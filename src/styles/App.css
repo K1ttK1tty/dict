@@ -1,0 +1,36 @@
+html {
+    box-sizing: border-box;
+}
+*,
+::after,
+::before {
+    box-sizing: inherit;
+}
+html,body{
+    height: 100%;
+}
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: "Heebo", sans-serif;
+}
+
+.navbar{
+    height: 80px;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    padding:0px 15px;
+    background-color: lightgray;
+
+}
+.navbar__links{
+    display: flex;
+    flex-direction: column;
+}
+.navbar__links a{
+    margin-bottom: 10px;
+}
+#root{
+   height: 100%;
+}

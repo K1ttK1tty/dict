@@ -1,0 +1,74 @@
+:root {
+    --visibilityOff: hidden;
+    --visibilityOn: visible;
+    --visibilityOn: visible;
+    --opacityOff: 0;
+    --opacityOn: 1;
+    --positionAbsolute: absolute;
+    --positionRelative: relative;
+    --overflowHidden:hidden;
+    --pointer:pointer
+}
+.card {
+    /* background: #f7f7f79c; */
+    background: green;
+    padding: 11px 11px 19px 15px;
+    border-radius: 12px;
+    /* border: 0.2px solid rgb(204, 204, 204); */
+    max-width: 500px;
+    margin: 0px auto 24px;
+    position: var(--positionRelative);
+    overflow:var(--overflowHidden);
+    box-shadow: 0px -3px 5px 0px #252530 inset;
+    cursor:var(--pointer);
+}
+.card:last-child {
+    margin: 0px auto;
+}
+.word {
+    line-height: 1.2;
+    font-size: 21px;
+    font-weight: 500;
+    position: var(--positionRelative);
+    top: -4px;
+    max-height: 26px;
+    overflow:var(--overflowHidden);
+}
+.translate {
+    font-size: 18px;
+    line-height: 1.2;
+    font-weight: 400;
+    color: rgb(65, 65, 65);
+    position: var(--positionRelative);
+    top: 1px;
+    height:23px;
+    overflow:var(--overflowHidden);
+}
+.edit {
+    opacity: var(--opacityOff);
+    visibility: var(--visibilityOff);
+    position: var(--positionAbsolute);
+    top: 28%;
+    right: 14%;
+    cursor:var(--pointer);
+    transition: 0.1s;
+    padding: 2px;
+}
+.remove {
+    opacity: var(--opacityOff);
+    visibility: var(--visibilityOff);
+    position: var(--positionAbsolute);
+    top: 28%;
+    right: 3.5%;
+    cursor:var(--pointer);
+    transition: 0.1s;
+    padding: 2px;
+}
+.card:hover .edit{
+    opacity: var(--opacityOn);
+    visibility: var(--visibilityOn);
+}
+.card:hover .remove {
+    opacity: var(--opacityOn);
+    visibility: var(--visibilityOn);
+}
