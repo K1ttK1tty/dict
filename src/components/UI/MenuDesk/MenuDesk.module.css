@@ -1,0 +1,135 @@
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap");
+/* font-family */
+:root {
+    --transition02s: 0.2s;
+    --opacity0: 0;
+    --opacity1: 1;
+    --fzInh: inherit;
+    --fz0px: 0px;
+    --visIn: visible;
+    --visHid: hidden;
+}
+* {
+    text-decoration: none;
+    outline: none;
+    list-style: none;
+}
+nav {
+    position: relative;
+}
+.back {
+    background-color: #22222c;
+    position: fixed;
+    height: 100%;
+    width: 70px;
+    padding: 28px 20px;
+    font-family: "Heebo", sans-serif;
+    transition: var(--transition02s);
+    z-index: 50;
+}
+.back:hover {
+    width: 300px;
+    transition: var(--transition02s);
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+}
+.ulMmenu,
+.callBack {
+    margin: 0px auto;
+    width: 80%;
+}
+.ulMenu__item {
+    color: #68686e;
+    font-weight: 500;
+    font-size: 19px;
+    line-height: 1.2;
+    margin-bottom: 19px;
+    transition: var(--transition02s);
+    max-height: 25.8px;
+}
+.spanIcons {
+    cursor: pointer;
+}
+
+.spanIcons:hover .swipe {
+    color: #adadb0;
+}
+.spanIcons:hover .colorIcon {
+    fill: #adadb0;
+}
+
+.colorIcon {
+    fill: #68686e;
+    position: relative;
+    top: 2px;
+    margin-right: 15px;
+    transition: var(--transition02s);
+}
+.swipe {
+    opacity: var(--opacity0);
+    visibility: var(--visHid);
+    font-size: var(--fz0px);
+    transition: var(--transition02s);
+}
+.back:hover .swipe {
+    opacity: var(--opacity1);
+    visibility: var(--visIn);
+    font-size: var(--fzInh);
+    transition: var(--transition02s);
+}
+.callBack {
+    padding: 0px;
+    color: #72747f;
+    font-size: 16px;
+    line-height: 1.2;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 12px;
+}
+.callBack:hover {
+    color: #adadb0;
+}
+.questIcon {
+    stroke: #68686e;
+    transition: var(--transition02s);
+}
+.callBack:hover .questIcon {
+    stroke: #adadb0;
+}
+.callBackSpan {
+    opacity: var(--opacity0);
+    visibility: var(--visHid);
+    font-size: var(--fz0px);
+    transition: var(--transition02s);
+    display: block;
+    height: 0px;
+}
+.back:hover .callBackSpan {
+    font-size: 16px;
+    opacity: var(--opacity1);
+    visibility: var(--visIn);
+}
+.icon4Class {
+    position: relative;
+    top: -2px;
+    margin-right: 0px;
+    transition: var(--transition02s);
+}
+.back:hover .icon4Class {
+    margin-right: 14px;
+}
+.callBackItem {
+    cursor: pointer;
+    display: flex;
+}
+
+link:visited,
+a:visited {
+    color: inherit;
+}

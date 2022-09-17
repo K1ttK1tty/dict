@@ -1,0 +1,55 @@
+.inputOn {
+    height: 30px;
+    line-height: 1;
+    width: 175px;
+    margin-right: 15px;
+    padding: 8px;
+}
+.inputOff {
+    height: 30px;
+    line-height: 1;
+    width: 0px;
+    margin-right: 15px;
+    padding: 0px;
+}
+.inputShared{
+    font-family: "Heebo", sans-serif;
+    font-size: 16px;
+    position: relative;
+    top: -5px;
+    border-radius: 12px;
+    background-color: rgb(255, 255, 255);
+    border: none;
+}
+
+.inputOnAnimation{
+    animation: menuInputOnAnimation 0.25s ease-in-out;
+}
+@keyframes menuInputOnAnimation {
+    from {
+        width: 0px;
+        opacity: 0;
+        visibility: hidden;
+    }
+    to {
+        width: 175px;
+        opacity: 1;
+        visibility: visible;
+    }
+}
+.inputOffAnimation{
+    animation: menuInputOffAnimation 0.2s ease-in-out;
+}
+@keyframes menuInputOffAnimation {
+    from {
+        width: 175px;
+        opacity: 1;
+        visibility: visible;
+    }
+    to {
+        width: 0px;
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
