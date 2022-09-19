@@ -1,18 +1,19 @@
 import React from 'react';
 import Card from './Card';
-const SetCards = function ({ Cards, remove, searchWord }) {
+const SetCards = function ({ Cards, remove,setModal,editCard, setEditCard,inputValue,setIndex,...props }) {
 
-        // Cards.map(card=> console.log(card.word))
+
+    // Cards.map(card=> console.log(card.word))
     return (
         <div>
 
 
-            {Cards.map((card, index) => 
+            {Cards.map((card, index) =>
 
                 // console.log(card.word.includes(searchWord));
 
-                < Card remove={remove} card={card} key={card.word + index} index={index} />
-            
+                < Card setIndex={setIndex} setEditCard={setEditCard} setModal={setModal} remove={remove} card={card} key={card.word + index} index={index} />
+
             )}
 
 

@@ -1,8 +1,7 @@
 import React from 'react';
 import InputSearch from './UI/InputSearch/InputSearch';
 import Search from '../pages/Icons/Search';
-const MenuVoc = function ({input,setInput, searchWord, setSearchWord }) {
-
+const MenuVoc = function ({input,setInput, searchWord, setSearchWord,...props }) {
 
     function inputOn(event) {
 
