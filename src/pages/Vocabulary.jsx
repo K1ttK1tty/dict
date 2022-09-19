@@ -6,6 +6,7 @@ import SetCard from '../components/UI/WordCard/SetCard';
 import InputAddCard from '../components/UI/InputAddCard/InputAddCard';
 import BtnAddCard from '../components/UI/BtnAddCard/BtnAddCard';
 import MySelect from '../components/UI/MySelect/MySelect';
+import Modal from '../components/UI/Modal/Modal';
 const Vocabulary = function () {
 
     const [searchWord, setSearchWord] = useState('');
@@ -68,17 +69,26 @@ const Vocabulary = function () {
         after: '',
     });
 
-
     const selectedThemes = useMemo(() => {
         return [...Cards].filter(card => card.theme.toLowerCase().includes(chooseTheme.toLowerCase()));
     }, [chooseTheme, Cards]);
-
 
     const selectedAndSearchedWord = useMemo(() => {
         return selectedThemes.filter(card => card.word.toLowerCase().includes(searchWord.toLowerCase()));
     }, [selectedThemes, searchWord])
 
+    const [modal, setModal] = useState(false);
 
+
+    const [editCard, setEditCard] = useState(
+        {
+            word: '',
+            translate: '',
+            theme: '',
+        }
+    )
+
+    const [index, setIndex] = useState()
 
     function AddNewCard(e) {
         e.preventDefault()
@@ -95,13 +105,13 @@ const Vocabulary = function () {
 
     }
 
-    // console.log(selectOptions)
-
 
     function removeCard(cardClick) {
-        setCards(Cards.filter(card => cardClick.word !== card.word || cardClick.translate !== card.translate))
+        setCards(selectedAndSearchedWord.filter(card => cardClick.word != card.word && cardClick.translate != card.translate))
+        console.log(cardClick)
     }
 
+    console.log(selectedAndSearchedWord)
 
     function removeInput(elem) {
         if (elem.target.id != 1 && elem.target.id != 2) {
@@ -114,13 +124,12 @@ const Vocabulary = function () {
         }
     }
 
-
     return (
         <div onClick={removeInput} className="searchWrapper">
             <MenuVoc input={input} setInput={setInput} searchWord={searchWord} setSearchWord={setSearchWord} cards={Cards} />
+            <Modal index={index} Cards={Cards} setCards={setCards} editCard={editCard} setModal={setModal} inputValue={inputValue} setInputValue={setInputValue} modal={modal}></Modal>
             <div className="CardsField">
                 <div className='wrap'>
-
 
                     <MySelect chooseTheme={chooseTheme} setChooseTheme={setChooseTheme} selectOptions={selectOptions} setSelectOptions={setSelectOptions} />
                     {/* сделать по клику вне селекта его закрытие, перенести состояние в этот компонент */}
@@ -136,7 +145,7 @@ const Vocabulary = function () {
                     </form>
 
 
-                    {selectedAndSearchedWord.length !== 0 ? < SetCard searchWord={searchWord} remove={removeCard} Cards={selectedAndSearchedWord} /> : <h4 className='noCards'>Пустота...</h4>}
+                    {selectedAndSearchedWord.length !== 0 ? < SetCard setIndex={setIndex} inputValue={inputValue} editCard={editCard} setEditCard={setEditCard} setModal={setModal} remove={removeCard} Cards={selectedAndSearchedWord} /> : <h4 className='noCards'>Пустота...</h4>}
 
 
 

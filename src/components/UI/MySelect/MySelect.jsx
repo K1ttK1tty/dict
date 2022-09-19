@@ -4,7 +4,7 @@ import { useState } from 'react';
 import SetOptions from '../../SetOptions';
 import { CSSTransition } from 'react-transition-group';
 import IconSelect from './IconSelect';
-const MySelect = function ({ chooseTheme, setChooseTheme, selectOptions, setSelectOptions, ...props }) {
+const MySelect = function ({ chooseTheme, setChooseTheme, selectOptions, setSelectOptions}) {
 
 
     // for (let index = 0; index < selectOptions.length; index++) {

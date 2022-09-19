@@ -1,0 +1,55 @@
+.modal {
+    position: fixed;
+    z-index: 10;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background: rgb(0, 0, 0, 0.5);
+    display: none;
+}
+.modalContent {
+    padding: 26px;
+    background-color: white;
+    min-width: 400px;
+    border-radius: 12px;
+    max-width: 60%;
+}
+.modalInputs {
+    display: flex;
+    flex-direction: column;
+}
+.modal.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modalNav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 20px;
+    line-height: 1.2;
+}
+.modalMarg {
+    margin-bottom: 18px;
+    position: relative;
+    top: -12px;
+}
+.modalTitle {
+}
+.modalClose {
+    font-size: 28px;
+    cursor: pointer;
+}
+.inputDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.inputP{
+    font-size: 20px;
+    position: relative;
+    top: -10px;
+}
