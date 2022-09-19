@@ -107,11 +107,8 @@ const Vocabulary = function () {
 
 
     function removeCard(cardClick) {
-        setCards(selectedAndSearchedWord.filter(card => cardClick.word != card.word && cardClick.translate != card.translate))
-        console.log(cardClick)
+        setCards(Cards.filter(card => cardClick.word != card.word && cardClick.translate != card.translate))
     }
-
-    console.log(selectedAndSearchedWord)
 
     function removeInput(elem) {
         if (elem.target.id != 1 && elem.target.id != 2) {
