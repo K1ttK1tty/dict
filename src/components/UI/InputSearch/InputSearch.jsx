@@ -1,19 +1,23 @@
 import React from 'react';
 import cl from './InputSearch.module.css'
 import { useState } from 'react';
-const InputSearch = function ({ input, placeholder, searchWord, setSearchWord }) {
+const InputSearch = function ({ input, placeholder, searchWord, setSearchWord,}) {
     function inputHandle(event) {
-        // console.log(event.target.value);
         setSearchWord(event.target.value);
     }
 
     const inputElement = document.getElementById('1');
     const [inputKey, setInputKey] = useState('');
-    
+
 
     function handleKey(key) {
         setInputKey(key.keyCode)
+        if (key.keyCode == 27){
+            setSearchWord('');
+        }
     }
+
+
 
 
     if (!input.after) {

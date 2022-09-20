@@ -51,11 +51,11 @@ const Vocabulary = function () {
             translate: 'общий',
             theme: 'noun',
         },
-        {
-            word: '1232',
-            translate: 'no12341234 1234 1234 1234 1234 123 12 3412 3441 2346dsfg sdfgsdrtgwergsd  sefgewrrgsdfgerg werg sdrg erg werwerun',
-            theme: 'noun',
-        },
+        // {
+        //     word: '1232',
+        //     translate: 'no12341234 1234 1234 1234 1234 123 12 3412 3441 2346dsfg sdfgsdrtgwergsd  sefgewrrgsdfgerg werg sdrg erg werwerun',
+        //     theme: 'noun',
+        // },
     ]);
     const [inputValue, setInputValue] = useState(
         {
@@ -69,16 +69,25 @@ const Vocabulary = function () {
         after: '',
     });
 
+    const sordetCard = useMemo(() => {
+        // return selectedAndSearchedWord.sort((a,b)=> console.log(a.word,b.word));
+        return Cards.sort((a, b) => a.word.localeCompare(b.word));
+    }, [Cards])
+
+
     const selectedThemes = useMemo(() => {
-        return [...Cards].filter(card => card.theme.toLowerCase().includes(chooseTheme.toLowerCase()));
+        return [...sordetCard].filter(card => card.theme.toLowerCase().includes(chooseTheme.toLowerCase()));
     }, [chooseTheme, Cards]);
 
     const selectedAndSearchedWord = useMemo(() => {
-        return selectedThemes.filter(card => card.word.toLowerCase().includes(searchWord.toLowerCase()));
+        return [...selectedThemes].filter(card => card.word.toLowerCase().includes(searchWord.toLowerCase()));
     }, [selectedThemes, searchWord])
 
-    const [modal, setModal] = useState(false);
 
+   
+
+
+    const [modal, setModal] = useState(false);
 
     const [editCard, setEditCard] = useState(
         {
@@ -92,7 +101,6 @@ const Vocabulary = function () {
 
     function AddNewCard(e) {
         e.preventDefault()
-
         if (inputValue.word && inputValue.translate) {
             setCards([...Cards, inputValue])
 
@@ -102,7 +110,6 @@ const Vocabulary = function () {
         } else {
             window.alert('Поля "Word" и "Translate" должны быть заполнены')
         }
-
     }
 
 
@@ -112,6 +119,7 @@ const Vocabulary = function () {
 
     function removeInput(elem) {
         if (elem.target.id != 1 && elem.target.id != 2) {
+            setSearchWord('')
             setInput(
                 {
                     before: false,
@@ -121,6 +129,9 @@ const Vocabulary = function () {
         }
     }
 
+
+
+
     return (
         <div onClick={removeInput} className="searchWrapper">
             <MenuVoc input={input} setInput={setInput} searchWord={searchWord} setSearchWord={setSearchWord} cards={Cards} />
@@ -129,7 +140,6 @@ const Vocabulary = function () {
                 <div className='wrap'>
 
                     <MySelect chooseTheme={chooseTheme} setChooseTheme={setChooseTheme} selectOptions={selectOptions} setSelectOptions={setSelectOptions} />
-                    {/* сделать по клику вне селекта его закрытие, перенести состояние в этот компонент */}
 
 
                     <form>

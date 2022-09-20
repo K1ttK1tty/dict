@@ -11,6 +11,7 @@ const Modal = function ({ modal, setInputValue, inputValue, setModal, editCard, 
     }
     function removeModal() {
         setModal(false);
+        setInputValue({ word: '', translate: '', theme: '', });
         // visible = [cl.modal]
     }
     function ChangeCard(e) {
