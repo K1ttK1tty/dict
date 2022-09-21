@@ -32,7 +32,7 @@ const MenuVoc = function ({ input, setInput, searchWord, setSearchWord, ...props
         <div className="menu">
             <div className='menu__container'>
                 <div className="menu__logo">Logo</div>
-                <div className="menu__search" onClick={inputOn}><InputSearch clearINput={clearINput} input={input} searchWord={searchWord} setSearchWord={setSearchWord} placeholder={' Search word'} /><Search stroke={'black'} height={'22px'} width={'22px'} /></div>
+                <div className="menu__search" onClick={inputOn}><InputSearch input={input} searchWord={searchWord} setSearchWord={setSearchWord} placeholder={' Search word'} /><Search stroke={'black'} height={'22px'} width={'22px'} /></div>
             </div>
         </div>
     )

@@ -7,10 +7,14 @@ import InputAddCard from '../components/UI/InputAddCard/InputAddCard';
 import BtnAddCard from '../components/UI/BtnAddCard/BtnAddCard';
 import MySelect from '../components/UI/MySelect/MySelect';
 import Modal from '../components/UI/Modal/Modal';
+import { useCards } from '../hooks/useCards';
+
 const Vocabulary = function () {
 
     const [searchWord, setSearchWord] = useState('');
     const [chooseTheme, setChooseTheme] = useState('');
+    const [modal, setModal] = useState(false);
+    
     const [selectOptions, setSelectOptions] = useState([
         'noun',
         'verb',
@@ -69,25 +73,9 @@ const Vocabulary = function () {
         after: '',
     });
 
-    const sordetCard = useMemo(() => {
-        // return selectedAndSearchedWord.sort((a,b)=> console.log(a.word,b.word));
-        return Cards.sort((a, b) => a.word.localeCompare(b.word));
-    }, [Cards])
+    const selectedAndSearchedWord = useCards(Cards,chooseTheme,searchWord)
 
-
-    const selectedThemes = useMemo(() => {
-        return [...sordetCard].filter(card => card.theme.toLowerCase().includes(chooseTheme.toLowerCase()));
-    }, [chooseTheme, Cards]);
-
-    const selectedAndSearchedWord = useMemo(() => {
-        return [...selectedThemes].filter(card => card.word.toLowerCase().includes(searchWord.toLowerCase()));
-    }, [selectedThemes, searchWord])
-
-
-   
-
-
-    const [modal, setModal] = useState(false);
+ 
 
     const [editCard, setEditCard] = useState(
         {
@@ -111,7 +99,6 @@ const Vocabulary = function () {
             window.alert('Поля "Word" и "Translate" должны быть заполнены')
         }
     }
-
 
     function removeCard(cardClick) {
         setCards(Cards.filter(card => cardClick.word != card.word && cardClick.translate != card.translate))
