@@ -27,8 +27,8 @@ const MySelect = function ({ chooseTheme, setChooseTheme, selectOptions, setSele
     }
     function removeTheme() {
         setReplaceOptionName('Choose a theme');
-        setChooseTheme('');
         setStateOption({ ...stateOption, remove: false })
+        setChooseTheme('');
     }
     return (
         <div className={cl.select}>

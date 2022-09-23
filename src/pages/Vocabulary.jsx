@@ -14,7 +14,7 @@ const Vocabulary = function () {
     const [searchWord, setSearchWord] = useState('');
     const [chooseTheme, setChooseTheme] = useState('');
     const [modal, setModal] = useState(false);
-    
+
     const [selectOptions, setSelectOptions] = useState([
         'noun',
         'verb',
@@ -73,10 +73,6 @@ const Vocabulary = function () {
         after: '',
     });
 
-    const selectedAndSearchedWord = useCards(Cards,chooseTheme,searchWord)
-
- 
-
     const [editCard, setEditCard] = useState(
         {
             word: '',
@@ -92,12 +88,25 @@ const Vocabulary = function () {
         if (inputValue.word && inputValue.translate) {
             setCards([...Cards, inputValue])
 
-            setSelectOptions([...selectOptions, inputValue.theme])
+            addNewTheme(selectOptions, inputValue.theme)
+
 
             setInputValue({ word: '', translate: '', theme: '', });
         } else {
             window.alert('Поля "Word" и "Translate" должны быть заполнены')
         }
+    }
+
+
+    function addNewTheme(selectOptions, newTheme) {
+        let opt = [...selectOptions, newTheme];
+        opt.filter(theme => (theme !== newTheme))
+        console.log(selectOptions)
+        console.log(newTheme)
+        // selectOptions.filter(theme => (console.log(theme )))
+        
+        setSelectOptions([...opt])
+     
     }
 
     function removeCard(cardClick) {
@@ -115,6 +124,8 @@ const Vocabulary = function () {
             )
         }
     }
+
+    const selectedAndSearchedWord = useCards(Cards, chooseTheme, searchWord)
 
 
 
