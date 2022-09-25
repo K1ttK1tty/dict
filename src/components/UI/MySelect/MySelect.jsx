@@ -4,14 +4,7 @@ import { useState } from 'react';
 import SetOptions from '../../SetOptions';
 import { CSSTransition } from 'react-transition-group';
 import IconSelect from './IconSelect';
-const MySelect = function ({ chooseTheme, setChooseTheme, selectOptions, setSelectOptions}) {
-
-
-    // for (let index = 0; index < selectOptions.length; index++) {
-    //     const element = selectOptions[index];
-    // }
-
-    const [stateOption, setStateOption] = useState({ option: false, remove: false })
+const MySelect = function ({setChooseTheme, selectOptions,stateOption,setStateOption}) {
     const [replaceOptionName, setReplaceOptionName] = useState('Choose a theme')
 
     function replaceOption(el) {
@@ -27,20 +20,16 @@ const MySelect = function ({ chooseTheme, setChooseTheme, selectOptions, setSele
     }
     function removeTheme() {
         setReplaceOptionName('Choose a theme');
-        setStateOption({ ...stateOption, remove: false })
+        setStateOption({ option: false, remove: false })
         setChooseTheme('');
     }
     return (
-        <div className={cl.select}>
-            <div onClick={getValue} className={cl.title}>
-                <div className={cl.selectValue}>{replaceOptionName}</div>
+        <div className={cl.select} >
+            <div onClick={getValue} id='select1' className={cl.title}>
+                <div onClick={getValue} id='select2' className={cl.selectValue}>{replaceOptionName}</div>
                 <div className={cl.selectIcon}><IconSelect /></div>
             </div>
-            {stateOption.remove ? <div onClick={removeTheme} className={cl.removeTheme}>&times;</div> : ''}
-
-
-
-
+            {stateOption.remove ? <div id='select3' onClick={removeTheme} className={cl.removeTheme}>&times;</div> : ''}
 
 
             <CSSTransition
