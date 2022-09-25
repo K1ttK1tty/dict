@@ -2,36 +2,26 @@ import React from 'react';
 import cl from './Modal.module.css'
 import InputAddCard from '../InputAddCard/InputAddCard';
 import BtnAddCard from '../BtnAddCard/BtnAddCard';
-const Modal = function ({ modal, setInputValue, inputValue, setModal, editCard, setCards, Cards, index,...props }) {
+const Modal = function ({ modal, setInputValue, inputValue, setModal, editCard, setCards, Cards, index}) {
     let visible = [cl.modal]
-
     if (modal) {
         visible = [cl.modal, cl.active].join(' ')
-
     }
     function removeModal() {
         setModal(false);
         setInputValue({ word: '', translate: '', theme: '', });
-        // visible = [cl.modal]
     }
     function ChangeCard(e) {
         e.preventDefault()
-        // console.log(Cards)
-        // filterCardsAfterEdit(editCard);
-        // removeCard(editCard);
         setCards([...Cards.slice(0, index), { word: inputValue.word, translate: inputValue.translate, theme: editCard.theme, }, ...Cards.slice(index + 1)]);
         setModal(false);
         setInputValue({ word: '', translate: '', theme: '', });
-
-        // Cards.filter(card=> setCards([card.word != inputValue.word]))
-
     }
 
 
-
     return (
-        <div className={visible}>
-            <div className={cl.modalContent}>
+        <div onClick={()=>setModal(false)} className={visible}>
+            <div onClick={e=>(e.stopPropagation())} className={cl.modalContent}>
                 <div className={cl.modalMarg}>
                     <div className={cl.modalNav}>
                         <h5 style={{ fontSize: '20px', fontWeight: '500' }} className={cl.modalTitle}>Edit card</h5>

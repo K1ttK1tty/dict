@@ -8,9 +8,7 @@ import BtnAddCard from '../components/UI/BtnAddCard/BtnAddCard';
 import MySelect from '../components/UI/MySelect/MySelect';
 import Modal from '../components/UI/Modal/Modal';
 import { useCards } from '../hooks/useCards';
-
 const Vocabulary = function () {
-
     const [searchWord, setSearchWord] = useState('');
     const [chooseTheme, setChooseTheme] = useState('');
     const [modal, setModal] = useState(false);
@@ -79,44 +77,38 @@ const Vocabulary = function () {
             translate: '',
             theme: '',
         }
-    )
+    );
 
-    const [index, setIndex] = useState()
+    const [index, setIndex] = useState();
 
     function AddNewCard(e) {
         e.preventDefault()
         if (inputValue.word && inputValue.translate) {
             setCards([...Cards, inputValue])
-
             addNewTheme(selectOptions, inputValue.theme)
-
-
             setInputValue({ word: '', translate: '', theme: '', });
         } else {
             window.alert('Поля "Word" и "Translate" должны быть заполнены')
         }
-    }
-
+    };
 
     function addNewTheme(selectOptions, newTheme) {
         let opt = [...selectOptions];
         let a = 0;
         for (let index = 0; index < opt.length; index++) {
             const element = opt[index];
-            if (element == newTheme) {
-                a=1;
-            }
+            if (element == newTheme) a = 1;
         }
-        if (!a) {
-            setSelectOptions([...selectOptions, newTheme]) 
-        } 
-    }
+        if (!a) setSelectOptions([...selectOptions, newTheme])
+    };
 
     function removeCard(cardClick) {
         setCards(Cards.filter(card => cardClick.word != card.word && cardClick.translate != card.translate))
-    }
+    };
+    const [stateOption, setStateOption] = useState({ option: false, remove: false });
 
     function removeInput(elem) {
+        console.log(elem.target)
         if (elem.target.id != 1 && elem.target.id != 2) {
             setSearchWord('')
             setInput(
@@ -126,12 +118,10 @@ const Vocabulary = function () {
                 }
             )
         }
-    }
+        if (chooseTheme && elem.target.id != 'select1' && elem.target.id != 'select2' && elem.target.className != 'selSVG'  && elem.target.id != 'select3') setStateOption({ ...stateOption, option: false })
+    };
 
-    const selectedAndSearchedWord = useCards(Cards, chooseTheme, searchWord)
-
-
-
+    const selectedAndSearchedWord = useCards(Cards, chooseTheme, searchWord);
 
     return (
         <div onClick={removeInput} className="searchWrapper">
@@ -140,7 +130,7 @@ const Vocabulary = function () {
             <div className="CardsField">
                 <div className='wrap'>
 
-                    <MySelect chooseTheme={chooseTheme} setChooseTheme={setChooseTheme} selectOptions={selectOptions} setSelectOptions={setSelectOptions} />
+                    <MySelect stateOption={stateOption} setStateOption={setStateOption} setChooseTheme={setChooseTheme} selectOptions={selectOptions} />
 
 
                     <form>
@@ -152,12 +142,7 @@ const Vocabulary = function () {
 
                     </form>
 
-
                     {selectedAndSearchedWord.length !== 0 ? < SetCard setIndex={setIndex} inputValue={inputValue} editCard={editCard} setEditCard={setEditCard} setModal={setModal} remove={removeCard} Cards={selectedAndSearchedWord} /> : <h4 className='noCards'>Пустота...</h4>}
-
-
-
-
 
                 </div>
 
