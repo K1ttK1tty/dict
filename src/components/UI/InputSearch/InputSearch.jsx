@@ -5,10 +5,8 @@ const InputSearch = function ({ input, placeholder, searchWord, setSearchWord,})
     function inputHandle(event) {
         setSearchWord(event.target.value);
     }
-
     const inputElement = document.getElementById('1');
     const [inputKey, setInputKey] = useState('');
-
 
     function handleKey(key) {
         setInputKey(key.keyCode)
@@ -16,9 +14,6 @@ const InputSearch = function ({ input, placeholder, searchWord, setSearchWord,})
             setSearchWord('');
         }
     }
-
-
-
 
     if (!input.after) {
         input.after = '1';

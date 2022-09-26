@@ -8,11 +8,9 @@ const MenuVoc = function ({ input, setInput, searchWord, setSearchWord}) {
     }
 
     function inputOn(event) {
-
         if (event.target.id == 1) {
             return false
         }
-        
         if (!input.before) {
             setInput({
                 before: true,

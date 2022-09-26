@@ -3,15 +3,16 @@ import { useState, useMemo } from 'react';
 import vocabularyCss from '../styles/Vocabulary.css'
 import MenuVoc from '../components/MenuVoc';
 import SetCard from '../components/UI/WordCard/SetCard';
-import InputAddCard from '../components/UI/InputAddCard/InputAddCard';
 import BtnAddCard from '../components/UI/BtnAddCard/BtnAddCard';
 import MySelect from '../components/UI/MySelect/MySelect';
 import Modal from '../components/UI/Modal/Modal';
 import { useCards } from '../hooks/useCards';
+import ModalAddCards from '../components/UI/ModalAddCards/ModalAddCards';
 const Vocabulary = function () {
     const [searchWord, setSearchWord] = useState('');
     const [chooseTheme, setChooseTheme] = useState('');
     const [modal, setModal] = useState(false);
+    const [modalCards, setModalCards] = useState(false)
 
     const [selectOptions, setSelectOptions] = useState([
         'noun',
@@ -90,6 +91,7 @@ const Vocabulary = function () {
         } else {
             window.alert('Поля "Word" и "Translate" должны быть заполнены')
         }
+        setModalCards(!modalCards);
     };
 
     function addNewTheme(selectOptions, newTheme) {
@@ -108,57 +110,45 @@ const Vocabulary = function () {
     const [stateOption, setStateOption] = useState({ option: false, remove: false });
 
     function removeInput(elem) {
-        console.log(elem.target)
+        let a = false;
         if (elem.target.id != 1 && elem.target.id != 2) {
-            setSearchWord('')
+            setSearchWord('');
             setInput(
                 {
                     before: false,
                     after: '',
                 }
             )
-        }
-        if (chooseTheme && elem.target.id != 'select1' && elem.target.id != 'select2' && elem.target.className != 'selSVG'  && elem.target.id != 'select3') setStateOption({ ...stateOption, option: false })
+        };
+        if (elem.target.id != 'select1' && elem.target.id != 'select2' && elem.target.className != 'selSVG' && elem.target.id != 'select3') {
+            if (elem.target.parentNode.id == 'options') {
+                a = true;
+            } else a = false;
+            if (chooseTheme) a = true;
+            setStateOption({ option: false, remove: a });
+        };
     };
 
+
     const selectedAndSearchedWord = useCards(Cards, chooseTheme, searchWord);
+    function modalAddCard() {
+        setModalCards(!modalCards);
+    }
+
 
     return (
         <div onClick={removeInput} className="searchWrapper">
             <MenuVoc input={input} setInput={setInput} searchWord={searchWord} setSearchWord={setSearchWord} cards={Cards} />
-            <Modal index={index} Cards={Cards} setCards={setCards} editCard={editCard} setModal={setModal} inputValue={inputValue} setInputValue={setInputValue} modal={modal}></Modal>
+            <Modal index={index} Cards={Cards} setCards={setCards} setEditCard={setEditCard} editCard={editCard} setModal={setModal} inputValue={inputValue} setInputValue={setInputValue} modal={modal}></Modal>
+            <ModalAddCards AddNewCard={AddNewCard} inputValue={inputValue} setInputValue={setInputValue} modalCards={modalCards} setModalCards={setModalCards} />
             <div className="CardsField">
                 <div className='wrap'>
 
+                    <BtnAddCard onClick={modalAddCard} style={{ margin: '0px auto', display: 'block' }}>Create new card</BtnAddCard>
                     <MySelect stateOption={stateOption} setStateOption={setStateOption} setChooseTheme={setChooseTheme} selectOptions={selectOptions} />
 
-
-                    <form>
-                        <InputAddCard placeholder={'Word'} inputValue={inputValue.word} setInputValue={e => setInputValue({ ...inputValue, word: e })}></InputAddCard>
-                        <InputAddCard placeholder={'Translate'} inputValue={inputValue.translate} setInputValue={e => setInputValue({ ...inputValue, translate: e })}></InputAddCard>
-                        <InputAddCard placeholder={'Theme'} inputValue={inputValue.theme} setInputValue={e => setInputValue({ ...inputValue, theme: e })}></InputAddCard>
-                        <BtnAddCard onClick={AddNewCard} type='submit'>Добавить Карточку</BtnAddCard>
-
-
-                    </form>
-
                     {selectedAndSearchedWord.length !== 0 ? < SetCard setIndex={setIndex} inputValue={inputValue} editCard={editCard} setEditCard={setEditCard} setModal={setModal} remove={removeCard} Cards={selectedAndSearchedWord} /> : <h4 className='noCards'>Пустота...</h4>}
-
                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             </div>
         </div >
 

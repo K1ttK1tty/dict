@@ -9,6 +9,7 @@
     height: auto;
     transition: 0.3s;
     position: relative;
+    display: inline-block;
 }
 .title {
     display: flex;

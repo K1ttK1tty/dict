@@ -3,4 +3,8 @@
     font-size: 20px;
     line-height: 1.2;
     padding: 6px 13px;
+
+}
+input:disabled{
+    background-color: transparent;
 }
