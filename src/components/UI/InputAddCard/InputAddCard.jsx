@@ -11,7 +11,6 @@ const InputAddCard = function ({ inputValue, setInputValue, placeholder, style, 
             className={cl.www}
             value={inputValue}
             onChange={e => setInputValue(e.target.value)}
-
         ></input>
     )
 };
