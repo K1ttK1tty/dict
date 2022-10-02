@@ -9,7 +9,7 @@ import Modal from '../components/UI/Modal/Modal';
 import { useCards } from '../hooks/useCards';
 import ModalAddCards from '../components/UI/ModalAddCards/ModalAddCards';
 import useScrollbarSize from 'react-scrollbar-size';
-const Vocabulary = function () {
+const Vocabulary = function ({ Cards, setCards }) {
     const { height, width } = useScrollbarSize();
     const [searchWord, setSearchWord] = useState('');
     const [chooseTheme, setChooseTheme] = useState('');
@@ -21,48 +21,7 @@ const Vocabulary = function () {
         'noun',
         'verb',
     ])
-    const [Cards, setCards] = useState([
-        {
-            word: 'Value',
-            translate: 'Значение',
-            theme: 'noun',
-        },
-        {
-            word: 'to gather',
-            translate: 'Собирать, коллекционировать',
-            theme: 'verb',
-        },
-        {
-            word: 'to mount',
-            translate: 'Монтировать, устанавливать',
-            theme: 'verb',
-        },
-        {
-            word: 'to confess',
-            translate: 'Признаваться, сознаваться',
-            theme: 'verb',
-        },
-        {
-            word: 'to outclass',
-            translate: 'Превосходить',
-            theme: 'verb',
-        },
-        {
-            word: 'to handle',
-            translate: 'обрабатывать',
-            theme: 'verb',
-        },
-        {
-            word: 'shared',
-            translate: 'общий',
-            theme: 'noun',
-        },
-        // {
-        //     word: '1232',
-        //     translate: 'no12341234 1234 1234 1234 1234 123 12 3412 3441 2346dsfg sdfgsdrtgwergsd  sefgewrrgsdfgerg werg sdrg erg werwerun',
-        //     theme: 'noun',
-        // },
-    ]);
+
     const [inputValue, setInputValue] = useState(
         {
             word: '',

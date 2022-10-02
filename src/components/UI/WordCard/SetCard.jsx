@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from './Card';
-const SetCards = function ({ Cards, remove,setModal,editCard, setEditCard,inputValue,setIndex,...props }) {
+const SetCards = function ({ Cards, remove,setModal,editCard, setEditCard,inputValue,setIndex}) {
 
 
     // Cards.map(card=> console.log(card.word))
