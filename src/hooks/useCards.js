@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 export const useSordetCard = (Cards) => {
+    // console.log(Cards)
     const sordetCard = useMemo(() => {
         return Cards.sort((a, b) => a.word.localeCompare(b.word));
     }, [Cards])
