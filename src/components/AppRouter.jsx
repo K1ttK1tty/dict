@@ -48,14 +48,12 @@ const AppRouter = function () {
         // },
     ]);
 
-
-
     return (
         <Routes>
-            <Route path='/posts' element={<Vocabulary Cards={Cards} setCards={setCards} />}></Route>
+            <Route path='/posts' element={<Vocabulary Cards={Cards} setCards={setCards}/>}></Route>
             <Route path='/games' element={<Games Cards={Cards} />}></Route>
             <Route path='/settings' element={<Settings />}></Route>
-            <Route path='*' element={<Vocabulary />} />
+            <Route path='*' element={<Vocabulary Cards={Cards} setCards={setCards}/>} />
         </Routes>
     )
 };
