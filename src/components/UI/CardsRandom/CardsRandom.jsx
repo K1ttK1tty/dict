@@ -1,6 +1,6 @@
 import React from 'react';
 import CardRand from '../CardRand/CardRand'
-const CardsRandom = function ({ cardsGame }) {
+const CardsRandom = function ({ cardsGame, input,setInput}) {
 
 
 
@@ -12,7 +12,7 @@ const CardsRandom = function ({ cardsGame }) {
         <div>
 
             {
-                cardsGame.map((card,index) => <CardRand key={index+card.word} card={card}/>)
+                cardsGame.map((card,index) => <CardRand input={input} setInput={setInput} key={index+card.word} card={card}/>)
 
 
             }

@@ -7,6 +7,21 @@ import { useState } from 'react';
 const AppRouter = function () {
     const [Cards, setCards] = useState([
         {
+            word: 'to research',
+            translate: 'изучение, исследование',
+            theme: 'verb',
+        },
+        {
+            word: 'insight',
+            translate: 'понимание решения проблемы, новая идея для...',
+            theme: '',
+        },
+        {
+            word: 'to share',
+            translate: 'делиться',
+            theme: 'verb',
+        },
+        {
             word: 'Value',
             translate: 'Значение',
             theme: 'noun',
