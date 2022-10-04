@@ -1,0 +1,11 @@
+.cardRand {
+    display:flex;
+    margin-bottom: 30px;
+    font-size: 17px;
+}
+.requiredWord {
+    margin-right: 18px;
+}
+.translateRand {
+    color: white;
+}

@@ -1,0 +1,9 @@
+.input {
+    margin-right: 18px;
+    border: none;
+    border-bottom: 1px solid white;
+    background: transparent;
+    color: white;
+    padding:0px 8px;
+    font-size: 17px;
+}
