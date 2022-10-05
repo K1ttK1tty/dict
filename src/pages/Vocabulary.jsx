@@ -48,9 +48,7 @@ const Vocabulary = function ({ Cards, setCards }) {
             setCards([...Cards, inputValue])
             addNewTheme(selectOptions, inputValue.theme)
             setInputValue({ word: '', translate: '', theme: '', });
-        } else {
-            window.alert('Поля "Word" и "Translate" должны быть заполнены')
-        }
+        } else window.alert('Поля "Word" и "Translate" должны быть заполнены')
         setModalCards(!modalCards);
     };
 

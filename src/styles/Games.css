@@ -1,3 +1,11 @@
-.gameWrap{
+.gameWrap {
     height: 100%;
+}
+.trueWord {
+    box-shadow: 0px 0px 8px 1px lime;
+    box-shadow: 0px 0px 30px -4px lime;
+}
+.falseWord {
+    box-shadow: 0px 0px 8px 1px red;
+    box-shadow: 0px 0px 30px -4px red;
 }
