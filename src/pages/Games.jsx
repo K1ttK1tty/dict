@@ -10,6 +10,7 @@ const Games = function ({ Cards }) {
     const [input, setInput] = useState('');
     const [numb, setNumb] = useState();
     let cardsGame = [];
+    const [validate, setValidate] = useState([]);
     function getRandomInt(max) {
         return Math.floor(Math.random() * max);
     }
@@ -18,34 +19,39 @@ const Games = function ({ Cards }) {
         e.preventDefault();
         setNumb(inputReq);
         setInputReq('');
+        setInput('');
     };
 
     const array = useMemo(() => {
         for (let index = 0; index < numb; index++) {
             cardsGame.push(Cards[getRandomInt(Cards.length)])
-        }
+        };
+        setValidate([]);
 
         return cardsGame
 
     }, [numb])
-    let trueOrFalse = '';
+
+    
+
+
     function valudate(e) {
+        let state = [];
         e.preventDefault();
         let tt = document.querySelectorAll('.inptReq');
         for (let index = 0; index < tt.length; index++) {
             const element = tt[index];
-            console.log(element.value.trim())
-            // console.log(array[index].word)
 
+            if (array[index].word.trim().toLowerCase().split(' ').join('') == element.value.trim().toLowerCase().split(' ').join('')) {
+                state.push('trueWord');
 
-
-            if (array[index].word.trim().toLowerCase() == element.value.trim().toLowerCase()) {
-                console.log(1)
-            } else console.log(0)
+            } else state.push('falseWord')
         }
+        setValidate(state);
 
-    }
- 
+    };
+
+
 
 
     return (
@@ -61,7 +67,7 @@ const Games = function ({ Cards }) {
 
 
                         <form>
-                            <CardsRandom input={input} setInput={setInput} cardsGame={array} />
+                            <CardsRandom validate={validate} input={input} setInput={setInput} cardsGame={array} />
                             <BtnAddCard onClick={e => valudate(e)}>Проверить</BtnAddCard>
                         </form>
 
