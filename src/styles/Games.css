@@ -9,3 +9,18 @@
     box-shadow: 0px 0px 8px 1px red;
     box-shadow: 0px 0px 30px -4px red;
 }
+.title {
+    font-size: 20px;
+    text-align: center;
+    color: whitesmoke;
+    position: relative;
+    top: -50px;
+    left: -90px;
+}
+.gameCardsField {
+    background-color: #2e2e3c;
+    padding:90px 0px 0px 100px;
+    min-height: 100%;
+    height: auto;
+    padding-bottom: 15px;
+}

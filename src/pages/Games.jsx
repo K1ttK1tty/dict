@@ -27,12 +27,10 @@ const Games = function ({ Cards }) {
             cardsGame.push(Cards[getRandomInt(Cards.length)])
         };
         setValidate([]);
-
         return cardsGame
-
     }, [numb])
 
-    
+
 
 
     function valudate(e) {
@@ -41,22 +39,19 @@ const Games = function ({ Cards }) {
         let tt = document.querySelectorAll('.inptReq');
         for (let index = 0; index < tt.length; index++) {
             const element = tt[index];
-
-            if (array[index].word.trim().toLowerCase().split(' ').join('') == element.value.trim().toLowerCase().split(' ').join('')) {
+            const wordInCard = array[index].word.trim().toLowerCase().split(' ').join('');
+            let inputValue = element.value.trim().toLowerCase().split(' ').join('');
+            if (wordInCard == inputValue){
                 state.push('trueWord');
-
             } else state.push('falseWord')
-        }
+        };
         setValidate(state);
-
     };
-
-
-
 
     return (
         <div className='gameWrap'>
-            <div className="CardsField">
+            <div className="gameCardsField">
+                <div className='title'>Самопроверка</div>
                 <div className='wrap'>
                     <div style={{ width: '50%', margin: '0px auto' }}>
 
@@ -65,15 +60,10 @@ const Games = function ({ Cards }) {
                             <BtnAddCard onClick={generate} type='submit'>Сгенериовать</BtnAddCard>
                         </form>
 
-
                         <form>
                             <CardsRandom validate={validate} input={input} setInput={setInput} cardsGame={array} />
                             <BtnAddCard onClick={e => valudate(e)}>Проверить</BtnAddCard>
                         </form>
-
-
-
-
 
                     </div>
                 </div>

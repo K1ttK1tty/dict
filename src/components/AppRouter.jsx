@@ -17,6 +17,11 @@ const AppRouter = function () {
             theme: 'verb',
         },
         {
+            word: 'to extract',
+            translate: 'извлекать',
+            theme: 'verb',
+        },
+        {
             word: 'to pretend',
             translate: 'притворятся, симулировать',
             theme: 'verb',

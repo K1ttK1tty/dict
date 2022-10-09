@@ -1,10 +1,8 @@
 import React from 'react';
 import cl from '../CardRand/CardRand.module.css'
 import Input from '../Input/Input';
-import Gamescss from '../../../styles/Games.css'
-const CardRand = function ({ card, input, setInput,validate,index}) {
-    // console.log(card)
 
+const CardRand = function ({ card, input, setInput,validate,index}) {
 
     return (
         <div className={[cl.cardRand,validate[index]].join(' ')}>
