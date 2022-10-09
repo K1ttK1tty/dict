@@ -68,7 +68,8 @@ const Vocabulary = function ({ Cards, setCards }) {
 
     function removeInput(elem) {
         let a = false;
-        if (input.before && elem.target.id != 1 && elem.target.id != 2) {
+        const idElement = elem.target.id;
+        if (input.before && idElement != 1 && idElement != 2) {
             setSearchWord('');
             setInput(
                 {
@@ -77,7 +78,8 @@ const Vocabulary = function ({ Cards, setCards }) {
                 }
             )
         };
-        if (elem.target.id != 'select1' && elem.target.id != 'select2' && elem.target.className != 'selSVG' && elem.target.id != 'select3') {
+
+        if (idElement != 'select1' && idElement != 'select2' && elem.target.className != 'selSVG' && idElement != 'select3') {
             if (elem.target.parentNode.id == 'options') {
                 a = true;
             } else a = false;
@@ -104,7 +106,6 @@ const Vocabulary = function ({ Cards, setCards }) {
                 <div className='wrap'>
                     <BtnAddCard onClick={modalAddCard} style={{ margin: '0px auto', display: 'block' }}>Create new card</BtnAddCard>
                     <MySelect stateOption={stateOption} setStateOption={setStateOption} setChooseTheme={setChooseTheme} selectOptions={selectOptions} />
-
                     {selectedAndSearchedWord.length !== 0 ? < SetCard setIndex={setIndex} inputValue={inputValue} editCard={editCard} setEditCard={setEditCard} setModal={setModal} remove={removeCard} Cards={selectedAndSearchedWord} /> : <h4 className='noCards'>Пустота...</h4>}
                 </div>
             </div>
