@@ -1,6 +1,6 @@
 import React from 'react';
 import CardRand from '../CardRand/CardRand'
-const CardsRandom = function ({ cardsGame, input,setInput,validate}) {
+const CardsRandom = function ({ cardsGame, input,setInput,validate,}) {
 
     return (
         <div>
