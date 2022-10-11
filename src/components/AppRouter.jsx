@@ -81,6 +81,10 @@ const AppRouter = function () {
             translate: 'понимание решения проблемы, новая идея для...',
             theme: '',
         },
+
+
+
+        
         // {
         //     word: 'to share',
         //     translate: 'делиться',

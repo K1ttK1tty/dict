@@ -2,7 +2,7 @@ import React from 'react';
 import cl from '../CardRand/CardRand.module.css'
 import Input from '../Input/Input';
 import Gamescss from '../../../styles/Games.css'
-const CardRand = function ({ card, input, setInput, validate, index }) {
+const CardRand = function ({ card, input, setInput, validate, index}) {
     let validateWord = 'hidden';
 
     if (validate[index]) {
@@ -15,7 +15,7 @@ const CardRand = function ({ card, input, setInput, validate, index }) {
 
     return (
         <div className={[cl.cardRand]}>
-            
+
             <div className='wordBlock'>
                 <div className={validateWord}>{card.word}</div>
                 <Input validClass={validate[index]} input={input} setInput={setInput}></Input>

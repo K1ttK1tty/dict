@@ -6,30 +6,41 @@ import vocabularyCss from '../styles/Vocabulary.css'
 import BtnAddCard from '../components/UI/BtnAddCard/BtnAddCard';
 import CardsRandom from '../components/UI/CardsRandom/CardsRandom'
 const Games = function ({ Cards }) {
-    const [inputReq, setInputReq] = useState('');
+    const [inputReq, setInputReq] = useState(''); // для приёма числа слов
     const [input, setInput] = useState('');
-    const [numb, setNumb] = useState();
+    const [numb, setNumb] = useState(); // 
+    const [value, setValue] = useState(''); // для очищения полей
     let cardsGame = [];
-    const [validate, setValidate] = useState([]);
+    const [validate, setValidate] = useState([]); // для проверки
     function getRandomInt(max) {
         return Math.floor(Math.random() * max);
     }
 
-    function generate(e) {
-        e.preventDefault();
-        setNumb(inputReq);
-        setInputReq('');
-        setInput('');
-    };
+
 
     const array = useMemo(() => {
         for (let index = 0; index < numb; index++) {
             cardsGame.push(Cards[getRandomInt(Cards.length)])
         };
         setValidate([]);
-        setInput('');
         return cardsGame
     }, [numb])
+
+    function generate(e) {
+        e.preventDefault();
+        setNumb(inputReq);
+        setInputReq('');
+        setValue('')
+
+        let tt = document.querySelectorAll('.inptReq');
+        for (let index = 0; index < tt.length; index++) {
+            tt[index].value = ''
+        };
+
+
+
+
+    };
 
 
 
@@ -39,18 +50,20 @@ const Games = function ({ Cards }) {
         e.preventDefault();
         let tt = document.querySelectorAll('.inptReq');
         for (let index = 0; index < tt.length; index++) {
-            const element = tt[index];
+            const input = tt[index];
+            
             const wordInCard = array[index].word.toLowerCase().split(' ').join('');
-            let inputValue = element.value.toLowerCase().split(' ').join('');
+            let inputValue = input.value.toLowerCase().split(' ').join('');
 
             if (wordInCard == inputValue) {
                 state.push('trueWord')
-            } else if (wordInCard.includes(inputValue) && inputValue != 'to') {
+            } else if (wordInCard.includes(inputValue) && inputValue != 'to' && inputValue != '') {
                 state.push('almost')
-                
-            }else state.push('falseWord')
-            
+
+            } else state.push('falseWord')
+
         };
+        cardsGame = [];
         setValidate(state);
     };
 
@@ -70,6 +83,7 @@ const Games = function ({ Cards }) {
                             <CardsRandom validate={validate} input={input} setInput={setInput} cardsGame={array} />
                             <BtnAddCard onClick={e => valudate(e)}>Проверить</BtnAddCard>
                         </form>
+
 
                     </div>
                 </div>
