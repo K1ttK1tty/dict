@@ -1,9 +1,9 @@
 import React from 'react';
 import cl from '../InputRequire/InputRequire.module.css'
-const InputRequire = function ({ inputReq, setInputReq, style }) {
+const InputRequire = function ({ inputReq, setInputReq,}) {
 
     return (
-        <input style={style} value={inputReq} onChange={e => setInputReq(e.target.value)} className={cl.input}>
+        <input value={inputReq} onChange={e => setInputReq(e.target.value)} className={cl.input}>
 
         </input>
     )
