@@ -6,17 +6,14 @@ import vocabularyCss from '../styles/Vocabulary.css'
 import BtnAddCard from '../components/UI/BtnAddCard/BtnAddCard';
 import CardsRandom from '../components/UI/CardsRandom/CardsRandom'
 const Games = function ({ Cards }) {
-    const [inputReq, setInputReq] = useState(''); // для приёма числа слов
+    const [inputReq, setInputReq] = useState(''); // number of words
     const [input, setInput] = useState('');
-    const [numb, setNumb] = useState(); // 
-    const [value, setValue] = useState(''); // для очищения полей
+    const [numb, setNumb] = useState();
     let cardsGame = [];
-    const [validate, setValidate] = useState([]); // для проверки
+    const [validate, setValidate] = useState([]); //for validate
     function getRandomInt(max) {
         return Math.floor(Math.random() * max);
     }
-
-
 
     const array = useMemo(() => {
         for (let index = 0; index < numb; index++) {
@@ -30,20 +27,12 @@ const Games = function ({ Cards }) {
         e.preventDefault();
         setNumb(inputReq);
         setInputReq('');
-        setValue('')
 
         let tt = document.querySelectorAll('.inptReq');
         for (let index = 0; index < tt.length; index++) {
-            tt[index].value = ''
+            tt[index].value = '';
         };
-
-
-
-
     };
-
-
-
 
     function valudate(e) {
         let state = [];
@@ -51,7 +40,7 @@ const Games = function ({ Cards }) {
         let tt = document.querySelectorAll('.inptReq');
         for (let index = 0; index < tt.length; index++) {
             const input = tt[index];
-            
+
             const wordInCard = array[index].word.toLowerCase().split(' ').join('');
             let inputValue = input.value.toLowerCase().split(' ').join('');
 
@@ -70,20 +59,19 @@ const Games = function ({ Cards }) {
     return (
         <div className='gameWrap'>
             <div className="gameCardsField">
-                <div className='title'>Самопроверка</div>
+                <div className='title'>Self test</div>
                 <div className='wrap'>
-                    <div style={{ width: '60%', margin: '0px auto' }}>
+                    <div style={{ width: '45%', margin: '0px auto' }}>
 
-                        <form style={{ margin: '0px auto 50px', color: 'white' }}>
-                            Введите количество слов: <InputRequire style={{ marginRight: '8px' }} inputReq={inputReq} setInputReq={setInputReq} />
-                            <BtnAddCard onClick={generate} type='submit'>Сгенериовать</BtnAddCard>
+                        <form className='formTitle'>
+                            Enter number of words: <InputRequire inputReq={inputReq} setInputReq={setInputReq} />
+                            <BtnAddCard onClick={generate} type='submit'>Generate</BtnAddCard>
                         </form>
 
-                        <form style={{ margin: '0px auto', marginBottom: '50px', color: 'white' }}>
-                            <CardsRandom validate={validate} input={input} setInput={setInput} cardsGame={array} />
-                            <BtnAddCard onClick={e => valudate(e)}>Проверить</BtnAddCard>
+                        <form className='formCards'>
+                            <CardsRandom validate={validate} setInput={setInput} cardsGame={array} />
+                            <BtnAddCard onClick={e => valudate(e)}>Check</BtnAddCard>
                         </form>
-
 
                     </div>
                 </div>

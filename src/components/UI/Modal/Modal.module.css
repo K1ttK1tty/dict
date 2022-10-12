@@ -38,6 +38,8 @@
     top: -12px;
 }
 .modalTitle {
+    font-size: 20px;
+    font-weight: 500;
 }
 .modalClose {
     font-size: 28px;

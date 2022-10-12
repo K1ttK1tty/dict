@@ -10,7 +10,7 @@ import { useCards } from '../hooks/useCards';
 import ModalAddCards from '../components/UI/ModalAddCards/ModalAddCards';
 import useScrollbarSize from 'react-scrollbar-size';
 const Vocabulary = function ({ Cards, setCards }) {
-    const { height, width } = useScrollbarSize();
+    // const { height, width } = useScrollbarSize();
     const [searchWord, setSearchWord] = useState('');
     const [chooseTheme, setChooseTheme] = useState('');
     const [modal, setModal] = useState(false);
@@ -59,7 +59,7 @@ const Vocabulary = function ({ Cards, setCards }) {
             const element = opt[index];
             if (element == newTheme) a = 1;
         }
-        if (!a) setSelectOptions([...selectOptions, newTheme])
+        if (!a) setSelectOptions([...selectOptions, newTheme]);
     };
 
     function removeCard(cardClick) {
@@ -93,18 +93,20 @@ const Vocabulary = function ({ Cards, setCards }) {
         setModalCards(!modalCards);
     }
 
-    let paramsModal = { over: 'auto', padding: '0px' };
-    if (modal || modalCards) paramsModal = { over: 'hidden', padding: width };
+    let paramsModal = { overflow: 'auto', paddingRight: '0px' };
+    // if (modal || modalCards) paramsModal = { overflow: 'hidden', paddingRight: width };
+
+    const btnStyle= { margin: '0px auto', display: 'block' };
 
 
     return (
-        <div onClick={removeInput} className={"searchWrapper"} style={{ overflow: paramsModal.over, paddingRight: paramsModal.padding }}>
+        <div onClick={removeInput} className={"searchWrapper"} style={paramsModal}>
             <MenuVoc input={input} setInput={setInput} searchWord={searchWord} setSearchWord={setSearchWord} cards={Cards} />
             <Modal index={index} Cards={Cards} setCards={setCards} setEditCard={setEditCard} editCard={editCard} setModal={setModal} inputValue={inputValue} setInputValue={setInputValue} modal={modal}></Modal>
             <ModalAddCards AddNewCard={AddNewCard} inputValue={inputValue} setInputValue={setInputValue} modalCards={modalCards} setModalCards={setModalCards} />
             <div className="CardsField">
                 <div className='wrap'>
-                    <BtnAddCard onClick={modalAddCard} style={{ margin: '0px auto', display: 'block' }}>Create new card</BtnAddCard>
+                    <BtnAddCard onClick={modalAddCard} style={btnStyle}>Create new card</BtnAddCard>
                     <MySelect stateOption={stateOption} setStateOption={setStateOption} setChooseTheme={setChooseTheme} selectOptions={selectOptions} />
                     {selectedAndSearchedWord.length !== 0 ? < SetCard setIndex={setIndex} inputValue={inputValue} editCard={editCard} setEditCard={setEditCard} setModal={setModal} remove={removeCard} Cards={selectedAndSearchedWord} /> : <h4 className='noCards'>Пустота...</h4>}
                 </div>

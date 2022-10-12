@@ -25,25 +25,27 @@ const Modal = function ({ modal, setInputValue, inputValue, setModal, setEditCar
         setModal(false);
         setInputValue({ word: '', translate: '', theme: '', });
     };
-    
-    const styles={ marginBottom: '18px', border: 'none', borderBottom: '1px solid black', borderRadius: '0px' };
+
+
+    //styles
+    const inputAddCardstyles={ marginBottom: '18px', border: 'none', borderBottom: '1px solid black', borderRadius: '0px' };
+    const btnForm ={ fontSize: '18px', padding: '12px', background: 'rgb(146, 146, 146)', width: '100%' };
     return (
         <div onClick={() => setModal(false)} className={visible}>
             <div onClick={e => (e.stopPropagation())} className={cl.modalContent}>
                 <div className={cl.modalMarg}>
                     <div className={cl.modalNav}>
-                        <h5 style={{ fontSize: '20px', fontWeight: '500' }} className={cl.modalTitle}>Edit card</h5>
+                        <h5 className={cl.modalTitle}>Edit card</h5>
                         <div onClick={removeModal} className={cl.modalClose}>&times;</div>
                     </div>
                     <hr />
                 </div>
                 <div className={cl.modalInputs}>
                     <form>
-                        <div className={cl.inputDiv}><p className={cl.inputP}>Word:</p><InputAddCard inputValue={inputValue.word} setInputValue={e => setInputValue({ ...inputValue, word: e })} placeholder={editCard.word} style={styles}></InputAddCard></div>
-                        <div className={cl.inputDiv}><p className={cl.inputP}>Translate:</p><InputAddCard inputValue={inputValue.translate} setInputValue={e => setInputValue({ ...inputValue, translate: e })} placeholder={editCard.translate} style={styles}></InputAddCard></div>
-                        <div className={cl.inputDiv}><p className={cl.inputP}>Theme: </p><InputAddCard disabled={true} inputValue={inputValue.theme} setInputValue={e => setInputValue({ ...inputValue, theme: e })} placeholder={editCard.theme} style={styles}></InputAddCard></div>
-                        <BtnAddCard onClick={ChangeCard} type='submit' style={{ fontSize: '18px', padding: '12px', background: 'rgb(146, 146, 146)', width: '100%' }}>Change</BtnAddCard>
-                        {/* <InputAddCard style={{marginBottom:'15px',border:'0.5px solid black'}}></InputAddCard> */}
+                        <div className={cl.inputDiv}><p className={cl.inputP}>Word:</p><InputAddCard inputValue={inputValue.word} setInputValue={e => setInputValue({ ...inputValue, word: e })} placeholder={editCard.word} style={inputAddCardstyles}></InputAddCard></div>
+                        <div className={cl.inputDiv}><p className={cl.inputP}>Translate:</p><InputAddCard inputValue={inputValue.translate} setInputValue={e => setInputValue({ ...inputValue, translate: e })} placeholder={editCard.translate} style={inputAddCardstyles}></InputAddCard></div>
+                        <div className={cl.inputDiv}><p className={cl.inputP}>Theme: </p><InputAddCard disabled={true} inputValue={inputValue.theme} setInputValue={e => setInputValue({ ...inputValue, theme: e })} placeholder={editCard.theme} style={inputAddCardstyles}></InputAddCard></div>
+                        <BtnAddCard onClick={ChangeCard} type='submit' style={btnForm}>Change</BtnAddCard>
                     </form>
                 </div>
             </div>
