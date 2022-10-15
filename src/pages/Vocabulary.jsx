@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import vocabularyCss from '../styles/Vocabulary.css'
 import MenuVoc from '../components/MenuVoc';
 import SetCard from '../components/UI/WordCard/SetCard';
@@ -17,6 +17,7 @@ const Vocabulary = function ({ Cards, setCards }) {
     const [modalCards, setModalCards] = useState(false);
     const [index, setIndex] = useState();
     const [stateOption, setStateOption] = useState({ option: false, remove: false });
+
     const [selectOptions, setSelectOptions] = useState([
         'noun',
         'verb',
@@ -29,6 +30,7 @@ const Vocabulary = function ({ Cards, setCards }) {
             theme: '',
         }
     );
+
     const [input, setInput] = useState({
         before: false,
         after: '',
@@ -96,7 +98,7 @@ const Vocabulary = function ({ Cards, setCards }) {
     let paramsModal = { overflow: 'auto', paddingRight: '0px' };
     // if (modal || modalCards) paramsModal = { overflow: 'hidden', paddingRight: width };
 
-    const btnStyle= { margin: '0px auto', display: 'block' };
+    const btnStyle = { margin: '0px auto', display: 'block' };
 
 
     return (
