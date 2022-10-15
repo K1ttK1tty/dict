@@ -9,11 +9,13 @@ const Games = function ({ Cards }) {
     const [inputReq, setInputReq] = useState(''); // number of words
     const [input, setInput] = useState('');
     const [numb, setNumb] = useState();
+    const [genState,setGenState] = useState(true); // only for get new generate
     let cardsGame = [];
     const [validate, setValidate] = useState([]); //for validate
     function getRandomInt(max) {
         return Math.floor(Math.random() * max);
     }
+
 
     const array = useMemo(() => {
         for (let index = 0; index < numb; index++) {
@@ -21,11 +23,13 @@ const Games = function ({ Cards }) {
         };
         setValidate([]);
         return cardsGame
-    }, [numb])
+    }, [numb,genState])
+
 
     function generate(e) {
         e.preventDefault();
         setNumb(inputReq);
+        setGenState(!genState);
         setInputReq('');
 
         let tt = document.querySelectorAll('.inptReq');
@@ -33,6 +37,7 @@ const Games = function ({ Cards }) {
             tt[index].value = '';
         };
     };
+
 
     function valudate(e) {
         let state = [];
@@ -55,6 +60,7 @@ const Games = function ({ Cards }) {
         cardsGame = [];
         setValidate(state);
     };
+
 
     return (
         <div className='gameWrap'>

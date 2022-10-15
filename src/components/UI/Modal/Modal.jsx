@@ -31,7 +31,7 @@ const Modal = function ({ modal, setInputValue, inputValue, setModal, setEditCar
     const inputAddCardstyles={ marginBottom: '18px', border: 'none', borderBottom: '1px solid black', borderRadius: '0px' };
     const btnForm ={ fontSize: '18px', padding: '12px', background: 'rgb(146, 146, 146)', width: '100%' };
     return (
-        <div onClick={() => setModal(false)} className={visible}>
+        <div onClick={removeModal} className={visible}>
             <div onClick={e => (e.stopPropagation())} className={cl.modalContent}>
                 <div className={cl.modalMarg}>
                     <div className={cl.modalNav}>
