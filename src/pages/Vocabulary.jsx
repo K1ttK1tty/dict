@@ -1,13 +1,15 @@
 import React from 'react';
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import vocabularyCss from '../styles/Vocabulary.css'
 import MenuVoc from '../components/MenuVoc';
 import SetCard from '../components/UI/WordCard/SetCard';
 import BtnAddCard from '../components/UI/BtnAddCard/BtnAddCard';
+import cl from '../components/UI/BtnAddCard/BtnAddCard.module.css';
 import MySelect from '../components/UI/MySelect/MySelect';
 import Modal from '../components/UI/Modal/Modal';
 import { useCards } from '../hooks/useCards';
 import ModalAddCards from '../components/UI/ModalAddCards/ModalAddCards';
+import RemoveTheme from '../components/RemoveTheme';
 import useScrollbarSize from 'react-scrollbar-size';
 const Vocabulary = function ({ Cards, setCards }) {
     // const { height, width } = useScrollbarSize();
@@ -17,32 +19,11 @@ const Vocabulary = function ({ Cards, setCards }) {
     const [modalCards, setModalCards] = useState(false);
     const [index, setIndex] = useState();
     const [stateOption, setStateOption] = useState({ option: false, remove: false });
-
-    const [selectOptions, setSelectOptions] = useState([
-        'noun',
-        'verb',
-    ])
-
-    const [inputValue, setInputValue] = useState(
-        {
-            word: '',
-            translate: '',
-            theme: '',
-        }
-    );
-
-    const [input, setInput] = useState({
-        before: false,
-        after: '',
-    });
-
-    const [editCard, setEditCard] = useState(
-        {
-            word: '',
-            translate: '',
-            theme: '',
-        }
-    );
+    const [replaceOptionName, setReplaceOptionName] = useState('Choose a theme');
+    const [selectOptions, setSelectOptions] = useState(['noun', 'verb',])
+    const [inputValue, setInputValue] = useState({ word: '', translate: '', theme: '', });
+    const [input, setInput] = useState({ before: false, after: '', });
+    const [editCard, setEditCard] = useState({ word: '', translate: '', theme: '', });
 
     function AddNewCard(e) {
         e.preventDefault()
@@ -70,25 +51,27 @@ const Vocabulary = function ({ Cards, setCards }) {
 
     function removeInput(elem) {
         let a = false;
-        const idElement = elem.target.id;
+        const idElement = elem.target.id; // simplification
+        const classElement = elem.target.className; // simplification
+        const btnClass = classElement !== [cl.btnAddCard, 'noClick'].join(' '); // track button click
+
         if (input.before && idElement != 1 && idElement != 2) {
             setSearchWord('');
-            setInput(
-                {
-                    before: false,
-                    after: input.after,
-                }
-            )
+            setInput({ before: false, after: input.after })
         };
 
-        if (idElement != 'select1' && idElement != 'select2' && elem.target.className != 'selSVG' && idElement != 'select3') {
-            if (elem.target.parentNode.id == 'options') {
-                a = true;
-            } else a = false;
-            if (chooseTheme) a = true;
+
+        if (idElement != 'select1' && idElement != 'select2' && classElement != 'selSVG' && idElement != 'select3') {
+            if ((elem.target.parentNode.id == 'options' || chooseTheme) && btnClass) a = true;
             setStateOption({ option: false, remove: a });
         };
     };
+
+    function removeTheme() {
+        setSelectOptions(selectOptions.filter(theme => theme != chooseTheme));
+        setReplaceOptionName('Choose a theme');
+        setChooseTheme('');
+    }
 
     const selectedAndSearchedWord = useCards(Cards, chooseTheme, searchWord);
     function modalAddCard() {
@@ -100,17 +83,56 @@ const Vocabulary = function ({ Cards, setCards }) {
 
     const btnStyle = { margin: '0px auto', display: 'block' };
 
-
     return (
         <div onClick={removeInput} className={"searchWrapper"} style={paramsModal}>
-            <MenuVoc input={input} setInput={setInput} searchWord={searchWord} setSearchWord={setSearchWord} cards={Cards} />
-            <Modal index={index} Cards={Cards} setCards={setCards} setEditCard={setEditCard} editCard={editCard} setModal={setModal} inputValue={inputValue} setInputValue={setInputValue} modal={modal}></Modal>
-            <ModalAddCards AddNewCard={AddNewCard} inputValue={inputValue} setInputValue={setInputValue} modalCards={modalCards} setModalCards={setModalCards} />
+            <MenuVoc
+                input={input}
+                setInput={setInput}
+                searchWord={searchWord}
+                setSearchWord={setSearchWord}
+                cards={Cards}
+            />
+            <Modal
+                index={index}
+                Cards={Cards}
+                setCards={setCards}
+                setEditCard={setEditCard}
+                editCard={editCard}
+                setModal={setModal}
+                inputValue={inputValue}
+                setInputValue={setInputValue}
+                modal={modal}
+            />
+            <ModalAddCards
+                AddNewCard={AddNewCard}
+                inputValue={inputValue}
+                setInputValue={setInputValue}
+                modalCards={modalCards}
+                setModalCards={setModalCards}
+            />
             <div className="CardsField">
                 <div className='wrap'>
                     <BtnAddCard onClick={modalAddCard} style={btnStyle}>Create new card</BtnAddCard>
-                    <MySelect stateOption={stateOption} setStateOption={setStateOption} setChooseTheme={setChooseTheme} selectOptions={selectOptions} />
-                    {selectedAndSearchedWord.length !== 0 ? < SetCard setIndex={setIndex} inputValue={inputValue} editCard={editCard} setEditCard={setEditCard} setModal={setModal} remove={removeCard} Cards={selectedAndSearchedWord} /> : <h4 className='noCards'>Пустота...</h4>}
+                    <MySelect
+                        replaceOptionName={replaceOptionName}
+                        setReplaceOptionName={setReplaceOptionName}
+                        stateOption={stateOption}
+                        setStateOption={setStateOption}
+                        setChooseTheme={setChooseTheme}
+                        selectOptions={selectOptions}
+                    />
+
+                    {selectedAndSearchedWord.length !== 0 ?
+                        < SetCard
+                            setIndex={setIndex}
+                            inputValue={inputValue}
+                            editCard={editCard}
+                            setEditCard={setEditCard}
+                            setModal={setModal}
+                            remove={removeCard}
+                            Cards={selectedAndSearchedWord}
+                        />
+                        : <RemoveTheme chooseTheme={chooseTheme} removeTheme={removeTheme} />}
                 </div>
             </div>
         </div >

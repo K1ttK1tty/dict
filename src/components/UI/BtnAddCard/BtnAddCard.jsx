@@ -1,8 +1,8 @@
 import React from 'react';
 import cl from './BtnAddCard.module.css'
-const BtnAddCard = function ({ children, style, ...props }) {
+const BtnAddCard = function ({ children, style,noClick, ...props }) {
     return (
-        <button style={style} {...props} className={cl.btnAddCard}>{children}</button>
+        <button style={style} {...props} className={[cl.btnAddCard,noClick].join(' ')}>{children}</button>
     )
 };
 export default BtnAddCard;
