@@ -4,8 +4,8 @@ import { useState } from 'react';
 import SetOptions from '../../SetOptions';
 import { CSSTransition } from 'react-transition-group';
 import IconSelect from './IconSelect';
-const MySelect = function ({setChooseTheme, selectOptions,stateOption,setStateOption}) {
-    const [replaceOptionName, setReplaceOptionName] = useState('Choose a theme')
+const MySelect = function ({ setChooseTheme, selectOptions, stateOption, setStateOption, replaceOptionName, setReplaceOptionName }) {
+
 
     function replaceOption(el) {
         setReplaceOptionName(el.target.innerText);
@@ -14,7 +14,7 @@ const MySelect = function ({setChooseTheme, selectOptions,stateOption,setStateOp
     }
     function getValue() {
         if (stateOption.option) {
-            setStateOption({ option: false, remove: false })
+            setStateOption({ ...stateOption, option: false })
         } else setStateOption({ ...stateOption, option: true })
 
     }

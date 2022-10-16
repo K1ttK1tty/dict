@@ -6,15 +6,10 @@ const ModalAddCards = function ({ modalCards, setModalCards, inputValue, setInpu
     let vis = [cl.modal];
     if (modalCards) vis = [cl.modal, cl.active].join(' ')
     const styles = { width: '100%', display: 'block', marginBottom: '15px', marginBottom: '18px', border: 'none', borderBottom: '1px solid black', borderRadius: '0px' };
-
+    const h5Style = { fontSize: '20px', fontWeight: '500' };
     function removeMosal() {
         setModalCards(!modalCards)
-        setInputValue(
-            {
-            word: '',
-            translate: '',
-            theme: '',
-        })
+        setInputValue({ word: '', translate: '', theme: ''})
     }
 
 
@@ -23,7 +18,7 @@ const ModalAddCards = function ({ modalCards, setModalCards, inputValue, setInpu
             <div onClick={e => (e.stopPropagation())} className={cl.modalContent}>
                 <div className={cl.modalMarg}>
                     <div className={cl.modalNav}>
-                        <h5 style={{ fontSize: '20px', fontWeight: '500' }} className={cl.modalTitle}>Creating card</h5>
+                        <h5 style={h5Style} className={cl.modalTitle}>Creating card</h5>
                         <div onClick={removeMosal} className={cl.modalClose}>&times;</div>
                     </div>
                     <hr />
