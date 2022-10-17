@@ -4,83 +4,93 @@ import Vocabulary from '../pages/Vocabulary';
 import Settings from '../pages/Settings';
 import { Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
+import { useTheme } from '../hooks/useTheme';
 const AppRouter = function () {
+    const [pageTheme, setPageTheme] = useState('light')
+    useTheme(pageTheme);
+    function changeTheme(elem) {
+        if (elem.target.checked) {
+            setPageTheme('dark')
+        } else setPageTheme('light')
+    }
+
+
     const [Cards, setCards] = useState([
-        {
-            word: 'to compose',
-            translate: 'составить,написать',
-            theme: 'verb',
-        },
-        {
-            word: 'to suspend',
-            translate: 'приостановить, остановить на время или постоянно',
-            theme: 'verb',
-        },
-        {
-            word: 'to extract',
-            translate: 'извлекать',
-            theme: 'verb',
-        },
-        {
-            word: 'to pretend',
-            translate: 'притворятся, симулировать',
-            theme: 'verb',
-        },
-        {
-            word: 'to embed',
-            translate: 'встраивать ',
-            theme: '',
-        },
-        {
-            word: 'explicit',
-            translate: 'явный, понятный',
-            theme: '',
-        },
-        {
-            word: 'to eject',
-            translate: 'выбрасывать, изгонять',
-            theme: 'verb',
-        },
-        {
-            word: 'to maintain',
-            translate: 'поддерживать, сохранять',
-            theme: 'verb',
-        },
-        {
-            word: 'appropriate',
-            translate: 'соответствующий, подходящий',
-            theme: 'noun',
-        },
-        {
-            word: 'purpose',
-            translate: 'цель, назначение, причина существования',
-            theme: 'noun',
-        },
-        {
-            word: 'recent',
-            translate: 'недавний, недавно появившийся',
-            theme: 'noun',
-        },
-        {
-            word: 'confusion',
-            translate: 'путаница, замешательство, сметение',
-            theme: 'noun',
-        }, 
-        {
-            word: 'particular',
-            translate: 'конкретный, особенный',
-            theme: 'noun',
-        }, 
-        {
-            word: 'to research',
-            translate: 'изучение, исследование',
-            theme: 'verb',
-        },
-        {
-            word: 'insight',
-            translate: 'понимание решения проблемы, новая идея для...',
-            theme: '',
-        },
+        // {
+        //     word: 'to compose',
+        //     translate: 'составить,написать',
+        //     theme: 'verb',
+        // },
+        // {
+        //     word: 'to suspend',
+        //     translate: 'приостановить, остановить на время или постоянно',
+        //     theme: 'verb',
+        // },
+        // {
+        //     word: 'to extract',
+        //     translate: 'извлекать',
+        //     theme: 'verb',
+        // },
+        // {
+        //     word: 'to pretend',
+        //     translate: 'притворятся, симулировать',
+        //     theme: 'verb',
+        // },
+        // {
+        //     word: 'to embed',
+        //     translate: 'встраивать ',
+        //     theme: '',
+        // },
+        // {
+        //     word: 'explicit',
+        //     translate: 'явный, понятный',
+        //     theme: '',
+        // },
+        // {
+        //     word: 'to eject',
+        //     translate: 'выбрасывать, изгонять',
+        //     theme: 'verb',
+        // },
+        // {
+        //     word: 'to maintain',
+        //     translate: 'поддерживать, сохранять',
+        //     theme: 'verb',
+        // },
+        // {
+        //     word: 'appropriate',
+        //     translate: 'соответствующий, подходящий',
+        //     theme: 'noun',
+        // },
+        // {
+        //     word: 'purpose',
+        //     translate: 'цель, назначение, причина существования',
+        //     theme: 'noun',
+        // },
+        // {
+        //     word: 'recent',
+        //     translate: 'недавний, недавно появившийся',
+        //     theme: 'noun',
+        // },
+        // {
+        //     word: 'confusion',
+        //     translate: 'путаница, замешательство, сметение',
+        //     theme: 'noun',
+        // }, 
+        // {
+        //     word: 'particular',
+        //     translate: 'конкретный, особенный',
+        //     theme: 'noun',
+        // }, 
+        // {
+        //     word: 'to research',
+        //     translate: 'изучение, исследование',
+        //     theme: 'verb',
+        // },
+        // {
+        //     word: 'insight',
+        //     translate: 'понимание решения проблемы, новая идея для...',
+        //     theme: '',
+        // },
 
 
 
@@ -131,13 +141,15 @@ const AppRouter = function () {
         //     theme: 'noun',
         // },
     ]);
+    
+
 
     return (
         <Routes>
-            <Route path='/posts' element={<Vocabulary Cards={Cards} setCards={setCards}/>}></Route>
+            <Route path='/posts' element={<Vocabulary changeTheme={changeTheme} Cards={Cards} setCards={setCards}/>}></Route>
             <Route path='/games' element={<Games Cards={Cards} />}></Route>
             <Route path='/settings' element={<Settings />}></Route>
-            <Route path='*' element={<Vocabulary Cards={Cards} setCards={setCards}/>} />
+            <Route path='*' element={<Vocabulary changeTheme={changeTheme} Cards={Cards} setCards={setCards}/>} />
         </Routes>
     )
 };

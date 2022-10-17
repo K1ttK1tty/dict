@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import vocabularyCss from '../styles/Vocabulary.css'
+import themecss from '../styles/theme.css'
 import MenuVoc from '../components/MenuVoc';
 import SetCard from '../components/UI/WordCard/SetCard';
 import BtnAddCard from '../components/UI/BtnAddCard/BtnAddCard';
@@ -11,7 +12,7 @@ import { useCards } from '../hooks/useCards';
 import ModalAddCards from '../components/UI/ModalAddCards/ModalAddCards';
 import RemoveTheme from '../components/RemoveTheme';
 import useScrollbarSize from 'react-scrollbar-size';
-const Vocabulary = function ({ Cards, setCards }) {
+const Vocabulary = function ({ Cards, setCards, changeTheme }) {
     // const { height, width } = useScrollbarSize();
     const [searchWord, setSearchWord] = useState('');
     const [chooseTheme, setChooseTheme] = useState('');
@@ -24,6 +25,7 @@ const Vocabulary = function ({ Cards, setCards }) {
     const [inputValue, setInputValue] = useState({ word: '', translate: '', theme: '', });
     const [input, setInput] = useState({ before: false, after: '', });
     const [editCard, setEditCard] = useState({ word: '', translate: '', theme: '', });
+
 
     function AddNewCard(e) {
         e.preventDefault()
@@ -78,11 +80,15 @@ const Vocabulary = function ({ Cards, setCards }) {
         setModalCards(!modalCards);
     }
 
+
+
+
+
     let paramsModal = { overflow: 'auto', paddingRight: '0px' };
     // if (modal || modalCards) paramsModal = { overflow: 'hidden', paddingRight: width };
 
     const btnStyle = { margin: '0px auto', display: 'block' };
-
+    // console.log(document.querySelector('#checkbox').checked)
     return (
         <div onClick={removeInput} className={"searchWrapper"} style={paramsModal}>
             <MenuVoc
@@ -122,6 +128,7 @@ const Vocabulary = function ({ Cards, setCards }) {
                         selectOptions={selectOptions}
                     />
 
+
                     {selectedAndSearchedWord.length !== 0 ?
                         < SetCard
                             setIndex={setIndex}
@@ -133,9 +140,21 @@ const Vocabulary = function ({ Cards, setCards }) {
                             Cards={selectedAndSearchedWord}
                         />
                         : <RemoveTheme chooseTheme={chooseTheme} removeTheme={removeTheme} />}
+
+
+
+
+                    <input onClick={changeTheme} id='checkbox' type="checkbox" />
+                    <label className='checkboxLabel' htmlFor="checkbox"></label>
+
+
+
+
                 </div>
             </div>
+
         </div >
+
     )
 };
 export default Vocabulary;

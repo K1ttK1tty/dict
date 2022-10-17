@@ -18,7 +18,7 @@
     top: -50px;
 }
 .gameCardsField {
-    background-color: #2e2e3c;
+    background-color: var(--background-cards);
     padding: 90px 0px 0px 0px;
     min-height: 100%;
     height: auto;
@@ -53,4 +53,7 @@
 .formCards{
     margin: 0px auto 50px;
     color: whitesmoke;
+}
+.noWords{
+    text-align: center;
 }

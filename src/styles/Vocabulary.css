@@ -1,3 +1,6 @@
+:root {
+    --transition-theme03s: 0.3s ease;
+  }
 .menu {
     height: 50px;
     background-color: #2e2e3cdc;
@@ -22,7 +25,6 @@
     height: 100%;
 }
 
-
 .menu__logo {
     font-size: 20px;
     color: #c8c8dd;
@@ -45,11 +47,12 @@
     }
 }
 .CardsField {
-    background-color: #2e2e3c;
+    background-color: var(--background-cards);
     padding-top: 90px;
     min-height: 100%;
     height: auto;
     padding-bottom: 15px;
+    transition: var(--transition-theme03s);
 }
 
 @keyframes appear {
@@ -77,9 +80,38 @@
     opacity: 0;
     transition: 0.3s;
 }
-.noCards{
+.noCards {
     color: white;
     font-size: 25px;
     text-align: center;
     margin-top: 35px;
+}
+
+#checkbox {
+    display: none;
+}
+
+.checkboxLabel {
+    height: 25px;
+    width: 46px;
+    border: white 1px solid;
+    border-radius: 15px;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+}
+.checkboxLabel::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    top: 2.5px;
+    left: 4px;
+    width: 17px;
+    height: 17px;
+    background-color: var(--chexbox-circle);
+    transition: 0.25s;
+}
+
+#checkbox:checked + .checkboxLabel::after{
+    transform: translateX(19px);
 }

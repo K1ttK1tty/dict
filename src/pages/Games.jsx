@@ -68,16 +68,25 @@ const Games = function ({ Cards }) {
                 <div className='title'>Self test</div>
                 <div className='wrap'>
                     <div style={{ width: '45%', margin: '0px auto' }}>
+                        {Cards.length !=0 ? 
 
-                        <form className='formTitle'>
-                            Enter number of words: <InputRequire inputReq={inputReq} setInputReq={setInputReq} />
-                            <BtnAddCard onClick={generate} type='submit'>Generate</BtnAddCard>
-                        </form>
+                        <div>
+                            <form className='formTitle'>
+                                Enter number of words: <InputRequire inputReq={inputReq} setInputReq={setInputReq} />
+                                <BtnAddCard onClick={generate} type='submit'>Generate</BtnAddCard>
+                            </form> 
+                            
+                            <form className='formCards'>
+                                <CardsRandom validate={validate} setInput={setInput} cardsGame={array} />
+                                <BtnAddCard onClick={e => valudate(e)}>Check</BtnAddCard>
+                            </form>
+                        </div>
+                        
+                        
+                        : <h3 className='noWords'>Добавьте слова!</h3>}
+                        
 
-                        <form className='formCards'>
-                            <CardsRandom validate={validate} setInput={setInput} cardsGame={array} />
-                            <BtnAddCard onClick={e => valudate(e)}>Check</BtnAddCard>
-                        </form>
+                        
 
                     </div>
                 </div>
