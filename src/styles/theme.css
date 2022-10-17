@@ -1,0 +1,12 @@
+/* dark theme */
+
+html[data-theme="light"] {
+    --chexbox-circle: rgb(255, 179, 36);
+    --background-cards: #fd9854b2;
+}
+
+html[data-theme="dark"] {
+    --chexbox-circle: rgb(255, 179, 36);
+    --background-cards: #2e2e3c;
+}
+
