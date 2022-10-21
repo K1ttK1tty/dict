@@ -1,12 +1,28 @@
-/* dark theme */
-
 html[data-theme="light"] {
+    /* dark theme */
     --chexbox-circle: rgb(255, 179, 36);
     --background-cards: #fd9854b2;
+    --background-card: #272730;
+    --btn-color: green;
+
+    --search-menu-color: #0000f8dc;
+    --card-icon-color:  rgb(185, 183, 183);
+
+    --search-icon-color: ;
+    --transition-theme: 0.3s ease;
 }
 
 html[data-theme="dark"] {
+    /* light theme */
     --chexbox-circle: rgb(255, 179, 36);
-    --background-cards: #2e2e3c;
-}
+    --background-cards: #272730;
+    --background-card: #ffffffb0;
+    --btn-color: rgb(219, 219, 219);
 
+    --search-menu-color: #22222b;
+    /* --card-icon-color:  rgb(3, 65, 8); */
+    --card-icon-color:  rgb(1, 32, 80);
+
+    --search-icon-color: rgb(207, 207, 207);
+    --transition-theme: 0.3s ease;
+}

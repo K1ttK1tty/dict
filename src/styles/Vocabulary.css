@@ -1,10 +1,8 @@
-:root {
-    --transition-theme03s: 0.3s ease;
-  }
 .menu {
     height: 50px;
-    background-color: #2e2e3cdc;
+    background-color: var(--search-menu-color);
     box-shadow: 0px 15px 45px rgba(0, 0, 0, 0.15);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.164);
 }
 
 .menu__container {
@@ -52,7 +50,7 @@
     min-height: 100%;
     height: auto;
     padding-bottom: 15px;
-    transition: var(--transition-theme03s);
+    transition: var(--transition-theme);
 }
 
 @keyframes appear {
@@ -114,4 +112,20 @@
 
 #checkbox:checked + .checkboxLabel::after{
     transform: translateX(19px);
+}
+
+/* for light-dark theme */
+.iconSearchForMenu{
+    stroke: var(--search-icon-color);
+    fill: var(--search-icon-color);
+    height: 22px;
+    width: 22px;
+    transition: var(--transition-theme);
+}
+.cardIconsize{
+    height: 25px;
+    width: 25px;
+}
+.cardsIconColor{
+    fill: var(--card-icon-color);
 }

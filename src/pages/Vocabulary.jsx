@@ -144,7 +144,7 @@ const Vocabulary = function ({ Cards, setCards, changeTheme }) {
 
 
 
-                    <input onClick={changeTheme} id='checkbox' type="checkbox" />
+                    <input defaultChecked={true} onClick={changeTheme} id='checkbox' type="checkbox"/>
                     <label className='checkboxLabel' htmlFor="checkbox"></label>
 
 

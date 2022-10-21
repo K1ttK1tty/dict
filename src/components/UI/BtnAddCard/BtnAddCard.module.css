@@ -1,5 +1,5 @@
 .btnAddCard{
-    background-color: rgb(219, 219, 219);
+    background-color: var(--btn-color);;
     padding: 12px;
     border: none;
     border-radius: 12px;
@@ -7,4 +7,5 @@
     color: black;
     font-weight: 500;
     cursor: pointer;
+    transition:var(--transition-theme);
 }
