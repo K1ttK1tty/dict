@@ -14,7 +14,7 @@ const MenuDesk = function () {
                         <li className={cl.ulMenu__item}>
                             <span className={cl.spanIcons}>
                                 <Link to="/posts">
-                                    <Icon2 width={'20px'} height={'20px'} fill={cl.colorIcon} /><span className={cl.swipe}>Словарь</span>
+                                    <Icon2 className={cl.colorIcon}/><span className={cl.swipe}>Словарь</span>
                                 </Link>
                             </span>
                         </li>
@@ -22,18 +22,18 @@ const MenuDesk = function () {
                         <li className={cl.ulMenu__item}>
                             <span className={cl.spanIcons}>
                                 <Link to="/games">
-                                    <Icon1 width={'20px'} height={'20px'} fill={cl.colorIcon} /><span className={cl.swipe}>Мини игры</span>
+                                    <Icon1 className={cl.colorIcon}/><span className={cl.swipe}>Мини игры</span>
                                 </Link>
                             </span>
                         </li>
                         <li className={cl.ulMenu__item}>
                             <span className={cl.spanIcons}>
-                                <Link to="/settings" ><Icon3 width={'20px'} height={'20px'} fill={cl.colorIcon} /><span className={cl.swipe}>Настройки</span></Link>
+                                <Link to="/settings" ><Icon3 className={cl.colorIcon} /><span className={cl.swipe}>Настройки</span></Link>
                             </span>
                         </li>
                     </ul>
                     <a className={cl.callBack}>
-                        <span className={cl.callBackItem}><Icon4 width={'23px'} height={'23px'} fill={cl.questIcon} icon4Class={cl.icon4Class} /><span className={cl.callBackSpan}>Возникли вопросы?<p>Пиши нам!</p></span></span>
+                        <span className={cl.callBackItem}><Icon4 fill={cl.questIcon} icon4Class={cl.icon4Class} /><span className={cl.callBackSpan}>Возникли вопросы?<p>Пиши нам!</p></span></span>
                     </a>
                 </div>
             </div>

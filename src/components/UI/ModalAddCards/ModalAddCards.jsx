@@ -27,7 +27,7 @@ const ModalAddCards = function ({ modalCards, setModalCards, inputValue, setInpu
                     <InputAddCard style={styles} placeholder={'Word'} inputValue={inputValue.word} setInputValue={e => setInputValue({ ...inputValue, word: e })}></InputAddCard>
                     <InputAddCard style={styles} placeholder={'Translate'} inputValue={inputValue.translate} setInputValue={e => setInputValue({ ...inputValue, translate: e })}></InputAddCard>
                     <InputAddCard style={styles} placeholder={'Theme'} inputValue={inputValue.theme} setInputValue={e => setInputValue({ ...inputValue, theme: e })}></InputAddCard>
-                    <BtnAddCard style={{ width: '100%', background: 'rgb(146, 146, 146)' }} onClick={AddNewCard} type='submit'>Create</BtnAddCard>
+                    <BtnAddCard style={{ width: '100%', background: 'rgb(146, 146, 146)', border:'none' }} onClick={AddNewCard} type='submit'>Create</BtnAddCard>
                 </form>
             </div>
         </div>

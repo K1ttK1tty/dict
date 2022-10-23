@@ -11,13 +11,13 @@
 }
 .card {
     background: var(--background-card);
-    padding: 10px 11px 15px 15px;
+    padding: 10px 11px 12px 14px;
     border-radius: 12px;
     max-width: 500px;
     margin: 0px auto 24px;
     position: var(--positionRelative);
     overflow:var(--overflowHidden);
-    box-shadow: 0px -2px 5px 0px #252530 inset;
+    box-shadow: 0px 0px 6px 1px #030303ab;
     cursor:var(--pointer);
     transition: var(--transition-theme);
 }

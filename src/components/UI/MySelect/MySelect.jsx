@@ -1,11 +1,9 @@
 import React from 'react';
 import cl from './MySelect.module.css'
-import { useState } from 'react';
 import SetOptions from '../../SetOptions';
 import { CSSTransition } from 'react-transition-group';
 import IconSelect from './IconSelect';
 const MySelect = function ({ setChooseTheme, selectOptions, stateOption, setStateOption, replaceOptionName, setReplaceOptionName }) {
-
 
     function replaceOption(el) {
         setReplaceOptionName(el.target.innerText);
@@ -23,6 +21,7 @@ const MySelect = function ({ setChooseTheme, selectOptions, stateOption, setStat
         setStateOption({ option: false, remove: false })
         setChooseTheme('');
     }
+    
     return (
         <div className={cl.select} >
             <div onClick={getValue} id='select1' className={cl.title}>

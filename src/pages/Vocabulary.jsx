@@ -22,9 +22,9 @@ const Vocabulary = function ({ Cards, setCards, changeTheme }) {
     const [stateOption, setStateOption] = useState({ option: false, remove: false });
     const [replaceOptionName, setReplaceOptionName] = useState('Choose a theme');
     const [selectOptions, setSelectOptions] = useState(['noun', 'verb',])
-    const [inputValue, setInputValue] = useState({ word: '', translate: '', theme: '', });
-    const [input, setInput] = useState({ before: false, after: '', });
-    const [editCard, setEditCard] = useState({ word: '', translate: '', theme: '', });
+    const [inputValue, setInputValue] = useState({ word: '', translate: '', theme: '' });
+    const [input, setInput] = useState({ before: false, after: '' });
+    const [editCard, setEditCard] = useState({ word: '', translate: '', theme: '' });
 
 
     function AddNewCard(e) {
@@ -80,15 +80,9 @@ const Vocabulary = function ({ Cards, setCards, changeTheme }) {
         setModalCards(!modalCards);
     }
 
-
-
-
-
     let paramsModal = { overflow: 'auto', paddingRight: '0px' };
     // if (modal || modalCards) paramsModal = { overflow: 'hidden', paddingRight: width };
-
     const btnStyle = { margin: '0px auto', display: 'block' };
-    // console.log(document.querySelector('#checkbox').checked)
     return (
         <div onClick={removeInput} className={"searchWrapper"} style={paramsModal}>
             <MenuVoc
@@ -127,8 +121,6 @@ const Vocabulary = function ({ Cards, setCards, changeTheme }) {
                         setChooseTheme={setChooseTheme}
                         selectOptions={selectOptions}
                     />
-
-
                     {selectedAndSearchedWord.length !== 0 ?
                         < SetCard
                             setIndex={setIndex}
@@ -142,19 +134,12 @@ const Vocabulary = function ({ Cards, setCards, changeTheme }) {
                         : <RemoveTheme chooseTheme={chooseTheme} removeTheme={removeTheme} />}
 
 
-
-
-                    <input defaultChecked={true} onClick={changeTheme} id='checkbox' type="checkbox"/>
+                    <input defaultChecked={false} onClick={changeTheme} id='checkbox' type="checkbox" />
                     <label className='checkboxLabel' htmlFor="checkbox"></label>
-
-
-
 
                 </div>
             </div>
-
         </div >
-
     )
 };
 export default Vocabulary;

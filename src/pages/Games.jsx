@@ -3,6 +3,7 @@ import { useState, useMemo } from 'react';
 import InputRequire from '../components/UI/InputRequire/InputRequire'
 import Gamescss from '../styles/Games.css'
 import vocabularyCss from '../styles/Vocabulary.css'
+import themecss from '../styles/theme.css'
 import BtnAddCard from '../components/UI/BtnAddCard/BtnAddCard';
 import CardsRandom from '../components/UI/CardsRandom/CardsRandom'
 const Games = function ({ Cards }) {
