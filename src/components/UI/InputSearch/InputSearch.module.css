@@ -4,6 +4,7 @@
     width: 175px;
     margin-right: 15px;
     padding: 8px;
+    border: var(--input-search-border);
 }
 .inputOff {
     height: 30px;
@@ -11,6 +12,7 @@
     width: 0px;
     margin-right: 15px;
     padding: 0px;
+    border: none;
 }
 .inputShared{
     font-family: "Heebo", sans-serif;
@@ -19,7 +21,7 @@
     top: -5px;
     border-radius: 12px;
     background-color: rgb(255, 255, 255);
-    border: none;
+
 }
 
 .inputOnAnimation{

@@ -6,14 +6,13 @@ import { Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
 import { useTheme } from '../hooks/useTheme';
 const AppRouter = function () {
-    const [pageTheme, setPageTheme] = useState('dark')
+    const [pageTheme, setPageTheme] = useState('light')
     useTheme(pageTheme);
     function changeTheme(elem) {
         if (elem.target.checked) {
             setPageTheme('dark')
         } else setPageTheme('light')
     }
-
 
     const [Cards, setCards] = useState([
         {
@@ -41,56 +40,57 @@ const AppRouter = function () {
             translate: 'встраивать ',
             theme: '',
         },
-        {
-            word: 'explicit',
-            translate: 'явный, понятный',
-            theme: '',
-        },
-        {
-            word: 'to eject',
-            translate: 'выбрасывать, изгонять',
-            theme: 'verb',
-        },
-        {
-            word: 'to maintain',
-            translate: 'поддерживать, сохранять',
-            theme: 'verb',
-        },
-        {
-            word: 'appropriate',
-            translate: 'соответствующий, подходящий',
-            theme: 'noun',
-        },
-        {
-            word: 'purpose',
-            translate: 'цель, назначение, причина существования',
-            theme: 'noun',
-        },
-        {
-            word: 'recent',
-            translate: 'недавний, недавно появившийся',
-            theme: 'noun',
-        },
-        {
-            word: 'confusion',
-            translate: 'путаница, замешательство, сметение',
-            theme: 'noun',
-        }, 
-        {
-            word: 'particular',
-            translate: 'конкретный, особенный',
-            theme: 'noun',
-        }, 
-        {
-            word: 'to research',
-            translate: 'изучение, исследование',
-            theme: 'verb',
-        },
-        {
-            word: 'insight',
-            translate: 'понимание решения проблемы, новая идея для...',
-            theme: '',
-        },
+
+        // {
+        //     word: 'explicit',
+        //     translate: 'явный, понятный',
+        //     theme: '',
+        // },
+        // {
+        //     word: 'to eject',
+        //     translate: 'выбрасывать, изгонять',
+        //     theme: 'verb',
+        // },
+        // {
+        //     word: 'to maintain',
+        //     translate: 'поддерживать, сохранять',
+        //     theme: 'verb',
+        // },
+        // {
+        //     word: 'appropriate',
+        //     translate: 'соответствующий, подходящий',
+        //     theme: 'noun',
+        // },
+        // {
+        //     word: 'purpose',
+        //     translate: 'цель, назначение, причина существования',
+        //     theme: 'noun',
+        // },
+        // {
+        //     word: 'recent',
+        //     translate: 'недавний, недавно появившийся',
+        //     theme: 'noun',
+        // },
+        // {
+        //     word: 'confusion',
+        //     translate: 'путаница, замешательство, сметение',
+        //     theme: 'noun',
+        // }, 
+        // {
+        //     word: 'particular',
+        //     translate: 'конкретный, особенный',
+        //     theme: 'noun',
+        // }, 
+        // {
+        //     word: 'to research',
+        //     translate: 'изучение, исследование',
+        //     theme: 'verb',
+        // },
+        // {
+        //     word: 'insight',
+        //     translate: 'понимание решения проблемы, новая идея для...',
+        //     theme: '',
+        // },
 
 
 
@@ -142,7 +142,6 @@ const AppRouter = function () {
         // },
     ]);
     
-
 
     return (
         <Routes>
