@@ -6,13 +6,7 @@ import { Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
 import { useTheme } from '../hooks/useTheme';
 const AppRouter = function () {
-    const [pageTheme, setPageTheme] = useState('light')
-    useTheme(pageTheme);
-    function changeTheme(elem) {
-        if (elem.target.checked) {
-            setPageTheme('dark')
-        } else setPageTheme('light')
-    }
+    
 
     const [Cards, setCards] = useState([
         {
@@ -145,10 +139,10 @@ const AppRouter = function () {
 
     return (
         <Routes>
-            <Route path='/posts' element={<Vocabulary changeTheme={changeTheme} Cards={Cards} setCards={setCards}/>}></Route>
+            <Route path='/posts' element={<Vocabulary Cards={Cards} setCards={setCards}/>}></Route>
             <Route path='/games' element={<Games Cards={Cards} />}></Route>
             <Route path='/settings' element={<Settings />}></Route>
-            <Route path='*' element={<Vocabulary changeTheme={changeTheme} Cards={Cards} setCards={setCards}/>} />
+            <Route path='*' element={<Vocabulary Cards={Cards} setCards={setCards}/>} />
         </Routes>
     )
 };
