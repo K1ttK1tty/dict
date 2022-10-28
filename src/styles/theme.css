@@ -1,7 +1,6 @@
 /* dark theme */
 html[data-theme="light"] {
     /* Vocabulary */
-    --checkbox-border: #272730;
     --background-cards: rgb(238, 238, 238);
     --background-card: #ebebeb;
     --btn-color: #fafafa;
@@ -30,7 +29,6 @@ html[data-theme="light"] {
 /* light theme */
 html[data-theme="dark"] {
     /* Vocabulary */
-    --checkbox-border: white;
     --background-cards: #232830;
     --background-card: #ffffffd7;
     --btn-color: rgb(255, 255, 255);

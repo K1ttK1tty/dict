@@ -12,7 +12,7 @@ import { useCards } from '../hooks/useCards';
 import ModalAddCards from '../components/UI/ModalAddCards/ModalAddCards';
 import RemoveTheme from '../components/RemoveTheme';
 import useScrollbarSize from 'react-scrollbar-size';
-const Vocabulary = function ({ Cards, setCards, changeTheme }) {
+const Vocabulary = function ({ Cards, setCards }) {
     // const { height, width } = useScrollbarSize();
     const [searchWord, setSearchWord] = useState('');
     const [chooseTheme, setChooseTheme] = useState('');
@@ -134,8 +134,7 @@ const Vocabulary = function ({ Cards, setCards, changeTheme }) {
                         : <RemoveTheme chooseTheme={chooseTheme} removeTheme={removeTheme} />}
 
 
-                    <input defaultChecked={false} onClick={changeTheme} id='checkbox' type="checkbox" />
-                    <label className='checkboxLabel' htmlFor="checkbox"></label>
+                    
 
                 </div>
             </div>
