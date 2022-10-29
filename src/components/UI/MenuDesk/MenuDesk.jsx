@@ -26,18 +26,21 @@ const MenuDesk = function ({ changeTheme }) {
                                 </Link>
                             </span>
                         </li>
-                        <li className={cl.ulMenu__item}>
+                        {/* <li className={cl.ulMenu__item}>
                             <span className={cl.spanIcons}>
                                 <Link to="/settings" ><Icon3 className={cl.colorIcon} /><span className={cl.swipe}>Настройки</span></Link>
                             </span>
-                        </li>
+                        </li> */}
                     </ul>
+                    <div className='themeChanger'>
                         <input defaultChecked={false} onClick={changeTheme} id='checkbox' type="checkbox" />
                         <label className='checkboxLabel' htmlFor="checkbox"></label>
+                        <p className={cl.changeThemeTitle}>Change theme</p>
+                    </div>
 
 
 
-                        
+
                     {/* <a className={cl.callBack}>
                         <span className={cl.callBackItem}><Icon4 fill={cl.questIcon} icon4Class={cl.icon4Class} /><span className={cl.callBackSpan}>Возникли вопросы?<p>Пиши нам!</p></span></span>
                     </a> */}

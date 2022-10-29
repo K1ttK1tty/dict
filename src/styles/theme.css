@@ -11,11 +11,13 @@ html[data-theme="light"] {
     --nav-menu-shadow: -18px 0px 52px 5px rgba(0, 0, 0, 0.24);
     --transition-theme: 0.3s ease;
 
+
     /* Games */
     --header: black;
     --form-label: black;
     --color-word-translate: black;
     --input-borderBottom: black;
+    --empty-header:black;
 
     --color-true: rgb(45, 143, 45);
     --color-false: rgba(206, 15, 15, 0.9);
@@ -39,11 +41,13 @@ html[data-theme="dark"] {
     --nav-menu-shadow: none;
     --transition-theme: 0.3s ease;
 
+
     /* Games */
     --header: white;
     --form-label: white;
     --color-word-translate: white;
     --input-borderBottom: white;
+    --empty-header:white;
 
     --color-true: rgba(0, 255, 0, 0.85);
     --color-false: rgba(255, 0, 0, 0.9);

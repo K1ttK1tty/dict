@@ -134,8 +134,6 @@ const Vocabulary = function ({ Cards, setCards }) {
                         : <RemoveTheme chooseTheme={chooseTheme} removeTheme={removeTheme} />}
 
 
-                    
-
                 </div>
             </div>
         </div >
