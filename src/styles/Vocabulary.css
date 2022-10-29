@@ -81,10 +81,11 @@
     transition: 0.3s;
 }
 .noCards {
-    color: white;
+    color: var(--empty-header);
     font-size: 25px;
     text-align: center;
     margin-top: 35px;
+    transition: var(--transition-theme);
 }
 
 #checkbox {
@@ -98,10 +99,9 @@
     border-radius: 15px;
     cursor: pointer;
     display: inline-block;
-    position: relative;
     transition: var(--transition-theme);
     position: relative;
-    /* top: 230px; */
+    left: -6px;
 }
 .checkboxLabel::after {
     content: "";
@@ -135,4 +135,11 @@
 .cardsIconColor {
     fill: var(--card-icon-color);
     transition: var(--transition-theme);
+}
+.themeChanger{
+    margin: 0px auto;
+    height: 25px;
+    min-width: 46px;
+    position: relative;
+    display: flex;
 }
