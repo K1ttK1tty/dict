@@ -18,8 +18,7 @@ nav {
     position: relative;
 }
 .back {
-    /* background-color: #22222c; */
-    background-color: #24292F;
+    background-color: #24292f;
     position: fixed;
     height: 100%;
     width: 70px;
@@ -34,7 +33,6 @@ nav {
     width: 300px;
     transition: var(--transition02s);
 }
-
 .content {
     display: flex;
     flex-direction: column;
@@ -60,9 +58,8 @@ nav {
 }
 
 .spanIcons:hover .swipe {
-    color: rgba(255, 255, 255, 0.65);
+    color: rgba(255, 255, 255, 0.7);
 }
-
 
 .colorIcon {
     width: 20px;
@@ -70,10 +67,11 @@ nav {
     fill: rgba(255, 255, 255, 0.65);
     position: relative;
     top: 2px;
-    margin-right: 15px;
+    margin-right: 25px;
     transition: var(--transition02s);
 }
 .swipe {
+    position: relative;
     opacity: var(--opacity0);
     visibility: var(--visHid);
     font-size: var(--fz0px);
@@ -138,16 +136,13 @@ a:visited {
 }
 
 
-
-
 /* for light-dark theme */
-.changeThemeTitle{
+.changeThemeTitle {
     opacity: var(--opacity0);
     visibility: var(--visHid);
     font-size: var(--fz0px);
     transition: var(--transition02s);
 }
-
 .back:hover .changeThemeTitle {
     color: white;
     opacity: var(--opacity1);
@@ -155,18 +150,3 @@ a:visited {
     font-size: 18px;
     transition: 0.2s;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

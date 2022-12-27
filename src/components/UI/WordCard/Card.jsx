@@ -2,12 +2,10 @@ import React from 'react';
 import cl from './WordCard.module.css'
 import IconEdit from './IconEdit';
 import IconRemove from './IconRemove';
-
 const Card = function ({ card, remove, setModal,setEditCard, index,setIndex}) {
     function tt() {
         remove(card);
     }
-
     function editWord() {
         setIndex(index);
         setEditCard(card)

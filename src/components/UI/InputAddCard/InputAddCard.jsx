@@ -1,13 +1,12 @@
 import React from 'react';
 import cl from './inputAddCard.module.css'
-const InputAddCard = function ({ inputValue, setInputValue, placeholder, style, disabled}) {
-
+const InputAddCard = function ({ inputValue, setInputValue, placeholder, additionClasses, disabled,style}) {
 
     return (
         <input
             disabled={disabled}
-            style={style}
             placeholder={placeholder}
+            style={style}
             className={cl.www}
             value={inputValue}
             onChange={e => setInputValue(e.target.value)}

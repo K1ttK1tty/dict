@@ -50,8 +50,9 @@
     top: 28%;
     right: 14%;
     cursor:var(--pointer);
-    transition: 0.1s;
+    transition: 0.2s;
     padding: 3px;
+    transform:translate(8px)
 }
 .remove {
     opacity: var(--opacityOff);
@@ -60,14 +61,21 @@
     top: 28%;
     right: 3.5%;
     cursor:var(--pointer);
-    transition: 0.1s;
+    transition: 0.2s;
     padding: 3px;
+    transform:translate(-8px)
 }
+.remove:hover{
+    
+}
+
 .card:hover .edit{
     opacity: var(--opacityOn);
     visibility: var(--visibilityOn);
+    transform:translate(0px)
 }
 .card:hover .remove {
     opacity: var(--opacityOn);
     visibility: var(--visibilityOn);
+    transform:translate(0px)
 }
