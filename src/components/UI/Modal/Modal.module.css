@@ -1,12 +1,19 @@
 .modal {
     position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     z-index: 10;
     top: 0px;
     bottom: 0px;
     left: 0px;
     right: 0px;
     background: rgb(0, 0, 0, 0.5);
-    display: none;
+    opacity: 0;
+    visibility: hidden;
+    scale: 0.4;
+    transition: 0.3s;
+    border-radius: 50px;
 }
 .modalContent {
     padding: 26px;
@@ -20,9 +27,9 @@
     flex-direction: column;
 }
 .modal.active {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    opacity: 1;
+    visibility: visible;
+    scale: 1.03;
 }
 .modalNav {
     width: 100%;
@@ -42,8 +49,24 @@
     font-weight: 500;
 }
 .modalClose {
-    font-size: 28px;
+    position: relative;
+    top: -1px;
+    right: -12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
     cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.06);
+    border-radius: 50%;
+    color: rgba(0, 0, 0, 0.9);
+    width: 31px;
+    height: 30px;
+    transition: 0.2s;
+}
+
+.modalClose:hover{
+    background-color: rgba(0, 0, 0, 0.2);
 }
 .inputDiv {
     display: flex;
@@ -56,4 +79,7 @@
     top: -10px;
 }
 
-
+.modalTitle{
+    font-size: 20px;
+    font-weight: 500;
+}

@@ -26,7 +26,6 @@ const Vocabulary = function ({ Cards, setCards }) {
     const [input, setInput] = useState({ before: false, after: '' });
     const [editCard, setEditCard] = useState({ word: '', translate: '', theme: '' });
 
-
     function AddNewCard(e) {
         e.preventDefault()
         if (inputValue.word && inputValue.translate) {

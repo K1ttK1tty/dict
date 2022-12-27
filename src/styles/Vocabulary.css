@@ -26,7 +26,8 @@
 
 .menu__logo {
     font-size: 20px;
-    color: rgba(255, 255, 255, 0.85);
+    /* color: rgba(255, 255, 255, 0.85); */
+    color: rgb(136, 214, 47);
     transition: var(--transition-theme);
 }
 .menu__search {
@@ -122,8 +123,10 @@
 
 /* for light-dark theme */
 .iconSearchForMenu {
-    stroke: rgba(255, 255, 255, 0.85);
-    fill: rgba(255, 255, 255, 0.85);
+    stroke:  rgb(136, 214, 47);
+    fill:  rgb(136, 214, 47);
+    /* stroke: rgba(255, 255, 255, 0.85);
+    fill: rgba(255, 255, 255, 0.85); */
     height: 22px;
     width: 22px;
     transition: var(--transition-theme);
@@ -143,3 +146,4 @@
     position: relative;
     display: flex;
 }
+
