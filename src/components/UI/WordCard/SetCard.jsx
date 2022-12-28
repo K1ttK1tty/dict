@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from './Card';
-const SetCards = function ({ Cards, remove,setModal,editCard, setEditCard,inputValue,setIndex}) {
+const SetCards = function ({ Cards, remove,setModal,editCard, setEditCard,inputValue,setIndex,modalChangeCard}) {
 
 
     // Cards.map(card=> console.log(card.word))
@@ -12,7 +12,7 @@ const SetCards = function ({ Cards, remove,setModal,editCard, setEditCard,inputV
 
                 // console.log(card.word.includes(searchWord));
 
-                < Card setIndex={setIndex} setEditCard={setEditCard} setModal={setModal} remove={remove} card={card} key={card.word + index} index={index} />
+                < Card modalChangeCard={modalChangeCard} setIndex={setIndex} setEditCard={setEditCard} setModal={setModal} remove={remove} card={card} key={card.word + index} index={index} />
 
             )}
 

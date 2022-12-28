@@ -1,10 +1,16 @@
-.www{
+.www {
     border-radius: 12px;
     font-size: 20px;
     line-height: 1.2;
     padding: 6px 13px;
-
+    transition: 0.15s;
 }
-input:disabled{
+input:disabled {
     background-color: transparent;
+}
+
+.www:focus {
+    scale: 1.06;
+    /* box-shadow: 0px 0px 18px 1px rgba(136, 214, 47, 0.548); */
+    color: black;
 }

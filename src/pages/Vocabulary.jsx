@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { useRef } from 'react';
 import vocabularyCss from '../styles/Vocabulary.css'
 import themecss from '../styles/theme.css'
 import MenuVoc from '../components/MenuVoc';
@@ -25,6 +26,8 @@ const Vocabulary = function ({ Cards, setCards }) {
     const [inputValue, setInputValue] = useState({ word: '', translate: '', theme: '' });
     const [input, setInput] = useState({ before: false, after: '' });
     const [editCard, setEditCard] = useState({ word: '', translate: '', theme: '' });
+    const modalAdd = useRef();
+    const modalChangeCard = useRef();
 
     function AddNewCard(e) {
         e.preventDefault()
@@ -77,6 +80,7 @@ const Vocabulary = function ({ Cards, setCards }) {
     const selectedAndSearchedWord = useCards(Cards, chooseTheme, searchWord);
     function modalAddCard() {
         setModalCards(!modalCards);
+        setTimeout(() => { modalAdd.current.focus(); }, 200);
     }
 
     let paramsModal = { overflow: 'auto', paddingRight: '0px' };
@@ -92,6 +96,7 @@ const Vocabulary = function ({ Cards, setCards }) {
                 cards={Cards}
             />
             <Modal
+                modalChangeCard={modalChangeCard}
                 index={index}
                 Cards={Cards}
                 setCards={setCards}
@@ -103,6 +108,7 @@ const Vocabulary = function ({ Cards, setCards }) {
                 modal={modal}
             />
             <ModalAddCards
+                modalAdd={modalAdd}
                 AddNewCard={AddNewCard}
                 inputValue={inputValue}
                 setInputValue={setInputValue}
@@ -129,9 +135,9 @@ const Vocabulary = function ({ Cards, setCards }) {
                             setModal={setModal}
                             remove={removeCard}
                             Cards={selectedAndSearchedWord}
+                            modalChangeCard={modalChangeCard}
                         />
                         : <RemoveTheme chooseTheme={chooseTheme} removeTheme={removeTheme} />}
-
 
                 </div>
             </div>

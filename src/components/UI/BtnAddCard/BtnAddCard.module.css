@@ -1,26 +1,35 @@
-.btnAddCard{
+.btnAddCard {
     background-color: var(--btn-color);
     padding: 11px;
     font-size: 16px;
     color: black;
     font-weight: 500;
     cursor: pointer;
-    transition:var(--transition-theme);
-    border: 0px solid black;
+    transition: var(--transition-theme);
+    border: 1px solid transparent;
     position: relative;
     border-radius: 6px;
 }
-.btnAddCard:after{
+.btnAddCard:after {
     position: absolute;
-    bottom: 0px;
+    bottom: -1px;
     left: 0px;
-    content: '';
+    content: "";
     width: 100%;
     height: 2px;
     background-color: rgb(35, 112, 143);
     scale: 0.1;
-    transition: 0.4s;
+    transition: 0.3s;
 }
-.btnAddCard:hover.btnAddCard:after{
+.btnAddCard:hover.btnAddCard:after {
     scale: 1;
+}
+
+.btnAddCard:focus {
+    box-shadow: 0px 0px 18px 1px rgb(136, 214, 47);
+
+
+
+
+
 }
