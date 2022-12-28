@@ -2,11 +2,9 @@ import React from 'react';
 import InputSearch from './UI/InputSearch/InputSearch';
 import Search from '../pages/Icons/Search';
 const MenuVoc = function ({ input, setInput, searchWord, setSearchWord}) {
-
     function clearINput() {
         setSearchWord('');
     }
-
     function inputOn(event) {
         if (event.target.id == 1) {
             return false
@@ -24,7 +22,6 @@ const MenuVoc = function ({ input, setInput, searchWord, setSearchWord}) {
             clearINput();
         }
     }
-
 
     return (
         <div className="menu">

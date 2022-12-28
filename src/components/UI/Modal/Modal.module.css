@@ -11,9 +11,7 @@
     background: rgb(0, 0, 0, 0.5);
     opacity: 0;
     visibility: hidden;
-    scale: 0.4;
     transition: 0.3s;
-    border-radius: 50px;
 }
 .modalContent {
     padding: 26px;
@@ -21,6 +19,8 @@
     min-width: 400px;
     border-radius: 12px;
     max-width: 60%;
+    scale: 0.4;
+    transition: 0.3s;
 }
 .modalInputs {
     display: flex;
@@ -29,7 +29,9 @@
 .modal.active {
     opacity: 1;
     visibility: visible;
-    scale: 1.03;
+}
+.modal.active .modalContent {
+    scale: 1;
 }
 .modalNav {
     width: 100%;
@@ -63,11 +65,17 @@
     width: 31px;
     height: 30px;
     transition: 0.2s;
+    border: none;
 }
 
 .modalClose:hover{
     background-color: rgba(0, 0, 0, 0.2);
 }
+
+.modalClose:focus{
+    background-color: rgba(0, 0, 0, 0.315);
+}
+
 .inputDiv {
     display: flex;
     justify-content: space-between;

@@ -2,7 +2,7 @@ import React from 'react';
 import cl from './WordCard.module.css'
 import IconEdit from './IconEdit';
 import IconRemove from './IconRemove';
-const Card = function ({ card, remove, setModal,setEditCard, index,setIndex}) {
+const Card = function ({ card, remove, setModal,setEditCard, index,setIndex,modalChangeCard}) {
     function tt() {
         remove(card);
     }
@@ -10,6 +10,9 @@ const Card = function ({ card, remove, setModal,setEditCard, index,setIndex}) {
         setIndex(index);
         setEditCard(card)
         setModal(true);
+        setTimeout(() => {
+            modalChangeCard.current.focus();
+        }, 170);
     }
 
 
