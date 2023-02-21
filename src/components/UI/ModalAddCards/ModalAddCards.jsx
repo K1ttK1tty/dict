@@ -2,18 +2,19 @@ import React from 'react';
 import cl from '../Modal/Modal.module.css'
 import InputAddCard from '../InputAddCard/InputAddCard';
 import BtnAddCard from '../BtnAddCard/BtnAddCard';
+import { keyClose } from '../../../functions/keyClose';
 const ModalAddCards = function ({ modalCards, setModalCards, inputValue, setInputValue, AddNewCard, modalAdd }) {
     let vis = [cl.modal];
     if (modalCards) vis = [cl.modal, cl.active].join(' ')
 
     const styles = { width: '100%', display: 'block', marginBottom: '15px', marginBottom: '18px', border: 'none', borderBottom: '1px solid black', borderRadius: '0px' };
     function removeModal() {
-        setModalCards(!modalCards)
+        setModalCards(false)
         setInputValue({ word: '', translate: '', theme: '' })
     }
 
     return (
-        <div className={vis} onClick={removeModal}>
+        <div className={vis} onKeyDown={e => keyClose(e, setModalCards, setInputValue)} onClick={removeModal}>
             <div onClick={e => (e.stopPropagation())} className={cl.modalContent}>
                 <div className={cl.modalMarg}>
                     <div className={cl.modalNav}>

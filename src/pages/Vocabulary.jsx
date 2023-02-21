@@ -1,33 +1,56 @@
-import React from 'react';
-import { useState } from 'react';
-import { useRef } from 'react';
-import vocabularyCss from '../styles/Vocabulary.css'
-import themecss from '../styles/theme.css'
+import React, {useState, useRef} from 'react';
+import { useCards } from '../hooks/useCards';
+import useScrollbarSize from 'react-scrollbar-size';
+//components
 import MenuVoc from '../components/MenuVoc';
 import SetCard from '../components/UI/WordCard/SetCard';
 import BtnAddCard from '../components/UI/BtnAddCard/BtnAddCard';
-import cl from '../components/UI/BtnAddCard/BtnAddCard.module.css';
 import MySelect from '../components/UI/MySelect/MySelect';
 import Modal from '../components/UI/Modal/Modal';
-import { useCards } from '../hooks/useCards';
 import ModalAddCards from '../components/UI/ModalAddCards/ModalAddCards';
 import RemoveTheme from '../components/RemoveTheme';
-import useScrollbarSize from 'react-scrollbar-size';
-const Vocabulary = function ({ Cards, setCards }) {
+//functions
+import {_AddNewCard} from '../functions/_AddNewCard'
+import { ADDNewTheme } from '../functions/ADDNewTheme.js'
+import { _removeTheme } from '../functions/_removeTheme.js';
+import { paramsModal,btnStyle } from '../consts/consts';
+//styles
+import cl from '../components/UI/BtnAddCard/BtnAddCard.module.css';
+import themecss from '../styles/theme.css'
+import vocabularyCss from '../styles/Vocabulary.css'
+//redux
+import { useSelector, useDispatch } from 'react-redux';
+import { setSearchWord } from '../store/upMenu';
+import { setInput } from '../store/upMenu';
+
+
+
+const Vocabulary = function ({ Cards, setCards, selectOptions, setSelectOptions }) {
     // const { height, width } = useScrollbarSize();
-    const [searchWord, setSearchWord] = useState('');
+    //redux
+    const searchWord = useSelector(state=> state.upMenu.searchWord)
+    const input = useSelector (state => state.upMenu.input);
+    const dispatch = useDispatch()
+
+
+
+
     const [chooseTheme, setChooseTheme] = useState('');
     const [modal, setModal] = useState(false);
     const [modalCards, setModalCards] = useState(false);
     const [index, setIndex] = useState();
     const [stateOption, setStateOption] = useState({ option: false, remove: false });
     const [replaceOptionName, setReplaceOptionName] = useState('Choose a theme');
-    const [selectOptions, setSelectOptions] = useState(['noun', 'verb',])
     const [inputValue, setInputValue] = useState({ word: '', translate: '', theme: '' });
-    const [input, setInput] = useState({ before: false, after: '' });
     const [editCard, setEditCard] = useState({ word: '', translate: '', theme: '' });
     const modalAdd = useRef();
     const modalChangeCard = useRef();
+
+
+
+
+
+
 
     function AddNewCard(e) {
         e.preventDefault()
@@ -40,13 +63,7 @@ const Vocabulary = function ({ Cards, setCards }) {
     };
 
     function addNewTheme(selectOptions, newTheme) {
-        let opt = [...selectOptions];
-        let a = 0;
-        for (let index = 0; index < opt.length; index++) {
-            const element = opt[index];
-            if (element == newTheme) a = 1;
-        }
-        if (!a) setSelectOptions([...selectOptions, newTheme]);
+        ADDNewTheme(selectOptions, newTheme, setSelectOptions);
     };
 
     function removeCard(cardClick) {
@@ -59,11 +76,10 @@ const Vocabulary = function ({ Cards, setCards }) {
         const classElement = elem.target.className; // simplification
         const btnClass = classElement !== [cl.btnAddCard, 'noClick'].join(' '); // track button click
 
-        if (input.before && idElement != 1 && idElement != 2) {
-            setSearchWord('');
-            setInput({ before: false, after: input.after })
+        if (input.isOpen && idElement != 1 && idElement != 2) {
+            dispatch(setSearchWord(''))
+            dispatch(setInput({ isOpen: false, after: input.after }))
         };
-
 
         if (idElement != 'select1' && idElement != 'select2' && classElement != 'selSVG' && idElement != 'select3') {
             if ((elem.target.parentNode.id == 'options' || chooseTheme) && btnClass) a = true;
@@ -72,9 +88,7 @@ const Vocabulary = function ({ Cards, setCards }) {
     };
 
     function removeTheme() {
-        setSelectOptions(selectOptions.filter(theme => theme != chooseTheme));
-        setReplaceOptionName('Choose a theme');
-        setChooseTheme('');
+        _removeTheme(setSelectOptions, selectOptions, chooseTheme, setReplaceOptionName, setChooseTheme)
     }
 
     const selectedAndSearchedWord = useCards(Cards, chooseTheme, searchWord);
@@ -82,19 +96,11 @@ const Vocabulary = function ({ Cards, setCards }) {
         setModalCards(!modalCards);
         setTimeout(() => { modalAdd.current.focus(); }, 200);
     }
-
-    let paramsModal = { overflow: 'auto', paddingRight: '0px' };
     // if (modal || modalCards) paramsModal = { overflow: 'hidden', paddingRight: width };
-    const btnStyle = { margin: '0px auto', display: 'block' };
+
     return (
         <div onClick={removeInput} className={"searchWrapper"} style={paramsModal}>
-            <MenuVoc
-                input={input}
-                setInput={setInput}
-                searchWord={searchWord}
-                setSearchWord={setSearchWord}
-                cards={Cards}
-            />
+            <MenuVoc/>
             <Modal
                 modalChangeCard={modalChangeCard}
                 index={index}

@@ -2,6 +2,8 @@ import React from 'react';
 import cl from './Modal.module.css'
 import InputAddCard from '../InputAddCard/InputAddCard';
 import BtnAddCard from '../BtnAddCard/BtnAddCard';
+import { inputAddCardstyles, btnForm } from '../../../consts/consts';
+import { keyClose } from '../../../functions/keyClose';
 const Modal = function ({ modal, setInputValue, inputValue, setModal, setEditCard, editCard, setCards, Cards, index, modalChangeCard }) {
     let visible = [cl.modal];
     if (modal) visible = [cl.modal, cl.active].join(' ')
@@ -19,12 +21,8 @@ const Modal = function ({ modal, setInputValue, inputValue, setModal, setEditCar
         setInputValue({ word: '', translate: '', theme: '', });
     };
 
-    //styles
-    const inputAddCardstyles = { marginBottom: '18px', border: 'none', borderBottom: '1px solid black', borderRadius: '0px' };
-    const btnForm = { fontSize: '18px', padding: '12px', background: 'rgb(136, 214, 47)', border: 'none', width: '100%' };
-
     return (
-        <div onClick={removeModal} className={visible}>
+        <div onKeyDown={e => keyClose(e, setModal, setInputValue)} onClick={removeModal} className={visible}>
             <div onClick={e => (e.stopPropagation())} className={cl.modalContent}>
                 <div className={cl.modalMarg}>
                     <div className={cl.modalNav}>

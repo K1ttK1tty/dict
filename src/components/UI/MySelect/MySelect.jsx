@@ -11,17 +11,14 @@ const MySelect = function ({ setChooseTheme, selectOptions, stateOption, setStat
         setStateOption({ option: false, remove: true })
     }
     function getValue() {
-        if (stateOption.option) {
-            setStateOption({ ...stateOption, option: false })
-        } else setStateOption({ ...stateOption, option: true })
-
+        setStateOption({ ...stateOption, option: !stateOption.option })
     }
     function removeTheme() {
         setReplaceOptionName('Choose a theme');
         setStateOption({ option: false, remove: false })
         setChooseTheme('');
     }
-    
+
     return (
         <div className={cl.select} >
             <div onClick={getValue} id='select1' className={cl.title}>
@@ -29,7 +26,6 @@ const MySelect = function ({ setChooseTheme, selectOptions, stateOption, setStat
                 <div className={cl.selectIcon}><IconSelect /></div>
             </div>
             {stateOption.remove ? <div id='select3' onClick={removeTheme} className={cl.removeTheme}>&times;</div> : ''}
-
 
             <CSSTransition
                 in={stateOption.option}

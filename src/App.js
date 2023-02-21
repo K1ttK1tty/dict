@@ -4,7 +4,6 @@ import { BrowserRouter } from 'react-router-dom';
 import AppRouter from './components/AppRouter';
 import { useTheme } from './hooks/useTheme'
 import { useState } from 'react';
-
 function App() {
     
     const [pageTheme, setPageTheme] = useState('light')
@@ -17,11 +16,7 @@ function App() {
     return (
             <BrowserRouter>
                 <MenuDesk changeTheme={changeTheme} />
-
-
                 <AppRouter />
-
-
             </BrowserRouter>
     );
 }

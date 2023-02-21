@@ -6,7 +6,6 @@ import { Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
 import { useTheme } from '../hooks/useTheme';
 const AppRouter = function () {
-    
 
     const [Cards, setCards] = useState([
         {
@@ -69,12 +68,12 @@ const AppRouter = function () {
             word: 'confusion',
             translate: 'путаница, замешательство, сметение',
             theme: 'noun',
-        }, 
+        },
         {
             word: 'particular',
             translate: 'конкретный, особенный',
             theme: 'noun',
-        }, 
+        },
         {
             word: 'to research',
             translate: 'изучение, исследование',
@@ -88,7 +87,7 @@ const AppRouter = function () {
 
 
 
-        
+
         {
             word: 'to share',
             translate: 'делиться',
@@ -135,14 +134,28 @@ const AppRouter = function () {
         //     theme: 'noun',
         // },
     ]);
-    
+
+    const [selectOptions, setSelectOptions] = useState(['noun', 'verb'])
+
 
     return (
         <Routes>
-            <Route path='/posts' element={<Vocabulary Cards={Cards} setCards={setCards}/>}></Route>
+            <Route path='/posts' element={
+                <Vocabulary
+                    selectOptions={selectOptions}
+                    setSelectOptions={setSelectOptions}
+                    Cards={Cards} setCards={setCards}
+                />
+            }></Route>
             <Route path='/games' element={<Games Cards={Cards} />}></Route>
             <Route path='/settings' element={<Settings />}></Route>
-            <Route path='*' element={<Vocabulary Cards={Cards} setCards={setCards}/>} />
+            <Route path='*' element={
+                <Vocabulary selectOptions={selectOptions}
+                    setSelectOptions={setSelectOptions}
+                    Cards={Cards}
+                    setCards={setCards}
+                />}
+            />
         </Routes>
     )
 };

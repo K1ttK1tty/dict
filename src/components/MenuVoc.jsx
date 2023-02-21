@@ -1,24 +1,27 @@
 import React from 'react';
 import InputSearch from './UI/InputSearch/InputSearch';
 import Search from '../pages/Icons/Search';
-const MenuVoc = function ({ input, setInput, searchWord, setSearchWord}) {
+// import { _inputOn } from '../functions/_inputOn';
+//redux
+import { useDispatch, useSelector } from 'react-redux';
+import { setSearchWord } from '../store/upMenu';
+import { setInput } from '../store/upMenu';
+const MenuVoc = function ({ }) {
+    const dispatch = useDispatch()
+    const input = useSelector(state => state.upMenu.input)
+
     function clearINput() {
-        setSearchWord('');
+        dispatch(setSearchWord(''))
     }
     function inputOn(event) {
         if (event.target.id == 1) {
             return false
         }
-        if (!input.before) {
-            setInput({
-                before: true,
-                after: input.after,
-            });
+        if (!input.isOpen) {
+            dispatch(setInput({ isOpen: true, after: input.after }))
+
         } else {
-            setInput({
-                before: false,
-                after: input.after,
-            });
+            dispatch(setInput({ isOpen: false, after: input.after }))
             clearINput();
         }
     }
@@ -27,7 +30,9 @@ const MenuVoc = function ({ input, setInput, searchWord, setSearchWord}) {
         <div className="menu">
             <div className='menu__container'>
                 <div className="menu__logo">Logo</div>
-                <div className="menu__search" onClick={inputOn}><InputSearch input={input} searchWord={searchWord} setSearchWord={setSearchWord} placeholder={' Search word'} /><Search /></div>
+                <div className="menu__search" onClick={inputOn}>
+                    <InputSearch placeholder={' Search word'} />
+                    <Search /></div>
             </div>
         </div>
     )
