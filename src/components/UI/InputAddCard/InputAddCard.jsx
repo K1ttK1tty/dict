@@ -1,7 +1,12 @@
 import React from 'react';
 import cl from './inputAddCard.module.css'
-const InputAddCard = function ({ inputValue, setInputValue, placeholder, disabled, style, modalAdd, modalChangeCard, ...props }) {
+//redux
+import { useDispatch } from 'react-redux';
+const InputAddCard = function ({ inputValue, placeholder, disabled, style, modalAdd, modalChangeCard, setValue }) {
+    const dispatch = useDispatch();
     const element = modalAdd ? modalAdd : modalChangeCard;
+    // const element = modalChangeCard;
+
     return (
         <input
             ref={element}
@@ -10,7 +15,7 @@ const InputAddCard = function ({ inputValue, setInputValue, placeholder, disable
             style={style}
             className={cl.www}
             value={inputValue}
-            onChange={e => setInputValue(e.target.value)}
+            onChange={e => setValue(e.target.value)}
         />
     )
 };

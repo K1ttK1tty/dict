@@ -13,10 +13,6 @@ const upMenu = createSlice({
             state.input = action.payload
         }
     }
-
-
 })
-
-
 export default upMenu.reducer
 export const { setSearchWord, setInput } = upMenu.actions

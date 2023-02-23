@@ -4,7 +4,6 @@ import Vocabulary from '../pages/Vocabulary';
 import Settings from '../pages/Settings';
 import { Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
-import { useTheme } from '../hooks/useTheme';
 const AppRouter = function () {
 
     const [Cards, setCards] = useState([
@@ -135,23 +134,17 @@ const AppRouter = function () {
         // },
     ]);
 
-    const [selectOptions, setSelectOptions] = useState(['noun', 'verb'])
-
-
     return (
         <Routes>
             <Route path='/posts' element={
                 <Vocabulary
-                    selectOptions={selectOptions}
-                    setSelectOptions={setSelectOptions}
                     Cards={Cards} setCards={setCards}
                 />
             }></Route>
             <Route path='/games' element={<Games Cards={Cards} />}></Route>
             <Route path='/settings' element={<Settings />}></Route>
             <Route path='*' element={
-                <Vocabulary selectOptions={selectOptions}
-                    setSelectOptions={setSelectOptions}
+                <Vocabulary
                     Cards={Cards}
                     setCards={setCards}
                 />}

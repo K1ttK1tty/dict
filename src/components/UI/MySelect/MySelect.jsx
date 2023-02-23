@@ -3,38 +3,46 @@ import cl from './MySelect.module.css'
 import SetOptions from '../../SetOptions';
 import { CSSTransition } from 'react-transition-group';
 import IconSelect from './IconSelect';
-const MySelect = function ({ setChooseTheme, selectOptions, stateOption, setStateOption, replaceOptionName, setReplaceOptionName }) {
+import { useSelector, useDispatch } from 'react-redux';
+import { setOptionName } from '../../../store/select';
+import { setOptionState } from '../../../store/select';
+const MySelect = function ({ setChooseTheme }) {
+    const dispatch = useDispatch();
+    const optionName = useSelector(state => state.select.optionName)
+    const optionState = useSelector(state => state.select.optionState)
 
     function replaceOption(el) {
-        setReplaceOptionName(el.target.innerText);
+        dispatch(setOptionName(el.target.innerText))
+
         setChooseTheme(el.target.innerText);
-        setStateOption({ option: false, remove: true })
+        dispatch(setOptionState({ open: false, removeMark: true }))
     }
     function getValue() {
-        setStateOption({ ...stateOption, option: !stateOption.option })
+        dispatch(setOptionState({ ...optionState, open: !optionState.open }))
     }
     function removeTheme() {
-        setReplaceOptionName('Choose a theme');
-        setStateOption({ option: false, remove: false })
+        dispatch(setOptionName('Choose a theme'))
+
+        dispatch(setOptionState({ open: false, removeMark: false }))
         setChooseTheme('');
     }
 
     return (
         <div className={cl.select} >
             <div onClick={getValue} id='select1' className={cl.title}>
-                <div onClick={getValue} id='select2' className={cl.selectValue}>{replaceOptionName}</div>
+                <div onClick={getValue} id='select2' className={cl.selectValue}>{optionName}</div>
                 <div className={cl.selectIcon}><IconSelect /></div>
             </div>
-            {stateOption.remove ? <div id='select3' onClick={removeTheme} className={cl.removeTheme}>&times;</div> : ''}
+            {optionState.removeMark ? <div id='select3' onClick={removeTheme} className={cl.removeTheme}>&times;</div> : ''}
 
             <CSSTransition
-                in={stateOption.option}
+                in={optionState.open}
                 timeout={220}
                 classNames="stateOption"
                 mountOnEnter
                 unmountOnExit
             >
-                {state => <SetOptions state={state} className={stateOption.option} selectOptions={selectOptions} replaceOption={replaceOption} />}
+                {state => <SetOptions state={state} className={optionState.open} replaceOption={replaceOption} />}
             </CSSTransition>
         </div>
     )
