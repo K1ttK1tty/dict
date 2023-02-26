@@ -4,7 +4,8 @@ const select = createSlice({
     initialState: {
         optionName: 'Choose a theme',
         optionState: { open: false, removeMark: false },
-        selectOptions: ['noun', 'verb']
+        selectOptions: ['noun', 'verb'],
+        chooseTheme: ''
     },
     reducers: {
         setOptionName(state, action) {
@@ -15,11 +16,14 @@ const select = createSlice({
         },
         setSelectOptions(state, action) {
             state.selectOptions = action.payload
+        },
+        setChooseTheme(state, action) {
+            state.chooseTheme = action.payload
         }
     }
 })
 export default select.reducer
-export const { setOptionName, setOptionState, setSelectOptions } = select.actions
+export const { setOptionName, setOptionState, setSelectOptions, setChooseTheme } = select.actions
 
 
 

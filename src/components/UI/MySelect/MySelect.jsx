@@ -6,15 +6,14 @@ import IconSelect from './IconSelect';
 import { useSelector, useDispatch } from 'react-redux';
 import { setOptionName } from '../../../store/select';
 import { setOptionState } from '../../../store/select';
-const MySelect = function ({ setChooseTheme }) {
+import { setChooseTheme } from '../../../store/select';
+const MySelect = function () {
     const dispatch = useDispatch();
     const optionName = useSelector(state => state.select.optionName)
     const optionState = useSelector(state => state.select.optionState)
-
     function replaceOption(el) {
         dispatch(setOptionName(el.target.innerText))
-
-        setChooseTheme(el.target.innerText);
+        dispatch(setChooseTheme(el.target.innerText))
         dispatch(setOptionState({ open: false, removeMark: true }))
     }
     function getValue() {
@@ -22,11 +21,9 @@ const MySelect = function ({ setChooseTheme }) {
     }
     function removeTheme() {
         dispatch(setOptionName('Choose a theme'))
-
         dispatch(setOptionState({ open: false, removeMark: false }))
-        setChooseTheme('');
+        dispatch(setChooseTheme(''))
     }
-
     return (
         <div className={cl.select} >
             <div onClick={getValue} id='select1' className={cl.title}>

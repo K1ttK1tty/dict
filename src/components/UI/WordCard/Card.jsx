@@ -7,30 +7,25 @@ import { setIndexCard } from '../../../store/modalRenameCard';
 import { useDispatch } from 'react-redux';
 import { setModal } from '../../../store/modalRenameCard';
 import { setEditCard } from '../../../store/modalRenameCard';
+import { setChangeCard } from '../../../store/Cards';
 const Card = function ({ card, remove, index, modalChangeCard }) {
-
-
     const dispatch = useDispatch()
-
-    function tt() {
-        remove(card);
-    }
+    
     function editWord() {
         dispatch(setIndexCard(index))
+        dispatch(setChangeCard(card))
         dispatch(setEditCard(card))
         dispatch(setModal(true))
         setTimeout(() => {
             modalChangeCard.current.focus();
         }, 170);
     }
-
-
     return (
         <div className={cl.card} >
             <h4 className={cl.word}>{card.word}</h4>
             <p className={cl.translate}>{card.translate}</p>
             <div onClick={editWord} className={cl.edit}><IconEdit /></div>
-            <div onClick={tt} className={cl.remove}><IconRemove /></div>
+            <div onClick={()=>remove(card.id)} className={cl.remove}><IconRemove /></div>
         </div>
     )
 };

@@ -6,7 +6,12 @@ import vocabularyCss from '../styles/Vocabulary.css'
 import themecss from '../styles/theme.css'
 import BtnAddCard from '../components/UI/BtnAddCard/BtnAddCard';
 import CardsRandom from '../components/UI/CardsRandom/CardsRandom'
-const Games = function ({ Cards }) {
+//redux
+import { useSelector } from 'react-redux';
+const Games = function () {
+    
+    const Cards = useSelector(state => state.Cards.cards)
+
     const [inputReq, setInputReq] = useState(''); // number of words
     const [input, setInput] = useState('');
     const [numb, setNumb] = useState();

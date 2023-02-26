@@ -10,6 +10,7 @@ const modalRenameCard = createSlice({
             theme: ''
         },
         editCard: {
+            id:0,
             word: '',
             translate: '',
             theme: ''

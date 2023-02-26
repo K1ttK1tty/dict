@@ -1,9 +1,6 @@
 import React from 'react';
 import cl from './inputAddCard.module.css'
-//redux
-import { useDispatch } from 'react-redux';
 const InputAddCard = function ({ inputValue, placeholder, disabled, style, modalAdd, modalChangeCard, setValue }) {
-    const dispatch = useDispatch();
     const element = modalAdd ? modalAdd : modalChangeCard;
     // const element = modalChangeCard;
 

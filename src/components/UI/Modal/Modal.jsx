@@ -9,14 +9,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setModal } from '../../../store/modalRenameCard';
 import { setInputValue } from '../../../store/modalRenameCard';
 import { setEditCard } from '../../../store/modalRenameCard';
-const Modal = function ({ setCards, Cards, modalChangeCard }) {
-
-    const index = useSelector(state => state.modalRenameCard.indexCard)
+import { changeCardFields } from '../../../store/Cards';
+const Modal = function ({ modalChangeCard }) {
     const isModalActive = useSelector(state => state.modalRenameCard.isModalActive)
     const inputValue = useSelector(state => state.modalRenameCard.inputValue)
     const editCard = useSelector(state => state.modalRenameCard.editCard)
-    const dispatch = useDispatch();
 
+    const changeCard = useSelector(state=> state.Cards.changeCard)
+    const dispatch = useDispatch();
 
     let visible = [cl.modal];
     if (isModalActive) visible = [cl.modal, cl.active].join(' ')
@@ -26,13 +26,12 @@ const Modal = function ({ setCards, Cards, modalChangeCard }) {
     };
     function ChangeCard(e) {
         e.preventDefault();
-        setCards([...Cards.slice(0, index), { word: inputValue.word, translate: inputValue.translate, theme: inputValue.theme, }, ...Cards.slice(index + 1)]);
+        dispatch(changeCardFields({old:changeCard, new: inputValue}))
         shared();
     };
     function shared() {
         dispatch(setModal(false))
         dispatch(setInputValue({ word: '', translate: '', theme: '', }))
-
     }
 
     function keyClose(e) {
@@ -41,7 +40,6 @@ const Modal = function ({ setCards, Cards, modalChangeCard }) {
             dispatch(setInputValue({ word: '', translate: '', theme: '', }))
         }
     }
-
 
     return (
         <div onKeyDown={e => keyClose(e)} onClick={removeModal} className={visible}>

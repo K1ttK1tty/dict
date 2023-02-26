@@ -1,4 +1,4 @@
-const _AddNewCard = () => {
+const _AddNewCard = (setCards, ) => {
 
 
 

@@ -11,13 +11,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setInputValue } from '../../../store/modalRenameCard';
 import { setIsModalAddCardActive } from '../../../store/modalAddCard';
 const ModalAddCards = function ({ AddNewCard, modalAdd }) {
-
     const dispatch = useDispatch()
     const inputValue = useSelector(state => state.modalRenameCard.inputValue)
     const isModalAddCardActive = useSelector(state => state.modalAddCard.isModalAddCardActive)
-
     const btnStyle = btnStyleModalAddCards;
-
+    
     let vis = [cl.modal];
     if (isModalAddCardActive) vis = [cl.modal, cl.active].join(' ')
 
@@ -32,7 +30,6 @@ const ModalAddCards = function ({ AddNewCard, modalAdd }) {
             dispatch(setInputValue({ word: '', translate: '', theme: '' }))
         }
     }
-
 
     return (
         <div className={vis} onKeyDown={keyClose} onClick={removeModal}>
