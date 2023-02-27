@@ -5,15 +5,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setSearchWord } from '../../../store/upMenu';
 import { setInput } from '../../../store/upMenu';
 const InputSearch = function ({ placeholder }) {
-
     const dispatch = useDispatch()
     const searchWord = useSelector(state => state.upMenu.searchWord)
     const input = useSelector(state => state.upMenu.input)
     const inputElement = document.getElementById('1');
-
-    function inputHandle(event) {
-        dispatch(setSearchWord(event.target.value))
-    }
 
     function handleKey(key) {
         if (key.keyCode === 27) {
@@ -22,14 +17,15 @@ const InputSearch = function ({ placeholder }) {
             inputElement.blur();
         }
     }
-
+    
     if (!input.after) {
         dispatch(setInput({ ...input, after: '1' }))
         return <input
             value={searchWord}
             placeholder={placeholder}
-            id='1' onChange={inputHandle}
-            className={[cl.inputShared, cl.inputOff].join(' ')}
+            id='1'
+            onChange={e => dispatch(setSearchWord(e.target.value))}
+            className={[cl.inputShared, cl.inputOff, 'ifNotThisThenClose'].join(' ')}
         />
     }
     if (!input.isOpen) {
@@ -37,8 +33,8 @@ const InputSearch = function ({ placeholder }) {
             value={searchWord}
             placeholder={placeholder}
             id='1'
-            onChange={inputHandle}
-            className={[cl.inputShared, cl.inputOff, cl.inputOffAnimation].join(' ')}
+            onChange={e => dispatch(setSearchWord(e.target.value))}
+            className={[cl.inputShared, cl.inputOff, cl.inputOffAnimation, 'ifNotThisThenClose'].join(' ')}
         />
 
     } else {
@@ -51,8 +47,8 @@ const InputSearch = function ({ placeholder }) {
             placeholder={placeholder}
             id='1'
             onKeyDown={handleKey}
-            onChange={inputHandle}
-            className={[cl.inputShared, cl.inputOn, cl.inputOnAnimation].join(' ')}
+            onChange={e => dispatch(setSearchWord(e.target.value))}
+            className={[cl.inputShared, cl.inputOn, cl.inputOnAnimation, 'ifNotThisThenClose'].join(' ')}
         />
     }
 };

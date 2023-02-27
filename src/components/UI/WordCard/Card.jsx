@@ -2,30 +2,28 @@ import React from 'react';
 import cl from './WordCard.module.css'
 import IconEdit from './IconEdit';
 import IconRemove from './IconRemove';
-import { setIndexCard } from '../../../store/modalRenameCard';
+import { removeCard } from '../../../functions/removeCard';
+import { editWord } from '../../../functions/editWord';
 //redux
-import { useDispatch } from 'react-redux';
-import { setModal } from '../../../store/modalRenameCard';
-import { setEditCard } from '../../../store/modalRenameCard';
-import { setChangeCard } from '../../../store/Cards';
-const Card = function ({ card, remove, index, modalChangeCard }) {
+import { useSelector, useDispatch } from 'react-redux';
+const Card = function ({ card, index, modalChangeCard }) {
     const dispatch = useDispatch()
-    
-    function editWord() {
-        dispatch(setIndexCard(index))
-        dispatch(setChangeCard(card))
-        dispatch(setEditCard(card))
-        dispatch(setModal(true))
-        setTimeout(() => {
-            modalChangeCard.current.focus();
-        }, 170);
-    }
+    const Cards = useSelector(state => state.Cards.cards)
     return (
         <div className={cl.card} >
             <h4 className={cl.word}>{card.word}</h4>
             <p className={cl.translate}>{card.translate}</p>
-            <div onClick={editWord} className={cl.edit}><IconEdit /></div>
-            <div onClick={()=>remove(card.id)} className={cl.remove}><IconRemove /></div>
+
+            <div
+                onClick={() => editWord(card, index, modalChangeCard, dispatch)}
+                className={cl.edit}
+            ><IconEdit /></div>
+
+            <div
+                onClick={() => removeCard(card.id, Cards, dispatch)}
+                className={cl.remove}
+            ><IconRemove /></div>
+
         </div>
     )
 };

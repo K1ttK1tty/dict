@@ -44,14 +44,9 @@ const MenuDesk = function ({ changeTheme }) {
                     {/* <a className={cl.callBack}>
                         <span className={cl.callBackItem}><Icon4 fill={cl.questIcon} icon4Class={cl.icon4Class} /><span className={cl.callBackSpan}>Возникли вопросы?<p>Пиши нам!</p></span></span>
                     </a> */}
-
-
                 </div>
             </div>
         </nav>
     )
 };
-
-
-
 export default MenuDesk;

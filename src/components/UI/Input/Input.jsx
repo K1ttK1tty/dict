@@ -1,6 +1,5 @@
 import React from 'react';
 import cl from '../Input/Input.module.css'
-import { useState } from 'react';
 const Input = function ({ setInput, validClass}) {
 
     return (

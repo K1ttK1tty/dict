@@ -1,6 +1,7 @@
 import React from 'react';
 import cl from './inputAddCard.module.css'
-const InputAddCard = function ({ inputValue, placeholder, disabled, style, modalAdd, modalChangeCard, setValue }) {
+
+const InputAddCard = function ({ inputValue, placeholder, disabled, style, modalAdd, modalChangeCard, setValue}) {
     const element = modalAdd ? modalAdd : modalChangeCard;
     // const element = modalChangeCard;
 

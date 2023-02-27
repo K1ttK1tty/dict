@@ -15,7 +15,7 @@ export const useSelectedThemes = (Cards, chooseTheme) => {
     return selectedThemes
 }
 
-export const useCards = (Cards,searchWord, chooseTheme) => {
+export const useCards = (Cards, searchWord, chooseTheme) => {
     const selectedThemes = useSelectedThemes(Cards, chooseTheme)
 
     const selectedAndSearchedWord = useMemo(() => {
