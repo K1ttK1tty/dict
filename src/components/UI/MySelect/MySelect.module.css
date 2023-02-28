@@ -6,10 +6,10 @@
     font-size: 18px;
     border-radius: 12px;
     cursor: pointer;
-    height: auto;
     transition: 0.3s;
     position: relative;
     display: inline-block;
+    margin-bottom: 25px;
 }
 .title {
     display: flex;
@@ -48,7 +48,8 @@
     background: white;
     z-index: 0;
     border-radius: 14px;
-    border:1px solid rgba(0, 0, 0, 0.4)
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    z-index: 1;
 }
 .removeTheme {
     font-size: 37px;

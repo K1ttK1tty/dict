@@ -4,6 +4,7 @@ import modalRenameCard from "./modalRenameCard";
 import modalAddCard from "./modalAddCard";
 import select from "./select";
 import Cards from "./Cards";
+import GamesSlice from "./GamesSlice";
 
 const rootReducer = combineReducers({
     upMenu: upMenu,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
     modalAddCard: modalAddCard,
     select: select,
     Cards: Cards,
+    GamesSlice: GamesSlice,
 
 
 })

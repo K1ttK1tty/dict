@@ -9,7 +9,7 @@ import MySelect from '../components/UI/MySelect/MySelect';
 import ModalEditCard from '../components/UI/Modal/ModalEditCard';
 import ModalAddCards from '../components/UI/ModalAddCards/ModalAddCards';
 import RemoveTheme from '../components/RemoveTheme';
-//functions
+//functions and consts
 import { paramsModal, btnStyle } from '../consts/consts';
 import { removeInput } from '../functions/removeInput';
 import { modalAddCard } from '../functions/modalAddCard';
@@ -18,7 +18,6 @@ import '../styles/theme.css';
 import '../styles/Vocabulary.css';
 //redux
 import { useSelector, useDispatch } from 'react-redux';
-
 const Vocabulary = function () {
     // const { height, width } = useScrollbarSize();
     //redux  
@@ -26,29 +25,46 @@ const Vocabulary = function () {
     const searchWord = useSelector(state => state.upMenu.searchWord);
     const input = useSelector(state => state.upMenu.input);
     const chooseTheme = useSelector(state => state.select.chooseTheme);
-    const optionState = useSelector(state => state.select.optionState)
+    const optionState = useSelector(state => state.select.optionState);
     const dispatch = useDispatch();
     const modalAdd = useRef();
     const modalChangeCard = useRef();
 
     const selectedAndSearchedWord = useCards([...Cards], chooseTheme, searchWord);
     // if (modal || modalCards) paramsModal = { overflow: 'hidden', paddingRight: width };
+
+    // let back = 'blue';
+
+    // function click() {
+    //     if (back === 'blue') {back = 'green'}
+    //     else back = 'blue'
+    //     console.log('click')
+    //     console.log(back)
+    // }
+    //style={{ background: back }}
     return (
         <div
             onClick={elem => removeInput(elem, input, chooseTheme, optionState, dispatch)}
             className={"searchWrapper"}
             style={paramsModal}
         >
+
+
+
+
             <MenuVoc />
             <ModalEditCard modalChangeCard={modalChangeCard} />
             <ModalAddCards modalAdd={modalAdd} />
-            <div className="CardsField">
+            <div className="CardsField" >
                 <div className='wrap'>
                     <BtnAddCard
                         onClick={() => modalAddCard(modalAdd, dispatch)}
                         style={btnStyle}
                         children='Create new card'
                     />
+
+                    {/* <div style={{ backgroundColor: 'green', color: 'blue', width: '100px', marginBottom: '20px' }} onClick={click}> Click here</div> */}
+
                     <MySelect />
                     {selectedAndSearchedWord.length !== 0 ?
                         < SetCard

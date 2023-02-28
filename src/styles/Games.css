@@ -6,6 +6,11 @@
     top: -50px;
     transition: var(--transition-theme);
 }
+.gameBody {
+    width: 60%;
+    margin: 0px auto;
+    max-width: 1600px;
+}
 .gameCardsField {
     background-color: var(--background-cards);
     padding: 90px 0px 0px 0px;
@@ -28,10 +33,11 @@
 }
 
 .formTitle {
+    text-align: center;
     margin: 0px auto 50px;
     color: var(--form-label);
     transition: var(--transition-theme);
-    width:75%
+    width: 100%;
 }
 .formCards {
     margin: 0px auto 50px;

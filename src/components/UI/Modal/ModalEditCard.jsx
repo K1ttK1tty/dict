@@ -7,8 +7,7 @@ import { keyClose } from '../../../functions/keyClose';
 import { removeModal } from '../../../functions/removeModal';
 //redux
 import { useSelector, useDispatch } from 'react-redux';
-import { setModal } from '../../../store/modalRenameCard';
-import { setEditCard } from '../../../store/modalRenameCard';
+import { setModal, setEditCard } from '../../../store/modalRenameCard';
 import { changeCardFields } from '../../../store/Cards';
 const ModalEditCard = function ({ modalChangeCard }) {
     const isModalActive = useSelector(state => state.modalRenameCard.isModalActive)
@@ -68,7 +67,7 @@ const ModalEditCard = function ({ modalChangeCard }) {
                                 style={inputAddCardstyles}
                             />
                         </div>
-                        <BtnAddCard aria={'change'} onClick={ChangeCard} type='submit' style={btnForm} children='Change' />
+                        <BtnAddCard aria={'change'} onClick={ChangeCard} style={btnForm} children='Change' />
                     </form >
                 </div >
             </div >

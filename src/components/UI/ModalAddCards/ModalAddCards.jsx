@@ -11,16 +11,15 @@ import { styles } from '../../../consts/consts';
 import { btnStyleModalAddCards } from '../../../consts/consts';
 //redux
 import { useSelector, useDispatch } from 'react-redux';
-import { setInputValue } from '../../../store/modalRenameCard';
+import { setInputValue, setThemeInputValue } from '../../../store/modalRenameCard';
 import { setIsModalAddCardActive } from '../../../store/modalAddCard';
-import { setThemeInputValue } from '../../../store/modalRenameCard';
 const ModalAddCards = function ({ modalAdd }) {
-    const dispatch = useDispatch()
     const selectOptions = useSelector(state => state.select.selectOptions)
     const Cards = useSelector(state => state.Cards.cards)
     const inputValue = useSelector(state => state.modalRenameCard.inputValue)
     const isModalAddCardActive = useSelector(state => state.modalAddCard.isModalAddCardActive)
     const chooseTheme = useSelector(state => state.select.chooseTheme)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         if (chooseTheme) dispatch(setThemeInputValue(chooseTheme))

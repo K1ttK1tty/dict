@@ -4,9 +4,11 @@ import SetOptions from '../../SetOptions';
 import { CSSTransition } from 'react-transition-group';
 import IconSelect from './IconSelect';
 import { useSelector, useDispatch } from 'react-redux';
-import { setOptionName } from '../../../store/select';
-import { setOptionState } from '../../../store/select';
-import { setChooseTheme } from '../../../store/select';
+import {
+    setOptionName,
+    setOptionState,
+    setChooseTheme
+} from '../../../store/select';
 const MySelect = function () {
     const dispatch = useDispatch();
     const optionName = useSelector(state => state.select.optionName)
