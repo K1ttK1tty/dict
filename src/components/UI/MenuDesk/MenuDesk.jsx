@@ -32,12 +32,12 @@ const MenuDesk = function ({ changeTheme }) {
                             </span>
                         </li> */}
                     </ul>
-                    <div className='themeChanger'>
-                        <input defaultChecked={false} onClick={changeTheme} id='checkbox' type="checkbox" />
-                        <label className='checkboxLabel' htmlFor="checkbox"></label>
-                        <p className={cl.changeThemeTitle}>Change theme</p>
-                    </div>
 
+                    <div className='themeChanger'>
+                            <input defaultChecked={false} onClick={changeTheme} id='checkbox' type="checkbox" />
+                            <label className='checkboxLabel' htmlFor="checkbox"></label>
+                            <p className={cl.changeThemeTitle}>Change theme</p>
+                    </div>
 
 
 

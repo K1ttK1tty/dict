@@ -1,6 +1,6 @@
 import React from 'react';
 import "../../styles/Vocabulary.css";
-const Search = function ({ }) {
+const Search = function () {
 
     return (
         <svg className='iconSearchForMenu ifNotThisThenClose' id={2} viewBox="0 0 53.627 53.627" >
