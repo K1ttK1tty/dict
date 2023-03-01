@@ -22,6 +22,8 @@ import ColorPicker from '../components/UI/ColorPicker/ColorPicker';
 import { useSelector, useDispatch } from 'react-redux';
 import { setColorModeOn } from '../store/ColorPicker';
 import { setColorRemoveMode } from '../store/ColorPicker';
+import { setGetCurrentColorMode } from '../store/ColorPicker';
+import { setCurrentColor } from '../store/ColorPicker';
 
 const Vocabulary = function () {
     // const { height, width } = useScrollbarSize();
@@ -31,8 +33,11 @@ const Vocabulary = function () {
     const input = useSelector(state => state.upMenu.input);
     const chooseTheme = useSelector(state => state.select.chooseTheme);
     const optionState = useSelector(state => state.select.optionState);
+    //color-pixel
     const colorModeOn = useSelector(state => state.ColorPicker.colorModeOn)
     const colorRemoveMode = useSelector(state => state.ColorPicker.colorRemoveMode)
+    const getCurrentColorMode = useSelector(state => state.ColorPicker.getCurrentColorMode)
+    const currentColor = useSelector(state => state.ColorPicker.currentColor)
     const dispatch = useDispatch();
     const modalAdd = useRef();
     const modalChangeCard = useRef();
@@ -40,21 +45,27 @@ const Vocabulary = function () {
     const selectedAndSearchedWord = useCards([...Cards], chooseTheme, searchWord);
     // if (modal || modalCards) paramsModal = { overflow: 'hidden', paddingRight: width };
     const [color, setColor] = useState('#fff')
-    const [array, setArray] = useState([])
+    const [allElementsArray, setAllElementsArray] = useState([])
+    const [arrayBeforePaint, setArrayBeforePaint] = useState([])
     const body = document.body
-    let arrOfElements = useMemo(() => {
+    let arrOfCurrentElements = useMemo(() => {
         return []
-    }, [])
+    }, [colorModeOn])
 
     function click(e) {
         const element = e.target;
-        console.log(colorRemoveMode)
         if (element.className !== 'noCLick' && element.className !== 'react-colorful__interactive' && element.className !== 'react-colorful__pointer react-colorful__saturation-pointer') {
             if (colorRemoveMode) {
                 element.style.background = '';
-            } else {
+            } else if (getCurrentColorMode) {
+                console.log(element.style.background)
+                dispatch(setCurrentColor(element.style.background))
+            } else { // paint
+                if (!arrOfCurrentElements.includes(element)) {
+                    arrOfCurrentElements.push(element)
+                    setArrayBeforePaint([...arrayBeforePaint, element.style.background])
+                }
                 element.style.background = color;
-                if (!arrOfElements.includes(element)) arrOfElements.push(element)
             }
         }
     }
@@ -62,21 +73,67 @@ const Vocabulary = function () {
     function devMode() {
         if (colorModeOn) {
             const isExit = window.confirm('Выход из режима редактирования. Сохранить изменения?');
-            setArray(arrOfElements)
-            if (!isExit) arrOfElements = []
+
+            if (!isExit) { // if not save
+
+                arrOfCurrentElements.map((elem, index) => { // return to previous colors
+                    elem.style.background = arrayBeforePaint[index];
+                })
+
+            }
+
+            dispatch(setGetCurrentColorMode(false)) // remove all mods
+            dispatch(setColorRemoveMode(false)) // remove all mods
+            // console.log(arrOfCurrentElements)
+
+            // const y = []
+            // for (let index = 0; index < arrOfCurrentElements.length; index++) {
+            //     const element = arrOfCurrentElements[index];
+                
+            //     if (!allElementsArray.includes(element)) {
+            //         y.push(element)
+            //     }
+                
+                
+            // }
+            
+            // setAllElementsArray([...arrOfCurrentElements].concat(y))
+            setAllElementsArray([...arrOfCurrentElements].concat(allElementsArray))
+
+
+
+            setArrayBeforePaint([])
         }
+        // console.log(arrayBeforePaint)
+
         dispatch(setColorModeOn(!colorModeOn))
     }
     function removeAllColors() {
-        console.log('remove')
-        console.log(array)
+        if (colorModeOn) {
+            console.log('remove')
+            console.log(allElementsArray)
+            console.log(arrOfCurrentElements)
+            const resultArray = arrOfCurrentElements.concat(allElementsArray)
 
-        array.map(elem => {
-            elem.style.background = '';
-        })
+            resultArray.map(elem => {
+                elem.style.background = '';
+            })
+            // очистить массив всех элементов (глобальный)
+        }
     }
     function removeCurrent() {
-        dispatch(setColorRemoveMode(!colorRemoveMode))
+
+        if (colorModeOn) {
+            dispatch(setGetCurrentColorMode(false))
+            dispatch(setColorRemoveMode(!colorRemoveMode))
+        }
+    }
+    function getCurrentColor() {
+        if (colorModeOn) {
+
+            dispatch(setColorRemoveMode(false))
+            dispatch(setGetCurrentColorMode(!getCurrentColorMode))
+        }
     }
 
     useEffect(() => {
@@ -84,7 +141,7 @@ const Vocabulary = function () {
         else body.removeEventListener('click', click)
 
         return () => body.removeEventListener('click', click)
-    }, [colorModeOn, color, colorRemoveMode]);
+    }, [colorModeOn, color, colorRemoveMode, getCurrentColorMode, arrOfCurrentElements.length]);
 
     return (
         <div
@@ -114,14 +171,21 @@ const Vocabulary = function () {
                     <div
                         className='noCLick'
                         onClick={removeCurrent}
-                        style={{ background: 'teal', color: 'white', width: '100px', cursor: 'pointer', marginBottom: '20px', textAlign: 'center', borderRadius: '20px', padding: '5px' }}
+                        style={{ background: colorRemoveMode ? 'green' : 'teal', color: 'white', width: '100px', cursor: 'pointer', marginBottom: '20px', textAlign: 'center', borderRadius: '20px', padding: '5px' }}
                     >Выборочно отменить {colorRemoveMode ? 'on' : 'off'}</div>
+
+                    <div
+                        className='noCLick'
+                        onClick={getCurrentColor}
+                        style={{ background: getCurrentColorMode ? 'green' : 'teal', color: 'white', width: '100px', cursor: 'pointer', marginBottom: '20px', textAlign: 'center', borderRadius: '20px', padding: '5px' }}
+                    > Скопировать цвет {getCurrentColorMode ? 'on' : 'off'}. цвет - {currentColor}</div>
 
                     <div
                         className='noCLick'
                         onClick={removeAllColors}
                         style={{ background: 'pink', color: 'black', width: '100px', cursor: 'pointer', marginBottom: '20px', textAlign: 'center', borderRadius: '20px', padding: '5px' }}
-                    >Отменить изменения</div>
+                    >Убрать все цвета</div>
+
 
                     <MySelect />
                     {selectedAndSearchedWord.length !== 0 ?
