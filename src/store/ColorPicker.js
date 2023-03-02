@@ -6,6 +6,7 @@ const ColorPicker = createSlice({
         colorRemoveMode: false,
         getCurrentColorMode: false,
         currentColor: '',
+        colorsBeforePaint: []
     },
     reducers: {
         setColorModeOn(state, action) {
@@ -19,9 +20,11 @@ const ColorPicker = createSlice({
         },
         setCurrentColor(state, action) {
             state.currentColor = action.payload
+        },
+        setColorsBeforePaint(state, action) {
+            state.colorsBeforePaint = action.payload
         }
-
     }
 })
 export default ColorPicker.reducer
-export const { setColorModeOn, setColorRemoveMode, setGetCurrentColorMode, setCurrentColor } = ColorPicker.actions
+export const { setColorModeOn, setColorRemoveMode, setGetCurrentColorMode, setCurrentColor, setColorsBeforePaint } = ColorPicker.actions

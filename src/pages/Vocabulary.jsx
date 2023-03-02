@@ -24,7 +24,8 @@ import { setColorModeOn } from '../store/ColorPicker';
 import { setColorRemoveMode } from '../store/ColorPicker';
 import { setGetCurrentColorMode } from '../store/ColorPicker';
 import { setCurrentColor } from '../store/ColorPicker';
-
+import { setColorsBeforePaint } from '../store/ColorPicker';
+import { setToggleWordsOrder } from '../store/Cards';
 const Vocabulary = function () {
     // const { height, width } = useScrollbarSize();
     //redux  
@@ -33,21 +34,21 @@ const Vocabulary = function () {
     const input = useSelector(state => state.upMenu.input);
     const chooseTheme = useSelector(state => state.select.chooseTheme);
     const optionState = useSelector(state => state.select.optionState);
+    const dispatch = useDispatch();
+    const modalAdd = useRef();
+    const modalChangeCard = useRef();
     //color-pixel
     const colorModeOn = useSelector(state => state.ColorPicker.colorModeOn)
     const colorRemoveMode = useSelector(state => state.ColorPicker.colorRemoveMode)
     const getCurrentColorMode = useSelector(state => state.ColorPicker.getCurrentColorMode)
     const currentColor = useSelector(state => state.ColorPicker.currentColor)
-    const dispatch = useDispatch();
-    const modalAdd = useRef();
-    const modalChangeCard = useRef();
-
-    const selectedAndSearchedWord = useCards([...Cards], chooseTheme, searchWord);
+    const colorsBeforePaint = useSelector(state => state.ColorPicker.colorsBeforePaint)
+    const toggleWordsOrder = useSelector(state => state.Cards.toggleWordsOrder)
+    const selectedAndSearchedWord = useCards([...Cards], chooseTheme, searchWord, toggleWordsOrder);
     // if (modal || modalCards) paramsModal = { overflow: 'hidden', paddingRight: width };
-    const [color, setColor] = useState('#fff')
+    const [color, setColor] = useState('#fac')
     const [allElementsArray, setAllElementsArray] = useState([])
-    const [arrayBeforePaint, setArrayBeforePaint] = useState([])
-    const body = document.body
+    const body = document.body;
     let arrOfCurrentElements = useMemo(() => {
         return []
     }, [colorModeOn])
@@ -55,85 +56,82 @@ const Vocabulary = function () {
     function click(e) {
         const element = e.target;
         if (element.className !== 'noCLick' && element.className !== 'react-colorful__interactive' && element.className !== 'react-colorful__pointer react-colorful__saturation-pointer') {
-            if (colorRemoveMode) {
-                element.style.background = '';
-            } else if (getCurrentColorMode) {
-                console.log(element.style.background)
-                dispatch(setCurrentColor(element.style.background))
-            } else { // paint
-                if (!arrOfCurrentElements.includes(element)) {
-                    arrOfCurrentElements.push(element)
-                    setArrayBeforePaint([...arrayBeforePaint, element.style.background])
-                }
-                element.style.background = color;
+
+            if (!arrOfCurrentElements.includes(element)) {
+                arrOfCurrentElements.push(element)
+                dispatch(setColorsBeforePaint([...colorsBeforePaint, element.style.background]))
             }
+
+            if (colorRemoveMode) element.style.background = '';
+            else if (getCurrentColorMode) {
+
+                if (currentColor) element.style.background = currentColor;
+                else {
+
+                    dispatch(setCurrentColor(element.style.background))
+                    setColor(element.style.background)
+                }
+
+            } else element.style.background = color; // paint
+
         }
     }
 
     function devMode() {
         if (colorModeOn) {
+
             const isExit = window.confirm('Выход из режима редактирования. Сохранить изменения?');
 
             if (!isExit) { // if not save
-
                 arrOfCurrentElements.map((elem, index) => { // return to previous colors
-                    elem.style.background = arrayBeforePaint[index];
+                    elem.style.background = colorsBeforePaint[index];
                 })
-
             }
 
             dispatch(setGetCurrentColorMode(false)) // remove all mods
             dispatch(setColorRemoveMode(false)) // remove all mods
-            // console.log(arrOfCurrentElements)
 
-            // const y = []
-            // for (let index = 0; index < arrOfCurrentElements.length; index++) {
-            //     const element = arrOfCurrentElements[index];
-                
-            //     if (!allElementsArray.includes(element)) {
-            //         y.push(element)
-            //     }
-                
-                
-            // }
-            
-            // setAllElementsArray([...arrOfCurrentElements].concat(y))
-            setAllElementsArray([...arrOfCurrentElements].concat(allElementsArray))
+            const y = []
+            for (let index = 0; index < arrOfCurrentElements.length; index++) {
+                const element = arrOfCurrentElements[index];
+                if (!allElementsArray.includes(element)) {
+                    y.push(element)
+                }
+            }
 
-
-
-            setArrayBeforePaint([])
+            setAllElementsArray([...allElementsArray].concat(y))
+            dispatch(setColorsBeforePaint([]))
         }
-        // console.log(arrayBeforePaint)
-
+        dispatch(setCurrentColor(''))
         dispatch(setColorModeOn(!colorModeOn))
     }
     function removeAllColors() {
         if (colorModeOn) {
-            console.log('remove')
-            console.log(allElementsArray)
-            console.log(arrOfCurrentElements)
-            const resultArray = arrOfCurrentElements.concat(allElementsArray)
+            const resultArray = allElementsArray.concat(arrOfCurrentElements)
 
             resultArray.map(elem => {
                 elem.style.background = '';
             })
-            // очистить массив всех элементов (глобальный)
+
+            arrOfCurrentElements = [];
+            setAllElementsArray([]);
+            dispatch(setColorsBeforePaint([]));
+            dispatch(setCurrentColor(''))
         }
     }
     function removeCurrent() {
-
         if (colorModeOn) {
             dispatch(setGetCurrentColorMode(false))
             dispatch(setColorRemoveMode(!colorRemoveMode))
         }
+        dispatch(setCurrentColor(''))
     }
     function getCurrentColor() {
         if (colorModeOn) {
-
             dispatch(setColorRemoveMode(false))
             dispatch(setGetCurrentColorMode(!getCurrentColorMode))
         }
+        dispatch(setCurrentColor(''))
     }
 
     useEffect(() => {
@@ -141,7 +139,7 @@ const Vocabulary = function () {
         else body.removeEventListener('click', click)
 
         return () => body.removeEventListener('click', click)
-    }, [colorModeOn, color, colorRemoveMode, getCurrentColorMode, arrOfCurrentElements.length]);
+    }, [colorModeOn, color, colorRemoveMode, getCurrentColorMode, arrOfCurrentElements.length, currentColor, colorsBeforePaint]);
 
     return (
         <div
@@ -150,6 +148,8 @@ const Vocabulary = function () {
             style={paramsModal}
         >
             <MenuVoc />
+            <div className='wordsCount'>Всего слов: {Cards.length} </div>
+            <span className='inputOrder' >Алфавитный порядок: <input defaultChecked={true} onChange={() => dispatch(setToggleWordsOrder())} type="checkbox" /></span>
             <ModalEditCard modalChangeCard={modalChangeCard} />
             <ModalAddCards modalAdd={modalAdd} />
             <div className="CardsField">
@@ -178,7 +178,7 @@ const Vocabulary = function () {
                         className='noCLick'
                         onClick={getCurrentColor}
                         style={{ background: getCurrentColorMode ? 'green' : 'teal', color: 'white', width: '100px', cursor: 'pointer', marginBottom: '20px', textAlign: 'center', borderRadius: '20px', padding: '5px' }}
-                    > Скопировать цвет {getCurrentColorMode ? 'on' : 'off'}. цвет - {currentColor}</div>
+                    > {currentColor ? 'Крашу в ' + currentColor : "Копирую"}</div>
 
                     <div
                         className='noCLick'

@@ -147,7 +147,8 @@ const Cards = createSlice({
             word: '',
             translate: '',
             theme: ''
-        }
+        },
+        toggleWordsOrder: true
     },
     reducers: {
         setCards(state, action) {
@@ -170,8 +171,11 @@ const Cards = createSlice({
         },
         setChangeCard(state, action) {
             state.changeCard = action.payload
+        },
+        setToggleWordsOrder(state) {
+            state.toggleWordsOrder = !state.toggleWordsOrder
         }
     }
 })
 export default Cards.reducer
-export const { setCards, setID, changeCardFields, setChangeCard } = Cards.actions
+export const { setCards, setID, changeCardFields, setChangeCard, setToggleWordsOrder } = Cards.actions
