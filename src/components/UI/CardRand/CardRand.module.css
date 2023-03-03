@@ -1,7 +1,7 @@
 .cardRand {
     display:flex;
     margin: 0px auto 0px;
-    justify-content: start;
+    justify-content: flex-start;
     margin-bottom: 30px;
     font-size: 17px;
     max-width:600px;

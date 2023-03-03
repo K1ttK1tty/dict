@@ -1,5 +1,4 @@
-import { setSearchWord } from "../store/upMenu"
-import { setInput } from "../store/upMenu"
+import { setSearchWord, setInput } from "../store/upMenu"
 import { setOptionState } from "../store/select"
 import cl from '../components/UI/BtnAddCard/BtnAddCard.module.css';
 export const removeInput = (elem, input, chooseTheme, optionState, dispatch) => {

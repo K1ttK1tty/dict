@@ -1,3 +1,6 @@
+.paintBrush {
+    cursor: url("../styles//Icons//brush1.png") 0 30, pointer;
+}
 .menu {
     height: 50px;
     background-color: #24292f;
@@ -34,7 +37,6 @@
 }
 
 .inputOrder {
-    display: block;
     text-align: right;
     top: 0px;
     right: 0px;

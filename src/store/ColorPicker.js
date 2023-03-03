@@ -2,13 +2,17 @@ import { createSlice } from "@reduxjs/toolkit";
 const ColorPicker = createSlice({
     name: 'ColorPicker',
     initialState: {
+        pageTheme:'light',
         colorModeOn: false,
         colorRemoveMode: false,
         getCurrentColorMode: false,
         currentColor: '',
-        colorsBeforePaint: []
+        colorsBeforePaint: [],
     },
     reducers: {
+        setPageTheme(state,action){
+            state.pageTheme = action.payload
+        },
         setColorModeOn(state, action) {
             state.colorModeOn = action.payload
         },
@@ -23,8 +27,9 @@ const ColorPicker = createSlice({
         },
         setColorsBeforePaint(state, action) {
             state.colorsBeforePaint = action.payload
-        }
+        },
+
     }
 })
 export default ColorPicker.reducer
-export const { setColorModeOn, setColorRemoveMode, setGetCurrentColorMode, setCurrentColor, setColorsBeforePaint } = ColorPicker.actions
+export const { setColorModeOn, setColorRemoveMode, setGetCurrentColorMode, setCurrentColor, setColorsBeforePaint,setPageTheme } = ColorPicker.actions

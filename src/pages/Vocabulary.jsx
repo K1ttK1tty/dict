@@ -28,6 +28,7 @@ import { setColorsBeforePaint } from '../store/ColorPicker';
 import { setToggleWordsOrder } from '../store/Cards';
 const Vocabulary = function () {
     // const { height, width } = useScrollbarSize();
+    // if (modal || modalCards) paramsModal = { overflow: 'hidden', paddingRight: width };
     //redux  
     const Cards = useSelector(state => state.Cards.cards);
     const searchWord = useSelector(state => state.upMenu.searchWord);
@@ -38,6 +39,7 @@ const Vocabulary = function () {
     const modalAdd = useRef();
     const modalChangeCard = useRef();
     //color-pixel
+    const pageTheme = useSelector(state => state.ColorPicker.pageTheme)
     const colorModeOn = useSelector(state => state.ColorPicker.colorModeOn)
     const colorRemoveMode = useSelector(state => state.ColorPicker.colorRemoveMode)
     const getCurrentColorMode = useSelector(state => state.ColorPicker.getCurrentColorMode)
@@ -45,13 +47,13 @@ const Vocabulary = function () {
     const colorsBeforePaint = useSelector(state => state.ColorPicker.colorsBeforePaint)
     const toggleWordsOrder = useSelector(state => state.Cards.toggleWordsOrder)
     const selectedAndSearchedWord = useCards([...Cards], chooseTheme, searchWord, toggleWordsOrder);
-    // if (modal || modalCards) paramsModal = { overflow: 'hidden', paddingRight: width };
-    const [color, setColor] = useState('#fac')
+    const [color, setColor] = useState('#0dccce')
     const [allElementsArray, setAllElementsArray] = useState([])
     const body = document.body;
     let arrOfCurrentElements = useMemo(() => {
         return []
     }, [colorModeOn])
+
 
     function click(e) {
         const element = e.target;
@@ -73,14 +75,17 @@ const Vocabulary = function () {
                 }
 
             } else element.style.background = color; // paint
-
         }
     }
 
     function devMode() {
         if (colorModeOn) {
 
-            const isExit = window.confirm('Выход из режима редактирования. Сохранить изменения?');
+            let isExit = true;
+            if (arrOfCurrentElements.length) {
+                isExit = window.confirm('Выход из режима редактирования. Сохранить изменения?');
+
+            }
 
             if (!isExit) { // if not save
                 arrOfCurrentElements.map((elem, index) => { // return to previous colors
@@ -117,6 +122,8 @@ const Vocabulary = function () {
             setAllElementsArray([]);
             dispatch(setColorsBeforePaint([]));
             dispatch(setCurrentColor(''))
+            colorObject.light.colors = []
+            colorObject.dark.colors = []
         }
     }
     function removeCurrent() {
@@ -138,18 +145,89 @@ const Vocabulary = function () {
         if (colorModeOn) body.addEventListener('click', click)
         else body.removeEventListener('click', click)
 
-        return () => body.removeEventListener('click', click)
+
+
+        if (colorModeOn) document.body.className = 'paintBrush' // set cursors
+        else document.body.className = ''
+
+
+
+        return () => {
+            body.removeEventListener('click', click)
+            document.body.className = ''
+        }
+
     }, [colorModeOn, color, colorRemoveMode, getCurrentColorMode, arrOfCurrentElements.length, currentColor, colorsBeforePaint]);
+
+    const colorObject = useMemo(() => {
+        return {
+            light: { elements: [], colors: [] },
+            dark: { elements: [], colors: [] }
+        }
+
+    }, [])
+
+    // проверить как ведут себя массивы элементов при точечном удалении цвета
+    useEffect(() => {
+
+        if (pageTheme === 'light') {
+
+            colorObject.light.elements = [...allElementsArray]
+            colorObject.light.colors = []
+
+            for (let index = 0; index < allElementsArray.length; index++) {
+                const element = allElementsArray[index];
+                colorObject.light.colors = [...colorObject.light.colors, element.style.background]
+            }
+
+        } else {
+            colorObject.dark.elements = [...allElementsArray]
+            colorObject.dark.colors = []
+
+            for (let index = 0; index < allElementsArray.length; index++) {
+                const element = allElementsArray[index];
+                colorObject.dark.colors = [...colorObject.dark.colors, element.style.background]
+            }
+
+        }
+
+    }, [allElementsArray]);
+    // console.log(pageTheme)
+    console.log(colorObject)
+    console.log(allElementsArray)
+
+
+    useEffect(() => {
+
+        if (pageTheme === 'light') {
+
+            for (let index = 0; index < colorObject.light.elements.length; index++) {
+                const element = colorObject.light.elements[index];
+
+                element.style.background = colorObject.light.colors[index]
+
+            }
+        } else {
+
+            for (let index = 0; index < colorObject.dark.elements.length; index++) {
+                const element = colorObject.dark.elements[index];
+
+                element.style.background = colorObject.dark.colors[index]
+
+            }
+        }
+    }, [pageTheme]);
+
 
     return (
         <div
             onClick={elem => removeInput(elem, input, chooseTheme, optionState, dispatch)}
-            className={"searchWrapper"}
+            className={'searchWrapper'}
             style={paramsModal}
         >
             <MenuVoc />
             <div className='wordsCount'>Всего слов: {Cards.length} </div>
-            <span className='inputOrder' >Алфавитный порядок: <input defaultChecked={true} onChange={() => dispatch(setToggleWordsOrder())} type="checkbox" /></span>
+            <div className='inputOrder' >Алфавитный порядок: <input defaultChecked={true} onChange={() => dispatch(setToggleWordsOrder())} type="checkbox" /></div>
             <ModalEditCard modalChangeCard={modalChangeCard} />
             <ModalAddCards modalAdd={modalAdd} />
             <div className="CardsField">
