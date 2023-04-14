@@ -7,8 +7,8 @@ import { keyClose } from '../../../functions/keyClose';
 import { removeModal } from '../../../functions/removeModal';
 //redux
 import { useSelector, useDispatch } from 'react-redux';
-import { setModal, setEditCard } from '../../../store/modalRenameCard';
-import { changeCardFields } from '../../../store/Cards';
+import { setModal, setEditCard } from '../../../store/reducers/modalRenameCard';
+import { changeCardFields } from '../../../store/reducers/Cards';
 const ModalEditCard = function ({ modalChangeCard }) {
     const isModalActive = useSelector(state => state.modalRenameCard.isModalActive)
     const editCard = useSelector(state => state.modalRenameCard.editCard)

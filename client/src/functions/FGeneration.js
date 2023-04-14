@@ -1,7 +1,7 @@
-import { setValidateArr } from "../store/GamesSlice";
-import { setCardsNumber } from "../store/GamesSlice";
-import { setInputReq } from "../store/GamesSlice";
-import { setChanger } from "../store/GamesSlice";
+import { setValidateArr } from "../store/reducers/GamesSlice";
+import { setCardsNumber } from "../store/reducers/GamesSlice";
+import { setInputReq } from "../store/reducers/GamesSlice";
+import { setChanger } from "../store/reducers/GamesSlice";
 export const FGenerate = (e, inputReq,  dispatch) => {
     e.preventDefault();
     dispatch(setValidateArr([]));

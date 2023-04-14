@@ -2,7 +2,7 @@ import React from 'react';
 import cl from '../InputRequire/InputRequire.module.css'
 //redux
 import { useSelector, useDispatch } from 'react-redux';
-import { setInputReq } from '../../../store/GamesSlice';
+import { setInputReq } from '../../../store/reducers/GamesSlice';
 const InputRequire = function () {
     const inputReq = useSelector(state => state.GamesSlice.inputReq);
     const dispatch = useDispatch();

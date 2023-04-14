@@ -1,4 +1,4 @@
-import { setValidateArr } from "../store/GamesSlice"
+import { setValidateArr } from "../store/reducers/GamesSlice"
 export const FValidateQuiz = (e, array, setCardsGame, dispatch) => {
     let state = [];
     e.preventDefault();

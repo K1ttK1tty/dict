@@ -1,7 +1,7 @@
-import { setCards } from "../store/Cards"
-import { setIsModalAddCardActive } from "../store/modalAddCard"
-import { setInputValue } from "../store/modalRenameCard"
-import { setSelectOptions } from "../store/select"
+import { setCards } from "../store/reducers/Cards"
+import { setIsModalAddCardActive } from "../store/reducers/modalAddCard"
+import { setInputValue } from "../store/reducers/modalRenameCard"
+import { setSelectOptions } from "../store/reducers/select"
 import { ADDNewTheme } from "./ADDNewTheme"
 export const addNewCard = (e, inputValue, Cards, selectOptions, dispatch) => {
     e.preventDefault()

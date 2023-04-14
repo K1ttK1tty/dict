@@ -1,20 +1,25 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import upMenu from "./upMenu";
-import modalRenameCard from "./modalRenameCard";
-import modalAddCard from "./modalAddCard";
-import select from "./select";
-import Cards from "./Cards";
-import GamesSlice from "./GamesSlice";
-import ColorPicker from "./ColorPicker";
+
+// reducers
+import upMenu from "./reducers/upMenu";
+import modalRenameCard from "./reducers/modalRenameCard";
+import modalAddCard from "./reducers/modalAddCard";
+import select from "./reducers/select";
+import Cards from "./reducers/Cards";
+import GamesSlice from "./reducers/GamesSlice";
+import ColorPicker from "./reducers/ColorPicker";
+import AuthSlice from "./reducers/authorization/AuthSlice";
 
 const rootReducer = combineReducers({
-    upMenu: upMenu,
-    modalRenameCard: modalRenameCard,
-    modalAddCard: modalAddCard,
-    select: select,
-    Cards: Cards,
-    GamesSlice: GamesSlice,
-    ColorPicker: ColorPicker,
+    upMenu,
+    modalRenameCard,
+    modalAddCard,
+    select,
+    Cards,
+    GamesSlice,
+    ColorPicker,
+
+    AuthSlice,
 
 
 })

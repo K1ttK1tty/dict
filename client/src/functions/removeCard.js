@@ -1,5 +1,4 @@
-import { setCards } from "../store/Cards"
-import { setID } from "../store/Cards"
+import { setCards,setID } from "../store/reducers/Cards"
 export const removeCard = (cardClickID, Cards, dispatch) => {
     const cards = [...Cards.filter(card => cardClickID !== card.id)]
     dispatch(setCards(cards))

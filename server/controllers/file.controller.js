@@ -15,6 +15,19 @@ class fileController {
         }
 
     }
+
+
+    async getContent(req, res, next) {
+        try {
+            const { email } = req.body
+            const response = await fileService.getDataFromFile(email)
+            res.json(response)
+        } catch (err) {
+            next(err)
+        }
+    }
+
+
 }
 
 module.exports = new fileController();

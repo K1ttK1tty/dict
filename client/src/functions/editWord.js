@@ -1,7 +1,5 @@
-import { setChangeCard } from "../store/Cards"
-import { setEditCard } from "../store/modalRenameCard"
-import { setModal } from "../store/modalRenameCard"
-import { setIndexCard } from "../store/modalRenameCard"
+import { setChangeCard } from "../store/reducers/Cards"
+import { setEditCard, setModal, setIndexCard } from "../store/reducers/modalRenameCard"
 export const editWord = (card, index, modalChangeCard, dispatch) => {
     dispatch(setIndexCard(index))
     dispatch(setChangeCard(card))

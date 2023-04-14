@@ -1,7 +1,10 @@
-import { setSelectOptions } from "../store/select"
-import { setChooseTheme } from "../store/select"
-import { setOptionName } from "../store/select"
-import { setOptionState } from "../store/select"
+import {
+    setSelectOptions,
+    setChooseTheme,
+    setOptionName,
+    setOptionState
+} from "../store/reducers/select"
+
 export const _removeTheme = (selectOptions, optionState, chooseTheme, dispatch) => {
     dispatch(setSelectOptions(selectOptions.filter(theme => theme !== chooseTheme)))
     dispatch(setChooseTheme(''))

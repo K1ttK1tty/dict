@@ -1,5 +1,5 @@
-import { setSearchWord, setInput } from "../store/upMenu"
-import { setOptionState } from "../store/select"
+import { setSearchWord, setInput } from "../store/reducers/upMenu"
+import { setOptionState } from "../store/reducers/select"
 import cl from '../components/UI/BtnAddCard/BtnAddCard.module.css';
 export const removeInput = (elem, input, chooseTheme, optionState, dispatch) => {
     let a = false;

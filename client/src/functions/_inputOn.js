@@ -1,5 +1,4 @@
-import { setInput } from "../store/upMenu"
-import { setSearchWord } from "../store/upMenu"
+import { setInput,setSearchWord } from "../store/reducers/upMenu"
 export const _inputOn = (e, input, dispatch) => {
     if (e.target.id === 1) {
         return false

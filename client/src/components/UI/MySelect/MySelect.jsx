@@ -8,7 +8,7 @@ import {
     setOptionName,
     setOptionState,
     setChooseTheme
-} from '../../../store/select';
+} from '../../../store/reducers/select';
 const MySelect = function () {
     const dispatch = useDispatch();
     const optionName = useSelector(state => state.select.optionName)

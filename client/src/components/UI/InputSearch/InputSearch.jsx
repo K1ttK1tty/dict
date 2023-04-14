@@ -2,7 +2,7 @@ import React from 'react';
 import cl from './InputSearch.module.css'
 //redux
 import { useSelector, useDispatch } from 'react-redux';
-import { setSearchWord,setInput } from '../../../store/upMenu';
+import { setSearchWord,setInput } from '../../../store/reducers/upMenu';
 const InputSearch = function ({ placeholder }) {
     const dispatch = useDispatch()
     const searchWord = useSelector(state => state.upMenu.searchWord)

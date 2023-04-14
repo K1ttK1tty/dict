@@ -45,12 +45,12 @@ class tokenService {
     }
 
     async removeToken(refreshToken) {
-        await pool.query(`delete from token where refreshToken=?`, [refreshToken])
+        await pool.query(`delete from token where refreshToken=?;`, [refreshToken])
         // возможно нужно что-то вернуть
     }
 
     async findToken(refreshToken) {
-        const [token] = await pool.query(`select refreshToken from token where refreshToken=?`, [refreshToken]);
+        const [token] = await pool.query(`select refreshToken from token where refreshToken=?;`, [refreshToken])
         return token[0].refreshToken;
     }
 

@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const fileError = require('../exeptions/fileError.js')
+const tokenService = require('./tokenService.js')
 
 class fileService {
 
@@ -22,6 +23,22 @@ class fileService {
             })
         }
     }
+
+    // async getDataFromFile(email) {
+
+    //     if (!fs.existsSync(path.resolve(process.env.USER_DATA_PATH, `${email}.txt`))) {
+    //         throw new Error('файла не существует')
+
+    //     }
+    //     let userData = fs.readFileSync(path.resolve(process.env.USER_DATA_PATH, `${email}.txt`), { encoding: 'utf-8' }, (err, data) => { // прочитать содержимое файла
+    //         if (err) {
+    //             throw fileError.getDataError()
+    //         }
+    //     })
+
+    //     return JSON.parse(userData)
+    // }
+
 
     async getDataFromFile(email) {
 

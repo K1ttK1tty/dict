@@ -12,7 +12,7 @@ import { FValidateQuiz } from '../functions/FValidateQuiz';
 import { checkStyle } from '../consts/consts';
 //redux
 import { useSelector, useDispatch } from 'react-redux';
-import { setCardsNumber, setInputReq } from '../store/GamesSlice';
+import { setCardsNumber, setInputReq } from '../store/reducers/GamesSlice';
 const Games = function () {
     const Cards = useSelector(state => state.Cards.cards)
     const inputReq = useSelector(state => state.GamesSlice.inputReq)

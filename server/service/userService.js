@@ -15,7 +15,7 @@ class userService {
         const activationLink = uuid.v4() // уникальная ссылка для активации по почте
         await pool.query(`insert into user (email,password) values(?,?);`, [email, hashPassword]);
 
-        await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`) 
+        // await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`) 
 
         const [newPerson] = await pool.query(`select id,email from user where email=?;`, [email]) // запрос к только что добавленному пользователю
         await pool.query(`insert into activation (activationLink,user_id) values(?,?);`, [activationLink, newPerson[0].id])
@@ -74,6 +74,8 @@ class userService {
     }
 
     async refresh(refreshToken) {
+        
+
         // дублируется с логином -> вынести в отдельную функцию
         if (!refreshToken) {
             throw ApiError.UnauthorizedError()
@@ -104,12 +106,5 @@ class userService {
             }
         }
     }
-
-
-    async getAllUsers() {
-        const [users] = await pool.query(`select * from user;`)
-        return users;
-    }
-
 }
 module.exports = new userService();

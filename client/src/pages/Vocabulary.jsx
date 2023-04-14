@@ -20,15 +20,28 @@ import '../styles/Vocabulary.css';
 import ColorPicker from '../components/UI/ColorPicker/ColorPicker';
 //redux
 import { useSelector, useDispatch } from 'react-redux';
-import { setColorModeOn } from '../store/ColorPicker';
-import { setColorRemoveMode } from '../store/ColorPicker';
-import { setGetCurrentColorMode } from '../store/ColorPicker';
-import { setCurrentColor } from '../store/ColorPicker';
-import { setColorsBeforePaint } from '../store/ColorPicker';
-import { setToggleWordsOrder } from '../store/Cards';
+import {
+    setColorModeOn,
+    setColorRemoveMode,
+    setGetCurrentColorMode,
+    setCurrentColor,
+    setColorsBeforePaint
+} from '../store/reducers/ColorPicker';
+
+import { setToggleWordsOrder } from '../store/reducers/Cards';
+
+import { AuthService } from '../services/AuthService';
+import { setCards } from "../store/reducers/Cards"
+import { Logout } from '../store/reducers/asyncActions/ActionCreator';
+
 const Vocabulary = function () {
     // const { height, width } = useScrollbarSize();
     // if (modal || modalCards) paramsModal = { overflow: 'hidden', paddingRight: width };
+
+    // authorization
+    const fetchingCards = useSelector(state => state.AuthSlice.cards)
+
+
     //redux  
     const Cards = useSelector(state => state.Cards.cards);
     const searchWord = useSelector(state => state.upMenu.searchWord);
@@ -193,8 +206,8 @@ const Vocabulary = function () {
 
     }, [allElementsArray]);
     // console.log(pageTheme)
-    console.log(colorObject)
-    console.log(allElementsArray)
+    // console.log(colorObject)
+    // console.log(allElementsArray)
 
 
     useEffect(() => {
@@ -237,6 +250,14 @@ const Vocabulary = function () {
                         style={btnStyle}
                         children='Create new card'
                     />
+
+                <button onClick={()=>dispatch(Logout())}>выйти из аккаунта</button>
+
+
+
+
+
+
 
                     <ColorPicker color={color} setColor={setColor} />
 

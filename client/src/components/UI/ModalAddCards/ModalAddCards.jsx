@@ -11,8 +11,8 @@ import { styles } from '../../../consts/consts';
 import { btnStyleModalAddCards } from '../../../consts/consts';
 //redux
 import { useSelector, useDispatch } from 'react-redux';
-import { setInputValue, setThemeInputValue } from '../../../store/modalRenameCard';
-import { setIsModalAddCardActive } from '../../../store/modalAddCard';
+import { setInputValue, setThemeInputValue } from '../../../store/reducers/modalRenameCard';
+import { setIsModalAddCardActive } from '../../../store/reducers/modalAddCard';
 const ModalAddCards = function ({ modalAdd }) {
     const selectOptions = useSelector(state => state.select.selectOptions)
     const Cards = useSelector(state => state.Cards.cards)
