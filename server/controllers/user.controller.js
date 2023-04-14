@@ -24,7 +24,6 @@ class userController {
             // время жизни задается умножением цифр
 
 
-
             await fileService.createFile(email);
 
             return res.json(userData)

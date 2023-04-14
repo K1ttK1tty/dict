@@ -6,16 +6,16 @@ create table user(
 );
 
 create table activation(
-    id into auto_increment primary key,
+    id int auto_increment primary key,
     isActivated BOOLEAN DEFAULT 0,
     activationLink VARCHAR(255) DEFAULT '',
     user_id int NOT NULL,
-    FOREIGN KEY (user_ID) REFERENCES user (id)
-)
+    FOREIGN KEY (user_id) REFERENCES user (id)
+);
 
 create table token(
     id int auto_increment primary key,
     refreshToken VARCHAR(255) NOT NULL,
     user_id int NOT NULL,
     FOREIGN KEY (user_id) REFERENCES user (id)
-)
+);

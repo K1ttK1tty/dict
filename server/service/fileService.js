@@ -39,7 +39,6 @@ class fileService {
     }
 
 
-
     async updateData(email,data) {
         const userData = JSON.stringify(data)
 
@@ -53,9 +52,7 @@ class fileService {
                 throw fileError.ReadError()
             }
         })
-
     }
  
-
 }
 module.exports = new fileService();

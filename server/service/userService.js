@@ -4,32 +4,38 @@ const pool = require('../db.js').pool
 const mailService = require('../service/mailService.js')
 const tokenService = require('../service/tokenService.js')
 const ApiError = require('../exeptions/apiError.js')
- 
+
 class userService {
     async registration(email, password) {
-        const [isPerson] = await pool.query(`select * from user where email='${email}';`)
+        const [isPerson] = await pool.query(`select * from user where email=?;`, [email])
         if (isPerson[0]) {
             throw ApiError.BadRequest(`Пользователь с почтовым адресом ${email} уже существует.`)
         }
         const hashPassword = await bcrypt.hash(password, 3); // для хеширования пароля
         const activationLink = uuid.v4() // уникальная ссылка для активации по почте
-        await pool.query(`insert into user (email,password,activationLink) values('${email}','${hashPassword}','${activationLink}');`);
-        await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`) // пока не используется 
+        await pool.query(`insert into user (email,password) values(?,?);`, [email, hashPassword]);
 
-        const [newPerson] = await pool.query(`select id,email,isActivated from user where email='${email}';`)
-        // запрос к только что добавленному пользователю
+        await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`) 
+
+        const [newPerson] = await pool.query(`select id,email from user where email=?;`, [email]) // запрос к только что добавленному пользователю
+        await pool.query(`insert into activation (activationLink,user_id) values(?,?);`, [activationLink, newPerson[0].id])
+
+        
 
         const tokens = tokenService.generateTokens(newPerson[0]) // тут возвращаются оба токена
         await tokenService.saveToken(newPerson[0].id, tokens.refreshToken) // тут refresh сохраняется в базу
-        return { ...tokens, user: newPerson[0] } // можно две строчки вынести в отдельную функцию т.к. переиспользуется 2 раза
+
+        const dto = { ...newPerson[0], activationLink }
+
+        return { ...tokens, user: dto } // можно две строчки вынести в отдельную функцию т.к. переиспользуется 2 раза
     }
 
     async activate(activationLink) {
-        const [user] = await pool.query(`select * from user where activationLink=?;`, [activationLink]);
+        const [user] = await pool.query(`select * from activation where activationLink=?;`, [activationLink]);
         if (!user) {
             throw ApiError.BadRequest('Неккоректная ссылка активации')
         }
-        await pool.query(`update user set isActivated=? where activationLink=?;`, [1, activationLink])
+        await pool.query(`update activation set isActivated=? where activationLink=?;`, [1, activationLink])
 
     }
 
@@ -80,7 +86,7 @@ class userService {
             throw ApiError.UnauthorizedError()
         }
         const [user] = await pool.query(`select * from user where id=?;`, [userData.id]) // действительно возвращается id
-        
+
         const tokens = tokenService.generateTokens({
             id: user[0].id,
             email: user[0].email,
