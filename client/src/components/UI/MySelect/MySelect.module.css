@@ -1,0 +1,63 @@
+.select {
+    width: 250px;
+    background: white;
+    color: black;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    font-size: 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+    position: relative;
+    display: inline-block;
+    margin-bottom: 25px;
+}
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px;
+    box-shadow: 0px 6px 6px rgba(34, 60, 80, 0.2);
+    border-radius: 12px;
+    padding: 4px 18px;
+    position: relative;
+    z-index: 2;
+}
+.selectIcon {
+    font-size: 22px;
+    position: relative;
+    right: -5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.selectVlue {
+    text-align: center;
+}
+.optionsOption {
+    text-align: center;
+    padding: 4px;
+}
+.optionsOption:hover {
+    background-color: rgba(128, 128, 128, 0.22);
+}
+.options {
+    position: absolute;
+    left: 0px;
+    top: 40px;
+    width: 246px;
+    background: white;
+    z-index: 0;
+    border-radius: 14px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+.removeTheme {
+    font-size: 37px;
+    color: var(--select-remove-icon);
+    position: absolute;
+    top: 7px;
+    right: -30px;
+    line-height: 0.5;
+    padding: 2px;
+    transition: var(--transition-theme);
+}

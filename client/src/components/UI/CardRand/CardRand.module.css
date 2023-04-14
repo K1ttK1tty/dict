@@ -1,0 +1,17 @@
+.cardRand {
+    display:flex;
+    margin: 0px auto 0px;
+    justify-content: flex-start;
+    margin-bottom: 30px;
+    font-size: 17px;
+    max-width:600px;
+    transform: translateX(45px);
+}
+.requiredWord {
+    margin-right: 18px;
+}
+.translateRand {
+    color: var(--color-word-translate);
+    transition: var(--transition-theme);
+    max-width: 270px;
+}
