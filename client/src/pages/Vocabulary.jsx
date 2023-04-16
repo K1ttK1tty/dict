@@ -9,10 +9,11 @@ import MySelect from '../components/UI/MySelect/MySelect';
 import ModalEditCard from '../components/UI/Modal/ModalEditCard';
 import ModalAddCards from '../components/UI/ModalAddCards/ModalAddCards';
 import RemoveTheme from '../components/RemoveTheme';
-//functions and consts
-import { paramsModal, btnStyle } from '../consts/consts';
+//functions 
 import { removeInput } from '../functions/removeInput';
 import { modalAddCard } from '../functions/modalAddCard';
+// consts
+import { paramsModal, btnStyle } from '../consts/consts';
 //styles
 import '../styles/theme.css';
 import '../styles/Vocabulary.css';
@@ -28,16 +29,15 @@ import {
     setColorsBeforePaint
 } from '../store/reducers/ColorPicker';
 
-import { setToggleWordsOrder } from '../store/reducers/authorization/AuthSlice';
 
-import { Logout, UpdateCards } from '../store/reducers/asyncActions/ActionCreator';
+import { setToggleWordsOrder } from '../store/reducers/authorization/AuthSlice';
+import { Logout } from '../store/reducers/asyncActions/ActionCreator';
 
 const Vocabulary = function () {
     // const { height, width } = useScrollbarSize();
     // if (modal || modalCards) paramsModal = { overflow: 'hidden', paddingRight: width };
 
     // authorization
-    const email = useSelector(state => state.AuthSlice.user.email)
     const { toggleWordsOrder, cards } = useSelector(state => state.AuthSlice);
     //redux  
     const { searchWord, input } = useSelector(state => state.upMenu);
@@ -52,8 +52,7 @@ const Vocabulary = function () {
     const getCurrentColorMode = useSelector(state => state.ColorPicker.getCurrentColorMode)
     const currentColor = useSelector(state => state.ColorPicker.currentColor)
     const colorsBeforePaint = useSelector(state => state.ColorPicker.colorsBeforePaint)
-    const selectedAndSearchedWord = useCards(cards, chooseTheme, searchWord, toggleWordsOrder);
-    // const selectedAndSearchedWord = useCards(cards, chooseTheme, searchWord, toggleWordsOrder);
+    const selectedAndSearchedWord = useCards(cards, searchWord, chooseTheme, toggleWordsOrder);
     const [color, setColor] = useState('#0dccce')
 
     const [allElementsArray, setAllElementsArray] = useState([])
@@ -226,17 +225,6 @@ const Vocabulary = function () {
         }
     }, [pageTheme]);
 
-
-    const [withoutFirstRender, setWithoutFirstRender] = useState(false)
-    useEffect(() => {
-        if (withoutFirstRender) {
-            dispatch(UpdateCards({ email, cards }))
-        } else{
-            setWithoutFirstRender(prev => true)
-        }
-        // должно быть только 2 get (один options)
-    }, [cards.length]);
-
     return (
         <div
             onClick={elem => removeInput(elem, input, chooseTheme, optionState, dispatch)}
@@ -245,7 +233,14 @@ const Vocabulary = function () {
         >
             <MenuVoc />
             <div className='wordsCount'>Всего слов: {cards.length} </div>
-            <div className='inputOrder' >Алфавитный порядок: <input defaultChecked={true} onChange={() => dispatch(setToggleWordsOrder())} type="checkbox" /></div>
+            <div className='inputOrder' >
+                Алфавитный порядок:
+                <input
+                    defaultChecked={true}
+                    onChange={() => dispatch(setToggleWordsOrder())}
+                    type="checkbox"
+                />
+            </div>
             <ModalEditCard modalChangeCard={modalChangeCard} />
             <ModalAddCards modalAdd={modalAdd} />
             <div className="CardsField">
@@ -258,8 +253,7 @@ const Vocabulary = function () {
 
                     <button onClick={() => dispatch(Logout())}>выйти из аккаунта</button>
 
-
-                    <ColorPicker color={color} setColor={setColor} />
+                    {/* <ColorPicker color={color} setColor={setColor} />
 
                     <div
                         className='noCLick'
@@ -283,11 +277,11 @@ const Vocabulary = function () {
                         className='noCLick'
                         onClick={removeAllColors}
                         style={{ background: 'pink', color: 'black', width: '100px', cursor: 'pointer', marginBottom: '20px', textAlign: 'center', borderRadius: '20px', padding: '5px' }}
-                    >Убрать все цвета</div>
+                    >Убрать все цвета</div> */}
 
 
                     <MySelect />
-                    {selectedAndSearchedWord.length !== 0 ?
+                    {selectedAndSearchedWord.length ?
                         < SetCard
                             Cards={selectedAndSearchedWord}
                             modalChangeCard={modalChangeCard}

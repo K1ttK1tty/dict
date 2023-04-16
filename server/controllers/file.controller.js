@@ -1,5 +1,4 @@
 const fileService = require('../service/fileService.js')
-
 class fileController {
 
     async updateCards(req, res, next) {

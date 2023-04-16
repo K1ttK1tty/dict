@@ -1,3 +1,3 @@
-export const FGetRandomIng = (max) => {
+export const getRandomIng = (max) => {
     return Math.floor(Math.random() * max);
 }

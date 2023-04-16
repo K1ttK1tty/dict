@@ -1,18 +1,16 @@
 import React from 'react';
-import cl from './Modal.module.css'
-import InputAddCard from '../InputAddCard/InputAddCard';
-import BtnAddCard from '../BtnAddCard/BtnAddCard';
-import { inputAddCardstyles, btnForm } from '../../../consts/consts';
+// components
+import FormEditCard from './FormEditCard';
+// functions
 import { keyClose } from '../../../functions/keyClose';
 import { removeModal } from '../../../functions/removeModal';
-//redux
+// styles
+import cl from './Modal.module.css'
+// redux
 import { useSelector, useDispatch } from 'react-redux';
 import { setModal, setEditCard } from '../../../store/reducers/modalRenameCard';
-import { changeCardFields } from '../../../store/reducers/authorization/AuthSlice';
 const ModalEditCard = function ({ modalChangeCard }) {
     const isModalActive = useSelector(state => state.modalRenameCard.isModalActive)
-    const editCard = useSelector(state => state.modalRenameCard.editCard)
-    const changeCard = useSelector(state => state.AuthSlice.changeCard)
     const dispatch = useDispatch();
 
     let visible = [cl.modal];
@@ -21,11 +19,7 @@ const ModalEditCard = function ({ modalChangeCard }) {
         dispatch(setEditCard({ word: '', translate: '', theme: '' }))
         removeModal(setModal, dispatch)
     };
-    function ChangeCard(e) {
-        e.preventDefault();
-        dispatch(changeCardFields({ old: changeCard, new: editCard }))
-        removeModal(setModal, dispatch)
-    };
+
     return (
         <div
             onKeyDown={e => keyClose(e, setModal, dispatch)}
@@ -40,35 +34,7 @@ const ModalEditCard = function ({ modalChangeCard }) {
                     </div>
                 </div>
                 <div className={cl.modalInputs}>
-                    <form>
-                        <div className={cl.inputDiv}>
-                            <p className={cl.inputP}>Word:</p>
-                            <InputAddCard
-                                modalChangeCard={modalChangeCard}
-                                inputValue={editCard.word}
-                                setValue={e => dispatch(setEditCard({ ...editCard, word: e }))}
-                                style={inputAddCardstyles}
-                            />
-                        </div>
-                        <div className={cl.inputDiv}>
-                            <p className={cl.inputP}>Translate:</p>
-                            <InputAddCard
-                                inputValue={editCard.translate}
-                                setValue={e => dispatch(setEditCard({ ...editCard, translate: e }))}
-                                style={inputAddCardstyles}
-                            />
-                        </div>
-                        <div className={cl.inputDiv}>
-                            <p className={cl.inputP}>Theme: </p>
-                            <InputAddCard
-                                disabled={true}
-                                inputValue={editCard.theme}
-                                setValue={e => dispatch(setEditCard({ ...editCard, theme: e }))}
-                                style={inputAddCardstyles}
-                            />
-                        </div>
-                        <BtnAddCard aria={'change'} onClick={ChangeCard} style={btnForm} children='Change' />
-                    </form >
+                    <FormEditCard modalChangeCard={modalChangeCard} />
                 </div >
             </div >
         </div >

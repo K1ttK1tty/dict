@@ -1,7 +1,9 @@
 import React from 'react';
+// components
 import InputSearch from './UI/InputSearch/InputSearch';
 import Search from '../pages/Icons/Search';
-import { _inputOn } from '../functions/_inputOn';
+// functions
+import { inputSearchHandler } from '../functions/inputSearchHandler';
 //redux
 import { useDispatch, useSelector } from 'react-redux';
 const MenuVoc = function () {
@@ -12,7 +14,7 @@ const MenuVoc = function () {
         <div className="menu">
             <div className='menu__container'>
                 <div className="menu__logo">Logo</div>
-                <div className="menu__search" onClick={e => _inputOn(e, input, dispatch)}>
+                <div className="menu__search" onClick={e => inputSearchHandler(e, input, dispatch)}>
                     <InputSearch placeholder={' Search word'} />
                     <Search /></div>
             </div>

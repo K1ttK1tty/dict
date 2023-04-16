@@ -1,7 +1,6 @@
 import React from 'react';
 import "../../styles/Vocabulary.css";
 const Search = function () {
-
     return (
         <svg className='iconSearchForMenu ifNotThisThenClose' id={2} viewBox="0 0 53.627 53.627" >
             <path d="M53.627,49.385L37.795,33.553C40.423,30.046,42,25.709,42,21C42,9.42,32.58,0,21,0S0,9.42,0,21s9.42,21,21,21

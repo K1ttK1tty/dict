@@ -1,27 +1,21 @@
 import React, { useEffect } from 'react';
-import InputAddCard from '../InputAddCard/InputAddCard';
-import BtnAddCard from '../BtnAddCard/BtnAddCard';
+// components
+import FormAddCard from './FormAddCard';
 //functions
 import { keyClose } from '../../../functions/keyClose';
 import { removeModal } from '../../../functions/removeModal';
-import { addNewCard } from '../../../functions/addNewCard';
 //styles
 import cl from '../Modal/Modal.module.css'
-import { styles } from '../../../consts/consts';
-import { btnStyleModalAddCards } from '../../../consts/consts';
 //redux
 import { useSelector, useDispatch } from 'react-redux';
 import { setInputValue, setThemeInputValue } from '../../../store/reducers/modalRenameCard';
 import { setIsModalAddCardActive } from '../../../store/reducers/modalAddCard';
 
 const ModalAddCards = function ({ modalAdd }) {
-    const selectOptions = useSelector(state => state.AuthSlice.selectOptions)
-    const { cards, user } = useSelector(state => state.AuthSlice)
-    const inputValue = useSelector(state => state.modalRenameCard.inputValue)
+    const dispatch = useDispatch()
     const isModalAddCardActive = useSelector(state => state.modalAddCard.isModalAddCardActive)
     const chooseTheme = useSelector(state => state.AuthSlice.chooseTheme)
-    const dispatch = useDispatch()
-    // console.log(cards)
+
     useEffect(() => {
         if (chooseTheme) dispatch(setThemeInputValue(chooseTheme))
         return () => dispatch(setInputValue({ word: '', translate: '', theme: '' }))
@@ -29,6 +23,7 @@ const ModalAddCards = function ({ modalAdd }) {
 
     let vis = [cl.modal];
     if (isModalAddCardActive) vis = [cl.modal, cl.active].join(' ')
+    
     return (
         <div
             className={vis}
@@ -46,35 +41,7 @@ const ModalAddCards = function ({ modalAdd }) {
                         >&times;</button>
                     </div>
                 </div>
-
-                <form>
-                    <InputAddCard
-                        modalAdd={modalAdd}
-                        style={styles} placeholder={'Word'}
-                        inputValue={inputValue.word}
-                        setValue={e => dispatch(setInputValue({ ...inputValue, word: e }))}
-                    />
-                    <InputAddCard
-                        style={styles}
-                        placeholder={'Translate'}
-                        inputValue={inputValue.translate}
-                        setValue={e => dispatch(setInputValue({ ...inputValue, translate: e }))}
-                    />
-                    <InputAddCard
-                        style={styles}
-                        placeholder={'Theme'}
-                        inputValue={inputValue.theme}
-                        setValue={e => dispatch(setInputValue({ ...inputValue, theme: e }))}
-                    />
-                    <BtnAddCard
-                        aria={'Create'}
-                        style={btnStyleModalAddCards}
-                        onClick={e => addNewCard(e, inputValue, cards, selectOptions,user.email, dispatch)}
-                        type='submit'
-                        children='Create'
-                    />
-                </form>
-
+                <FormAddCard modalAdd={modalAdd} />
             </div>
         </div>
     )

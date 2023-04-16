@@ -1,7 +1,6 @@
 import React from 'react';
 const IconSelect = function () {
 
-
     return (
         <svg className='selSVG' width="27px" height="27px" viewBox="0 0 24 24" fill="none" >
             <path className='selSVG' d="M2.75 5H21.25C21.6642 5 22 5.33579 22 5.75C22 6.1297 21.7178 6.44349 21.3518 6.49315L21.25 6.5H2.75C2.33579 6.5 2 6.16421 2 5.75C2 5.3703 2.28215 5.05651 2.64823 5.00685L2.75 5Z" fill="#212121" />

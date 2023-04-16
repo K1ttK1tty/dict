@@ -39,8 +39,8 @@ class fileService {
     async getDataFromFile(email) {
 
         if (!fs.existsSync(path.resolve(process.env.USER_DATA_PATH, `${email}_content`))) {
-            throw new Error('файла не существует')
-
+            // throw new Error('файла не существует')
+            throw fileError.getDataError()
         }
         let cards = fs.readFileSync(path.resolve(process.env.USER_DATA_PATH, `${email}_content`, `cards_${email}.txt`), { encoding: 'utf-8' }, (err, data) => { // прочитать содержимое файла
             if (err) {
@@ -57,7 +57,7 @@ class fileService {
         return { userCards, userThemes }
     }
 
-
+ 
     async updateCards(email, data) {
         const userData = JSON.stringify(data)
 

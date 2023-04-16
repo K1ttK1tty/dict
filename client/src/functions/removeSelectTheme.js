@@ -6,7 +6,7 @@ import {
 } from "../store/reducers/authorization/AuthSlice"
 import { UpdateThemes } from "../store/reducers/asyncActions/ActionCreator";
 
-export const _removeTheme = (selectOptions, optionState, chooseTheme, email, dispatch) => {
+export const removeSelectTheme = (selectOptions, optionState, chooseTheme, email, dispatch) => {
     const themes = selectOptions.filter(theme => theme !== chooseTheme)
     dispatch(setSelectOptions(themes))
     dispatch(UpdateThemes({ email, themes }))

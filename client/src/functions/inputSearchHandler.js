@@ -1,5 +1,5 @@
 import { setInput,setSearchWord } from "../store/reducers/upMenu"
-export const _inputOn = (e, input, dispatch) => {
+export const inputSearchHandler = (e, input, dispatch) => {
     if (e.target.id === 1) {
         return false
     }

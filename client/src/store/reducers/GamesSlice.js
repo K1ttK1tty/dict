@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const GamesSlice = createSlice({
     name: 'Games',
     initialState: {
-        inputReq: '',
+        inputReq: 0,
         cardsNumber: 0,
         validateArr: [],
         changer: false,

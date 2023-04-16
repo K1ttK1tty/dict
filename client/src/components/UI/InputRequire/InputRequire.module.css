@@ -2,3 +2,13 @@
     margin:0px auto;
     margin-right: 8px;
 }
+.input[type="number"] {
+	-moz-appearance: textfield;
+	-webkit-appearance: textfield;
+	appearance: textfield;
+}
+ 
+.input[type="number"]::-webkit-outer-spin-button,
+.input[type="number"]::-webkit-inner-spin-button {
+	display: none;
+}

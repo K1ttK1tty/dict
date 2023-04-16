@@ -1,8 +1,12 @@
+// libs
 import React from 'react';
-import cl from './MySelect.module.css'
-import SetOptions from '../../SetOptions';
 import { CSSTransition } from 'react-transition-group';
+// components
+import SetOptions from '../../SetOptions';
 import IconSelect from './IconSelect';
+// styles
+import cl from './MySelect.module.css'
+// redux
 import { useSelector, useDispatch } from 'react-redux';
 import {
     setOptionName,
@@ -24,26 +28,26 @@ const MySelect = function () {
         dispatch(setChooseTheme(''))
         dispatch(setOptionState({ open: false, removeMark: false })) //
     }
+
     return (
         <div className={cl.select} >
             <div
                 onClick={() => dispatch(setOptionState({ ...optionState, open: !optionState.open }))}
                 className={[cl.title, 'ifNotThisThenClose'].join(' ')}
             >
-
                 <div
                     onClick={() => dispatch(setOptionState({ ...optionState, open: !optionState.open }))}
                     className={[cl.selectValue, 'ifNotThisThenClose'].join(' ')}
                 >{optionName}</div>
 
                 <div className={cl.selectIcon}><IconSelect /></div>
-
             </div>
 
-            {optionState.removeMark ?
+            {
+                optionState.removeMark &&
                 <div id='close' onClick={removeTheme} className={cl.removeTheme}>&times;</div>
-                : ''
             }
+
             <CSSTransition
                 in={optionState.open}
                 timeout={220}

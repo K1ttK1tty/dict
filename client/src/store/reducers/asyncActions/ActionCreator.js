@@ -90,11 +90,10 @@ export const UpdateCards = createAsyncThunk(
     }
 )
 
-
 export const UpdateThemes = createAsyncThunk(
     'UpdateThemes',
     async (data, thunkAPI) => {
-        console.log(data)
+        // console.log(data)
         try {
             const { email, themes } = data;
             const response = await $api.post('/updateTheme', { email, themes })

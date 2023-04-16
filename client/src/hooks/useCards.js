@@ -12,8 +12,9 @@ export const useSelectedThemes = (Cards, chooseTheme, toggleWordsOrder) => {
     const sordetCard = useSordetCard(Cards, toggleWordsOrder)
 
     const selectedThemes = useMemo(() => {
-        return sordetCard.filter(card => card.word.toLowerCase().includes(chooseTheme.toLowerCase())); // ???перепутаны местами
-    }, [chooseTheme, Cards, toggleWordsOrder]);
+        // console.log('selectedThemes')
+        return sordetCard.filter(card => card.theme.toLowerCase().includes(chooseTheme.toLowerCase()));
+    }, [chooseTheme, Cards]);
     return selectedThemes
 }
 
@@ -23,8 +24,8 @@ export const useCards = (Cards, searchWord, chooseTheme, toggleWordsOrder) => {
     const selectedThemes = useSelectedThemes(iterableCards, chooseTheme, toggleWordsOrder)
 
     const selectedAndSearchedWord = useMemo(() => {
-        return selectedThemes.filter(card => card.theme.toLowerCase().includes(searchWord.toLowerCase())); // ???перепутаны местами
-    }, [selectedThemes, searchWord, toggleWordsOrder])
+        return selectedThemes.filter(card => card.word.toLowerCase().includes(searchWord.toLowerCase()));
+    }, [selectedThemes, searchWord])
 
     return selectedAndSearchedWord
 }

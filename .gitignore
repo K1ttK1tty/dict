@@ -1,21 +1,13 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-
-# 
-# /.env
-server\.env
+# env
 .env
-# /server/.env
-node_modules
+
 # dependencies
-# /server/node_modules
-# /client/node_modules
+node_modules
 
-server/userData
-userData
+#  files
+server/usersData
+client/словарь.txt
 
-client\словарь.txt
-словарь.txt
 
 /.pnp
 .pnp.js

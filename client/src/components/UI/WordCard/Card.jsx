@@ -1,14 +1,19 @@
 import React from 'react';
-import cl from './WordCard.module.css'
-import IconEdit from './IconEdit';
+// components
 import IconRemove from './IconRemove';
+import IconEdit from './IconEdit';
+// functions
 import { removeCard } from '../../../functions/removeCard';
 import { editWord } from '../../../functions/editWord';
+// styles
+import cl from './WordCard.module.css'
 //redux
 import { useSelector, useDispatch } from 'react-redux';
+
 const Card = function ({ card, index, modalChangeCard }) {
     const dispatch = useDispatch()
-    const Cards = useSelector(state => state.AuthSlice.cards)
+    const { cards, user } = useSelector(state => state.AuthSlice)
+
     return (
         <div className={cl.card} >
             <h4 className={cl.word}>{card.word}</h4>
@@ -20,10 +25,9 @@ const Card = function ({ card, index, modalChangeCard }) {
             ><IconEdit /></div>
 
             <div
-                onClick={() => removeCard(card.id, Cards, dispatch)}
+                onClick={() => removeCard(card.id, cards, user.email, dispatch)}
                 className={cl.remove}
             ><IconRemove /></div>
-
         </div>
     )
 };

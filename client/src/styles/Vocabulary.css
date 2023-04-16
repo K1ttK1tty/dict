@@ -99,14 +99,25 @@
     opacity: 0;
     transition: 0.3s;
 }
+
+/*  remove theme styles */
 .noCards {
     color: var(--empty-header);
     font-size: 25px;
     text-align: center;
-    margin-top: 35px;
+    margin: 65px 0px;
     transition: var(--transition-theme);
 }
 
+.deleteThemeWrapper{
+    display: flex;
+    margin: 0px auto;
+    max-width: 400px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/*  */
 #checkbox {
     display: none;
 }

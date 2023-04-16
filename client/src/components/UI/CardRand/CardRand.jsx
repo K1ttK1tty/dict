@@ -1,6 +1,8 @@
 import React from 'react';
-import cl from '../CardRand/CardRand.module.css'
+// components
 import Input from '../Input/Input';
+// styles
+import cl from '../CardRand/CardRand.module.css'
 import '../../../styles/Games.css'
 //redux
 import { useSelector } from 'react-redux';

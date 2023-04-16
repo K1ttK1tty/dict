@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt')
 const uuid = require('uuid')
-const pool = require('../db.js').pool
+const pool = require('../db.js').pool 
 const mailService = require('../service/mailService.js')
 const tokenService = require('../service/tokenService.js')
 const ApiError = require('../exeptions/apiError.js')

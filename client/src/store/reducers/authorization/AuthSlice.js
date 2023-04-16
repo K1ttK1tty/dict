@@ -26,7 +26,7 @@ const initialState = {
     // select
     optionName: 'Choose a theme',
     optionState: { open: false, removeMark: false },
-    selectOptions: ['noun', 'verb'],
+    selectOptions: [],
     chooseTheme: ''
 }
 export const AuthSlice = createSlice({
@@ -48,16 +48,6 @@ export const AuthSlice = createSlice({
         setID(state) {
             state.cards.map((card, index) => {
                 card.id = index + 1
-            })
-        },
-        changeCardFields(state, action) {
-            const oldCard = action.payload.old;
-            const newFields = action.payload.new
-            state.cards.map(card => {
-                if (card.id === oldCard.id) {
-                    card.word = newFields.word
-                    card.translate = newFields.translate
-                }
             })
         },
         setChangeCard(state, action) {
@@ -153,7 +143,6 @@ export const {
     setIsAuth,
     setCards,
     setID,
-    changeCardFields,
     setChangeCard,
     setToggleWordsOrder,
     setOptionName,
