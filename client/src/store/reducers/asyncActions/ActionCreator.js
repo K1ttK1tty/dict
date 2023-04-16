@@ -75,4 +75,36 @@ export const GetData = createAsyncThunk(
     }
 )
 
+export const UpdateCards = createAsyncThunk(
+    'UpdateCards',
+    async (data, thunkAPI) => {
+        try {
+            const { email, cards } = data;
+            const response = await $api.post('/updateCards', { email, cards })
+            return response.data
+        } catch (err) {
+            console.log(err)
+            console.log(err?.response?.data?.message)
+            return thunkAPI.rejectWithValue('Произошла ошибка при запросе на сервер :(')
+        }
+    }
+)
+
+
+export const UpdateThemes = createAsyncThunk(
+    'UpdateThemes',
+    async (data, thunkAPI) => {
+        console.log(data)
+        try {
+            const { email, themes } = data;
+            const response = await $api.post('/updateTheme', { email, themes })
+            return response.data
+        } catch (err) {
+            console.log(err)
+            console.log(err?.response?.data?.message)
+            return thunkAPI.rejectWithValue('Произошла ошибка при запросе на сервер :(')
+        }
+    }
+)
+ 
 // update cards

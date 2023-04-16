@@ -8,7 +8,7 @@ import { editWord } from '../../../functions/editWord';
 import { useSelector, useDispatch } from 'react-redux';
 const Card = function ({ card, index, modalChangeCard }) {
     const dispatch = useDispatch()
-    const Cards = useSelector(state => state.Cards.cards)
+    const Cards = useSelector(state => state.AuthSlice.cards)
     return (
         <div className={cl.card} >
             <h4 className={cl.word}>{card.word}</h4>

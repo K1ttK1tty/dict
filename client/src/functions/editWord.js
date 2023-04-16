@@ -1,4 +1,4 @@
-import { setChangeCard } from "../store/reducers/Cards"
+import { setChangeCard } from "../store/reducers/authorization/AuthSlice"
 import { setEditCard, setModal, setIndexCard } from "../store/reducers/modalRenameCard"
 export const editWord = (card, index, modalChangeCard, dispatch) => {
     dispatch(setIndexCard(index))

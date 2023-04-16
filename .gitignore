@@ -4,14 +4,16 @@
 # 
 # /.env
 server\.env
+.env
 # /server/.env
 node_modules
 # dependencies
 # /server/node_modules
 # /client/node_modules
 
+server/userData
+userData
 
-.env
 client\словарь.txt
 словарь.txt
 

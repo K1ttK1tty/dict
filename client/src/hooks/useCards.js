@@ -18,7 +18,9 @@ export const useSelectedThemes = (Cards, chooseTheme, toggleWordsOrder) => {
 }
 
 export const useCards = (Cards, searchWord, chooseTheme, toggleWordsOrder) => {
-    const selectedThemes = useSelectedThemes(Cards, chooseTheme, toggleWordsOrder)
+    const iterableCards = Cards.length ? [...Cards] : []
+
+    const selectedThemes = useSelectedThemes(iterableCards, chooseTheme, toggleWordsOrder)
 
     const selectedAndSearchedWord = useMemo(() => {
         return selectedThemes.filter(card => card.theme.toLowerCase().includes(searchWord.toLowerCase())); // ???перепутаны местами

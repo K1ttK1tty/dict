@@ -18,8 +18,9 @@ router.post('/logout', userController.logout);
 router.get('/activate/:link', userController.activate);
 router.get('/refresh', userController.refresh);
 // work with files
-router.post('/update', authMiddleware, fileController.updateContent);
-router.post('/getData', authMiddleware, fileController.getContent)
+router.post('/getData', authMiddleware, fileController.getContent);
+router.post('/updateCards', authMiddleware, fileController.updateCards);
+router.post('/updateTheme', authMiddleware, fileController.updateThemes);
 
 
-module.exports = router
+module.exports = router 

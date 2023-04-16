@@ -8,11 +8,11 @@ import {
     setOptionName,
     setOptionState,
     setChooseTheme
-} from '../../../store/reducers/select';
+} from '../../../store/reducers/authorization/AuthSlice';
 const MySelect = function () {
     const dispatch = useDispatch();
-    const optionName = useSelector(state => state.select.optionName)
-    const optionState = useSelector(state => state.select.optionState)
+    const optionName = useSelector(state => state.AuthSlice.optionName)
+    const optionState = useSelector(state => state.AuthSlice.optionState)
 
     function replaceOption(el) {
         dispatch(setOptionName(el.target.innerText))

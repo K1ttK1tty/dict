@@ -13,14 +13,15 @@ import { btnStyleModalAddCards } from '../../../consts/consts';
 import { useSelector, useDispatch } from 'react-redux';
 import { setInputValue, setThemeInputValue } from '../../../store/reducers/modalRenameCard';
 import { setIsModalAddCardActive } from '../../../store/reducers/modalAddCard';
+
 const ModalAddCards = function ({ modalAdd }) {
-    const selectOptions = useSelector(state => state.select.selectOptions)
-    const Cards = useSelector(state => state.Cards.cards)
+    const selectOptions = useSelector(state => state.AuthSlice.selectOptions)
+    const { cards, user } = useSelector(state => state.AuthSlice)
     const inputValue = useSelector(state => state.modalRenameCard.inputValue)
     const isModalAddCardActive = useSelector(state => state.modalAddCard.isModalAddCardActive)
-    const chooseTheme = useSelector(state => state.select.chooseTheme)
+    const chooseTheme = useSelector(state => state.AuthSlice.chooseTheme)
     const dispatch = useDispatch()
-
+    // console.log(cards)
     useEffect(() => {
         if (chooseTheme) dispatch(setThemeInputValue(chooseTheme))
         return () => dispatch(setInputValue({ word: '', translate: '', theme: '' }))
@@ -68,7 +69,7 @@ const ModalAddCards = function ({ modalAdd }) {
                     <BtnAddCard
                         aria={'Create'}
                         style={btnStyleModalAddCards}
-                        onClick={e => addNewCard(e, inputValue, Cards, selectOptions, dispatch)}
+                        onClick={e => addNewCard(e, inputValue, cards, selectOptions,user.email, dispatch)}
                         type='submit'
                         children='Create'
                     />

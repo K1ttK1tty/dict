@@ -28,26 +28,20 @@ import {
     setColorsBeforePaint
 } from '../store/reducers/ColorPicker';
 
-import { setToggleWordsOrder } from '../store/reducers/Cards';
+import { setToggleWordsOrder } from '../store/reducers/authorization/AuthSlice';
 
-import { AuthService } from '../services/AuthService';
-import { setCards } from "../store/reducers/Cards"
-import { Logout } from '../store/reducers/asyncActions/ActionCreator';
+import { Logout, UpdateCards } from '../store/reducers/asyncActions/ActionCreator';
 
 const Vocabulary = function () {
     // const { height, width } = useScrollbarSize();
     // if (modal || modalCards) paramsModal = { overflow: 'hidden', paddingRight: width };
 
     // authorization
-    const fetchingCards = useSelector(state => state.AuthSlice.cards)
-
-
+    const email = useSelector(state => state.AuthSlice.user.email)
+    const { toggleWordsOrder, cards } = useSelector(state => state.AuthSlice);
     //redux  
-    const Cards = useSelector(state => state.Cards.cards);
-    const searchWord = useSelector(state => state.upMenu.searchWord);
-    const input = useSelector(state => state.upMenu.input);
-    const chooseTheme = useSelector(state => state.select.chooseTheme);
-    const optionState = useSelector(state => state.select.optionState);
+    const { searchWord, input } = useSelector(state => state.upMenu);
+    const { chooseTheme, optionState } = useSelector(state => state.AuthSlice);
     const dispatch = useDispatch();
     const modalAdd = useRef();
     const modalChangeCard = useRef();
@@ -58,9 +52,10 @@ const Vocabulary = function () {
     const getCurrentColorMode = useSelector(state => state.ColorPicker.getCurrentColorMode)
     const currentColor = useSelector(state => state.ColorPicker.currentColor)
     const colorsBeforePaint = useSelector(state => state.ColorPicker.colorsBeforePaint)
-    const toggleWordsOrder = useSelector(state => state.Cards.toggleWordsOrder)
-    const selectedAndSearchedWord = useCards([...Cards], chooseTheme, searchWord, toggleWordsOrder);
+    const selectedAndSearchedWord = useCards(cards, chooseTheme, searchWord, toggleWordsOrder);
+    // const selectedAndSearchedWord = useCards(cards, chooseTheme, searchWord, toggleWordsOrder);
     const [color, setColor] = useState('#0dccce')
+
     const [allElementsArray, setAllElementsArray] = useState([])
     const body = document.body;
     let arrOfCurrentElements = useMemo(() => {
@@ -232,6 +227,16 @@ const Vocabulary = function () {
     }, [pageTheme]);
 
 
+    const [withoutFirstRender, setWithoutFirstRender] = useState(false)
+    useEffect(() => {
+        if (withoutFirstRender) {
+            dispatch(UpdateCards({ email, cards }))
+        } else{
+            setWithoutFirstRender(prev => true)
+        }
+        // должно быть только 2 get (один options)
+    }, [cards.length]);
+
     return (
         <div
             onClick={elem => removeInput(elem, input, chooseTheme, optionState, dispatch)}
@@ -239,7 +244,7 @@ const Vocabulary = function () {
             style={paramsModal}
         >
             <MenuVoc />
-            <div className='wordsCount'>Всего слов: {Cards.length} </div>
+            <div className='wordsCount'>Всего слов: {cards.length} </div>
             <div className='inputOrder' >Алфавитный порядок: <input defaultChecked={true} onChange={() => dispatch(setToggleWordsOrder())} type="checkbox" /></div>
             <ModalEditCard modalChangeCard={modalChangeCard} />
             <ModalAddCards modalAdd={modalAdd} />
@@ -251,12 +256,7 @@ const Vocabulary = function () {
                         children='Create new card'
                     />
 
-                <button onClick={()=>dispatch(Logout())}>выйти из аккаунта</button>
-
-
-
-
-
+                    <button onClick={() => dispatch(Logout())}>выйти из аккаунта</button>
 
 
                     <ColorPicker color={color} setColor={setColor} />

@@ -41,8 +41,7 @@ class userService {
 
     async login(email, password) {
         const [user] = await pool.query(`select * from user where email=?;`, [email])
-
-        if (!user) { // если пользователя нет то ошибка
+        if (!user[0]) { // если пользователя нет то ошибка
             throw ApiError.BadRequest('Пользователь с таким email не был найден')
         }
         const isPasswordsEqual = await bcrypt.compare(password, user[0].password) // возвращает true/false - сравнение паролей

@@ -8,11 +8,11 @@ import { removeModal } from '../../../functions/removeModal';
 //redux
 import { useSelector, useDispatch } from 'react-redux';
 import { setModal, setEditCard } from '../../../store/reducers/modalRenameCard';
-import { changeCardFields } from '../../../store/reducers/Cards';
+import { changeCardFields } from '../../../store/reducers/authorization/AuthSlice';
 const ModalEditCard = function ({ modalChangeCard }) {
     const isModalActive = useSelector(state => state.modalRenameCard.isModalActive)
     const editCard = useSelector(state => state.modalRenameCard.editCard)
-    const changeCard = useSelector(state => state.Cards.changeCard)
+    const changeCard = useSelector(state => state.AuthSlice.changeCard)
     const dispatch = useDispatch();
 
     let visible = [cl.modal];

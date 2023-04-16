@@ -7,9 +7,7 @@ import { _removeTheme } from '../functions/_removeTheme';
 import { useSelector, useDispatch } from 'react-redux';
 const RemoveTheme = function () {
     const dispatch = useDispatch()
-    const selectOptions = useSelector(state => state.select.selectOptions)
-    const chooseTheme = useSelector(state => state.select.chooseTheme)
-    const optionState = useSelector(state => state.select.optionState)
+    const { selectOptions, chooseTheme, optionState, user } = useSelector(state => state.AuthSlice)
 
     return (
         <div>
@@ -17,11 +15,11 @@ const RemoveTheme = function () {
             {optionState.removeMark ?
                 <BtnAddCard
                     noClick={'noClick'}
-                    onClick={() => _removeTheme(selectOptions, optionState, chooseTheme, dispatch)}
+                    onClick={() => _removeTheme(selectOptions, optionState, chooseTheme, user.email, dispatch)}
                     style={styleRemoveTheme}
                     children='Удалить эту тему' />
                 : ''}
         </div>
     )
-};
+};   
 export default RemoveTheme;

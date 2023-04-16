@@ -2,18 +2,24 @@ const fileService = require('../service/fileService.js')
 
 class fileController {
 
-    async updateContent(req, res, next) {
+    async updateCards(req, res, next) {
         try {
-            const { email, data } = req.body
-            await fileService.updateData(email, data)
-            res.json({
-                "message": "",
-                "errors": []
-            })
+            const { email, cards } = req.body
+            await fileService.updateCards(email, cards)
+            res.json({ "message": "" })
         } catch (err) {
             next(err)
         }
+    }
 
+    async updateThemes(req, res, next) {
+        try {
+            const { email, themes } = req.body
+            await fileService.updateTheme(email, themes)
+            res.json({ "message": "" })
+        } catch (err) {
+            next(err)
+        }
     }
 
 
@@ -26,6 +32,7 @@ class fileController {
             next(err)
         }
     }
+
 
 
 }
