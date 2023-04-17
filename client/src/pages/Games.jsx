@@ -8,8 +8,6 @@ import CardsRandom from '../components/UI/CardsRandom/CardsRandom'
 import { generateQuizWords } from '../functions/generateQuizWords';
 import { getRandomIng } from '../functions/getRandomInt';
 import { validateQuiz } from '../functions/validateQuiz';
-// const
-import { checkStyle } from '../consts/consts';
 // styles
 import '../styles/Games.css'
 import '../styles/theme.css'
@@ -62,7 +60,7 @@ const Games = function () {
                                 <form className='formCards'>
                                     <CardsRandom cardsGame={array} />
                                     <BtnAddCard
-                                        style={checkStyle}
+                                        dinamicclassname={'btnGamesCheck'}
                                         onClick={e => validateQuiz(e, array, setCardsGame, dispatch)}
                                         children={'Check'}
                                     />

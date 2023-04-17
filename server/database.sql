@@ -1,4 +1,4 @@
--- database: dictionary, not added
+-- database: dictionary
 create table user(
     id int auto_increment primary key,
     email VARCHAR(255) NOT NULL,

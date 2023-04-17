@@ -134,19 +134,3 @@ link:visited,
 a:visited {
     color: inherit;
 }
-
-
-/* for light-dark theme */
-.changeThemeTitle {
-    opacity: var(--opacity0);
-    visibility: var(--visHid);
-    font-size: var(--fz0px);
-    transition: var(--transition02s);
-}
-.back:hover .changeThemeTitle {
-    color: white;
-    opacity: var(--opacity1);
-    visibility: var(--visIn);
-    font-size: 18px;
-    transition: 0.2s;
-}

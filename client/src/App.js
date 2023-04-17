@@ -5,7 +5,6 @@ import { BrowserRouter } from 'react-router-dom';
 import AppRouter from './components/AppRouter';
 import { setTheme } from './functions/setTheme';
 import { useSelector, useDispatch } from 'react-redux';
-import { setPageTheme } from './store/reducers/ColorPicker';
 // authorization
 import Authorization from './components/UI/Authorization/Authorization';
 import { CheckAuth, GetData } from '../src/store/reducers/asyncActions/ActionCreator'
@@ -16,10 +15,7 @@ function App() {
     const email = useSelector(state => state.AuthSlice.user.email)
 
     setTheme(pageTheme)
-    function changeTheme(elem) {
-        elem.target.checked ? dispatch(setPageTheme('dark')) : dispatch(setPageTheme('light'))
-    }
-
+    
     useEffect(() => {
         if (localStorage.getItem('token')) dispatch(CheckAuth())
     }, []);
@@ -36,7 +32,7 @@ function App() {
 
     return (
         <BrowserRouter>
-            <MenuDesk changeTheme={changeTheme} />
+            <MenuDesk />
             <AppRouter />
         </BrowserRouter>
     );

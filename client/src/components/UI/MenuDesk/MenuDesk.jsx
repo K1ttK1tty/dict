@@ -1,11 +1,11 @@
 import React from 'react';
 import cl from './MenuDesk.module.css'
-import Icon1 from './Icon1';
-import Icon2 from './Icon2';
-import Icon3 from './Icon3';
-import Icon4 from './Icon4';
+import Icon1 from './icons/Icon1';
+import Icon2 from './icons/Icon2';
+// import Icon3 from './icons/Icon3';
+// import Icon4 from './icons/Icon4';
 import { Link } from 'react-router-dom';
-const MenuDesk = function ({ changeTheme }) {
+const MenuDesk = function () {
     return (
         <nav>
             <div className={cl.back}>
@@ -32,13 +32,6 @@ const MenuDesk = function ({ changeTheme }) {
                             </span>
                         </li> */}
                     </ul>
-
-                    <div className='themeChanger'>
-                            <input defaultChecked={false} onClick={changeTheme} id='checkbox' type="checkbox" />
-                            <label className='checkboxLabel' htmlFor="checkbox"></label>
-                            <p className={cl.changeThemeTitle}>Change theme</p>
-                    </div>
-
 
 
                     {/* <a className={cl.callBack}>

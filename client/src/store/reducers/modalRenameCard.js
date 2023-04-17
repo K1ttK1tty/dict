@@ -29,10 +29,7 @@ const modalRenameCard = createSlice({
         setEditCard(state, action) {
             state.editCard = action.payload
         },
-        setThemeInputValue(state, action) {
-            state.inputValue.theme = action.payload
-        }
     }
 })
 export default modalRenameCard.reducer
-export const { setIndexCard, setModal, setInputValue, setEditCard, setThemeInputValue } = modalRenameCard.actions
+export const { setIndexCard, setModal, setInputValue, setEditCard } = modalRenameCard.actions

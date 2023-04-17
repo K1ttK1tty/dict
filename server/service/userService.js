@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt')
 const uuid = require('uuid')
-const pool = require('../db.js').pool 
+const pool = require('../db.js').pool
 const mailService = require('../service/mailService.js')
 const tokenService = require('../service/tokenService.js')
 const ApiError = require('../exeptions/apiError.js')
@@ -20,7 +20,7 @@ class userService {
         const [newPerson] = await pool.query(`select id,email from user where email=?;`, [email]) // запрос к только что добавленному пользователю
         await pool.query(`insert into activation (activationLink,user_id) values(?,?);`, [activationLink, newPerson[0].id])
 
-        
+
 
         const tokens = tokenService.generateTokens(newPerson[0]) // тут возвращаются оба токена
         await tokenService.saveToken(newPerson[0].id, tokens.refreshToken) // тут refresh сохраняется в базу
@@ -73,7 +73,7 @@ class userService {
     }
 
     async refresh(refreshToken) {
-        
+
 
         // дублируется с логином -> вынести в отдельную функцию
         if (!refreshToken) {
@@ -87,21 +87,20 @@ class userService {
             throw ApiError.UnauthorizedError()
         }
         const [user] = await pool.query(`select * from user where id=?;`, [userData.id]) // действительно возвращается id
-
+        const [userActivation] = await pool.query(`select * from activation where user_id=?;`, [userData.id]);
         const tokens = tokenService.generateTokens({
             id: user[0].id,
             email: user[0].email,
-            isActivated: user[0].isActivated
+            isActivated: userActivation[0].isActivated
         })
 
         await tokenService.saveToken(user[0].id, tokens.refreshToken) // тут refresh сохраняется в базу
-
         return {
             ...tokens,
             user: {
                 id: user[0].id,
                 email: user[0].email,
-                isActivated: user[0].isActivated
+                isActivated: userActivation[0].isActivated
             }
         }
     }

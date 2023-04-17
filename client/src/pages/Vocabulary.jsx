@@ -12,11 +12,10 @@ import RemoveTheme from '../components/RemoveTheme';
 //functions 
 import { removeInput } from '../functions/removeInput';
 import { modalAddCard } from '../functions/modalAddCard';
-// consts
-import { paramsModal, btnStyle } from '../consts/consts';
 //styles
 import '../styles/theme.css';
 import '../styles/Vocabulary.css';
+import btnStyle from '../components/UI/ModalAddCards/FormAddCard.module.css'
 //color-picker
 import ColorPicker from '../components/UI/ColorPicker/ColorPicker';
 //redux
@@ -28,19 +27,17 @@ import {
     setCurrentColor,
     setColorsBeforePaint
 } from '../store/reducers/ColorPicker';
-
-
 import { setToggleWordsOrder } from '../store/reducers/authorization/AuthSlice';
-import { Logout } from '../store/reducers/asyncActions/ActionCreator';
 
 const Vocabulary = function () {
     // const { height, width } = useScrollbarSize();
+    // let paramsModal = { overflow: 'auto', paddingRight: '0px' }
     // if (modal || modalCards) paramsModal = { overflow: 'hidden', paddingRight: width };
 
     // authorization
     const { toggleWordsOrder, cards } = useSelector(state => state.AuthSlice);
     //redux  
-    const { searchWord, input } = useSelector(state => state.upMenu);
+    const { searchWord, input, isUserMenuOpen } = useSelector(state => state.upMenu);
     const { chooseTheme, optionState } = useSelector(state => state.AuthSlice);
     const dispatch = useDispatch();
     const modalAdd = useRef();
@@ -60,7 +57,7 @@ const Vocabulary = function () {
     let arrOfCurrentElements = useMemo(() => {
         return []
     }, [colorModeOn])
-
+    // console.log(cards)
 
     function click(e) {
         const element = e.target;
@@ -227,13 +224,13 @@ const Vocabulary = function () {
 
     return (
         <div
-            onClick={elem => removeInput(elem, input, chooseTheme, optionState, dispatch)}
+            onClick={e => removeInput(e, input, chooseTheme, optionState, isUserMenuOpen, dispatch)}
             className={'searchWrapper'}
-            style={paramsModal}
+        // style={paramsModal}
         >
             <MenuVoc />
             <div className='wordsCount'>Всего слов: {cards.length} </div>
-            <div className='inputOrder' >
+            <div className='inputOrder'>
                 Алфавитный порядок:
                 <input
                     defaultChecked={true}
@@ -247,11 +244,10 @@ const Vocabulary = function () {
                 <div className='wrap'>
                     <BtnAddCard
                         onClick={() => modalAddCard(modalAdd, dispatch)}
-                        style={btnStyle}
+                        dinamicclassname={btnStyle.btnCreateCard}
                         children='Create new card'
                     />
 
-                    <button onClick={() => dispatch(Logout())}>выйти из аккаунта</button>
 
                     {/* <ColorPicker color={color} setColor={setColor} />
 

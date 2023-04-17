@@ -10,10 +10,9 @@ export const useSordetCard = (Cards, toggleWordsOrder) => {
 
 export const useSelectedThemes = (Cards, chooseTheme, toggleWordsOrder) => {
     const sordetCard = useSordetCard(Cards, toggleWordsOrder)
-
     const selectedThemes = useMemo(() => {
-        // console.log('selectedThemes')
-        return sordetCard.filter(card => card.theme.toLowerCase().includes(chooseTheme.toLowerCase()));
+        if (!chooseTheme) return sordetCard
+        return sordetCard.filter(card => card.theme.toLowerCase() == chooseTheme.toLowerCase());
     }, [chooseTheme, Cards]);
     return selectedThemes
 }

@@ -1,10 +1,8 @@
 import React from 'react';
-import Vocabularycss from '../../../styles/Vocabulary.css'
+import styles from '../WordCard.module.css'
 const IconEdit = function () {
-
     return (
-
-        <svg x="0px" y="0px" className='cardIconsize' viewBox="0 0 55.25 55.25" >
+        <svg x="0px" y="0px" className={styles.cardIconsize} viewBox="0 0 55.25 55.25" >
             <path className='cardsIconColor' d="M52.618,2.631c-3.51-3.508-9.219-3.508-12.729,0L3.827,38.693C3.81,38.71,3.8,38.731,3.785,38.749
 	            c-0.021,0.024-0.039,0.05-0.058,0.076c-0.053,0.074-0.094,0.153-0.125,0.239c-0.009,0.026-0.022,0.049-0.029,0.075
 	            c-0.003,0.01-0.009,0.02-0.012,0.03l-3.535,14.85c-0.016,0.067-0.02,0.135-0.022,0.202C0.004,54.234,0,54.246,0,54.259
@@ -23,7 +21,6 @@ const IconEdit = function () {
 	            L16.097,43.395l-4.773,0.53l0.53-4.773l22.38-22.378c0.391-0.391,0.391-1.023,0-1.414s-1.023-0.391-1.414,0L10.44,37.738
 	            l-3.183,0.354L34.94,10.409l9.9,9.9L17.157,47.992L17.511,44.809z M49.082,16.067l-9.9-9.9l1.415-1.415l9.9,9.9L49.082,16.067z"/>
         </svg>
-
     )
 };
 export default IconEdit;

@@ -50,6 +50,12 @@
     font-size: 25px;
     transition: var(--transition-theme);
 }
+.btnGamesCheck {
+    margin: 0px auto;
+    display: block;
+    width: 20%;
+    padding: 8px;
+}
 
 /* words validate */
 .trueWordColor {

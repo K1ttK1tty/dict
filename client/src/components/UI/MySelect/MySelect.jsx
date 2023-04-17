@@ -3,9 +3,9 @@ import React from 'react';
 import { CSSTransition } from 'react-transition-group';
 // components
 import SetOptions from '../../SetOptions';
-import IconSelect from './IconSelect';
+import IconSelect from './icons/IconSelect';
 // styles
-import cl from './MySelect.module.css'
+import styles from './MySelect.module.css'
 // redux
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -30,22 +30,22 @@ const MySelect = function () {
     }
 
     return (
-        <div className={cl.select} >
+        <div className={styles.select} >
             <div
                 onClick={() => dispatch(setOptionState({ ...optionState, open: !optionState.open }))}
-                className={[cl.title, 'ifNotThisThenClose'].join(' ')}
+                className={[styles.title, 'ifNotThisThenClose'].join(' ')}
             >
                 <div
                     onClick={() => dispatch(setOptionState({ ...optionState, open: !optionState.open }))}
-                    className={[cl.selectValue, 'ifNotThisThenClose'].join(' ')}
+                    className={[styles.selectValue, 'ifNotThisThenClose'].join(' ')}
                 >{optionName}</div>
 
-                <div className={cl.selectIcon}><IconSelect /></div>
+                <div className={styles.selectIcon}><IconSelect /></div>
             </div>
 
             {
                 optionState.removeMark &&
-                <div id='close' onClick={removeTheme} className={cl.removeTheme}>&times;</div>
+                <div id='close' onClick={removeTheme} className={styles.removeTheme}>&times;</div>
             }
 
             <CSSTransition

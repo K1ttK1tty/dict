@@ -1,6 +1,6 @@
 import React from 'react';
 // styles
-import cl from '../InputRequire/InputRequire.module.css'
+import styles from '../InputRequire/InputRequire.module.css'
 //redux
 import { useSelector, useDispatch } from 'react-redux';
 import { setInputReq } from '../../../store/reducers/GamesSlice';
@@ -13,7 +13,7 @@ const InputRequire = function () {
             value={inputReq ? inputReq : ''}
             type='number'
             onChange={e => dispatch(setInputReq(e.target.value))}
-            className={cl.input}
+            className={styles.input}
         />
     )
 };

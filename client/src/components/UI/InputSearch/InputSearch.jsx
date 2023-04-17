@@ -1,54 +1,40 @@
-import React from 'react';
-import cl from './InputSearch.module.css'
+import React, { useRef } from 'react';
+// styles
+import style from './InputSearch.module.css'
 //redux
 import { useSelector, useDispatch } from 'react-redux';
-import { setSearchWord,setInput } from '../../../store/reducers/upMenu';
-const InputSearch = function ({ placeholder }) {
+import { setSearchWord, setInput } from '../../../store/reducers/upMenu';
+const InputSearch = function () {
     const dispatch = useDispatch()
     const searchWord = useSelector(state => state.upMenu.searchWord)
     const input = useSelector(state => state.upMenu.input)
-    const inputElement = document.getElementById('1');
+    const inputElement = useRef()
 
     function handleKey(key) {
         if (key.keyCode === 27) {
+            inputElement.current.blur();
             dispatch(setSearchWord(''))
             dispatch(setInput({ isOpen: false, after: input.after }))
-            inputElement.blur();
         }
     }
-    
-    if (!input.after) {
-        dispatch(setInput({ ...input, after: '1' }))
-        return <input
-            value={searchWord}
-            placeholder={placeholder}
-            id='1'
-            onChange={e => dispatch(setSearchWord(e.target.value))}
-            className={[cl.inputShared, cl.inputOff, 'ifNotThisThenClose'].join(' ')}
-        />
-    }
-    if (!input.isOpen) {
-        return <input
-            value={searchWord}
-            placeholder={placeholder}
-            id='1'
-            onChange={e => dispatch(setSearchWord(e.target.value))}
-            className={[cl.inputShared, cl.inputOff, cl.inputOffAnimation, 'ifNotThisThenClose'].join(' ')}
-        />
 
-    } else {
+    let isHidden = style.inputHidden;
+    if (input.isOpen) {
+        isHidden = '';
         setTimeout(() => {
-            inputElement.focus();
-        }, 200);
-
-        return <input
-            value={searchWord}
-            placeholder={placeholder}
-            id='1'
-            onKeyDown={handleKey}
-            onChange={e => dispatch(setSearchWord(e.target.value))}
-            className={[cl.inputShared, cl.inputOn, cl.inputOnAnimation, 'ifNotThisThenClose'].join(' ')}
-        />
+            inputElement.current.focus();
+        }, 300);
     }
+    const inputClass = [style.inputSearch, isHidden].join(' ')
+
+    return <input
+        onClick={e => e.stopPropagation()}
+        value={searchWord}
+        placeholder={' Search word'}
+        ref={inputElement}
+        onKeyDown={handleKey}
+        onChange={e => dispatch(setSearchWord(e.target.value))}
+        className={inputClass}
+    />
 };
 export default InputSearch;

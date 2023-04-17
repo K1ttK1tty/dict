@@ -6,7 +6,6 @@ html[data-theme="light"] {
     --btn-color: #fafafa;
     --btn-border: rgba(0, 0, 0, 0.4) 1px solid;
     --card-icon-color: rgb(35, 112, 143);
-    --input-search-border: black 1px solid;
     --select-remove-icon: rgb(35, 112, 143);
     --nav-menu-shadow: -18px 0px 52px 5px rgba(0, 0, 0, 0.24);
     --transition-theme: 0.3s ease;
@@ -33,7 +32,6 @@ html[data-theme="dark"] {
     --btn-color: rgb(255, 255, 255);
     --btn-border: 1px transparent solid;
     --card-icon-color: rgb(35, 112, 143);
-    --input-search-border: none;
     --select-remove-icon: rgba(255, 255, 255, 0.712);
     --nav-menu-shadow: none;
     --transition-theme: 0.3s ease;

@@ -1,0 +1,17 @@
+.inputFormAddCard {
+    width: 100%;
+    display: block;
+    margin-bottom: 18px;
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 0px;
+}
+.btnFormAddCard {
+    width: 100%;
+    background: rgb(136, 214, 47);
+    border: none;
+}
+.btnCreateCard {
+    margin: 0px auto 15px;
+    display: block;
+}
