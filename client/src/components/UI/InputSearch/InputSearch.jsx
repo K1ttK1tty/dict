@@ -17,7 +17,7 @@ const InputSearch = function () {
             dispatch(setInput({ isOpen: false, after: input.after }))
         }
     }
-
+    
     let isHidden = style.inputHidden;
     if (input.isOpen) {
         isHidden = '';

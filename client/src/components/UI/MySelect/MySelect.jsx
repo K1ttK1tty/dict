@@ -1,5 +1,5 @@
 // libs
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { CSSTransition } from 'react-transition-group';
 // components
 import SetOptions from '../../SetOptions';
@@ -17,6 +17,7 @@ const MySelect = function () {
     const dispatch = useDispatch();
     const optionName = useSelector(state => state.AuthSlice.optionName)
     const optionState = useSelector(state => state.AuthSlice.optionState)
+    const selectElement = useRef()
 
     function replaceOption(el) {
         dispatch(setOptionName(el.target.innerText))
@@ -28,13 +29,27 @@ const MySelect = function () {
         dispatch(setChooseTheme(''))
         dispatch(setOptionState({ open: false, removeMark: false })) //
     }
+    if (optionState.open) {
+        setTimeout(() => {
+            selectElement.current.focus()
+        }, 200);
+    }
+    useEffect(() => {
+        return () => dispatch(setOptionState({ ...optionState, open: false }));
+    }, []);
 
     return (
-        <div className={styles.select} >
+        <div
+            className={styles.select}
+            ref={selectElement}
+            onKeyDown={() => dispatch(setOptionState({ ...optionState, open: false }))}
+            tabIndex='0'
+        >
+
             <div
                 onClick={() => dispatch(setOptionState({ ...optionState, open: !optionState.open }))}
-                className={[styles.title, 'ifNotThisThenClose'].join(' ')}
-            >
+                className={[styles.title, 'ifNotThisThenClose'].join(' ')}>
+
                 <div
                     onClick={() => dispatch(setOptionState({ ...optionState, open: !optionState.open }))}
                     className={[styles.selectValue, 'ifNotThisThenClose'].join(' ')}

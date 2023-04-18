@@ -19,9 +19,11 @@ const ModalAddCards = function ({ modalAdd }) {
         return () => dispatch(setInputValue({ word: '', translate: '', theme: '' }))
     }, [isModalAddCardActive]);
 
-    let vis = [style.modal];
-    if (isModalAddCardActive) vis = [style.modal, style.active].join(' ')
-    
+    let vis = isModalAddCardActive
+        ? [style.modal, style.active].join(' ')
+        : [style.modal];
+
+
     return (
         <div
             className={vis}
@@ -36,7 +38,9 @@ const ModalAddCards = function ({ modalAdd }) {
                             onClick={() => removeModal(setIsModalAddCardActive, dispatch, setInputValue)}
                             className={style.modalClose}
                             aria-label="close"
-                        >&times;</button>
+                        >
+                            &times;
+                        </button>
                     </div>
                 </div>
                 <FormAddCard modalAdd={modalAdd} />

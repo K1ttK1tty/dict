@@ -7,9 +7,13 @@ const UserMenuDots = function () {
     const { isUserMenuOpen } = useSelector(state => state.upMenu)
     const dispatch = useDispatch()
     
+    const wrapperStyles = isUserMenuOpen
+        ? [styles.wrapper, styles.wrapperActive].join(' ')
+        : styles.wrapper;
+
     return (
         <div
-            className={styles.wrapper}
+            className={wrapperStyles}
             onClick={() => dispatch(setIsUserMenuOpen(!isUserMenuOpen))}
         >
             <div className={styles.dot} />

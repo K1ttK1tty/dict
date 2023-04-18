@@ -1,10 +1,11 @@
 import React from 'react';
 import cl from './inputAddCard.module.css'
-const InputAddCard = function ({ inputValue, placeholder, disabled, style, modalAdd, modalChangeCard, setValue, dinamicclassname }) {
+const InputAddCard = function ({ inputValue, placeholder, disabled, style, modalAdd, modalChangeCard, setValue, dinamicclassname, type,}) {
     const element = modalAdd ? modalAdd : modalChangeCard;
     return (
         <input
             ref={element}
+            type={type}
             disabled={disabled}
             placeholder={placeholder}
             style={style}

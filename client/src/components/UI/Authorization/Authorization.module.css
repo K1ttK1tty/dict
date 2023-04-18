@@ -1,0 +1,103 @@
+.back {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(226, 226, 226);
+}
+.content {
+    height: 520px;
+    min-width: 300px;
+    width: 80%;
+    max-width: 480px;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    padding-top: 0px;
+    border-radius: 8px;
+    position: relative;
+}
+.form {
+    margin: 0px auto;
+    width: 80%;
+    position: absolute;
+    top: 80px;
+    left: 48px;
+    opacity: 1;
+    visibility: visible;
+    transition: 0.14s ease-in;
+}
+.formHide {
+    top: 90px;
+    opacity: 0;
+    visibility: hidden;
+}
+.title {
+    margin-bottom: 30px;
+}
+.changeActions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 210px;
+    margin-bottom: 35px;
+}
+
+.input {
+    background-color: #cbcbcb;
+    width: 100%;
+    padding-right: 58px;
+    transition: 0s;
+}
+.input:focus {
+    scale: 1;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #cbcbcb inset;
+}
+
+.passwordLabel {
+    margin-bottom: 40px;
+    display: block;
+    position: relative;
+}
+.iconStyle {
+    position: absolute;
+    top: 27px;
+    right: 25px;
+    cursor: pointer;
+}
+
+.button {
+    width: 100%;
+    font-size: 18px;
+    padding: 10px;
+    border: none;
+    background: rgb(136, 214, 47);
+    transition: 0.15s;
+}
+.button:hover {
+    background: rgb(124, 196, 43);
+}
+.button:after {
+    scale: 0;
+}
+.button:hover.button:after {
+    scale: 0;
+}
+.buttonSwitcher {
+    font-size: 16px;
+    height: 46px;
+    padding: 10px 20px;
+
+    border: none;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background: rgba(0, 0, 0, 0);
+    cursor: pointer;
+    transition: 0.1s;
+}
+.buttonSwitcherActive {
+    background: rgb(136, 214, 47);
+}
