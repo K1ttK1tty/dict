@@ -1,5 +1,4 @@
 const ApiError = require('../exeptions/apiError.js')
-// для того чтобы фукнция getAllUsers была доступна только авторизованный пользователям
 const tokenService = require('../service/tokenService.js')
 module.exports = function (req, res, next) {
 

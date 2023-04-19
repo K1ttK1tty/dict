@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const fileError = require('../exeptions/fileError.js')
-const tokenService = require('./tokenService.js')
+const pool = require('../db.js').pool
 
 class fileService {
 
@@ -57,7 +57,7 @@ class fileService {
         return { userCards, userThemes }
     }
 
- 
+
     async updateCards(email, data) {
         const userData = JSON.stringify(data)
 
@@ -79,7 +79,6 @@ class fileService {
 
         if (!fs.existsSync(process.env.USER_DATA_PATH, `${email}_content`, `themes_${email}.txt`)) {
             throw fileError.ReadError()
-
         }
 
         fs.writeFile(path.resolve(process.env.USER_DATA_PATH, `${email}_content`, `themes_${email}.txt`), userData, (err) => {
@@ -87,6 +86,32 @@ class fileService {
                 throw fileError.ReadError()
             }
         })
+    }
+
+
+    async uploadAvatar(email, avatar) {
+        const extension = avatar.name.split('.').pop()
+        const filePath = path.resolve(process.env.USER_DATA_PATH, `${email}_content`, `avatar.${extension}`)
+
+        if (fs.existsSync(filePath)) {
+            fs.unlinkSync(filePath)
+            await avatar.mv(filePath)
+        } else {
+
+            await avatar.mv(filePath)
+        }
+        // newPerson[0].id
+        const [user] = await pool.query(`select id from user where email=?;`, [email])
+        await pool.query(`insert into avatar (avatarName,user_id) values(?,?);`, [`avatar.${extension}`,user[0].id])
+
+    }
+
+
+    async getAvatar(email) {
+        const [userId] = await pool.query('select id from user where email=?;', [email])
+        const [avatarName] = await pool.query('select avatarName from avatar where user_id=?;', [userId[0].id])
+        return path.resolve(process.env.USER_DATA_PATH, `${email}_content`, avatarName[0].avatarName)
+
     }
 
 }

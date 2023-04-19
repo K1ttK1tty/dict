@@ -21,6 +21,9 @@ router.get('/refresh', userController.refresh);
 router.post('/getData', authMiddleware, fileController.getContent);
 router.post('/updateCards', authMiddleware, fileController.updateCards);
 router.post('/updateTheme', authMiddleware, fileController.updateThemes);
+// avatar
+router.post('/uploadAvatar', authMiddleware, fileController.uploadAvatar)
+router.post('/getAvatar', authMiddleware, fileController.getAvatar)
 
 
 module.exports = router 

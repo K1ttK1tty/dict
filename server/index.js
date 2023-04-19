@@ -1,4 +1,5 @@
 const express = require('express');
+const fileupload = require('express-fileupload')
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 require('dotenv').config()
@@ -8,6 +9,7 @@ const fileService = require('./service/fileService.js')
 const PORT = process.env.PORT || 5001;
 const app = express()
 
+app.use(fileupload({}))
 app.use(express.json())
 app.use(cookieParser());
 app.use(cors({
@@ -36,14 +38,16 @@ const getData = async () => {
 }
 const fs = require('fs');
 const path = require('path')
+
 // fs.mkdirSync(path.resolve(process.env.USER_DATA_PATH, `vlad.petuxov.2018@bk.ru.txt`), (err) => {
 //     if (!err) {
 //         console.log("ошибка создания папки")
 //     }
 // })
-  
-// if (fs.existsSync(process.env.USER_DATA_PATH)) {
-//     console.log("папка существует")
+
+// path.resolve(process.env.USER_DATA_PATH, `${email}_content`,
+// if (fs.existsSync(path.resolve(process.env.USER_DATA_PATH, `vlad.petuxov.2018@bk.ru_content`,'avatar.jpeg'))) {
+//     console.log("файл существует")
 // }
  
 // fs.readFile(path.resolve(process.env.USER_DATA_PATH, `vlad.petuxov.2018@bk.ru.txt`), { encoding: 'utf-8' }, (err, data) => { // прочитать содержимое файла
@@ -53,11 +57,11 @@ const path = require('path')
 //     }
 //     console.log(JSON.parse(data))
 // })
-        
+
 const start = () => {
     try {
         app.listen(PORT, () => console.log('server start at port ' + PORT))
-        fileService.createUsersDataDir(); 
+        fileService.createUsersDataDir();
 
     } catch (err) {
         console.log(err)

@@ -5,7 +5,7 @@
 .wrapper {
     display: block;
     height: 100%;
-    width: 33px;
+    width: 68px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,39 +18,46 @@
 .wrapperActive {
     background: #383e47;
 }
-.dot {
+.navbtn {
+    border: none;
+    background: rgba(255, 255, 255, 0);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 75%;
+    cursor: pointer;
+}
+.avatar{
+    border-radius: 50%;
+    width: 33px;
+    height: 33px;
+    object-fit: cover;
+    cursor: pointer;
+}
+.arrow {
     position: relative;
-    width: var(--px5);
-    height: var(--px5);
-    margin: 0px auto;
-    background: rgb(136, 214, 47);
-    border-radius: var(--percent50);
-    transform: translateY(1px);
+    top: 1px;
+    transform: rotate(0deg);
+    cursor: pointer;
+    transition: 0.15s;
 }
-.dot::before {
-    position: absolute;
-    content: "";
-    top: -10px;
-    left: 0px;
-    width: var(--px5);
-    height: var(--px5);
-    border-radius: var(--percent50);
-    background: rgb(136, 214, 47);
+.arrowActive{
+    transform: rotate(180deg);
+    transition: 0.15s;
 }
-.dot::after {
-    position: absolute;
-    content: "";
-    top: 10px;
-    left: 0px;
-    width: var(--px5);
-    height: var(--px5);
-    border-radius: var(--percent50);
-    background: rgb(136, 214, 47);
+
+.arrow span {
+    display: block;
+    width: 9px;
+    height: 9px;
+    border-bottom: 3px solid rgba(255, 255, 255, 0.6);
+    border-right: 3px solid rgba(255, 255, 255, 0.6);
+    transform: rotate(45deg);
 }
 
 /* MENU */
 .content {
-    width: 250px;
+    width: 280px;
     height: 200px;
     position: absolute;
     top: 110%;
@@ -75,7 +82,21 @@
     flex-grow: 1;
     height: 100%;
     padding: 0px 18px;
+    font-size: 16px;
 }
+.userMain{
+    display: flex;
+}
+
+.userMain .avatar{
+    width: 44px;
+    height: 44px;
+    margin-right: 10px;
+    position: relative;
+    top: -3px;
+
+}
+
 
 .theme {
     display: flex;
@@ -83,9 +104,17 @@
     justify-content: space-between;
     width: 52%;
 }
+.userName {
+    font-size: 19px;
+    line-height: 1;
+}
+.email {
+    font-size: 14px;
+    margin-bottom: 24px;
+}
 
 .mb14 {
-    margin-bottom: 14px;
+    margin-bottom: 18px;
 }
 .btnExit {
     width: 100%;

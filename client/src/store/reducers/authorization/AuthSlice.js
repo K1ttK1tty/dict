@@ -6,13 +6,16 @@ import {
     CheckAuth,
     GetData,
     UpdateCards,
-    UpdateThemes
+    UpdateThemes,
+    UploadAvatar,
+    GetAvatar
 } from '../asyncActions/ActionCreator'
 import { reducers } from "./reducers";
 
 const initialState = {
     // authorization
     user: {},
+    avatar:'',
     isAuth: false,
     isLoading: false,
     error: '',
@@ -36,7 +39,7 @@ export const AuthSlice = createSlice({
     initialState,
 
     reducers: reducers,
-
+  
     extraReducers(builder) {
         //registration
         builder.addCase(Registration.fulfilled, (state, action) => {
@@ -101,6 +104,20 @@ export const AuthSlice = createSlice({
             console.log(action.payload)
             state.updateError = action.payload.userThemes;
         })
+        //  avatar
+        builder.addCase(UploadAvatar.fulfilled, (state, action) => {
+            console.log(action.payload)
+        })
+        builder.addCase(GetAvatar.fulfilled, (state, action) => {
+            state.avatar = action.payload
+        })
+
+
+
+        // const blob = await response.blob()
+        // const url = window.URL.createObjectURL(blob)
+        // console.log(url)
+
     }
 })
 export default AuthSlice.reducer

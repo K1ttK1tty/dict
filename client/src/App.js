@@ -7,7 +7,7 @@ import { setTheme } from './functions/setTheme';
 import { useSelector, useDispatch } from 'react-redux';
 // authorization
 import Authorization from './components/UI/Authorization/Authorization';
-import { CheckAuth, GetData } from '../src/store/reducers/asyncActions/ActionCreator'
+import { CheckAuth, GetData,GetAvatar } from '../src/store/reducers/asyncActions/ActionCreator'
 function App() {
     const dispatch = useDispatch()
     const pageTheme = useSelector(state => state.ColorPicker.pageTheme)
@@ -23,6 +23,7 @@ function App() {
     useEffect(() => {
         if (isAuth) {
             dispatch(GetData(email))
+            dispatch(GetAvatar(email))
         }
     }, [isAuth]);
 

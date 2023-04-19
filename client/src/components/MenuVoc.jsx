@@ -1,7 +1,7 @@
 import React from 'react';
 // components
 import InputSearch from './UI/InputSearch/InputSearch';
-import UserMenuDots from './UI/UserMenu/UserMenuDots';
+import UserMenuDots from './UI/UserMenu/UserTopMenu';
 import UserMenu from './UI/UserMenu/UserMenu';
 // functions
 import { inputSearchHandler } from '../functions/inputSearchHandler';
@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 const MenuVoc = function () {
     const dispatch = useDispatch()
     const input = useSelector(state => state.upMenu.input)
-    const { user, isActivated } = useSelector(state => state.AuthSlice)
+    const { user, isActivated, avatar } = useSelector(state => state.AuthSlice)
 
     return (
         <div className="menu">
@@ -23,10 +23,12 @@ const MenuVoc = function () {
                         <InputSearch />
                         <Search />
                     </div>
-                    <UserMenuDots />
+                    <UserMenuDots avatar={avatar} />
                     <UserMenu
                         email={user.email}
+                        userName={user.name}
                         isActivated={isActivated}
+                        avatar={avatar}
                     />
                 </div>
             </div>

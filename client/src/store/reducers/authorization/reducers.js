@@ -32,5 +32,10 @@ export const reducers = {
     },
     setChooseTheme(state, action) {
         state.chooseTheme = action.payload
+    },
+    // avatar
+    setAvatar(state,action){
+        state.avatar = action.payload
     }
+
 }

@@ -30,12 +30,18 @@ const Authorization = function () {
         dispatch(Login({ email, password }))
     }
 
+
     const regRes = async (e) => {
         e.preventDefault()
-        dispatch(Registration({ email, password }))
+        dispatch(Registration({ userName, email, password }))
     }
-    const buttonLogin = isLogin ? [styles.buttonSwitcher, styles.buttonSwitcherActive].join(' ') : styles.buttonSwitcher
-    const buttonRegistration = isLogin ? styles.buttonSwitcher : [styles.buttonSwitcher, styles.buttonSwitcherActive].join(' ');
+    const buttonLogin = isLogin
+        ? [styles.buttonSwitcher, styles.buttonSwitcherActive].join(' ')
+        : styles.buttonSwitcher
+
+    const buttonRegistration = isLogin
+        ? styles.buttonSwitcher
+        : [styles.buttonSwitcher, styles.buttonSwitcherActive].join(' ');
 
     return (
         <div className={styles.back}>
@@ -56,7 +62,6 @@ const Authorization = function () {
                     action={loginRes}
                     isLogin={isLogin}
                 />
-
                 <FormRegistration
                     userName={userName}
                     setUserName={setUserName}
@@ -69,36 +74,6 @@ const Authorization = function () {
                     action={regRes}
                     isLogin={isLogin}
                 />
-
-
-
-
-
-
-
-                {/* <input
-                    type="text"
-                    placeholder='Email'
-                    onChange={e => setEmail(e.target.value)}
-                    value={email}
-                />
-                <input
-                    type="text"
-                    placeholder='Password'
-                    onChange={e => setPassword(e.target.value)}
-                    value={password}
-                />
-
-                <button
-                    type='submit'
-                    children='Логин'
-                    onClick={loginRes}
-                />
-                <button
-                    type='submit'
-                    children='Регистрация'
-                    onClick={regRes}
-                /> */}
 
             </div>
         </div>

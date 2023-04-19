@@ -6,25 +6,25 @@ const tokenService = require('../service/tokenService.js')
 const ApiError = require('../exeptions/apiError.js')
 
 class userService {
-    async registration(email, password) {
+    async registration(userName, email, password) {
+
         const [isPerson] = await pool.query(`select * from user where email=?;`, [email])
         if (isPerson[0]) {
             throw ApiError.BadRequest(`Пользователь с почтовым адресом ${email} уже существует.`)
         }
         const hashPassword = await bcrypt.hash(password, 3); // для хеширования пароля
         const activationLink = uuid.v4() // уникальная ссылка для активации по почте
-        await pool.query(`insert into user (email,password) values(?,?);`, [email, hashPassword]);
+        await pool.query(`insert into user (name,email,password) values(?,?,?);`, [userName, email, hashPassword]);
 
         // await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`) 
 
-        const [newPerson] = await pool.query(`select id,email from user where email=?;`, [email]) // запрос к только что добавленному пользователю
+        const [newPerson] = await pool.query(`select id,name,email from user where email=?;`, [email]) // запрос к только что добавленному пользователю
         await pool.query(`insert into activation (activationLink,user_id) values(?,?);`, [activationLink, newPerson[0].id])
 
 
 
         const tokens = tokenService.generateTokens(newPerson[0]) // тут возвращаются оба токена
         await tokenService.saveToken(newPerson[0].id, tokens.refreshToken) // тут refresh сохраняется в базу
-
         const dto = { ...newPerson[0], activationLink }
 
         return { ...tokens, user: dto } // можно две строчки вынести в отдельную функцию т.к. переиспользуется 2 раза
@@ -50,6 +50,7 @@ class userService {
         }
         const tokens = tokenService.generateTokens({ // генерация токенов
             id: user[0].id,
+            name: user[0].name,
             email: user[0].email,
             isActivated: user[0].isActivated
         })
@@ -60,6 +61,7 @@ class userService {
             ...tokens,
             user: {
                 id: user[0].id,
+                name: user[0].name,
                 email: user[0].email,
                 isActivated: user[0].isActivated
             }
@@ -90,6 +92,7 @@ class userService {
         const [userActivation] = await pool.query(`select * from activation where user_id=?;`, [userData.id]);
         const tokens = tokenService.generateTokens({
             id: user[0].id,
+            name: user[0].name,
             email: user[0].email,
             isActivated: userActivation[0].isActivated
         })
@@ -99,6 +102,7 @@ class userService {
             ...tokens,
             user: {
                 id: user[0].id,
+                name: user[0].name,
                 email: user[0].email,
                 isActivated: userActivation[0].isActivated
             }

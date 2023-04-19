@@ -15,8 +15,8 @@ class userController {
                 // передаем класс ошибки и вторым аргументом массив ошибок
             }
 
-            const { email, password } = req.body;
-            const userData = await userService.registration(email, password);
+            const { userName, email, password } = req.body;
+            const userData = await userService.registration(userName, email, password);
             res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
             // передаем куки, по ключу 'refreshToken' можно получить сам токен, далее параметры время жизни 
             // и httpOnly, чтобы нельзя было получить в браузере  

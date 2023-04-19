@@ -14,7 +14,7 @@
     transition: 0.3s;
 }
 .modalContent {
-    padding: 26px;
+    padding: 30px;
     background-color: white;
     min-width: 400px;
     border-radius: 12px;
@@ -101,7 +101,7 @@
 }
 
 .inputFormEditCard {
-    margin-bottom: 18px;
+    margin-bottom: 28px;
     border: none;
     border-bottom: 1px solid black;
     border-radius: 0px;
