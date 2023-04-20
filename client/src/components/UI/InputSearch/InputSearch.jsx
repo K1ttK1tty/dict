@@ -1,10 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useRef, memo } from 'react';
 // styles
 import style from './InputSearch.module.css'
 //redux
 import { useSelector, useDispatch } from 'react-redux';
 import { setSearchWord, setInput } from '../../../store/reducers/upMenu';
-const InputSearch = function () {
+const InputSearch = memo(function () {
     const dispatch = useDispatch()
     const searchWord = useSelector(state => state.upMenu.searchWord)
     const input = useSelector(state => state.upMenu.input)
@@ -17,7 +17,7 @@ const InputSearch = function () {
             dispatch(setInput({ isOpen: false, after: input.after }))
         }
     }
-    
+
     let isHidden = style.inputHidden;
     if (input.isOpen) {
         isHidden = '';
@@ -36,5 +36,5 @@ const InputSearch = function () {
         onChange={e => dispatch(setSearchWord(e.target.value))}
         className={inputClass}
     />
-};
+});
 export default InputSearch;

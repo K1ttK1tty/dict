@@ -50,8 +50,7 @@ class fileController {
         try {
             const email = req.body.data
             const response = await fileService.getAvatar(email)
-
-            return res.download(response)
+            if (response) return res.download(response)
         } catch (err) {
             next(err)
         }

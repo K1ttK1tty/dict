@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react';
 import cl from './MenuDesk.module.css'
 import Icon1 from './icons/Icon1';
 import Icon2 from './icons/Icon2';
 // import Icon3 from './icons/Icon3';
 // import Icon4 from './icons/Icon4';
 import { Link } from 'react-router-dom';
-const MenuDesk = function () {
+const MenuDesk = memo(function () {
     return (
         <nav>
             <div className={cl.back}>
@@ -41,5 +41,5 @@ const MenuDesk = function () {
             </div>
         </nav>
     )
-};
+});
 export default MenuDesk;

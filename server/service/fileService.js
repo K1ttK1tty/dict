@@ -88,21 +88,21 @@ class fileService {
         })
     }
 
-
+    
     async uploadAvatar(email, avatar) {
         const extension = avatar.name.split('.').pop()
         const filePath = path.resolve(process.env.USER_DATA_PATH, `${email}_content`, `avatar.${extension}`)
+        const [user] = await pool.query(`select id from user where email=?;`, [email])
 
         if (fs.existsSync(filePath)) {
             fs.unlinkSync(filePath)
             await avatar.mv(filePath)
+            await pool.query(`update avatar set avatarName=? where user_id=?;`, [`avatar.${extension}`, user[0].id])
         } else {
 
             await avatar.mv(filePath)
+            await pool.query(`insert into avatar (avatarName,user_id) values(?,?);`, [`avatar.${extension}`, user[0].id])
         }
-        // newPerson[0].id
-        const [user] = await pool.query(`select id from user where email=?;`, [email])
-        await pool.query(`insert into avatar (avatarName,user_id) values(?,?);`, [`avatar.${extension}`,user[0].id])
 
     }
 
@@ -110,7 +110,10 @@ class fileService {
     async getAvatar(email) {
         const [userId] = await pool.query('select id from user where email=?;', [email])
         const [avatarName] = await pool.query('select avatarName from avatar where user_id=?;', [userId[0].id])
-        return path.resolve(process.env.USER_DATA_PATH, `${email}_content`, avatarName[0].avatarName)
+        if (avatarName[0]) {
+            return path.resolve(process.env.USER_DATA_PATH, `${email}_content`, avatarName[0].avatarName)
+
+        }
 
     }
 

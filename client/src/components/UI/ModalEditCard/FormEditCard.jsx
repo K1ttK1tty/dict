@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 // components
 import InputAddCard from '../InputAddCard/InputAddCard';
 import BtnAddCard from '../BtnAddCard/BtnAddCard';
@@ -13,11 +13,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { UpdateCards } from '../../../store/reducers/asyncActions/ActionCreator';
 import { setCards } from '../../../store/reducers/authorization/AuthSlice';
 import { setModal, setEditCard } from '../../../store/reducers/modalRenameCard';
-const FormEditCard = function ({ modalChangeCard }) {
+const FormEditCard = memo(function ({ modalChangeCard }) {
     const dispatch = useDispatch();
     const editCard = useSelector(state => state.modalRenameCard.editCard)
     const { changeCard, cards, selectOptions } = useSelector(state => state.AuthSlice)
-    const email = useSelector(state => state.AuthSlice.user.email)
+    const { email } = useSelector(state => state.AuthSlice.user)
 
     function ChangeCard(e) {
         e.preventDefault();
@@ -58,5 +58,5 @@ const FormEditCard = function ({ modalChangeCard }) {
             <BtnAddCard aria={'change'} onClick={ChangeCard} dinamicclassname={style.btnFormEditCard} children='Change' />
         </form >
     )
-};
+});
 export default FormEditCard;

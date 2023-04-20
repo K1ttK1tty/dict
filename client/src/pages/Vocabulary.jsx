@@ -1,12 +1,12 @@
-import React, { useRef, useState, useEffect, useMemo } from 'react';
+import React, { useRef, useState, useEffect, useMemo, memo } from 'react';
 import { useCards } from '../hooks/useCards';
 // import useScrollbarSize from 'react-scrollbar-size';
 //components
-import MenuVoc from '../components/MenuVoc';
+import MenuVoc from '../components/UI/MenuVoc/MenuVoc';
 import SetCard from '../components/UI/WordCard/SetCard';
 import BtnAddCard from '../components/UI/BtnAddCard/BtnAddCard';
 import MySelect from '../components/UI/MySelect/MySelect';
-import ModalEditCard from '../components/UI/Modal/ModalEditCard';
+import ModalEditCard from '../components/UI/ModalEditCard/ModalEditCard';
 import ModalAddCards from '../components/UI/ModalAddCards/ModalAddCards';
 import RemoveTheme from '../components/RemoveTheme';
 //functions 
@@ -29,10 +29,7 @@ import {
 } from '../store/reducers/ColorPicker';
 import { setToggleWordsOrder } from '../store/reducers/authorization/AuthSlice';
 
-
-import { UploadAvatar } from '../store/reducers/asyncActions/ActionCreator';
-
-const Vocabulary = function () {
+const Vocabulary = memo(function () {
     // const { height, width } = useScrollbarSize();
     // let paramsModal = { overflow: 'auto', paddingRight: '0px' }
     // if (modal || modalCards) paramsModal = { overflow: 'hidden', paddingRight: width };
@@ -226,27 +223,6 @@ const Vocabulary = function () {
     }, [pageTheme]);
 
 
-
-    const email = useSelector(state => state.AuthSlice.user.email);
-    const [files, setFiles] = useState([])
-
-    // console.log(files[0])
-
-    const upload = () => {
-        dispatch(UploadAvatar({ email, avatar: files[0] }))
-    }
-
-    const changeFile = (file) => {
-
-        const extension = file.files[0].name.split('.').pop()
-        if (extension === 'jpg' || extension === 'png') {
-            setFiles(file.files)
-        } else {
-            file.value = ''
-            window.alert('Нужно выбрать файлы с расширением jpg/png')
-        }
-    }
-
     return (
         <div
             onClick={e => removeInput(e, input, chooseTheme, optionState, isUserMenuOpen, dispatch)}
@@ -254,31 +230,25 @@ const Vocabulary = function () {
         // style={paramsModal}
         >
             <MenuVoc />
-            <div className='wordsCount'>Всего слов: {cards.length} </div>
-            <div className='inputOrder'>
-                Алфавитный порядок:
-                <input
-                    defaultChecked={true}
-                    onChange={() => dispatch(setToggleWordsOrder())}
-                    type="checkbox"
-                />
-            </div>
             <ModalEditCard modalChangeCard={modalChangeCard} />
             <ModalAddCards modalAdd={modalAdd} />
             <div className="CardsField">
                 <div className='wrap'>
+                    
+                    <div className='wordsCount'>Всего слов: {cards.length} </div>
+                    <div className='inputOrder'>
+                        Алфавитный порядок:
+                        <input
+                            defaultChecked={true}
+                            onChange={() => dispatch(setToggleWordsOrder())}
+                            type="checkbox"
+                        />
+                    </div>
                     <BtnAddCard
                         onClick={() => modalAddCard(modalAdd, dispatch)}
                         dinamicclassname={btnStyle.btnCreateCard}
                         children='Create new card'
                     />
-
-
-
-                    <input onChange={e => changeFile(e.target)} accept="image/png, image/jpeg" type="file" />
-                    <input onClick={upload} type="submit" />
-                    {/* <img src={avatar} alt="" width='300px' height='300px' /> */}
-
 
 
                     {/* <ColorPicker color={color} setColor={setColor} />
@@ -319,5 +289,5 @@ const Vocabulary = function () {
             </div>
         </div >
     )
-};
+});
 export default Vocabulary;

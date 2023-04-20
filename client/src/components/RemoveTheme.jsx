@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 // components
 import BtnAddCard from './UI/BtnAddCard/BtnAddCard';
 // functions
@@ -9,7 +9,7 @@ import '../styles/Vocabulary.css'
 //redux
 import { useSelector, useDispatch } from 'react-redux';
 
-const RemoveTheme = function () {
+const RemoveTheme = memo(function () {
     const dispatch = useDispatch()
     const {
         selectOptions,
@@ -40,5 +40,5 @@ const RemoveTheme = function () {
             }
         </div>
     )
-};
+});
 export default RemoveTheme;

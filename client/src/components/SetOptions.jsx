@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styles from './UI/MySelect/MySelect.module.css'
 import { useSelector } from 'react-redux';
-const SetOptions = function ({ replaceOption }) {
+const SetOptions = memo(function ({ replaceOption }) {
     const selectOptions = useSelector(state => state.AuthSlice.selectOptions)
     return (
         <div id='options' className={styles.options}>
@@ -11,5 +11,5 @@ const SetOptions = function ({ replaceOption }) {
                 </div>)}
         </div>
     )
-};
+});
 export default SetOptions;

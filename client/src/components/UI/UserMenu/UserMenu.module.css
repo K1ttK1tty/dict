@@ -27,13 +27,15 @@
     width: 75%;
     cursor: pointer;
 }
-.avatar{
+.avatar {
     border-radius: 50%;
     width: 33px;
     height: 33px;
     object-fit: cover;
     cursor: pointer;
+    transition: 0.2s;
 }
+
 .arrow {
     position: relative;
     top: 1px;
@@ -41,7 +43,7 @@
     cursor: pointer;
     transition: 0.15s;
 }
-.arrowActive{
+.arrowActive {
     transform: rotate(180deg);
     transition: 0.15s;
 }
@@ -84,17 +86,60 @@
     padding: 0px 18px;
     font-size: 16px;
 }
-.userMain{
+.userMain {
+    position: relative;
     display: flex;
+    max-height: 46px;
+    max-width: 46px;
+    margin-bottom: 15px;
 }
 
-.userMain .avatar{
+.userMain .avatar {
     width: 44px;
     height: 44px;
     margin-right: 10px;
-    position: relative;
     top: -3px;
+}
 
+.avatarWrapper {
+    position: relative;
+    max-height: 46px;
+    max-width: 46px;
+    margin-right: 4px;
+    cursor: pointer;
+}
+
+.avatarWrapper::after {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.6);
+    content: "";
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    top: 0px;
+    left: 0px;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.1s;
+}
+.avatarWrapper::before {
+    position: absolute;
+    z-index: 1;
+    font-size: 35px;
+    color: white;
+    content: "+";
+    width: 44px;
+    height: 44px;
+    top: -3px;
+    left: 27%;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.1s;
+}
+.avatarWrapper:hover::after,
+.avatarWrapper:hover::before {
+    opacity: 1;
+    visibility: visible;
 }
 
 

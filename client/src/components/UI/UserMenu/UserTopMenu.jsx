@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styles from './UserMenu.module.css'
 // redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setIsUserMenuOpen } from '../../../store/reducers/upMenu';
-const UserTopMenu = function ({ avatar }) {
-    const { isUserMenuOpen } = useSelector(state => state.upMenu)
+const UserTopMenu = memo(function ({ avatar, isUserMenuOpen }) {
     const dispatch = useDispatch()
 
     const wrapperStyles = isUserMenuOpen
@@ -28,5 +27,5 @@ const UserTopMenu = function ({ avatar }) {
             </button>
         </div>
     )
-};
+});
 export default UserTopMenu;

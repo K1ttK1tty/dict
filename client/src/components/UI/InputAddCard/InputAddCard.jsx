@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { memo } from 'react';
 import cl from './inputAddCard.module.css'
-const InputAddCard = function ({ inputValue, placeholder, disabled, style, modalAdd, modalChangeCard, setValue, dinamicclassname, type,}) {
+const InputAddCard = memo(function ({ inputValue, placeholder, disabled, style, modalAdd, modalChangeCard, setValue, dinamicclassname, type, }) {
     const element = modalAdd ? modalAdd : modalChangeCard;
     return (
         <input
@@ -14,5 +14,5 @@ const InputAddCard = function ({ inputValue, placeholder, disabled, style, modal
             onChange={e => setValue(e.target.value)}
         />
     )
-};
+});
 export default InputAddCard;

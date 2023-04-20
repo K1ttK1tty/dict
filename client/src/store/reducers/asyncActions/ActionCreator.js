@@ -138,7 +138,6 @@ export const UploadAvatar = createAsyncThunk(
 export const GetAvatar = createAsyncThunk(
     'GetAvatar',
     async (data, thunkAPI) => {
-        console.log(data)
         const token = localStorage.getItem('token')
         try {
             const response = await fetch('http://localhost:5001/api/getAvatar', {

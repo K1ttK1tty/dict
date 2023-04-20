@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { memo } from 'react';
 import "../../styles/Vocabulary.css";
-const Search = function () {
+const Search = memo(function () {
     return (
         <svg className='iconSearchForMenu' id={2} viewBox="0 0 53.627 53.627" >
             <path d="M53.627,49.385L37.795,33.553C40.423,30.046,42,25.709,42,21C42,9.42,32.58,0,21,0S0,9.42,0,21s9.42,21,21,21
@@ -9,5 +9,5 @@ const Search = function () {
 	            l-1.415,1.415L35.123,36.537C35.278,36.396,35.416,36.238,35.567,36.093z"/>
         </svg>
     )
-};
+});
 export default Search;

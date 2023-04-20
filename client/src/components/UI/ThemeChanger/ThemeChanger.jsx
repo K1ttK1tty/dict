@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 // styles
 import styles from './ThemeChanger.module.css'
 // redux
 import { setPageTheme } from '../../../store/reducers/ColorPicker';
 import { useDispatch } from 'react-redux';
-const ThemeChanger = function () {
+const ThemeChanger = memo(function () {
     const dispatch = useDispatch()
     function changeTheme(elem) {
         elem.target.checked ? dispatch(setPageTheme('dark')) : dispatch(setPageTheme('light'))
@@ -15,5 +15,5 @@ const ThemeChanger = function () {
             <label className={styles.checkboxLabel} htmlFor={styles.checkbox}></label>
         </div>
     )
-};
+});
 export default ThemeChanger;

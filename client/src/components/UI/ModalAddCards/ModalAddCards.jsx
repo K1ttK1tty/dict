@@ -1,51 +1,31 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 // components
 import FormAddCard from './FormAddCard';
-//functions
-import { keyClose } from '../../../functions/keyClose';
-import { removeModal } from '../../../functions/removeModal';
-//styles
-import style from '../Modal/Modal.module.css'
+import Modal from '../Modal/Modal';
 //redux
 import { useSelector, useDispatch } from 'react-redux';
 import { setInputValue } from '../../../store/reducers/modalRenameCard';
 import { setIsModalAddCardActive } from '../../../store/reducers/modalAddCard';
 
-const ModalAddCards = function ({ modalAdd }) {
+const ModalAddCards = memo(function ({ modalAdd }) {
     const dispatch = useDispatch()
-    const isModalAddCardActive = useSelector(state => state.modalAddCard.isModalAddCardActive)
+    const { isModalAddCardActive } = useSelector(state => state.modalAddCard)
 
     useEffect(() => {
         return () => dispatch(setInputValue({ word: '', translate: '', theme: '' }))
     }, [isModalAddCardActive]);
 
-    let vis = isModalAddCardActive
-        ? [style.modal, style.active].join(' ')
-        : [style.modal];
-
 
     return (
-        <div
-            className={vis}
-            onKeyDown={e => keyClose(e, setIsModalAddCardActive, dispatch, setInputValue)}
-            onClick={() => removeModal(setIsModalAddCardActive, dispatch, setInputValue)}
-        >
-            <div onClick={e => (e.stopPropagation())} className={style.modalContent}>
-                <div className={style.modalMarg}>
-                    <div className={style.modalNav}>
-                        <h5 className={style.modalTitle}>Creating card</h5>
-                        <button
-                            onClick={() => removeModal(setIsModalAddCardActive, dispatch, setInputValue)}
-                            className={style.modalClose}
-                            aria-label="close"
-                        >
-                            &times;
-                        </button>
-                    </div>
-                </div>
-                <FormAddCard modalAdd={modalAdd} />
-            </div>
-        </div>
+        <Modal
+            title={'Creating card'}
+            isModal={isModalAddCardActive}
+            setModal={setIsModalAddCardActive}
+            setFields={setInputValue}
+            content={<FormAddCard modalAdd={modalAdd} />}
+            dispatch={dispatch}
+
+        />
     )
-};
+});
 export default ModalAddCards;

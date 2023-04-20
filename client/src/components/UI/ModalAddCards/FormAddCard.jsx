@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 // components
 import InputAddCard from '../InputAddCard/InputAddCard';
 import BtnAddCard from '../BtnAddCard/BtnAddCard';
@@ -10,12 +10,12 @@ import styles from './FormAddCard.module.css'
 //redux
 import { useSelector, useDispatch } from 'react-redux';
 import { setInputValue } from '../../../store/reducers/modalRenameCard';
-const FormAddCard = function ({ modalAdd }) {
+const FormAddCard = memo(function ({ modalAdd }) {
     const dispatch = useDispatch()
     const { cards, user, selectOptions } = useSelector(state => state.AuthSlice)
     const inputValue = useSelector(state => state.modalRenameCard.inputValue)
     return (
-        <form>
+        <form >
             <InputAddCard
                 modalAdd={modalAdd}
                 dinamicclassname={styles.inputFormAddCard}
@@ -44,5 +44,5 @@ const FormAddCard = function ({ modalAdd }) {
             />
         </form>
     )
-};
+});
 export default FormAddCard;

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, memo } from 'react';
 // components
 import ThemeChanger from '../ThemeChanger/ThemeChanger';
 import BtnAddCard from '../BtnAddCard/BtnAddCard';
@@ -10,36 +10,40 @@ import styles from './UserMenu.module.css'
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { Logout } from '../../../store/reducers/asyncActions/ActionCreator';
-const UserMenu = function ({ email, userName, isActivated, avatar }) {
+const UserMenu = memo(function ({ email, userName, isActivated, avatar, setModal, modal }) {
     const dispatch = useDispatch();
     const { isUserMenuOpen } = useSelector(state => state.upMenu)
 
     const menuElement = useRef()
     let isOpenMenu = [styles.content, styles.hidden].join(' ');
 
-    if (isUserMenuOpen) {
-        isOpenMenu = styles.content;
-        setTimeout(() => {
-            menuElement.current.focus()
-        }, 200);
-    }
-
     useEffect(() => {
         dispatch(setIsUserMenuOpen(false))
         return () => dispatch(setIsUserMenuOpen(false))
     }, []);
+
+
+    if (isUserMenuOpen && !modal) {
+        isOpenMenu = styles.content;
+        setTimeout(() => {
+            menuElement.current.focus()
+        }, 150);
+    }
 
     return (
         <div
             onClick={e => e.stopPropagation()}
             onKeyDown={e => keyClose(e, setIsUserMenuOpen, dispatch)}
             className={isOpenMenu}
-            tabIndex="0"
+            tabIndex="1"
             ref={menuElement}
         >
+
             <div className={styles.contentWrapper}>
                 <div className={styles.userMain}>
-                    <img className={styles.avatar} src={avatar} alt="Аватар" />
+                    <div onClick={() => setModal(true)} className={styles.avatarWrapper}>
+                        <img className={styles.avatar} src={avatar} alt="Аватар" />
+                    </div>
                     <div>
                         <div className={styles.userName}>{userName}</div>
                         <div className={styles.email}>{email}</div>
@@ -63,5 +67,5 @@ const UserMenu = function ({ email, userName, isActivated, avatar }) {
 
         </div >
     )
-};
+});
 export default UserMenu;

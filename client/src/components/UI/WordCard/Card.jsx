@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 // components
 import IconRemove from './icons/IconRemove';
 import IconEdit from './icons/IconEdit';
@@ -10,7 +10,7 @@ import styles from './WordCard.module.css'
 //redux
 import { useSelector, useDispatch } from 'react-redux';
 
-const Card = function ({ card, index, modalChangeCard }) {
+const Card = memo(function ({ card, index, modalChangeCard }) {
     const dispatch = useDispatch()
     const { cards, user } = useSelector(state => state.AuthSlice)
 
@@ -30,5 +30,5 @@ const Card = function ({ card, index, modalChangeCard }) {
             ><IconRemove /></div>
         </div>
     )
-};
+});
 export default Card;

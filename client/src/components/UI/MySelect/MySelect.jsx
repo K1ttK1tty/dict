@@ -1,5 +1,5 @@
 // libs
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, memo } from 'react';
 import { CSSTransition } from 'react-transition-group';
 // components
 import SetOptions from '../../SetOptions';
@@ -13,7 +13,7 @@ import {
     setOptionState,
     setChooseTheme
 } from '../../../store/reducers/authorization/AuthSlice';
-const MySelect = function () {
+const MySelect = memo(function () {
     const dispatch = useDispatch();
     const optionName = useSelector(state => state.AuthSlice.optionName)
     const optionState = useSelector(state => state.AuthSlice.optionState)
@@ -74,5 +74,5 @@ const MySelect = function () {
             </CSSTransition>
         </div>
     )
-};
+});
 export default MySelect;
