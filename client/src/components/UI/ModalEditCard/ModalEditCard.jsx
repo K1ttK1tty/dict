@@ -11,7 +11,7 @@ const ModalEditCard = memo(function ({ modalChangeCard }) {
 
     return (
         <Modal
-            title={'Edit card'}
+            title={'Редактирование'}
             isModal={isModalActive}
             setModal={setModal}
             setFields={setEditCard}

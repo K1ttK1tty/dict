@@ -1,5 +1,5 @@
-import { setCards, setID } from "../store/reducers/authorization/AuthSlice"
-import { UpdateCards } from "../store/reducers/asyncActions/ActionCreator"
+import { setCards, setID } from "../store/reducers/authorization/Authorization/AuthSlice"
+import { UpdateCards } from "../store/reducers/authorization/Authorization/ActionCreator"
 export const removeCard = (cardClickID, Cards, email, dispatch) => {
     const cards = [...Cards.filter(card => cardClickID !== card.id)]
     dispatch(UpdateCards({ email, cards }))

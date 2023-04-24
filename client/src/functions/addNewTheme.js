@@ -1,5 +1,5 @@
-import { UpdateThemes } from "../store/reducers/asyncActions/ActionCreator";
-import { setSelectOptions } from "../store/reducers/authorization/AuthSlice"
+import { UpdateThemes } from "../store/reducers/authorization/Authorization/ActionCreator";
+import { setSelectOptions } from "../store/reducers/authorization/Authorization/AuthSlice"
 import { isNotEmpty } from "./isNotEmpty"
 export const addNewTheme = (selectOptions, newTheme, email, dispatch) => {
 

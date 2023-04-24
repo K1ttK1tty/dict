@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer')
-require('dotenv').config()
+// require('dotenv').config()
 class mailService {
 
     constructor() {
@@ -24,6 +24,23 @@ class mailService {
             html: `
             <div>
                 <h1>Для активации перейдите по ссылке</h1>
+                <a href='${link}'>${link}</a>
+            </div>
+            `
+        })
+    }
+
+
+    async sendResetPassword(to,link){
+        await this.transporter.sendMail({
+            from: process.env.SMTP_USER,
+            to,
+            subject: 'Смена пароля на ' + process.env.API_URL,
+            test: '',
+            html: `
+            <div>
+                <h1>Для смены пароля перейдите по ссылке, далее вам нужно будет ввести новый пароль</h1>
+                <p>Если вы получили это письмо по ошибке, то просто проигнорируйте его.</p>
                 <a href='${link}'>${link}</a>
             </div>
             `

@@ -10,8 +10,8 @@ import { removeModal } from '../../../functions/removeModal';
 import style from './Modal.module.css'
 // redux
 import { useSelector, useDispatch } from 'react-redux';
-import { UpdateCards } from '../../../store/reducers/asyncActions/ActionCreator';
-import { setCards } from '../../../store/reducers/authorization/AuthSlice';
+import { UpdateCards } from '../../../store/reducers/authorization/Authorization/ActionCreator';
+import { setCards } from '../../../store/reducers/authorization/Authorization/AuthSlice';
 import { setModal, setEditCard } from '../../../store/reducers/modalRenameCard';
 const FormEditCard = memo(function ({ modalChangeCard }) {
     const dispatch = useDispatch();
@@ -55,7 +55,13 @@ const FormEditCard = memo(function ({ modalChangeCard }) {
                     dinamicclassname={style.inputFormEditCard}
                 />
             </div>
-            <BtnAddCard aria={'change'} onClick={ChangeCard} dinamicclassname={style.btnFormEditCard} children='Change' />
+            <BtnAddCard
+                aria={'Изменить'}
+                onClick={ChangeCard}
+                dinamicclassname={style.btnFormEditCard}
+                children='Изменить'
+            />
+            
         </form >
     )
 });

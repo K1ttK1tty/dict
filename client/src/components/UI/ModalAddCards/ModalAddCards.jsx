@@ -18,7 +18,7 @@ const ModalAddCards = memo(function ({ modalAdd }) {
 
     return (
         <Modal
-            title={'Creating card'}
+            title={'Создание карточки'}
             isModal={isModalAddCardActive}
             setModal={setIsModalAddCardActive}
             setFields={setInputValue}

@@ -1,13 +1,20 @@
+// libs
 import { useEffect } from 'react';
-import './styles/App.css';
+import { Routes, Route } from 'react-router-dom';
+// components
 import MenuDesk from './components/UI/MenuDesk/MenuDesk.jsx'
-import { BrowserRouter } from 'react-router-dom';
 import AppRouter from './components/AppRouter';
+import Authorization from './components/UI/Authorization/Authorization';
+import ChangePassword from './components/UI/Authorization/ResetPassword/ChangePassword';
+import SetNewPassword from './components/UI/Authorization/SetNewPassword/SetNewPassword.jsx';
+// functions
 import { setTheme } from './functions/setTheme';
+// styles
+import './styles/App.css';
+// redux
 import { useSelector, useDispatch } from 'react-redux';
 // authorization
-import Authorization from './components/UI/Authorization/Authorization';
-import { CheckAuth, GetData,GetAvatar } from '../src/store/reducers/asyncActions/ActionCreator'
+import { CheckAuth, GetData, GetAvatar } from './store/reducers/authorization/Authorization/ActionCreator.js'
 function App() {
     const dispatch = useDispatch()
     const pageTheme = useSelector(state => state.ColorPicker.pageTheme)
@@ -15,7 +22,7 @@ function App() {
     const email = useSelector(state => state.AuthSlice.user.email)
 
     setTheme(pageTheme)
-    
+
     useEffect(() => {
         if (localStorage.getItem('token')) dispatch(CheckAuth())
     }, []);
@@ -28,14 +35,21 @@ function App() {
     }, [isAuth]);
 
     if (!isAuth) {
-        return <Authorization />
+
+        return (
+            <Routes>
+                <Route path='/forgotPassword' element={<ChangePassword />} />
+                <Route path='/setNewPassword' element={<SetNewPassword />} />
+                <Route path='*' element={<Authorization />} />
+            </Routes>
+        )
     }
 
     return (
-        <BrowserRouter>
+        <>
             <MenuDesk />
             <AppRouter />
-        </BrowserRouter>
+        </>
     );
 }
 export default App;

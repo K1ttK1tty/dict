@@ -108,5 +108,31 @@ class userService {
             }
         }
     }
+
+
+    async resetPassword(email) {
+
+        const [user] = await pool.query(`select * from user where email=?`, [email])
+        // console.log(user[0].id)
+        if (!user[0].email) {
+            throw ApiError.EmailNotFound()
+        }
+        const activationLink = uuid.v4() // уникальная ссылка для активации по почте
+        await mailService.sendResetPassword(email, `${process.env.API_URL}/api/setNewPassword/${activationLink}?id=${user[0].id}`)
+
+    }
+
+
+    async newPassword(id, password) {
+
+        const [user] = await pool.query('select * from user where id=?', [id])
+
+        if (!user[0].id) {
+            throw ApiError.UserNotFound()
+        }
+        const hashPassword = await bcrypt.hash(password, 3); // для хеширования пароля
+        await pool.query('update user set password=? where id=?', [hashPassword, id])
+
+    }
 }
 module.exports = new userService();

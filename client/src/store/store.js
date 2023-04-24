@@ -6,7 +6,7 @@ import modalRenameCard from "./reducers/modalRenameCard";
 import modalAddCard from "./reducers/modalAddCard";
 import GamesSlice from "./reducers/GamesSlice";
 import ColorPicker from "./reducers/ColorPicker";
-import AuthSlice from "./reducers/authorization/AuthSlice";
+import AuthSlice from "./reducers/authorization/Authorization/AuthSlice";
 
 const rootReducer = combineReducers({
     upMenu,

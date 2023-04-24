@@ -1,11 +1,11 @@
-import { UpdateThemes } from "../store/reducers/asyncActions/ActionCreator";
+import { UpdateThemes } from "../store/reducers/authorization/Authorization/ActionCreator";
 
 import {
     setSelectOptions,
     setChooseTheme,
     setOptionName,
     setOptionState
-} from "../store/reducers/authorization/AuthSlice"
+} from "../store/reducers/authorization/Authorization/AuthSlice"
 
 export const deleteAllEmptyThemes = (cards, allThemes, optionState, email, dispatch) => {
     const themes = []
@@ -22,7 +22,7 @@ export const deleteAllEmptyThemes = (cards, allThemes, optionState, email, dispa
     dispatch(setSelectOptions(themes))
     dispatch(UpdateThemes({ email, themes }))
     dispatch(setChooseTheme(''))
-    dispatch(setOptionName('Choose a theme'))
+    dispatch(setOptionName('Выбрать тему'))
     dispatch(setOptionState({ ...optionState, removeMark: false }))
 
 }

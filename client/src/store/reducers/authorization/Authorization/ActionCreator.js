@@ -1,6 +1,6 @@
-import $api from "../../../api";
+import $api from "../../../../api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { API_URL } from "../../../api";
+import { API_URL } from "../../../../api";
 import axios from "axios";
 
 export const Registration = createAsyncThunk(
@@ -116,14 +116,9 @@ export const UploadAvatar = createAsyncThunk(
 
         try {
             const { email, avatar } = data;
-            // console.log(avatar)
             const formData = new FormData()
             formData.append('avatar', avatar)
             const response = await $api.post(`/uploadAvatar?email=${email}`, formData)
-            // const newData = JSON.parse(JSON.stringify(response.data))
-            // const blob = await response.blob();
-            // const url = window.URL.createObjectURL(blob)
-
 
             return response.data
         } catch (err) {
@@ -147,7 +142,7 @@ export const GetAvatar = createAsyncThunk(
                     Authorization: 'Bearer ' + token,
                     withCredentials: true
                 },
-                body: JSON.stringify({data})
+                body: JSON.stringify({ data })
             })
             const blob = await response.blob()
             const url = window.URL.createObjectURL(blob)
@@ -160,4 +155,20 @@ export const GetAvatar = createAsyncThunk(
         }
     }
 
+)
+
+export const RemoveAvatar = createAsyncThunk(
+    'RemoveAvatar',
+    async (data, thunkAPI) => {
+        try {
+            const { email } = data;
+            const response = await $api.post(`/removeAvatar`, { email })
+
+            return response.data
+        } catch (err) {
+            console.log(err)
+            console.log(err?.response?.data?.message)
+            return thunkAPI.rejectWithValue('Произошла ошибка при запросе на сервер :(')
+        }
+    }
 )

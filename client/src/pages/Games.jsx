@@ -43,16 +43,16 @@ const Games = function () {
     return (
         <div className='gameWrap'>
             <div className="gameCardsField">
-                <div className='title'>Self test</div>
+                <div className='title'>Самопроверка</div>
                 <div className='gameBody'>
                     {cards.length ?
                         <div>
 
                             <form className='formTitle'>
-                                Enter number of words: <InputRequire />
+                                Введите количество слов: <InputRequire />
                                 <BtnAddCard
                                     onClick={e => generateQuizWords(e, inputReq, dispatch)}
-                                    children={'Generate'}
+                                    children={'Сгенерировать'}
                                 />
                             </form>
 
@@ -62,7 +62,7 @@ const Games = function () {
                                     <BtnAddCard
                                         dinamicclassname={'btnGamesCheck'}
                                         onClick={e => validateQuiz(e, array, setCardsGame, dispatch)}
-                                        children={'Check'}
+                                        children={'Проверить'}
                                     />
                                 </form>
                                 : ''}

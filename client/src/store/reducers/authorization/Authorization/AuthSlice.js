@@ -9,13 +9,13 @@ import {
     UpdateThemes,
     UploadAvatar,
     GetAvatar
-} from '../asyncActions/ActionCreator'
+} from './ActionCreator'
 import { reducers } from "./reducers";
 
 const initialState = {
     // authorization
     user: {},
-    avatar:'',
+    avatar: '',
     isAuth: false,
     isLoading: false,
     error: '',
@@ -29,7 +29,7 @@ const initialState = {
     },
     toggleWordsOrder: true,
     // select
-    optionName: 'Choose a theme',
+    optionName: 'Выбрать тему',
     optionState: { open: false, removeMark: false },
     selectOptions: [],
     chooseTheme: ''
@@ -37,9 +37,8 @@ const initialState = {
 export const AuthSlice = createSlice({
     name: 'AuthSlice',
     initialState,
-
     reducers: reducers,
-  
+
     extraReducers(builder) {
         //registration
         builder.addCase(Registration.fulfilled, (state, action) => {
@@ -112,12 +111,6 @@ export const AuthSlice = createSlice({
             state.avatar = action.payload
         })
 
-
-
-        // const blob = await response.blob()
-        // const url = window.URL.createObjectURL(blob)
-        // console.log(url)
-
     }
 })
 export default AuthSlice.reducer
@@ -130,5 +123,6 @@ export const {
     setOptionName,
     setOptionState,
     setSelectOptions,
-    setChooseTheme
+    setChooseTheme,
+    setAvatar,
 } = AuthSlice.actions

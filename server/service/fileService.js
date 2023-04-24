@@ -88,7 +88,7 @@ class fileService {
         })
     }
 
-    
+
     async uploadAvatar(email, avatar) {
         const extension = avatar.name.split('.').pop()
         const filePath = path.resolve(process.env.USER_DATA_PATH, `${email}_content`, `avatar.${extension}`)
@@ -115,6 +115,17 @@ class fileService {
 
         }
 
+    }
+
+    async removeAvatar(email) {
+        const [userId] = await pool.query('select id from user where email=?;', [email])
+        const [avatarName] = await pool.query('select * from avatar where user_id=?;', [userId[0].id])
+        await pool.query('delete from avatar where user_id=?;', [userId[0].id])
+        if (avatarName[0]) {
+            const filePath = path.resolve(process.env.USER_DATA_PATH, `${email}_content`, `${avatarName[0].avatarName}`)
+            fs.unlinkSync(filePath)
+
+        }
     }
 
 }

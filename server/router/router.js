@@ -17,6 +17,10 @@ router.post('/login', userController.login);
 router.post('/logout', userController.logout);
 router.get('/activate/:link', userController.activate);
 router.get('/refresh', userController.refresh);
+// reset password
+router.post('/resetPassword', userController.resetPassword)
+router.get('/setNewPassword/:link',userController.toChangePassword)
+router.post('/refreshPassword', userController.setNewPassword)
 // work with files
 router.post('/getData', authMiddleware, fileController.getContent);
 router.post('/updateCards', authMiddleware, fileController.updateCards);
@@ -24,6 +28,7 @@ router.post('/updateTheme', authMiddleware, fileController.updateThemes);
 // avatar
 router.post('/uploadAvatar', authMiddleware, fileController.uploadAvatar)
 router.post('/getAvatar', authMiddleware, fileController.getAvatar)
+router.post('/removeAvatar', authMiddleware, fileController.removeAvatar)
 
 
 module.exports = router 

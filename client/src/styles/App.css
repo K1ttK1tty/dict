@@ -9,16 +9,19 @@ html {
 html,
 body {
     height: 100%;
+    overflow-x: hidden;
 }
 body {
-    scroll-behavior: smooth ;
+    scroll-behavior: smooth;
 }
 * {
     margin: 0px;
     padding: 0px;
-    font-family: "Heebo", sans-serif;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
 }
-
+a:visited {
+    color: inherit;
+}
 .navbar {
     height: 80px;
     width: 100vw;

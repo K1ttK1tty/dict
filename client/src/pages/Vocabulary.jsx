@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect, useMemo, memo } from 'react';
+// hooks
 import { useCards } from '../hooks/useCards';
-// import useScrollbarSize from 'react-scrollbar-size';
+
 //components
 import MenuVoc from '../components/UI/MenuVoc/MenuVoc';
 import SetCard from '../components/UI/WordCard/SetCard';
@@ -27,13 +28,9 @@ import {
     setCurrentColor,
     setColorsBeforePaint
 } from '../store/reducers/ColorPicker';
-import { setToggleWordsOrder } from '../store/reducers/authorization/AuthSlice';
+import { setToggleWordsOrder } from '../store/reducers/authorization/Authorization/AuthSlice';
 
 const Vocabulary = memo(function () {
-    // const { height, width } = useScrollbarSize();
-    // let paramsModal = { overflow: 'auto', paddingRight: '0px' }
-    // if (modal || modalCards) paramsModal = { overflow: 'hidden', paddingRight: width };
-
     // authorization
     const { toggleWordsOrder, cards } = useSelector(state => state.AuthSlice);
     //redux  
@@ -57,7 +54,6 @@ const Vocabulary = memo(function () {
     let arrOfCurrentElements = useMemo(() => {
         return []
     }, [colorModeOn])
-    // console.log(cards)
 
     function click(e) {
         const element = e.target;
@@ -227,7 +223,6 @@ const Vocabulary = memo(function () {
         <div
             onClick={e => removeInput(e, input, chooseTheme, optionState, isUserMenuOpen, dispatch)}
             className={'searchWrapper'}
-        // style={paramsModal}
         >
             <MenuVoc />
             <ModalEditCard modalChangeCard={modalChangeCard} />
@@ -247,7 +242,7 @@ const Vocabulary = memo(function () {
                     <BtnAddCard
                         onClick={() => modalAddCard(modalAdd, dispatch)}
                         dinamicclassname={btnStyle.btnCreateCard}
-                        children='Create new card'
+                        children='Создать карточку'
                     />
 
 

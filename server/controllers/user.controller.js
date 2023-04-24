@@ -2,6 +2,7 @@ const userService = require('../service/userService.js')
 const { validationResult } = require('express-validator')
 const ApiError = require('../exeptions/apiError.js')
 const fileService = require('../service/fileService.js')
+const url = require('url')
 
 class userController {
 
@@ -75,6 +76,37 @@ class userController {
             const userData = await userService.refresh(refreshToken)
             res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
             return res.json(userData)
+        } catch (err) {
+            next(err)
+        }
+    }
+
+    async resetPassword(req, res, next) {
+        try {
+            const { email } = req.body
+            const response = await userService.resetPassword(email)
+            // return res.json(userData)
+        } catch (err) {
+            next(err)
+        }
+    }
+
+    async toChangePassword(req, res, next) {
+        const userID = req.query.id
+        try {
+            return res.redirect(process.env.CHANGE_PASSWD_URL + '?id=' + userID)
+        } catch (err) {
+            next(err)
+        }
+    }
+
+
+    async setNewPassword(req, res, next) {
+        const { id, password } = req.body
+        try {
+
+            const response = await userService.newPassword(id, password);
+            return res.status(200)
         } catch (err) {
             next(err)
         }

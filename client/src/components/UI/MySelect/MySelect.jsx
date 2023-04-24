@@ -12,7 +12,7 @@ import {
     setOptionName,
     setOptionState,
     setChooseTheme
-} from '../../../store/reducers/authorization/AuthSlice';
+} from '../../../store/reducers/authorization/Authorization/AuthSlice';
 const MySelect = memo(function () {
     const dispatch = useDispatch();
     const optionName = useSelector(state => state.AuthSlice.optionName)
@@ -25,7 +25,7 @@ const MySelect = memo(function () {
         dispatch(setOptionState({ open: false, removeMark: true })) //
     }
     function removeTheme() {
-        dispatch(setOptionName('Choose a theme'))
+        dispatch(setOptionName('Выбрать тему'))
         dispatch(setChooseTheme(''))
         dispatch(setOptionState({ open: false, removeMark: false })) //
     }

@@ -1,8 +1,8 @@
-import { setCards } from "../store/reducers/authorization/AuthSlice"
+import { setCards } from "../store/reducers/authorization/Authorization/AuthSlice"
 import { setIsModalAddCardActive } from "../store/reducers/modalAddCard"
 import { setInputValue } from "../store/reducers/modalRenameCard"
 import { addNewTheme } from "./addNewTheme"
-import { UpdateCards } from "../store/reducers/asyncActions/ActionCreator"
+import { UpdateCards } from "../store/reducers/authorization/Authorization/ActionCreator"
 import { isNotEmpty } from "./isNotEmpty"
 export const addNewCard = (e, inputValue, Cards, selectOptions, email, dispatch) => {
     e.preventDefault()

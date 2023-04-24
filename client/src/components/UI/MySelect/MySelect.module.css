@@ -30,8 +30,9 @@
     justify-content: center;
     align-items: center;
 }
-.selectVlue {
-    text-align: center;
+.selectValue {
+    font-size: 17px;
+    color: rgba(0, 0, 0, 0.9);
 }
 .optionsOption {
     text-align: center;

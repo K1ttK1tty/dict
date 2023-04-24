@@ -36,11 +36,11 @@ const FormAddCard = memo(function ({ modalAdd }) {
                 setValue={e => dispatch(setInputValue({ ...inputValue, theme: e }))}
             />
             <BtnAddCard
-                aria={'Create'}
+                aria={'Создать'}
                 dinamicclassname={styles.btnFormAddCard}
                 onClick={e => addNewCard(e, inputValue, cards, selectOptions, user.email, dispatch)}
                 type='submit'
-                children='Create'
+                children='Создать'
             />
         </form>
     )

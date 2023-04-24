@@ -7,7 +7,7 @@
     background: rgb(226, 226, 226);
 }
 .content {
-    height: 520px;
+    height: 510px;
     min-width: 300px;
     width: 80%;
     max-width: 480px;
@@ -34,6 +34,7 @@
 }
 .title {
     margin-bottom: 30px;
+    font-size: 28px;
 }
 .changeActions {
     display: flex;
@@ -64,7 +65,7 @@ input:-webkit-autofill {
 }
 .iconStyle {
     position: absolute;
-    top: 27px;
+    top: 23px;
     right: 25px;
     cursor: pointer;
 }
@@ -76,6 +77,7 @@ input:-webkit-autofill {
     border: none;
     background: rgb(136, 214, 47);
     transition: 0.15s;
+    margin-bottom: 18px;
 }
 .button:hover {
     background: rgb(124, 196, 43);
@@ -90,7 +92,6 @@ input:-webkit-autofill {
     font-size: 16px;
     height: 46px;
     padding: 10px 20px;
-
     border: none;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -100,4 +101,26 @@ input:-webkit-autofill {
 }
 .buttonSwitcherActive {
     background: rgb(136, 214, 47);
+}
+
+.forgotPasswd{
+    font-size: 17px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.forgotPasswd:hover{
+    color: rgb(89, 145, 25);
+}
+
+.setPasswdContent {
+    height: 400px;
+    min-width: 300px;
+    width: 75%;
+    max-width: 450px;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 20px ;
+    padding-top: 0px;
+    border-radius: 8px;
+    position: relative;
 }

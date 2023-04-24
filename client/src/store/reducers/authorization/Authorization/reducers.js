@@ -5,6 +5,7 @@ export const reducers = {
     },
     //////////////
 
+
     // cards
     setCards(state, action) {
         state.cards = action.payload
@@ -34,8 +35,9 @@ export const reducers = {
         state.chooseTheme = action.payload
     },
     // avatar
-    setAvatar(state,action){
+    setAvatar(state, action) {
         state.avatar = action.payload
     }
+
 
 }

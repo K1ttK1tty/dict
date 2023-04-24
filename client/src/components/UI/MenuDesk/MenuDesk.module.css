@@ -23,7 +23,6 @@ nav {
     height: 100%;
     width: 70px;
     padding: 28px 20px;
-    font-family: "Heebo", sans-serif;
     transition: var(--transition02s);
     z-index: 50;
     box-shadow: var(--nav-menu-shadow);

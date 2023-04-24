@@ -1,4 +1,4 @@
-import React, { useState, useRef, memo } from 'react';
+import React, { useState, memo } from 'react';
 // components
 import InputSearch from '../InputSearch/InputSearch';
 import UserTopMenu from '../UserMenu/UserTopMenu';
@@ -17,7 +17,6 @@ const MenuVoc = memo(function () {
     const { input, isUserMenuOpen } = useSelector(state => state.upMenu)
     const { user, isActivated, avatar } = useSelector(state => state.AuthSlice)
 
-    const menuElement = useRef()
     const [modal, setModal] = useState(false);
     const imgSource = avatar ? avatar : defaultAvatar
 

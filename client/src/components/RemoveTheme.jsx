@@ -27,13 +27,11 @@ const RemoveTheme = memo(function () {
                     <BtnAddCard
                         noClick={'noClick'}
                         onClick={() => deleteAllEmptyThemes(cards, selectOptions, optionState, user.email, dispatch)}
-                        // style={styleRemoveTheme}
                         children='Удалить все пустые темы'
                     />
                     <BtnAddCard
                         noClick={'noClick'}
                         onClick={() => removeSelectTheme(selectOptions, optionState, chooseTheme, user.email, dispatch)}
-                        // style={styleRemoveTheme}
                         children='Удалить эту тему'
                     />
                 </div>

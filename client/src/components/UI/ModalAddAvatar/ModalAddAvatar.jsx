@@ -1,19 +1,19 @@
-import React, { useState, memo } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 // components
 import Modal from '../Modal/Modal';
 import AddAvatarContent from './AddAvatarContent';
 // redux
 import { useSelector, useDispatch } from 'react-redux';
-import { UploadAvatar, GetAvatar } from '../../../store/reducers/asyncActions/ActionCreator';
+import { UploadAvatar, GetAvatar } from '../../../store/reducers/authorization/Authorization/ActionCreator';
 const ModalAddAvatar = memo(function ({ isModal, setModal }) {
     const dispatch = useDispatch();
-    const email = useSelector(state => state.AuthSlice.user.email);
+    const { email } = useSelector(state => state.AuthSlice.user);
     const [files, setFiles] = useState([])
 
     const upload = () => {
         if (!files[0]) {
             window.alert('Добавьте файл')
-            return ;
+            return;
         }
         dispatch(UploadAvatar({ email, avatar: files[0] }))
         setModal(false)
@@ -34,6 +34,12 @@ const ModalAddAvatar = memo(function ({ isModal, setModal }) {
         }
     }
 
+    useEffect(() => {
+        if (!isModal) setFiles([])
+
+        return () => setFiles([])
+    }, [isModal]);
+
     return (
         <Modal
             title={'Загрузка нового аватара'}
@@ -42,12 +48,15 @@ const ModalAddAvatar = memo(function ({ isModal, setModal }) {
             content={
                 <AddAvatarContent
                     changeFile={changeFile}
+                    files={files}
                     upload={upload}
+                    setFiles={setFiles}
+                    email={email}
+                    dispatch={dispatch}
                 />
             }
 
         />
-
 
     )
 });

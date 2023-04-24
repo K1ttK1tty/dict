@@ -1,8 +1,8 @@
 .btnAddCard {
     background-color: var(--btn-color);
     padding: 11px;
-    font-size: 16px;
-    color: black;
+    font-size: 17px;
+    color: rgba(0, 0, 0, 0.9);
     font-weight: 500;
     cursor: pointer;
     transition: var(--transition-theme);

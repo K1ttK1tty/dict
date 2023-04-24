@@ -1,5 +1,5 @@
 import { setSearchWord, setInput, setIsUserMenuOpen } from "../store/reducers/upMenu"
-import { setOptionState } from "../store/reducers/authorization/AuthSlice"
+import { setOptionState } from "../store/reducers/authorization/Authorization/AuthSlice"
 import cl from '../components/UI/BtnAddCard/BtnAddCard.module.css';
 export const removeInput = (elem, input, chooseTheme, optionState, isUserMenuOpen, dispatch) => {
     let a = false;

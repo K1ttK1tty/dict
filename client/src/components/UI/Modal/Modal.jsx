@@ -10,7 +10,7 @@ const Modal = memo(function ({ title, content, isModal, setModal, setFields, dis
         ? [style.modal, style.active].join(' ')
         : style.modal;
 
-
+    const isAvatarModal = 'Загрузка нового аватара'
     return (
         <div
             tabIndex={'1'}
@@ -25,13 +25,13 @@ const Modal = memo(function ({ title, content, isModal, setModal, setFields, dis
                         <button
                             onClick={() => removeModal(setModal, dispatch, setFields)}
                             className={style.modalClose}
-                            aria-label="close"
+                            aria-label="закрыть"
                         >
                             &times;
                         </button>
                     </div>
+                    {title == isAvatarModal && <hr className={style.hr} />}
                 </div>
-
                 {content}
 
             </div>

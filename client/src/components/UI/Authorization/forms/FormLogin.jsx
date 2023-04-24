@@ -1,10 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 // components
 import InputAddCard from '../../InputAddCard/InputAddCard';
 import BtnAddCard from '../../BtnAddCard/BtnAddCard';
-// icons
-import IconShow from './../icons/IconShow';
-import IconHide from './../icons/IconHide';
+import ShowIcon from './Icons/ShowIcon';
 // styles
 import styles from '../Authorization.module.css'
 import inputStyle from '../../ModalAddCards/FormAddCard.module.css'
@@ -29,6 +28,7 @@ const FormLogin = function
                     dinamicclassname={[inputStyle.inputFormAddCard, styles.input].join(' ')}
                     inputValue={email}
                     setValue={e => setEmail(e)}
+                    type='email'
                 />
             </label>
             <label className={styles.passwordLabel}> password
@@ -38,19 +38,11 @@ const FormLogin = function
                     inputValue={password}
                     setValue={e => setPassword(e)}
                 />
-
-                {showPassword
-                    ? <IconHide
-                        setShowPassword={setShowPassword}
-                        style={styles.iconStyle}
-                    />
-
-                    : < IconShow
-                        setShowPassword={setShowPassword}
-                        style={styles.iconStyle}
-                    />
-                }
-
+                <ShowIcon
+                    showPassword={showPassword}
+                    setShowPassword={setShowPassword}
+                    styles={styles}
+                />
             </label>
 
             <BtnAddCard
@@ -59,7 +51,10 @@ const FormLogin = function
                 children='Вход'
                 onClick={action}
             />
-            <div>Забыли пароль?</div>
+
+            <Link to="/forgotPassword">
+                <p className={styles.forgotPasswd}>Забыли пароль?</p>
+            </Link>
 
         </form>
     )

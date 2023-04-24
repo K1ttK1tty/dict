@@ -9,7 +9,7 @@ import { keyClose } from '../../../functions/keyClose';
 import styles from './UserMenu.module.css'
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { Logout } from '../../../store/reducers/asyncActions/ActionCreator';
+import { Logout } from '../../../store/reducers/authorization/Authorization/ActionCreator';
 const UserMenu = memo(function ({ email, userName, isActivated, avatar, setModal, modal }) {
     const dispatch = useDispatch();
     const { isUserMenuOpen } = useSelector(state => state.upMenu)

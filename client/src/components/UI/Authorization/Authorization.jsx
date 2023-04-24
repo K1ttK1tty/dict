@@ -1,22 +1,24 @@
-import React, { useState } from 'react';
+// libs
+import React, { useState, memo } from 'react';
+import { Routes, Route } from 'react-router-dom';
 // components
 import FormLogin from './forms/FormLogin';
 import FormRegistration from './forms/FormRegistration';
+import ChangePassword from './ResetPassword/ChangePassword';
 // styles
 import styles from './Authorization.module.css'
 // redux
-import { Registration, Login } from '../../../store/reducers/asyncActions/ActionCreator'
 import { useDispatch } from 'react-redux';
-import { setIsAuth } from '../../../store/reducers/authorization/AuthSlice';
-const Authorization = function () {
+import { Registration,Login } from '../../../store/reducers/authorization/Authorization/ActionCreator';
+// import { Registration, Login } from '../../../store/reducers/authorization/Authorization/ActionCreator'
+import { setIsAuth } from '../../../store/reducers/authorization//Authorization/AuthSlice';
+const Authorization = memo(function () {
     const [userName, setUserName] = useState('')
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLogin, setIsLogin] = useState(true)
     const [showPassword, setShowPassword] = useState(false)
-
     const dispatch = useDispatch();
-
 
     const loginRes = async (e) => {
         e.preventDefault();
@@ -26,10 +28,8 @@ const Authorization = function () {
             return;
         }
         //////////////////////
-
         dispatch(Login({ email, password }))
     }
-
 
     const regRes = async (e) => {
         e.preventDefault()
@@ -75,8 +75,11 @@ const Authorization = function () {
                     isLogin={isLogin}
                 />
 
+                <Routes>
+                    <Route path='/forgotPassword' element={<ChangePassword />} />
+                </Routes>
             </div>
         </div>
     )
-};
+});
 export default Authorization;

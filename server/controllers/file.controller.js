@@ -55,6 +55,14 @@ class fileController {
             next(err)
         }
     }
+    async removeAvatar(req, res, next) {
+        try {
+            const email = req.body.email
+            await fileService.removeAvatar(email)
+        } catch (err) {
+            next(err)
+        }
+    }
 
 }
 
