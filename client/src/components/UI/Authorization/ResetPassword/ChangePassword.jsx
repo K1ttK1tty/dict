@@ -9,7 +9,6 @@ import inputStyle from '../../ModalAddCards/FormAddCard.module.css'
 import styles from './ResetPassword.module.css'
 // redux
 import { useDispatch } from 'react-redux';
-import { setEmail } from '../../../../store/reducers/authorization/Authorization/ActionCreator';
 import { SendResetPassword } from '../../../../store/reducers/authorization/ChangePassword/Actions';
 const ChangePassword = memo(function ({ }) {
     const dispatch = useDispatch();
@@ -42,7 +41,6 @@ const ChangePassword = memo(function ({ }) {
                             inputValue={email}
                             setValue={e => setEmail(e)}
                         />
-
                     </label>
 
                     <BtnAddCard

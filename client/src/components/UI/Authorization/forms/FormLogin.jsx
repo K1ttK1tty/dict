@@ -25,10 +25,10 @@ const FormLogin = function
             <h1 className={styles.title}>Вход</h1>
             <label> email
                 <InputAddCard
+                    type='email'
                     dinamicclassname={[inputStyle.inputFormAddCard, styles.input].join(' ')}
                     inputValue={email}
                     setValue={e => setEmail(e)}
-                    type='email'
                 />
             </label>
             <label className={styles.passwordLabel}> password

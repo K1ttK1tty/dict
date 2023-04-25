@@ -8,7 +8,7 @@ const fileController = require('../controllers/file.controller.js')
 const { body } = require('express-validator')
 const authMiddleware = require('../middlewares/authMiddleware.js') // еще одна "валидация" токена
 
-
+// authorization
 router.post('/registration',
     body('email').isEmail(),
     body('password').isLength({ min: 4, max: 32 }),

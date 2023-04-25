@@ -26,14 +26,12 @@ const SetNewPassword = function () {
         dispatch(refreshPassword({id:userID, password}))
     }
 
-
     return (
         <div className={stylesAuth.back}>
 
             <div className={[stylesAuth.content, stylesAuth.setPasswdContent].join(' ')}>
                 <form className={stylesAuth.form} >
                     <h1 className={styles.title}>Введите новый пароль</h1>
-                    {/* <p className={styles.info}>На почту придет письмо с инструкцией по смене пароля*</p> */}
 
                     <label className={stylesAuth.passwordLabel}> PASSWORD
                         <InputAddCard
@@ -55,8 +53,6 @@ const SetNewPassword = function () {
                         children='Отправить'
                         onClick={sendNewPassword}
                     />
-
-
 
                 </form>
             </div>

@@ -10,6 +10,7 @@ import {
     UploadAvatar,
     GetAvatar
 } from './ActionCreator'
+import { SendResetPassword, refreshPassword } from "../ChangePassword/Actions";
 import { reducers } from "./reducers";
 
 const initialState = {
@@ -18,7 +19,6 @@ const initialState = {
     avatar: '',
     isAuth: false,
     isLoading: false,
-    error: '',
     updateError: '',
     // cards
     cards: [],
@@ -32,7 +32,9 @@ const initialState = {
     optionName: 'Выбрать тему',
     optionState: { open: false, removeMark: false },
     selectOptions: [],
-    chooseTheme: ''
+    chooseTheme: '',
+    // servers response
+    serverMessage: '',
 }
 export const AuthSlice = createSlice({
     name: 'AuthSlice',
@@ -46,12 +48,14 @@ export const AuthSlice = createSlice({
             // state.isAuth = true; // сомневаюсь
             state.user = action.payload.user
             state.isLoading = false;
+            state.serverMessage = action.payload.message
         })
         builder.addCase(Registration.pending, (state) => {
             state.isLoading = true;
         })
-        builder.addCase(Registration.rejected, (state) => {
+        builder.addCase(Registration.rejected, (state, action) => {
             state.isLoading = false;
+            state.serverMessage = action.payload;
         })
 
         //login
@@ -62,28 +66,31 @@ export const AuthSlice = createSlice({
             state.isAuth = true;
             state.user = action.payload.user
             state.isLoading = false;
+            state.serverMessage = action.payload.message
         })
         builder.addCase(Login.pending, (state) => {
             state.isLoading = true;
         })
         builder.addCase(Login.rejected, (state, action) => {
-            state.isLoading = action.payload;
+            state.serverMessage = action.payload;
             state.isLoading = false;
-
         })
 
         //logout
-        builder.addCase(Logout.fulfilled, (state) => {
+        builder.addCase(Logout.fulfilled, (state, action) => {
             localStorage.removeItem('token')
             state.isAuth = false;
             state.user = {}
+            state.serverMessage = action.payload.message
         })
 
         // refresh token
         builder.addCase(CheckAuth.fulfilled, (state, action) => {
+            console.log(action.payload)
             localStorage.setItem('token', action.payload.accessToken)
             state.isAuth = true;
             state.user = action.payload.user
+            state.serverMessage = action.payload.message
         })
 
         // get cards 
@@ -107,8 +114,25 @@ export const AuthSlice = createSlice({
         builder.addCase(UploadAvatar.fulfilled, (state, action) => {
             console.log(action.payload)
         })
+
         builder.addCase(GetAvatar.fulfilled, (state, action) => {
             state.avatar = action.payload
+        })
+
+
+        // change password
+        builder.addCase(SendResetPassword.fulfilled, (state, action) => {
+            state.serverMessage = action.payload.message;
+        })
+        builder.addCase(SendResetPassword.rejected, (state, action) => {
+            state.serverMessage = action.payload.message;
+        })
+        // refresh password
+        builder.addCase(refreshPassword.fulfilled, (state, action) => {
+            localStorage.setItem('token', action.payload.accessToken)
+            state.isAuth = true;
+            state.user = action.payload.user
+            state.serverMessage = action.payload.message
         })
 
     }
@@ -125,4 +149,5 @@ export const {
     setSelectOptions,
     setChooseTheme,
     setAvatar,
+    setServerMessage,
 } = AuthSlice.actions

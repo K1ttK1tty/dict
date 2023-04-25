@@ -25,7 +25,7 @@ export const Login = createAsyncThunk(
         try {
             const { email, password } = userData;
             const response = await $api.post('/login', { email, password });
-            console.log(response.data)
+            console.log(response)
             return response.data
         } catch (err) {
             console.log(err)
@@ -40,6 +40,7 @@ export const Logout = createAsyncThunk(
     async (_, thunkAPI) => {
         try {
             const response = await $api.post('/logout');
+            console.log(response)
             return response.data
         } catch (err) {
             console.log(err)
@@ -54,7 +55,7 @@ export const CheckAuth = createAsyncThunk(
     async (_, thunkAPI) => {
         try {
             const response = await axios.get(`${API_URL}/refresh`, { withCredentials: true })
-            console.log(response.data)
+            console.log(response)
             return response.data
         } catch (err) {
             console.log(err)
@@ -69,6 +70,7 @@ export const GetData = createAsyncThunk(
     async (email, thunkAPI) => {
         try {
             const response = await $api.post('/getData', { email })
+            console.log(response)
             return response.data
         } catch (err) {
             console.log(err)
@@ -84,6 +86,7 @@ export const UpdateCards = createAsyncThunk(
         try {
             const { email, cards } = data;
             const response = await $api.post('/updateCards', { email, cards })
+            console.log(response)
             return response.data
         } catch (err) {
             console.log(err)
@@ -100,6 +103,7 @@ export const UpdateThemes = createAsyncThunk(
         try {
             const { email, themes } = data;
             const response = await $api.post('/updateTheme', { email, themes })
+            console.log(response)
             return response.data
         } catch (err) {
             console.log(err)
@@ -119,7 +123,7 @@ export const UploadAvatar = createAsyncThunk(
             const formData = new FormData()
             formData.append('avatar', avatar)
             const response = await $api.post(`/uploadAvatar?email=${email}`, formData)
-
+            console.log(response)
             return response.data
         } catch (err) {
             console.log(err)
@@ -146,7 +150,7 @@ export const GetAvatar = createAsyncThunk(
             })
             const blob = await response.blob()
             const url = window.URL.createObjectURL(blob)
-
+            console.log(response)
             return url
         } catch (err) {
             console.log(err)
@@ -163,7 +167,7 @@ export const RemoveAvatar = createAsyncThunk(
         try {
             const { email } = data;
             const response = await $api.post(`/removeAvatar`, { email })
-
+            console.log(response)
             return response.data
         } catch (err) {
             console.log(err)

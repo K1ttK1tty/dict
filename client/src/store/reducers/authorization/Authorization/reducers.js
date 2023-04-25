@@ -37,6 +37,13 @@ export const reducers = {
     // avatar
     setAvatar(state, action) {
         state.avatar = action.payload
+    },
+    // servers response
+    setServerMessage(state) {
+        state.serverMessage = '';
+    },
+    setStatus(state) {
+        state.status = 200;
     }
 
 

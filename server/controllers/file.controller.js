@@ -6,7 +6,6 @@ class fileController {
         try {
             const { email, cards } = req.body
             await fileService.updateCards(email, cards)
-            res.json({ "message": "" })
         } catch (err) {
             next(err)
         }
@@ -16,7 +15,6 @@ class fileController {
         try {
             const { email, themes } = req.body
             await fileService.updateTheme(email, themes)
-            res.json({ "message": "" })
         } catch (err) {
             next(err)
         }

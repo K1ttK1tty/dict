@@ -10,7 +10,6 @@ import styles from './Authorization.module.css'
 // redux
 import { useDispatch } from 'react-redux';
 import { Registration,Login } from '../../../store/reducers/authorization/Authorization/ActionCreator';
-// import { Registration, Login } from '../../../store/reducers/authorization/Authorization/ActionCreator'
 import { setIsAuth } from '../../../store/reducers/authorization//Authorization/AuthSlice';
 const Authorization = memo(function () {
     const [userName, setUserName] = useState('')

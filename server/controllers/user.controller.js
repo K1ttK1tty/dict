@@ -27,19 +27,18 @@ class userController {
 
             await fileService.createFile(email);
 
-            return res.json(userData)
+            return res.json({ userData, message: 'Регистрация прошла успешно' })
         } catch (err) {
             next(err)
         }
     }
-
+ 
     async login(req, res, next) {
         try {
             const { email, password } = req.body
             // console.log(req.body)
             const userData = await userService.login(email, password)
             res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
-
             const userContent = await fileService.getDataFromFile(email)
 
             return res.json({ ...userData, userContent })
@@ -53,7 +52,7 @@ class userController {
             const { refreshToken } = req.cookies; // вытаскиваем из куки токен
             const token = await userService.logout(refreshToken);
             res.clearCookie('refreshToken');
-            return res.json(token) // можно вернуть 200 статус
+            return res.json({ message: 'Вы вышли из аккаунта' });
         } catch (err) {
             next(err)
         }
@@ -71,7 +70,6 @@ class userController {
 
     async refresh(req, res, next) {
         try {
-
             const { refreshToken } = req.cookies;
             const userData = await userService.refresh(refreshToken)
             res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
@@ -85,7 +83,7 @@ class userController {
         try {
             const { email } = req.body
             const response = await userService.resetPassword(email)
-            // return res.json(userData)
+            return res.json({ message: 'На вашу почту было отправлено письмо' });
         } catch (err) {
             next(err)
         }
@@ -104,9 +102,15 @@ class userController {
     async setNewPassword(req, res, next) {
         const { id, password } = req.body
         try {
+            const userEmail = await userService.newPassword(id, password);
 
-            const response = await userService.newPassword(id, password);
-            return res.status(200)
+
+            const userData = await userService.login(userEmail, password)
+            res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
+            const userContent = await fileService.getDataFromFile(userEmail)
+
+            return res.json({ ...userData, userContent, message: 'Смена пароля прошла успешно' })
+
         } catch (err) {
             next(err)
         }

@@ -28,7 +28,6 @@ const FormRegistration = function ({
                     dinamicclassname={[inputStyle.inputFormAddCard, styles.input].join(' ')}
                     inputValue={userName}
                     setValue={e => setUserName(e)}
-                    type='email'
                 />
             </label>
             <label> email
@@ -36,6 +35,7 @@ const FormRegistration = function ({
                     dinamicclassname={[inputStyle.inputFormAddCard, styles.input].join(' ')}
                     inputValue={email}
                     setValue={e => setEmail(e)}
+                    type='email'
                 />
             </label>
             <label className={styles.passwordLabel}> password

@@ -1,0 +1,33 @@
+.wrapper {
+    position: fixed;
+    bottom: 15px;
+    right: 10px;
+    width: 270px;
+    min-height: 80px;
+    padding: 10px;
+    z-index: 10;
+}
+.hide {
+    visibility: hidden;
+}
+.message {
+    width: 250px;
+    min-height: 40px;
+    position: absolute;
+    bottom: 14px;
+    padding: 16px;
+    border-radius: 10px;
+    visibility: hidden;
+    transform: translateX(350px);
+    transition: 0.35s;
+    cursor: pointer;
+    background: rgb(136, 214, 47);
+    border: 1px solid #24292fbe;
+}
+.text {
+    font-size: 19px;
+}
+.show {
+    visibility: visible;
+    transform: translateX(0px);
+}

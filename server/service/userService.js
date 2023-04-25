@@ -64,18 +64,16 @@ class userService {
                 name: user[0].name,
                 email: user[0].email,
                 isActivated: user[0].isActivated
-            }
+            },
+            message: 'Вы вошли в аккаунт'
         }
     }
 
     async logout(refreshToken) {
-
         const token = await tokenService.removeToken(refreshToken)
-        return token;
     }
 
     async refresh(refreshToken) {
-
 
         // дублируется с логином -> вынести в отдельную функцию
         if (!refreshToken) {
@@ -105,7 +103,8 @@ class userService {
                 name: user[0].name,
                 email: user[0].email,
                 isActivated: userActivation[0].isActivated
-            }
+            },
+            message: 'Вы вошли в аккаунт'
         }
     }
 
@@ -119,7 +118,6 @@ class userService {
         }
         const activationLink = uuid.v4() // уникальная ссылка для активации по почте
         await mailService.sendResetPassword(email, `${process.env.API_URL}/api/setNewPassword/${activationLink}?id=${user[0].id}`)
-
     }
 
 
@@ -132,7 +130,7 @@ class userService {
         }
         const hashPassword = await bcrypt.hash(password, 3); // для хеширования пароля
         await pool.query('update user set password=? where id=?', [hashPassword, id])
-
+        return user[0].email
     }
 }
 module.exports = new userService();

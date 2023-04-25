@@ -7,6 +7,7 @@ export const SendResetPassword = createAsyncThunk(
         try {
             const { email } = userData;
             const response = await $api.post('/resetPassword', { email })
+            console.log(response)
             return response.data
         } catch (err) {
             console.log(err)
@@ -22,6 +23,7 @@ export const refreshPassword = createAsyncThunk(
         try {
             const { id, password } = userData;
             const response = await $api.post('/refreshPassword', { id, password })
+            console.log(response)
             return response.data
         } catch (err) {
             console.log(err)
