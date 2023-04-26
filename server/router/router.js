@@ -17,6 +17,7 @@ router.post('/login', userController.login);
 router.post('/logout', userController.logout);
 router.get('/activate/:link', userController.activate);
 router.get('/refresh', userController.refresh);
+router.post('/sendActivationMail',userController.activationMail)
 // reset password
 router.post('/resetPassword', userController.resetPassword)
 router.get('/setNewPassword/:link',userController.toChangePassword)

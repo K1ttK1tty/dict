@@ -12,7 +12,7 @@ export const SendResetPassword = createAsyncThunk(
         } catch (err) {
             console.log(err)
             console.log(err?.response?.data?.message)
-            return thunkAPI.rejectWithValue('Произошла ошибка при запросе на сервер :(')
+            return thunkAPI.rejectWithValue(err?.response?.data?.message)
         }
     }
 )
@@ -28,7 +28,7 @@ export const refreshPassword = createAsyncThunk(
         } catch (err) {
             console.log(err)
             console.log(err?.response?.data?.message)
-            return thunkAPI.rejectWithValue('Произошла ошибка при запросе на сервер :(')
+            return thunkAPI.rejectWithValue(err?.response?.data?.message)
         }
     }
 )

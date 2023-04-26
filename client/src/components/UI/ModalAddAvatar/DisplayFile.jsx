@@ -4,7 +4,6 @@ const DisplayFile = memo(function ({ files, setFiles, styles }) {
         <div className={styles.changeFileWrapper}>
             <span className={styles.fileName}>{files[0]?.name}</span>
             <button onClick={() => setFiles([])} className={styles.removeFile}>&times;</button>
-
         </div>
     )
 });

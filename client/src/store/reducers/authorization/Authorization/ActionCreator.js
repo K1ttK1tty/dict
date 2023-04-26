@@ -14,7 +14,23 @@ export const Registration = createAsyncThunk(
         } catch (err) {
             console.log(err)
             console.log(err?.response?.data?.message)
-            return thunkAPI.rejectWithValue('Произошла ошибка при запросе на сервер :(')
+            return thunkAPI.rejectWithValue(err?.response?.data?.message)
+        }
+    }
+)
+
+export const activateMail = createAsyncThunk(
+    'activateMail',
+    async (userData, thunkAPI) => {
+        try {
+            const { email } = userData;
+            const response = await $api.post('/sendActivationMail', { email })
+            console.log(response)
+            return response.data
+        } catch (err) {
+            console.log(err)
+            console.log(err?.response?.data?.message)
+            return thunkAPI.rejectWithValue(err?.response?.data?.message)
         }
     }
 )
@@ -30,7 +46,7 @@ export const Login = createAsyncThunk(
         } catch (err) {
             console.log(err)
             console.log(err?.response?.data?.message)
-            return thunkAPI.rejectWithValue('Произошла ошибка при запросе на сервер :(')
+            return thunkAPI.rejectWithValue(err?.response?.data?.message)
         }
     }
 )
@@ -45,7 +61,7 @@ export const Logout = createAsyncThunk(
         } catch (err) {
             console.log(err)
             console.log(err?.response?.data?.message)
-            return thunkAPI.rejectWithValue('Произошла ошибка при запросе на сервер :(')
+            return thunkAPI.rejectWithValue(err?.response?.data?.message)
         }
     }
 )
@@ -60,7 +76,7 @@ export const CheckAuth = createAsyncThunk(
         } catch (err) {
             console.log(err)
             console.log(err?.response?.data?.message)
-            return thunkAPI.rejectWithValue('Произошла ошибка при запросе на сервер :(')
+            return thunkAPI.rejectWithValue(err?.response?.data?.message)
         }
     }
 )
@@ -75,7 +91,7 @@ export const GetData = createAsyncThunk(
         } catch (err) {
             console.log(err)
             console.log(err?.response?.data?.message)
-            return thunkAPI.rejectWithValue('Произошла ошибка при запросе на сервер :(')
+            return thunkAPI.rejectWithValue(err?.response?.data?.message)
         }
     }
 )

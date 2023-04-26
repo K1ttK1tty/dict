@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { UploadAvatar, GetAvatar } from '../../../store/reducers/authorization/Authorization/ActionCreator';
 const ModalAddAvatar = memo(function ({ isModal, setModal }) {
     const dispatch = useDispatch();
-    const { email } = useSelector(state => state.AuthSlice.user);
+    const email = useSelector(state => state.AuthSlice?.user?.email);
     const [files, setFiles] = useState([])
 
     const upload = () => {

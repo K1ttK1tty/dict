@@ -17,7 +17,7 @@ const Alert = function () {
             setIsOpen(true)
             setTimeout(() => {
                 close()
-            }, 3500);
+            }, 3000);
         }
 
     }, [serverMessage]);

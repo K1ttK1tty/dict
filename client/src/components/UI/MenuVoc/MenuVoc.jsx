@@ -15,8 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 const MenuVoc = memo(function () {
     const dispatch = useDispatch()
     const { input, isUserMenuOpen } = useSelector(state => state.upMenu)
-    const { user, isActivated, avatar } = useSelector(state => state.AuthSlice)
-
+    const { user, avatar } = useSelector(state => state.AuthSlice)
     const [modal, setModal] = useState(false);
     const imgSource = avatar ? avatar : defaultAvatar
 
@@ -41,9 +40,9 @@ const MenuVoc = memo(function () {
                     />
                     <UserMenu
                         setModal={setModal}
-                        email={user.email}
-                        userName={user.name}
-                        isActivated={isActivated}
+                        email={user?.email}
+                        userName={user?.name}
+                        isActivated={user.isActivated}
                         avatar={imgSource}
                         modal={modal}
                     />

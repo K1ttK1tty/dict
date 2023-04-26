@@ -17,10 +17,10 @@ module.exports = class ApiError extends Error {
     }
 
     static EmailNotFound(){
-        return new ApiError(401, 'Такого почтового адреса не существует')
+        return new ApiError(400, 'Такого почтового адреса не существует')
     }
 
     static UserNotFound(){
-        return new ApiError(401, 'Не удалось найти пользователя')
+        return new ApiError(400, 'Не удалось найти пользователя')
     }
 }

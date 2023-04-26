@@ -43,10 +43,11 @@
 }
 .removeFile {
     font-weight: 500;
-    font-size: 27px;
+    font-size: 30px;
     padding: 3px;
     line-height: 1;
     color: rgba(206, 15, 15, 0.9);
+    background:white;
     cursor: pointer;
     border: none;
 }

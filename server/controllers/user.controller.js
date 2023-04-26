@@ -32,11 +32,20 @@ class userController {
             next(err)
         }
     }
- 
+
+    async activationMail(req, res, next) {
+        try {
+            const { email } = req.body
+            const response = await userService.sendActivate(email)
+            return res.json({ message: 'На почту ' + email + ' было отправлено письмо об активации аккаунта.' });
+        } catch (err) {
+            next(err);
+        }
+    }
+
     async login(req, res, next) {
         try {
             const { email, password } = req.body
-            // console.log(req.body)
             const userData = await userService.login(email, password)
             res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
             const userContent = await fileService.getDataFromFile(email)
@@ -104,13 +113,11 @@ class userController {
         try {
             const userEmail = await userService.newPassword(id, password);
 
-
             const userData = await userService.login(userEmail, password)
             res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
             const userContent = await fileService.getDataFromFile(userEmail)
 
             return res.json({ ...userData, userContent, message: 'Смена пароля прошла успешно' })
-
         } catch (err) {
             next(err)
         }

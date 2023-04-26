@@ -19,16 +19,16 @@ function App() {
     const dispatch = useDispatch()
     const { pageTheme } = useSelector(state => state.ColorPicker)
     const { isAuth } = useSelector(state => state.AuthSlice)
-    const { email } = useSelector(state => state.AuthSlice.user)
-
+    const email = useSelector(state => state.AuthSlice?.user?.email)
     setTheme(pageTheme)
 
     useEffect(() => {
         if (localStorage.getItem('token')) dispatch(CheckAuth())
     }, []);
-
     useEffect(() => {
         if (isAuth) {
+
+
             dispatch(GetData(email))
             dispatch(GetAvatar(email))
         }

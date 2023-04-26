@@ -8,7 +8,8 @@ import {
     UpdateCards,
     UpdateThemes,
     UploadAvatar,
-    GetAvatar
+    GetAvatar,
+    activateMail
 } from './ActionCreator'
 import { SendResetPassword, refreshPassword } from "../ChangePassword/Actions";
 import { reducers } from "./reducers";
@@ -35,6 +36,7 @@ const initialState = {
     chooseTheme: '',
     // servers response
     serverMessage: '',
+
 }
 export const AuthSlice = createSlice({
     name: 'AuthSlice',
@@ -55,6 +57,22 @@ export const AuthSlice = createSlice({
         })
         builder.addCase(Registration.rejected, (state, action) => {
             state.isLoading = false;
+            if (!action.payload) {
+                state.serverMessage = 'Произошла ошибка при запросе на сервер :(';
+                return;
+            }
+            state.serverMessage = action.payload;
+        })
+        // send activation mail
+        builder.addCase(activateMail.fulfilled, (state, action) => {
+            state.serverMessage = action.payload.message
+        })
+        builder.addCase(activateMail.rejected, (state, action) => {
+
+            if (!action.payload) {
+                state.serverMessage = 'Произошла ошибка при запросе на сервер :(';
+                return;
+            }
             state.serverMessage = action.payload;
         })
 
@@ -72,8 +90,13 @@ export const AuthSlice = createSlice({
             state.isLoading = true;
         })
         builder.addCase(Login.rejected, (state, action) => {
-            state.serverMessage = action.payload;
+            console.log(action.payload)
             state.isLoading = false;
+            if (!action.payload) {
+                state.serverMessage = 'Произошла ошибка при запросе на сервер :(';
+                return;
+            }
+            state.serverMessage = action.payload;
         })
 
         //logout
@@ -99,23 +122,24 @@ export const AuthSlice = createSlice({
             state.selectOptions = action.payload.userThemes;
         })
 
-        // update cards
-        builder.addCase(UpdateCards.rejected, (state, action) => {
-            console.log(action.payload)
-            state.updateError = action.payload.userCards;
-        })
+        // // update cards
+        // builder.addCase(UpdateCards.rejected, (state, action) => {
+        //     console.log(action.payload)
+        //     state.updateError = action.payload.userCards;
+        // })
 
-        // updateThemes
-        builder.addCase(UpdateThemes.rejected, (state, action) => {
-            console.log(action.payload)
-            state.updateError = action.payload.userThemes;
-        })
-        //  avatar
-        builder.addCase(UploadAvatar.fulfilled, (state, action) => {
-            console.log(action.payload)
-        })
+        // // updateThemes
+        // builder.addCase(UpdateThemes.rejected, (state, action) => {
+        //     console.log(action.payload)
+        //     state.updateError = action.payload.userThemes;
+        // })
+        // //  avatar
+        // builder.addCase(UploadAvatar.fulfilled, (state, action) => {
+        //     console.log(action.payload)
+        // })
 
         builder.addCase(GetAvatar.fulfilled, (state, action) => {
+            console.log(action.payload)
             state.avatar = action.payload
         })
 
@@ -125,7 +149,12 @@ export const AuthSlice = createSlice({
             state.serverMessage = action.payload.message;
         })
         builder.addCase(SendResetPassword.rejected, (state, action) => {
-            state.serverMessage = action.payload.message;
+            console.log(action.payload)
+            if (!action.payload) {
+                state.serverMessage = 'Произошла ошибка при запросе на сервер :(';
+                return;
+            }
+            state.serverMessage = action.payload;
         })
         // refresh password
         builder.addCase(refreshPassword.fulfilled, (state, action) => {
@@ -134,7 +163,13 @@ export const AuthSlice = createSlice({
             state.user = action.payload.user
             state.serverMessage = action.payload.message
         })
-
+        builder.addCase(refreshPassword.rejected, (state, action) => {
+            if (!action.payload) {
+                state.serverMessage = 'Произошла ошибка при запросе на сервер :(';
+                return;
+            }
+            state.serverMessage = action.payload;
+        })
     }
 })
 export default AuthSlice.reducer

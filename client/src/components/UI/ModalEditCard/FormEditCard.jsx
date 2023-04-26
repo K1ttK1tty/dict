@@ -17,7 +17,7 @@ const FormEditCard = memo(function ({ modalChangeCard }) {
     const dispatch = useDispatch();
     const editCard = useSelector(state => state.modalRenameCard.editCard)
     const { changeCard, cards, selectOptions } = useSelector(state => state.AuthSlice)
-    const { email } = useSelector(state => state.AuthSlice.user)
+    const email = useSelector(state => state.AuthSlice?.user?.email)
 
     function ChangeCard(e) {
         e.preventDefault();
@@ -61,7 +61,7 @@ const FormEditCard = memo(function ({ modalChangeCard }) {
                 dinamicclassname={style.btnFormEditCard}
                 children='Изменить'
             />
-            
+
         </form >
     )
 });

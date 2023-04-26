@@ -16,7 +16,7 @@ class userService {
         const activationLink = uuid.v4() // уникальная ссылка для активации по почте
         await pool.query(`insert into user (name,email,password) values(?,?,?);`, [userName, email, hashPassword]);
 
-        // await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`) 
+        await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`)
 
         const [newPerson] = await pool.query(`select id,name,email from user where email=?;`, [email]) // запрос к только что добавленному пользователю
         await pool.query(`insert into activation (activationLink,user_id) values(?,?);`, [activationLink, newPerson[0].id])
@@ -30,13 +30,18 @@ class userService {
         return { ...tokens, user: dto } // можно две строчки вынести в отдельную функцию т.к. переиспользуется 2 раза
     }
 
+    async sendActivate(email) {
+        const activationLink = uuid.v4() // уникальная ссылка для активации по почте
+        await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`)
+
+    }
+
     async activate(activationLink) {
         const [user] = await pool.query(`select * from activation where activationLink=?;`, [activationLink]);
-        if (!user) {
+        if (!user[0]) {
             throw ApiError.BadRequest('Неккоректная ссылка активации')
         }
         await pool.query(`update activation set isActivated=? where activationLink=?;`, [1, activationLink])
-
     }
 
     async login(email, password) {
@@ -112,8 +117,7 @@ class userService {
     async resetPassword(email) {
 
         const [user] = await pool.query(`select * from user where email=?`, [email])
-        // console.log(user[0].id)
-        if (!user[0].email) {
+        if (!user[0]) {
             throw ApiError.EmailNotFound()
         }
         const activationLink = uuid.v4() // уникальная ссылка для активации по почте
@@ -125,7 +129,7 @@ class userService {
 
         const [user] = await pool.query('select * from user where id=?', [id])
 
-        if (!user[0].id) {
+        if (!user[0]) {
             throw ApiError.UserNotFound()
         }
         const hashPassword = await bcrypt.hash(password, 3); // для хеширования пароля

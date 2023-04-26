@@ -2,6 +2,7 @@ import React, { useRef, useEffect, memo } from 'react';
 // components
 import ThemeChanger from '../ThemeChanger/ThemeChanger';
 import BtnAddCard from '../BtnAddCard/BtnAddCard';
+import Info from './Info';
 // functions
 import { setIsUserMenuOpen } from '../../../store/reducers/upMenu';
 import { keyClose } from '../../../functions/keyClose';
@@ -50,9 +51,13 @@ const UserMenu = memo(function ({ email, userName, isActivated, avatar, setModal
                     </div>
                 </div>
 
-                <p className={[styles.account, styles.mb14].join(' ')}>
-                    Аккаунт: {isActivated ? 'активирован' : 'не активирован'}
-                </p>
+                <div className={styles.activation}>
+                    <p className={[styles.account, styles.mb14].join(' ')}>
+                        Аккаунт: {isActivated ? 'активирован' : 'не активирован'}
+                    </p>
+                    {isActivated ? '' : <Info isActivated={isActivated} isUserMenuOpen={isUserMenuOpen} />}
+
+                </div>
                 <div className={[styles.theme, styles.mb14].join(' ')}>
                     <p>Тема: </p>
                     <div><ThemeChanger /></div>
