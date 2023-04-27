@@ -18,13 +18,10 @@ const ModalAddAvatar = memo(function ({ isModal, setModal }) {
         dispatch(UploadAvatar({ email, avatar: files[0] }))
         setModal(false)
         setTimeout(() => {
-
             dispatch(GetAvatar(email))
         }, 1000);
     }
-
     const changeFile = (file) => {
-
         const extension = file.files[0].name.split('.').pop()
         if (extension === 'jpg' || extension === 'png') {
             setFiles(file.files)
@@ -52,12 +49,12 @@ const ModalAddAvatar = memo(function ({ isModal, setModal }) {
                     upload={upload}
                     setFiles={setFiles}
                     email={email}
+                    setModal={setModal}
                     dispatch={dispatch}
                 />
             }
 
         />
-
     )
 });
 export default ModalAddAvatar;

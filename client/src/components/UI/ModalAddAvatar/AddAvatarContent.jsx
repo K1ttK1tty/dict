@@ -1,13 +1,13 @@
 import React, { useRef, memo } from 'react';
 // components
-import DisplayFile from './DisplayFile';
 import BtnAddCard from '../BtnAddCard/BtnAddCard';
+import ChangeFileController from './ChangeFileController';
 // styles
 import styles from './AddAvatarContent.module.css'
 // redux
 import { RemoveAvatar } from '../../../store/reducers/authorization/Authorization/ActionCreator';
 import { setAvatar } from '../../../store/reducers/authorization/Authorization/AuthSlice';
-const AddAvatarContent = memo(function ({ changeFile, files, upload, setFiles, email, dispatch }) {
+const AddAvatarContent = memo(function ({ changeFile, files, upload, setFiles, email, setModal, dispatch }) {
 
     const element = useRef()
     const setFocus = () => {
@@ -15,42 +15,24 @@ const AddAvatarContent = memo(function ({ changeFile, files, upload, setFiles, e
             element.current.focus()
         }, 150);
     }
-
     const removeAvatar = () => {
         dispatch(setAvatar(''))
         dispatch(RemoveAvatar({ email }))
+        setModal(false)
     }
-
     return (
         <div className={styles.contentWrapper} tabIndex={'1'} onClick={setFocus()} ref={element}>
-            <p className={styles.about}>Вы можете загрузить изображение в формате JPG или PNG.</p>
-            <div className={styles.wrapper}>
-
-                {files[0]?.name ?
-                    <input
-                        className={styles.inputUpload}
-                        onClick={upload}
-                        type="submit"
-                        value='Загрузить'
-                    />
-                    : <label className={styles.label}> Выбрать файл
-                        <input
-                            className={styles.input}
-                            onChange={e => changeFile(e.target)}
-                            accept="image/png, image/jpeg"
-                            type="file"
-                        />
-                    </label>
-                }
-                {files[0]?.name &&
-                    <DisplayFile
-                        files={files}
-                        styles={styles}
-                        setFiles={setFiles}
-                    />
-                }
-
-            </div>
+            <p className={styles.about}>
+                Вы можете загрузить изображение
+                в формате JPG или PNG.
+            </p>
+            <ChangeFileController
+                styles={styles}
+                upload={upload}
+                changeFile={changeFile}
+                files={files}
+                setFiles={setFiles}
+            />
 
             <BtnAddCard
                 dinamicclassname={styles.btnRemoveAvatar}

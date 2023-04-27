@@ -15,9 +15,10 @@ router.post('/registration',
     userController.registration);
 router.post('/login', userController.login);
 router.post('/logout', userController.logout);
-router.get('/activate/:link', userController.activate);
 router.get('/refresh', userController.refresh);
+// activate email
 router.post('/sendActivationMail',userController.activationMail)
+router.get('/activate/:link', userController.activate);
 // reset password
 router.post('/resetPassword', userController.resetPassword)
 router.get('/setNewPassword/:link',userController.toChangePassword)
@@ -30,6 +31,5 @@ router.post('/updateTheme', authMiddleware, fileController.updateThemes);
 router.post('/uploadAvatar', authMiddleware, fileController.uploadAvatar)
 router.post('/getAvatar', authMiddleware, fileController.getAvatar)
 router.post('/removeAvatar', authMiddleware, fileController.removeAvatar)
-
 
 module.exports = router 

@@ -17,25 +17,21 @@ import { useSelector, useDispatch } from 'react-redux';
 import { CheckAuth, GetData, GetAvatar } from './store/reducers/authorization/Authorization/ActionCreator.js'
 function App() {
     const dispatch = useDispatch()
-    const { pageTheme } = useSelector(state => state.ColorPicker)
     const { isAuth } = useSelector(state => state.AuthSlice)
     const email = useSelector(state => state.AuthSlice?.user?.email)
-    setTheme(pageTheme)
 
     useEffect(() => {
         if (localStorage.getItem('token')) dispatch(CheckAuth())
+        setTheme()
     }, []);
     useEffect(() => {
         if (isAuth) {
-
-
             dispatch(GetData(email))
             dispatch(GetAvatar(email))
         }
     }, [isAuth]);
 
     if (!isAuth) {
-
         return (
             <Routes>
                 <Route path='/forgotPassword' element={<ChangePassword />} />

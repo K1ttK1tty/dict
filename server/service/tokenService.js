@@ -2,8 +2,8 @@ const jwt = require('jsonwebtoken')
 const pool = require('../db').pool
 
 class tokenService {
-    generateTokens(payload) { // payload - информация о пользователе, но не пароль и не важные данные о нем
-        const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_SERCRET, { expiresIn: '30m' }) // генерация вебтокена
+    generateTokens(payload) { 
+        const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_SERCRET, { expiresIn: '30m' }) 
         // третим аргументом (их может быть несколько) время жизни
         const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_SECRET, { expiresIn: '30d' })
         return {
@@ -30,23 +30,18 @@ class tokenService {
         }
     }
 
-
-
-    async saveToken(userId, refreshToken) { // сохранение refresh токена в базу
+    async saveToken(userId, refreshToken) {
         const [refToken] = await pool.query(`select refreshToken from token where user_id=?;`, [userId])
-
         if (refToken[0]) { // перезапись токена если он уже существует
             await pool.query(`update token set refreshToken=? where user_id=?;`, [refreshToken, userId])
             return refreshToken
         }
-  
-        await pool.query(`insert into token (refreshToken,user_id) values(?,?);`, [refreshToken, userId]) // создание новoй записи 
+        await pool.query(`insert into token (refreshToken,user_id) values(?,?);`, [refreshToken, userId])
         return refreshToken
     }
 
     async removeToken(refreshToken) {
         await pool.query(`delete from token where refreshToken=?;`, [refreshToken])
-        // возможно нужно что-то вернуть
     }
 
     async findToken(refreshToken) {

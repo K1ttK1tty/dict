@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { memo } from 'react';
 import CardRand from '../CardRand/CardRand'
-const CardsRandom = function ({ cardsGame }) {
+const CardsRandom = memo(function ({ cardsGame }) {
     return (
         <div>
             {
@@ -8,5 +8,5 @@ const CardsRandom = function ({ cardsGame }) {
             }
         </div>
     )
-};
+});
 export default CardsRandom;

@@ -23,8 +23,8 @@ export const activateMail = createAsyncThunk(
     'activateMail',
     async (userData, thunkAPI) => {
         try {
-            const { email } = userData;
-            const response = await $api.post('/sendActivationMail', { email })
+            const { id, email } = userData;
+            const response = await $api.post('/sendActivationMail', { email, id })
             console.log(response)
             return response.data
         } catch (err) {

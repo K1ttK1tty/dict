@@ -12,6 +12,17 @@
     cursor: pointer;
     transition: 0.1s;
 }
+@media (max-width: 1250px) {
+    .rightItmes {
+        width: 115px;
+    }
+}
+@media (max-width:768px){
+    .hideMenu{
+        display: none;
+        visibility: hidden;
+    }
+}
 .wrapper:hover {
     background: #383e47;
 }

@@ -1,7 +1,10 @@
+// libs
 const fs = require('fs');
 const path = require('path');
-const fileError = require('../exeptions/fileError.js')
+// database
 const pool = require('../db.js').pool
+// exeptions
+const fileError = require('../exeptions/fileError.js')
 
 class fileService {
 
@@ -12,7 +15,6 @@ class fileService {
     }
 
     async createFile(email) {
-
         fs.mkdir(path.resolve(process.env.SERVER_DIR_PATH, 'usersData', `${email}_content`), (err) => { // асинхронная функция
             if (err) {
                 throw new Error('Ошибка при создании файла')
@@ -23,26 +25,23 @@ class fileService {
                 throw new Error('Ошибка при создании файла')
             }
         })
-
         fs.writeFile(path.resolve(process.env.USER_DATA_PATH, `${email}_content`, `cards_${email}.txt`), '[]', (err) => {
             if (err) {
                 throw new Error('Ошибка при создании файла')
             }
         })
-
     }
 
     async getDataFromFile(email) {
-
         if (!fs.existsSync(path.resolve(process.env.USER_DATA_PATH, `${email}_content`))) {
             throw fileError.getDataError()
         }
-        let cards = fs.readFileSync(path.resolve(process.env.USER_DATA_PATH, `${email}_content`, `cards_${email}.txt`), { encoding: 'utf-8' }, (err, data) => { // прочитать содержимое файла
+        let cards = fs.readFileSync(path.resolve(process.env.USER_DATA_PATH, `${email}_content`, `cards_${email}.txt`), { encoding: 'utf-8' }, (err, data) => { 
             if (err) {
                 throw fileError.getDataError()
             }
         })
-        let themes = fs.readFileSync(path.resolve(process.env.USER_DATA_PATH, `${email}_content`, `themes_${email}.txt`), { encoding: 'utf-8' }, (err, data) => { // прочитать содержимое файла
+        let themes = fs.readFileSync(path.resolve(process.env.USER_DATA_PATH, `${email}_content`, `themes_${email}.txt`), { encoding: 'utf-8' }, (err, data) => { 
             if (err) {
                 throw fileError.getDataError()
             }
@@ -55,11 +54,9 @@ class fileService {
 
     async updateCards(email, data) {
         const userData = JSON.stringify(data)
-
         if (!fs.existsSync(process.env.USER_DATA_PATH, `${email}_content`, `cards_${email}.txt`)) {
             throw fileError.ReadError()
         }
-
         fs.writeFile(path.resolve(process.env.USER_DATA_PATH, `${email}_content`, `cards_${email}.txt`), userData, (err) => {
             if (err) {
                 throw fileError.ReadError()
@@ -70,11 +67,9 @@ class fileService {
 
     async updateTheme(email, data) {
         const userData = JSON.stringify(data)
-
         if (!fs.existsSync(process.env.USER_DATA_PATH, `${email}_content`, `themes_${email}.txt`)) {
             throw fileError.ReadError()
         }
-
         fs.writeFile(path.resolve(process.env.USER_DATA_PATH, `${email}_content`, `themes_${email}.txt`), userData, (err) => {
             if (err) {
                 throw fileError.ReadError()
@@ -86,7 +81,6 @@ class fileService {
         const extension = avatar.name.split('.').pop()
         const filePath = path.resolve(process.env.USER_DATA_PATH, `${email}_content`, `avatar.${extension}`)
         const [user] = await pool.query(`select id from user where email=?;`, [email])
-
         if (fs.existsSync(filePath)) {
             fs.unlinkSync(filePath)
             await avatar.mv(filePath)
@@ -100,18 +94,11 @@ class fileService {
     async getAvatar(email) {
         const [userId] = await pool.query('select id from user where email=?;', [email])
         const [avatarName] = await pool.query('select avatarName from avatar where user_id=?;', [userId[0].id])
-        const avatarPath = path.resolve(process.env.USER_DATA_PATH, `${email}_content`, avatarName[0].avatarName)
-        // console.log(path.resolve(process.env.USER_DATA_PATH, `${email}_content`, avatarName[0].avatarName))
         if (!avatarName[0].avatarName) {
             return false;
         } else {
             return path.resolve(process.env.USER_DATA_PATH, `${email}_content`, avatarName[0].avatarName)
         }
-        // if (fs.existsSync(avatarPath)) {
-
-        // }
-
-
     }
 
     async removeAvatar(email) {
@@ -121,7 +108,6 @@ class fileService {
         if (avatarName[0]) {
             const filePath = path.resolve(process.env.USER_DATA_PATH, `${email}_content`, `${avatarName[0].avatarName}`)
             fs.unlinkSync(filePath)
-
         }
     }
 }

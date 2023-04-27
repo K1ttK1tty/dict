@@ -1,15 +1,22 @@
+// libs
 import React, { memo } from 'react';
-import cl from './MenuDesk.module.css'
+import { Link } from 'react-router-dom';
+// components
+import Avatar from '../Avatar/Avatar';
+// icons
 import Icon1 from './icons/Icon1';
 import Icon2 from './icons/Icon2';
 // import Icon3 from './icons/Icon3';
 // import Icon4 from './icons/Icon4';
-import { Link } from 'react-router-dom';
+
+// styles
+import cl from './MenuDesk.module.css'
 const MenuDesk = memo(function () {
     return (
         <nav>
             <div className={cl.back}>
                 <div className={cl.content}>
+                    <Avatar styles={cl.avatar} />
                     <ul className={cl.ulMmenu}>
                         <li className={cl.ulMenu__item}>
                             <span className={cl.spanIcons}>

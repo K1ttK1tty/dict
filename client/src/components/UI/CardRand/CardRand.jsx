@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 // components
 import Input from '../Input/Input';
 // styles
@@ -6,7 +6,7 @@ import styles from '../CardRand/CardRand.module.css'
 import '../../../styles/Games.css'
 //redux
 import { useSelector } from 'react-redux';
-const CardRand = function ({ card, index }) {
+const CardRand = memo(function ({ card, index }) {
     const validateArr = useSelector(state => state.GamesSlice.validateArr)
     let validateWord = 'hidden';
     if (validateArr[index]) validateWord = validateArr[index] + 'Color';
@@ -20,5 +20,5 @@ const CardRand = function ({ card, index }) {
             <div className={styles.translateRand}>{card.translate}</div>
         </div>
     )
-};
+});
 export default CardRand;

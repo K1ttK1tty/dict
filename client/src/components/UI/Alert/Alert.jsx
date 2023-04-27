@@ -1,28 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 // styles
 import styles from './Alert.module.css'
 // redux
 import { useSelector, useDispatch } from 'react-redux';
 import { setServerMessage } from '../../../store/reducers/authorization/Authorization/AuthSlice';
-const Alert = function () {
+const Alert = memo(function () {
     const dispatch = useDispatch();
     const { serverMessage } = useSelector(state => state.AuthSlice);
     const [isOpen, setIsOpen] = useState(false)
+
     const messageStyle = isOpen ? [styles.message, styles.show].join(' ') : styles.message
     const wrapperStyles = isOpen ? styles.wrapper : [styles.wrapper, styles.hide].join(' ')
-
+    
     useEffect(() => {
-
         if (serverMessage) {
             setIsOpen(true)
             setTimeout(() => {
                 close()
             }, 3000);
         }
-
     }, [serverMessage]);
-
-
 
     const close = () => {
         setIsOpen(false)
@@ -41,5 +38,5 @@ const Alert = function () {
 
         </div>
     )
-};
+});
 export default Alert;

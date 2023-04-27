@@ -45,24 +45,19 @@ const MySelect = memo(function () {
             onKeyDown={() => dispatch(setOptionState({ ...optionState, open: false }))}
             tabIndex='0'
         >
-
             <div
                 onClick={() => dispatch(setOptionState({ ...optionState, open: !optionState.open }))}
                 className={[styles.title, 'ifNotThisThenClose'].join(' ')}>
-
                 <div
                     onClick={() => dispatch(setOptionState({ ...optionState, open: !optionState.open }))}
                     className={[styles.selectValue, 'ifNotThisThenClose'].join(' ')}
                 >{optionName}</div>
-
                 <div className={styles.selectIcon}><IconSelect /></div>
             </div>
-
             {
                 optionState.removeMark &&
                 <div id='close' onClick={removeTheme} className={styles.removeTheme}>&times;</div>
             }
-
             <CSSTransition
                 in={optionState.open}
                 timeout={220}
@@ -70,7 +65,12 @@ const MySelect = memo(function () {
                 mountOnEnter
                 unmountOnExit
             >
-                {state => <SetOptions state={state} className={optionState.open} replaceOption={replaceOption} />}
+                {state => <SetOptions
+                    state={state}
+                    className={optionState.open}
+                    replaceOption={replaceOption}
+                />
+                }
             </CSSTransition>
         </div>
     )

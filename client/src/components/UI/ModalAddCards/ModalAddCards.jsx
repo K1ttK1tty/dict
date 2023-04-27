@@ -6,7 +6,6 @@ import Modal from '../Modal/Modal';
 import { useSelector, useDispatch } from 'react-redux';
 import { setInputValue } from '../../../store/reducers/modalRenameCard';
 import { setIsModalAddCardActive } from '../../../store/reducers/modalAddCard';
-
 const ModalAddCards = memo(function ({ modalAdd }) {
     const dispatch = useDispatch()
     const { isModalAddCardActive } = useSelector(state => state.modalAddCard)
@@ -14,7 +13,6 @@ const ModalAddCards = memo(function ({ modalAdd }) {
     useEffect(() => {
         return () => dispatch(setInputValue({ word: '', translate: '', theme: '' }))
     }, [isModalAddCardActive]);
-
 
     return (
         <Modal

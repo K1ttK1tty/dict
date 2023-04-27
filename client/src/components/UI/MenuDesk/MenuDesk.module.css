@@ -24,14 +24,25 @@ nav {
     width: 70px;
     padding: 28px 20px;
     transition: var(--transition02s);
-    z-index: 50;
+    z-index: 12;
     box-shadow: var(--nav-menu-shadow);
     border-right: 1px solid rgba(255, 255, 255, 0.15);
 }
-.back:hover {
-    width: 300px;
-    transition: var(--transition02s);
+@media (max-width:768px){
+    .back {
+        
+    }
 }
+.menuHandler{
+
+}
+
+.avatar{
+    height: 35px;
+    width: 35px;
+}
+
+
 .content {
     display: flex;
     flex-direction: column;
@@ -76,12 +87,7 @@ nav {
     font-size: var(--fz0px);
     transition: var(--transition02s);
 }
-.back:hover .swipe {
-    opacity: var(--opacity1);
-    visibility: var(--visIn);
-    font-size: var(--fzInh);
-    transition: var(--transition02s);
-}
+
 .callBack {
     padding: 0px;
     color: #72747f;
@@ -108,11 +114,7 @@ nav {
     display: block;
     height: 0px;
 }
-.back:hover .callBackSpan {
-    font-size: 16px;
-    opacity: var(--opacity1);
-    visibility: var(--visIn);
-}
+
 .icon4Class {
     position: relative;
     top: -2px;
@@ -121,9 +123,28 @@ nav {
     margin-right: 0px;
     transition: var(--transition02s);
 }
-.back:hover .icon4Class {
-    margin-right: 14px;
+
+@media (min-width:768px){
+    .back:hover {
+        width: 300px;
+        transition: var(--transition02s);
+    }
+    .back:hover .callBackSpan {
+        font-size: 16px;
+        opacity: var(--opacity1);
+        visibility: var(--visIn);
+    }
+    .back:hover .icon4Class {
+        margin-right: 14px;
+    }
+    .back:hover .swipe {
+    opacity: var(--opacity1);
+    visibility: var(--visIn);
+    font-size: var(--fzInh);
+    transition: var(--transition02s);
 }
+}
+
 .callBackItem {
     cursor: pointer;
     display: flex;

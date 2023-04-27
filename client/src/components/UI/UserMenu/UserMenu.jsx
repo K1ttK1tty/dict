@@ -3,6 +3,7 @@ import React, { useRef, useEffect, memo } from 'react';
 import ThemeChanger from '../ThemeChanger/ThemeChanger';
 import BtnAddCard from '../BtnAddCard/BtnAddCard';
 import Info from './Info';
+import Avatar from '../Avatar/Avatar';
 // functions
 import { setIsUserMenuOpen } from '../../../store/reducers/upMenu';
 import { keyClose } from '../../../functions/keyClose';
@@ -11,7 +12,7 @@ import styles from './UserMenu.module.css'
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { Logout } from '../../../store/reducers/authorization/Authorization/ActionCreator';
-const UserMenu = memo(function ({ email, userName, isActivated, avatar, setModal, modal }) {
+const UserMenu = memo(function ({ email, userName, isActivated, setModal, modal }) {
     const dispatch = useDispatch();
     const { isUserMenuOpen } = useSelector(state => state.upMenu)
 
@@ -22,7 +23,6 @@ const UserMenu = memo(function ({ email, userName, isActivated, avatar, setModal
         dispatch(setIsUserMenuOpen(false))
         return () => dispatch(setIsUserMenuOpen(false))
     }, []);
-
 
     if (isUserMenuOpen && !modal) {
         isOpenMenu = styles.content;
@@ -39,11 +39,10 @@ const UserMenu = memo(function ({ email, userName, isActivated, avatar, setModal
             tabIndex="1"
             ref={menuElement}
         >
-
             <div className={styles.contentWrapper}>
                 <div className={styles.userMain}>
                     <div onClick={() => setModal(true)} className={styles.avatarWrapper}>
-                        <img className={styles.avatar} src={avatar} alt="Аватар" />
+                        <Avatar styles={styles.avatar} />
                     </div>
                     <div>
                         <div className={styles.userName}>{userName}</div>
@@ -55,7 +54,7 @@ const UserMenu = memo(function ({ email, userName, isActivated, avatar, setModal
                     <p className={[styles.account, styles.mb14].join(' ')}>
                         Аккаунт: {isActivated ? 'активирован' : 'не активирован'}
                     </p>
-                    {isActivated ? '' : <Info isActivated={isActivated} isUserMenuOpen={isUserMenuOpen} />}
+                    {isActivated ? '' : <Info isUserMenuOpen={isUserMenuOpen} />}
 
                 </div>
                 <div className={[styles.theme, styles.mb14].join(' ')}>
@@ -69,7 +68,6 @@ const UserMenu = memo(function ({ email, userName, isActivated, avatar, setModal
                 children='Выйти из аккаунта'
                 onClick={() => dispatch(Logout())}
             />
-
         </div >
     )
 });

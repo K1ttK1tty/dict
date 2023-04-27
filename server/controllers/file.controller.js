@@ -1,5 +1,4 @@
 const fileService = require('../service/fileService.js')
-const path = require('path');
 class fileController {
 
     async updateCards(req, res, next) {
@@ -34,9 +33,7 @@ class fileController {
         try {
             const email = req.query.email
             const avatar = req.files.avatar
-            const response = await fileService.uploadAvatar(email, avatar)
-            // отправить 200
- 
+            await fileService.uploadAvatar(email, avatar)
         } catch (err) {
             next(err)
         }
@@ -48,7 +45,6 @@ class fileController {
             const response = await fileService.getAvatar(email)
             if (response) return res.download(response)
         } catch (err) {
-            // next(err)
         }
     } 
 
@@ -60,7 +56,6 @@ class fileController {
             next(err)
         }
     }
-
 }
 
 module.exports = new fileController();

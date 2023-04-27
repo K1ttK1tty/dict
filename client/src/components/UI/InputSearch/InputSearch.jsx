@@ -30,7 +30,7 @@ const InputSearch = memo(function () {
     return <input
         onClick={e => e.stopPropagation()}
         value={searchWord}
-        placeholder={' Search word'}
+        placeholder={' Искать'}
         ref={inputElement}
         onKeyDown={handleKey}
         onChange={e => dispatch(setSearchWord(e.target.value))}

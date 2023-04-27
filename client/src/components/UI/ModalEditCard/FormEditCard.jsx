@@ -61,7 +61,6 @@ const FormEditCard = memo(function ({ modalChangeCard }) {
                 dinamicclassname={style.btnFormEditCard}
                 children='Изменить'
             />
-
         </form >
     )
 });

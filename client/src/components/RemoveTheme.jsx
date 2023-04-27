@@ -8,7 +8,6 @@ import { deleteAllEmptyThemes } from '../functions/deleteAllEmptyThemes';
 import '../styles/Vocabulary.css'
 //redux
 import { useSelector, useDispatch } from 'react-redux';
-
 const RemoveTheme = memo(function () {
     const dispatch = useDispatch()
     const {
@@ -18,7 +17,6 @@ const RemoveTheme = memo(function () {
         user,
         cards
     } = useSelector(state => state.AuthSlice)
-
     return (
         <div>
             <h4 className='noCards'>Пустота...</h4>

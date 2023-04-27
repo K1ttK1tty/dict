@@ -1,4 +1,6 @@
-export const setTheme = (pageTheme) => {
-    const a = document.documentElement;
-    a.setAttribute('data-theme', pageTheme)
+export const setTheme = () => {
+    const theme = localStorage.getItem('theme')
+    const mainElement = document.documentElement;
+    if (theme) mainElement.setAttribute('data-theme', theme)
+    else mainElement.setAttribute('data-theme', 'ligth')
 }

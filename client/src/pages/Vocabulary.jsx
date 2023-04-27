@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect, useMemo, memo } from 'react';
 // hooks
 import { useCards } from '../hooks/useCards';
-
 //components
 import MenuVoc from '../components/UI/MenuVoc/MenuVoc';
 import SetCard from '../components/UI/WordCard/SetCard';
@@ -29,7 +28,6 @@ import {
     setColorsBeforePaint
 } from '../store/reducers/ColorPicker';
 import { setToggleWordsOrder } from '../store/reducers/authorization/Authorization/AuthSlice';
-
 const Vocabulary = memo(function () {
     // authorization
     const { toggleWordsOrder, cards } = useSelector(state => state.AuthSlice);
@@ -217,7 +215,6 @@ const Vocabulary = memo(function () {
             }
         }
     }, [pageTheme]);
-
 
     return (
         <div
