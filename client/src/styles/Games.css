@@ -73,6 +73,7 @@
 
 .gameWrap {
     height: 100%;
+    transition: var(--transition02s);
 }
 .trueWord {
     box-shadow: var(--word-shadow-true);

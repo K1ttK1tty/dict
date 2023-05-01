@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useMemo, useEffect, useState } from 'react';
 // components
 import InputRequire from '../components/UI/InputRequire/InputRequire'
@@ -14,7 +14,7 @@ import '../styles/theme.css'
 // redux
 import { useSelector, useDispatch } from 'react-redux';
 import { setCardsNumber, setInputReq } from '../store/reducers/GamesSlice';
-const Games = function () {
+const Games = memo(function () {
     const dispatch = useDispatch();
     const { cards } = useSelector(state => state.AuthSlice);
     const {
@@ -41,7 +41,7 @@ const Games = function () {
     }, [changer])
 
     return (
-        <div className='gameWrap'>
+        <div className='gameWrap pageContent'>
             <div className="gameCardsField">
                 <div className='title'>Самопроверка</div>
                 <div className='gameBody'>
@@ -73,5 +73,5 @@ const Games = function () {
             </div>
         </div>
     )
-};
+});
 export default Games;

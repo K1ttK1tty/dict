@@ -1,7 +1,7 @@
-import React from 'react';
-const Icon1 = function ({ className}) {
+import React, { memo } from 'react';
+const Icon1 = memo(function ({ className }) {
     return (
-        <svg className={className}  viewBox="0 0 457.822 457.822">
+        <svg className={className} viewBox="0 0 457.822 457.822">
             <path d="M457.757,314.792c-0.793-41.923-9.194-91.07-19.978-116.863c-15.956-38.128-52.971-62.765-94.298-62.765
 				c-13.544,0-26.791,2.67-39.368,7.933c-15.12,6.319-28.424,16.122-38.863,28.573h-21.704v-37.378
 				c0-39.15,31.852-71.001,71.001-71.001h70.204c8.106,0,14.677-6.571,14.677-14.677s-6.571-14.677-14.677-14.677h-70.204
@@ -27,5 +27,5 @@ const Icon1 = function ({ className}) {
             />
         </svg>
     )
-};
+});
 export default Icon1;

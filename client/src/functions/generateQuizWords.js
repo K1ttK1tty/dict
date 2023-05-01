@@ -4,7 +4,6 @@ import { setInputReq } from "../store/reducers/GamesSlice";
 import { setChanger } from "../store/reducers/GamesSlice";
 export const generateQuizWords = (e, inputReq, dispatch) => {
     e.preventDefault();
-    console.log(inputReq)
     dispatch(setValidateArr([]));
     dispatch(setCardsNumber(inputReq));
     dispatch(setChanger())

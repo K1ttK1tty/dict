@@ -26,6 +26,7 @@
     .menu__container {
         justify-content: right;
     }
+    
 }
 
 @media (max-width: 1250px) {
@@ -36,10 +37,16 @@
 .searchWrapper {
     position: relative;
     height: 100%;
+    width: 100%;
+    transition: var(--transition02s);
+}
+@media (max-width:768px){
+    .searchWrapper {
+        margin-left: 30px;
+    }
 }
 .wordsCount {
     color: rgba(0, 0, 0, 0.8);
-    background-color: var(--background-cards);
     text-align: right;
     padding-right: 6px;
     font-size: 17px;
@@ -53,7 +60,6 @@
     font-size: 17px;
     top: 0px;
     right: 0px;
-    background-color: var(--background-cards);
 }
 
 .menu__logo {

@@ -38,9 +38,7 @@ const MenuVoc = memo(function () {
                     />
                     <UserMenu
                         setModal={setModal}
-                        email={user?.email}
-                        userName={user?.name}
-                        isActivated={user.isActivated}
+                        isActivated={user?.isActivated}
                         modal={modal}
                     />
                 </div>

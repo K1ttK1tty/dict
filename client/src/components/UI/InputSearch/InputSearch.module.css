@@ -15,7 +15,7 @@
     border-radius: 10px;
     border: none;
     background-color: rgb(255, 255, 255);
-    transition: 0.3s;
+    transition: 0.25s;
     opacity: 1;
     visibility: visible;
     z-index: 12;

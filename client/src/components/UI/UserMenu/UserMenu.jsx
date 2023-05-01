@@ -3,7 +3,7 @@ import React, { useRef, useEffect, memo } from 'react';
 import ThemeChanger from '../ThemeChanger/ThemeChanger';
 import BtnAddCard from '../BtnAddCard/BtnAddCard';
 import Info from './Info';
-import Avatar from '../Avatar/Avatar';
+import AvatarWithInfo from '../Avatar/AvatarWithInfo';
 // functions
 import { setIsUserMenuOpen } from '../../../store/reducers/upMenu';
 import { keyClose } from '../../../functions/keyClose';
@@ -12,7 +12,7 @@ import styles from './UserMenu.module.css'
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { Logout } from '../../../store/reducers/authorization/Authorization/ActionCreator';
-const UserMenu = memo(function ({ email, userName, isActivated, setModal, modal }) {
+const UserMenu = memo(function ({isActivated, setModal, modal }) {
     const dispatch = useDispatch();
     const { isUserMenuOpen } = useSelector(state => state.upMenu)
 
@@ -40,15 +40,7 @@ const UserMenu = memo(function ({ email, userName, isActivated, setModal, modal 
             ref={menuElement}
         >
             <div className={styles.contentWrapper}>
-                <div className={styles.userMain}>
-                    <div onClick={() => setModal(true)} className={styles.avatarWrapper}>
-                        <Avatar styles={styles.avatar} />
-                    </div>
-                    <div>
-                        <div className={styles.userName}>{userName}</div>
-                        <div className={styles.email}>{email}</div>
-                    </div>
-                </div>
+                <AvatarWithInfo setFunction={() => setModal(true)} />
 
                 <div className={styles.activation}>
                     <p className={[styles.account, styles.mb14].join(' ')}>

@@ -1,5 +1,5 @@
 .select {
-    width: 250px;
+    width: 190px;
     background: white;
     color: black;
     border: 1px solid rgba(0, 0, 0, 0.4);
@@ -32,6 +32,7 @@
 }
 .selectValue {
     font-size: 17px;
+    overflow: hidden;
     color: rgba(0, 0, 0, 0.9);
 }
 .optionsOption {
@@ -45,12 +46,13 @@
     position: absolute;
     left: 0px;
     top: 40px;
-    width: 246px;
+    width: 190px;
     background: white;
     z-index: 0;
     border-radius: 14px;
     border: 1px solid rgba(0, 0, 0, 0.4);
     z-index: 1;
+    overflow: hidden;
 }
 .removeTheme {
     font-size: 37px;

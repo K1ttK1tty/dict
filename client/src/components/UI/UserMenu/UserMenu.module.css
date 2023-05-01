@@ -17,8 +17,8 @@
         width: 115px;
     }
 }
-@media (max-width:768px){
-    .hideMenu{
+@media (max-width: 768px) {
+    .hideMenu {
         display: none;
         visibility: hidden;
     }
@@ -37,14 +37,6 @@
     align-items: center;
     width: 75%;
     cursor: pointer;
-}
-.avatar {
-    border-radius: 50%;
-    width: 33px;
-    height: 33px;
-    object-fit: cover;
-    cursor: pointer;
-    transition: 0.2s;
 }
 
 .arrow {
@@ -104,12 +96,25 @@
     max-width: 46px;
     margin-bottom: 15px;
 }
-
+/* avatar below */
+.avatar {
+    border-radius: 50%;
+    width: 33px;
+    height: 33px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: var(--transition02s);
+}
 .userMain .avatar {
     width: 44px;
     height: 44px;
     margin-right: 10px;
     top: -3px;
+}
+@media (min-width: 768px) {
+    .menuDesc {
+        display: none;
+    }
 }
 
 .avatarWrapper {
@@ -152,6 +157,27 @@
     opacity: 1;
     visibility: visible;
 }
+@media (max-width: 768px) {
+    .avatarWrapper::after {
+        display: none;
+    }
+    .avatarWrapper::before {
+        display: none;
+    }
+    .avatarWrapper:hover::after,
+    .avatarWrapper:hover::before {
+        display: none;
+    }
+    .userMain .avatar {
+        width: 36px;
+        height: 36px;
+    }
+    .userMain {
+        margin-bottom: 30px;
+    }
+
+}
+/* avatar above*/
 
 .theme {
     display: flex;
@@ -162,33 +188,48 @@
 .userName {
     font-size: 19px;
     line-height: 1;
+    transition: 0.35s ease-in;
 }
 .email {
-    font-size: 14px;
-    margin-bottom: 24px;
+    font-size: 13px;
+    transition: 0.35s ease-in;
+}
+@media (max-width: 768px) {
+    .userName {
+        color: white;
+    }
+    .email {
+        color: white;
+    }
+}
+.hide {
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition02s);
+
 }
 
 .mb14 {
     margin-bottom: 18px;
 }
 .btnExit {
-    width: 100%;
-    font-size: 18px;
-    padding: 10px;
-    border: none;
-    background: rgb(136, 214, 47);
-    border-top-right-radius: 0px;
-    border-top-left-radius: 0px;
-    transition: 0.15s;
+    width: 100% !important;
+    font-size: 18px !important;
+    padding: 10px !important;
+    border: none !important;
+    background: rgb(136, 214, 47) !important;
+    border-top-right-radius: 0px !important;
+    border-top-left-radius: 0px !important;
+    transition: 0.15s !important;
 }
 .btnExit:hover {
-    background: rgb(124, 196, 43);
+    background: rgb(124, 196, 43) !important;
 }
 .btnExit:after {
-    scale: 0;
+    scale: 0 !important;
 }
 .btnExit:hover.btnExit:after {
-    scale: 0;
+    scale: 0 !important;
 }
 
 .account {
@@ -221,7 +262,7 @@
     transition: 0.2s;
 }
 
-.show{
+.show {
     opacity: 1;
     visibility: visible;
     transform: translateY(25px);

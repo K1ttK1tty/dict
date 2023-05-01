@@ -194,7 +194,6 @@ const Vocabulary = memo(function () {
     // console.log(colorObject)
     // console.log(allElementsArray)
 
-
     useEffect(() => {
 
         if (pageTheme === 'light') {
@@ -219,14 +218,14 @@ const Vocabulary = memo(function () {
     return (
         <div
             onClick={e => removeInput(e, input, chooseTheme, optionState, isUserMenuOpen, dispatch)}
-            className={'searchWrapper'}
+            className={'searchWrapper pageContent'}
         >
             <MenuVoc />
             <ModalEditCard modalChangeCard={modalChangeCard} />
             <ModalAddCards modalAdd={modalAdd} />
             <div className="CardsField">
                 <div className='wrap'>
-                    
+
                     <div className='wordsCount'>Всего слов: {cards.length} </div>
                     <div className='inputOrder'>
                         Алфавитный порядок:
