@@ -22,7 +22,7 @@ export const deleteAllEmptyThemes = (cards, allThemes, optionState, email, dispa
     dispatch(setSelectOptions(themes))
     dispatch(UpdateThemes({ email, themes }))
     dispatch(setChooseTheme(''))
-    dispatch(setOptionName('Выбрать тему'))
+    dispatch(setOptionName('Тема'))
     dispatch(setOptionState({ ...optionState, removeMark: false }))
 
 }

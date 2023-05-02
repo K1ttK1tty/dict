@@ -11,6 +11,6 @@ export const removeSelectTheme = (selectOptions, optionState, chooseTheme, email
     dispatch(setSelectOptions(themes))
     dispatch(UpdateThemes({ email, themes }))
     dispatch(setChooseTheme(''))
-    dispatch(setOptionName('Выбрать тему'))
+    dispatch(setOptionName('Тема'))
     dispatch(setOptionState({ ...optionState, removeMark: false }))
 }

@@ -4,14 +4,13 @@ import { useCards } from '../hooks/useCards';
 //components
 import MenuVoc from '../components/UI/MenuVoc/MenuVoc';
 import SetCard from '../components/UI/WordCard/SetCard';
-import BtnAddCard from '../components/UI/BtnAddCard/BtnAddCard';
-import MySelect from '../components/UI/MySelect/MySelect';
 import ModalEditCard from '../components/UI/ModalEditCard/ModalEditCard';
 import ModalAddCards from '../components/UI/ModalAddCards/ModalAddCards';
 import RemoveTheme from '../components/RemoveTheme';
+import CardsControl from '../components/UI/CardsControl/CardsControl';
+import CardsInfo from '../components/UI/CardsInfo/CardsInfo';
 //functions 
 import { removeInput } from '../functions/removeInput';
-import { modalAddCard } from '../functions/modalAddCard';
 //styles
 import '../styles/theme.css';
 import '../styles/Vocabulary.css';
@@ -27,7 +26,6 @@ import {
     setCurrentColor,
     setColorsBeforePaint
 } from '../store/reducers/ColorPicker';
-import { setToggleWordsOrder } from '../store/reducers/authorization/Authorization/AuthSlice';
 const Vocabulary = memo(function () {
     // authorization
     const { toggleWordsOrder, cards } = useSelector(state => state.AuthSlice);
@@ -37,7 +35,7 @@ const Vocabulary = memo(function () {
     const dispatch = useDispatch();
     const modalAdd = useRef();
     const modalChangeCard = useRef();
-    //color-pixel
+    //color-pixelwindow
     const pageTheme = useSelector(state => state.ColorPicker.pageTheme)
     const colorModeOn = useSelector(state => state.ColorPicker.colorModeOn)
     const colorRemoveMode = useSelector(state => state.ColorPicker.colorRemoveMode)
@@ -225,21 +223,12 @@ const Vocabulary = memo(function () {
             <ModalAddCards modalAdd={modalAdd} />
             <div className="CardsField">
                 <div className='wrap'>
-
-                    <div className='wordsCount'>Всего слов: {cards.length} </div>
-                    <div className='inputOrder'>
-                        Алфавитный порядок:
-                        <input
-                            defaultChecked={true}
-                            onChange={() => dispatch(setToggleWordsOrder())}
-                            type="checkbox"
-                        />
-                    </div>
-                    <BtnAddCard
-                        onClick={() => modalAddCard(modalAdd, dispatch)}
-                        dinamicclassname={btnStyle.btnCreateCard}
-                        children='Создать карточку'
+                    <CardsControl
+                        btnstyles={btnStyle.btnCreateCard}
+                        modalAdd={modalAdd}
                     />
+                    <CardsInfo cards={cards} />
+
 
 
                     {/* <ColorPicker color={color} setColor={setColor} />
@@ -269,7 +258,6 @@ const Vocabulary = memo(function () {
                     >Убрать все цвета</div> */}
 
 
-                    <MySelect />
                     {selectedAndSearchedWord.length ?
                         < SetCard
                             Cards={selectedAndSearchedWord}

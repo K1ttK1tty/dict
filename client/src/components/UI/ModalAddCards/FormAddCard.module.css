@@ -1,10 +1,10 @@
 .inputFormAddCard {
     width: 100%;
     display: block;
-    margin-bottom: 28px;
     border: none;
     border-bottom: 1px solid black;
     border-radius: 0px;
+    margin-bottom: 28px;
 }
 .btnFormAddCard {
     width: 100%;
@@ -12,6 +12,21 @@
     border: none;
 }
 .btnCreateCard {
-    margin: 0px auto 15px;
+    width: 170px;
+    padding: 7px;
+    margin: 0px auto 10px;
     display: block;
+}
+.btnCreateCard:after {
+    scale: 0 !important;
+}
+.btnCreateCard:hover.btnCreateCard:after {
+    scale: 0 !important;
+}
+@media (max-width: 768px) {
+    .btnCreateCard {
+        margin: 0px;
+        padding: 7px 3px;
+        height: 40px;
+    }
 }

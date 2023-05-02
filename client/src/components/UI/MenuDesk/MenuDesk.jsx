@@ -16,7 +16,7 @@ const MenuDesk = memo(function () {
 
     useEffect(() => {
         const page = document.querySelector('.pageContent');
-        if (menuOpen) page.style.transform = 'translateX(270px)';
+        if (menuOpen) page.style.transform = 'translateX(225px)';
         else page.style.transform = 'translateX(0px)';
 
     }, [menuOpen]);

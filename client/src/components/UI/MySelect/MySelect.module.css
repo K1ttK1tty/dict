@@ -1,15 +1,15 @@
 .select {
-    width: 190px;
-    background: white;
-    color: black;
-    border: 1px solid rgba(0, 0, 0, 0.4);
-    font-size: 18px;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: 0.3s;
+    display: block;
     position: relative;
-    display: inline-block;
-    margin-bottom: 25px;
+    width: 180px;
+    font-size: 18px;
+    color: black;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    transition: 0.3s;
+    margin: 0px auto;
+    cursor: pointer;
 }
 .title {
     display: flex;
@@ -30,6 +30,11 @@
     justify-content: center;
     align-items: center;
 }
+@media (max-width:375px){
+    .selectIcon {
+        display: none;
+    }
+}
 .selectValue {
     font-size: 17px;
     overflow: hidden;
@@ -46,21 +51,56 @@
     position: absolute;
     left: 0px;
     top: 40px;
-    width: 190px;
+    width: 180px;
     background: white;
     z-index: 0;
     border-radius: 14px;
     border: 1px solid rgba(0, 0, 0, 0.4);
-    z-index: 1;
+    z-index: 2;
     overflow: hidden;
+}
+@media (max-width: 768px) {
+    .select {
+        font-size: 17px;
+        width: 110px;
+        height: 45px;
+        margin: 0px;
+    }
+    .options {
+        top: 45px;
+        width: 110px;
+    }
+    .title {
+        height: 100%;
+        padding: 5px 10px;
+    }
+    .selectValue {
+        width: 100%;
+        text-align: center;
+    }
 }
 .removeTheme {
     font-size: 37px;
-    color: var(--select-remove-icon);
+    color: rgb(136, 214, 47);
     position: absolute;
     top: 7px;
     right: -30px;
     line-height: 0.5;
     padding: 2px;
     transition: var(--transition-theme);
+}
+@media (max-width:768px){
+    .removeTheme {
+        font-size: 45px;
+        top: 7px;
+        right: -42px;
+    }
+}
+
+@media (max-width:318px){
+    .removeTheme {
+        font-size: 50px;
+        top: 58px;
+        right: 10px;
+    }
 }

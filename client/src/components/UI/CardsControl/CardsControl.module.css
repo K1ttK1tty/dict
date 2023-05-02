@@ -1,0 +1,107 @@
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.wrapper {
+    position: fixed;
+    top: 90px;
+    right: 200px;
+    color: rgb(219, 219, 219);
+    background-color: #dddddd;
+    width: 280px;
+    height: 200px;
+    border-radius: 12px;
+    border: 1px solid rgb(136, 214, 47);
+    transition: 0.2s;
+    box-shadow: 0px 0px 18px 2px rgba(0, 0, 0, 0.7);
+    z-index: 1;
+}
+.wrapperGrab {
+    cursor: grab;
+}
+.cardsOptions {
+    margin-bottom: 22px;
+}
+h2 {
+    font-size: 19px;
+}
+.title {
+    margin-bottom: 14px;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 13px;
+}
+.pinIcon {
+    fill: rgb(0, 0, 0);
+    transition: 0.2s;
+    cursor: pointer;
+}
+.buttonChangePosition {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    width: 100%;
+    max-width: none;
+    font-size: 17px;
+    padding: 5px;
+    background: rgb(136, 214, 47);
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+    transition: 0.2s;
+}
+.buttonChangePosition:hover {
+    background: rgb(124, 196, 43) !important;
+}
+.buttonChangePosition:after {
+    scale: 0 !important;
+}
+.buttonChangePosition:hover.buttonChangePosition:after {
+    scale: 0 !important;
+}
+.pinIcon:hover {
+    fill: rgb(136, 214, 47);
+}
+
+/* in mobile - only attached  */
+.plus {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    color: rgb(136, 214, 47);
+    min-width: 45px;
+    height: 45px;
+    margin-right: 10px;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+}
+@media (max-width: 768px) {
+    .cardsOptions {
+        position: sticky;
+        margin: -30px auto 0px;
+        top: 50px;
+        right: 0px;
+        padding: 5px 50px 5px 10px;
+        max-width: 270px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 22px;
+        background: #24292f;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        transform: translateX(5px);
+        z-index: 1;
+    }
+}
+@media (max-width: 318px) {
+    .cardsOptions {
+        padding: 5px 15px;
+    }
+}

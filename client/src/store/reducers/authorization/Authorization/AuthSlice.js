@@ -30,13 +30,12 @@ const initialState = {
     },
     toggleWordsOrder: true,
     // select
-    optionName: 'Выбрать тему',
+    optionName: 'Тема',
     optionState: { open: false, removeMark: false },
     selectOptions: [],
     chooseTheme: '',
     // servers response
     serverMessage: '',
-
 }
 export const AuthSlice = createSlice({
     name: 'AuthSlice',

@@ -25,7 +25,7 @@ const MySelect = memo(function () {
         dispatch(setOptionState({ open: false, removeMark: true })) //
     }
     function removeTheme() {
-        dispatch(setOptionName('Выбрать тему'))
+        dispatch(setOptionName('Тема'))
         dispatch(setChooseTheme(''))
         dispatch(setOptionState({ open: false, removeMark: false })) //
     }
@@ -60,7 +60,7 @@ const MySelect = memo(function () {
             }
             <CSSTransition
                 in={optionState.open}
-                timeout={220}
+                timeout={180}
                 classNames="stateOption"
                 mountOnEnter
                 unmountOnExit

@@ -26,7 +26,6 @@
     .menu__container {
         justify-content: right;
     }
-    
 }
 
 @media (max-width: 1250px) {
@@ -38,9 +37,9 @@
     position: relative;
     height: 100%;
     width: 100%;
-    transition: var(--transition02s);
+    transition: 0.27s;
 }
-@media (max-width:768px){
+@media (max-width: 768px) {
     .searchWrapper {
         margin-left: 30px;
     }
@@ -60,6 +59,13 @@
     font-size: 17px;
     top: 0px;
     right: 0px;
+    margin-bottom: 30px;
+}
+@media (max-width: 768px) {
+    .inputOrder,
+    .wordsCount {
+        text-align: left;
+    }
 }
 
 .menu__logo {
@@ -105,7 +111,7 @@
 }
 .CardsField {
     background-color: var(--background-cards);
-    padding-top: 90px;
+    padding-top: 30px;
     min-height: 100%;
     height: auto;
     padding-bottom: 15px;
@@ -120,7 +126,6 @@
         transform: translateY(0px);
     }
 }
-
 .stateOption-enter {
     opacity: 0;
 }
@@ -195,10 +200,9 @@
     width: 24px;
     transition: var(--transition-theme);
 }
-@media (max-width:768px){
+@media (max-width: 768px) {
     .iconSearchForMenu {
         position: relative;
-
     }
 }
 .cardIconsize {
