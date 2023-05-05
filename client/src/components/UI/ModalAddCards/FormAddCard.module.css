@@ -13,20 +13,24 @@
 }
 .btnCreateCard {
     width: 170px;
-    padding: 7px;
-    margin: 0px auto 10px;
+    height: 35px;
+    padding: 7px ;
+    margin: 0px auto;
     display: block;
+    transition: 0s;
+}
+.btnMoved{
+    margin-bottom: 10px;
 }
 .btnCreateCard:after {
     scale: 0 !important;
 }
+
 .btnCreateCard:hover.btnCreateCard:after {
     scale: 0 !important;
 }
 @media (max-width: 768px) {
     .btnCreateCard {
-        margin: 0px;
-        padding: 7px 3px;
-        height: 40px;
+        display: none;
     }
 }

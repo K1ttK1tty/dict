@@ -1,17 +1,17 @@
 import React, { useState, useRef } from 'react';
+import { isMobile } from 'react-device-detect';
 // components
 import MySelect from '../MySelect/MySelect';
 import BtnAddCard from '../BtnAddCard/BtnAddCard';
 // functions
 import { modalAddCard } from '../../../functions/modalAddCard';
-
 // styles
 import styles from './CardsControl.module.css'
 // icon
 import PinIcon from './Icons/PinIcon';
 // redux
 import { useDispatch } from 'react-redux';
-const CardsControl = function ({ btnstyles, modalAdd }) {
+const CardsControl = function ({ btnStyle, modalAdd }) {
     const dispatch = useDispatch();
 
     const windowBlock = useRef();
@@ -20,7 +20,9 @@ const CardsControl = function ({ btnstyles, modalAdd }) {
     const grabCursor = isCanMove
         ? [styles.wrapperGrab, styles.wrapper].join(' ')
         : styles.wrapper
-
+    const attachedMenuStyles = isMobile
+        ? {}
+        : { top: '80px', left: '0px' }
     const mouseStay = () => {
         document.onmousemove = null;
         document.body.className = '';
@@ -33,7 +35,7 @@ const CardsControl = function ({ btnstyles, modalAdd }) {
 
     const move = (element) => {
         if (!isCanMove) {
-            return false
+            return;
         }
 
         const coordinates = getCoordinates(windowBlock.current);
@@ -54,16 +56,20 @@ const CardsControl = function ({ btnstyles, modalAdd }) {
     }
     if (isAttached) {
         return (
-            <div className={styles.cardsOptions}>
-                <div className={styles.plus}>+</div>
-                {/* <BtnAddCard
+            <div style={attachedMenuStyles} className={styles.cardsOptions}>
+                {!isMobile && <PinIcon setIsAttached={setIsAttached} styles={styles.pinIcon} />}
+                <button
                     onClick={() => modalAddCard(modalAdd, dispatch)}
-                    dinamicclassname={btnstyles}
+                    className={styles.plus}
+                >+</button>
+
+                <BtnAddCard
+                    onClick={() => modalAddCard(modalAdd, dispatch)}
+                    dinamicclassname={btnStyle.btnCreateCard}
                     children='Создать карточку'
-                /> */}
+                />
                 <MySelect />
             </div>
-
         )
     }
 
@@ -75,17 +81,17 @@ const CardsControl = function ({ btnstyles, modalAdd }) {
             className={grabCursor}
         >
             <div className={styles.title}>
-                <h2>Управление карточками</h2>
-                <PinIcon setIsAttached={setIsAttached} styles={styles.pinIcon} />
+                <PinIcon setIsAttached={setIsAttached} styles={[styles.pinIcon, styles.pinIconMarginRight].join(' ')} />
+                <h2>Управление</h2>
             </div>
 
-            <div className={styles.cardsOptions}>
+            <div className={styles.cardsOptionsMoved}>
                 <BtnAddCard
-                    onClick={() => modalAddCard(modalAdd, dispatch)}
-                    dinamicclassname={btnstyles}
+                    onClick={isCanMove ? null : () => modalAddCard(modalAdd, dispatch)}
+                    dinamicclassname={[btnStyle.btnCreateCard, btnStyle.btnMoved].join(' ')}
                     children='Создать карточку'
                 />
-                <MySelect />
+                <MySelect isCanMove={isCanMove} />
             </div>
             <BtnAddCard
                 onMouseDown={e => e.preventDefault()}

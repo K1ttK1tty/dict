@@ -36,3 +36,12 @@
     visibility: visible;
     transform: translateX(0px);
 }
+@media (max-width: 375px) {
+    .wrapper {
+        width: 210px;
+    }
+    .message {
+        width: 210px;
+        padding: 10px;
+    }
+}

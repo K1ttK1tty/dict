@@ -25,6 +25,12 @@
 @media (max-width: 768px) {
     .menu__container {
         justify-content: right;
+        margin-right: 70px;
+    }
+}
+@media (max-width: 375px) {
+    .menu__container {
+        margin-right: 50px;
     }
 }
 
@@ -203,6 +209,7 @@
 @media (max-width: 768px) {
     .iconSearchForMenu {
         position: relative;
+        margin-right: 8px;
     }
 }
 .cardIconsize {

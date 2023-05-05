@@ -30,12 +30,9 @@ const Alert = memo(function () {
 
     return (
         <div className={wrapperStyles}>
-
-
             <div onClick={close} className={messageStyle}>
                 <p className={styles.text}>{serverMessage}</p>
             </div>
-
         </div>
     )
 });

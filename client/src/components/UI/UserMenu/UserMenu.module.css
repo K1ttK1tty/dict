@@ -17,12 +17,6 @@
         width: 115px;
     }
 }
-@media (max-width: 768px) {
-    .hideMenu {
-        display: none;
-        visibility: hidden;
-    }
-}
 .wrapper:hover {
     background: #383e47;
 }
@@ -38,7 +32,6 @@
     width: 75%;
     cursor: pointer;
 }
-
 .arrow {
     position: relative;
     top: 1px;
@@ -109,19 +102,15 @@
     width: 44px;
     height: 44px;
     margin-right: 10px;
+    margin-bottom: 30px;
     top: -3px;
-}
-@media (min-width: 768px) {
-    .menuDesc {
-        display: none;
-    }
 }
 
 .avatarWrapper {
     position: relative;
     max-height: 46px;
     max-width: 46px;
-    margin-right: 4px;
+    margin-right: 6px;
     cursor: pointer;
 }
 
@@ -157,28 +146,6 @@
     opacity: 1;
     visibility: visible;
 }
-@media (max-width: 768px) {
-    .avatarWrapper::after {
-        display: none;
-    }
-    .avatarWrapper::before {
-        display: none;
-    }
-    .avatarWrapper:hover::after,
-    .avatarWrapper:hover::before {
-        display: none;
-    }
-    .userMain .avatar {
-        width: 36px;
-        height: 36px;
-    }
-    .userMain {
-        margin-bottom: 30px;
-    }
-
-}
-/* avatar above*/
-
 .theme {
     display: flex;
     align-items: center;
@@ -193,20 +160,6 @@
 .email {
     font-size: 13px;
     transition: 0.35s ease-in;
-}
-@media (max-width: 768px) {
-    .userName {
-        color: white;
-    }
-    .email {
-        color: white;
-    }
-}
-.hide {
-    opacity: 0;
-    visibility: hidden;
-    transition: var(--transition02s);
-
 }
 
 .mb14 {
@@ -244,7 +197,6 @@
 .icon {
     cursor: pointer;
 }
-
 .submenu {
     position: absolute;
     top: 0px;
@@ -261,7 +213,6 @@
     z-index: 3;
     transition: 0.2s;
 }
-
 .show {
     opacity: 1;
     visibility: visible;

@@ -12,13 +12,16 @@
     right: 200px;
     color: rgb(219, 219, 219);
     background-color: #dddddd;
-    width: 280px;
-    height: 200px;
+    width: 250px;
+    height: 183px;
     border-radius: 12px;
     border: 1px solid rgb(136, 214, 47);
-    transition: 0.2s;
     box-shadow: 0px 0px 18px 2px rgba(0, 0, 0, 0.7);
     z-index: 1;
+}
+.wrapperMoved {
+    width: 280px;
+    height: 200px;
 }
 .wrapperGrab {
     cursor: grab;
@@ -27,20 +30,27 @@
     margin-bottom: 22px;
 }
 h2 {
-    font-size: 19px;
+    font-size: 20px;
 }
 .title {
-    margin-bottom: 14px;
+    margin-bottom: 8px;
     color: black;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     padding: 10px 13px;
 }
 .pinIcon {
-    fill: rgb(0, 0, 0);
+    fill: white;
     transition: 0.2s;
     cursor: pointer;
+}
+.pinIconMarginRight {
+    margin-right: 10px;
+}
+@media (max-width: 768px) {
+    .pinIcon {
+        display: none;
+    }
 }
 .buttonChangePosition {
     position: absolute;
@@ -53,7 +63,7 @@ h2 {
     background: rgb(136, 214, 47);
     border-top-right-radius: 0px;
     border-top-left-radius: 0px;
-    transition: 0.2s;
+    transition: 0s;
 }
 .buttonChangePosition:hover {
     background: rgb(124, 196, 43) !important;
@@ -61,6 +71,7 @@ h2 {
 .buttonChangePosition:after {
     scale: 0 !important;
 }
+
 .buttonChangePosition:hover.buttonChangePosition:after {
     scale: 0 !important;
 }
@@ -70,38 +81,55 @@ h2 {
 
 /* in mobile - only attached  */
 .plus {
+    display: none;
+}
+.cardsOptions {
+    position: fixed;
+    margin: 0px auto;
+    top: 80px;
+    right: 0px;
+    left: 0px;
+    padding: 7px 30px 7px 13px;
+    max-width: 500px;
+    max-height: 150px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-size: 40px;
-    color: rgb(136, 214, 47);
-    min-width: 45px;
-    height: 45px;
-    margin-right: 10px;
-    border-radius: 10px;
-    background-color: rgb(255, 255, 255);
+    justify-content: space-between;
+    background: #24292f;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    z-index: 1;
+    transform: translate(-6px, -30px);
 }
+
+@media (min-width: 768px) {
+    .cardsOptionsAttached {
+        display: none;
+    }
+}
+
 @media (max-width: 768px) {
-    .cardsOptions {
-        position: sticky;
-        margin: -30px auto 0px;
-        top: 50px;
-        right: 0px;
-        padding: 5px 50px 5px 10px;
-        max-width: 270px;
+    .plus {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        margin-bottom: 22px;
-        background: #24292f;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-        transform: translateX(5px);
-        z-index: 1;
+        justify-content: center;
+        font-size: 43px;
+        color: rgb(136, 214, 47);
+        min-width: 45px;
+        height: 45px;
+        margin-right: 10px;
+        border-radius: 10px;
+        background-color: rgb(247, 247, 247);
+        border: none;
+    }
+    .cardsOptions {
+        max-width: 230px;
+        left: 70px;
+        padding: 5px 50px 5px 10px;
     }
 }
 @media (max-width: 318px) {
     .cardsOptions {
-        padding: 5px 15px;
+        padding: 5px 30px 5px 10px;
     }
 }

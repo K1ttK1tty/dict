@@ -1,8 +1,7 @@
 // libs
 import React, { useState, useEffect, memo } from 'react';
 import { Link } from 'react-router-dom';
-// components
-import AvatarWithInfo from '../Avatar/AvatarWithInfo';
+import { isMobile } from 'react-device-detect';
 // icons
 import Icon1 from './icons/Icon1';
 import Icon2 from './icons/Icon2';
@@ -12,29 +11,35 @@ import Icon2 from './icons/Icon2';
 import cl from './MenuDesk.module.css';
 const MenuDesk = memo(function () {
     const [menuOpen, setMenuOpen] = useState(false);
-    const isMenuOpen = menuOpen ? [cl.back, cl.menuOpen].join(' ') : cl.back;
-
+    const isMenuOpen = menuOpen
+        ? (isMobile ? [cl.back, cl.menuOpen].join(' ') : cl.back)
+        : (isMobile ? cl.back : [cl.back, cl.canHover].join(' '));
+    const showMenuCloseIcon = menuOpen
+        ? [cl.removeMenuIconShow, cl.removeMenuIcon].join(' ')
+        : cl.removeMenuIcon
     useEffect(() => {
         const page = document.querySelector('.pageContent');
         if (menuOpen) page.style.transform = 'translateX(225px)';
-        else page.style.transform = 'translateX(0px)';
-
+        else page.style.transform = null;
     }, [menuOpen]);
-    const closeMenu = (e) => {
+    const openMenu = (e) => {
         e.stopPropagation();
-        if (e.target.className === isMenuOpen) {
-            setMenuOpen(false);
-        }
+        if (!menuOpen) setMenuOpen(true);
+        else if (e.target.className === isMenuOpen) setMenuOpen(false);
     }
 
     return (
-        <nav onClick={closeMenu} >
-            <div onClick={() => setMenuOpen(true)} className={isMenuOpen}>
+        <nav onClick={isMobile ? openMenu : null} >
+            <div className={isMenuOpen}>
                 <div className={cl.content}>
-                    <AvatarWithInfo
-                        isMenuOpen={menuOpen}
-                        setFunction={() => setMenuOpen(prev => !prev)}
-                    />
+                    {
+                        isMobile &&
+                        <button
+                            className={showMenuCloseIcon}
+                            onClick={() => setMenuOpen(false)}
+                        >&times;</button>
+                    }
+
                     <ul className={cl.ulMmenu}>
                         <li className={cl.ulMenu__item}>
                             <span onClick={e => e.stopPropagation()} className={cl.spanIcons}>
@@ -70,7 +75,7 @@ const MenuDesk = memo(function () {
                     </a> */}
                 </div>
             </div>
-        </nav>
+        </nav >
     )
 });
 export default MenuDesk;

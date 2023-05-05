@@ -23,8 +23,8 @@ nav {
     position: fixed;
     height: 100%;
     width: 70px;
-    padding: 75px 20px;
-    transition: var(--transition02s);
+    padding: 80px 19px 20px 20px;
+    transition: 0.25s;
     z-index: 12;
     box-shadow: var(--nav-menu-shadow);
     border-right: 1px solid rgba(255, 255, 255, 0.15);
@@ -59,6 +59,7 @@ nav {
     margin-bottom: 19px;
     transition: var(--transition02s);
     height: 25.8px;
+    min-width: 25px;
 }
 .spanIcons {
     cursor: pointer;
@@ -103,28 +104,12 @@ nav {
     transition: var(--transition02s);
 }
 
-.callBackSpan {
-    opacity: var(--opacity0);
-    visibility: var(--visHid);
-    transition: var(--transition02s);
-    display: block;
-}
-
-.icon4Class {
-    position: relative;
-    top: -2px;
-    width: 23px;
-    height: 23px;
-    margin-right: 0px;
-    transition: var(--transition02s);
-}
-
 @media (min-width: 768px) {
-    .back:hover {
+    .canHover:hover {
         width: 300px;
         transition: var(--transition02s);
     }
-    .back:hover .ulMmenu::after {
+    .canHover:hover .ulMmenu::after {
         position: absolute;
         top: 0px;
         left: 0px;
@@ -133,19 +118,19 @@ nav {
         content: "";
         z-index: -10;
     }
-    .back:hover .callBackSpan {
+    .canHover:hover .callBackSpan {
         font-size: 16px;
         opacity: var(--opacity1);
         visibility: var(--visIn);
     }
-    .back:hover .icon4Class {
+    .canHover:hover .icon4Class {
         margin-right: 14px;
     }
-    .back:hover .swipe {
+    .canHover:hover .swipe {
         opacity: var(--opacity1);
         visibility: var(--visIn);
         font-size: var(--fzInh);
-        transition: 0.25s ease-in;
+        transition: 0.44s ease-in;
     }
 }
 
@@ -160,47 +145,32 @@ a:visited {
 }
 
 /* mobile */
-.avatar {
-    display: none;
+.callBackSpan {
+    font-size: 16px;
+    opacity: var(--opacity1);
+    visibility: var(--visIn);
 }
-@media (max-width: 768px) {
-    .back {
-        padding: 15px 15px;
-        transition: var(--transition02s);
-    }
-    .callBackSpan {
-        font-size: 16px;
-        opacity: var(--opacity1);
-        visibility: var(--visIn);
-    }
-    .icon4Class {
-        margin-right: 14px;
-    }
-    .content {
-        display: block;
-    }
-    .avatar {
-        display: block;
-        height: 35px;
-        width: 35px;
-        margin-bottom: 25px;
-    }
-    .ulMmenu,
-    .callBack {
-        width: 70%;
-    }
-    .menuOpen {
-        width: 285px;
-    }
-    .ulMenu__item {
-        min-width: 25px;
-    }
+.icon4Class {
+    margin-right: 14px;
+}
+.avatar {
+    display: block;
+    height: 35px;
+    width: 35px;
+    margin-bottom: 25px;
+}
+.ulMmenu,
+.callBack {
+    width: 70%;
+}
+.menuOpen {
+    width: 255px;
 }
 .menuOpen .swipe {
     opacity: var(--opacity1);
     visibility: var(--visIn);
     font-size: var(--fzInh);
-    transition: 0.4s ease-in;
+    transition: 0.44s ease-in;
 }
 .menuOpen .ulMmenu::after {
     position: absolute;
@@ -212,7 +182,7 @@ a:visited {
     z-index: -10;
     background-color: transparent;
 }
-.menuOpen::after{
+.menuOpen::after {
     position: fixed;
     top: 0px;
     left: 0px;
@@ -221,4 +191,20 @@ a:visited {
     content: "";
     z-index: -1;
     background-color: transparent;
+}
+.removeMenuIcon {
+    font-size: 60px;
+    color: rgb(136, 214, 47);
+    background-color: rgba(121, 89, 89, 0);
+    position: absolute;
+    top: 0px;
+    left: 20px;
+    border: none;
+    transition: var(--transition-theme);
+    visibility: hidden;
+    opacity: 0;
+}
+.removeMenuIconShow {
+    visibility: visible;
+    opacity: 1;
 }

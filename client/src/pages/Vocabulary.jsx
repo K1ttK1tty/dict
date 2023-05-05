@@ -224,7 +224,7 @@ const Vocabulary = memo(function () {
             <div className="CardsField">
                 <div className='wrap'>
                     <CardsControl
-                        btnstyles={btnStyle.btnCreateCard}
+                        btnStyle={btnStyle}
                         modalAdd={modalAdd}
                     />
                     <CardsInfo cards={cards} />

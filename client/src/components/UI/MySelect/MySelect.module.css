@@ -1,7 +1,8 @@
 .select {
     display: block;
     position: relative;
-    width: 180px;
+    width: 170px;
+    height: 35px;
     font-size: 18px;
     color: black;
     background: white;
@@ -18,7 +19,7 @@
     padding: 6px;
     box-shadow: 0px 6px 6px rgba(34, 60, 80, 0.2);
     border-radius: 12px;
-    padding: 4px 18px;
+    padding: 3px 18px;
     position: relative;
     z-index: 2;
 }
@@ -36,7 +37,7 @@
     }
 }
 .selectValue {
-    font-size: 17px;
+    font-size: 18px;
     overflow: hidden;
     color: rgba(0, 0, 0, 0.9);
 }
@@ -51,7 +52,7 @@
     position: absolute;
     left: 0px;
     top: 40px;
-    width: 180px;
+    width: 170px;
     background: white;
     z-index: 0;
     border-radius: 14px;
@@ -61,7 +62,6 @@
 }
 @media (max-width: 768px) {
     .select {
-        font-size: 17px;
         width: 110px;
         height: 45px;
         margin: 0px;
@@ -80,11 +80,11 @@
     }
 }
 .removeTheme {
-    font-size: 37px;
+    font-size: 40px;
     color: rgb(136, 214, 47);
     position: absolute;
-    top: 7px;
-    right: -30px;
+    top: 5px;
+    right: -33px;
     line-height: 0.5;
     padding: 2px;
     transition: var(--transition-theme);

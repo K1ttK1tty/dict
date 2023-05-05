@@ -13,7 +13,7 @@ import {
     setOptionState,
     setChooseTheme
 } from '../../../store/reducers/authorization/Authorization/AuthSlice';
-const MySelect = memo(function () {
+const MySelect = memo(function ({ isCanMove }) {
     const dispatch = useDispatch();
     const optionName = useSelector(state => state.AuthSlice.optionName)
     const optionState = useSelector(state => state.AuthSlice.optionState)
@@ -35,7 +35,14 @@ const MySelect = memo(function () {
         }, 200);
     }
     useEffect(() => {
-        return () => dispatch(setOptionState({ ...optionState, open: false }));
+        if (optionName !== 'Тема') {
+            dispatch(setOptionState({ ...optionState, removeMark: true }))
+        } else {
+            dispatch(setOptionState({ ...optionState, removeMark: false }))
+        }
+        return () => {
+            dispatch(setOptionState({ ...optionState, open: false }))
+        }
     }, []);
 
     return (
@@ -46,10 +53,10 @@ const MySelect = memo(function () {
             tabIndex='0'
         >
             <div
-                onClick={() => dispatch(setOptionState({ ...optionState, open: !optionState.open }))}
+                onClick={isCanMove ? null : () => dispatch(setOptionState({ ...optionState, open: !optionState.open }))}
                 className={[styles.title, 'ifNotThisThenClose'].join(' ')}>
                 <div
-                    onClick={() => dispatch(setOptionState({ ...optionState, open: !optionState.open }))}
+                    onClick={isCanMove ? null : () => dispatch(setOptionState({ ...optionState, open: !optionState.open }))}
                     className={[styles.selectValue, 'ifNotThisThenClose'].join(' ')}
                 >{optionName}</div>
                 <div className={styles.selectIcon}><IconSelect /></div>
