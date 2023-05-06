@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-import { isMobile } from 'react-device-detect';
 // components 
 import Avatar from './Avatar';
 // styles

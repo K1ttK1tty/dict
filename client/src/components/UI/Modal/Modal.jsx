@@ -4,14 +4,17 @@ import { keyClose } from '../../../functions/keyClose';
 import { removeModal } from '../../../functions/removeModal';
 //styles
 import style from '../ModalEditCard/Modal.module.css'
-const Modal = memo(function ({ title, content, isModal, setModal, setFields, dispatch }) {
-
+// redux
+import { useDispatch } from 'react-redux';
+const Modal = memo(function ({ title, content, isModal, setModal, setFields }) {
+    const dispatch = useDispatch();
     let visible = isModal
         ? [style.modal, style.active].join(' ')
         : style.modal;
 
     const isAvatarModal = 'Загрузка нового аватара'
     return (
+
         <div
             tabIndex={'1'}
             className={visible}

@@ -15,7 +15,6 @@ const Info = memo(function ({ isUserMenuOpen }) {
         if (!isUserMenuOpen) setIsOpen(false)
     }, [isUserMenuOpen]);
 
-
     const [isOpen, setIsOpen] = useState(false);
     const submenuStyles = (isOpen && isUserMenuOpen) ?
         [styles.show, styles.submenu].join(' ')

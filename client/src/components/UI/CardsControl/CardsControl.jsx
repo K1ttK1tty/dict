@@ -56,7 +56,7 @@ const CardsControl = function ({ btnStyle, modalAdd }) {
     }
     if (isAttached) {
         return (
-            <div style={attachedMenuStyles} className={styles.cardsOptions}>
+            <div style={attachedMenuStyles} className={[styles.cardsOptions, 'CardsControl'].join(' ')}>
                 {!isMobile && <PinIcon setIsAttached={setIsAttached} styles={styles.pinIcon} />}
                 <button
                     onClick={() => modalAddCard(modalAdd, dispatch)}

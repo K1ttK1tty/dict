@@ -50,10 +50,8 @@ const ModalAddAvatar = memo(function ({ isModal, setModal }) {
                     setFiles={setFiles}
                     email={email}
                     setModal={setModal}
-                    dispatch={dispatch}
                 />
             }
-
         />
     )
 });

@@ -19,8 +19,16 @@ const MenuDesk = memo(function () {
         : cl.removeMenuIcon
     useEffect(() => {
         const page = document.querySelector('.pageContent');
-        if (menuOpen) page.style.transform = 'translateX(225px)';
-        else page.style.transform = null;
+        const CardsControl = document.querySelector('.CardsControl');
+        if (menuOpen) {
+            page.style.right = '-220px'
+            CardsControl.classList.add(cl.marginCardsControl)
+        
+        }
+        else {
+            page.style.right = '0px'
+            CardsControl.classList.remove(cl.marginCardsControl)
+        }
     }, [menuOpen]);
     const openMenu = (e) => {
         e.stopPropagation();

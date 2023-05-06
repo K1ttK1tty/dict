@@ -12,7 +12,7 @@ import styles from './UserMenu.module.css'
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { Logout } from '../../../store/reducers/authorization/Authorization/ActionCreator';
-const UserMenu = memo(function ({isActivated, setModal, modal }) {
+const UserMenu = memo(function ({ isActivated, setModal, modal }) {
     const dispatch = useDispatch();
     const { isUserMenuOpen } = useSelector(state => state.upMenu)
 
@@ -42,14 +42,14 @@ const UserMenu = memo(function ({isActivated, setModal, modal }) {
             <div className={styles.contentWrapper}>
                 <AvatarWithInfo setFunction={() => setModal(true)} />
 
-                <div className={styles.activation}>
-                    <p className={[styles.account, styles.mb14].join(' ')}>
+                <div className={[styles.activation, styles.mb14].join(' ')}>
+                    <p className={styles.account}>
                         Аккаунт: {isActivated ? 'активирован' : 'не активирован'}
                     </p>
-                    {isActivated ? '' : <Info isUserMenuOpen={isUserMenuOpen} />}
+                    {!isActivated && <Info isUserMenuOpen={isUserMenuOpen} />}
 
                 </div>
-                <div className={[styles.theme, styles.mb14].join(' ')}>
+                <div className={styles.theme}>
                     <p>Тема: </p>
                     <div><ThemeChanger /></div>
                 </div>

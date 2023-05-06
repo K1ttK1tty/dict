@@ -100,6 +100,7 @@ h2 {
     border-bottom-right-radius: 10px;
     z-index: 1;
     transform: translate(-6px, -30px);
+    transition: 0.27s;
 }
 
 @media (min-width: 768px) {
@@ -124,8 +125,15 @@ h2 {
     }
     .cardsOptions {
         max-width: 230px;
-        left: 70px;
+        left: 60px;
         padding: 5px 50px 5px 10px;
+    }
+}
+
+@media (max-width: 374px) {
+    .cardsOptions {
+        left: 68px;
+        max-width:200px;
     }
 }
 @media (max-width: 318px) {

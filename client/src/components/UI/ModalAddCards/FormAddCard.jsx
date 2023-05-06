@@ -19,19 +19,19 @@ const FormAddCard = memo(function ({ modalAdd }) {
             <InputAddCard
                 modalAdd={modalAdd}
                 dinamicclassname={styles.inputFormAddCard}
-                placeholder={'Word'}
+                placeholder={'Слово'}
                 inputValue={inputValue.word}
                 setValue={e => dispatch(setInputValue({ ...inputValue, word: e }))}
             />
             <InputAddCard
                 dinamicclassname={styles.inputFormAddCard}
-                placeholder={'Translate'}
+                placeholder={'Перевод'}
                 inputValue={inputValue.translate}
                 setValue={e => dispatch(setInputValue({ ...inputValue, translate: e }))}
             />
             <InputAddCard
                 dinamicclassname={styles.inputFormAddCard}
-                placeholder={'Theme'}
+                placeholder={'Тема'}
                 inputValue={inputValue.theme}
                 setValue={e => dispatch(setInputValue({ ...inputValue, theme: e }))}
             />

@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import { isMobile } from 'react-device-detect';
 // components
 import InputAddCard from '../InputAddCard/InputAddCard';
 import BtnAddCard from '../BtnAddCard/BtnAddCard';
@@ -6,6 +7,7 @@ import BtnAddCard from '../BtnAddCard/BtnAddCard';
 import { changeCardFields } from '../../../functions/changeCardFields';
 import { addNewTheme } from '../../../functions/addNewTheme';
 import { removeModal } from '../../../functions/removeModal';
+import { removeCard } from '../../../functions/removeCard';
 // styles
 import style from './Modal.module.css'
 // redux
@@ -19,7 +21,7 @@ const FormEditCard = memo(function ({ modalChangeCard }) {
     const { changeCard, cards, selectOptions } = useSelector(state => state.AuthSlice)
     const email = useSelector(state => state.AuthSlice?.user?.email)
 
-    function ChangeCard(e) {
+    const ChangeCard = (e) => {
         e.preventDefault();
         const newCards = changeCardFields(cards, changeCard, editCard)
         addNewTheme(selectOptions, editCard.theme, email, dispatch)
@@ -27,11 +29,15 @@ const FormEditCard = memo(function ({ modalChangeCard }) {
         dispatch(setCards(newCards))
         removeModal(setModal, dispatch)
     };
-
+    const remove = (e) => {
+        e.preventDefault();
+        removeCard(editCard.id, cards, email, dispatch)
+        removeModal(setModal, dispatch)
+    }
     return (
         <form>
             <div className={style.inputDiv}>
-                <p className={style.inputP}>Word:</p>
+                <div className={style.inputP}>Слово:</div>
                 <InputAddCard
                     modalChangeCard={modalChangeCard}
                     inputValue={editCard.word}
@@ -40,7 +46,7 @@ const FormEditCard = memo(function ({ modalChangeCard }) {
                 />
             </div>
             <div className={style.inputDiv}>
-                <p className={style.inputP}>Translate:</p>
+                <div className={style.inputP}>Перевод:</div>
                 <InputAddCard
                     inputValue={editCard.translate}
                     setValue={e => dispatch(setEditCard({ ...editCard, translate: e }))}
@@ -48,19 +54,30 @@ const FormEditCard = memo(function ({ modalChangeCard }) {
                 />
             </div>
             <div className={style.inputDiv}>
-                <p className={style.inputP}>Theme: </p>
+                <div className={style.inputP}>Тема: </div>
                 <InputAddCard
                     inputValue={editCard.theme}
                     setValue={e => dispatch(setEditCard({ ...editCard, theme: e }))}
                     dinamicclassname={style.inputFormEditCard}
                 />
             </div>
-            <BtnAddCard
-                aria={'Изменить'}
-                onClick={ChangeCard}
-                dinamicclassname={style.btnFormEditCard}
-                children='Изменить'
-            />
+            <div className={style.buttonsBlock}>
+                {
+                    isMobile && <BtnAddCard
+                        aria={'Удалить'}
+                        onClick={remove}
+                        // () => removeCard(card.id, cards, user.email, dispatch)
+                        dinamicclassname={[style.btnFormEditCard, style.removeButtonOnMobile].join(' ')}
+                        children='Удалить'
+                    />
+                }
+                <BtnAddCard
+                    aria={'Изменить'}
+                    onClick={ChangeCard}
+                    dinamicclassname={style.btnFormEditCard}
+                    children='Изменить'
+                />
+            </div>
         </form >
     )
 });

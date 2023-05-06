@@ -208,3 +208,13 @@ a:visited {
     visibility: visible;
     opacity: 1;
 }
+/* for cards control block */
+.marginCardsControl{
+    right: -440px;
+}
+@media (max-width:768px){
+    .marginCardsControl{
+        right: -1000px;
+    }
+
+}

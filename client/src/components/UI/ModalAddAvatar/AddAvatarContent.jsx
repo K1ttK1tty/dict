@@ -7,8 +7,9 @@ import styles from './AddAvatarContent.module.css'
 // redux
 import { RemoveAvatar } from '../../../store/reducers/authorization/Authorization/ActionCreator';
 import { setAvatar } from '../../../store/reducers/authorization/Authorization/AuthSlice';
-const AddAvatarContent = memo(function ({ changeFile, files, upload, setFiles, email, setModal, dispatch }) {
-
+import { useDispatch } from 'react-redux';
+const AddAvatarContent = memo(function ({ changeFile, files, upload, setFiles, email, setModal }) {
+    const dispatch = useDispatch();
     const element = useRef()
     const setFocus = () => {
         setTimeout(() => {

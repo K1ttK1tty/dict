@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 const Question = memo(function ({ style, setIsOpen }) {
     return (
 
-        <svg onClick={() => setIsOpen(prev => !prev)} className={style} fill="#000000" height="20px" width="20px" viewBox="0 0 512 512" >
+        <svg onClick={() => setIsOpen(prev => !prev)} className={style} fill="#000000"  viewBox="0 0 512 512" >
 
             <path d="M256,0C114.62,0,0,114.62,0,256s114.62,256,256,256s256-114.62,256-256S397.38,0,256,0z M256,486.4
 			C128.956,486.4,25.6,383.044,25.6,256S128.956,25.6,256,25.6S486.4,128.956,486.4,256S383.044,486.4,256,486.4z"/>

@@ -8,9 +8,8 @@
     width: 100%;
     background-color: #24292f;
     box-shadow: 0px 15px 45px rgba(0, 0, 0, 0.15);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.164);
     transition: var(--transition-theme);
-    z-index: 3;
+    z-index: 13;
 }
 .menu__container {
     margin: 0px auto;
@@ -71,6 +70,7 @@
     .inputOrder,
     .wordsCount {
         text-align: left;
+        margin-left: 18px;
     }
 }
 
@@ -117,7 +117,7 @@
 }
 .CardsField {
     background-color: var(--background-cards);
-    padding-top: 30px;
+    padding-top: 65px;
     min-height: 100%;
     height: auto;
     padding-bottom: 15px;

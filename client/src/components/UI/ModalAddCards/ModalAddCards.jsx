@@ -21,8 +21,6 @@ const ModalAddCards = memo(function ({ modalAdd }) {
             setModal={setIsModalAddCardActive}
             setFields={setInputValue}
             content={<FormAddCard modalAdd={modalAdd} />}
-            dispatch={dispatch}
-
         />
     )
 });

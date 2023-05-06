@@ -258,12 +258,14 @@ const Vocabulary = memo(function () {
                     >Убрать все цвета</div> */}
 
 
-                    {selectedAndSearchedWord.length ?
-                        < SetCard
-                            Cards={selectedAndSearchedWord}
-                            modalChangeCard={modalChangeCard}
-                        />
-                        : <RemoveTheme chooseTheme={chooseTheme} />}
+                    {
+                        selectedAndSearchedWord.length
+                            ? < SetCard
+                                Cards={selectedAndSearchedWord}
+                                modalChangeCard={modalChangeCard}
+                            />
+                            : <RemoveTheme chooseTheme={chooseTheme} />
+                    }
                 </div>
             </div>
         </div >
