@@ -11,23 +11,24 @@ import Icon2 from './icons/Icon2';
 import cl from './MenuDesk.module.css';
 const MenuDesk = memo(function () {
     const [menuOpen, setMenuOpen] = useState(false);
+
     const isMenuOpen = menuOpen
         ? (isMobile ? [cl.back, cl.menuOpen].join(' ') : cl.back)
         : (isMobile ? cl.back : [cl.back, cl.canHover].join(' '));
     const showMenuCloseIcon = menuOpen
         ? [cl.removeMenuIconShow, cl.removeMenuIcon].join(' ')
         : cl.removeMenuIcon
+
     useEffect(() => {
         const page = document.querySelector('.pageContent');
         const CardsControl = document.querySelector('.CardsControl');
-        if (menuOpen) {
+        if (menuOpen && CardsControl) {
             page.style.right = '-220px'
-            CardsControl.classList.add(cl.marginCardsControl)
-        
+            CardsControl.classList.add(cl.rightCardsControl)
         }
-        else {
+        else if(CardsControl) {
             page.style.right = '0px'
-            CardsControl.classList.remove(cl.marginCardsControl)
+            CardsControl.classList.remove(cl.rightCardsControl)
         }
     }, [menuOpen]);
     const openMenu = (e) => {
@@ -35,7 +36,15 @@ const MenuDesk = memo(function () {
         if (!menuOpen) setMenuOpen(true);
         else if (e.target.className === isMenuOpen) setMenuOpen(false);
     }
-
+    const changePage = () => {
+        const CardsControl = document.querySelector('.CardsControl');
+        if (CardsControl) {
+            const page = document.querySelector('.pageContent');
+            page.style.right = '0px'
+            CardsControl.classList.remove(cl.rightCardsControl)
+        }
+        setMenuOpen(false)
+    }
     return (
         <nav onClick={isMobile ? openMenu : null} >
             <div className={isMenuOpen}>
@@ -51,18 +60,18 @@ const MenuDesk = memo(function () {
                     <ul className={cl.ulMmenu}>
                         <li className={cl.ulMenu__item}>
                             <span onClick={e => e.stopPropagation()} className={cl.spanIcons}>
-                                <Link onClick={() => setMenuOpen(false)} to="/posts">
+                                <Link className={cl.navigationLink} onClick={changePage} to="/posts">
                                     <Icon2 className={cl.colorIcon} />
-                                    <span className={cl.swipe}>Словарь</span>
+                                    <div className={cl.swipe}>Словарь</div>
                                 </Link>
                             </span>
                         </li>
 
                         <li className={cl.ulMenu__item}>
                             <span onClick={e => e.stopPropagation()} className={cl.spanIcons}>
-                                <Link onClick={() => setMenuOpen(false)} to="/games">
+                                <Link className={cl.navigationLink} onClick={changePage} to="/games">
                                     <Icon1 className={cl.colorIcon} />
-                                    <span className={cl.swipe}>Мини игры</span>
+                                    <div className={cl.swipe}>Мини игры</div>
                                 </Link>
                             </span>
                         </li>

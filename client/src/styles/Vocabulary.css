@@ -49,31 +49,9 @@
         margin-left: 30px;
     }
 }
-.wordsCount {
-    color: rgba(0, 0, 0, 0.8);
-    text-align: right;
-    padding-right: 6px;
-    font-size: 17px;
-    top: 0px;
-    right: 0px;
+.paddingTop124 {
+    padding-top: 124px !important;
 }
-
-.inputOrder {
-    color: rgba(0, 0, 0, 0.8);
-    text-align: right;
-    font-size: 17px;
-    top: 0px;
-    right: 0px;
-    margin-bottom: 30px;
-}
-@media (max-width: 768px) {
-    .inputOrder,
-    .wordsCount {
-        text-align: left;
-        margin-left: 18px;
-    }
-}
-
 .menu__logo {
     font-size: 20px;
     color: rgb(136, 214, 47);
@@ -117,11 +95,11 @@
 }
 .CardsField {
     background-color: var(--background-cards);
-    padding-top: 65px;
+    padding-top: 72px;
     min-height: 100%;
     height: auto;
     padding-bottom: 15px;
-    transition: var(--transition-theme);
+    /* transition: var(--transition-theme); */
 }
 
 @keyframes appear {

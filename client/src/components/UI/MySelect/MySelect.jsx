@@ -18,6 +18,9 @@ const MySelect = memo(function ({ isCanMove }) {
     const optionName = useSelector(state => state.AuthSlice.optionName)
     const optionState = useSelector(state => state.AuthSlice.optionState)
     const selectElement = useRef()
+    const isCanMoveFunction = isCanMove
+        ? null :
+        () => dispatch(setOptionState({ ...optionState, open: !optionState.open }))
 
     function replaceOption(el) {
         dispatch(setOptionName(el.target.innerText))
@@ -53,17 +56,20 @@ const MySelect = memo(function ({ isCanMove }) {
             tabIndex='0'
         >
             <div
-                onClick={isCanMove ? null : () => dispatch(setOptionState({ ...optionState, open: !optionState.open }))}
-                className={[styles.title, 'ifNotThisThenClose'].join(' ')}>
+                onClick={isCanMoveFunction}
+                className={[styles.title, 'ifNotThisThenClose'].join(' ')}
+            >
                 <div
-                    onClick={isCanMove ? null : () => dispatch(setOptionState({ ...optionState, open: !optionState.open }))}
+                    onClick={isCanMoveFunction}
                     className={[styles.selectValue, 'ifNotThisThenClose'].join(' ')}
-                >{optionName}</div>
+                >
+                    {optionName}
+                </div>
                 <div className={styles.selectIcon}><IconSelect /></div>
             </div>
             {
                 optionState.removeMark &&
-                <div id='close' onClick={removeTheme} className={styles.removeTheme}>&times;</div>
+                <button id='close' onClick={removeTheme} className={styles.removeTheme}>&times;</button>
             }
             <CSSTransition
                 in={optionState.open}

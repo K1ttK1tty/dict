@@ -31,7 +31,7 @@
     justify-content: center;
     align-items: center;
 }
-@media (max-width:375px){
+@media (max-width: 375px) {
     .selectIcon {
         display: none;
     }
@@ -86,10 +86,13 @@
     top: 5px;
     right: -33px;
     line-height: 0.5;
+    background: transparent;
+    border: none;
     padding: 2px;
     transition: var(--transition-theme);
+    cursor: pointer;
 }
-@media (max-width:768px){
+@media (max-width: 768px) {
     .removeTheme {
         font-size: 45px;
         top: 7px;
@@ -102,10 +105,10 @@
     }
 }
 
-@media (max-width:318px){
+@media (max-width: 318px) {
     .removeTheme {
         font-size: 50px;
-        top: 58px;
+        top: 55px;
         right: 10px;
     }
     .title {

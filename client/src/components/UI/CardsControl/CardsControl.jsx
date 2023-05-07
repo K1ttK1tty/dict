@@ -3,6 +3,7 @@ import { isMobile } from 'react-device-detect';
 // components
 import MySelect from '../MySelect/MySelect';
 import BtnAddCard from '../BtnAddCard/BtnAddCard';
+import CardsInfo from '../CardsInfo/CardsInfo';
 // functions
 import { modalAddCard } from '../../../functions/modalAddCard';
 // styles
@@ -11,12 +12,11 @@ import styles from './CardsControl.module.css'
 import PinIcon from './Icons/PinIcon';
 // redux
 import { useDispatch } from 'react-redux';
-const CardsControl = function ({ btnStyle, modalAdd }) {
+const CardsControl = function ({ btnStyle, modalAdd,isAttached,setIsAttached }) {
     const dispatch = useDispatch();
 
     const windowBlock = useRef();
     const [isCanMove, setIsCanMove] = useState(false);
-    const [isAttached, setIsAttached] = useState(true);
     const grabCursor = isCanMove
         ? [styles.wrapperGrab, styles.wrapper].join(' ')
         : styles.wrapper
@@ -79,12 +79,13 @@ const CardsControl = function ({ btnStyle, modalAdd }) {
             onMouseDown={element => move(element)}
             onMouseUp={mouseStay}
             className={grabCursor}
-        >
+            >
             <div className={styles.title}>
                 <PinIcon setIsAttached={setIsAttached} styles={[styles.pinIcon, styles.pinIconMarginRight].join(' ')} />
                 <h2>Управление</h2>
             </div>
 
+            <CardsInfo isMovedBlock={true} />
             <div className={styles.cardsOptionsMoved}>
                 <BtnAddCard
                     onClick={isCanMove ? null : () => modalAddCard(modalAdd, dispatch)}

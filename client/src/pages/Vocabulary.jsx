@@ -9,6 +9,7 @@ import ModalAddCards from '../components/UI/ModalAddCards/ModalAddCards';
 import RemoveTheme from '../components/RemoveTheme';
 import CardsControl from '../components/UI/CardsControl/CardsControl';
 import CardsInfo from '../components/UI/CardsInfo/CardsInfo';
+import ScrollToTop from '../components/UI/ScrollToTop/ScrollToTop';
 //functions 
 import { removeInput } from '../functions/removeInput';
 //styles
@@ -27,6 +28,7 @@ import {
     setColorsBeforePaint
 } from '../store/reducers/ColorPicker';
 const Vocabulary = memo(function () {
+    const [isAttached, setIsAttached] = useState(true);
     // authorization
     const { toggleWordsOrder, cards } = useSelector(state => state.AuthSlice);
     //redux  
@@ -215,19 +217,23 @@ const Vocabulary = memo(function () {
 
     return (
         <div
+            // onScroll={() => console.log(document.body.scrollTop)}
             onClick={e => removeInput(e, input, chooseTheme, optionState, isUserMenuOpen, dispatch)}
             className={'searchWrapper pageContent'}
         >
+            <ScrollToTop />
             <MenuVoc />
             <ModalEditCard modalChangeCard={modalChangeCard} />
             <ModalAddCards modalAdd={modalAdd} />
-            <div className="CardsField">
+            <div className={isAttached ? 'CardsField' : 'CardsField paddingTop124'}>
                 <div className='wrap'>
                     <CardsControl
                         btnStyle={btnStyle}
                         modalAdd={modalAdd}
+                        isAttached={isAttached}
+                        setIsAttached={setIsAttached}
                     />
-                    <CardsInfo cards={cards} />
+                    {isAttached && <CardsInfo />}
 
 
 

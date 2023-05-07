@@ -6,17 +6,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setSearchWord, setInput } from '../../../store/reducers/upMenu';
 const InputSearch = memo(function () {
     const dispatch = useDispatch()
-    const searchWord = useSelector(state => state.upMenu.searchWord)
-    const input = useSelector(state => state.upMenu.input)
+    const { input } = useSelector(state => state.upMenu)
     const inputElement = useRef()
-
-    function handleKey(key) {
-        if (key.keyCode === 27) {
-            inputElement.current.blur();
-            dispatch(setSearchWord(''))
-            dispatch(setInput({ isOpen: false, after: input.after }))
-        }
-    }
 
     let isHidden = style.inputHidden;
     if (input.isOpen) {
@@ -24,16 +15,36 @@ const InputSearch = memo(function () {
         setTimeout(() => {
             inputElement.current.focus();
         }, 300);
+    } else if (inputElement.current) {
+        inputElement.current.value = ''
+        setTimeout(() => {
+            dispatch(setSearchWord(''))
+        }, 300);
     }
     const inputClass = [style.inputSearch, isHidden].join(' ')
 
+    const handleKey = (key) => {
+        if (key.keyCode === 27) {
+            inputElement.current.blur();
+            dispatch(setSearchWord(''))
+            dispatch(setInput({ isOpen: false, after: input.after }))
+        }
+    }
+
+    let typingTimeOut;
+    const searching = (value) => {
+        clearTimeout(typingTimeOut)
+        typingTimeOut = setTimeout(() => {
+            dispatch(setSearchWord(value))
+        }, 400);
+    }
+
     return <input
         onClick={e => e.stopPropagation()}
-        value={searchWord}
         placeholder={' Искать'}
         ref={inputElement}
         onKeyDown={handleKey}
-        onChange={e => dispatch(setSearchWord(e.target.value))}
+        onChange={e => searching(e.target.value)}
         className={inputClass}
     />
 });
