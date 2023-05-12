@@ -5,16 +5,13 @@ import { removeModal } from '../../../functions/removeModal';
 //styles
 import style from '../ModalEditCard/Modal.module.css'
 // redux
-import { useDispatch } from 'react-redux';
-const Modal = memo(function ({ title, content, isModal, setModal, setFields }) {
-    const dispatch = useDispatch();
+const Modal = memo(function ({ title, content, isModal, setModal, setFields, dispatch }) {
     let visible = isModal
         ? [style.modal, style.active].join(' ')
         : style.modal;
 
     const isAvatarModal = 'Загрузка нового аватара'
     return (
-
         <div
             tabIndex={'1'}
             className={visible}

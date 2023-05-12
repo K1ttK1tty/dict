@@ -14,8 +14,8 @@
 .gameCardsField {
     background-color: var(--background-cards);
     padding: 90px 0px 0px 0px;
+    height: 100%;
     min-height: 100%;
-    height: auto;
     padding-bottom: 15px;
     transition: var(--transition-theme);
 }

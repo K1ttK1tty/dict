@@ -4,7 +4,7 @@ const SetCards = memo(function ({ Cards, modalChangeCard }) {
     return (
         <>
             {Cards.map((card, index) =>
-                < Card modalChangeCard={modalChangeCard} card={card} key={card.word + index} index={index} />
+                < Card modalChangeCard={modalChangeCard} card={card} key={Math.random() + card.word} index={index} />
             )}
         </>
     )
