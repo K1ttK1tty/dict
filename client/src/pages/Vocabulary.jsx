@@ -243,27 +243,41 @@ const Vocabulary = memo(function () {
                     <div
                         className='noCLick'
                         onClick={devMode}
-                        style={{ background: colorModeOn ? 'red' : 'teal', color: 'white', width: '100px', cursor: 'pointer', marginBottom: '20px', textAlign: 'center', borderRadius: '20px', padding: '5px' }}
+                        style={
+                            { background: colorModeOn ? 'red' : 'teal', color: 'white', width: '100px',
+                             cursor: 'pointer', marginBottom: '20px', textAlign: 'center', borderRadius: '20px',
+                              padding: '5px' }
+                            }
                     >Change mode {colorModeOn ? 'on' : 'off'}</div>
 
                     <div
                         className='noCLick'
                         onClick={removeCurrent}
-                        style={{ background: colorRemoveMode ? 'green' : 'teal', color: 'white', width: '100px', cursor: 'pointer', marginBottom: '20px', textAlign: 'center', borderRadius: '20px', padding: '5px' }}
+                        style={
+                            { background: colorRemoveMode ? 'green' : 'teal', color: 'white', width: '100px',
+                             cursor: 'pointer', marginBottom: '20px', textAlign: 'center', 
+                             borderRadius: '20px', padding: '5px' }
+                            }
                     >Выборочно отменить {colorRemoveMode ? 'on' : 'off'}</div>
 
                     <div
                         className='noCLick'
                         onClick={getCurrentColor}
-                        style={{ background: getCurrentColorMode ? 'green' : 'teal', color: 'white', width: '100px', cursor: 'pointer', marginBottom: '20px', textAlign: 'center', borderRadius: '20px', padding: '5px' }}
+                        style={
+                            { background: getCurrentColorMode ? 'green' : 'teal', color: 'white',
+                             width: '100px', cursor: 'pointer', marginBottom: '20px', textAlign: 'center', 
+                             borderRadius: '20px', padding: '5px' }
+                            }
                     > {currentColor ? 'Крашу в ' + currentColor : "Копирую"}</div>
 
                     <div
                         className='noCLick'
                         onClick={removeAllColors}
-                        style={{ background: 'pink', color: 'black', width: '100px', cursor: 'pointer', marginBottom: '20px', textAlign: 'center', borderRadius: '20px', padding: '5px' }}
+                        style={{
+                             background: 'pink', color: 'black', width: '100px', cursor: 'pointer', 
+                        marginBottom: '20px', textAlign: 'center', borderRadius: '20px', padding: '5px'
+                     }}
                     >Убрать все цвета</div> */}
-
 
                     {
                         selectedAndSearchedWord.length
