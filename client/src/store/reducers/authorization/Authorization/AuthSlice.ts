@@ -1,43 +1,20 @@
+// redux lib
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+// Actions
 import {
     Login,
     Registration,
     Logout,
     CheckAuth,
     GetData,
-    UpdateCards,
-    UpdateThemes,
-    UploadAvatar,
     GetAvatar,
     activateMail
 } from './ActionCreator';
 import { SendResetPassword, refreshPassword } from '../ChangePassword/Actions';
-import { reducers } from './reducers';
-
-export interface ICards {
-    id: number;
-    theme: string;
-    translate: string;
-    word: string;
-}
-interface IUser {
-    id: number;
-    name: string;
-    email: string;
-    isActivated: boolean;
-}
-interface IChangeCard {
-    word: string;
-    translate: string;
-    theme: string;
-}
-interface IOptionState {
-    open: boolean;
-    removeMark: boolean;
-}
-
-interface IInitialState {
-    user: IUser | Record<string, never>;
+// interfaces
+import { ICards, IChangeCard, IOptionState, IUser } from './AuthTypes';
+export interface IInitialState {
+    user: IUser;
     avatar: string;
     isAuth: boolean;
     isLoading: boolean;
@@ -51,42 +28,63 @@ interface IInitialState {
     chooseTheme: string;
     serverMessage: string;
 }
-
-const initialState: IInitialState = {
-    // authorization
-    user: {},
-    avatar: '',
-    isAuth: false,
-    isLoading: false,
-    updateError: '',
-    // cards
-    cards: [],
-    changeCard: {
-        word: '',
-        translate: '',
-        theme: ''
-    },
-    toggleWordsOrder: true,
-    // select
-    optionName: 'Тема',
-    optionState: { open: false, removeMark: false },
-    selectOptions: [],
-    chooseTheme: '',
-    // servers response
-    serverMessage: '',
-};
+// state
+import { initialState } from './State';
 export const AuthSlice = createSlice({
     name: 'AuthSlice',
     initialState,
-    reducers: reducers,
+    reducers: {
+        /////////////// DELETE THIS !
+        setIsAuth(state) {
+            state.isAuth = true;
+        },
+        ////////////// DELETE THIS !
+
+        // cards
+        setCards(state, action: PayloadAction<ICards[]>) {
+            state.cards = action.payload;
+        },
+        setID(state) {
+            state.cards.map((card, index) => {
+                card.id = index + 1;
+            });
+        },
+        setChangeCard(state, action: PayloadAction<IChangeCard>) {
+            state.changeCard = action.payload;
+        },
+        setToggleWordsOrder(state) {
+            state.toggleWordsOrder = !state.toggleWordsOrder;
+        },
+        // select
+        setOptionName(state, action: PayloadAction<string>) {
+            state.optionName = action.payload;
+        },
+        setOptionState(state, action: PayloadAction<IOptionState>) {
+            state.optionState = action.payload;
+        },
+        setSelectOptions(state, action: PayloadAction<string[]>) {
+            state.selectOptions = action.payload;
+        },
+        setChooseTheme(state, action: PayloadAction<string>) {
+            state.chooseTheme = action.payload;
+        },
+        // avatar
+        setAvatar(state, action: PayloadAction<string>) {
+            state.avatar = action.payload;
+        },
+        // servers response
+        setServerMessage(state) {
+            state.serverMessage = '';
+        },
+    },
 
     extraReducers(builder) {
         //registration
         builder.addCase(Registration.fulfilled, (state, action) => {
             localStorage.setItem('token', action.payload.accessToken);
 
-            const isActivated = { ...action.payload.user, isActivated: !!action.payload.user.isActivated };
-            state.user = isActivated;
+            const userInfo = { ...action.payload.user, isActivated: !!action.payload.user.isActivated };
+            state.user = userInfo;
             state.isLoading = false;
             state.serverMessage = action.payload.message;
         });
@@ -124,8 +122,8 @@ export const AuthSlice = createSlice({
             state.cards = action.payload.userContent.userCards;
             state.selectOptions = action.payload.userContent.userThemes;
             state.isAuth = true;
-            const isActivated = { ...action.payload.user, isActivated: !!action.payload.user.isActivated };
-            state.user = isActivated;
+            const userInfo = { ...action.payload.user, isActivated: !!action.payload.user.isActivated };
+            state.user = userInfo;
             state.isLoading = false;
             state.serverMessage = action.payload.message;
         });
@@ -147,7 +145,7 @@ export const AuthSlice = createSlice({
         builder.addCase(Logout.fulfilled, (state, action) => {
             localStorage.removeItem('token');
             state.isAuth = false;
-            state.user = {};
+            state.user = { id: 0, name: '', email: '', isActivated: false };
             state.serverMessage = action.payload.message;
         });
 
@@ -156,8 +154,8 @@ export const AuthSlice = createSlice({
             console.log(action.payload);
             localStorage.setItem('token', action.payload.accessToken);
             state.isAuth = true;
-            const isActivated = { ...action.payload.user, isActivated: !!action.payload.user.isActivated };
-            state.user = isActivated;
+            const userInfo = { ...action.payload.user, isActivated: !!action.payload.user.isActivated };
+            state.user = userInfo;
             state.serverMessage = action.payload.message;
         });
 
@@ -171,7 +169,6 @@ export const AuthSlice = createSlice({
             console.log(action.payload);
             state.avatar = action.payload;
         });
-
 
         // change password
         builder.addCase(SendResetPassword.fulfilled, (state, action) => {
@@ -190,7 +187,8 @@ export const AuthSlice = createSlice({
         builder.addCase(refreshPassword.fulfilled, (state, action) => {
             localStorage.setItem('token', action.payload.accessToken);
             state.isAuth = true;
-            state.user = action.payload.user;
+            const userInfo = { ...action.payload.user, isActivated: !!action.payload.user.isActivated };
+            state.user = userInfo;
             state.serverMessage = action.payload.message;
         });
         builder.addCase(refreshPassword.rejected, (state, action) => {

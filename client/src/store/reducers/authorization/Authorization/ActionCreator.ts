@@ -1,68 +1,25 @@
+// axios lib
+import axios from 'axios';
+// api
 import $api from '../../../../api';
 import { API_URL } from '../../../../api';
-import axios from 'axios';
 // redux
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 // interfaces
-import { ICards } from './AuthSlice';
-
-interface IRegistrationProps {
-    userName: string;
-    email: string;
-    password: string;
-}
-interface IActivateMailProps {
-    id: number;
-    email: string;
-}
-interface ILoginProps {
-    email: string;
-    password: string;
-}
-interface ICheckAuth {
-    accessToken: string;
-    message: string;
-    refreshToken: string;
-    user: IUser;
-}
-interface IUser {
-    id: number;
-    name: string;
-    email: string;
-    isActivated: number;
-}
-interface IFetchError {
-    message: string;
-    errors: [] | { value: string, msg: string, param: string, location: string }
-}
-interface IUpdateCards {
-    email: string;
-    cards: ICards;
-}
-interface IUpdateThemes {
-    email: string;
-    themes: string[];
-}
-interface IUploadAvatar {
-    email: string;
-    avatar: string;
-}
-interface ILogin {
-    accessToken: string;
-    refreshToken: string;
-    message: string;
-    user: IUser;
-    userContent: IUserContent;
-}
-interface IUserContent {
-    userCards: ICards[];
-    userThemes: string[];
-}
-interface IMessage {
-    message: string;
-}
-
+import {
+    IRegistrationProps,
+    ILogin,
+    IFetchError,
+    IActivateMailProps,
+    IMessage,
+    ILoginProps,
+    ICheckAuth,
+    IUserContent,
+    IUpdateCards,
+    IUpdateThemes,
+    IUploadAvatar
+} from './AuthTypes';
 export const Registration = createAsyncThunk(
     'Registration',
     async (userData: IRegistrationProps, thunkAPI) => {
@@ -79,7 +36,6 @@ export const Registration = createAsyncThunk(
         }
     }
 );
-
 export const activateMail = createAsyncThunk(
     'activateMail',
     async (userData: IActivateMailProps, thunkAPI) => {
@@ -96,7 +52,6 @@ export const activateMail = createAsyncThunk(
         }
     }
 );
-
 export const Login = createAsyncThunk(
     'Login',
     async (userData: ILoginProps, thunkAPI) => {
@@ -113,7 +68,6 @@ export const Login = createAsyncThunk(
         }
     }
 );
-
 export const Logout = createAsyncThunk(
     'Logout',
     async (_, thunkAPI) => {
@@ -129,7 +83,6 @@ export const Logout = createAsyncThunk(
         }
     }
 );
-
 export const CheckAuth = createAsyncThunk(
     'CheckAuth',
     async (_, thunkAPI) => {
@@ -146,7 +99,6 @@ export const CheckAuth = createAsyncThunk(
         }
     }
 );
-
 export const GetData = createAsyncThunk(
     'GetData',
     async (email: string, thunkAPI) => {
@@ -162,7 +114,6 @@ export const GetData = createAsyncThunk(
         }
     }
 );
-
 export const UpdateCards = createAsyncThunk(
     'UpdateCards',
     async (data: IUpdateCards, thunkAPI) => {
@@ -177,7 +128,6 @@ export const UpdateCards = createAsyncThunk(
         }
     }
 );
-
 export const UpdateThemes = createAsyncThunk(
     'UpdateThemes',
     async (data: IUpdateThemes, thunkAPI) => {
@@ -192,11 +142,9 @@ export const UpdateThemes = createAsyncThunk(
         }
     }
 );
-
 export const UploadAvatar = createAsyncThunk(
     'UploadAvatar',
     async (data: IUploadAvatar, thunkAPI) => {
-
         try {
             const { email, avatar } = data;
             const formData = new FormData();
@@ -210,7 +158,6 @@ export const UploadAvatar = createAsyncThunk(
         }
     }
 );
-
 export const GetAvatar = createAsyncThunk(
     'GetAvatar',
     async (data: string, thunkAPI) => {
@@ -234,9 +181,7 @@ export const GetAvatar = createAsyncThunk(
             return thunkAPI.rejectWithValue('Произошла ошибка при запросе на сервер :(');
         }
     }
-
 );
-
 export const RemoveAvatar = createAsyncThunk(
     'RemoveAvatar',
     async (data: { email: string }, thunkAPI) => {

@@ -1,14 +1,16 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+const initialState: { isModalAddCardActive: boolean } = {
+    isModalAddCardActive: false,
+};
 const modalAddCard = createSlice({
     name: 'modalAddCard',
-    initialState: {
-        isModalAddCardActive: false,
-    },
+    initialState,
     reducers: {
-        setIsModalAddCardActive(state, action) {
-            state.isModalAddCardActive = action.payload
+        setIsModalAddCardActive(state, action: PayloadAction<boolean>) {
+            state.isModalAddCardActive = action.payload;
         },
     }
-})
-export default modalAddCard.reducer
-export const {setIsModalAddCardActive} = modalAddCard.actions
+});
+export default modalAddCard.reducer;
+export const { setIsModalAddCardActive } = modalAddCard.actions;

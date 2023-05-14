@@ -1,0 +1,24 @@
+import { IInitialState } from './AuthSlice';
+export const initialState: IInitialState = {
+    // authorization
+    user: { id: 0, name: '', email: '', isActivated: false },
+    avatar: '',
+    isAuth: false,
+    isLoading: false,
+    updateError: '',
+    // cards
+    cards: [],
+    changeCard: {
+        word: '',
+        translate: '',
+        theme: ''
+    },
+    toggleWordsOrder: true,
+    // select
+    optionName: 'Тема',
+    optionState: { open: false, removeMark: false },
+    selectOptions: [],
+    chooseTheme: '',
+    // servers response
+    serverMessage: '',
+};

@@ -1,13 +1,13 @@
 import { setValidateArr } from "../store/reducers/GamesSlice"
 export const validateQuiz = (e, array, setCardsGame, dispatch) => {
-    let state = [];
+    const state = [];
     e.preventDefault();
-    let inputs = document.querySelectorAll('.inptReq');
+    const inputs = document.querySelectorAll('.inptReq');
     for (let index = 0; index < inputs.length; index++) {
         const input = inputs[index];
 
         const wordInCard = array[index].word.toLowerCase().split(' ').join('');
-        let inputValue = input.value.toLowerCase().split(' ').join('');
+        const inputValue = input.value.toLowerCase().split(' ').join('');
 
         if (wordInCard === inputValue) {
             state.push('trueWord')
@@ -16,7 +16,7 @@ export const validateQuiz = (e, array, setCardsGame, dispatch) => {
 
         } else state.push('falseWord')
 
-    };
+    }
     setCardsGame([])
     dispatch(setValidateArr(state));
 }

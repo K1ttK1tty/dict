@@ -33,7 +33,7 @@ const Games = memo(function () {
     }, []);
 
     const array = useMemo(() => {
-        let arr = [...cardsGame]
+        const arr = [...cardsGame]
         for (let index = 0; index < cardsNumber; index++) {
             arr.push(cards[getRandomIng(cards.length)])
         }
