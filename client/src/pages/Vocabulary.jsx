@@ -15,11 +15,11 @@ import { removeInput } from '../functions/removeInput';
 //styles
 import '../styles/theme.css';
 import '../styles/Vocabulary.css';
-import btnStyle from '../components/UI/ModalAddCards/FormAddCard.module.css'
+import btnStyle from '../components/UI/ModalAddCards/FormAddCard.module.css';
 //color-picker
 import ColorPicker from '../components/UI/ColorPicker/ColorPicker';
 //redux
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import {
     setColorModeOn,
     setColorRemoveMode,
@@ -30,36 +30,40 @@ import {
 const Vocabulary = memo(function () {
     const [isAttached, setIsAttached] = useState(true);
     // authorization
-    const { toggleWordsOrder, cards } = useSelector(state => state.AuthSlice);
+    const { toggleWordsOrder, cards } = useAppSelector(state => state.AuthSlice);
     //redux  
-    const { searchWord, input, isUserMenuOpen } = useSelector(state => state.upMenu);
-    const { chooseTheme, optionState } = useSelector(state => state.AuthSlice);
-    const dispatch = useDispatch();
+    const { searchWord, input, isUserMenuOpen } = useAppSelector(state => state.upMenu);
+    const { chooseTheme, optionState } = useAppSelector(state => state.AuthSlice);
+    const dispatch = useAppDispatch();
     const modalAdd = useRef();
     const modalChangeCard = useRef();
     //color-pixelwindow
-    const pageTheme = useSelector(state => state.ColorPicker.pageTheme)
-    const colorModeOn = useSelector(state => state.ColorPicker.colorModeOn)
-    const colorRemoveMode = useSelector(state => state.ColorPicker.colorRemoveMode)
-    const getCurrentColorMode = useSelector(state => state.ColorPicker.getCurrentColorMode)
-    const currentColor = useSelector(state => state.ColorPicker.currentColor)
-    const colorsBeforePaint = useSelector(state => state.ColorPicker.colorsBeforePaint)
+    const pageTheme = useAppSelector(state => state.ColorPicker.pageTheme);
+    const colorModeOn = useAppSelector(state => state.ColorPicker.colorModeOn);
+    const colorRemoveMode = useAppSelector(state => state.ColorPicker.colorRemoveMode);
+    const getCurrentColorMode = useAppSelector(state => state.ColorPicker.getCurrentColorMode);
+    const currentColor = useAppSelector(state => state.ColorPicker.currentColor);
+    const colorsBeforePaint = useAppSelector(state => state.ColorPicker.colorsBeforePaint);
     const selectedAndSearchedWord = useCards(cards, searchWord, chooseTheme, toggleWordsOrder);
-    const [color, setColor] = useState('#0dccce')
+    const [color, setColor] = useState('#0dccce');
 
-    const [allElementsArray, setAllElementsArray] = useState([])
+    const [allElementsArray, setAllElementsArray] = useState([]);
     const body = document.body;
     let arrOfCurrentElements = useMemo(() => {
-        return []
-    }, [colorModeOn])
+        return [];
+    }, [colorModeOn]);
 
     function click(e) {
         const element = e.target;
-        if (element.className !== 'noCLick' && element.className !== 'react-colorful__interactive' && element.className !== 'react-colorful__pointer react-colorful__saturation-pointer') {
+        if (
+            element.className !== 'noCLick' &&
+            element.className !== 'react-colorful__interactive' &&
+            element.className !== 'react-colorful__pointer react-colorful__saturation-pointer'
+        ) {
 
             if (!arrOfCurrentElements.includes(element)) {
-                arrOfCurrentElements.push(element)
-                dispatch(setColorsBeforePaint([...colorsBeforePaint, element.style.background]))
+                arrOfCurrentElements.push(element);
+                dispatch(setColorsBeforePaint([...colorsBeforePaint, element.style.background]));
             }
 
             if (colorRemoveMode) element.style.background = '';
@@ -68,8 +72,8 @@ const Vocabulary = memo(function () {
                 if (currentColor) element.style.background = currentColor;
                 else {
 
-                    dispatch(setCurrentColor(element.style.background))
-                    setColor(element.style.background)
+                    dispatch(setCurrentColor(element.style.background));
+                    setColor(element.style.background);
                 }
 
             } else element.style.background = color; // paint
@@ -82,109 +86,111 @@ const Vocabulary = memo(function () {
             let isExit = true;
             if (arrOfCurrentElements.length) {
                 isExit = window.confirm('Выход из режима редактирования. Сохранить изменения?');
-
             }
 
             if (!isExit) { // if not save
                 arrOfCurrentElements.map((elem, index) => { // return to previous colors
                     elem.style.background = colorsBeforePaint[index];
-                })
+                });
             }
 
-            dispatch(setGetCurrentColorMode(false)) // remove all mods
-            dispatch(setColorRemoveMode(false)) // remove all mods
+            dispatch(setGetCurrentColorMode(false)); // remove all mods
+            dispatch(setColorRemoveMode(false)); // remove all mods
 
-            const y = []
+            const y = [];
             for (let index = 0; index < arrOfCurrentElements.length; index++) {
                 const element = arrOfCurrentElements[index];
                 if (!allElementsArray.includes(element)) {
-                    y.push(element)
+                    y.push(element);
                 }
             }
 
-            setAllElementsArray([...allElementsArray].concat(y))
-            dispatch(setColorsBeforePaint([]))
+            setAllElementsArray([...allElementsArray].concat(y));
+            dispatch(setColorsBeforePaint([]));
         }
-        dispatch(setCurrentColor(''))
-        dispatch(setColorModeOn(!colorModeOn))
+        dispatch(setCurrentColor(''));
+        dispatch(setColorModeOn(!colorModeOn));
     }
     function removeAllColors() {
         if (colorModeOn) {
-            const resultArray = allElementsArray.concat(arrOfCurrentElements)
+            const resultArray = allElementsArray.concat(arrOfCurrentElements);
 
             resultArray.map(elem => {
                 elem.style.background = '';
-            })
+            });
 
             arrOfCurrentElements = [];
             setAllElementsArray([]);
             dispatch(setColorsBeforePaint([]));
-            dispatch(setCurrentColor(''))
-            colorObject.light.colors = []
-            colorObject.dark.colors = []
+            dispatch(setCurrentColor(''));
+            colorObject.light.colors = [];
+            colorObject.dark.colors = [];
         }
     }
     function removeCurrent() {
         if (colorModeOn) {
-            dispatch(setGetCurrentColorMode(false))
-            dispatch(setColorRemoveMode(!colorRemoveMode))
+            dispatch(setGetCurrentColorMode(false));
+            dispatch(setColorRemoveMode(!colorRemoveMode));
         }
-        dispatch(setCurrentColor(''))
+        dispatch(setCurrentColor(''));
     }
     function getCurrentColor() {
         if (colorModeOn) {
-            dispatch(setColorRemoveMode(false))
-            dispatch(setGetCurrentColorMode(!getCurrentColorMode))
+            dispatch(setColorRemoveMode(false));
+            dispatch(setGetCurrentColorMode(!getCurrentColorMode));
         }
-        dispatch(setCurrentColor(''))
+        dispatch(setCurrentColor(''));
     }
 
     useEffect(() => {
-        if (colorModeOn) body.addEventListener('click', click)
-        else body.removeEventListener('click', click)
+        if (colorModeOn) body.addEventListener('click', click);
+        else body.removeEventListener('click', click);
 
 
 
-        if (colorModeOn) document.body.className = 'paintBrush' // set cursors
-        else document.body.className = ''
+        if (colorModeOn) document.body.className = 'paintBrush'; // set cursors
+        else document.body.className = '';
 
 
 
         return () => {
-            body.removeEventListener('click', click)
-            document.body.className = ''
-        }
+            body.removeEventListener('click', click);
+            document.body.className = '';
+        };
 
-    }, [colorModeOn, color, colorRemoveMode, getCurrentColorMode, arrOfCurrentElements.length, currentColor, colorsBeforePaint]);
+    }, [
+        colorModeOn, color, colorRemoveMode,
+        getCurrentColorMode, arrOfCurrentElements.length, currentColor, colorsBeforePaint
+    ]);
 
     const colorObject = useMemo(() => {
         return {
             light: { elements: [], colors: [] },
             dark: { elements: [], colors: [] }
-        }
+        };
 
-    }, [])
+    }, []);
 
     // проверить как ведут себя массивы элементов при точечном удалении цвета
     useEffect(() => {
 
         if (pageTheme === 'light') {
 
-            colorObject.light.elements = [...allElementsArray]
-            colorObject.light.colors = []
+            colorObject.light.elements = [...allElementsArray];
+            colorObject.light.colors = [];
 
             for (let index = 0; index < allElementsArray.length; index++) {
                 const element = allElementsArray[index];
-                colorObject.light.colors = [...colorObject.light.colors, element.style.background]
+                colorObject.light.colors = [...colorObject.light.colors, element.style.background];
             }
 
         } else {
-            colorObject.dark.elements = [...allElementsArray]
-            colorObject.dark.colors = []
+            colorObject.dark.elements = [...allElementsArray];
+            colorObject.dark.colors = [];
 
             for (let index = 0; index < allElementsArray.length; index++) {
                 const element = allElementsArray[index];
-                colorObject.dark.colors = [...colorObject.dark.colors, element.style.background]
+                colorObject.dark.colors = [...colorObject.dark.colors, element.style.background];
             }
 
         }
@@ -201,7 +207,7 @@ const Vocabulary = memo(function () {
             for (let index = 0; index < colorObject.light.elements.length; index++) {
                 const element = colorObject.light.elements[index];
 
-                element.style.background = colorObject.light.colors[index]
+                element.style.background = colorObject.light.colors[index];
 
             }
         } else {
@@ -209,7 +215,7 @@ const Vocabulary = memo(function () {
             for (let index = 0; index < colorObject.dark.elements.length; index++) {
                 const element = colorObject.dark.elements[index];
 
-                element.style.background = colorObject.dark.colors[index]
+                element.style.background = colorObject.dark.colors[index];
 
             }
         }
@@ -227,7 +233,7 @@ const Vocabulary = memo(function () {
             <ModalEditCard modalChangeCard={modalChangeCard} />
             <ModalAddCards modalAdd={modalAdd} />
             <div className={isAttached ? 'CardsField' : 'CardsField paddingTop124'}>
-                <div className='wrap'>
+                <div className="wrap">
                     <CardsControl
                         btnStyle={btnStyle}
                         modalAdd={modalAdd}
