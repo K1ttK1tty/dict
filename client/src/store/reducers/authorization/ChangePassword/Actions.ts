@@ -7,7 +7,7 @@ import { IFetchError, IMessage, ILogin, IEmail } from '../Authorization/AuthType
 import { AxiosError } from 'axios';
 interface IRefreshPassword {
     password: string;
-    id: number;
+    id: string | null;
 }
 export const SendResetPassword = createAsyncThunk(
     'SendResetPassword',

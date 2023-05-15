@@ -49,7 +49,7 @@ export interface IUpdateThemes extends IEmail {
     themes: string[];
 }
 export interface IUploadAvatar extends IEmail {
-    avatar: string;
+    avatar: File;
 }
 export interface ILogin extends ICheckAuth {
     userContent: IUserContent;
