@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { FC, memo } from 'react';
 import { isMobile } from 'react-device-detect';
 // components
 import IconRemove from './icons/IconRemove';
@@ -7,15 +7,22 @@ import IconEdit from './icons/IconEdit';
 import { removeCard } from '../../../functions/removeCard';
 import { editWord } from '../../../functions/editWord';
 // styles
-import styles from './WordCard.module.css'
+import styles from './WordCard.module.css';
 //redux
-import { useSelector, useDispatch } from 'react-redux';
-const Card = memo(function ({ card, index, modalChangeCard }) {
-    const dispatch = useDispatch()
-    const { cards, user } = useSelector(state => state.AuthSlice)
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+// types
+import { ICards } from '../../../store/reducers/authorization/Authorization/AuthTypes';
+interface ICard {
+    card: ICards;
+    index: number;
+    modalChangeCard: React.MutableRefObject<HTMLInputElement | undefined>;
+}
+const Card: FC<ICard> = memo(function ({ card, index, modalChangeCard }) {
+    const dispatch = useAppDispatch();
+    const { cards, user } = useAppSelector(state => state.AuthSlice);
     const openMobalInMobile = isMobile
         ? () => editWord(card, index, modalChangeCard, dispatch)
-        : null
+        : undefined;
     return (
         <div onClick={openMobalInMobile} className={styles.card} >
             <h4 className={styles.word}>{card.word}</h4>
@@ -38,6 +45,6 @@ const Card = memo(function ({ card, index, modalChangeCard }) {
                 }
             ><IconRemove /></div>
         </div>
-    )
+    );
 });
 export default Card;

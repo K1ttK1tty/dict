@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { FC, memo } from 'react';
 // components
 import BtnAddCard from './UI/BtnAddCard/BtnAddCard';
 // functions
@@ -7,16 +7,16 @@ import { deleteAllEmptyThemes } from '../functions/deleteAllEmptyThemes';
 // styles
 import '../styles/Vocabulary.css';
 //redux
-import { useSelector, useDispatch } from 'react-redux';
-const RemoveTheme = memo(function () {
-    const dispatch = useDispatch();
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
+const RemoveTheme: FC = memo(function () {
+    const dispatch = useAppDispatch();
     const {
         selectOptions,
         chooseTheme,
         optionState,
         user,
         cards
-    } = useSelector(state => state.AuthSlice);
+    } = useAppSelector(state => state.AuthSlice);
     return (
         <div>
             <h4 className="noCards">Пустота...</h4>

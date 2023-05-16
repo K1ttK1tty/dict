@@ -5,16 +5,17 @@ import { removeModal } from '../../../functions/removeModal';
 //styles
 import style from '../ModalEditCard/Modal.module.css';
 // types
-import { useAppDispatch } from '../../../hooks/redux';
+import { } from '../../../hooks/redux';
+import { AppDispatch } from '../../../store/store';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
-import { IChangeCard } from '../../../store/reducers/authorization/Authorization/AuthTypes';
+import { IChangeCard, ICards } from '../../../store/reducers/authorization/Authorization/AuthTypes';
 interface IModal {
     title: string;
     content: React.ReactNode;
     isModal: boolean;
     setModal: (state: boolean) => void;
-    setFields?: ActionCreatorWithPayload<IChangeCard, 'modalRenameCard/setInputValue'>;
-    dispatch?: typeof useAppDispatch;
+    setFields?: ActionCreatorWithPayload<(IChangeCard | ICards)>;
+    dispatch?: AppDispatch;
 }
 const Modal: FC<IModal> = memo(function ({ title, content, isModal, setModal, setFields, dispatch }) {
     const visible = isModal

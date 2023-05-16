@@ -1,18 +1,22 @@
-import React from 'react';
+import { FC } from 'react';
 // styles
-import style from './CardsInfo.module.css'
+import style from './CardsInfo.module.css';
 // redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setToggleWordsOrder } from '../../../store/reducers/authorization/Authorization/AuthSlice';
-const CardsInfo = function ({ isMovedBlock }) {
-    const dispatch = useDispatch();
-    const { toggleWordsOrder, cards } = useSelector(state => state.AuthSlice);
-    const totalWordsClass = isMovedBlock
+// types
+interface ICardsInfo {
+    isMovedBlock?: boolean;
+}
+const CardsInfo: FC<ICardsInfo> = function ({ isMovedBlock }) {
+    const dispatch = useAppDispatch();
+    const { toggleWordsOrder, cards } = useAppSelector(state => state.AuthSlice);
+    const totalWordsClass: string = isMovedBlock
         ? [style.wordsCount, style.textCenter].join(' ')
-        : style.wordsCount
-    const wordsOrderClass = isMovedBlock
+        : style.wordsCount;
+    const wordsOrderClass: string = isMovedBlock
         ? [style.inputOrder, style.textCenter].join(' ')
-        : style.inputOrder
+        : style.inputOrder;
     return (
         <>
             <div className={totalWordsClass}>Всего слов: {cards.length} </div>
@@ -27,6 +31,6 @@ const CardsInfo = function ({ isMovedBlock }) {
                 <label htmlFor={style.input} className={style.label}></label>
             </div>
         </>
-    )
+    );
 };
 export default CardsInfo;

@@ -1,9 +1,10 @@
+import { FC, memo } from 'react';
 import { Routes, Route } from 'react-router-dom';
 // pages
 import Games from '../pages/Games.tsx';
 import Vocabulary from '../pages/Vocabulary.tsx';
 import Settings from '../pages/Settings.tsx';
-const AppRouter = function () {
+const AppRouter: FC = memo(function () {
     return (
         <Routes>
             <Route path="/posts" element={<Vocabulary />} />
@@ -12,5 +13,5 @@ const AppRouter = function () {
             <Route path="*" element={<Vocabulary />} />
         </Routes>
     );
-};
+});
 export default AppRouter;

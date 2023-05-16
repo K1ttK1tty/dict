@@ -17,14 +17,14 @@ interface ICardsControl {
     btnStyle: CSSModuleClasses;
     modalAdd: React.MutableRefObject<HTMLInputElement | null>;
     isAttached: boolean;
-    setIsAttached: (state: boolean) => void;
+    setIsAttached: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const CardsControl: FC<ICardsControl> = memo(function ({ btnStyle, modalAdd, isAttached, setIsAttached }) {
     const dispatch = useAppDispatch();
 
-    const windowBlock = useRef<React.MutableRefObject<HTMLElement | null>>(null);
-    const [isCanMove, setIsCanMove] = useState(false);
-    const grabCursor = isCanMove
+    const windowBlock = useRef<HTMLDivElement | null>(null);
+    const [isCanMove, setIsCanMove] = useState<boolean>(false);
+    const grabCursor: string = isCanMove
         ? [styles.wrapperGrab, styles.wrapper].join(' ')
         : styles.wrapper;
     const attachedMenuStyles = isMobile
@@ -34,27 +34,27 @@ const CardsControl: FC<ICardsControl> = memo(function ({ btnStyle, modalAdd, isA
         document.onmousemove = null;
         document.body.className = '';
     };
-    const mouseMove = (element, shiftY, shiftX) => {
-        const windowElement = windowBlock.current;
-        windowElement.style.top = element.pageY - shiftY + 'px';
-        windowElement.style.left = element.pageX - shiftX + 'px';
+    const mouseMove = (element: MouseEvent, shiftY: number, shiftX: number) => {
+        if (windowBlock.current) {
+            const windowElement = windowBlock.current;
+            windowElement.style.top = element.pageY - shiftY + 'px';
+            windowElement.style.left = element.pageX - shiftX + 'px';
+        }
     };
 
-    const move = (element) => {
-        if (!isCanMove) {
+    const move = (element: React.MouseEvent) => {
+        if (!isCanMove || !windowBlock.current) {
             return;
         }
-
         const coordinates = getCoordinates(windowBlock.current);
-        const shiftY = element.pageY - coordinates.top;
-        const shiftX = element.pageX - coordinates.left;
-
-        document.onmousemove = (element) => {
-            mouseMove(element, shiftY, shiftX);
+        const shiftY: number = element.pageY - coordinates.top;
+        const shiftX: number = element.pageX - coordinates.left;
+        document.onmousemove = (elem) => {
+            mouseMove(elem, shiftY, shiftX);
         };
         document.body.className = styles.noselect;
     };
-    const getCoordinates = (element) => {
+    const getCoordinates = (element: HTMLDivElement) => {
         const coordinatesObj = element.getBoundingClientRect();
         return {
             top: coordinatesObj.top + window.scrollY,
@@ -78,7 +78,6 @@ const CardsControl: FC<ICardsControl> = memo(function ({ btnStyle, modalAdd, isA
             </div>
         );
     }
-
     return (
         <div
             ref={windowBlock}
@@ -90,18 +89,17 @@ const CardsControl: FC<ICardsControl> = memo(function ({ btnStyle, modalAdd, isA
                 <PinIcon setIsAttached={setIsAttached} styles={[styles.pinIcon, styles.pinIconMarginRight].join(' ')} />
                 <h2>Управление</h2>
             </div>
-
             <CardsInfo isMovedBlock={true} />
             <div className={styles.cardsOptionsMoved}>
                 <BtnAddCard
-                    onClick={isCanMove ? null : () => modalAddCard(modalAdd, dispatch)}
+                    onClick={isCanMove ? undefined : () => modalAddCard(modalAdd, dispatch)}
                     dinamicclassname={[btnStyle.btnCreateCard, btnStyle.btnMoved].join(' ')}
                     children="Создать карточку"
                 />
                 <MySelect isCanMove={isCanMove} />
             </div>
             <BtnAddCard
-                onMouseDown={e => e.preventDefault()}
+                onMouseDown={(e: React.MouseEvent<HTMLButtonElement>) => e.preventDefault()}
                 onClick={() => setIsCanMove(prev => !prev)}
                 dinamicclassname={styles.buttonChangePosition}
                 children={isCanMove ? 'Закрепить' : 'Переместить'}

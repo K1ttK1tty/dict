@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ICards, IChangeCard } from './authorization/Authorization/AuthTypes';
 interface IInitialState {
-    indexCard: number,
-    isModalActive: boolean,
-    inputValue: IChangeCard,
-    editCard: ICards
+    indexCard: number;
+    isModalActive: boolean;
+    inputValue: IChangeCard;
+    editCard: ICards;
 }
 const initialState: IInitialState = {
     indexCard: 0,

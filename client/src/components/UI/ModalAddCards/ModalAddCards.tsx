@@ -24,7 +24,7 @@ const ModalAddCards: FC<IModalAddCards> = memo(function ({ modalAdd }) {
             isModal={isModalAddCardActive}
             setModal={setIsModalAddCardActive}
             setFields={setInputValue}
-            dispatch={useAppDispatch}
+            dispatch={dispatch}
             content={<FormAddCard modalAdd={modalAdd} />}
         />
     );

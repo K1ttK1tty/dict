@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { FC, memo } from 'react';
 import { isMobile } from 'react-device-detect';
 // components
 import InputAddCard from '../InputAddCard/InputAddCard';
@@ -9,31 +9,35 @@ import { addNewTheme } from '../../../functions/addNewTheme';
 import { removeModal } from '../../../functions/removeModal';
 import { removeCard } from '../../../functions/removeCard';
 // styles
-import style from './Modal.module.css'
+import style from './Modal.module.css';
 // redux
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { UpdateCards } from '../../../store/reducers/authorization/Authorization/ActionCreator';
 import { setCards } from '../../../store/reducers/authorization/Authorization/AuthSlice';
 import { setModal, setEditCard } from '../../../store/reducers/modalRenameCard';
-const FormEditCard = memo(function ({ modalChangeCard }) {
-    const dispatch = useDispatch();
-    const editCard = useSelector(state => state.modalRenameCard.editCard)
-    const { changeCard, cards, selectOptions } = useSelector(state => state.AuthSlice)
-    const email = useSelector(state => state.AuthSlice?.user?.email)
+// types
+interface IFormEditCard {
+    modalChangeCard: React.MutableRefObject<HTMLInputElement>;
+}
+const FormEditCard: FC<IFormEditCard> = memo(function ({ modalChangeCard }) {
+    const dispatch = useAppDispatch();
+    const editCard = useAppSelector(state => state.modalRenameCard.editCard);
+    const { changeCard, cards, selectOptions } = useAppSelector(state => state.AuthSlice);
+    const email = useAppSelector(state => state.AuthSlice?.user?.email);
 
-    const ChangeCard = (e) => {
+    const ChangeCard = (e:React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        const newCards = changeCardFields(cards, changeCard, editCard)
-        addNewTheme(selectOptions, editCard.theme, email, dispatch)
-        dispatch(UpdateCards({ email, cards: newCards }))
-        dispatch(setCards(newCards))
-        removeModal(setModal, dispatch)
+        const newCards = changeCardFields(cards, changeCard, editCard);
+        addNewTheme(selectOptions, editCard.theme, email, dispatch);
+        dispatch(UpdateCards({ email, cards: newCards }));
+        dispatch(setCards(newCards));
+        removeModal(setModal, dispatch);
     };
-    const remove = (e) => {
+    const remove = (e:React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        removeCard(editCard.id, cards, email, dispatch)
-        removeModal(setModal, dispatch)
-    }
+        removeCard(editCard.id, cards, email, dispatch);
+        removeModal(setModal, dispatch);
+    };
     return (
         <form>
             <div className={style.inputDiv}>
@@ -66,19 +70,18 @@ const FormEditCard = memo(function ({ modalChangeCard }) {
                     isMobile && <BtnAddCard
                         aria={'Удалить'}
                         onClick={remove}
-                        // () => removeCard(card.id, cards, user.email, dispatch)
                         dinamicclassname={[style.btnFormEditCard, style.removeButtonOnMobile].join(' ')}
-                        children='Удалить'
+                        children="Удалить"
                     />
                 }
                 <BtnAddCard
                     aria={'Изменить'}
                     onClick={ChangeCard}
                     dinamicclassname={style.btnFormEditCard}
-                    children='Изменить'
+                    children="Изменить"
                 />
             </div>
         </form >
-    )
+    );
 });
 export default FormEditCard;

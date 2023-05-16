@@ -36,7 +36,7 @@ const Vocabulary = memo(function () {
     const { chooseTheme, optionState } = useAppSelector(state => state.AuthSlice);
     const dispatch = useAppDispatch();
     const modalAdd = useRef<HTMLInputElement | null>(null);
-    const modalChangeCard = useRef<React.MutableRefObject<HTMLInputElement | undefined>>();
+    const modalChangeCard = useRef<HTMLInputElement | undefined>();
     //color-pixelwindow
     // const pageTheme = useAppSelector(state => state.ColorPicker.pageTheme);
     const pageTheme = localStorage.getItem('theme');
@@ -46,7 +46,7 @@ const Vocabulary = memo(function () {
     const currentColor = useAppSelector(state => state.ColorPicker.currentColor);
     const colorsBeforePaint = useAppSelector(state => state.ColorPicker.colorsBeforePaint);
     const selectedAndSearchedWord = useCards(cards, searchWord, chooseTheme, toggleWordsOrder);
-    const [color, setColor] = useState('#0dccce');
+    const [color, setColor] = useState<string>('#0dccce');
 
     const [allElementsArray, setAllElementsArray] = useState([]);
     const body = document.body;

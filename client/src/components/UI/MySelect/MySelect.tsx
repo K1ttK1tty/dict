@@ -1,51 +1,57 @@
 // libs
-import React, { useRef, useEffect, memo } from 'react';
+import { FC, useRef, useEffect, memo } from 'react';
 import { CSSTransition } from 'react-transition-group';
 // components
 import SetOptions from '../../SetOptions';
 import IconSelect from './icons/IconSelect';
 // styles
-import styles from './MySelect.module.css'
+import styles from './MySelect.module.css';
 // redux
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import {
     setOptionName,
     setOptionState,
     setChooseTheme
 } from '../../../store/reducers/authorization/Authorization/AuthSlice';
-const MySelect = memo(function ({ isCanMove }) {
-    const dispatch = useDispatch();
-    const optionName = useSelector(state => state.AuthSlice.optionName)
-    const optionState = useSelector(state => state.AuthSlice.optionState)
-    const selectElement = useRef()
+// types
+interface IMySelect {
+    isCanMove?: boolean;
+}
+const MySelect: FC<IMySelect> = memo(function ({ isCanMove }) {
+    const dispatch = useAppDispatch();
+    const { optionName, optionState } = useAppSelector(state => state.AuthSlice);
+    const selectElement = useRef<HTMLDivElement | null>(null);
     const isCanMoveFunction = isCanMove
-        ? null :
-        () => dispatch(setOptionState({ ...optionState, open: !optionState.open }))
+        ? undefined :
+        () => dispatch(setOptionState({ ...optionState, open: !optionState.open }));
 
-    function replaceOption(el) {
-        dispatch(setOptionName(el.target.innerText))
-        dispatch(setChooseTheme(el.target.innerText))
-        dispatch(setOptionState({ open: false, removeMark: true })) //
+    function replaceOption(element: React.MouseEvent<HTMLDivElement>) {
+        const divElement = element.target as HTMLDivElement;
+        dispatch(setOptionName(divElement.innerText));
+        dispatch(setChooseTheme(divElement.innerText));
+        dispatch(setOptionState({ open: false, removeMark: true })); //
     }
     function removeTheme() {
-        dispatch(setOptionName('Тема'))
-        dispatch(setChooseTheme(''))
-        dispatch(setOptionState({ open: false, removeMark: false })) //
+        dispatch(setOptionName('Тема'));
+        dispatch(setChooseTheme(''));
+        dispatch(setOptionState({ open: false, removeMark: false })); //
     }
     if (optionState.open) {
         setTimeout(() => {
-            selectElement.current.focus()
+            if (selectElement.current) {
+                selectElement.current.focus();
+            }
         }, 200);
     }
     useEffect(() => {
         if (optionName !== 'Тема') {
-            dispatch(setOptionState({ ...optionState, removeMark: true }))
+            dispatch(setOptionState({ ...optionState, removeMark: true }));
         } else {
-            dispatch(setOptionState({ ...optionState, removeMark: false }))
+            dispatch(setOptionState({ ...optionState, removeMark: false }));
         }
         return () => {
-            dispatch(setOptionState({ ...optionState, open: false }))
-        }
+            dispatch(setOptionState({ ...optionState, open: false }));
+        };
     }, []);
 
     return (
@@ -53,7 +59,7 @@ const MySelect = memo(function ({ isCanMove }) {
             className={styles.select}
             ref={selectElement}
             onKeyDown={() => dispatch(setOptionState({ ...optionState, open: false }))}
-            tabIndex='0'
+            tabIndex={0}
         >
             <div
                 onClick={isCanMoveFunction}
@@ -69,7 +75,7 @@ const MySelect = memo(function ({ isCanMove }) {
             </div>
             {
                 optionState.removeMark &&
-                <button id='close' onClick={removeTheme} className={styles.removeTheme}>&times;</button>
+                <button id="close" onClick={removeTheme} className={styles.removeTheme}>&times;</button>
             }
             <CSSTransition
                 in={optionState.open}
@@ -78,14 +84,12 @@ const MySelect = memo(function ({ isCanMove }) {
                 mountOnEnter
                 unmountOnExit
             >
-                {state => <SetOptions
-                    state={state}
-                    className={optionState.open}
+                <SetOptions
                     replaceOption={replaceOption}
                 />
-                }
+
             </CSSTransition>
         </div>
-    )
+    );
 });
 export default MySelect;

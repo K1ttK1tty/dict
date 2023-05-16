@@ -1,5 +1,5 @@
 // libs
-import React, { useState, useEffect, memo } from 'react';
+import { FC, useState, useEffect, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 // icons
@@ -9,44 +9,45 @@ import Icon2 from './icons/Icon2';
 // import Icon4 from './icons/Icon4';
 // styles
 import cl from './MenuDesk.module.css';
-const MenuDesk = memo(function () {
-    const [menuOpen, setMenuOpen] = useState(false);
+const MenuDesk: FC = memo(function () {
+    const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
-    const isMenuOpen = menuOpen
+    const isMenuOpen: string = menuOpen
         ? (isMobile ? [cl.back, cl.menuOpen].join(' ') : cl.back)
         : (isMobile ? cl.back : [cl.back, cl.canHover].join(' '));
-    const showMenuCloseIcon = menuOpen
+    const showMenuCloseIcon: string = menuOpen
         ? [cl.removeMenuIconShow, cl.removeMenuIcon].join(' ')
-        : cl.removeMenuIcon
+        : cl.removeMenuIcon;
 
     useEffect(() => {
-        const page = document.querySelector('.pageContent');
+        const page: HTMLDivElement | null = document.querySelector('.pageContent');
         const CardsControl = document.querySelector('.CardsControl');
-        if (menuOpen && CardsControl) {
-            page.style.right = '-220px'
-            CardsControl.classList.add(cl.rightCardsControl)
+        if (menuOpen && CardsControl && page) {
+            page.style.right = '-220px';
+            CardsControl.classList.add(cl.rightCardsControl);
         }
-        else if(CardsControl) {
-            page.style.right = '0px'
-            CardsControl.classList.remove(cl.rightCardsControl)
+        else if (CardsControl && page) {
+            page.style.right = '0px';
+            CardsControl.classList.remove(cl.rightCardsControl);
         }
     }, [menuOpen]);
-    const openMenu = (e) => {
-        e.stopPropagation();
+    const openMenu = (element: React.MouseEvent<HTMLElement>) => {
+        element.stopPropagation();
+        const navElement = element.target as HTMLElement;
         if (!menuOpen) setMenuOpen(true);
-        else if (e.target.className === isMenuOpen) setMenuOpen(false);
-    }
+        else if (navElement.className === isMenuOpen) setMenuOpen(false);
+    };
     const changePage = () => {
         const CardsControl = document.querySelector('.CardsControl');
         if (CardsControl) {
-            const page = document.querySelector('.pageContent');
-            page.style.right = '0px'
-            CardsControl.classList.remove(cl.rightCardsControl)
+            const page: HTMLDivElement | null = document.querySelector('.pageContent');
+            if (page) page.style.right = '0px';
+            CardsControl.classList.remove(cl.rightCardsControl);
         }
-        setMenuOpen(false)
-    }
+        setMenuOpen(false);
+    };
     return (
-        <nav onClick={isMobile ? openMenu : null} >
+        <nav onClick={isMobile ? openMenu : undefined} >
             <div className={isMenuOpen}>
                 <div className={cl.content}>
                     {
@@ -93,6 +94,6 @@ const MenuDesk = memo(function () {
                 </div>
             </div>
         </nav >
-    )
+    );
 });
 export default MenuDesk;
