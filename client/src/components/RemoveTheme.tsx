@@ -20,7 +20,8 @@ const RemoveTheme: FC = memo(function () {
     return (
         <div>
             <h4 className="noCards">Пустота...</h4>
-            {optionState.removeMark &&
+            {
+                optionState.removeMark &&
                 <div className="deleteThemeWrapper">
                     <BtnAddCard
                         noClick={'noClick'}

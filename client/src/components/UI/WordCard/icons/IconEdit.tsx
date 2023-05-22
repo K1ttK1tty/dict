@@ -1,4 +1,5 @@
 import { FC } from 'react';
+// styles
 import styles from '../WordCard.module.css';
 const IconEdit: FC = function () {
     return (

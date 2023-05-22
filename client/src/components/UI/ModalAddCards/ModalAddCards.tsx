@@ -1,4 +1,4 @@
-import { FC, useEffect, memo } from 'react';
+import { FC, useState, useEffect, memo } from 'react';
 // components
 import FormAddCard from './FormAddCard';
 import Modal from '../Modal/Modal';
@@ -13,18 +13,22 @@ interface IModalAddCards {
 const ModalAddCards: FC<IModalAddCards> = memo(function ({ modalAdd }) {
     const dispatch = useAppDispatch();
     const { isModalAddCardActive } = useAppSelector(state => state.modalAddCard);
-
+    const [isModal, setIsModal] = useState<boolean>(false);
     useEffect(() => {
-        return () => { dispatch(setInputValue({ word: '', translate: '', theme: '' })); };
+        if (isModalAddCardActive) setIsModal(true);
+        return () => {
+            dispatch(setInputValue({ id: 0, word: '', translate: '', theme: '' }));
+        };
     }, [isModalAddCardActive]);
-
+    useEffect(() => {
+        if (!isModal) dispatch(setIsModalAddCardActive(false));
+    }, [isModal]);
     return (
         <Modal
             title={'Создание карточки'}
             isModal={isModalAddCardActive}
-            setModal={setIsModalAddCardActive}
+            setModal={setIsModal}
             setFields={setInputValue}
-            dispatch={dispatch}
             content={<FormAddCard modalAdd={modalAdd} />}
         />
     );

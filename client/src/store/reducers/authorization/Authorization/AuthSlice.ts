@@ -12,15 +12,15 @@ import {
 } from './ActionCreator';
 import { SendResetPassword, refreshPassword } from '../ChangePassword/Actions';
 // interfaces
-import { ICards, IChangeCard, IOptionState, IUser } from './AuthTypes';
+import { ICard, IOptionState, IUser } from './AuthTypes';
 export interface IInitialState {
     user: IUser;
     avatar: string;
     isAuth: boolean;
     isLoading: boolean;
     updateError: string;
-    cards: ICards[] | [];
-    changeCard: IChangeCard;
+    cards: ICard[] | [];
+    changeCard: ICard;
     toggleWordsOrder: boolean;
     optionName: string;
     optionState: IOptionState;
@@ -41,7 +41,7 @@ export const AuthSlice = createSlice({
         ////////////// DELETE THIS !
 
         // cards
-        setCards(state, action: PayloadAction<ICards[]>) {
+        setCards(state, action: PayloadAction<ICard[]>) {
             state.cards = action.payload;
         },
         setID(state) {
@@ -49,7 +49,7 @@ export const AuthSlice = createSlice({
                 card.id = index + 1;
             });
         },
-        setChangeCard(state, action: PayloadAction<IChangeCard>) {
+        setChangeCard(state, action: PayloadAction<ICard>) {
             state.changeCard = action.payload;
         },
         setToggleWordsOrder(state) {

@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
 const initialState: { isModalAddCardActive: boolean } = {
     isModalAddCardActive: false,
 };

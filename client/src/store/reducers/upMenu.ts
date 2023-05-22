@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-interface IInput {
+export interface IInput {
     isOpen: boolean;
     after: string;
 }

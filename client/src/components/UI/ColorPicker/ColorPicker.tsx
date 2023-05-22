@@ -1,3 +1,4 @@
+// libs
 import { FC } from 'react';
 import { HexColorPicker } from 'react-colorful';
 // types

@@ -1,5 +1,7 @@
 import { FC, memo } from 'react';
+// styles
 import styles from './UI/MySelect/MySelect.module.css';
+// redux
 import { useAppSelector } from '../hooks/redux';
 // types
 interface ISetOptions {

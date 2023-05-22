@@ -8,7 +8,6 @@ import styles from '../Authorization.module.css';
 import inputStyle from '../../ModalAddCards/FormAddCard.module.css';
 // types 
 import { IFormRegistrationProps } from './FormsTypes';
-
 const FormRegistration: FC<IFormRegistrationProps> = function ({
     userName,
     setUserName,
@@ -22,7 +21,6 @@ const FormRegistration: FC<IFormRegistrationProps> = function ({
     isLogin
 }) {
     const formStyle = isLogin ? [styles.form, styles.formHide].join(' ') : styles.form;
-
     return (
         <form className={formStyle} >
             <h1 className={styles.title}>Регистрация</h1>
@@ -60,7 +58,6 @@ const FormRegistration: FC<IFormRegistrationProps> = function ({
                 children="Зарегистрироваться"
                 onClick={action}
             />
-
         </form>
     );
 };

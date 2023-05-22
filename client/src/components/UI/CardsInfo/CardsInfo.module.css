@@ -2,7 +2,6 @@
     text-align: left !important;
     margin-left: 40px;
 }
-
 .wordsCount {
     color: rgba(0, 0, 0, 0.8);
     text-align: right;
@@ -11,7 +10,6 @@
     top: 0px;
     right: 0px;
 }
-
 .inputOrder {
     color: rgba(0, 0, 0, 0.8);
     text-align: right;
@@ -27,11 +25,9 @@
         margin-left: 18px;
     }
 }
-
 #input {
     display: none;
 }
-
 .label {
     position: relative;
     border-radius: 4px;

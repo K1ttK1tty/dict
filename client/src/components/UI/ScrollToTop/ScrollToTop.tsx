@@ -1,31 +1,29 @@
-import React, { useEffect, useRef } from 'react';
+import { FC, useEffect, useRef } from 'react';
 // styles
-import style from './ScrollToTop.module.css'
-const ScrollToTop = function () {
-    const arrow = useRef();
+import style from './ScrollToTop.module.css';
+const ScrollToTop: FC = function () {
+    const arrow = useRef<HTMLButtonElement | null>(null);
     let showArrow = false;
-    let scrollTimeOut;
+    let scrollTimeOut: ReturnType<typeof setTimeout>;
 
     const addActiveClassName = () => {
-        clearTimeout(scrollTimeOut)
+        clearTimeout(scrollTimeOut);
         scrollTimeOut = setTimeout(() => {
             showArrow = document.body.scrollTop > window.innerHeight * 0.6;
             const styles = showArrow
                 ? [style.arrowWrapper, style.arrowActive].join(' ')
-                : style.arrowWrapper
+                : style.arrowWrapper;
             if (arrow.current) {
-                arrow.current.className = styles
+                arrow.current.className = styles;
             }
         }, 200);
-    }
-
+    };
     useEffect(() => {
-        document.body.addEventListener('scroll', addActiveClassName)
+        document.body.addEventListener('scroll', addActiveClassName);
         return () => {
-            document.body.removeEventListener('scroll', addActiveClassName)
+            document.body.removeEventListener('scroll', addActiveClassName);
         };
     }, []);
-
     return (
         <button
             ref={arrow}
@@ -36,6 +34,6 @@ const ScrollToTop = function () {
                 <div className={style.arrow}></div>
             </div>
         </button>
-    )
+    );
 };
 export default ScrollToTop;

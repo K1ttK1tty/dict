@@ -41,7 +41,6 @@ const CardsControl: FC<ICardsControl> = memo(function ({ btnStyle, modalAdd, isA
             windowElement.style.left = element.pageX - shiftX + 'px';
         }
     };
-
     const move = (element: React.MouseEvent) => {
         if (!isCanMove || !windowBlock.current) {
             return;

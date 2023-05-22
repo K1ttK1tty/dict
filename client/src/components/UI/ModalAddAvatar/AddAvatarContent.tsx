@@ -5,9 +5,9 @@ import ChangeFileController from './ChangeFileController';
 // styles
 import styles from './AddAvatarContent.module.css';
 // redux
+import { useAppDispatch } from '../../../hooks/redux';
 import { RemoveAvatar } from '../../../store/reducers/authorization/Authorization/ActionCreator';
 import { setAvatar } from '../../../store/reducers/authorization/Authorization/AuthSlice';
-import { useAppDispatch } from '../../../hooks/redux';
 // types
 interface IAddAvatarContent {
     changeFile: (file: HTMLInputElement) => void;

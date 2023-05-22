@@ -1,3 +1,4 @@
+// libs
 import { FC, memo } from 'react';
 import { isMobile } from 'react-device-detect';
 // components
@@ -11,13 +12,13 @@ import styles from './WordCard.module.css';
 //redux
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 // types
-import { ICards } from '../../../store/reducers/authorization/Authorization/AuthTypes';
-interface ICard {
-    card: ICards;
+import { ICard } from '../../../store/reducers/authorization/Authorization/AuthTypes';
+interface ICardProps {
+    card: ICard;
     index: number;
-    modalChangeCard: React.MutableRefObject<HTMLInputElement | undefined>;
+    modalChangeCard: React.MutableRefObject<HTMLInputElement | null>;
 }
-const Card: FC<ICard> = memo(function ({ card, index, modalChangeCard }) {
+const Card: FC<ICardProps> = memo(function ({ card, index, modalChangeCard }) {
     const dispatch = useAppDispatch();
     const { cards, user } = useAppSelector(state => state.AuthSlice);
     const openMobalInMobile = isMobile

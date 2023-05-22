@@ -43,7 +43,6 @@
     transform: rotate(180deg);
     transition: 0.15s;
 }
-
 .arrow span {
     display: block;
     width: 9px;
@@ -131,7 +130,6 @@
     margin-bottom: 30px;
     top: -3px;
 }
-
 .avatarWrapper {
     position: relative;
     max-height: 46px;
@@ -144,7 +142,6 @@
         margin-right: 2px;
     }
 }
-
 .avatarWrapper::after {
     position: absolute;
     background-color: rgba(0, 0, 0, 0.6);
@@ -216,7 +213,6 @@
 .btnExit:hover.btnExit:after {
     scale: 0 !important;
 }
-
 .account {
     margin-right: 10px;
 }
@@ -265,7 +261,6 @@
     opacity: 1;
     visibility: visible;
 }
-
 .submenu p {
     margin-bottom: 10px;
     padding: 12px;

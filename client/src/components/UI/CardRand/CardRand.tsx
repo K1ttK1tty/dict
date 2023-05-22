@@ -7,9 +7,9 @@ import '../../../styles/Games.css';
 //redux
 import { useAppSelector } from '../../../hooks/redux';
 // types
-import { ICards } from '../../../store/reducers/authorization/Authorization/AuthTypes';
+import { ICard } from '../../../store/reducers/authorization/Authorization/AuthTypes';
 interface ICardRand {
-    card: ICards;
+    card: ICard;
     index: number;
 }
 const CardRand: FC<ICardRand> = memo(function ({ card, index }) {

@@ -25,7 +25,6 @@
 .btnCreateCard:after {
     scale: 0 !important;
 }
-
 .btnCreateCard:hover.btnCreateCard:after {
     scale: 0 !important;
 }

@@ -5,7 +5,6 @@ import BtnAddCard from '../BtnAddCard/BtnAddCard';
 // functions
 import { addNewCard } from '../../../functions/addNewCard';
 // consts
-// import { styles } from '../../../consts/consts';
 import styles from './FormAddCard.module.css';
 //redux
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
@@ -17,7 +16,7 @@ interface IFormAddCard {
 const FormAddCard: FC<IFormAddCard> = memo(function ({ modalAdd }) {
     const dispatch = useAppDispatch();
     const { cards, user, selectOptions } = useAppSelector(state => state.AuthSlice);
-    const inputValue = useAppSelector(state => state.modalRenameCard.inputValue);
+    const { inputValue } = useAppSelector(state => state.modalRenameCard);
     return (
         <form >
             <InputAddCard

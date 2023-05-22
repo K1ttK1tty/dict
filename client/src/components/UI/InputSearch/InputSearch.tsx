@@ -26,7 +26,6 @@ const InputSearch: FC = memo(function () {
         }, 300);
     }
     const inputClass:string = [style.inputSearch, isHidden].join(' ');
-
     const handleKey = (key: React.KeyboardEvent) => {
         if (key.key === 'Escape') {
             if (inputElement.current) {
@@ -44,7 +43,6 @@ const InputSearch: FC = memo(function () {
             dispatch(setSearchWord(value));
         }, 400);
     };
-
     return <input
         onClick={e => e.stopPropagation()}
         placeholder={' Искать'}

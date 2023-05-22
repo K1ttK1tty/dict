@@ -5,11 +5,11 @@ import BtnAddCard from '../BtnAddCard/BtnAddCard';
 import Info from './Info';
 import AvatarWithInfo from '../Avatar/AvatarWithInfo';
 // functions
-import { setIsUserMenuOpen } from '../../../store/reducers/upMenu';
 import { keyClose } from '../../../functions/keyClose';
 // styles
 import styles from './UserMenu.module.css';
 // redux
+import { setIsUserMenuOpen } from '../../../store/reducers/upMenu';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { Logout } from '../../../store/reducers/authorization/Authorization/ActionCreator';
 interface IUserMenuProps {

@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useMemo, memo } from 'react';
+import { FC, useRef, useState, useEffect, useMemo, memo } from 'react';
 // hooks
 import { useCards } from '../hooks/useCards';
 //components
@@ -27,7 +27,9 @@ import {
     setCurrentColor,
     setColorsBeforePaint
 } from '../store/reducers/ColorPicker';
-const Vocabulary = memo(function () {
+// types
+import { IColorObject } from '../models/models';
+const Vocabulary: FC = memo(function () {
     const [isAttached, setIsAttached] = useState<boolean>(true);
     // authorization
     const { toggleWordsOrder, cards } = useAppSelector(state => state.AuthSlice);
@@ -36,7 +38,7 @@ const Vocabulary = memo(function () {
     const { chooseTheme, optionState } = useAppSelector(state => state.AuthSlice);
     const dispatch = useAppDispatch();
     const modalAdd = useRef<HTMLInputElement | null>(null);
-    const modalChangeCard = useRef<HTMLInputElement | undefined>();
+    const modalChangeCard = useRef<HTMLInputElement | null>(null);
     //color-pixelwindow
     // const pageTheme = useAppSelector(state => state.ColorPicker.pageTheme);
     const pageTheme = localStorage.getItem('theme');
@@ -48,14 +50,14 @@ const Vocabulary = memo(function () {
     const selectedAndSearchedWord = useCards(cards, searchWord, chooseTheme, toggleWordsOrder);
     const [color, setColor] = useState<string>('#0dccce');
 
-    const [allElementsArray, setAllElementsArray] = useState([]);
+    const [allElementsArray, setAllElementsArray] = useState<HTMLElement[]>([]);
     const body = document.body;
-    let arrOfCurrentElements = useMemo(() => {
+    let arrOfCurrentElements: HTMLElement[] = useMemo(() => {
         return [];
     }, [colorModeOn]);
 
-    function click(e) {
-        const element = e.target;
+    function click(e: MouseEvent) {
+        const element = e.target as HTMLElement;
         if (
             element.className !== 'noCLick' &&
             element.className !== 'react-colorful__interactive' &&
@@ -72,7 +74,6 @@ const Vocabulary = memo(function () {
 
                 if (currentColor) element.style.background = currentColor;
                 else {
-
                     dispatch(setCurrentColor(element.style.background));
                     setColor(element.style.background);
                 }
@@ -147,12 +148,8 @@ const Vocabulary = memo(function () {
         if (colorModeOn) body.addEventListener('click', click);
         else body.removeEventListener('click', click);
 
-
-
         if (colorModeOn) document.body.className = 'paintBrush'; // set cursors
         else document.body.className = '';
-
-
 
         return () => {
             body.removeEventListener('click', click);
@@ -160,16 +157,21 @@ const Vocabulary = memo(function () {
         };
 
     }, [
-        colorModeOn, color, colorRemoveMode,
-        getCurrentColorMode, arrOfCurrentElements.length, currentColor, colorsBeforePaint
-    ]);
+        colorModeOn,
+        color,
+        colorRemoveMode,
+        getCurrentColorMode,
+        arrOfCurrentElements.length,
+        currentColor,
+        colorsBeforePaint
+    ]
+    );
 
-    const colorObject = useMemo(() => {
+    const colorObject:IColorObject = useMemo(() => {
         return {
             light: { elements: [], colors: [] },
             dark: { elements: [], colors: [] }
         };
-
     }, []);
 
     // проверить как ведут себя массивы элементов при точечном удалении цвета
@@ -291,7 +293,7 @@ const Vocabulary = memo(function () {
                                 Cards={selectedAndSearchedWord}
                                 modalChangeCard={modalChangeCard}
                             />
-                            : <RemoveTheme chooseTheme={chooseTheme} />
+                            : <RemoveTheme />
                     }
                 </div>
             </div>

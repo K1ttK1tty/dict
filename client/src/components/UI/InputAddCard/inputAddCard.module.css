@@ -7,7 +7,6 @@
 input:disabled {
     background-color: transparent;
 }
-
 .www:focus {
     scale: 1.06;
     color: black;

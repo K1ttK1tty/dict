@@ -1,9 +1,9 @@
 import { FC, memo } from 'react';
 import CardRand from '../CardRand/CardRand';
 // types
-import { ICards } from '../../../store/reducers/authorization/Authorization/AuthTypes';
+import { ICard } from '../../../store/reducers/authorization/Authorization/AuthTypes';
 interface ICardsRandom {
-    cardsGame: ICards[];
+    cardsGame: ICard[];
 }
 const CardsRandom: FC<ICardsRandom> = memo(function ({ cardsGame }) {
     return (

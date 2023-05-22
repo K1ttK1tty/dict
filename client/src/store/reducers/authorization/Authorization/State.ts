@@ -9,6 +9,7 @@ export const initialState: IInitialState = {
     // cards
     cards: [],
     changeCard: {
+        id: 0,
         word: '',
         translate: '',
         theme: ''

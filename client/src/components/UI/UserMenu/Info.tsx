@@ -17,7 +17,6 @@ const Info: FC<IInfo> = memo(function ({ isUserMenuOpen }) {
     useEffect(() => {
         if (!isUserMenuOpen) setIsOpen(false);
     }, [isUserMenuOpen]);
-
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const submenuStyles = (isOpen && isUserMenuOpen)
         ? [styles.show, styles.submenu].join(' ')

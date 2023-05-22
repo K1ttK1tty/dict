@@ -7,7 +7,6 @@ import { setInputReq } from '../../../store/reducers/GamesSlice';
 const InputRequire: FC = memo(function () {
     const dispatch = useAppDispatch();
     const { inputReq } = useAppSelector(state => state.GamesSlice);
-
     return (
         < input
             value={inputReq ? inputReq : ''}

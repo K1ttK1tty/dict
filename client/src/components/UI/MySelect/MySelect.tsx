@@ -29,12 +29,12 @@ const MySelect: FC<IMySelect> = memo(function ({ isCanMove }) {
         const divElement = element.target as HTMLDivElement;
         dispatch(setOptionName(divElement.innerText));
         dispatch(setChooseTheme(divElement.innerText));
-        dispatch(setOptionState({ open: false, removeMark: true })); //
+        dispatch(setOptionState({ open: false, removeMark: true }));
     }
     function removeTheme() {
         dispatch(setOptionName('Тема'));
         dispatch(setChooseTheme(''));
-        dispatch(setOptionState({ open: false, removeMark: false })); //
+        dispatch(setOptionState({ open: false, removeMark: false }));
     }
     if (optionState.open) {
         setTimeout(() => {

@@ -10,7 +10,6 @@ export interface IFormIcon {
 interface IShowIcon extends IFormIcon {
     showPassword: boolean;
 }
-
 const ShowIcon: FC<IShowIcon> = function ({ showPassword, styles, setShowPassword }) {
     return (
         <div>

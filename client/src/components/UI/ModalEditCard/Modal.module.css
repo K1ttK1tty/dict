@@ -86,15 +86,12 @@
     transition: 0.2s;
     border: none;
 }
-
 .modalClose:hover {
     background-color: rgba(0, 0, 0, 0.2);
 }
-
 .modalClose:focus {
     background-color: rgba(0, 0, 0, 0.315);
 }
-
 .inputDiv {
     display: flex;
     justify-content: space-between;
@@ -116,7 +113,6 @@
         margin-bottom: 20px;
     }
 }
-
 .btnFormEditCard {
     width: 100%;
     font-size: 18px;
@@ -143,7 +139,6 @@
     justify-content: space-between;
     align-items: center;
 }
-
 .inputFormEditCard {
     padding: 6px 2px !important;
     font-size: 18px;

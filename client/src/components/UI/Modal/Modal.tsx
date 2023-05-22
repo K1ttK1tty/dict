@@ -4,20 +4,21 @@ import { keyClose } from '../../../functions/keyClose';
 import { removeModal } from '../../../functions/removeModal';
 //styles
 import style from '../ModalEditCard/Modal.module.css';
+// redux
+import { useAppDispatch } from '../../../hooks/redux';
 // types
 import { } from '../../../hooks/redux';
-import { AppDispatch } from '../../../store/store';
+import { ICard } from '../../../store/reducers/authorization/Authorization/AuthTypes';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
-import { IChangeCard, ICards } from '../../../store/reducers/authorization/Authorization/AuthTypes';
 interface IModal {
     title: string;
     content: React.ReactNode;
     isModal: boolean;
-    setModal: (state: boolean) => void;
-    setFields?: ActionCreatorWithPayload<(IChangeCard | ICards)>;
-    dispatch?: AppDispatch;
+    setModal?: (state: boolean) => void;
+    setFields?: ActionCreatorWithPayload<(ICard)>;
 }
-const Modal: FC<IModal> = memo(function ({ title, content, isModal, setModal, setFields, dispatch }) {
+const Modal: FC<IModal> = memo(function ({ title, content, isModal, setModal, setFields }) {
+    const dispatch = useAppDispatch();
     const visible = isModal
         ? [style.modal, style.active].join(' ')
         : style.modal;

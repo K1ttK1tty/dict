@@ -21,7 +21,6 @@ const FormLogin: FC<IFormProps> = function
         isLogin
     }) {
     const formStyle = isLogin ? styles.form : [styles.form, styles.formHide].join(' ');
-
     return (
         <form className={formStyle} >
             <h1 className={styles.title}>Вход</h1>
@@ -55,7 +54,6 @@ const FormLogin: FC<IFormProps> = function
             <Link to="/forgotPassword">
                 <p className={styles.forgotPasswd}>Забыли пароль?</p>
             </Link>
-
         </form>
     );
 };

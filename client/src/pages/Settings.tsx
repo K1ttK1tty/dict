@@ -1,5 +1,5 @@
-import React from 'react';
-const Settings = function () {
+import { FC } from 'react';
+const Settings: FC = function () {
 
     return (
         <div style={{ textAlign: 'center' }}>

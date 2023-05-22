@@ -1,11 +1,9 @@
 // AuthSlice.ts
-export interface IChangeCard {
+export interface ICard {
+    id: number;
     word: string;
     translate: string;
     theme: string;
-}
-export interface ICards extends IChangeCard {
-    id: number;
 }
 export interface IUser {
     id: number;
@@ -43,7 +41,8 @@ export interface IFetchError extends IMessage {
     errors: [] | { value: string, msg: string, param: string, location: string }
 }
 export interface IUpdateCards extends IEmail {
-    cards: ICards;
+    email: string;
+    cards: ICard[];
 }
 export interface IUpdateThemes extends IEmail {
     themes: string[];
@@ -55,6 +54,6 @@ export interface ILogin extends ICheckAuth {
     userContent: IUserContent;
 }
 export interface IUserContent {
-    userCards: ICards[];
+    userCards: ICard[];
     userThemes: string[];
 }

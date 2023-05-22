@@ -1,10 +1,10 @@
 import { FC, memo } from 'react';
 import Card from './Card';
 // types
-import { ICards } from '../../../store/reducers/authorization/Authorization/AuthTypes';
+import { ICard } from '../../../store/reducers/authorization/Authorization/AuthTypes';
 interface ISetCards {
-    Cards: ICards[];
-    modalChangeCard: React.MutableRefObject<HTMLInputElement | undefined>;
+    Cards: ICard[];
+    modalChangeCard: React.MutableRefObject<HTMLInputElement | null>;
 }
 const SetCards: FC<ISetCards> = memo(function ({ Cards, modalChangeCard }) {
     return (

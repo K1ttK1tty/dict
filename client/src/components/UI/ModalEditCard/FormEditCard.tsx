@@ -1,3 +1,4 @@
+// libs
 import { FC, memo } from 'react';
 import { isMobile } from 'react-device-detect';
 // components
@@ -16,24 +17,25 @@ import { UpdateCards } from '../../../store/reducers/authorization/Authorization
 import { setCards } from '../../../store/reducers/authorization/Authorization/AuthSlice';
 import { setModal, setEditCard } from '../../../store/reducers/modalRenameCard';
 // types
+import { ICard } from '../../../store/reducers/authorization/Authorization/AuthTypes';
 interface IFormEditCard {
-    modalChangeCard: React.MutableRefObject<HTMLInputElement>;
+    modalChangeCard: React.MutableRefObject<HTMLInputElement | null>;
 }
 const FormEditCard: FC<IFormEditCard> = memo(function ({ modalChangeCard }) {
     const dispatch = useAppDispatch();
-    const editCard = useAppSelector(state => state.modalRenameCard.editCard);
+    const { editCard } = useAppSelector(state => state.modalRenameCard);
     const { changeCard, cards, selectOptions } = useAppSelector(state => state.AuthSlice);
     const email = useAppSelector(state => state.AuthSlice?.user?.email);
 
-    const ChangeCard = (e:React.MouseEvent<HTMLButtonElement>) => {
+    const ChangeCard = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        const newCards = changeCardFields(cards, changeCard, editCard);
+        const newCards: ICard[] = changeCardFields(cards, changeCard, editCard);
         addNewTheme(selectOptions, editCard.theme, email, dispatch);
         dispatch(UpdateCards({ email, cards: newCards }));
         dispatch(setCards(newCards));
         removeModal(setModal, dispatch);
     };
-    const remove = (e:React.MouseEvent<HTMLButtonElement>) => {
+    const remove = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         removeCard(editCard.id, cards, email, dispatch);
         removeModal(setModal, dispatch);

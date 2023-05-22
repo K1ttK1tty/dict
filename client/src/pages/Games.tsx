@@ -1,5 +1,6 @@
+// libs
 import { FC, memo } from 'react';
-import { useMemo, useEffect, useState } from 'react';
+import { useMemo, useEffect } from 'react';
 // components
 import InputRequire from '../components/UI/InputRequire/InputRequire';
 import BtnAddCard from '../components/UI/BtnAddCard/BtnAddCard';
@@ -15,7 +16,7 @@ import '../styles/theme.css';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { setCardsNumber, setInputReq } from '../store/reducers/GamesSlice';
 // types
-import { ICards } from '../store/reducers/authorization/Authorization/AuthTypes';
+import { ICard } from '../store/reducers/authorization/Authorization/AuthTypes';
 const Games: FC = memo(function () {
     const dispatch = useAppDispatch();
     const { cards } = useAppSelector(state => state.AuthSlice);
@@ -24,7 +25,6 @@ const Games: FC = memo(function () {
         cardsNumber,
         changer
     } = useAppSelector(state => state.GamesSlice);
-    const [cardsGame, setCardsGame] = useState([]);
 
     useEffect(() => {
         return () => {
@@ -33,7 +33,7 @@ const Games: FC = memo(function () {
         };
     }, []);
     const array = useMemo(() => {
-        const arr: ICards[] = [...cardsGame];
+        const arr: ICard[] = [];
         for (let index = 0; index < cardsNumber; index++) {
             arr.push(cards[getRandomIng(cards.length)]);
         }
@@ -60,7 +60,7 @@ const Games: FC = memo(function () {
                                         <CardsRandom cardsGame={array} />
                                         <BtnAddCard
                                             dinamicclassname={'btnGamesCheck'}
-                                            onClick={e => validateQuiz(e, array, setCardsGame, dispatch)}
+                                            onClick={e => validateQuiz(e, array, dispatch)}
                                             children={'Проверить'}
                                         />
                                     </form>
