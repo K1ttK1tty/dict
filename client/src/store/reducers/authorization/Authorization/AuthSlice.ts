@@ -73,8 +73,8 @@ export const AuthSlice = createSlice({
             state.avatar = action.payload;
         },
         // servers response
-        setServerMessage(state) {
-            state.serverMessage = '';
+        setServerMessage(state, action: PayloadAction<string>) {
+            state.serverMessage = action.payload;
         },
     },
 

@@ -17,14 +17,14 @@ const Alert: FC = memo(function () {
             setIsOpen(true);
             setTimeout(() => {
                 close();
-            }, 3000);
+            }, 3400);
         }
     }, [serverMessage]);
 
     const close = () => {
         setIsOpen(false);
         setTimeout(() => {
-            dispatch(setServerMessage());
+            dispatch(setServerMessage(''));
         }, 350);
     };
 

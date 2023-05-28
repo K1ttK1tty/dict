@@ -1,14 +1,18 @@
 export interface IFormProps {
-    email: string;
-    setEmail: (state: string) => void;
-    password:string;
-    setPassword: (state: string) => void;
-    showPassword:boolean;
-    setShowPassword:(state:boolean)=>void;
-    action: (a:React.MouseEvent<HTMLElement>)=>void;
+    showPassword: boolean;
+    setShowPassword: (state: boolean) => void;
     isLogin: boolean;
 }
-export interface IFormRegistrationProps extends IFormProps {
-    userName: string;
-    setUserName: (a: string) => void;
+export interface IFormLoginHookArgs {
+    email: string;
+    password: string;
+}
+export interface IFormRegistrationHookArgs extends IFormLoginHookArgs {
+    name: string;
+}
+export interface IChangePassword {
+    email: string;
+}
+export interface ISetNewPassword {
+    password: string;
 }

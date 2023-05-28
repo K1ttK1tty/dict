@@ -1,8 +1,9 @@
 .www {
-    font-size: 20px;
+    font-size: 19px;
     line-height: 1.2;
-    padding: 6px 13px;
+    padding: 6px 10px;
     transition: 0.15s;
+    /* margin-bottom: 28px; */
 }
 input:disabled {
     background-color: transparent;

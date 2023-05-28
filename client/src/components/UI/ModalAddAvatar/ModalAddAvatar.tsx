@@ -5,6 +5,7 @@ import AddAvatarContent from './AddAvatarContent';
 // redux
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { UploadAvatar, GetAvatar } from '../../../store/reducers/authorization/Authorization/ActionCreator';
+import { setServerMessage } from '../../../store/reducers/authorization/Authorization/AuthSlice';
 // types
 interface IModalAddAvatar {
     isModal: boolean;
@@ -33,7 +34,7 @@ const ModalAddAvatar: FC<IModalAddAvatar> = memo(function ({ isModal, setModal }
                 setFiles(file.files);
             } else {
                 file.value = '';
-                window.alert('Нужно выбрать файлы с расширением jpg/png');
+                dispatch(setServerMessage('Нужно выбрать файлы с расширением jpg/png'));
             }
         }
     };

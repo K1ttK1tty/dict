@@ -7,7 +7,6 @@ import BtnAddCard from '../BtnAddCard/BtnAddCard';
 // functions
 import { changeCardFields } from '../../../functions/changeCardFields';
 import { addNewTheme } from '../../../functions/addNewTheme';
-import { removeModal } from '../../../functions/removeModal';
 import { removeCard } from '../../../functions/removeCard';
 // styles
 import style from './Modal.module.css';
@@ -33,12 +32,12 @@ const FormEditCard: FC<IFormEditCard> = memo(function ({ modalChangeCard }) {
         addNewTheme(selectOptions, editCard.theme, email, dispatch);
         dispatch(UpdateCards({ email, cards: newCards }));
         dispatch(setCards(newCards));
-        removeModal(setModal, dispatch);
+        dispatch(setModal(false));
     };
     const remove = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         removeCard(editCard.id, cards, email, dispatch);
-        removeModal(setModal, dispatch);
+        dispatch(setModal(false));
     };
     return (
         <form>
