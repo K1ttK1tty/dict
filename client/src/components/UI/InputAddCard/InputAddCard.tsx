@@ -1,9 +1,7 @@
-// libs
-import { FC, memo } from 'react';
 // styles
 import cl from './inputAddCard.module.css';
 // types
-interface IInputProps {
+interface IInputProps<T> {
     inputValue?: string;
     placeholder?: string;
     modalAdd?: React.MutableRefObject<HTMLInputElement | null>;
@@ -11,39 +9,27 @@ interface IInputProps {
     setValue?: (a: string) => void;
     dinamicclassname: string;
     type?: string;
-    register?: any;
+    register?: T;
 }
-const InputAddCard: FC<IInputProps> = memo(function (
-    {
-        inputValue,
-        placeholder,
-        modalAdd,
-        modalChangeCard,
-        setValue,
-        dinamicclassname,
-        type,
-        register,
-        ...props
-    }
-) {
-    const element = modalAdd ? modalAdd : modalChangeCard;
-    const setInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const element = e.target as HTMLInputElement;
-        if (setValue) {
-            setValue(element.value);
-        }
-    };
+export default function InputAddCard<T>(props: IInputProps<T>) {
+    const element = props.modalAdd ? props.modalAdd : props.modalChangeCard;
+        const setInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+            const element = e.target as HTMLInputElement;
+            if (props.setValue) {
+                props.setValue(element.value);
+            }
+        };
+
     return (
         <input
             ref={element}
-            type={type}
-            placeholder={placeholder}
-            className={[cl.www, dinamicclassname].join(' ')}
-            value={inputValue}
+            type={props.type}
+            placeholder={props.placeholder}
+            className={[cl.www, props.dinamicclassname].join(' ')}
+            value={props.inputValue}
             onChange={setInputValue}
-            {...register}
-            {...props}
+            {...props.register}
         />
     );
-});
-export default InputAddCard;
+
+}
