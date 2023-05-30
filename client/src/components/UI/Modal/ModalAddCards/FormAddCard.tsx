@@ -1,14 +1,14 @@
 import { FC, memo } from 'react';
 // components
-import InputAddCard from '../InputAddCard/InputAddCard';
-import BtnAddCard from '../BtnAddCard/BtnAddCard';
+import InputAddCard from '../../InputAddCard/InputAddCard';
+import BtnAddCard from '../../BtnAddCard/BtnAddCard';
 // functions
-import { addNewCard } from '../../../functions/addNewCard';
+import { addNewCard } from '../../../../functions/addNewCard';
 // consts
 import styles from './FormAddCard.module.css';
 //redux
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { setInputValue } from '../../../store/reducers/modalRenameCard';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
+import { setInputValue } from '../../../../store/reducers/modalRenameCard';
 // types
 interface IFormAddCard {
     modalAdd: React.MutableRefObject<HTMLInputElement | null>;

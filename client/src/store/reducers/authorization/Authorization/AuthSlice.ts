@@ -81,9 +81,8 @@ export const AuthSlice = createSlice({
     extraReducers(builder) {
         //registration
         builder.addCase(Registration.fulfilled, (state, action) => {
-            localStorage.setItem('token', action.payload.accessToken);
-
-            const userInfo = { ...action.payload.user, isActivated: !!action.payload.user.isActivated };
+            localStorage.setItem('token', action.payload.userData.accessToken);
+            const userInfo = { ...action.payload.userData.user, isActivated: false };
             state.user = userInfo;
             state.isLoading = false;
             state.serverMessage = action.payload.message;

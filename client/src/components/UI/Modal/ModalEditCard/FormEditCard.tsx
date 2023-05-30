@@ -2,21 +2,21 @@
 import { FC, memo } from 'react';
 import { isMobile } from 'react-device-detect';
 // components
-import InputAddCard from '../InputAddCard/InputAddCard';
-import BtnAddCard from '../BtnAddCard/BtnAddCard';
+import InputAddCard from '../../InputAddCard/InputAddCard';
+import BtnAddCard from '../../BtnAddCard/BtnAddCard';
 // functions
-import { changeCardFields } from '../../../functions/changeCardFields';
-import { addNewTheme } from '../../../functions/addNewTheme';
-import { removeCard } from '../../../functions/removeCard';
+import { changeCardFields } from '../../../../functions/changeCardFields';
+import { addNewTheme } from '../../../../functions/addNewTheme';
+import { removeCard } from '../../../../functions/removeCard';
 // styles
 import style from './Modal.module.css';
 // redux
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { UpdateCards } from '../../../store/reducers/authorization/Authorization/ActionCreator';
-import { setCards } from '../../../store/reducers/authorization/Authorization/AuthSlice';
-import { setModal, setEditCard } from '../../../store/reducers/modalRenameCard';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
+import { UpdateCards } from '../../../../store/reducers/authorization/Authorization/ActionCreator';
+import { setCards } from '../../../../store/reducers/authorization/Authorization/AuthSlice';
+import { setModal, setEditCard } from '../../../../store/reducers/modalRenameCard';
 // types
-import { ICard } from '../../../store/reducers/authorization/Authorization/AuthTypes';
+import { ICard } from '../../../../store/reducers/authorization/Authorization/AuthTypes';
 interface IFormEditCard {
     modalChangeCard: React.MutableRefObject<HTMLInputElement | null>;
 }

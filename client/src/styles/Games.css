@@ -18,9 +18,11 @@
     min-height: 100%;
     padding-bottom: 15px;
     transition: var(--transition-theme);
+    overflow: auto;
 }
 .wordShared {
-    width: 110px;
+    width: 200px;
+    justify-content: center;
 }
 .hidden {
     opacity: 0;
@@ -30,8 +32,25 @@
 .wordBlock {
     display: flex;
     align-items: center;
+    color: black;
+    margin-bottom: 6px;
+    max-height: 25px;
 }
-
+.translateBlock{
+    display: flex;
+    flex-direction: column;
+}
+.mr6{
+    margin-right: 6px;
+}
+.mb12{
+    margin-bottom: 12px;
+}
+.inputEnterWordsCount{
+    max-width:150px;
+    margin: 0px auto;
+    background: transparent;
+}
 .formTitle {
     text-align: center;
     margin: 0px auto 50px;
@@ -53,8 +72,6 @@
 .btnGamesCheck {
     margin: 0px auto;
     display: block;
-    width: 20%;
-    padding: 8px;
 }
 
 /* words validate */
@@ -70,10 +87,15 @@
     color: var(--color-almost);
     transition: var(--transition-theme);
 }
-
 .gameWrap {
     height: 100%;
     transition: var(--transition02s);
+}
+@media (max-width:768px){
+    .gameWrap {
+        margin-left: 30px;
+    }
+
 }
 .trueWord {
     box-shadow: var(--word-shadow-true);

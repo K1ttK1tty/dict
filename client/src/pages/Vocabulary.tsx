@@ -4,8 +4,8 @@ import { useCards } from '../hooks/useCards';
 //components
 import MenuVoc from '../components/UI/MenuVoc/MenuVoc';
 import SetCard from '../components/UI/WordCard/SetCard';
-import ModalEditCard from '../components/UI/ModalEditCard/ModalEditCard';
-import ModalAddCards from '../components/UI/ModalAddCards/ModalAddCards';
+import ModalEditCard from '../components/UI/Modal/ModalEditCard/ModalEditCard';
+import ModalAddCards from '../components/UI/Modal/ModalAddCards/ModalAddCards';
 import RemoveTheme from '../components/RemoveTheme';
 import CardsControl from '../components/UI/CardsControl/CardsControl';
 import CardsInfo from '../components/UI/CardsInfo/CardsInfo';
@@ -15,7 +15,8 @@ import { removeInput } from '../functions/removeInput';
 //styles
 import '../styles/theme.css';
 import '../styles/Vocabulary.css';
-import btnStyle from '../components/UI/ModalAddCards/FormAddCard.module.css';
+import btnStyle from '../components/UI/Modal/ModalAddCards/FormAddCard.module.css';
+// import btnStyle from '../components/UI/ModalAddCards/FormAddCard.module.css';
 //color-picker
 import ColorPicker from '../components/UI/ColorPicker/ColorPicker';
 //redux
@@ -167,7 +168,7 @@ const Vocabulary: FC = memo(function () {
     ]
     );
 
-    const colorObject:IColorObject = useMemo(() => {
+    const colorObject: IColorObject = useMemo(() => {
         return {
             light: { elements: [], colors: [] },
             dark: { elements: [], colors: [] }
@@ -195,31 +196,24 @@ const Vocabulary: FC = memo(function () {
                 const element = allElementsArray[index];
                 colorObject.dark.colors = [...colorObject.dark.colors, element.style.background];
             }
-
         }
-
     }, [allElementsArray]);
     // console.log(pageTheme)
     // console.log(colorObject)
     // console.log(allElementsArray)
 
     useEffect(() => {
-
         if (pageTheme === 'light') {
-
             for (let index = 0; index < colorObject.light.elements.length; index++) {
                 const element = colorObject.light.elements[index];
 
                 element.style.background = colorObject.light.colors[index];
-
             }
         } else {
-
             for (let index = 0; index < colorObject.dark.elements.length; index++) {
                 const element = colorObject.dark.elements[index];
 
                 element.style.background = colorObject.dark.colors[index];
-
             }
         }
     }, [pageTheme]);
@@ -249,42 +243,48 @@ const Vocabulary: FC = memo(function () {
                     {/* <ColorPicker color={color} setColor={setColor} />
 
                     <div
-                        className='noCLick'
+                        className="noCLick"
                         onClick={devMode}
                         style={
-                            { background: colorModeOn ? 'red' : 'teal', color: 'white', width: '100px',
-                             cursor: 'pointer', marginBottom: '20px', textAlign: 'center', borderRadius: '20px',
-                              padding: '5px' }
+                            {
+                                background: colorModeOn ? 'red' : 'teal', color: 'white', width: '100px',
+                                cursor: 'pointer', marginBottom: '20px', textAlign: 'center', borderRadius: '20px',
+                                padding: '5px'
                             }
+                        }
                     >Change mode {colorModeOn ? 'on' : 'off'}</div>
 
                     <div
-                        className='noCLick'
+                        className="noCLick"
                         onClick={removeCurrent}
                         style={
-                            { background: colorRemoveMode ? 'green' : 'teal', color: 'white', width: '100px',
-                             cursor: 'pointer', marginBottom: '20px', textAlign: 'center', 
-                             borderRadius: '20px', padding: '5px' }
+                            {
+                                background: colorRemoveMode ? 'green' : 'teal', color: 'white', width: '100px',
+                                cursor: 'pointer', marginBottom: '20px', textAlign: 'center',
+                                borderRadius: '20px', padding: '5px'
                             }
+                        }
                     >Выборочно отменить {colorRemoveMode ? 'on' : 'off'}</div>
 
                     <div
-                        className='noCLick'
+                        className="noCLick"
                         onClick={getCurrentColor}
                         style={
-                            { background: getCurrentColorMode ? 'green' : 'teal', color: 'white',
-                             width: '100px', cursor: 'pointer', marginBottom: '20px', textAlign: 'center', 
-                             borderRadius: '20px', padding: '5px' }
+                            {
+                                background: getCurrentColorMode ? 'green' : 'teal', color: 'white',
+                                width: '100px', cursor: 'pointer', marginBottom: '20px', textAlign: 'center',
+                                borderRadius: '20px', padding: '5px'
                             }
-                    > {currentColor ? 'Крашу в ' + currentColor : "Копирую"}</div>
+                        }
+                    > {currentColor ? 'Крашу в ' + currentColor : 'Копирую'}</div>
 
                     <div
-                        className='noCLick'
+                        className="noCLick"
                         onClick={removeAllColors}
                         style={{
-                             background: 'pink', color: 'black', width: '100px', cursor: 'pointer', 
-                        marginBottom: '20px', textAlign: 'center', borderRadius: '20px', padding: '5px'
-                     }}
+                            background: 'pink', color: 'black', width: '100px', cursor: 'pointer',
+                            marginBottom: '20px', textAlign: 'center', borderRadius: '20px', padding: '5px'
+                        }}
                     >Убрать все цвета</div> */}
 
                     {

@@ -8,7 +8,7 @@ import ShowIcon from './Icons/ShowIcon';
 import { regularExpression } from './regularExpression';
 // styles
 import styles from '../Authorization.module.css';
-import inputStyle from '../../ModalAddCards/FormAddCard.module.css';
+import inputStyle from '../../Modal/ModalAddCards/FormAddCard.module.css';
 // redux
 import { useAppDispatch } from '../../../../hooks/redux';
 import { Registration } from '../../../../store/reducers/authorization/Authorization/ActionCreator';

@@ -9,7 +9,7 @@ import BtnAddCard from '../../BtnAddCard/BtnAddCard';
 import { regularExpression } from '../forms/regularExpression';
 // styles 
 import stylesAuth from '../Authorization.module.css';
-import inputStyle from '../../ModalAddCards/FormAddCard.module.css';
+import inputStyle from '../../Modal/ModalAddCards/FormAddCard.module.css';
 import styles from './ResetPassword.module.css';
 // redux
 import { useAppDispatch } from '../../../../hooks/redux';

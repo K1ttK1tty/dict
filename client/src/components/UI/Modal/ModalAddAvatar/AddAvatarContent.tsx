@@ -1,13 +1,13 @@
 import { FC, useRef, useEffect, memo } from 'react';
 // components
-import BtnAddCard from '../BtnAddCard/BtnAddCard';
+import BtnAddCard from '../../BtnAddCard/BtnAddCard';
 import ChangeFileController from './ChangeFileController';
 // styles
 import styles from './AddAvatarContent.module.css';
 // redux
-import { useAppDispatch } from '../../../hooks/redux';
-import { RemoveAvatar } from '../../../store/reducers/authorization/Authorization/ActionCreator';
-import { setAvatar } from '../../../store/reducers/authorization/Authorization/AuthSlice';
+import { useAppDispatch } from '../../../../hooks/redux';
+import { RemoveAvatar } from '../../../../store/reducers/authorization/Authorization/ActionCreator';
+import { setAvatar } from '../../../../store/reducers/authorization/Authorization/AuthSlice';
 // types
 interface IAddAvatarContent {
     changeFile: (file: HTMLInputElement) => void;

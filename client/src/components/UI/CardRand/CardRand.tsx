@@ -1,6 +1,6 @@
 import { FC, memo } from 'react';
 // components
-import Input from '../Input/Input';
+import InputAddCard from '../InputAddCard/InputAddCard';
 // styles
 import styles from '../CardRand/CardRand.module.css';
 import '../../../styles/Games.css';
@@ -18,12 +18,17 @@ const CardRand: FC<ICardRand> = memo(function ({ card, index }) {
     if (validateArr[index]) validateWord = validateArr[index] + 'Color';
 
     return (
-        <div className={styles.cardRand}>
+        <div className={styles.wrapper}>
             <div className="wordBlock">
-                <div className={['wordShared', validateWord].join(' ')}>{card.word}</div>
-                <Input validClass={validateArr[index]} />
+                <div className="mr6">Слово: </div>
+                <div className={styles.translateRand}>{card.translate}</div>
             </div>
-            <div className={styles.translateRand}>{card.translate}</div>
+            <div className="translateBlock">
+                <InputAddCard
+                    dinamicclassname={[styles.input, validateArr[index], 'inptReq '].join(' ')}
+                />
+                <div className={['wordShared', validateWord].join(' ')}>{card.word}</div>
+            </div>
         </div>
     );
 });

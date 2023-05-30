@@ -1,11 +1,11 @@
 import { FC, useState, useEffect, memo } from 'react';
 // components
-import Modal from '../Modal/Modal';
+import Modal from '../Modal';
 import AddAvatarContent from './AddAvatarContent';
 // redux
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { UploadAvatar, GetAvatar } from '../../../store/reducers/authorization/Authorization/ActionCreator';
-import { setServerMessage } from '../../../store/reducers/authorization/Authorization/AuthSlice';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
+import { UploadAvatar, GetAvatar } from '../../../../store/reducers/authorization/Authorization/ActionCreator';
+import { setServerMessage } from '../../../../store/reducers/authorization/Authorization/AuthSlice';
 // types
 interface IModalAddAvatar {
     isModal: boolean;

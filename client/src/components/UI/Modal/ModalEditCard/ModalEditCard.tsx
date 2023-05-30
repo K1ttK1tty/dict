@@ -1,10 +1,10 @@
 import { FC, useState, useEffect, memo } from 'react';
 // components
 import FormEditCard from './FormEditCard';
-import Modal from '../Modal/Modal';
+import Modal from '../Modal';
 // redux
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { setModal, setEditCard } from '../../../store/reducers/modalRenameCard';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
+import { setModal, setEditCard } from '../../../../store/reducers/modalRenameCard';
 // types
 interface IModalEditCard {
     modalChangeCard: React.MutableRefObject<HTMLInputElement | null>;

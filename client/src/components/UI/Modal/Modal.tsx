@@ -3,7 +3,7 @@ import { FC, memo } from 'react';
 import { keyClose } from '../../../functions/keyClose';
 import { removeModal } from '../../../functions/removeModal';
 //styles
-import style from '../ModalEditCard/Modal.module.css';
+import style from './ModalEditCard/Modal.module.css';
 // redux
 import { useAppDispatch } from '../../../hooks/redux';
 // types

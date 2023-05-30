@@ -3,7 +3,7 @@ import { FC, useState, memo } from 'react';
 import InputSearch from '../InputSearch/InputSearch';
 import UserTopMenu from '../UserMenu/UserTopMenu';
 import UserMenu from '../UserMenu/UserMenu';
-import ModalAddAvatar from '../ModalAddAvatar/ModalAddAvatar';
+import ModalAddAvatar from '../Modal/ModalAddAvatar/ModalAddAvatar';
 // functions
 import { inputSearchHandler } from '../../../functions/inputSearchHandler';
 // icons

@@ -1,8 +1,7 @@
 // libs
-import { FC, memo } from 'react';
-import { useMemo, useEffect } from 'react';
+import { FC, memo, useMemo, useEffect } from 'react';
 // components
-import InputRequire from '../components/UI/InputRequire/InputRequire';
+import InputAddCard from '../components/UI/InputAddCard/InputAddCard';
 import BtnAddCard from '../components/UI/BtnAddCard/BtnAddCard';
 import CardsRandom from '../components/UI/CardsRandom/CardsRandom';
 // functions
@@ -12,6 +11,7 @@ import { validateQuiz } from '../functions/validateQuiz';
 // styles
 import '../styles/Games.css';
 import '../styles/theme.css';
+import inputStyle from '../components/UI/Modal/ModalAddCards/FormAddCard.module.css';
 // redux
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { setCardsNumber, setInputReq } from '../store/reducers/GamesSlice';
@@ -25,6 +25,9 @@ const Games: FC = memo(function () {
         cardsNumber,
         changer
     } = useAppSelector(state => state.GamesSlice);
+    const setInputWordsCount = (value: string | number) => {
+        dispatch(setInputReq(Number(value)));
+    };
 
     useEffect(() => {
         return () => {
@@ -48,7 +51,15 @@ const Games: FC = memo(function () {
                         cards.length ?
                             <div>
                                 <form className="formTitle">
-                                    Введите количество слов: <InputRequire />
+                                    <div className={'mr6 mb12'}>
+                                        Введите количество слов:
+                                        <InputAddCard
+                                            dinamicclassname={inputStyle.inputFormAddCard + ' inputEnterWordsCount'}
+                                            inputValue={inputReq ? inputReq : ''}
+                                            setValue={setInputWordsCount}
+                                            type="number"
+                                        />
+                                    </div>
                                     <BtnAddCard
                                         onClick={e => generateQuizWords(e, inputReq, dispatch)}
                                         children={'Сгенерировать'}

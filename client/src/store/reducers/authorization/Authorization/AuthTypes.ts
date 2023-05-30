@@ -57,3 +57,16 @@ export interface IUserContent {
     userCards: ICard[];
     userThemes: string[];
 }
+export interface IRegistration {
+    message: string;
+    userData: {
+        accessToken: string;
+        refreshToken: string;
+        user: {
+            activationLink: string;
+            email: string;
+            id: number;
+            name: string;
+        }
+    };
+}

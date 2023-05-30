@@ -1,7 +1,12 @@
 import { IInitialState } from './AuthSlice';
 export const initialState: IInitialState = {
     // authorization
-    user: { id: 0, name: '', email: '', isActivated: false },
+    user: {
+        id: 0,
+        name: '',
+        email: '',
+        isActivated: false
+    },
     avatar: '',
     isAuth: false,
     isLoading: false,

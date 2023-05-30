@@ -10,7 +10,7 @@ import ShowIcon from './Icons/ShowIcon';
 import { regularExpression } from './regularExpression';
 // styles
 import styles from '../Authorization.module.css';
-import inputStyle from '../../ModalAddCards/FormAddCard.module.css';
+import inputStyle from '../../Modal/ModalAddCards/FormAddCard.module.css';
 // redux
 import { Login } from '../../../../store/reducers/authorization/Authorization/ActionCreator';
 import { setIsAuth } from '../../../../store/reducers/authorization/Authorization/AuthSlice';
@@ -26,7 +26,7 @@ const FormLogin: FC<IFormProps> = function ({ showPassword, setShowPassword, isL
 
     const onSubmit: SubmitHandler<IFormLoginHookArgs> = data => {
         //////////////////// DELETE THIS!!
-        if (data.email === 'admin' && data.password === 'admin') {
+        if (data.email === 'admin@mail.ru' && data.password === 'admin') {
             dispatch(setIsAuth());
             return;
         }

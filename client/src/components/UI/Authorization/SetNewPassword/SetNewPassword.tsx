@@ -10,7 +10,7 @@ import { useSearchParams } from 'react-router-dom';
 import ShowIcon from '../forms/Icons/ShowIcon';
 // styles 
 import stylesAuth from '../Authorization.module.css';
-import inputStyle from '../../ModalAddCards/FormAddCard.module.css';
+import inputStyle from '../../Modal/ModalAddCards/FormAddCard.module.css';
 import styles from '../ResetPassword/ResetPassword.module.css';
 // redux
 import { useAppDispatch } from '../../../../hooks/redux';

@@ -9,6 +9,7 @@ import { AxiosError } from 'axios';
 // interfaces
 import {
     IRegistrationProps,
+    IRegistration,
     ILogin,
     IFetchError,
     IActivateMailProps,
@@ -25,7 +26,7 @@ export const Registration = createAsyncThunk(
     async (userData: IRegistrationProps, thunkAPI) => {
         try {
             const { userName, email, password } = userData;
-            const response = await $api.post<ILogin>('/registration', { userName, email, password });
+            const response = await $api.post<IRegistration>('/registration', { userName, email, password });
             console.log(response);
             return response.data;
         } catch (error) {
