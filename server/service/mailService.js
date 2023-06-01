@@ -1,7 +1,5 @@
 const nodemailer = require('nodemailer')
-// require('dotenv').config()
 class mailService {
-
     constructor() {
         this.transporter = nodemailer.createTransport({
             host: process.env.SMTP_HOST,
@@ -12,40 +10,44 @@ class mailService {
                 pass: process.env.SMTP_PASSWORD
             }
         })
-
     }
- 
+
     async sendActivationMail(to, link) {
         await this.transporter.sendMail({
             from: process.env.SMTP_USER,
             to,
-            subject: 'Активация аккаунта на ' + process.env.API_URL,
+            subject: 'Активация аккаунта на WordsWorld.',
             test: '',
             html: `
             <div>
-                <h1>Для активации перейдите по ссылке</h1>
-                <a href='${link}'>${link}</a>
+                <h1>Активация аккаунта на WordsWorld</h1>
+                <p>
+                    Здравствуйте, для активации аккаунта вам необходимо перейти по <a href='${link}'>ссылке</a>,
+                    ведущей обратно в приложение, активация произойдет автоматически
+                 </p>
+                 <p>Если вы получили эт​о сообщение по ошибке, то просто проигнорируйте его.</p>
             </div>
             `
         })
     }
 
-
-    async sendResetPassword(to,link){
+    async sendResetPassword(to, link) {
         await this.transporter.sendMail({
             from: process.env.SMTP_USER,
             to,
-            subject: 'Смена пароля на ' + process.env.API_URL,
+            subject: 'Смена пароля на WordsWorld.',
             test: '',
             html: `
             <div>
-                <h1>Для смены пароля перейдите по ссылке, далее вам нужно будет ввести новый пароль</h1>
-                <p>Если вы получили это письмо по ошибке, то просто проигнорируйте его.</p>
-                <a href='${link}'>${link}</a>
+                <h1>Смена пароля на WW.</h1>
+                <p>
+                    Здравствуйте, для смены пароля вам необходимо перейти по <a href='${link}'>ссылке</a> и ввести новый пароль. 
+                    Смена пароля может занять некоторое время, просим проявить терпение. 
+                </p>
+                <p>Если вы получили эт​о сообщение по ошибке, то просто проигнорируйте его.</p>
             </div>
             `
         })
     }
-
 }
 module.exports = new mailService()
