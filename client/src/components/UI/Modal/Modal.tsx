@@ -29,9 +29,10 @@ const Modal: FC<IModal> = memo(function ({ title, content, isModal, setModal, se
             tabIndex={1}
             className={visible}
             onKeyDown={e => keyClose(e, setModal, dispatch, setFields)}
-            onClick={() => removeModal(setModal, dispatch, setFields)}
+            // onClick={}
+            onMouseDown={() => removeModal(setModal, dispatch, setFields)}
         >
-            <div onClick={e => (e.stopPropagation())} className={style.modalContent}>
+            <div onMouseDown={e => (e.stopPropagation())} className={style.modalContent}>
                 <div className={style.modalMarg}>
                     <div className={style.modalNav}>
                         <h5 className={style.modalTitle}>{title}</h5>
