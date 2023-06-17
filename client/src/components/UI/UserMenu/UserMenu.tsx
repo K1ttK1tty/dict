@@ -36,7 +36,7 @@ const UserMenu: FC<IUserMenuProps> = memo(function ({ isActivated, setModal, mod
     }
     return (
         <div
-            onClick={e => e.stopPropagation()}
+            onMouseDown={e => e.stopPropagation()}
             onKeyDown={e => keyClose(e, setIsUserMenuOpen, dispatch)}
             className={isOpenMenu}
             tabIndex={1}

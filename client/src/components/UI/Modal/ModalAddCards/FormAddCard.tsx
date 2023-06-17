@@ -1,4 +1,4 @@
-import { FC, memo } from 'react';
+import { FC, useState, useEffect, memo } from 'react';
 // components
 import InputAddCard from '../../InputAddCard/InputAddCard';
 import BtnAddCard from '../../BtnAddCard/BtnAddCard';
@@ -15,8 +15,17 @@ interface IFormAddCard {
 }
 const FormAddCard: FC<IFormAddCard> = memo(function ({ modalAdd }) {
     const dispatch = useAppDispatch();
-    const { cards, user, selectOptions } = useAppSelector(state => state.AuthSlice);
+    const { cards, user, selectOptions, optionName } = useAppSelector(state => state.AuthSlice);
     const { inputValue } = useAppSelector(state => state.modalRenameCard);
+    const [defaultTheme, setDefaultTheme] = useState<string>('');
+    useEffect(() => {
+        if (optionName !== 'Тема') {
+            setDefaultTheme(optionName);
+        } else {
+            setDefaultTheme('');
+        }
+
+    }, [optionName])
     return (
         <form >
             <InputAddCard
@@ -35,13 +44,22 @@ const FormAddCard: FC<IFormAddCard> = memo(function ({ modalAdd }) {
             <InputAddCard
                 dinamicclassname={styles.inputFormAddCard}
                 placeholder={'Тема'}
-                inputValue={inputValue.theme}
-                setValue={e => dispatch(setInputValue({ ...inputValue, theme: e }))}
+                defaultTheme={defaultTheme}
+                setDefaultTheme={setDefaultTheme}
             />
             <BtnAddCard
                 aria={'Создать'}
                 dinamicclassname={styles.btnFormAddCard}
-                onClick={e => addNewCard(e, inputValue, cards, selectOptions, user.email, dispatch)}
+                onClick={
+                    e => addNewCard(
+                        e,
+                        { ...inputValue, theme: defaultTheme },
+                        cards,
+                        selectOptions,
+                        user.email,
+                        dispatch
+                    )
+                }
                 type="submit"
                 children="Создать"
             />

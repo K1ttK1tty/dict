@@ -13,7 +13,7 @@ const SetOptions: FC<ISetOptions> = memo(function ({ replaceOption }) {
         <div id="options" className={styles.options}>
             {
                 selectOptions.map((option, id) =>
-                    <div onClick={replaceOption} className={styles.optionsOption} key={option + id}>
+                    <div onMouseDown={replaceOption} className={styles.optionsOption} key={option + id}>
                         {option}
                     </div>
                 )
