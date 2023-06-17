@@ -1,0 +1,18 @@
+.www {
+    font-size: 19px;
+    line-height: 1.2;
+    padding: 6px 10px;
+    transition: 0.15s;
+    /* margin-bottom: 28px; */
+}
+.www::-webkit-outer-spin-button,
+.www::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+input:disabled {
+    background-color: transparent;
+}
+.www:focus {
+    scale: 1.06;
+    color: black;
+}

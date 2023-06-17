@@ -1,0 +1,35 @@
+{
+    "env": {
+        "browser": true,
+        "es2020": true,
+        "node": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:react-hooks/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react-refresh"
+    ],
+    "rules": {
+        "react-refresh/only-export-components": "warn",
+        "no-console": "warn",
+        "prefer-const":"error",
+        "max-len":["error",{"code":120}], // длина строки
+        "quotes": [
+            "warn",
+            "single"
+        ],
+        "camelcase":"warn",
+        "jsx-quotes":["warn","prefer-double"],
+        // "comma-dangle":["error",""] // для последней запятой в объекте
+        "semi":["warn","always"] // точка с запятой после строки
+        
+    }
+}

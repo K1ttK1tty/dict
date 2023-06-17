@@ -1,0 +1,111 @@
+.title {
+    font-size: 20px;
+    text-align: center;
+    color: var(--header);
+    position: relative;
+    top: -50px;
+    transition: var(--transition-theme);
+}
+.gameBody {
+    width: 60%;
+    margin: 0px auto;
+    max-width: 1600px;
+}
+.gameCardsField {
+    background-color: var(--background-cards);
+    padding: 90px 0px 0px 0px;
+    height: 100%;
+    min-height: 100%;
+    padding-bottom: 15px;
+    transition: var(--transition-theme);
+    overflow: auto;
+}
+.wordShared {
+    width: 200px;
+    justify-content: center;
+}
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+    width: 110px;
+}
+.wordBlock {
+    display: flex;
+    align-items: center;
+    color: black;
+    margin-bottom: 6px;
+    max-height: 25px;
+}
+.translateBlock{
+    display: flex;
+    flex-direction: column;
+}
+.mr6{
+    margin-right: 6px;
+}
+.mb12{
+    margin-bottom: 12px;
+}
+.inputEnterWordsCount{
+    max-width:150px;
+    margin: 0px auto;
+    background: transparent;
+}
+.formTitle {
+    text-align: center;
+    margin: 0px auto 50px;
+    color: var(--form-label);
+    transition: var(--transition-theme);
+    width: 100%;
+}
+.formCards {
+    margin: 0px auto 50px;
+    color: whitesmoke;
+}
+.noWords {
+    text-align: center;
+    color: var(--empty-header);
+    font-weight: 500;
+    font-size: 25px;
+    transition: var(--transition-theme);
+}
+.btnGamesCheck {
+    margin: 0px auto;
+    display: block;
+}
+
+/* words validate */
+.trueWordColor {
+    color: var(--color-true);
+    transition: var(--transition-theme);
+}
+.falseWordColor {
+    color: var(--color-false);
+    transition: var(--transition-theme);
+}
+.almostColor {
+    color: var(--color-almost);
+    transition: var(--transition-theme);
+}
+.gameWrap {
+    height: 100%;
+    transition: var(--transition02s);
+}
+@media (max-width:768px){
+    .gameWrap {
+        margin-left: 30px;
+    }
+
+}
+.trueWord {
+    box-shadow: var(--word-shadow-true);
+    transition: var(--transition-theme);
+}
+.falseWord {
+    box-shadow: var(--word-shadow-false);
+    transition: var(--transition-theme);
+}
+.almost {
+    box-shadow: var(--word-shadow-almost);
+    transition: var(--transition-theme);
+}

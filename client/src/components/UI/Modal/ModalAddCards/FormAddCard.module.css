@@ -1,0 +1,35 @@
+.inputFormAddCard {
+    width: 100%;
+    display: block;
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 0px;
+    margin-bottom: 28px;
+}
+.btnFormAddCard {
+    width: 100%;
+    background: rgb(136, 214, 47);
+    border: none;
+}
+.btnCreateCard {
+    width: 170px;
+    height: 35px;
+    padding: 7px ;
+    margin: 0px auto;
+    display: block;
+    transition: 0s;
+}
+.btnMoved{
+    margin-bottom: 10px;
+}
+.btnCreateCard:after {
+    scale: 0 !important;
+}
+.btnCreateCard:hover.btnCreateCard:after {
+    scale: 0 !important;
+}
+@media (max-width: 768px) {
+    .btnCreateCard {
+        display: none;
+    }
+}

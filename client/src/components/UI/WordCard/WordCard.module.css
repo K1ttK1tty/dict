@@ -1,0 +1,86 @@
+:root {
+    --visibilityOff: hidden;
+    --visibilityOn: visible;
+    --visibilityOn: visible;
+    --opacityOff: 0;
+    --opacityOn: 1;
+    --positionAbsolute: absolute;
+    --positionRelative: relative;
+    --overflowHidden: hidden;
+    --pointer: pointer;
+}
+.card {
+    background: var(--background-card);
+    padding: 10px 11px 12px 14px;
+    border-radius: 12px;
+    width: 70%;
+    max-width: 500px;
+    margin: 0px auto 24px;
+    position: var(--positionRelative);
+    overflow: var(--overflowHidden);
+    box-shadow: 0px 0px 6px 1px #030303ab;
+    cursor: var(--pointer);
+    transition: var(--transition-theme);
+}
+.card:last-child {
+    margin: 0px auto;
+}
+.word {
+    line-height: 1.2;
+    font-size: 19px;
+    font-weight: 500;
+    position: var(--positionRelative);
+    top: -4px;
+    max-height: 26px;
+    overflow: var(--overflowHidden);
+}
+.translate {
+    font-size: 16px;
+    line-height: 1.2;
+    font-weight: 400;
+    color: rgb(65, 65, 65);
+    position: var(--positionRelative);
+    top: 1px;
+    height: 23px;
+    overflow: var(--overflowHidden);
+}
+.edit {
+    opacity: var(--opacityOff);
+    visibility: var(--visibilityOff);
+    position: var(--positionAbsolute);
+    top: 28%;
+    right: 14%;
+    cursor: var(--pointer);
+    transition: 0.2s;
+    padding: 3px;
+    transform: translate(8px);
+}
+.remove {
+    opacity: var(--opacityOff);
+    visibility: var(--visibilityOff);
+    position: var(--positionAbsolute);
+    top: 28%;
+    right: 3.5%;
+    cursor: var(--pointer);
+    transition: 0.2s;
+    padding: 3px;
+    transform: translate(-8px);
+}
+.card:hover .edit {
+    opacity: var(--opacityOn);
+    visibility: var(--visibilityOn);
+    transform: translate(0px);
+}
+.card:hover .remove {
+    opacity: var(--opacityOn);
+    visibility: var(--visibilityOn);
+    transform: translate(0px);
+}
+.cardIconsize {
+    height: 25px;
+    width: 25px;
+}
+/*  mobile */
+.removeIcon {
+    display: none;
+}

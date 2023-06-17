@@ -1,0 +1,207 @@
+.paintBrush {
+    cursor: url("../styles//Icons//brush1.png") 0 30, pointer;
+}
+.menu {
+    height: 50px;
+    top: 0px;
+    position: fixed;
+    width: 100%;
+    background-color: #24292f;
+    box-shadow: 0px 15px 45px rgba(0, 0, 0, 0.15);
+    transition: var(--transition-theme);
+    z-index: 13;
+}
+.menu__container {
+    margin: 0px auto;
+    max-width: 1600px;
+    width: 81%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .menu__container {
+        justify-content: right;
+        margin-right: 70px;
+    }
+}
+@media (max-width: 375px) {
+    .menu__container {
+        margin-right: 50px;
+    }
+}
+
+@media (max-width: 1250px) {
+    .menu__container {
+        width: 77%;
+    }
+}
+.searchWrapper {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    transition: 0.27s;
+}
+@media (max-width: 768px) {
+    .searchWrapper {
+        margin-left: 30px;
+    }
+}
+.paddingTop124 {
+    padding-top: 167px !important;
+}
+.menu__logo {
+    font-size: 20px;
+    color: rgb(136, 214, 47);
+    transition: var(--transition-theme);
+}
+@media (max-width: 768px) {
+    .menu__logo {
+        position: relative;
+        left: -24px;
+    }
+}
+.menu__search {
+    position: relative;
+    top: 4.5px;
+    max-height: 35px;
+    cursor: pointer;
+}
+.wrap {
+    margin: 0px auto;
+    max-width: 1600px;
+    width: 83%;
+    height: 100%;
+}
+.rightItmes {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    width: 105px;
+}
+@media (max-width: 768px) {
+    .rightItmes {
+        width: auto;
+    }
+}
+@media (max-width: 1250px) {
+    .wrap {
+        width: 79%;
+    }
+}
+.CardsField {
+    background-color: var(--background-cards);
+    padding-top: 115px;
+    min-height: 100%;
+    height: auto;
+    padding-bottom: 15px;
+    /* transition: var(--transition-theme); */
+}
+
+@keyframes appear {
+    from {
+        transform: translateY(10px);
+    }
+    to {
+        transform: translateY(0px);
+    }
+}
+.stateOption-enter {
+    opacity: 0;
+}
+.stateOption-enter-active {
+    animation: appear 0.3s ease;
+    opacity: 1;
+    transition: 0.3s;
+}
+.stateOption-exit {
+    opacity: 1;
+}
+.stateOption-exit-active {
+    transform: translateY(10px);
+    opacity: 0;
+    transition: 0.3s;
+}
+
+/*  remove theme styles */
+.noCards {
+    color: var(--empty-header);
+    font-size: 25px;
+    text-align: center;
+    margin: 65px 0px;
+    transition: var(--transition-theme);
+}
+
+.deleteThemeWrapper {
+    display: flex;
+    margin: 0px auto;
+    max-width: 400px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/*  */
+#checkbox {
+    display: none;
+}
+
+.checkboxLabel {
+    height: 25px;
+    width: 46px;
+    border: white 1px solid;
+    border-radius: 15px;
+    cursor: pointer;
+    display: inline-block;
+    transition: var(--transition-theme);
+    position: relative;
+    left: -6px;
+}
+.checkboxLabel::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    top: 2.7px;
+    left: 4px;
+    width: 17px;
+    height: 17px;
+    background-color: rgb(43, 139, 177);
+    transition: 0.25s;
+}
+
+#checkbox:checked + .checkboxLabel::after {
+    transform: translateX(18px);
+}
+
+/* for light-dark theme */
+.iconSearchForMenu {
+    stroke: rgb(136, 214, 47);
+    fill: rgb(136, 214, 47);
+    height: 24px;
+    width: 24px;
+    transition: var(--transition-theme);
+}
+@media (max-width: 768px) {
+    .iconSearchForMenu {
+        position: relative;
+        margin-right: 8px;
+    }
+}
+.cardIconsize {
+    height: 25px;
+    width: 25px;
+}
+.cardsIconColor {
+    fill: var(--card-icon-color);
+    transition: var(--transition-theme);
+}
+.themeChanger {
+    margin: 0px auto;
+    height: 25px;
+    min-width: 46px;
+    position: relative;
+    display: flex;
+}

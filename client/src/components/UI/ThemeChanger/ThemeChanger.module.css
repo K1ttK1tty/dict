@@ -1,0 +1,41 @@
+.themeChanger {
+    margin: 0px auto;
+    height: 25px;
+    min-width: 46px;
+    position: relative;
+    display: flex;
+}
+#checkbox {
+    display: none;
+}
+.checkboxLabel {
+    height: 25px;
+    width: 46px;
+    border: rgb(165, 165, 165) 2px solid;
+    border-radius: 15px;
+    cursor: pointer;
+    display: inline-block;
+    transition: var(--transition-theme);
+    position: relative;
+    left: -6px;
+}
+.checkboxLabel::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    top: 2.5px;
+    left: 4px;
+    width: 16px;
+    height: 16px;
+    background-color: rgb(43, 139, 177);
+    transition: 0.2s;
+}
+#checkbox:checked + .checkboxLabel::after {
+    transform: translateX(18px);
+}
+.changeThemeTitle {
+    opacity: var(--opacity0);
+    visibility: var(--visHid);
+    font-size: var(--fz0px);
+    transition: var(--transition02s);
+}

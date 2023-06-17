@@ -1,0 +1,156 @@
+.back {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(226, 226, 226);
+}
+.content {
+    height: 510px;
+    min-width: 290px;
+    width: 80%;
+    max-width: 480px;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    padding-top: 0px;
+    border-radius: 8px;
+    position: relative;
+}
+.form {
+    width: 80%;
+    position: absolute;
+    top: 80px;
+    left: 10%;
+    /* left: 48px; */
+    opacity: 1;
+    visibility: visible;
+    transition: 0.14s ease-in;
+}
+@media (max-width: 768px) {
+    .form {
+        left: 7%;
+        width: 87%;
+    }
+}
+.formHide {
+    top: 90px;
+    opacity: 0;
+    visibility: hidden;
+}
+.title {
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+.changeActions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 210px;
+    margin-bottom: 35px;
+}
+
+.input {
+    background-color: #cbcbcb;
+    width: 100%;
+    transition: 0s;
+}
+.input:focus {
+    scale: 1;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #cbcbcb inset;
+}
+
+.passwordLabel {
+    margin-bottom: 40px;
+    display: block;
+    position: relative;
+}
+.iconStyle {
+    position: absolute;
+    top: 23px;
+    right: 25px;
+    cursor: pointer;
+}
+
+.button {
+    width: 100%;
+    font-size: 18px;
+    padding: 10px;
+    border: none;
+    background: rgb(136, 214, 47);
+    transition: 0.15s;
+    margin-bottom: 18px;
+}
+.button:hover {
+    background: rgb(124, 196, 43);
+}
+.button:after {
+    scale: 0;
+}
+.button:hover.button:after {
+    scale: 0;
+}
+.buttonSwitcher {
+    font-size: 16px;
+    height: 46px;
+    padding: 10px 20px;
+    border: none;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background: rgba(0, 0, 0, 0);
+    cursor: pointer;
+    transition: 0.1s;
+}
+.buttonSwitcherActive {
+    background: rgb(136, 214, 47);
+}
+.link{
+    color: inherit;
+}
+.forgotPasswd {
+    font-size: 17px;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-bottom: 10px;
+}
+
+.forgotPasswd:hover {
+    color: rgb(89, 145, 25);
+}
+
+.setPasswdContent {
+    height: 400px;
+    min-width: 300px;
+    width: 75%;
+    max-width: 450px;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    padding-top: 0px;
+    border-radius: 8px;
+    position: relative;
+}
+.label {
+    position: relative;
+    display:block;
+}
+.asterisk {
+    font-size: 18px;
+    color: red;
+}
+.errorMessage {
+    font-size: 16px;
+    color: red;
+    margin-top: 4px;
+    position: absolute;
+    bottom: -21px;
+    line-height: 1.1;
+    /* min-width: 280px; */
+}
+@media (max-width: 425px) {
+    .errorMessage {
+        font-size: 14px;
+    }
+}

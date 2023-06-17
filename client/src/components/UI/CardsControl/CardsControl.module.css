@@ -1,0 +1,145 @@
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.wrapper {
+    position: fixed;
+    top: 90px;
+    right: 200px;
+    color: rgb(219, 219, 219);
+    background-color: #dddddd;
+    width: 250px;
+    height: 233px;
+    border-radius: 12px;
+    border: 1px solid rgb(136, 214, 47);
+    box-shadow: 0px 0px 18px 2px rgba(0, 0, 0, 0.7);
+    z-index: 1;
+}
+.wrapperMoved {
+    width: 280px;
+    height: 200px;
+}
+.wrapperGrab {
+    cursor: grab;
+}
+.cardsOptions {
+    margin-bottom: 22px;
+}
+h2 {
+    font-size: 20px;
+}
+.title {
+    color: black;
+    display: flex;
+    align-items: center;
+    padding: 10px 13px;
+}
+.pinIcon {
+    fill: white;
+    transition: 0.2s;
+    cursor: pointer;
+}
+.pinIconMarginRight {
+    margin-right: 10px;
+}
+@media (max-width: 768px) {
+    .pinIcon {
+        display: none;
+    }
+}
+.cardsOptionsMoved{
+    margin-bottom: 10px;
+}
+.buttonChangePosition {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    width: 100%;
+    max-width: none;
+    font-size: 17px;
+    padding: 5px;
+    background: rgb(136, 214, 47);
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+    transition: 0s;
+}
+.buttonChangePosition:hover {
+    background: rgb(124, 196, 43) !important;
+}
+.buttonChangePosition:after {
+    scale: 0 !important;
+}
+
+.buttonChangePosition:hover.buttonChangePosition:after {
+    scale: 0 !important;
+}
+.pinIcon:hover {
+    fill: rgb(136, 214, 47);
+}
+
+/* in mobile - only attached  */
+.plus {
+    display: none;
+}
+.cardsOptions {
+    position: fixed;
+    margin: 0px auto;
+    top: 80px;
+    right: 0px;
+    left: 0px;
+    padding: 7px 30px 7px 13px;
+    max-width: 500px;
+    max-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #24292f;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    z-index: 1;
+    transform: translate(-6px, -30px);
+    transition: 0.27s;
+}
+
+@media (min-width: 768px) {
+    .cardsOptionsAttached {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .plus {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 43px;
+        color: rgb(136, 214, 47);
+        min-width: 45px;
+        height: 45px;
+        margin-right: 10px;
+        border-radius: 10px;
+        background-color: rgb(247, 247, 247);
+        border: none;
+    }
+    .cardsOptions {
+        max-width: 230px;
+        left: 60px;
+        padding: 5px 50px 5px 10px;
+    }
+}
+
+@media (max-width: 374px) {
+    .cardsOptions {
+        left: 68px;
+        max-width:200px;
+    }
+}
+@media (max-width: 318px) {
+    .cardsOptions {
+        padding: 5px 30px 5px 10px;
+    }
+}

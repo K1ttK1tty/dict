@@ -1,0 +1,213 @@
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap");
+/* font-family */
+:root {
+    --transition02s: 0.2s;
+    --opacity0: 0;
+    --opacity1: 1;
+    --fzInh: inherit;
+    --fz0px: 0px;
+    --visIn: visible;
+    --visHid: hidden;
+}
+* {
+    text-decoration: none;
+    outline: none;
+    list-style: none;
+}
+nav {
+    position: relative;
+}
+.back {
+    background-color: #24292f;
+    position: fixed;
+    height: 100%;
+    width: 70px;
+    padding: 80px 19px 20px 20px;
+    transition: 0.25s;
+    z-index: 12;
+    box-shadow: var(--nav-menu-shadow);
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+    overflow: hidden;
+}
+.ulMmenu::after {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 200%;
+    width: 200%;
+    content: "";
+    z-index: 10;
+    background-color: transparent;
+}
+.content {
+    display: block;
+    height: 100%;
+}
+.ulMmenu,
+.callBack {
+    width: 100%;
+    transform: translateX(6px);
+}
+.ulMenu__item {
+    color: #838388;
+    font-weight: 500;
+    font-size: 19px;
+    line-height: 1.2;
+    margin-bottom: 19px;
+    transition: var(--transition02s);
+    height: 25.8px;
+    min-width: 25px;
+}
+.spanIcons {
+    cursor: pointer;
+    height: 25px;
+    width: 25px;
+}
+.spanIcons:hover .swipe {
+    color: rgba(255, 255, 255, 0.8);
+}
+.colorIcon {
+    min-width: 20px;
+    height: 20px;
+    fill: rgba(255, 255, 255, 0.65);
+    position: relative;
+    top: 2px;
+    margin-right: 25px;
+    transition: var(--transition02s);
+}
+.swipe {
+    position: relative;
+    opacity: var(--opacity0);
+    visibility: var(--visHid);
+}
+.callBack {
+    padding: 0px;
+    color: #72747f;
+    font-size: 16px;
+    line-height: 1.2;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 12px;
+}
+.callBack:hover {
+    color: rgba(255, 255, 255, 0.65);
+}
+.questIcon {
+    stroke: rgba(255, 255, 255, 0.65);
+    transition: var(--transition02s);
+}
+@media (min-width: 768px) {
+    .canHover:hover {
+        width: 300px;
+        transition: var(--transition02s);
+    }
+    .canHover:hover .ulMmenu::after {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        height: 0px;
+        width: 0px;
+        content: "";
+        z-index: -10;
+    }
+    .canHover:hover .callBackSpan {
+        font-size: 16px;
+        opacity: var(--opacity1);
+        visibility: var(--visIn);
+    }
+    .canHover:hover .icon4Class {
+        margin-right: 14px;
+    }
+    .canHover:hover .swipe {
+        opacity: var(--opacity1);
+        visibility: var(--visIn);
+        font-size: var(--fzInh);
+        transition: 0.44s ease-in;
+    }
+}
+.callBackItem {
+    cursor: pointer;
+    display: flex;
+}
+link:visited,
+a:visited {
+    color: inherit;
+}
+/* mobile */
+.callBackSpan {
+    font-size: 16px;
+    opacity: var(--opacity1);
+    visibility: var(--visIn);
+}
+.icon4Class {
+    margin-right: 14px;
+}
+.avatar {
+    display: block;
+    height: 35px;
+    width: 35px;
+    margin-bottom: 25px;
+}
+.ulMmenu,
+.callBack {
+    width: 70%;
+}
+.menuOpen {
+    width: 255px;
+}
+.menuOpen .swipe {
+    opacity: var(--opacity1);
+    visibility: var(--visIn);
+    font-size: var(--fzInh);
+    transition: 0.44s ease-in;
+}
+.menuOpen .ulMmenu::after {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 0%;
+    width: 0%;
+    content: "";
+    z-index: -10;
+    background-color: transparent;
+}
+.menuOpen::after {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    content: "";
+    z-index: -1;
+    background-color: transparent;
+}
+.removeMenuIcon {
+    font-size: 60px;
+    color: rgb(136, 214, 47);
+    background-color: rgba(121, 89, 89, 0);
+    position: absolute;
+    top: 0px;
+    right: 40px;
+    border: none;
+    transition: var(--transition-theme);
+    visibility: hidden;
+    opacity: 0;
+}
+.removeMenuIconShow {
+    visibility: visible;
+    opacity: 1;
+}
+.navigationLink {
+    color: inherit;
+    display: flex;
+}
+/* for cards control block */
+.rightCardsControl {
+    right: -440px !important;
+}
+@media (max-width: 768px) {
+    .rightCardsControl {
+        right: -1000px !important;
+    }
+}
