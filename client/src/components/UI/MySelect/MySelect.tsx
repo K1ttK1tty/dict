@@ -62,11 +62,12 @@ const MySelect: FC<IMySelect> = memo(function ({ isCanMove }) {
             tabIndex={0}
         >
             <div
-                onClick={isCanMoveFunction}
+
+                onMouseDown={isCanMoveFunction}
                 className={[styles.title, 'ifNotThisThenClose'].join(' ')}
             >
                 <div
-                    onClick={isCanMoveFunction}
+                    onMouseDown={isCanMoveFunction}
                     className={[styles.selectValue, 'ifNotThisThenClose'].join(' ')}
                 >
                     {optionName}

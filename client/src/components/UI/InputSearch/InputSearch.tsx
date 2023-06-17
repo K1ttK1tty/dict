@@ -9,7 +9,8 @@ const InputSearch: FC = memo(function () {
     const { input } = useAppSelector(state => state.upMenu);
     const inputElement = useRef<HTMLInputElement | null>(null);
 
-    let isHidden:string = style.inputHidden;
+
+    let isHidden: string = style.inputHidden;
     if (input.isOpen) {
         isHidden = '';
         setTimeout(() => {
@@ -25,7 +26,8 @@ const InputSearch: FC = memo(function () {
             dispatch(setSearchWord(''));
         }, 300);
     }
-    const inputClass:string = [style.inputSearch, isHidden].join(' ');
+
+    const inputClass: string = [style.inputSearch, isHidden].join(' ');
     const handleKey = (key: React.KeyboardEvent) => {
         if (key.key === 'Escape') {
             if (inputElement.current) {
@@ -43,13 +45,16 @@ const InputSearch: FC = memo(function () {
             dispatch(setSearchWord(value));
         }, 400);
     };
-    return <input
-        onClick={e => e.stopPropagation()}
-        placeholder={' Искать'}
-        ref={inputElement}
-        onKeyDown={handleKey}
-        onChange={e => searching(e.target.value)}
-        className={inputClass}
-    />;
+
+    return (
+        <input
+            onMouseDown={e => e.stopPropagation()}
+            placeholder={' Искать'}
+            ref={inputElement}
+            onKeyDown={handleKey}
+            onChange={e => searching(e.target.value)}
+            className={inputClass}
+        />
+    );
 });
 export default InputSearch;

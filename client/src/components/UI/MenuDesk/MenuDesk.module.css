@@ -29,6 +29,14 @@ nav {
     border-right: 1px solid rgba(255, 255, 255, 0.15);
     overflow: hidden;
 }
+
+@media (max-width: 425px) {
+    .back {
+        width: 60px;
+        padding: 80px 15px 20px 15px;
+    }
+}
+
 .ulMmenu::after {
     position: absolute;
     top: 0px;

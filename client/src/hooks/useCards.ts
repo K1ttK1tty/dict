@@ -13,7 +13,8 @@ export const useSelectedThemes = (Cards: ICard[], chooseTheme: string, toggleWor
     const sordetCard = useSordetCard(Cards, toggleWordsOrder);
     const selectedThemes = useMemo(() => {
         if (!chooseTheme) return sordetCard;
-        return sordetCard.filter((card: ICard) => card.theme.toLowerCase() == chooseTheme.toLowerCase());
+
+        return sordetCard.filter((card: ICard) => card.theme == chooseTheme);
     }, [chooseTheme, Cards]);
 
     return selectedThemes;

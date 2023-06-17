@@ -24,7 +24,7 @@ const UserTopMenu: FC<IUserTopMenu> = memo(function ({ isUserMenuOpen, hideMenu 
     return (
         <div
             className={wrapperStyles}
-            onClick={() => dispatch(setIsUserMenuOpen(!isUserMenuOpen))}
+            onMouseDown={() => dispatch(setIsUserMenuOpen(!isUserMenuOpen))}
         >
             <button className={styles.navbtn}>
                 <Avatar styles={styles.avatar} />

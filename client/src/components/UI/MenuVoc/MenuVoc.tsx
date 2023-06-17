@@ -27,7 +27,8 @@ const MenuVoc: FC = memo(function () {
             <div className="menu__container">
                 <div className="menu__logo">Logo</div>
                 <div className="rightItmes">
-                    <div className="menu__search" onClick={e => inputSearchHandler(e, input, dispatch)}>
+
+                    <div className="menu__search" onMouseDown={e => inputSearchHandler(e, input, dispatch)}>
                         <InputSearch />
                         <Search />
                     </div>
