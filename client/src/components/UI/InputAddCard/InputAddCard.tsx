@@ -25,7 +25,6 @@ export default function InputAddCard<T>(props: IInputProps<T>) {
     };
     const onChangeThemeAddCard = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (props.setDefaultTheme) {
-            console.log(e.target.value)
             props.setDefaultTheme(e.target.value);
 
         }

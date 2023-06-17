@@ -120,7 +120,7 @@ export const UpdateCards = createAsyncThunk(
     async (data: IUpdateCards, thunkAPI) => {
         try {
             const { email, cards } = data;
-            await $api.post('/updateCards', { email, cards });
+            const response = await $api.post('/updateCards', { email, cards });
         } catch (error) {
             const err = error as AxiosError<IFetchError>;
             console.log(err);
@@ -134,7 +134,7 @@ export const UpdateThemes = createAsyncThunk(
     async (data: IUpdateThemes, thunkAPI) => {
         try {
             const { email, themes } = data;
-            await $api.post('/updateTheme', { email, themes });
+            const response = await $api.post('/updateTheme', { email, themes });
         } catch (error) {
             const err = error as AxiosError<IFetchError>;
             console.log(err);

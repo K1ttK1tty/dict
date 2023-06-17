@@ -1,4 +1,6 @@
 import { FC } from 'react';
+// components
+import Checkbox from '../Checkbox/Checkbox';
 // styles
 import style from './CardsInfo.module.css';
 // redux
@@ -22,13 +24,11 @@ const CardsInfo: FC<ICardsInfo> = function ({ isMovedBlock }) {
             <div className={totalWordsClass}>Всего слов: {cards.length} </div>
             <div className={wordsOrderClass}>
                 Алфавитный порядок:
-                <input
-                    id={style.input}
+                <Checkbox
                     defaultChecked={toggleWordsOrder}
-                    onChange={() => dispatch(setToggleWordsOrder())}
-                    type="checkbox"
+                    id={'cardsInfoID'}
+                    callback={() => dispatch(setToggleWordsOrder())}
                 />
-                <label htmlFor={style.input} className={style.label}></label>
             </div>
         </>
     );

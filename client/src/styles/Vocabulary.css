@@ -144,6 +144,15 @@
     align-items: center;
 }
 
+@media (max-width: 767px) {
+    .deleteThemeWrapper {
+        flex-direction: column;
+    }
+    .removeSelectedTheme{
+        margin-bottom: 19px;
+    }
+}
+
 /*  */
 #checkbox {
     display: none;

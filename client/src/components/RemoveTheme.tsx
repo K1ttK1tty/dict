@@ -24,7 +24,7 @@ const RemoveTheme: FC = memo(function () {
                 optionState.removeMark &&
                 <div className="deleteThemeWrapper">
                     <BtnAddCard
-                        noClick={'noClick'}
+                        noClick={'noClick removeSelectedTheme'}
                         onClick={() => deleteAllEmptyThemes(cards, selectOptions, optionState, user.email, dispatch)}
                         children="Удалить все пустые темы"
                     />

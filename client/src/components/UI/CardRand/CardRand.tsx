@@ -20,7 +20,7 @@ const CardRand: FC<ICardRand> = memo(function ({ card, index }) {
     return (
         <div className={styles.wrapper}>
             <div className="wordBlock">
-                <div className="mr6">Слово: </div>
+                <div className="word">Слово: </div>
                 <div className={styles.translateRand}>{card.translate}</div>
             </div>
             <div className="translateBlock">

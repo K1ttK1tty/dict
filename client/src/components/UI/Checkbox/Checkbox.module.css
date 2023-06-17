@@ -1,0 +1,37 @@
+#inputId {
+    display: none;
+}
+.input {
+    display: none;
+}
+.label {
+    position: relative;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.label::before {
+    position: absolute;
+    content: "";
+    top: 0px;
+    left: 0px;
+    width: 20px;
+    height: 20px;
+    border: 2px solid black;
+    border: 2px solid var(--empty-header);
+    border-radius: 50%;
+}
+.label::after {
+    position: absolute;
+    content: "";
+    top: 4px;
+    left: 4px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgb(136, 214, 47);
+    scale: 0;
+    transition: 0.1s;
+}
+.input:checked + .label::after {
+    scale: 1;
+}

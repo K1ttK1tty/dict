@@ -3,8 +3,12 @@
     display: block;
     border: none;
     border-bottom: 1px solid black;
+    /* color: red; */
     border-radius: 0px;
     margin-bottom: 28px;
+}
+.inputFormAddCard:focus{
+    /* color: blue; */
 }
 .btnFormAddCard {
     width: 100%;

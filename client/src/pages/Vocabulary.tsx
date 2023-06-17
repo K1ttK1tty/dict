@@ -223,6 +223,7 @@ const Vocabulary: FC = memo(function () {
             // onScroll={() => console.log(document.body.scrollTop)}
             onMouseDown={e => removeInput(e, input, chooseTheme, optionState, isUserMenuOpen, dispatch)}
             className={'searchWrapper pageContent'}
+            style={{right:'0px'}}
         >
             <ScrollToTop />
             <MenuVoc />
@@ -238,54 +239,60 @@ const Vocabulary: FC = memo(function () {
                     />
                     {isAttached && <CardsInfo />}
 
-
-
-                    {/* <ColorPicker color={color} setColor={setColor} />
-
-                    <div
-                        className="noCLick"
-                        onClick={devMode}
-                        style={
-                            {
-                                background: colorModeOn ? 'red' : 'teal', color: 'white', width: '100px',
-                                cursor: 'pointer', marginBottom: '20px', textAlign: 'center', borderRadius: '20px',
-                                padding: '5px'
+                    {
+                        /* <ColorPicker color={color} setColor={setColor} />
+                        <div
+                            className="noCLick"
+                            onClick={devMode}
+                            style={
+                                {
+                                    background: colorModeOn ? 'red' : 'teal', color: 'white', width: '100px',
+                                    cursor: 'pointer', marginBottom: '20px', textAlign: 'center', borderRadius: '20px',
+                                    padding: '5px'
+                                }
                             }
-                        }
-                    >Change mode {colorModeOn ? 'on' : 'off'}</div>
-
-                    <div
-                        className="noCLick"
-                        onClick={removeCurrent}
-                        style={
-                            {
-                                background: colorRemoveMode ? 'green' : 'teal', color: 'white', width: '100px',
-                                cursor: 'pointer', marginBottom: '20px', textAlign: 'center',
-                                borderRadius: '20px', padding: '5px'
+                        >
+                        Change mode {colorModeOn ? 'on' : 'off'}
+                        </div>
+                        <div
+                            className="noCLick"
+                            onClick={removeCurrent}
+                            style={
+                                {
+                                    background: colorRemoveMode ? 'green' : 'teal', color: 'white', width: '100px',
+                                    cursor: 'pointer', marginBottom: '20px', textAlign: 'center',
+                                    borderRadius: '20px', padding: '5px'
+                                }
                             }
-                        }
-                    >Выборочно отменить {colorRemoveMode ? 'on' : 'off'}</div>
-
-                    <div
-                        className="noCLick"
-                        onClick={getCurrentColor}
-                        style={
-                            {
-                                background: getCurrentColorMode ? 'green' : 'teal', color: 'white',
-                                width: '100px', cursor: 'pointer', marginBottom: '20px', textAlign: 'center',
-                                borderRadius: '20px', padding: '5px'
+                        >
+                        Выборочно отменить {colorRemoveMode ? 'on' : 'off'}
+                        </div>
+    
+                        <div
+                            className="noCLick"
+                            onClick={getCurrentColor}
+                            style={
+                                {
+                                    background: getCurrentColorMode ? 'green' : 'teal', color: 'white',
+                                    width: '100px', cursor: 'pointer', marginBottom: '20px', textAlign: 'center',
+                                    borderRadius: '20px', padding: '5px'
+                                }
                             }
-                        }
-                    > {currentColor ? 'Крашу в ' + currentColor : 'Копирую'}</div>
-
-                    <div
-                        className="noCLick"
-                        onClick={removeAllColors}
-                        style={{
-                            background: 'pink', color: 'black', width: '100px', cursor: 'pointer',
-                            marginBottom: '20px', textAlign: 'center', borderRadius: '20px', padding: '5px'
-                        }}
-                    >Убрать все цвета</div> */}
+                        >
+                         {currentColor ? 'Крашу в ' + currentColor : 'Копирую'}
+                         </div>
+    
+                        <div
+                            className="noCLick"
+                            onClick={removeAllColors}
+                            style={{
+                                background: 'pink', color: 'black', width: '100px', cursor: 'pointer',
+                                marginBottom: '20px', textAlign: 'center', borderRadius: '20px', padding: '5px'
+                            }}
+                        >
+                        Убрать все цвета
+                        </div> */
+                    }
 
                     {
                         selectedAndSearchedWord.length

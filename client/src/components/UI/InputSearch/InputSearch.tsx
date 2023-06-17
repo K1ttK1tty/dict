@@ -1,4 +1,6 @@
-import { FC, useRef, memo } from 'react';
+import { FC, useState, useRef, memo } from 'react';
+// components
+import Checkbox from '../Checkbox/Checkbox';
 // styles
 import style from './InputSearch.module.css';
 //redux
@@ -8,9 +10,9 @@ const InputSearch: FC = memo(function () {
     const dispatch = useAppDispatch();
     const { input } = useAppSelector(state => state.upMenu);
     const inputElement = useRef<HTMLInputElement | null>(null);
+    const [isSearchByWord, setIsSearchByWord] = useState<boolean>(true);
 
-
-    let isHidden: string = style.inputHidden;
+    let isHidden = style.blockHidden;
     if (input.isOpen) {
         isHidden = '';
         setTimeout(() => {
@@ -27,7 +29,7 @@ const InputSearch: FC = memo(function () {
         }, 300);
     }
 
-    const inputClass: string = [style.inputSearch, isHidden].join(' ');
+    const inputClass = [style.searchBlock, isHidden].join(' ');
     const handleKey = (key: React.KeyboardEvent) => {
         if (key.key === 'Escape') {
             if (inputElement.current) {
@@ -45,16 +47,23 @@ const InputSearch: FC = memo(function () {
             dispatch(setSearchWord(value));
         }, 400);
     };
-
     return (
-        <input
-            onMouseDown={e => e.stopPropagation()}
-            placeholder={' Искать'}
-            ref={inputElement}
-            onKeyDown={handleKey}
-            onChange={e => searching(e.target.value)}
-            className={inputClass}
-        />
+        <div className={inputClass} onMouseDown={e => e.stopPropagation()}>
+            <Checkbox
+                id={'inputSearchID'}
+                defaultChecked={isSearchByWord}
+                dinamicClassName={style.input}
+                callback={() => setIsSearchByWord(!isSearchByWord)}
+            />
+            <input
+                placeholder={' Искать'}
+                ref={inputElement}
+                onKeyDown={handleKey}
+                onChange={e => searching(e.target.value)}
+                className={style.inputSearch}
+            />
+        </div>
+
     );
 });
 export default InputSearch;

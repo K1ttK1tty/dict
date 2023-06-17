@@ -15,18 +15,23 @@ interface IFormAddCard {
 }
 const FormAddCard: FC<IFormAddCard> = memo(function ({ modalAdd }) {
     const dispatch = useAppDispatch();
-
     const { cards, user, selectOptions, optionName } = useAppSelector(state => state.AuthSlice);
+    const { isModalAddCardActive } = useAppSelector(state => state.modalAddCard);
+
     const { inputValue } = useAppSelector(state => state.modalRenameCard);
     const [defaultTheme, setDefaultTheme] = useState<string>('');
     useEffect(() => {
-        if (optionName !== 'Тема') {
+        if (optionName !== 'Тема' && isModalAddCardActive) {
             setDefaultTheme(optionName);
         } else {
             setDefaultTheme('');
         }
-
-    }, [optionName])
+    }, [optionName, isModalAddCardActive]);
+    const addCard = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
+        addNewCard(e, { ...inputValue, theme: defaultTheme }, cards, selectOptions, user.email, dispatch);
+        setDefaultTheme('');
+    };
     return (
         <form >
             <InputAddCard
@@ -47,22 +52,11 @@ const FormAddCard: FC<IFormAddCard> = memo(function ({ modalAdd }) {
                 placeholder={'Тема'}
                 defaultTheme={defaultTheme}
                 setDefaultTheme={setDefaultTheme}
-
             />
             <BtnAddCard
                 aria={'Создать'}
                 dinamicclassname={styles.btnFormAddCard}
-
-                onClick={
-                    e => addNewCard(
-                        e,
-                        { ...inputValue, theme: defaultTheme },
-                        cards,
-                        selectOptions,
-                        user.email,
-                        dispatch
-                    )
-                }
+                onClick={e => addCard(e)}
                 type="submit"
                 children="Создать"
             />
