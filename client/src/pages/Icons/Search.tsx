@@ -3,7 +3,11 @@ import { FC, memo } from 'react';
 import '../../styles/Vocabulary.css';
 const Search: FC = memo(function () {
     return (
-        <svg className="iconSearchForMenu" id="2" viewBox="0 0 53.627 53.627" >
+        <svg
+            className="iconSearchForMenu"
+            id="2"
+            viewBox="0 0 53.627 53.627"
+        >
             <path d="M53.627,49.385L37.795,33.553C40.423,30.046,42,25.709,42,21C42,
             9.42,32.58,0,21,0S0,9.42,0,21s9.42,21,21,21c4.709,0,9.046-1.577,
             12.553-4.205l15.832,15.832L53.627,49.385z M2,21C2,10.523,10.523,2,

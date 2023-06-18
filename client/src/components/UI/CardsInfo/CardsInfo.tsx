@@ -27,6 +27,7 @@ const CardsInfo: FC<ICardsInfo> = function ({ isMovedBlock }) {
                 <Checkbox
                     defaultChecked={toggleWordsOrder}
                     id={'cardsInfoID'}
+                    dinamicClassName={ isMovedBlock? style.input : ''}
                     callback={() => dispatch(setToggleWordsOrder())}
                 />
             </div>

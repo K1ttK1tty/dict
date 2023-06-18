@@ -1,4 +1,4 @@
-import { FC, ChangeEventHandler } from 'react';
+import { FC, ChangeEventHandler, memo } from 'react';
 import style from './Checkbox.module.css';
 interface ICheckbox {
     id: string;
@@ -6,7 +6,7 @@ interface ICheckbox {
     dinamicClassName?: string;
     callback: ChangeEventHandler<HTMLInputElement>;
 }
-const Checkbox: FC<ICheckbox> = function ({ id, defaultChecked, dinamicClassName, callback }) {
+const Checkbox: FC<ICheckbox> = memo(function ({ id, defaultChecked, dinamicClassName, callback }) {
 
     return (
         <>
@@ -17,8 +17,8 @@ const Checkbox: FC<ICheckbox> = function ({ id, defaultChecked, dinamicClassName
                 onChange={callback}
                 type="checkbox"
             />
-            <label htmlFor={id} className={[style.label,dinamicClassName].join(' ')}></label>
+            <label htmlFor={id} className={[style.label, dinamicClassName].join(' ')}></label>
         </>
     );
-};
+});
 export default Checkbox;

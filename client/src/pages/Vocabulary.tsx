@@ -30,12 +30,17 @@ import {
 } from '../store/reducers/ColorPicker';
 // types
 import { IColorObject } from '../models/models';
+import Checkbox from '../components/UI/Checkbox/Checkbox';
 const Vocabulary: FC = memo(function () {
     const [isAttached, setIsAttached] = useState<boolean>(true);
     // authorization
     const { toggleWordsOrder, cards } = useAppSelector(state => state.AuthSlice);
     //redux  
-    const { searchWord, input, isUserMenuOpen } = useAppSelector(state => state.upMenu);
+    const { searchWord,
+        input,
+        isSearchByWord,
+        isLetterCaseInclude
+    } = useAppSelector(state => state.upMenu);
     const { chooseTheme, optionState } = useAppSelector(state => state.AuthSlice);
     const dispatch = useAppDispatch();
     const modalAdd = useRef<HTMLInputElement | null>(null);
@@ -48,7 +53,14 @@ const Vocabulary: FC = memo(function () {
     const getCurrentColorMode = useAppSelector(state => state.ColorPicker.getCurrentColorMode);
     const currentColor = useAppSelector(state => state.ColorPicker.currentColor);
     const colorsBeforePaint = useAppSelector(state => state.ColorPicker.colorsBeforePaint);
-    const selectedAndSearchedWord = useCards(cards, searchWord, chooseTheme, toggleWordsOrder);
+    const selectedAndSearchedWord = useCards(
+        cards,
+        searchWord,
+        chooseTheme,
+        toggleWordsOrder,
+        isSearchByWord,
+        isLetterCaseInclude
+    );
     const [color, setColor] = useState<string>('#0dccce');
 
     const [allElementsArray, setAllElementsArray] = useState<HTMLElement[]>([]);
@@ -218,12 +230,13 @@ const Vocabulary: FC = memo(function () {
         }
     }, [pageTheme]);
 
+    const [doubleRowCards, setDoubleRowCards] = useState<boolean>(false);
     return (
         <div
             // onScroll={() => console.log(document.body.scrollTop)}
-            onMouseDown={e => removeInput(e, input, chooseTheme, optionState, isUserMenuOpen, dispatch)}
+            onMouseDown={e => removeInput(e, input, chooseTheme, optionState, dispatch)}
             className={'searchWrapper pageContent'}
-            style={{right:'0px'}}
+            style={{ right: '0px' }}
         >
             <ScrollToTop />
             <MenuVoc />
@@ -237,6 +250,13 @@ const Vocabulary: FC = memo(function () {
                         isAttached={isAttached}
                         setIsAttached={setIsAttached}
                     />
+                    <div>В две колонки
+                        <Checkbox
+                            id={'oneOrTwoCardsColumnsID'}
+                            defaultChecked={doubleRowCards}
+                            callback={() => setDoubleRowCards(!doubleRowCards)}
+                        />
+                    </div>
                     {isAttached && <CardsInfo />}
 
                     {
@@ -299,6 +319,7 @@ const Vocabulary: FC = memo(function () {
                             ? < SetCard
                                 Cards={selectedAndSearchedWord}
                                 modalChangeCard={modalChangeCard}
+                                doubleRowCards={doubleRowCards}
                             />
                             : <RemoveTheme />
                     }

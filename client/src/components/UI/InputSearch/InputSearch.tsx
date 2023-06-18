@@ -1,6 +1,7 @@
-import { FC, useState, useRef, memo } from 'react';
+import { FC, useState, useEffect, useRef, memo } from 'react';
 // components
-import Checkbox from '../Checkbox/Checkbox';
+import DropDownMenu from '../DropDownMenu/DropDownMenu';
+import SearchParamsMenu from './SearchParamsMenu';
 // styles
 import style from './InputSearch.module.css';
 //redux
@@ -10,8 +11,7 @@ const InputSearch: FC = memo(function () {
     const dispatch = useAppDispatch();
     const { input } = useAppSelector(state => state.upMenu);
     const inputElement = useRef<HTMLInputElement | null>(null);
-    const [isSearchByWord, setIsSearchByWord] = useState<boolean>(true);
-
+    const [isDropDownMenuOpen, setIsDropDownMenuOpen] = useState<boolean>(false);
     let isHidden = style.blockHidden;
     if (input.isOpen) {
         isHidden = '';
@@ -28,6 +28,11 @@ const InputSearch: FC = memo(function () {
             dispatch(setSearchWord(''));
         }, 300);
     }
+    useEffect(() => {
+        if (!input.isOpen) {
+            setIsDropDownMenuOpen(false);
+        }
+    }, [input.isOpen]);
 
     const inputClass = [style.searchBlock, isHidden].join(' ');
     const handleKey = (key: React.KeyboardEvent) => {
@@ -49,12 +54,6 @@ const InputSearch: FC = memo(function () {
     };
     return (
         <div className={inputClass} onMouseDown={e => e.stopPropagation()}>
-            <Checkbox
-                id={'inputSearchID'}
-                defaultChecked={isSearchByWord}
-                dinamicClassName={style.input}
-                callback={() => setIsSearchByWord(!isSearchByWord)}
-            />
             <input
                 placeholder={' Искать'}
                 ref={inputElement}
@@ -62,8 +61,19 @@ const InputSearch: FC = memo(function () {
                 onChange={e => searching(e.target.value)}
                 className={style.inputSearch}
             />
+            <div
+                className={style.dotsWrapper}
+                onMouseDown={() => setIsDropDownMenuOpen(!isDropDownMenuOpen)}
+            >
+                <div className={style.dots} onMouseDown={() => setIsDropDownMenuOpen(!isDropDownMenuOpen)}></div>
+            </div>
+            <DropDownMenu
+                isMenuOpen={isDropDownMenuOpen}
+                setIsMenuOpen={setIsDropDownMenuOpen}
+                dinamicClassName={style.DropDownMenuClassName}
+                content={<SearchParamsMenu />}
+            />
         </div>
-
     );
 });
 export default InputSearch;

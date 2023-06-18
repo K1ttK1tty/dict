@@ -4,6 +4,7 @@ import InputSearch from '../InputSearch/InputSearch';
 import UserTopMenu from '../UserMenu/UserTopMenu';
 import UserMenu from '../UserMenu/UserMenu';
 import ModalAddAvatar from '../Modal/ModalAddAvatar/ModalAddAvatar';
+import DropDownMenu from '../DropDownMenu/DropDownMenu';
 // functions
 import { inputSearchHandler } from '../../../functions/inputSearchHandler';
 // icons
@@ -14,9 +15,10 @@ import styles from '../UserMenu/UserMenu.module.css';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 const MenuVoc: FC = memo(function () {
     const dispatch = useAppDispatch();
-    const { input, isUserMenuOpen } = useAppSelector(state => state.upMenu);
+    const { input } = useAppSelector(state => state.upMenu);
     const { user } = useAppSelector(state => state.AuthSlice);
     const [modal, setModal] = useState<boolean>(false);
+    const [isDropDownMenuOpen, setIsDropDownMenuOpen] = useState<boolean>(false);
 
     return (
         <div className="menu">
@@ -24,7 +26,7 @@ const MenuVoc: FC = memo(function () {
                 isModal={modal}
                 setModal={setModal}
             />
-            <div className="menu__container">
+            <div className="menu__container" >
                 <div className="menu__logo">Logo</div>
                 <div className="rightItmes">
 
@@ -32,15 +34,24 @@ const MenuVoc: FC = memo(function () {
                         <InputSearch />
                         <Search />
                     </div>
+                    <DropDownMenu
+                        isMenuOpen={isDropDownMenuOpen}
+                        setIsMenuOpen={setIsDropDownMenuOpen}
+                        isAvatarMenuOpen={modal}
+                        content={
+                            <UserMenu
+                                setModal={setModal}
+                                isActivated={user?.isActivated}
+                                isDropDownMenuOpen={isDropDownMenuOpen}
+                            />
+                        }
+                    />
                     <UserTopMenu
-                        isUserMenuOpen={isUserMenuOpen}
                         hideMenu={styles.hideMenu}
+                        isMenuOpen={isDropDownMenuOpen}
+                        setIsMenuOpen={setIsDropDownMenuOpen}
                     />
-                    <UserMenu
-                        setModal={setModal}
-                        isActivated={user?.isActivated}
-                        modal={modal}
-                    />
+
                 </div>
             </div>
         </div>

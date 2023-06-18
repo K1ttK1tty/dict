@@ -6,19 +6,29 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    top: -6px;
-    right: 25px;
-    padding: 3px;
-    width: 190px;
-    background-color: green;
+    top: -9px;
+    right: 55px;
+    padding: 5px;
+    width: 195px;
     transition: 0.25s;
     opacity: 1;
     visibility: visible;
     z-index: 12;
 }
-.input{
+@media (max-width: 768px) {
+    .searchBlock {
+        top: 40px;
+        right: -40px;
+        background-color: #24292f;
+        border-radius: 8px;
+    }
+}
+.input {
     height: 20px;
     width: 20px;
+}
+.input::before {
+    border: 2px solid black;
 }
 .blockHidden {
     top: -50px;
@@ -27,7 +37,7 @@
 }
 .inputSearch {
     right: 25px;
-    width: 160px;
+    width: 150px;
     height: 30px;
     font-family: "Heebo", sans-serif;
     font-size: 16px;
@@ -48,12 +58,73 @@
         height: 40px;
         box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.6);
         padding: 0px 8px;
-        margin-right: 15px;
+        margin-right: 5px;
     }
     .inputHidden {
         top: 46px;
         right: -200px;
         opacity: 0;
         visibility: hidden;
+    }
+}
+/* search menu params */
+.dotsWrapper {
+    width: 40px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.dots {
+    position: relative;
+    border: none;
+}
+.dots::after {
+    content: "";
+    position: absolute;
+    top: 8px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}
+.dots::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}
+.dots,
+.dots::after,
+.dots::before {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: rgb(224, 224, 224);
+}
+.searchParamsMenu {
+    cursor: default;
+    font-size: 16px;
+}
+.DropDownMenuClassName {
+    height: 100px;
+    padding: 10px;
+    border: 1px solid rgb(136, 214, 47);
+}
+.mb14 {
+    margin-bottom: 14px;
+}
+.underline {
+    color: rgb(125, 201, 38);
+    transition: 0.1s;
+}
+@media (max-width: 425px) {
+    .DropDownMenuClassName {
+        height: 120px;
+    }
+    .mb6 {
+        margin-bottom: 8px;
     }
 }

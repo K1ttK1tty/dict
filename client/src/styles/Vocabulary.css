@@ -1,6 +1,23 @@
 .paintBrush {
     cursor: url("../styles//Icons//brush1.png") 0 30, pointer;
 }
+.CardsPosition {
+    max-width: 900px;
+    margin: 0px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+    gap: 20px;
+    column-gap: 35px;
+}
+@media (max-width: 767px) {
+    .CardsPosition {
+        grid-template-columns: 1fr;
+        gap: 0px;
+        column-gap: 0px;
+    }
+}
 .menu {
     height: 50px;
     top: 0px;
@@ -68,6 +85,7 @@
     top: 4.5px;
     max-height: 35px;
     cursor: pointer;
+    /* padding:0px 5px; */
 }
 .wrap {
     margin: 0px auto;
@@ -148,7 +166,7 @@
     .deleteThemeWrapper {
         flex-direction: column;
     }
-    .removeSelectedTheme{
+    .removeSelectedTheme {
         margin-bottom: 19px;
     }
 }
@@ -189,14 +207,15 @@
 .iconSearchForMenu {
     stroke: rgb(136, 214, 47);
     fill: rgb(136, 214, 47);
-    height: 24px;
-    width: 24px;
+    height: 33px;
+    width: 31px;
+    margin-right: 13px;
+    padding: 3px;
     transition: var(--transition-theme);
 }
 @media (max-width: 768px) {
     .iconSearchForMenu {
         position: relative;
-        margin-right: 8px;
     }
 }
 .cardIconsize {

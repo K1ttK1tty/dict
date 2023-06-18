@@ -17,15 +17,19 @@ interface ICardProps {
     card: ICard;
     index: number;
     modalChangeCard: React.MutableRefObject<HTMLInputElement | null>;
+    doubleRowCards: boolean;
 }
-const Card: FC<ICardProps> = memo(function ({ card, index, modalChangeCard }) {
+const Card: FC<ICardProps> = memo(function ({ card, index, modalChangeCard, doubleRowCards }) {
     const dispatch = useAppDispatch();
     const { cards, user } = useAppSelector(state => state.AuthSlice);
     const openMobalInMobile = isMobile
         ? () => editWord(card, index, modalChangeCard, dispatch)
         : undefined;
+    const cardClassName = doubleRowCards
+        ? styles.card :
+        [styles.card, styles.cardOneColumn].join(' ');
     return (
-        <div onClick={openMobalInMobile} className={styles.card} >
+        <div onClick={openMobalInMobile} className={cardClassName} >
             <h4 className={styles.word}>{card.word}</h4>
             <p className={styles.translate}>{card.translate}</p>
             <div

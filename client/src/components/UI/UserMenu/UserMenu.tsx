@@ -1,54 +1,30 @@
-import { FC, useRef, useEffect, memo } from 'react';
+import { FC, memo } from 'react';
 // components
 import ThemeChanger from '../ThemeChanger/ThemeChanger';
 import BtnAddCard from '../BtnAddCard/BtnAddCard';
 import Info from './Info';
 import AvatarWithInfo from '../Avatar/AvatarWithInfo';
-// functions
-import { keyClose } from '../../../functions/keyClose';
 // styles
 import styles from './UserMenu.module.css';
 // redux
-import { setIsUserMenuOpen } from '../../../store/reducers/upMenu';
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { useAppDispatch } from '../../../hooks/redux';
 import { Logout } from '../../../store/reducers/authorization/Authorization/ActionCreator';
 interface IUserMenuProps {
     isActivated: boolean;
     setModal: (state: boolean) => void;
-    modal: boolean;
+    isDropDownMenuOpen: boolean;
 }
-const UserMenu: FC<IUserMenuProps> = memo(function ({ isActivated, setModal, modal }) {
+const UserMenu: FC<IUserMenuProps> = memo(function ({ isActivated, setModal, isDropDownMenuOpen }) {
     const dispatch = useAppDispatch();
-    const { isUserMenuOpen } = useAppSelector(state => state.upMenu);
-    const menuElement = useRef<HTMLDivElement | null>(null);
-    let isOpenMenu = [styles.content, styles.hidden].join(' ');
-
-    useEffect(() => {
-        dispatch(setIsUserMenuOpen(false));
-    }, []);
-    if (isUserMenuOpen && !modal) {
-        isOpenMenu = styles.content;
-        setTimeout(() => {
-            if (menuElement.current) {
-                menuElement.current.focus();
-            }
-        }, 150);
-    }
     return (
-        <div
-            onMouseDown={e => e.stopPropagation()}
-            onKeyDown={e => keyClose(e, setIsUserMenuOpen, dispatch)}
-            className={isOpenMenu}
-            tabIndex={1}
-            ref={menuElement}
-        >
-            <div className={styles.contentWrapper}>
+        <>
+            <div className={styles.contentWrapper} onMouseDown={e => e.stopPropagation()}>
                 <AvatarWithInfo setFunction={() => setModal(true)} />
                 <div className={[styles.activation, styles.mb14].join(' ')}>
                     <p className={styles.account}>
                         Аккаунт: {isActivated ? 'активирован' : 'не активирован'}
                     </p>
-                    {!isActivated && <Info isUserMenuOpen={isUserMenuOpen} />}
+                    {!isActivated && <Info isUserMenuOpen={isDropDownMenuOpen} />}
                 </div>
                 <div className={styles.theme}>
                     <p>Тема: </p>
@@ -61,7 +37,7 @@ const UserMenu: FC<IUserMenuProps> = memo(function ({ isActivated, setModal, mod
                 children="Выйти из аккаунта"
                 onClick={() => dispatch(Logout())}
             />
-        </div >
+        </>
     );
 });
 export default UserMenu;

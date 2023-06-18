@@ -1,5 +1,5 @@
 // redux
-import { setSearchWord, setInput, setIsUserMenuOpen } from '../store/reducers/upMenu';
+import { setSearchWord, setInput} from '../store/reducers/upMenu';
 import { setOptionState } from '../store/reducers/authorization/Authorization/AuthSlice';
 // styles
 import cl from '../components/UI/BtnAddCard/BtnAddCard.module.css';
@@ -12,10 +12,9 @@ type FunctType = (
     input: IInput,
     chooseTheme: string,
     optionState: IOptionState,
-    isUserMenuOpen: boolean,
     dispatch: AppDispatch,
 ) => void;
-export const removeInput: FunctType = (elem, input, chooseTheme, optionState, isUserMenuOpen, dispatch) => {
+export const removeInput: FunctType = (elem, input, chooseTheme, optionState, dispatch) => {
     let a = false;
     const divElement = elem.target as HTMLDivElement;
     const parentElement = divElement.parentNode as HTMLElement;
@@ -29,8 +28,5 @@ export const removeInput: FunctType = (elem, input, chooseTheme, optionState, is
         if ((divElement.parentNode && parentElement.id === 'options' || chooseTheme) && btnClass) a = true;
         if (divElement.id === 'close') a = false;
         dispatch(setOptionState({ open: false, removeMark: a }));
-    }
-    if (isUserMenuOpen) {
-        dispatch(setIsUserMenuOpen(false));
     }
 };

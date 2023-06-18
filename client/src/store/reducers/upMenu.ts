@@ -6,12 +6,14 @@ export interface IInput {
 interface IInitialState {
     input: IInput;
     searchWord: string;
-    isUserMenuOpen: boolean;
+    isSearchByWord: boolean;
+    isLetterCaseInclude: boolean;
 }
 const initialState: IInitialState = {
     input: { isOpen: false, after: '' },
     searchWord: '',
-    isUserMenuOpen: false
+    isSearchByWord: true,
+    isLetterCaseInclude: false
 };
 const upMenu = createSlice({
     name: 'upMenu',
@@ -23,10 +25,18 @@ const upMenu = createSlice({
         setSearchWord(state, action: PayloadAction<string>) {
             state.searchWord = action.payload;
         },
-        setIsUserMenuOpen(state, action: PayloadAction<boolean>) {
-            state.isUserMenuOpen = action.payload;
+        setSearchByWord(state) {
+            state.isSearchByWord = !state.isSearchByWord;
+        },
+        setIsLetterCaseInclude(state) {
+            state.isLetterCaseInclude = !state.isLetterCaseInclude;
         }
+
     }
 });
 export default upMenu.reducer;
-export const { setSearchWord, setInput, setIsUserMenuOpen } = upMenu.actions;
+export const { setSearchWord,
+    setInput,
+    setSearchByWord,
+    setIsLetterCaseInclude
+} = upMenu.actions;

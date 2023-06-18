@@ -1,10 +1,11 @@
-@import url('../../../styles//theme.css');
+@import url("../../../styles//theme.css");
 .textCenter {
-    text-align: left;
+    text-align: left !important;
     margin-left: 40px;
+    color: black !important;
 }
 .wordsCount,
-.inputOrder{
+.inputOrder {
     color: var(--empty-header);
     text-align: right;
     top: 0px;
@@ -23,4 +24,7 @@
         text-align: left;
         margin-left: 18px;
     }
+}
+.input::before {
+    border: 2px solid black !important;
 }
