@@ -9,6 +9,7 @@ import Icon2 from './icons/Icon2';
 // import Icon4 from './icons/Icon4';
 // styles
 import cl from './MenuDesk.module.css';
+import arrowStyles from '../ScrollToTop/ScrollToTop.module.css';
 const MenuDesk: FC = memo(function () {
     const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
@@ -19,18 +20,18 @@ const MenuDesk: FC = memo(function () {
         ? [cl.removeMenuIconShow, cl.removeMenuIcon].join(' ')
         : cl.removeMenuIcon;
 
-    useEffect(() => {
-        const page: HTMLDivElement | null = document.querySelector('.pageContent');
-        const CardsControl = document.querySelector('.CardsControl');
-        if (menuOpen && CardsControl && page) {
-            page.style.right = '-220px';
-            CardsControl.classList.add(cl.rightCardsControl);
-        }
-        else if (CardsControl && page) {
-            page.style.right = '0px';
-            CardsControl.classList.remove(cl.rightCardsControl);
-        }
-    }, [menuOpen]);
+    // useEffect(() => {
+    //     const page: HTMLDivElement | null = document.querySelector('.pageContent');
+    //     const CardsControl = document.querySelector('.CardsControl');
+    //     if (menuOpen && CardsControl && page) {
+    //         page.style.right = '-220px';
+    //         CardsControl.classList.add(cl.rightCardsControl);
+    //     }
+    //     else if (CardsControl && page) {
+    //         page.style.right = '0px';
+    //         CardsControl.classList.remove(cl.rightCardsControl);
+    //     }
+    // }, [menuOpen]);
     const openMenu = (element: React.MouseEvent<HTMLElement>) => {
         element.stopPropagation();
         const navElement = element.target as HTMLElement;
@@ -48,6 +49,7 @@ const MenuDesk: FC = memo(function () {
     };
     return (
         <nav onClick={isMobile ? openMenu : undefined} >
+            <button className={cl.openMenuButton} onClick={() => setMenuOpen(true)}>открыть</button>
             <div className={isMenuOpen}>
                 <div className={cl.content}>
                     {
@@ -55,7 +57,11 @@ const MenuDesk: FC = memo(function () {
                         <button
                             className={showMenuCloseIcon}
                             onClick={() => setMenuOpen(false)}
-                        >&times;</button>
+                        >
+                            <div className={[arrowStyles.icon, cl.icon].join(' ')}>
+                                <div className={[arrowStyles.arrow, cl.arrow].join(' ')}></div>
+                            </div>
+                        </button>
                     }
 
                     <ul className={cl.ulMmenu}>

@@ -29,6 +29,24 @@ nav {
     border-right: 1px solid rgba(255, 255, 255, 0.15);
     overflow: hidden;
 }
+.openMenuButton {
+    display: none;
+}
+@media (max-width: 768px) {
+    .back {
+        /* width: 0px; */
+        padding: 110px 15px 20px 15px;
+        opacity: 0;
+        visibility: hidden;
+    }
+    .openMenuButton {
+        display: block;
+        position: absolute;
+        top: 90px;
+        left: 20px;
+        z-index: 10;
+    }
+}
 
 @media (max-width: 425px) {
     .back {
@@ -163,6 +181,8 @@ a:visited {
 }
 .menuOpen {
     width: 255px;
+    opacity: 1;
+    visibility: visible;
 }
 .menuOpen .swipe {
     opacity: var(--opacity1);
@@ -195,7 +215,7 @@ a:visited {
     color: rgb(136, 214, 47);
     background-color: rgba(121, 89, 89, 0);
     position: absolute;
-    top: 0px;
+    top: 50px;
     right: 40px;
     border: none;
     transition: var(--transition-theme);
@@ -211,11 +231,34 @@ a:visited {
     display: flex;
 }
 /* for cards control block */
-.rightCardsControl {
+/* .rightCardsControl {
     right: -440px !important;
 }
 @media (max-width: 768px) {
     .rightCardsControl {
         right: -1000px !important;
     }
+} */
+.icon {
+    transform: rotate(180deg) !important;
+}
+.arrow {
+    width: 55% !important;
+    height: 4px !important;
+    background-color: rgb(136, 214, 47) !important;
+}
+.arrow::after,
+.arrow::before {
+    width: 50% !important;
+    height: 4px !important;
+    right: 0px !important;
+    background-color: rgb(136, 214, 47) !important;
+}
+.arrow::after {
+    top: -5px !important;
+    transform: rotate(30deg) !important;
+}
+.arrow::before {
+    top: 5px !important;
+    transform: rotate(-30deg) !important;
 }

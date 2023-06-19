@@ -61,11 +61,11 @@
     width: 100%;
     transition: 0.27s;
 }
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .searchWrapper {
         margin-left: 30px;
     }
-}
+} */
 .paddingTop124 {
     padding-top: 167px !important;
 }

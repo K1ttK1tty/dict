@@ -127,14 +127,14 @@ h2 {
     }
     .cardsOptions {
         max-width: 230px;
-        left: 60px;
+        /* left: 60px; */
         padding: 5px 50px 5px 10px;
     }
 }
 
 @media (max-width: 374px) {
     .cardsOptions {
-        left: 68px;
+        /* left: 68px; */
         max-width:200px;
     }
 }

@@ -236,7 +236,7 @@ const Vocabulary: FC = memo(function () {
             // onScroll={() => console.log(document.body.scrollTop)}
             onMouseDown={e => removeInput(e, input, chooseTheme, optionState, dispatch)}
             className={'searchWrapper pageContent'}
-            style={{ right: '0px' }}
+            // style={{ right: '0px' }}
         >
             <ScrollToTop />
             <MenuVoc />

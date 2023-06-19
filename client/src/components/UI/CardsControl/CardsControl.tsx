@@ -10,6 +10,7 @@ import { modalAddCard } from '../../../functions/modalAddCard';
 import styles from './CardsControl.module.css';
 // icon
 import PinIcon from './Icons/PinIcon';
+import SettingsIcon from './Icons/SettingsIcon';
 // redux
 import { useAppDispatch } from '../../../hooks/redux';
 // types
@@ -74,9 +75,10 @@ const CardsControl: FC<ICardsControl> = memo(function ({ btnStyle, modalAdd, isA
                     children="Создать карточку"
                 />
                 <MySelect />
+                <SettingsIcon/>
             </div>
         );
-    }
+    }   
     return (
         <div
             ref={windowBlock}
