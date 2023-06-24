@@ -8,7 +8,7 @@ import { setInputValue } from '../../../../store/reducers/modalRenameCard';
 import { setIsModalAddCardActive } from '../../../../store/reducers/modalAddCard';
 // types
 interface IModalAddCards {
-    modalAdd: React.MutableRefObject<HTMLInputElement | null>;
+    modalAdd?: React.MutableRefObject<HTMLInputElement | null>;
 }
 const ModalAddCards: FC<IModalAddCards> = memo(function ({ modalAdd }) {
     const dispatch = useAppDispatch();

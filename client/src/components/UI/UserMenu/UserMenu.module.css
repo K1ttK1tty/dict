@@ -23,6 +23,9 @@
 .wrapperActive {
     background: #383e47;
 }
+.height100{
+    height: 100%;
+}
 .navbtn {
     border: none;
     background: rgba(255, 255, 255, 0);
@@ -158,7 +161,6 @@
     margin-bottom: 18px;
 }
 .btnExit {
-    /* transform: translateY(-20px); */
     width: 100% !important;
     font-size: 18px !important;
     padding: 10px !important;
@@ -215,7 +217,7 @@
     z-index: 14;
     transition: 0.2s;
 }
-@media (max-width:425px){
+@media (max-width: 425px) {
     .submenu {
         right: -75px;
         width: 220px;
@@ -228,4 +230,52 @@
 .submenu p {
     margin-bottom: 10px;
     padding: 12px;
+}
+.openMenuButton {
+    display: none;
+    border: none;
+}
+
+@media (max-width: 768px) {
+    .back {
+        /* padding: 110px 15px 20px 15px; */
+        /* padding: 80px 15px 20px 15px; */
+        opacity: 0;
+        visibility: hidden;
+    }
+    .openMenuButton {
+        display: block;
+        position: absolute;
+        top: 14px;
+        left: 10px;
+        padding: 10px;
+        background-color: transparent;
+        /* background-color: #24292f; */
+        border-radius: 6px;
+        /* z-index: 14; */
+        cursor: pointer;
+    }
+}
+.openMenuIcon {
+    position: relative;
+    background-color: rgb(136, 214, 47);
+    width: 25px;
+    height: 3px;
+    border-radius: 10px;
+}
+.openMenuIcon::before,
+.openMenuIcon::after {
+    position: absolute;
+    content: "";
+    left: 0px;
+    background-color: rgb(136, 214, 47);
+    width: 25px;
+    height: 3px;
+    border-radius: 10px;
+}
+.openMenuIcon::before {
+    top: -8px;
+}
+.openMenuIcon::after {
+    top: 8px;
 }

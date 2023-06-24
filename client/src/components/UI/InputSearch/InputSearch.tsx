@@ -65,7 +65,11 @@ const InputSearch: FC = memo(function () {
                 className={style.dotsWrapper}
                 onMouseDown={() => setIsDropDownMenuOpen(!isDropDownMenuOpen)}
             >
-                <div className={style.dots} onMouseDown={() => setIsDropDownMenuOpen(!isDropDownMenuOpen)}></div>
+                <div
+                    className={style.dots}
+                    onMouseDown={() => setIsDropDownMenuOpen(!isDropDownMenuOpen)}
+                >
+                </div>
             </div>
             <DropDownMenu
                 isMenuOpen={isDropDownMenuOpen}

@@ -13,7 +13,7 @@
 }
 .gameCardsField {
     background-color: var(--background-cards);
-    padding: 90px 0px 0px 0px;
+    padding: 125px 0px 0px 0px;
     height: 100%;
     min-height: 100%;
     padding-bottom: 15px;
@@ -93,11 +93,6 @@
 .gameWrap {
     height: 100%;
     transition: var(--transition02s);
-}
-@media (max-width: 768px) {
-    .gameWrap {
-        margin-left: 30px;
-    }
 }
 .trueWord {
     box-shadow: var(--word-shadow-true);

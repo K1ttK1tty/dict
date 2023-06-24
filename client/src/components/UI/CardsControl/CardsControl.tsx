@@ -10,7 +10,6 @@ import { modalAddCard } from '../../../functions/modalAddCard';
 import styles from './CardsControl.module.css';
 // icon
 import PinIcon from './Icons/PinIcon';
-import SettingsIcon from './Icons/SettingsIcon';
 // redux
 import { useAppDispatch } from '../../../hooks/redux';
 // types
@@ -19,10 +18,25 @@ interface ICardsControl {
     modalAdd: React.MutableRefObject<HTMLInputElement | null>;
     isAttached: boolean;
     setIsAttached: React.Dispatch<React.SetStateAction<boolean>>;
+    doubleRowCards: boolean;
+    setDoubleRowCards: (state: boolean) => void;
+    isOpenModal: boolean;
+    setIsModal: (state: boolean) => void;
 }
-const CardsControl: FC<ICardsControl> = memo(function ({ btnStyle, modalAdd, isAttached, setIsAttached }) {
+const CardsControl: FC<ICardsControl> = memo(function
+    (
+        {
+            btnStyle,
+            modalAdd,
+            isAttached,
+            setIsAttached,
+            doubleRowCards,
+            setDoubleRowCards,
+            isOpenModal,
+            setIsModal
+        }
+    ) {
     const dispatch = useAppDispatch();
-
     const windowBlock = useRef<HTMLDivElement | null>(null);
     const [isCanMove, setIsCanMove] = useState<boolean>(false);
     const grabCursor: string = isCanMove
@@ -74,11 +88,13 @@ const CardsControl: FC<ICardsControl> = memo(function ({ btnStyle, modalAdd, isA
                     dinamicclassname={btnStyle.btnCreateCard}
                     children="Создать карточку"
                 />
-                <MySelect />
-                <SettingsIcon/>
+                <MySelect
+                    isOpenModal={isOpenModal}
+                    setIsModal={setIsModal}
+                />
             </div>
         );
-    }   
+    }
     return (
         <div
             ref={windowBlock}
@@ -87,17 +103,27 @@ const CardsControl: FC<ICardsControl> = memo(function ({ btnStyle, modalAdd, isA
             className={grabCursor}
         >
             <div className={styles.title}>
-                <PinIcon setIsAttached={setIsAttached} styles={[styles.pinIcon, styles.pinIconMarginRight].join(' ')} />
+                <PinIcon
+                    setIsAttached={setIsAttached}
+                    styles={[styles.pinIcon, styles.pinIconMarginRight].join(' ')}
+                />
                 <h2>Управление</h2>
             </div>
-            <CardsInfo isMovedBlock={true} />
+            <CardsInfo
+                isMovedBlock={true}
+                doubleRowCards={doubleRowCards}
+                setDoubleRowCards={setDoubleRowCards}
+            />
             <div className={styles.cardsOptionsMoved}>
                 <BtnAddCard
                     onClick={isCanMove ? undefined : () => modalAddCard(modalAdd, dispatch)}
                     dinamicclassname={[btnStyle.btnCreateCard, btnStyle.btnMoved].join(' ')}
                     children="Создать карточку"
                 />
-                <MySelect isCanMove={isCanMove} />
+                <MySelect
+                    isOpenModal={isOpenModal}
+                    setIsModal={setIsModal}
+                    isCanMove={isCanMove} />
             </div>
             <BtnAddCard
                 onMouseDown={(e: React.MouseEvent<HTMLButtonElement>) => e.preventDefault()}

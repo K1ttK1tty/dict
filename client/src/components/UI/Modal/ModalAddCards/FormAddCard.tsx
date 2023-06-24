@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { setInputValue } from '../../../../store/reducers/modalRenameCard';
 // types
 interface IFormAddCard {
-    modalAdd: React.MutableRefObject<HTMLInputElement | null>;
+    modalAdd?: React.MutableRefObject<HTMLInputElement | null>;
 }
 const FormAddCard: FC<IFormAddCard> = memo(function ({ modalAdd }) {
     const dispatch = useAppDispatch();

@@ -19,8 +19,10 @@ import {
 // types
 interface IMySelect {
     isCanMove?: boolean;
+    isOpenModal: boolean;
+    setIsModal: (state: boolean) => void;
 }
-const MySelect: FC<IMySelect> = memo(function ({ isCanMove }) {
+const MySelect: FC<IMySelect> = memo(function ({ isCanMove, isOpenModal, setIsModal }) {
     const dispatch = useAppDispatch();
     const { optionName, optionState } = useAppSelector(state => state.AuthSlice);
     const selectElement = useRef<HTMLDivElement | null>(null);
@@ -56,7 +58,9 @@ const MySelect: FC<IMySelect> = memo(function ({ isCanMove }) {
             dispatch(setOptionState({ ...optionState, open: false }));
         };
     }, []);
-
+    useEffect(() => {
+        if (isOpenModal) dispatch(setOptionState({ ...optionState, open: false }));
+    }, [isOpenModal]);
     return (
         <div
             className={styles.select}
@@ -72,7 +76,7 @@ const MySelect: FC<IMySelect> = memo(function ({ isCanMove }) {
                     onMouseDown={isCanMoveFunction}
                     className={[styles.selectValue, 'ifNotThisThenClose'].join(' ')}
                 >
-                    {isMobile ? cutLongLine(optionName, 8) : cutLongLine(optionName, 11) }
+                    {isMobile ? cutLongLine(optionName, 8) : cutLongLine(optionName, 11)}
                 </div>
                 <div className={styles.selectIcon}><IconSelect /></div>
             </div>
@@ -89,6 +93,7 @@ const MySelect: FC<IMySelect> = memo(function ({ isCanMove }) {
             >
                 <SetOptions
                     replaceOption={replaceOption}
+                    setIsModal={setIsModal}
                 />
 
             </CSSTransition>

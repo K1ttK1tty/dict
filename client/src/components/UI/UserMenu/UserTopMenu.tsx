@@ -17,7 +17,7 @@ const UserTopMenu: FC<IUserTopMenu> = memo(function ({ hideMenu, isMenuOpen, set
         ? [styles.arrow, styles.arrowActive].join(' ')
         : styles.arrow;
     return (
-        <div onMouseDown={e => e.stopPropagation()}>
+        <div className={styles.height100} onMouseDown={e => e.stopPropagation()}>
             <div
                 className={wrapperStyles}
                 onMouseDown={() => setIsMenuOpen(!isMenuOpen)}

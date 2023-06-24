@@ -1,39 +1,41 @@
 import { FC, useState, memo } from 'react';
 // components
-import InputSearch from '../InputSearch/InputSearch';
 import UserTopMenu from '../UserMenu/UserTopMenu';
 import UserMenu from '../UserMenu/UserMenu';
 import ModalAddAvatar from '../Modal/ModalAddAvatar/ModalAddAvatar';
 import DropDownMenu from '../DropDownMenu/DropDownMenu';
-// functions
-import { inputSearchHandler } from '../../../functions/inputSearchHandler';
-// icons
-import Search from '../../../pages/Icons/Search';
+import SearchItem from './SearchItem';
 // styles
 import styles from '../UserMenu/UserMenu.module.css';
 //redux
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-const MenuVoc: FC = memo(function () {
-    const dispatch = useAppDispatch();
-    const { input } = useAppSelector(state => state.upMenu);
+import { useAppSelector } from '../../../hooks/redux';
+interface IMenuVoc {
+    setMenuOpen: (state: boolean) => void;
+    menuOpen: boolean;
+}
+const MenuVoc: FC<IMenuVoc> = memo(function ({ menuOpen, setMenuOpen }) {
     const { user } = useAppSelector(state => state.AuthSlice);
     const [modal, setModal] = useState<boolean>(false);
+
     const [isDropDownMenuOpen, setIsDropDownMenuOpen] = useState<boolean>(false);
 
     return (
         <div className="menu">
+
             <ModalAddAvatar
                 isModal={modal}
                 setModal={setModal}
             />
             <div className="menu__container" >
+                <div
+                    className={styles.openMenuButton}
+                    onClick={() => setMenuOpen(!menuOpen)}
+                >
+                    <div className={styles.openMenuIcon}></div>
+                </div>
                 <div className="menu__logo">Logo</div>
                 <div className="rightItmes">
-
-                    <div className="menu__search" onMouseDown={e => inputSearchHandler(e, input, dispatch)}>
-                        <InputSearch />
-                        <Search />
-                    </div>
+                    <SearchItem />
                     <DropDownMenu
                         isMenuOpen={isDropDownMenuOpen}
                         setIsMenuOpen={setIsDropDownMenuOpen}
@@ -51,7 +53,6 @@ const MenuVoc: FC = memo(function () {
                         isMenuOpen={isDropDownMenuOpen}
                         setIsMenuOpen={setIsDropDownMenuOpen}
                     />
-
                 </div>
             </div>
         </div>

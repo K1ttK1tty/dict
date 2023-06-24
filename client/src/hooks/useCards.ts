@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { isNotEmpty } from '../functions/isNotEmpty';
 // types
 import { ICard } from '../store/reducers/authorization/Authorization/AuthTypes';
 
@@ -48,4 +49,14 @@ export const useCards = (Cards: ICard[],
 
     }, [selectedThemes, searchWord, isSearchByWord, isLetterCaseInclude]);
     return selectedAndSearchedWord;
+};
+export const useSearchByWord = (array: string[], word: string) => {
+    const result = useMemo(() => {
+        if (isNotEmpty(word)) {
+            const newArray = [...array].filter(element => element.toLowerCase().includes(word.toLowerCase()));
+            return newArray;
+        }
+        else return array;
+    }, [word, array.length, array]);
+    return result;
 };

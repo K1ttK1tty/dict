@@ -2,7 +2,6 @@ import { FC, useRef, useState, useEffect, useMemo, memo } from 'react';
 // hooks
 import { useCards } from '../hooks/useCards';
 //components
-import MenuVoc from '../components/UI/MenuVoc/MenuVoc';
 import SetCard from '../components/UI/WordCard/SetCard';
 import ModalEditCard from '../components/UI/Modal/ModalEditCard/ModalEditCard';
 import ModalAddCards from '../components/UI/Modal/ModalAddCards/ModalAddCards';
@@ -10,6 +9,7 @@ import RemoveTheme from '../components/RemoveTheme';
 import CardsControl from '../components/UI/CardsControl/CardsControl';
 import CardsInfo from '../components/UI/CardsInfo/CardsInfo';
 import ScrollToTop from '../components/UI/ScrollToTop/ScrollToTop';
+import ModalEditThemes from '../components/UI/Modal/ModalEditThemes/ModalEditThemes';
 //functions 
 import { removeInput } from '../functions/removeInput';
 //styles
@@ -30,9 +30,11 @@ import {
 } from '../store/reducers/ColorPicker';
 // types
 import { IColorObject } from '../models/models';
-import Checkbox from '../components/UI/Checkbox/Checkbox';
 const Vocabulary: FC = memo(function () {
     const [isAttached, setIsAttached] = useState<boolean>(true);
+    const [doubleRowCards, setDoubleRowCards] = useState<boolean>(false);
+    const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+
     // authorization
     const { toggleWordsOrder, cards } = useAppSelector(state => state.AuthSlice);
     //redux  
@@ -230,18 +232,19 @@ const Vocabulary: FC = memo(function () {
         }
     }, [pageTheme]);
 
-    const [doubleRowCards, setDoubleRowCards] = useState<boolean>(false);
     return (
         <div
             // onScroll={() => console.log(document.body.scrollTop)}
             onMouseDown={e => removeInput(e, input, chooseTheme, optionState, dispatch)}
             className={'searchWrapper pageContent'}
-            // style={{ right: '0px' }}
         >
             <ScrollToTop />
-            <MenuVoc />
             <ModalEditCard modalChangeCard={modalChangeCard} />
             <ModalAddCards modalAdd={modalAdd} />
+            <ModalEditThemes
+                isOpenModal={isOpenModal}
+                setIsModal={setIsOpenModal}
+            />
             <div className={isAttached ? 'CardsField' : 'CardsField paddingTop124'}>
                 <div className="wrap">
                     <CardsControl
@@ -249,15 +252,17 @@ const Vocabulary: FC = memo(function () {
                         modalAdd={modalAdd}
                         isAttached={isAttached}
                         setIsAttached={setIsAttached}
+                        doubleRowCards={doubleRowCards}
+                        setDoubleRowCards={setDoubleRowCards}
+                        isOpenModal={isOpenModal}
+                        setIsModal={setIsOpenModal}
                     />
-                    <div>В две колонки
-                        <Checkbox
-                            id={'oneOrTwoCardsColumnsID'}
-                            defaultChecked={doubleRowCards}
-                            callback={() => setDoubleRowCards(!doubleRowCards)}
-                        />
-                    </div>
-                    {isAttached && <CardsInfo />}
+                    {
+                        isAttached &&
+                        <CardsInfo
+                            doubleRowCards={doubleRowCards}
+                            setDoubleRowCards={setDoubleRowCards}
+                        />}
 
                     {
                         /* <ColorPicker color={color} setColor={setColor} />

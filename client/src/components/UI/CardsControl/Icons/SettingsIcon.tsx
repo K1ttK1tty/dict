@@ -1,12 +1,16 @@
-import React from 'react';
-const SettingsIcon = function () {
+import { FC, memo } from 'react';
+interface ISettingsIcon {
+    dinamicClassName?: string;
+}
+const SettingsIcon: FC<ISettingsIcon> = memo(function ({ dinamicClassName }) {
 
     return (
         <svg
-            width="31px"
-            height="31px"
+            width="29px"
+            height="29px"
             viewBox="0 0 192 192"
             fill="none"
+            className={dinamicClassName}
         >
             <path
                 fill="white"
@@ -75,5 +79,5 @@ const SettingsIcon = function () {
                 d="M96 120c13.255 0 24-10.745 24-24s-10.745-24-24-24-24 10.745-24 24 10.745 24 24 24Z" />
         </svg>
     );
-};
+});
 export default SettingsIcon;

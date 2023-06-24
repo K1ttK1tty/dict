@@ -29,29 +29,52 @@ nav {
     border-right: 1px solid rgba(255, 255, 255, 0.15);
     overflow: hidden;
 }
+.openMenuIcon {
+    position: relative;
+    background-color: rgb(136, 214, 47);
+    width: 25px;
+    height: 3px;
+    border-radius: 10px;
+}
+.openMenuIcon::before,
+.openMenuIcon::after {
+    position: absolute;
+    content: "";
+    left: 0px;
+    background-color: rgb(136, 214, 47);
+    width: 25px;
+    height: 3px;
+    border-radius: 10px;
+}
+.openMenuIcon::before {
+    top: -8px;
+}
+.openMenuIcon::after {
+    top: 8px;
+}
 .openMenuButton {
     display: none;
+    border: none;
 }
+
 @media (max-width: 768px) {
     .back {
-        /* width: 0px; */
-        padding: 110px 15px 20px 15px;
+        /* padding: 110px 15px 20px 15px; */
+        /* padding: 80px 15px 20px 15px; */
         opacity: 0;
         visibility: hidden;
     }
     .openMenuButton {
         display: block;
-        position: absolute;
-        top: 90px;
-        left: 20px;
-        z-index: 10;
-    }
-}
-
-@media (max-width: 425px) {
-    .back {
-        width: 60px;
-        padding: 80px 15px 20px 15px;
+        position: fixed;
+        top: 14px;
+        left: 10px;
+        padding: 10px;
+        background-color: transparent;
+        /* background-color: #24292f; */
+        border-radius: 6px;
+        z-index: 14;
+        cursor: pointer;
     }
 }
 
@@ -230,15 +253,6 @@ a:visited {
     color: inherit;
     display: flex;
 }
-/* for cards control block */
-/* .rightCardsControl {
-    right: -440px !important;
-}
-@media (max-width: 768px) {
-    .rightCardsControl {
-        right: -1000px !important;
-    }
-} */
 .icon {
     transform: rotate(180deg) !important;
 }

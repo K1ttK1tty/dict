@@ -15,6 +15,12 @@
     background: rgb(136, 214, 47);
     border: none;
 }
+.btnFormAddCard:hover.btnFormAddCard:after {
+    scale: 0 !important;
+}
+.btnFormAddCard:hover {
+    background: rgb(124, 196, 43) !important;
+}
 .btnCreateCard {
     width: 170px;
     height: 35px;

@@ -6,11 +6,18 @@ import { useAppSelector } from '../hooks/redux';
 // types
 interface ISetOptions {
     replaceOption: (element: React.MouseEvent<HTMLDivElement>) => void;
+    setIsModal: (state: boolean) => void;
 }
-const SetOptions: FC<ISetOptions> = memo(function ({ replaceOption }) {
-    const selectOptions = useAppSelector(state => state.AuthSlice.selectOptions);
+const SetOptions: FC<ISetOptions> = memo(function ({ replaceOption, setIsModal }) {
+    const { selectOptions } = useAppSelector(state => state.AuthSlice);
     return (
         <div id="options" className={styles.options}>
+            <div onMouseDown={e => e.stopPropagation()}>
+                <div onMouseDown={() => setIsModal(true)} className={styles.optionsOption}>
+                    Редактирование Тем
+                </div>
+            </div>
+            <hr />
             {
                 selectOptions.map((option, id) =>
 

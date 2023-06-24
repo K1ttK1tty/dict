@@ -16,8 +16,9 @@ interface IModal {
     isModal: boolean;
     setModal?: (state: boolean) => void;
     setFields?: ActionCreatorWithPayload<(ICard)>;
+    dinamicClassName?: string;
 }
-const Modal: FC<IModal> = memo(function ({ title, content, isModal, setModal, setFields }) {
+const Modal: FC<IModal> = memo(function ({ title, content, isModal, setModal, setFields, dinamicClassName }) {
     const dispatch = useAppDispatch();
     const visible = isModal
         ? [style.modal, style.active].join(' ')
@@ -31,7 +32,7 @@ const Modal: FC<IModal> = memo(function ({ title, content, isModal, setModal, se
             onKeyDown={e => keyClose(e, setModal, dispatch, setFields)}
             onMouseDown={() => removeModal(setModal, dispatch, setFields)}
         >
-            <div onMouseDown={e => (e.stopPropagation())} className={style.modalContent}>
+            <div onMouseDown={e => (e.stopPropagation())} className={[style.modalContent,dinamicClassName].join(' ')}>
                 <div className={style.modalMarg}>
                     <div className={style.modalNav}>
                         <h5 className={style.modalTitle}>{title}</h5>

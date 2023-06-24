@@ -7,7 +7,7 @@ interface IInputProps<T> {
     modalAdd?: React.MutableRefObject<HTMLInputElement | null>;
     modalChangeCard?: React.MutableRefObject<HTMLInputElement | null>;
     setValue?: (a: string) => void;
-    dinamicclassname: string;
+    dinamicclassname?: string;
     type?: string;
     themeValue?: string;
     defaultTheme?: string;

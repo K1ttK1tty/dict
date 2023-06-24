@@ -9,10 +9,13 @@ import { setToggleWordsOrder } from '../../../store/reducers/authorization/Autho
 // types
 interface ICardsInfo {
     isMovedBlock?: boolean;
+    doubleRowCards: boolean;
+    setDoubleRowCards: (state: boolean) => void;
 }
-const CardsInfo: FC<ICardsInfo> = function ({ isMovedBlock }) {
+const CardsInfo: FC<ICardsInfo> = function ({ isMovedBlock, doubleRowCards, setDoubleRowCards }) {
     const dispatch = useAppDispatch();
     const { toggleWordsOrder, cards } = useAppSelector(state => state.AuthSlice);
+
     const totalWordsClass: string = isMovedBlock
         ? [style.wordsCount, style.textCenter].join(' ')
         : style.wordsCount;
@@ -27,8 +30,16 @@ const CardsInfo: FC<ICardsInfo> = function ({ isMovedBlock }) {
                 <Checkbox
                     defaultChecked={toggleWordsOrder}
                     id={'cardsInfoID'}
-                    dinamicClassName={ isMovedBlock? style.input : ''}
+                    dinamicClassName={isMovedBlock ? style.input : ''}
                     callback={() => dispatch(setToggleWordsOrder())}
+                />
+            </div>
+            <div className={[wordsOrderClass, style.mb18].join(' ')}>В две колонки:
+                <Checkbox
+                    id={'oneOrTwoCardsColumnsID'}
+                    defaultChecked={doubleRowCards}
+                    dinamicClassName={isMovedBlock ? style.input : ''}
+                    callback={() => setDoubleRowCards(!doubleRowCards)}
                 />
             </div>
         </>
