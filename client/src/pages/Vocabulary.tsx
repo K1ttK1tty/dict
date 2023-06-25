@@ -30,9 +30,12 @@ import {
 } from '../store/reducers/ColorPicker';
 // types
 import { IColorObject } from '../models/models';
-const Vocabulary: FC = memo(function () {
+interface IVocabulary {
+    doubleRowCards: boolean;
+    setDoubleRowCards: (state: boolean) => void;
+}
+const Vocabulary: FC<IVocabulary> = memo(function ({ doubleRowCards, setDoubleRowCards }) {
     const [isAttached, setIsAttached] = useState<boolean>(true);
-    const [doubleRowCards, setDoubleRowCards] = useState<boolean>(false);
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
 
     // authorization
@@ -64,7 +67,6 @@ const Vocabulary: FC = memo(function () {
         isLetterCaseInclude
     );
     const [color, setColor] = useState<string>('#0dccce');
-
     const [allElementsArray, setAllElementsArray] = useState<HTMLElement[]>([]);
     const body = document.body;
     let arrOfCurrentElements: HTMLElement[] = useMemo(() => {
@@ -231,8 +233,7 @@ const Vocabulary: FC = memo(function () {
             }
         }
     }, [pageTheme]);
-
-    return (
+              return (
         <div
             // onScroll={() => console.log(document.body.scrollTop)}
             onMouseDown={e => removeInput(e, input, chooseTheme, optionState, dispatch)}

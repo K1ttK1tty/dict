@@ -1,7 +1,6 @@
 // libs
 import { FC, useRef, useEffect, memo } from 'react';
 import { CSSTransition } from 'react-transition-group';
-import { isMobile } from 'react-device-detect';
 // components
 import SetOptions from '../../SetOptions';
 import IconSelect from './icons/IconSelect';
@@ -76,7 +75,7 @@ const MySelect: FC<IMySelect> = memo(function ({ isCanMove, isOpenModal, setIsMo
                     onMouseDown={isCanMoveFunction}
                     className={[styles.selectValue, 'ifNotThisThenClose'].join(' ')}
                 >
-                    {isMobile ? cutLongLine(optionName, 8) : cutLongLine(optionName, 11)}
+                    {cutLongLine(optionName, 11)}
                 </div>
                 <div className={styles.selectIcon}><IconSelect /></div>
             </div>

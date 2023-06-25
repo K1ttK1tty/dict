@@ -2,6 +2,8 @@ import { FC, useState, useEffect, useRef, memo } from 'react';
 // components
 import DropDownMenu from '../DropDownMenu/DropDownMenu';
 import SearchParamsMenu from './SearchParamsMenu';
+// functions
+import { debounce } from '../../../functions/debounce';
 // styles
 import style from './InputSearch.module.css';
 //redux
@@ -45,12 +47,9 @@ const InputSearch: FC = memo(function () {
         }
     };
 
-    let typingTimeOut: number | undefined;
+    let typingTimeOut: ReturnType<typeof setTimeout>;
     const searching = (value: string) => {
-        clearTimeout(typingTimeOut);
-        typingTimeOut = setTimeout(() => {
-            dispatch(setSearchWord(value));
-        }, 400);
+        debounce(typingTimeOut, null, { dispatch, func:setSearchWord, state:value });
     };
     return (
         <div className={inputClass} onMouseDown={e => e.stopPropagation()}>

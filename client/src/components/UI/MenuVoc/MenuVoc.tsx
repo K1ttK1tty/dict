@@ -1,4 +1,4 @@
-import { FC, useState, memo } from 'react';
+import { FC, useState, useEffect, memo } from 'react';
 // components
 import UserTopMenu from '../UserMenu/UserTopMenu';
 import UserMenu from '../UserMenu/UserMenu';
@@ -16,12 +16,18 @@ interface IMenuVoc {
 const MenuVoc: FC<IMenuVoc> = memo(function ({ menuOpen, setMenuOpen }) {
     const { user } = useAppSelector(state => state.AuthSlice);
     const [modal, setModal] = useState<boolean>(false);
-
+    const [enableSearch, setEnableSearch] = useState<boolean>(true);
     const [isDropDownMenuOpen, setIsDropDownMenuOpen] = useState<boolean>(false);
-
+    useEffect(() => {
+        if (window.location.pathname === '/posts') {
+            setEnableSearch(true);
+        } else setEnableSearch(false);
+        return () => {
+            setIsDropDownMenuOpen(false);
+        };
+    }, [window.location.pathname]);
     return (
         <div className="menu">
-
             <ModalAddAvatar
                 isModal={modal}
                 setModal={setModal}
@@ -29,13 +35,13 @@ const MenuVoc: FC<IMenuVoc> = memo(function ({ menuOpen, setMenuOpen }) {
             <div className="menu__container" >
                 <div
                     className={styles.openMenuButton}
-                    onClick={() => setMenuOpen(!menuOpen)}
+                onClick={() => setMenuOpen(!menuOpen)}
                 >
                     <div className={styles.openMenuIcon}></div>
                 </div>
                 <div className="menu__logo">Logo</div>
                 <div className="rightItmes">
-                    <SearchItem />
+                    {enableSearch && <SearchItem />}
                     <DropDownMenu
                         isMenuOpen={isDropDownMenuOpen}
                         setIsMenuOpen={setIsDropDownMenuOpen}

@@ -68,13 +68,12 @@
 }
 @media (max-width: 768px) {
     .select {
-        width: 110px;
+        width: 140px;
         height: 45px;
-        margin: 0px;
     }
     .options {
         top: 45px;
-        width: 160px;
+        width: 140px;
     }
     .title {
         height: 100%;
@@ -104,20 +103,5 @@
         font-size: 45px;
         top: 7px;
         right: -42px;
-    }
-}
-@media (max-width: 374px) {
-    .title {
-        max-width: 87px;
-    }
-}
-@media (max-width: 318px) {
-    .removeTheme {
-        font-size: 50px;
-        top: 55px;
-        right: 10px;
-    }
-    .title {
-        max-width: none;
     }
 }

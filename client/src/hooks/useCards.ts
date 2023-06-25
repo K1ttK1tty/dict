@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+// functions
 import { isNotEmpty } from '../functions/isNotEmpty';
 // types
 import { ICard } from '../store/reducers/authorization/Authorization/AuthTypes';
@@ -8,14 +9,12 @@ export const useSordetCard = (Cards: ICard[], toggleWordsOrder: boolean) => {
         if (!toggleWordsOrder) return Cards;
         return Cards.sort((a, b) => a.word.localeCompare(b.word));
     }, [Cards, toggleWordsOrder]);
-
     return sordetCard;
 };
 export const useSelectedThemes = (Cards: ICard[], chooseTheme: string, toggleWordsOrder: boolean) => {
     const sordetCard = useSordetCard(Cards, toggleWordsOrder);
     const selectedThemes = useMemo(() => {
         if (!chooseTheme) return sordetCard;
-
         return sordetCard.filter((card: ICard) => card.theme == chooseTheme);
     }, [chooseTheme, Cards]);
 
@@ -56,7 +55,7 @@ export const useSearchByWord = (array: string[], word: string) => {
             const newArray = [...array].filter(element => element.toLowerCase().includes(word.toLowerCase()));
             return newArray;
         }
-        else return array;
+        return array;
     }, [word, array.length, array]);
     return result;
 };

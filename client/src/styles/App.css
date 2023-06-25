@@ -19,6 +19,7 @@ body {
     padding: 0px;
     font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
     text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
 }
 a:visited {
     color: inherit;

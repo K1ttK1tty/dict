@@ -18,15 +18,15 @@ export default function InputAddCard<T>(props: IInputProps<T>) {
     const element = props.modalAdd ? props.modalAdd : props.modalChangeCard;
     const setInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
         const element = e.target as HTMLInputElement;
-        // console.log(element.value);
         if (props.setValue) {
+
             props.setValue(element.value);
         }
     };
     const onChangeThemeAddCard = (e: React.ChangeEvent<HTMLInputElement>) => {
+
         if (props.setDefaultTheme) {
             props.setDefaultTheme(e.target.value);
-
         }
     };
     if (props.setDefaultTheme) {
@@ -40,7 +40,6 @@ export default function InputAddCard<T>(props: IInputProps<T>) {
             />
         );
     }
-
     return (
         <input
             ref={element}
@@ -52,5 +51,4 @@ export default function InputAddCard<T>(props: IInputProps<T>) {
             {...props.register}
         />
     );
-
 }

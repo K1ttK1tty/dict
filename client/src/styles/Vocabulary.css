@@ -99,7 +99,6 @@
     align-items: center;
     justify-content: space-between;
     height: 50px;
-    width: 105px;
 }
 @media (max-width: 768px) {
     .rightItmes {

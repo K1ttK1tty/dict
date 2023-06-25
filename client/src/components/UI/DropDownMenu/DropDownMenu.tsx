@@ -31,7 +31,7 @@ const DropDownMenu: FC<IDropDownMenu> = memo(function (
         document.body.onmousedown = () => {
             setIsMenuOpen(false);
         };
-    }, []);
+    }, [isMenuOpen]);
 
     return (
         <div

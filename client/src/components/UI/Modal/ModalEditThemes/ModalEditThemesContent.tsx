@@ -50,8 +50,8 @@ const ModalEditThemesContent: FC<IModalEditThemesContent> = memo(function ({ set
         divElement.classList.add(style.selectedTheme);
         setSelectedElement(divElement);
     };
-    const changeThemeAndWords = (e: React.MouseEvent) => {
-        e.stopPropagation();
+    const changeThemeAndWords = (e: React.MouseEvent<HTMLFormElement>) => {
+        e.preventDefault()
         if (!selectedElement || !isNotEmpty(newTheme)) {
             dispatch(setServerMessage('Нужно выбрать старую и новую тему!'));
             return;
@@ -73,47 +73,59 @@ const ModalEditThemesContent: FC<IModalEditThemesContent> = memo(function ({ set
     };
     return (
         <div className={style.main}>
-            <div className={style.wrapper}>
-                <div id="editThemeList" className={style.content}>
-                    <InputAddCard
-                        dinamicclassname={style.input}
-                        placeholder="Искать..."
-                        defaultTheme={word}
-                        setDefaultTheme={setWord}
-                    />
-                    <button id="close" onMouseDown={clearInput} className={closeButtonStyle}>&times;</button>
-                    <div className={style.list}>
-                        {
-                            themes.map((option, id) =>
-                                <div
-                                    className={[listStyles.optionsOption, style.theme].join(' ')}
-                                    key={option + id + 'key'}
-                                    onMouseDown={selectTheme}
-                                >
-                                    {option}
-                                </div>
-                            )
-                        }
+            <form onSubmit={changeThemeAndWords} >
+                <div className={style.wrapper}>
+                    <div id="editThemeList" className={style.content}>
+                        <InputAddCard
+                            dinamicclassname={style.input}
+                            placeholder="Искать..."
+                            defaultTheme={word}
+                            setDefaultTheme={setWord}
+                            type="text"
+                        />
+                        <button
+                            id="close"
+                            onMouseDown={clearInput}
+                            className={closeButtonStyle}
+                        >
+                            &times;
+                        </button>
+                        <div className={style.list}>
+                            {
+                                themes.map((option, id) =>
+                                    <div
+                                        className={[listStyles.optionsOption, style.theme].join(' ')}
+                                        key={option + id + 'key'}
+                                        onMouseDown={selectTheme}
+                                    >
+                                        {option}
+                                    </div>
+                                )
+                            }
+                        </div>
+                    </div>
+                    <div className={style.icon}>
+                        <div className={style.arrow}></div>
+                    </div>
+                    <div className={style.newThemeBlock}>
+                        <InputAddCard
+                            dinamicclassname={[style.input, style.mb12Center].join(' ')}
+                            placeholder="Новая тема..."
+                            defaultTheme={newTheme}
+                            setDefaultTheme={setNewTheme}
+                            type="text"
+                        />
                     </div>
                 </div>
-                <div className={style.icon}>
-                    <div className={style.arrow}></div>
-                </div>
-                <div className={style.newThemeBlock}>
-                    <InputAddCard
-                        dinamicclassname={[style.input, style.mb12Center].join(' ')}
-                        placeholder="Новая тема..."
-                        defaultTheme={newTheme}
-                        setDefaultTheme={setNewTheme}
-                    />
-                </div>
-            </div>
-            <BtnAddCard
-                aria={'Изменить тему'}
-                dinamicclassname={[btnStyles.btnFormEditCard, style.button].join(' ')}
-                children="Изменить тему"
-                onClick={changeThemeAndWords}
-            />
+                <BtnAddCard
+                    aria={'Изменить тему'}
+                    dinamicclassname={[btnStyles.btnFormEditCard, style.button].join(' ')}
+                    children="Изменить тему"
+                    type="submit"
+
+                // onClick={changeThemeAndWords}
+                />
+            </form>
         </div>
     );
 });

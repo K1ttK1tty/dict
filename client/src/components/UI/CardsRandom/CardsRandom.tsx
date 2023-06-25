@@ -4,12 +4,20 @@ import CardRand from '../CardRand/CardRand';
 import { ICard } from '../../../store/reducers/authorization/Authorization/AuthTypes';
 interface ICardsRandom {
     cardsGame: ICard[];
+    testByWord: boolean;
 }
-const CardsRandom: FC<ICardsRandom> = memo(function ({ cardsGame }) {
+const CardsRandom: FC<ICardsRandom> = memo(function ({ cardsGame, testByWord }) {
     return (
         <>
             {
-                cardsGame.map((card, index) => <CardRand index={index} key={index + card.word} card={card} />)
+                cardsGame.map((card, index) =>
+                    <CardRand
+                        index={index}
+                        key={index + card.word}
+                        card={card}
+                        testByWord={testByWord}
+                    />
+                )
             }
         </>
     );
