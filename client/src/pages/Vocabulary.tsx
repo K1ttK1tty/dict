@@ -319,7 +319,6 @@ const Vocabulary: FC<IVocabulary> = memo(function ({ doubleRowCards, setDoubleRo
                         Убрать все цвета
                         </div> */
                     }
-
                     {
                         selectedAndSearchedWord.length
                             ? < SetCard

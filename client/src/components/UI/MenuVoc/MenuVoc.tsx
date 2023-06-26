@@ -19,7 +19,8 @@ const MenuVoc: FC<IMenuVoc> = memo(function ({ menuOpen, setMenuOpen }) {
     const [enableSearch, setEnableSearch] = useState<boolean>(true);
     const [isDropDownMenuOpen, setIsDropDownMenuOpen] = useState<boolean>(false);
     useEffect(() => {
-        if (window.location.pathname === '/posts') {
+        const path = window.location.pathname;
+        if (path === '/posts' || path === '/') {
             setEnableSearch(true);
         } else setEnableSearch(false);
         return () => {
@@ -35,7 +36,7 @@ const MenuVoc: FC<IMenuVoc> = memo(function ({ menuOpen, setMenuOpen }) {
             <div className="menu__container" >
                 <div
                     className={styles.openMenuButton}
-                onClick={() => setMenuOpen(!menuOpen)}
+                    onClick={() => setMenuOpen(!menuOpen)}
                 >
                     <div className={styles.openMenuIcon}></div>
                 </div>

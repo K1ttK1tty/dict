@@ -9,5 +9,5 @@ type FunctType = (
 ) => void;
 export const removeModal: FunctType = (setModal, dispatch, object) => {
     if (setModal) setModal(false);
-    if (object && dispatch) dispatch(object({ id: 0, word: '', translate: '', theme: '' }));
+    if (object && dispatch) dispatch(object({ id: 0, word: '', translate: '', theme: '',note:'' }));
 };

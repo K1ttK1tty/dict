@@ -13,13 +13,15 @@ const initialState: IInitialState = {
         id: 0,
         word: '',
         translate: '',
-        theme: ''
+        theme: '',
+        note: ''
     },
     editCard: {
         id: 0,
         word: '',
         translate: '',
-        theme: ''
+        theme: '',
+        note: ''
     }
 };
 const modalRenameCard = createSlice({

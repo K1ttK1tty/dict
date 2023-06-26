@@ -4,12 +4,15 @@ import { isMobile } from 'react-device-detect';
 // components
 import InputAddCard from '../../InputAddCard/InputAddCard';
 import BtnAddCard from '../../BtnAddCard/BtnAddCard';
+import TextArea from '../../TextArea/TextArea';
 // functions
 import { changeCardFields } from '../../../../functions/changeCardFields';
 import { addNewTheme } from '../../../../functions/addNewTheme';
 import { removeCard } from '../../../../functions/removeCard';
 // styles
 import style from './Modal.module.css';
+// icon
+import SoundIcon from '../icons/SoundIcon';
 // redux
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { UpdateCards } from '../../../../store/reducers/authorization/Authorization/ActionCreator';
@@ -42,7 +45,10 @@ const FormEditCard: FC<IFormEditCard> = memo(function ({ modalChangeCard }) {
     return (
         <form>
             <div className={style.inputDiv}>
-                <div className={style.inputP}>Слово:</div>
+                <div className={style.inputP}>
+                    Слово:
+                    <SoundIcon />
+                </div>
                 <InputAddCard
                     modalChangeCard={modalChangeCard}
                     inputValue={editCard.word}
@@ -66,6 +72,11 @@ const FormEditCard: FC<IFormEditCard> = memo(function ({ modalChangeCard }) {
                     dinamicclassname={style.inputFormEditCard}
                 />
             </div>
+            <TextArea
+                placeholder="Комментарий"
+                inputValue={editCard.note}
+                setValue={e => dispatch(setEditCard({ ...editCard, note: e }))}
+            />
             <div className={style.buttonsBlock}>
                 {
                     isMobile && <BtnAddCard

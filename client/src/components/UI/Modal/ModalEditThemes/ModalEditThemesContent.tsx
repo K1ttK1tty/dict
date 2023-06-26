@@ -51,7 +51,7 @@ const ModalEditThemesContent: FC<IModalEditThemesContent> = memo(function ({ set
         setSelectedElement(divElement);
     };
     const changeThemeAndWords = (e: React.MouseEvent<HTMLFormElement>) => {
-        e.preventDefault()
+        e.preventDefault();
         if (!selectedElement || !isNotEmpty(newTheme)) {
             dispatch(setServerMessage('Нужно выбрать старую и новую тему!'));
             return;
@@ -122,8 +122,6 @@ const ModalEditThemesContent: FC<IModalEditThemesContent> = memo(function ({ set
                     dinamicclassname={[btnStyles.btnFormEditCard, style.button].join(' ')}
                     children="Изменить тему"
                     type="submit"
-
-                // onClick={changeThemeAndWords}
                 />
             </form>
         </div>

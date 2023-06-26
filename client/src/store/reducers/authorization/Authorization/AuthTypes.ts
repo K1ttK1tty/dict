@@ -4,6 +4,7 @@ export interface ICard {
     word: string;
     translate: string;
     theme: string;
+    note:string;
 }
 export interface IUser {
     id: number;

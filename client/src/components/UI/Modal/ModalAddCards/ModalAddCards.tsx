@@ -17,7 +17,7 @@ const ModalAddCards: FC<IModalAddCards> = memo(function ({ modalAdd }) {
     useEffect(() => {
         if (isModalAddCardActive) setIsModal(true);
         return () => {
-            dispatch(setInputValue({ id: 0, word: '', translate: '', theme: '' }));
+            dispatch(setInputValue({ id: 0, word: '', translate: '', theme: '', note: '' }));
         };
     }, [isModalAddCardActive]);
     useEffect(() => {

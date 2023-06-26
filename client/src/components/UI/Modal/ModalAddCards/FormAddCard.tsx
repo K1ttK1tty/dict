@@ -2,6 +2,7 @@ import { FC, useState, useEffect, memo } from 'react';
 // components
 import InputAddCard from '../../InputAddCard/InputAddCard';
 import BtnAddCard from '../../BtnAddCard/BtnAddCard';
+import TextArea from '../../TextArea/TextArea';
 // functions
 import { addNewCard } from '../../../../functions/addNewCard';
 // consts
@@ -52,6 +53,11 @@ const FormAddCard: FC<IFormAddCard> = memo(function ({ modalAdd }) {
                 placeholder={'Тема'}
                 defaultTheme={defaultTheme}
                 setDefaultTheme={setDefaultTheme}
+            />
+            <TextArea
+                placeholder="Комментарий..."
+                inputValue={inputValue.note}
+                setValue={e => dispatch(setInputValue({ ...inputValue, note: e }))}
             />
             <BtnAddCard
                 aria={'Создать'}

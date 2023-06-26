@@ -27,7 +27,7 @@
 @media (max-width: 768px) {
     .modalContent {
         padding: 25px;
-        min-width: 300px;
+        min-width: 280px;
     }
 }
 @media (max-width: 425px) {
@@ -38,7 +38,7 @@
     }
     .modalContent {
         padding: 25px 21px;
-        min-width: 250px;
+        /* min-width: 250px; */
     }
 }
 .modalInputs {
@@ -101,13 +101,16 @@
 .inputP {
     font-size: 20px;
     margin-right: 5px;
-    min-width: 89px;
+    min-width: 104px;
+    display: flex;
+    align-items: center;
+    /* min-width: 89px; */
 }
 @media (max-width: 768px) {
     .inputP {
         font-size: 17px;
         margin-right: 3px;
-        min-width: 70px;
+        min-width: 95px;
     }
     .inputDiv {
         margin-bottom: 20px;

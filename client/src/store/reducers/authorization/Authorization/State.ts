@@ -17,7 +17,8 @@ export const initialState: IInitialState = {
         id: 0,
         word: '',
         translate: '',
-        theme: ''
+        theme: '',
+        note:''
     },
     toggleWordsOrder: true,
     // select

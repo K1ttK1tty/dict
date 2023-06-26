@@ -25,7 +25,7 @@ export const addNewCard: FunctType = (e, inputValue, Cards, selectOptions, email
         dispatch(UpdateCards({ email, cards }));
         addNewTheme(selectOptions, inputValue.theme, email, dispatch);
         dispatch(setIsModalAddCardActive(false));
-        dispatch(setInputValue({ id: 0, word: '', translate: '', theme: '', }));
+        dispatch(setInputValue({ id: 0, word: '', translate: '', theme: '', note: '' }));
 
     } else dispatch(setServerMessage('Поля "Слово" и "Перевод" должны быть заполнены'));
 };
