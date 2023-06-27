@@ -21,7 +21,6 @@ export interface IInitialState {
     updateError: string;
     cards: ICard[] | [];
     changeCard: ICard;
-    toggleWordsOrder: boolean;
     optionName: string;
     optionState: IOptionState;
     selectOptions: string[];
@@ -51,9 +50,6 @@ export const AuthSlice = createSlice({
         },
         setChangeCard(state, action: PayloadAction<ICard>) {
             state.changeCard = action.payload;
-        },
-        setToggleWordsOrder(state) {
-            state.toggleWordsOrder = !state.toggleWordsOrder;
         },
         // select
         setOptionName(state, action: PayloadAction<string>) {
@@ -206,7 +202,6 @@ export const {
     setCards,
     setID,
     setChangeCard,
-    setToggleWordsOrder,
     setOptionName,
     setOptionState,
     setSelectOptions,

@@ -9,7 +9,7 @@ import styles from '../UserMenu/UserMenu.module.css';
 import { useAppSelector } from '../../../hooks/redux';
 interface IAvatarWithInfoProps {
     isMenuOpen?: boolean;
-    setFunction: (state: React.MouseEvent<HTMLDivElement, MouseEvent> | boolean) => void;
+    setFunction: (state: boolean) => void;
 }
 const AvatarWithInfo: FC<IAvatarWithInfoProps> = memo(function ({ isMenuOpen, setFunction }) {
     const { user } = useAppSelector(state => state.AuthSlice);
@@ -24,12 +24,12 @@ const AvatarWithInfo: FC<IAvatarWithInfoProps> = memo(function ({ isMenuOpen, se
         : styles.userMain;
     return (
         <div onClick={e => e.stopPropagation()} className={menuDescAvatar}>
-            <div onClick={setFunction} className={styles.avatarWrapper}>
+            <div onClick={() => setFunction(true)} className={styles.avatarWrapper}>
                 <Avatar styles={styles.avatar} />
             </div>
             <div>
                 <div className={showName}>{cutLongLine(user?.name, 17)}</div>
-                <div className={showEmail}>{cutLongLine(user?.email,28)}</div>
+                <div className={showEmail}>{cutLongLine(user?.email, 28)}</div>
             </div>
         </div>
     );

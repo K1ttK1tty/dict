@@ -20,7 +20,6 @@ export const initialState: IInitialState = {
         theme: '',
         note:''
     },
-    toggleWordsOrder: true,
     // select
     optionName: 'Тема',
     optionState: { open: false, removeMark: false },

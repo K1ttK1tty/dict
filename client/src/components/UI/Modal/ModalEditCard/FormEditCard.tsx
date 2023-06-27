@@ -1,5 +1,5 @@
 // libs
-import { FC, memo } from 'react';
+import { FC } from 'react';
 import { isMobile } from 'react-device-detect';
 // components
 import InputAddCard from '../../InputAddCard/InputAddCard';
@@ -23,7 +23,7 @@ import { ICard } from '../../../../store/reducers/authorization/Authorization/Au
 interface IFormEditCard {
     modalChangeCard: React.MutableRefObject<HTMLInputElement | null>;
 }
-const FormEditCard: FC<IFormEditCard> = memo(function ({ modalChangeCard }) {
+const FormEditCard: FC<IFormEditCard> = function ({ modalChangeCard }) {
     const dispatch = useAppDispatch();
     const { editCard } = useAppSelector(state => state.modalRenameCard);
     const { changeCard, cards, selectOptions } = useAppSelector(state => state.AuthSlice);
@@ -95,5 +95,5 @@ const FormEditCard: FC<IFormEditCard> = memo(function ({ modalChangeCard }) {
             </div>
         </form >
     );
-});
+};
 export default FormEditCard;

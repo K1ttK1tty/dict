@@ -19,7 +19,7 @@ const ModalEditCard: FC<IModalEditCard> = memo(function ({ modalChangeCard }) {
 
     useEffect(() => {
         if (!isModal) dispatch(setModal(false));
-    }, [isModal]);
+    }, [isModal, dispatch]);
 
     return (
         <Modal

@@ -1,5 +1,5 @@
 // libs
-import { FC, useState, memo } from 'react';
+import { FC, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 // components
 import FormLogin from './forms/FormLogin';
@@ -7,10 +7,9 @@ import FormRegistration from './forms/FormRegistration';
 import ChangePassword from './ResetPassword/ChangePassword';
 // styles
 import styles from './Authorization.module.css';
-const Authorization: FC = memo(function () {
+const Authorization: FC = function () {
     const [isLogin, setIsLogin] = useState<boolean>(true);
     const [showPassword, setShowPassword] = useState<boolean>(false);
-
     const buttonLogin = isLogin
         ? [styles.buttonSwitcher, styles.buttonSwitcherActive].join(' ')
         : styles.buttonSwitcher;
@@ -40,5 +39,5 @@ const Authorization: FC = memo(function () {
             </div>
         </div>
     );
-});
+};
 export default Authorization;

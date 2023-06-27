@@ -1,5 +1,5 @@
 // libs
-import { FC, memo } from 'react';
+import { FC } from 'react';
 import { isMobile } from 'react-device-detect';
 // components
 import IconRemove from './icons/IconRemove';
@@ -19,7 +19,7 @@ interface ICardProps {
     modalChangeCard: React.MutableRefObject<HTMLInputElement | null>;
     doubleRowCards: boolean;
 }
-const Card: FC<ICardProps> = memo(function ({ card, index, modalChangeCard, doubleRowCards }) {
+const Card: FC<ICardProps> = function ({ card, index, modalChangeCard, doubleRowCards }) {
     const dispatch = useAppDispatch();
     const { cards, user } = useAppSelector(state => state.AuthSlice);
     const openMobalInMobile = isMobile
@@ -28,6 +28,7 @@ const Card: FC<ICardProps> = memo(function ({ card, index, modalChangeCard, doub
     const cardClassName = doubleRowCards
         ? styles.card :
         [styles.card, styles.cardOneColumn].join(' ');
+
     return (
         <div onClick={openMobalInMobile} className={cardClassName} >
             <h4 className={styles.word}>{card.word}</h4>
@@ -51,5 +52,5 @@ const Card: FC<ICardProps> = memo(function ({ card, index, modalChangeCard, doub
             ><IconRemove /></div>
         </div>
     );
-});
+};
 export default Card;

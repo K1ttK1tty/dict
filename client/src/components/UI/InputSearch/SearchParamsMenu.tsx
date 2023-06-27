@@ -1,4 +1,4 @@
-import { FC, memo } from 'react';
+import { FC } from 'react';
 //components
 import Checkbox from '../Checkbox/Checkbox';
 //style
@@ -6,11 +6,15 @@ import style from './InputSearch.module.css';
 // redux
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setSearchByWord, setIsLetterCaseInclude } from '../../../store/reducers/upMenu';
-const SearchParamsMenu: FC = memo(function () {
+const SearchParamsMenu: FC = function () {
     const dispatch = useAppDispatch();
     const { isSearchByWord, isLetterCaseInclude } = useAppSelector(state => state.upMenu);
-    const searchByWordClassName = isSearchByWord ? style.underline : '';
-    const searchByTranslateClassName = isSearchByWord ? '' : style.underline;
+    const searchByWordClassName = isSearchByWord
+        ? style.underline
+        : '';
+    const searchByTranslateClassName = isSearchByWord
+        ? ''
+        : style.underline;
     return (
         <div className={style.searchParamsMenu} onMouseDown={e => e.stopPropagation()}>
             <h3 className={style.mb14}>Параметры поиска</h3>
@@ -34,5 +38,5 @@ const SearchParamsMenu: FC = memo(function () {
             </div>
         </div>
     );
-});
+};
 export default SearchParamsMenu;

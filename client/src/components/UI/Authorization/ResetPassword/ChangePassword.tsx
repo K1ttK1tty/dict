@@ -1,5 +1,5 @@
 // libs
-import { FC, memo } from 'react';
+import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 // components
@@ -16,7 +16,7 @@ import { useAppDispatch } from '../../../../hooks/redux';
 import { SendResetPassword } from '../../../../store/reducers/authorization/ChangePassword/Actions';
 // types
 import { IChangePassword } from '../forms/FormsTypes';
-const ChangePassword: FC = memo(function () {
+const ChangePassword: FC = function () {
     const dispatch = useAppDispatch();
 
     const { register, handleSubmit, formState: { errors } } = useForm<IChangePassword>({
@@ -70,5 +70,5 @@ const ChangePassword: FC = memo(function () {
             </div>
         </div>
     );
-});
+};
 export default ChangePassword;

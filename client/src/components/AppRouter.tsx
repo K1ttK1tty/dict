@@ -1,27 +1,41 @@
 // libs
-import { FC, useState, memo } from 'react';
+import { FC, useState, useMemo, lazy, Suspense, memo } from 'react';
 import { Routes, Route } from 'react-router-dom';
 // pages
-import Games from '../pages/Games.tsx';
-import Vocabulary from '../pages/Vocabulary.tsx';
 import Settings from '../pages/Settings.tsx';
 const AppRouter: FC = memo(function () {
+    const Games = useMemo(() => lazy(() => import('../pages/Games.tsx')), []);
+    const Vocabulary = useMemo(() => lazy(() => import('../pages/Vocabulary.tsx')), []);
     const [doubleRowCards, setDoubleRowCards] = useState<boolean>(false);
+    const [wordsOrder, setWordsOrder] = useState<boolean>(true);
     return (
         <Routes>
             <Route path="/posts" element={
-                <Vocabulary
-                    doubleRowCards={doubleRowCards}
-                    setDoubleRowCards={setDoubleRowCards}
-                />
+                <Suspense>
+                    <Vocabulary
+                        doubleRowCards={doubleRowCards}
+                        setDoubleRowCards={setDoubleRowCards}
+                        wordsOrder={wordsOrder}
+                        setWordsOrder={setWordsOrder}
+                    />
+                </Suspense>
+            }
+            />
+            <Route path="/games" element={
+                <Suspense>
+                    <Games />
+                </Suspense>
             } />
-            <Route path="/games" element={<Games />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="*" element={
-                <Vocabulary
-                    doubleRowCards={doubleRowCards}
-                    setDoubleRowCards={setDoubleRowCards}
-                />
+                <Suspense>
+                    <Vocabulary
+                        doubleRowCards={doubleRowCards}
+                        setDoubleRowCards={setDoubleRowCards}
+                        wordsOrder={wordsOrder}
+                        setWordsOrder={setWordsOrder}
+                    />
+                </Suspense>
             } />
         </Routes>
     );

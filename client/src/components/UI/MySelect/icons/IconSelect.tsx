@@ -1,5 +1,5 @@
-import { FC } from 'react';
-const IconSelect: FC = function () {
+import { FC, memo } from 'react';
+const IconSelect: FC = memo(function () {
     return (
         <svg className="selSVG" width="27px" height="27px" viewBox="0 0 24 24" fill="none" >
             <path
@@ -42,5 +42,5 @@ const IconSelect: FC = function () {
             />
         </svg>
     );
-};
+});
 export default IconSelect;

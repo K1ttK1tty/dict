@@ -22,6 +22,8 @@ interface ICardsControl {
     setDoubleRowCards: (state: boolean) => void;
     isOpenModal: boolean;
     setIsModal: (state: boolean) => void;
+    wordsOrder: boolean;
+    setWordsOrder: (state: boolean) => void;
 }
 const CardsControl: FC<ICardsControl> = memo(function
     (
@@ -33,7 +35,9 @@ const CardsControl: FC<ICardsControl> = memo(function
             doubleRowCards,
             setDoubleRowCards,
             isOpenModal,
-            setIsModal
+            setIsModal,
+            wordsOrder,
+            setWordsOrder
         }
     ) {
     const dispatch = useAppDispatch();
@@ -113,6 +117,8 @@ const CardsControl: FC<ICardsControl> = memo(function
                 isMovedBlock={true}
                 doubleRowCards={doubleRowCards}
                 setDoubleRowCards={setDoubleRowCards}
+                wordsOrder={wordsOrder}
+                setWordsOrder={setWordsOrder}
             />
             <div className={styles.cardsOptionsMoved}>
                 <BtnAddCard

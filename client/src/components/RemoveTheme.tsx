@@ -1,4 +1,4 @@
-import { FC, memo } from 'react';
+import { FC } from 'react';
 // components
 import BtnAddCard from './UI/BtnAddCard/BtnAddCard';
 // functions
@@ -8,7 +8,7 @@ import { deleteAllEmptyThemes } from '../functions/deleteAllEmptyThemes';
 import '../styles/Vocabulary.css';
 //redux
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
-const RemoveTheme: FC = memo(function () {
+const RemoveTheme: FC = function () {
     const dispatch = useAppDispatch();
     const {
         selectOptions,
@@ -37,5 +37,5 @@ const RemoveTheme: FC = memo(function () {
             }
         </div>
     );
-});
+};
 export default RemoveTheme;

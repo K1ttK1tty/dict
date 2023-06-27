@@ -1,4 +1,4 @@
-import { FC, useRef, useEffect, memo, ReactNode } from 'react';
+import { FC, useRef, useEffect, ReactNode } from 'react';
 // styles
 import styles from './DropDownMenu.module.css';
 import { keyClose } from '../../../functions/keyClose';
@@ -9,7 +9,7 @@ interface IDropDownMenu {
     dinamicClassName?: string;
     isAvatarMenuOpen?: boolean;
 }
-const DropDownMenu: FC<IDropDownMenu> = memo(function (
+const DropDownMenu: FC<IDropDownMenu> = function (
     {
         content,
         isMenuOpen,
@@ -31,7 +31,7 @@ const DropDownMenu: FC<IDropDownMenu> = memo(function (
         document.body.onmousedown = () => {
             setIsMenuOpen(false);
         };
-    }, [isMenuOpen]);
+    }, [isMenuOpen, setIsMenuOpen]);
 
     return (
         <div
@@ -43,5 +43,5 @@ const DropDownMenu: FC<IDropDownMenu> = memo(function (
             {content}
         </div >
     );
-});
+};
 export default DropDownMenu;

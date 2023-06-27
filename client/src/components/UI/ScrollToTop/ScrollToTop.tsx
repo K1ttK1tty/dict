@@ -1,7 +1,7 @@
-import { FC, useEffect, useRef } from 'react';
+import { FC, useEffect, useRef, memo } from 'react';
 // styles
 import style from './ScrollToTop.module.css';
-const ScrollToTop: FC = function () {
+const ScrollToTop: FC = memo(function () {
     const arrow = useRef<HTMLButtonElement | null>(null);
     let showArrow = false;
     let scrollTimeOut: ReturnType<typeof setTimeout>;
@@ -23,7 +23,7 @@ const ScrollToTop: FC = function () {
         return () => {
             document.body.removeEventListener('scroll', addActiveClassName);
         };
-    }, []);
+    });
     return (
         <button
             ref={arrow}
@@ -35,5 +35,5 @@ const ScrollToTop: FC = function () {
             </div>
         </button>
     );
-};
+});
 export default ScrollToTop;

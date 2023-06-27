@@ -1,4 +1,4 @@
-import { useState, useEffect, memo, FC } from 'react';
+import { useState, useEffect, useCallback, memo, FC } from 'react';
 // styles
 import styles from './Alert.module.css';
 // redux
@@ -9,8 +9,19 @@ const Alert: FC = memo(function () {
     const { serverMessage } = useAppSelector(state => state.AuthSlice);
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
-    const messageStyle = isOpen ? [styles.message, styles.show].join(' ') : styles.message;
-    const wrapperStyles = isOpen ? styles.wrapper : [styles.wrapper, styles.hide].join(' ');
+    const messageStyle = isOpen
+        ? [styles.message, styles.show].join(' ')
+        : styles.message;
+    const wrapperStyles = isOpen
+        ? styles.wrapper
+        : [styles.wrapper, styles.hide].join(' ');
+
+    const close = useCallback(() => {
+        setIsOpen(false);
+        setTimeout(() => {
+            dispatch(setServerMessage(''));
+        }, 350);
+    }, [dispatch]);
 
     useEffect(() => {
         if (serverMessage) {
@@ -19,14 +30,7 @@ const Alert: FC = memo(function () {
                 close();
             }, 3400);
         }
-    }, [serverMessage]);
-
-    const close = () => {
-        setIsOpen(false);
-        setTimeout(() => {
-            dispatch(setServerMessage(''));
-        }, 350);
-    };
+    }, [serverMessage, close]);
 
     return (
         <div className={wrapperStyles}>

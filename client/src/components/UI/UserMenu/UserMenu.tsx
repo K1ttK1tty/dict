@@ -19,7 +19,7 @@ const UserMenu: FC<IUserMenuProps> = memo(function ({ isActivated, setModal, isD
     return (
         <>
             <div className={styles.contentWrapper} onMouseDown={e => e.stopPropagation()}>
-                <AvatarWithInfo setFunction={() => setModal(true)} />
+                <AvatarWithInfo setFunction={setModal} />
                 <div className={[styles.activation, styles.mb14].join(' ')}>
                     <p className={styles.account}>
                         Аккаунт: {isActivated ? 'активирован' : 'не активирован'}

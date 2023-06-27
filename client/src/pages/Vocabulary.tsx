@@ -33,13 +33,15 @@ import { IColorObject } from '../models/models';
 interface IVocabulary {
     doubleRowCards: boolean;
     setDoubleRowCards: (state: boolean) => void;
+    wordsOrder: boolean;
+    setWordsOrder: (state: boolean) => void;
 }
-const Vocabulary: FC<IVocabulary> = memo(function ({ doubleRowCards, setDoubleRowCards }) {
+const Vocabulary: FC<IVocabulary> = memo(function ({ doubleRowCards, setDoubleRowCards, wordsOrder, setWordsOrder }) {
     const [isAttached, setIsAttached] = useState<boolean>(true);
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
 
     // authorization
-    const { toggleWordsOrder, cards } = useAppSelector(state => state.AuthSlice);
+    const { cards } = useAppSelector(state => state.AuthSlice);
     //redux  
     const { searchWord,
         input,
@@ -62,16 +64,16 @@ const Vocabulary: FC<IVocabulary> = memo(function ({ doubleRowCards, setDoubleRo
         cards,
         searchWord,
         chooseTheme,
-        toggleWordsOrder,
+        wordsOrder,
         isSearchByWord,
-        isLetterCaseInclude
+        isLetterCaseInclude,
     );
     const [color, setColor] = useState<string>('#0dccce');
     const [allElementsArray, setAllElementsArray] = useState<HTMLElement[]>([]);
     const body = document.body;
     let arrOfCurrentElements: HTMLElement[] = useMemo(() => {
         return [];
-    }, [colorModeOn]);
+    }, []);
 
     function click(e: MouseEvent) {
         const element = e.target as HTMLElement;
@@ -213,7 +215,12 @@ const Vocabulary: FC<IVocabulary> = memo(function ({ doubleRowCards, setDoubleRo
                 colorObject.dark.colors = [...colorObject.dark.colors, element.style.background];
             }
         }
-    }, [allElementsArray]);
+    }, [
+        allElementsArray,
+        pageTheme,
+        colorObject.dark,
+        colorObject.light
+    ]);
     // console.log(pageTheme)
     // console.log(colorObject)
     // console.log(allElementsArray)
@@ -232,8 +239,15 @@ const Vocabulary: FC<IVocabulary> = memo(function ({ doubleRowCards, setDoubleRo
                 element.style.background = colorObject.dark.colors[index];
             }
         }
-    }, [pageTheme]);
-              return (
+    }, [
+        pageTheme,
+        colorObject.dark.colors,
+        colorObject.dark.elements,
+        colorObject.light.colors,
+        colorObject.light.elements
+    ]);
+
+    return (
         <div
             // onScroll={() => console.log(document.body.scrollTop)}
             onMouseDown={e => removeInput(e, input, chooseTheme, optionState, dispatch)}
@@ -257,12 +271,16 @@ const Vocabulary: FC<IVocabulary> = memo(function ({ doubleRowCards, setDoubleRo
                         setDoubleRowCards={setDoubleRowCards}
                         isOpenModal={isOpenModal}
                         setIsModal={setIsOpenModal}
+                        wordsOrder={wordsOrder}
+                        setWordsOrder={setWordsOrder}
                     />
                     {
                         isAttached &&
                         <CardsInfo
                             doubleRowCards={doubleRowCards}
                             setDoubleRowCards={setDoubleRowCards}
+                            wordsOrder={wordsOrder}
+                            setWordsOrder={setWordsOrder}
                         />}
 
                     {

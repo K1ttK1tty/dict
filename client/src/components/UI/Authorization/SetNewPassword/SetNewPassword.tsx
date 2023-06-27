@@ -26,7 +26,6 @@ const SetNewPassword: FC = function () {
         mode: 'onSubmit'
     });
     const onSubmit: SubmitHandler<ISetNewPassword> = data => {
-
         const password = data.password;
         dispatch(refreshPassword({ id: userID, password }));
     };

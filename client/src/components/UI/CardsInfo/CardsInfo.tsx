@@ -1,21 +1,28 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 // components
 import Checkbox from '../Checkbox/Checkbox';
 // styles
 import style from './CardsInfo.module.css';
 // redux
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { setToggleWordsOrder } from '../../../store/reducers/authorization/Authorization/AuthSlice';
+import { useAppSelector } from '../../../hooks/redux';
 // types
 interface ICardsInfo {
     isMovedBlock?: boolean;
     doubleRowCards: boolean;
     setDoubleRowCards: (state: boolean) => void;
+    wordsOrder: boolean;
+    setWordsOrder: (state: boolean) => void;
 }
-const CardsInfo: FC<ICardsInfo> = function ({ isMovedBlock, doubleRowCards, setDoubleRowCards }) {
-    const dispatch = useAppDispatch();
-    const { toggleWordsOrder, cards } = useAppSelector(state => state.AuthSlice);
-
+const CardsInfo: FC<ICardsInfo> = memo(function (
+    {
+        isMovedBlock,
+        doubleRowCards,
+        setDoubleRowCards,
+        wordsOrder,
+        setWordsOrder
+    }
+) {
+    const { cards } = useAppSelector(state => state.AuthSlice);
     const totalWordsClass: string = isMovedBlock
         ? [style.wordsCount, style.textCenter].join(' ')
         : style.wordsCount;
@@ -28,13 +35,14 @@ const CardsInfo: FC<ICardsInfo> = function ({ isMovedBlock, doubleRowCards, setD
             <div className={wordsOrderClass}>
                 Алфавитный порядок:
                 <Checkbox
-                    defaultChecked={toggleWordsOrder}
+                    defaultChecked={wordsOrder}
                     id={'cardsInfoID'}
                     dinamicClassName={isMovedBlock ? style.input : ''}
-                    callback={() => dispatch(setToggleWordsOrder())}
+                    callback={() => setWordsOrder(!wordsOrder)}
                 />
             </div>
-            <div className={[wordsOrderClass, style.mb18].join(' ')}>В две колонки:
+            <div className={[wordsOrderClass, style.mb18].join(' ')}>
+                В две колонки:
                 <Checkbox
                     id={'oneOrTwoCardsColumnsID'}
                     defaultChecked={doubleRowCards}
@@ -44,5 +52,5 @@ const CardsInfo: FC<ICardsInfo> = function ({ isMovedBlock, doubleRowCards, setD
             </div>
         </>
     );
-};
+});
 export default CardsInfo;
