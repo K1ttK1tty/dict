@@ -26,12 +26,12 @@ const FormRegistration: FC<IFormProps> = function ({ showPassword, setShowPasswo
         const password = data.password;
         dispatch(Registration({ userName, email, password }));
     };
-    console.log(errors)
+    console.log(errors);
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={formStyle} >
             <h1 className={styles.title}>Регистрация</h1>
-            
+
             <label className={styles.label}>
                 <span className={styles.asterisk}>*</span>Name
                 <InputAddCard
@@ -71,7 +71,7 @@ const FormRegistration: FC<IFormProps> = function ({ showPassword, setShowPasswo
                 <span className={styles.asterisk}>*</span>Password
                 <InputAddCard
                     type={showPassword ? 'text' : 'password'}
-                    dinamicclassname={[inputStyle.inputFormAddCard, styles.input].join(' ')}
+                    dinamicclassname={[inputStyle.inputFormAddCard, styles.input, styles.inputPasswd].join(' ')}
                     register={{
                         ...register('password', {
                             required: 'Поле обязательно для заполнения',

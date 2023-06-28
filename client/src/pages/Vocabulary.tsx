@@ -16,7 +16,6 @@ import { removeInput } from '../functions/removeInput';
 import '../styles/theme.css';
 import '../styles/Vocabulary.css';
 import btnStyle from '../components/UI/Modal/ModalAddCards/FormAddCard.module.css';
-// import btnStyle from '../components/UI/ModalAddCards/FormAddCard.module.css';
 //color-picker
 import ColorPicker from '../components/UI/ColorPicker/ColorPicker';
 //redux
@@ -29,17 +28,10 @@ import {
     setColorsBeforePaint
 } from '../store/reducers/ColorPicker';
 // types
-import { IColorObject } from '../models/models';
-interface IVocabulary {
-    doubleRowCards: boolean;
-    setDoubleRowCards: (state: boolean) => void;
-    wordsOrder: boolean;
-    setWordsOrder: (state: boolean) => void;
-}
+import { IColorObject, IVocabulary } from '../models/models';
 const Vocabulary: FC<IVocabulary> = memo(function ({ doubleRowCards, setDoubleRowCards, wordsOrder, setWordsOrder }) {
     const [isAttached, setIsAttached] = useState<boolean>(true);
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
-
     // authorization
     const { cards } = useAppSelector(state => state.AuthSlice);
     //redux  
@@ -53,7 +45,6 @@ const Vocabulary: FC<IVocabulary> = memo(function ({ doubleRowCards, setDoubleRo
     const modalAdd = useRef<HTMLInputElement | null>(null);
     const modalChangeCard = useRef<HTMLInputElement | null>(null);
     //color-pixelwindow
-    // const pageTheme = useAppSelector(state => state.ColorPicker.pageTheme);
     const pageTheme = localStorage.getItem('theme');
     const colorModeOn = useAppSelector(state => state.ColorPicker.colorModeOn);
     const colorRemoveMode = useAppSelector(state => state.ColorPicker.colorRemoveMode);

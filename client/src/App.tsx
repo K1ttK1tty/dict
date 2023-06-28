@@ -17,7 +17,6 @@ import { CheckAuth, GetData, GetAvatar } from './store/reducers/authorization/Au
 const App: FC = () => {
     const MenuDesk = useMemo(() => lazy(() => import('./components/UI/MenuDesk/MenuDesk')), []);
     const MenuVoc = useMemo(() => lazy(() => import('./components/UI/MenuVoc/MenuVoc')), []);
-    // const AppRouter = lazy(() => import('./components/AppRouter'));
     const [menuOpen, setMenuOpen] = useState<boolean>(false);
     const dispatch = useAppDispatch();
     const { isAuth } = useAppSelector(state => state.AuthSlice);
@@ -37,7 +36,6 @@ const App: FC = () => {
     if (isAuth) {
         return (
             <>
-
                 <Suspense>
                     <MenuDesk menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
                 </Suspense>

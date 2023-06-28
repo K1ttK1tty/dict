@@ -16,7 +16,7 @@ import inputStyle from '../components/UI/Modal/ModalAddCards/FormAddCard.module.
 import CheckboxChoice from '../components/UI//InputSearch/InputSearch.module.css';
 // redux
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
-import { setCardsNumber, setInputReq,setChanger } from '../store/reducers/GamesSlice';
+import { setCardsNumber, setInputReq, setChanger } from '../store/reducers/GamesSlice';
 // types
 import { ICard } from '../store/reducers/authorization/Authorization/AuthTypes';
 const Games: FC = memo(function () {
@@ -40,12 +40,12 @@ const Games: FC = memo(function () {
             dispatch(setInputReq(0));
             dispatch(setCardsNumber(0));
         };
-    }, []);
+    }, [dispatch]);
     useEffect(() => {
         dispatch(setInputReq(0));
         dispatch(setCardsNumber(0));
         dispatch(setChanger());
-    }, [testByWord])
+    }, [testByWord, dispatch]);
 
     const array = useMemo(() => {
         const arr: ICard[] = [];

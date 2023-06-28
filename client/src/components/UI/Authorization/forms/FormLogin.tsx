@@ -38,7 +38,8 @@ const FormLogin: FC<IFormProps> = function ({ showPassword, setShowPassword, isL
         <form onSubmit={handleSubmit(onSubmit)} className={formStyle} >
             <h1 className={styles.title}>Вход</h1>
             <label className={styles.label}>
-                <span className={styles.asterisk}>*</span>Email
+                <span className={styles.asterisk}>*</span>
+                Email
                 <InputAddCard
                     type="email"
                     dinamicclassname={[inputStyle.inputFormAddCard, styles.input].join(' ')}
@@ -62,7 +63,7 @@ const FormLogin: FC<IFormProps> = function ({ showPassword, setShowPassword, isL
                 <span className={styles.asterisk}>*</span>Password
                 <InputAddCard
                     type={showPassword ? 'text' : 'password'}
-                    dinamicclassname={[inputStyle.inputFormAddCard, styles.input].join(' ')}
+                    dinamicclassname={[inputStyle.inputFormAddCard, styles.input, styles.inputPasswd].join(' ')}
                     register={{
                         ...register('password', {
                             required: 'Поле обязательно для заполнения',

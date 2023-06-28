@@ -3,12 +3,9 @@
     display: block;
     border: none;
     border-bottom: 1px solid black;
-    /* color: red; */
     border-radius: 0px;
     margin-bottom: 28px;
-}
-.inputFormAddCard:focus{
-    /* color: blue; */
+    outline: none;
 }
 .btnFormAddCard {
     width: 100%;
@@ -24,12 +21,12 @@
 .btnCreateCard {
     width: 170px;
     height: 35px;
-    padding: 7px ;
+    padding: 7px;
     margin: 0px auto;
     display: block;
     transition: 0s;
 }
-.btnMoved{
+.btnMoved {
     margin-bottom: 10px;
 }
 .btnCreateCard:after {

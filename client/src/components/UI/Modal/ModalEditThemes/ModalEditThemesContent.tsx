@@ -14,9 +14,12 @@ import listStyles from '../../MySelect/MySelect.module.css';
 import btnStyles from '../../Modal/ModalEditCard/Modal.module.css';
 // redux
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
-import { setServerMessage } from '../../../../store/reducers/authorization/Authorization/AuthSlice';
 import { UpdateThemes, UpdateCards } from '../../../../store/reducers/authorization/Authorization/ActionCreator';
-import { setSelectOptions, setCards } from '../../../../store/reducers/authorization/Authorization/AuthSlice';
+import {
+    setSelectOptions,
+    setCards,
+    setServerMessage
+} from '../../../../store/reducers/authorization/Authorization/AuthSlice';
 interface IModalEditThemesContent {
     setIsModal: (state: boolean) => void;
 }
@@ -120,7 +123,7 @@ const ModalEditThemesContent: FC<IModalEditThemesContent> = memo(function ({ set
                 <BtnAddCard
                     aria={'Изменить тему'}
                     dinamicclassname={[btnStyles.btnFormEditCard, style.button].join(' ')}
-                    children="Изменить тему"
+                    children="Изменить"
                     type="submit"
                 />
             </form>

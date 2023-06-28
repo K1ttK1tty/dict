@@ -4,10 +4,7 @@ import styles from './UI/MySelect/MySelect.module.css';
 // redux
 import { useAppSelector } from '../hooks/redux';
 // types
-interface ISetOptions {
-    replaceOption: (element: React.MouseEvent<HTMLDivElement>) => void;
-    setIsModal: (state: boolean) => void;
-}
+import { ISetOptions } from '../models/models';
 const SetOptions: FC<ISetOptions> = memo(function ({ replaceOption, setIsModal }) {
     const { selectOptions } = useAppSelector(state => state.AuthSlice);
     return (
