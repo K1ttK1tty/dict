@@ -8,14 +8,14 @@ import style from './ModalEditCard/Modal.module.css';
 import { useAppDispatch } from '../../../hooks/redux';
 // types
 import { } from '../../../hooks/redux';
-import { ICard } from '../../../store/reducers/authorization/Authorization/AuthTypes';
+import { IInputValue } from '../../../store/reducers/authorization/Authorization/AuthTypes';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 interface IModal {
     title: string;
     content: React.ReactNode;
     isModal: boolean;
     setModal?: (state: boolean) => void;
-    setFields?: ActionCreatorWithPayload<(ICard)>;
+    setFields?: ActionCreatorWithPayload<(IInputValue)>;
     dinamicClassName?: string;
 }
 const Modal: FC<IModal> = memo(function ({ title, content, isModal, setModal, setFields, dinamicClassName }) {

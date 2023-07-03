@@ -2,12 +2,12 @@
 import { AppDispatch } from '../store/store';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 // types
-import { ICard } from '../store/reducers/authorization/Authorization/AuthTypes';
+import { IInputValue } from '../store/reducers/authorization/Authorization/AuthTypes';
 type FunctType = (
     e: React.KeyboardEvent<HTMLDivElement>,
     closeModal: ((state: boolean) => void) | undefined,
     dispatch?: AppDispatch | undefined,
-    setFields?: ActionCreatorWithPayload<(ICard)>
+    setFields?: ActionCreatorWithPayload<(IInputValue)>
 ) => void;
 export const keyClose: FunctType = (e, closeModal, dispatch, object) => {
     if (e.code === 'Escape' && closeModal) {

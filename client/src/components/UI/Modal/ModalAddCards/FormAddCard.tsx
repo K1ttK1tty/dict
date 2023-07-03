@@ -30,7 +30,13 @@ const FormAddCard: FC<IFormAddCard> = memo(function ({ modalAdd }) {
     }, [optionName, isModalAddCardActive]);
     const addCard = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation();
-        addNewCard(e, { ...inputValue, theme: defaultTheme }, cards, selectOptions, user.email, dispatch);
+        addNewCard(e,
+            { ...inputValue, theme: defaultTheme, time: Date.now(), color: 'red' },
+            cards,
+            selectOptions,
+            user.email,
+            dispatch
+        );
         setDefaultTheme('');
     };
     return (

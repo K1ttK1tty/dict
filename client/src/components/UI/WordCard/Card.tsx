@@ -1,5 +1,5 @@
 // libs
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 // components
 import IconRemove from './icons/IconRemove';
@@ -7,10 +7,14 @@ import IconEdit from './icons/IconEdit';
 // functions
 import { removeCard } from '../../../functions/removeCard';
 import { editWord } from '../../../functions/editWord';
+// consts
+import { colours, isNew } from './CardConsts';
 // styles
 import styles from './WordCard.module.css';
 //redux
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { setCards } from '../../../store/reducers/authorization/Authorization/AuthSlice';
+import { UpdateCards } from '../../../store/reducers/authorization/Authorization/ActionCreator';
 // types
 import { ICard } from '../../../store/reducers/authorization/Authorization/AuthTypes';
 interface ICardProps {
@@ -22,15 +26,47 @@ interface ICardProps {
 const Card: FC<ICardProps> = function ({ card, index, modalChangeCard, doubleRowCards }) {
     const dispatch = useAppDispatch();
     const { cards, user } = useAppSelector(state => state.AuthSlice);
-    const openMobalInMobile = isMobile
+    const cardColorMark = [styles.colorMark, colours.get(card.color)].join(' ');
+
+    const openModalInMobile = isMobile
         ? () => editWord(card, index, modalChangeCard, dispatch)
         : undefined;
     const cardClassName = doubleRowCards
         ? styles.card :
         [styles.card, styles.cardOneColumn].join(' ');
 
+    const nextColour = (e: React.MouseEvent<HTMLDivElement>) => {
+        const element = e.target as HTMLDivElement;
+        let color: 'green' | 'red' | 'orange';
+        if (element.classList.contains(styles.red)) {
+            // setCardColour([styles.colorMark, colours.get('orange')].join(' '));
+            color = 'orange';
+        } else if (element.classList.contains(styles.orange)) {
+            // setCardColour([styles.colorMark, colours.get('green')].join(' '));
+            color = 'green';
+        } else {
+            // setCardColour([styles.colorMark, colours.get('red')].join(' '));
+            color = 'red';
+        }
+        const newCards = setNewColor(cards, card.id, color);
+        dispatch(setCards(newCards));
+        dispatch(UpdateCards({ email: user.email, cards: newCards }));
+    };
+
+    const setNewColor = (cards: ICard[], id: number, color: 'green' | 'red' | 'orange') => {
+        const newCards: ICard[] = JSON.parse(JSON.stringify(cards));
+        newCards.map(card => {
+            if (card.id === id) {
+                card.color = color;
+            }
+        });
+        return newCards;
+    };
+
+
+
     return (
-        <div onClick={openMobalInMobile} className={cardClassName} >
+        <div onClick={openModalInMobile} className={cardClassName}>
             <h4 className={styles.word}>{card.word}</h4>
             <p className={styles.translate}>{card.translate}</p>
             <div
@@ -49,7 +85,24 @@ const Card: FC<ICardProps> = function ({ card, index, modalChangeCard, doubleRow
                     ? styles.removeIcon
                     : styles.remove
                 }
-            ><IconRemove /></div>
+            >
+                <IconRemove />
+            </div>
+            <div className={styles.cardInfo} onClick={e => e.stopPropagation()}>
+                <div
+                    className={cardColorMark}
+                    onMouseDown={nextColour}
+                >
+                </div>
+                {
+                    isNew(card.time) &&
+                    <div className={styles.new}>
+                        <div className={styles.font}>n</div>
+                        <div className={styles.font}>e</div>
+                        <div className={styles.font}>w</div>
+                    </div>
+                }
+            </div>
         </div>
     );
 };

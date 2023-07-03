@@ -56,7 +56,7 @@ const ModalEditThemesContent: FC<IModalEditThemesContent> = memo(function ({ set
     const changeThemeAndWords = (e: React.MouseEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!selectedElement || !isNotEmpty(newTheme)) {
-            dispatch(setServerMessage('Нужно выбрать старую и новую тему!'));
+            dispatch(setServerMessage('Нужно выбрать старую/новую тему!'));
             return;
         }
         const newThemesArray = overrideTheme(selectOptions, selectedElement!.innerText, newTheme);

@@ -4,7 +4,16 @@ export interface ICard {
     word: string;
     translate: string;
     theme: string;
-    note:string;
+    note: string;
+    time: number;
+    color: 'green' | 'red' | 'orange';
+}
+export interface IInputValue {
+    id: number;
+    word: string;
+    translate: string;
+    theme: string;
+    note: string;
 }
 export interface IUser {
     id: number;

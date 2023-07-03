@@ -15,29 +15,25 @@ export const validateQuiz: FunctType = (e, array, testByWord, dispatch) => {
     const inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll('.inptReq');
     if (testByWord) {
         for (let index = 0; index < inputs.length; index++) {
-            const input = inputs[index];
             const wordInCard = array[index].word.toLowerCase().split(' ').join('');
-            const inputValue = input.value.toLowerCase().split(' ').join('');
-            if (wordInCard === inputValue) {
-                state.push('trueWord');
-            } else if (wordInCard.includes(inputValue) && inputValue !== 'to' && inputValue !== '') {
-                state.push('almost');
-
-            } else state.push('falseWord');
+            shared(state, wordInCard, inputs, index);
         }
         dispatch(setValidateArr(state));
     } else {
         for (let index = 0; index < inputs.length; index++) {
-            const input = inputs[index];
             const wordInCard = array[index].translate.toLowerCase().split(' ').join('');
-            const inputValue = input.value.toLowerCase().split(' ').join('');
-            if (wordInCard === inputValue) {
-                state.push('trueWord');
-            } else if (wordInCard.includes(inputValue) && inputValue !== 'to' && inputValue !== '') {
-                state.push('almost');
-
-            } else state.push('falseWord');
+            shared(state, wordInCard, inputs, index);
         }
         dispatch(setValidateArr(state));
     }
+};
+const shared = (state: string[], wordInCard: string, inputs: NodeListOf<HTMLInputElement>, index: number) => {
+    const input = inputs[index];
+    const inputValue = input.value.toLowerCase().split(' ').join('');
+    if (wordInCard === inputValue) {
+        state.push('trueWord');
+    } else if (wordInCard.includes(inputValue) && inputValue !== 'to' && inputValue !== '') {
+        state.push('almost');
+
+    } else state.push('falseWord');
 };

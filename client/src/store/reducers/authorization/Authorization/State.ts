@@ -18,7 +18,9 @@ export const initialState: IInitialState = {
         word: '',
         translate: '',
         theme: '',
-        note:''
+        note: '',
+        time: 0,
+        color: 'red'
     },
     // select
     optionName: 'Тема',

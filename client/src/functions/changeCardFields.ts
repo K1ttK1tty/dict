@@ -1,9 +1,9 @@
 // types
-import { ICard } from '../store/reducers/authorization/Authorization/AuthTypes';
+import { ICard, IInputValue } from '../store/reducers/authorization/Authorization/AuthTypes';
 type FunctType = (
     cards: ICard[],
     oldCard: ICard,
-    newCard: ICard,
+    newCard: IInputValue,
 ) => ICard[];
 export const changeCardFields: FunctType = (cards, oldCard, newCard) => {
     const newState: ICard[] = JSON.parse(JSON.stringify(cards));
@@ -13,6 +13,8 @@ export const changeCardFields: FunctType = (cards, oldCard, newCard) => {
             card.translate = newCard.translate;
             card.theme = newCard.theme;
             card.note = newCard.note;
+            card.time;
+            card.color;
         }
     });
     return newState;

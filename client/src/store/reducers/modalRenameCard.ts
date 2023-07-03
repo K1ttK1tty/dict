@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ICard } from './authorization/Authorization/AuthTypes';
+import { IInputValue } from './authorization/Authorization/AuthTypes';
 interface IInitialState {
     indexCard: number;
     isModalActive: boolean;
-    inputValue: ICard;
-    editCard: ICard;
+    inputValue: IInputValue;
+    editCard: IInputValue;
 }
 const initialState: IInitialState = {
     indexCard: 0,
@@ -34,10 +34,10 @@ const modalRenameCard = createSlice({
         setModal(state, action: PayloadAction<boolean>) {
             state.isModalActive = action.payload;
         },
-        setInputValue(state, action: PayloadAction<ICard>) {
+        setInputValue(state, action: PayloadAction<IInputValue>) {
             state.inputValue = action.payload;
         },
-        setEditCard(state, action: PayloadAction<ICard>) {
+        setEditCard(state, action: PayloadAction<IInputValue>) {
             state.editCard = action.payload;
         },
     }
