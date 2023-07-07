@@ -11,9 +11,7 @@ import styles from './FormAddCard.module.css';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { setInputValue } from '../../../../store/reducers/modalRenameCard';
 // types
-interface IFormAddCard {
-    modalAdd?: React.MutableRefObject<HTMLInputElement | null>;
-}
+import { IFormAddCard } from '../ModalsModels';
 const FormAddCard: FC<IFormAddCard> = memo(function ({ modalAdd }) {
     const dispatch = useAppDispatch();
     const { cards, user, selectOptions, optionName } = useAppSelector(state => state.AuthSlice);

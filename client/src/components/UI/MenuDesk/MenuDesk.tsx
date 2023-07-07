@@ -8,10 +8,7 @@ import Icon2 from './icons/Icon2';
 // import Icon4 from './icons/Icon4';
 // styles
 import cl from './MenuDesk.module.css';
-interface IMenuDesk {
-    setMenuOpen: (state: boolean) => void;
-    menuOpen: boolean;
-}
+import { IMenuDesk } from './MenuDeskModel';
 const MenuDesk: FC<IMenuDesk> = memo(function ({ menuOpen, setMenuOpen }) {
 
     const isMenuOpen: string = menuOpen

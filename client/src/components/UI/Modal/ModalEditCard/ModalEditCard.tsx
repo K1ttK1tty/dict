@@ -6,10 +6,8 @@ import Modal from '../Modal';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { setModal, setEditCard } from '../../../../store/reducers/modalRenameCard';
 // types
-interface IModalEditCard {
-    modalChangeCard: React.MutableRefObject<HTMLInputElement | null>;
-}
-const ModalEditCard: FC<IModalEditCard> = memo(function ({ modalChangeCard }) {
+import { IFormEditCard } from '../ModalsModels';
+const ModalEditCard: FC<IFormEditCard> = memo(function ({ modalChangeCard }) {
     const dispatch = useAppDispatch();
     const { isModalActive } = useAppSelector(state => state.modalRenameCard);
     const [isModal, setIsModal] = useState<boolean>(false);

@@ -2,13 +2,7 @@ import { FC, memo } from 'react';
 // components
 import DisplayFile from './DisplayFile';
 // types
-interface IChangeFileController {
-    styles: CSSModuleClasses;
-    changeFile: (file: HTMLInputElement) => void;
-    files: FileList | [];
-    upload: () => void;
-    setFiles: (state: FileList | []) => void;
-}
+import { IChangeFileController } from '../ModalsModels';
 const ChangeFileController: FC<IChangeFileController> =
     memo(function ({ styles, upload, files, changeFile, setFiles }) {
         return (

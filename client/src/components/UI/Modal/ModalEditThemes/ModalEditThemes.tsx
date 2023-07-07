@@ -4,10 +4,7 @@ import ModalEditThemesContent from './ModalEditThemesContent';
 import Modal from '../Modal';
 // styles
 import style from './ModalEditThemes.module.css';
-interface IModalEditThemes {
-    isOpenModal: boolean;
-    setIsModal: (state: boolean) => void;
-}
+import { IModalEditThemes } from '../ModalsModels';
 const ModalEditThemes: FC<IModalEditThemes> = memo(function ({ isOpenModal, setIsModal }) {
 
     return (

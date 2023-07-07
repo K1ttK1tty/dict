@@ -7,10 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { UploadAvatar, GetAvatar } from '../../../../store/reducers/authorization/Authorization/ActionCreator';
 import { setServerMessage } from '../../../../store/reducers/authorization/Authorization/AuthSlice';
 // types
-interface IModalAddAvatar {
-    isModal: boolean;
-    setModal: (state: boolean) => void;
-}
+import { IModalAddAvatar } from '../ModalsModels';
 const ModalAddAvatar: FC<IModalAddAvatar> = memo(function ({ isModal, setModal }) {
     const dispatch = useAppDispatch();
     const email = useAppSelector(state => state.AuthSlice?.user?.email);

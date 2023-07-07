@@ -20,9 +20,7 @@ import { setCards } from '../../../../store/reducers/authorization/Authorization
 import { setModal, setEditCard } from '../../../../store/reducers/modalRenameCard';
 // types
 import { ICard } from '../../../../store/reducers/authorization/Authorization/AuthTypes';
-interface IFormEditCard {
-    modalChangeCard: React.MutableRefObject<HTMLInputElement | null>;
-}
+import { IFormEditCard } from '../ModalsModels';
 const FormEditCard: FC<IFormEditCard> = function ({ modalChangeCard }) {
     const dispatch = useAppDispatch();
     const { editCard } = useAppSelector(state => state.modalRenameCard);

@@ -1,4 +1,5 @@
-export const cutLongLine = (line: string, symbolCount: number) => {
+import { TCutLongLine } from './functoinModels';
+export const cutLongLine: TCutLongLine = (line, symbolCount) => {
     let newLine = '';
     for (let index = 0; index < line.length; index++) {
         if (index > symbolCount) return newLine + '...';

@@ -1,5 +1,5 @@
 // libs
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { isMobile } from 'react-device-detect';
 // components
 import IconRemove from './icons/IconRemove';
@@ -17,13 +17,8 @@ import { setCards } from '../../../store/reducers/authorization/Authorization/Au
 import { UpdateCards } from '../../../store/reducers/authorization/Authorization/ActionCreator';
 // types
 import { ICard } from '../../../store/reducers/authorization/Authorization/AuthTypes';
-interface ICardProps {
-    card: ICard;
-    index: number;
-    modalChangeCard: React.MutableRefObject<HTMLInputElement | null>;
-    doubleRowCards: boolean;
-}
-const Card: FC<ICardProps> = function ({ card, index, modalChangeCard, doubleRowCards }) {
+import { ICardProps, TSetNewColor } from './WordCardModel';
+const Card: FC<ICardProps> = function ({ card, index, modalChangeCard, isTwoColumns, isColorsOnCards }) {
     const dispatch = useAppDispatch();
     const { cards, user } = useAppSelector(state => state.AuthSlice);
     const cardColorMark = [styles.colorMark, colours.get(card.color)].join(' ');
@@ -31,21 +26,18 @@ const Card: FC<ICardProps> = function ({ card, index, modalChangeCard, doubleRow
     const openModalInMobile = isMobile
         ? () => editWord(card, index, modalChangeCard, dispatch)
         : undefined;
-    const cardClassName = doubleRowCards
+    const cardClassName = isTwoColumns
         ? styles.card :
         [styles.card, styles.cardOneColumn].join(' ');
 
-    const nextColour = (e: React.MouseEvent<HTMLDivElement>) => {
-        const element = e.target as HTMLDivElement;
+    const nextColour = (e: React.MouseEvent<HTMLButtonElement>) => {
+        const element = e.target as HTMLButtonElement;
         let color: 'green' | 'red' | 'orange';
         if (element.classList.contains(styles.red)) {
-            // setCardColour([styles.colorMark, colours.get('orange')].join(' '));
             color = 'orange';
         } else if (element.classList.contains(styles.orange)) {
-            // setCardColour([styles.colorMark, colours.get('green')].join(' '));
             color = 'green';
         } else {
-            // setCardColour([styles.colorMark, colours.get('red')].join(' '));
             color = 'red';
         }
         const newCards = setNewColor(cards, card.id, color);
@@ -53,7 +45,7 @@ const Card: FC<ICardProps> = function ({ card, index, modalChangeCard, doubleRow
         dispatch(UpdateCards({ email: user.email, cards: newCards }));
     };
 
-    const setNewColor = (cards: ICard[], id: number, color: 'green' | 'red' | 'orange') => {
+    const setNewColor: TSetNewColor = (cards, id, color) => {
         const newCards: ICard[] = JSON.parse(JSON.stringify(cards));
         newCards.map(card => {
             if (card.id === id) {
@@ -63,13 +55,11 @@ const Card: FC<ICardProps> = function ({ card, index, modalChangeCard, doubleRow
         return newCards;
     };
 
-
-
     return (
         <div onClick={openModalInMobile} className={cardClassName}>
             <h4 className={styles.word}>{card.word}</h4>
             <p className={styles.translate}>{card.translate}</p>
-            <div
+            <button
                 onClick={() => editWord(card, index, modalChangeCard, dispatch)}
                 className={
                     isMobile
@@ -78,7 +68,7 @@ const Card: FC<ICardProps> = function ({ card, index, modalChangeCard, doubleRow
                 }
             >
                 <IconEdit />
-            </div>
+            </button>
             <div
                 onClick={() => removeCard(card.id, cards, user.email, dispatch)}
                 className={isMobile
@@ -89,11 +79,16 @@ const Card: FC<ICardProps> = function ({ card, index, modalChangeCard, doubleRow
                 <IconRemove />
             </div>
             <div className={styles.cardInfo} onClick={e => e.stopPropagation()}>
-                <div
-                    className={cardColorMark}
-                    onMouseDown={nextColour}
-                >
-                </div>
+
+                {
+                    isColorsOnCards &&
+                    <button
+                        className={cardColorMark}
+                        onMouseDown={nextColour}
+                    >
+                    </button>
+                }
+
                 {
                     isNew(card.time) &&
                     <div className={styles.new}>

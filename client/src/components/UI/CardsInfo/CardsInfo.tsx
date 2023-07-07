@@ -6,20 +6,14 @@ import style from './CardsInfo.module.css';
 // redux
 import { useAppSelector } from '../../../hooks/redux';
 // types
-interface ICardsInfo {
-    isMovedBlock?: boolean;
-    doubleRowCards: boolean;
-    setDoubleRowCards: (state: boolean) => void;
-    wordsOrder: boolean;
-    setWordsOrder: (state: boolean) => void;
-}
+import { ICardsInfo } from './CardsInfoModel';
 const CardsInfo: FC<ICardsInfo> = memo(function (
     {
         isMovedBlock,
-        doubleRowCards,
-        setDoubleRowCards,
-        wordsOrder,
-        setWordsOrder
+        isTwoColumns,
+        setIsTwoColumns,
+        order,
+        setOrder
     }
 ) {
     const { cards } = useAppSelector(state => state.AuthSlice);
@@ -29,25 +23,26 @@ const CardsInfo: FC<ICardsInfo> = memo(function (
     const wordsOrderClass: string = isMovedBlock
         ? [style.inputOrder, style.textCenter].join(' ')
         : style.inputOrder;
+
     return (
         <>
             <div className={totalWordsClass}>Всего слов: {cards.length} </div>
             <div className={wordsOrderClass}>
                 Алфавитный порядок:
                 <Checkbox
-                    defaultChecked={wordsOrder}
+                    defaultChecked={order}
                     id={'cardsInfoID'}
                     dinamicClassName={isMovedBlock ? style.input : ''}
-                    callback={() => setWordsOrder(!wordsOrder)}
+                    callback={() => setOrder(!order)}
                 />
             </div>
             <div className={[wordsOrderClass, style.mb18].join(' ')}>
                 В две колонки:
                 <Checkbox
                     id={'oneOrTwoCardsColumnsID'}
-                    defaultChecked={doubleRowCards}
+                    defaultChecked={isTwoColumns}
                     dinamicClassName={isMovedBlock ? style.input : ''}
-                    callback={() => setDoubleRowCards(!doubleRowCards)}
+                    callback={() => setIsTwoColumns(!isTwoColumns)}
                 />
             </div>
         </>

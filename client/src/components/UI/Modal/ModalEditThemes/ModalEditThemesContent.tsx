@@ -20,9 +20,7 @@ import {
     setCards,
     setServerMessage
 } from '../../../../store/reducers/authorization/Authorization/AuthSlice';
-interface IModalEditThemesContent {
-    setIsModal: (state: boolean) => void;
-}
+import { IModalEditThemesContent } from '../ModalsModels';
 const ModalEditThemesContent: FC<IModalEditThemesContent> = memo(function ({ setIsModal }) {
     const [word, setWord] = useState<string>('');
     const [newTheme, setNewTheme] = useState<string>('');

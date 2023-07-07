@@ -3,11 +3,7 @@ import { FC, memo } from 'react';
 import Avatar from '../Avatar/Avatar';
 // styles
 import styles from './UserMenu.module.css';
-interface IUserTopMenu {
-    hideMenu: string;
-    isMenuOpen: boolean;
-    setIsMenuOpen: (state: boolean) => void;
-}
+import { IUserTopMenu } from './UserMenuModel';
 const UserTopMenu: FC<IUserTopMenu> = memo(function ({ hideMenu, isMenuOpen, setIsMenuOpen }) {
     const wrapperStyles = isMenuOpen
         ? [styles.wrapper, styles.wrapperActive, hideMenu].join(' ')

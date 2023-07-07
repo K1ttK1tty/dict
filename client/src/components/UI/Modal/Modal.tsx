@@ -8,22 +8,12 @@ import style from './ModalEditCard/Modal.module.css';
 import { useAppDispatch } from '../../../hooks/redux';
 // types
 import { } from '../../../hooks/redux';
-import { IInputValue } from '../../../store/reducers/authorization/Authorization/AuthTypes';
-import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
-interface IModal {
-    title: string;
-    content: React.ReactNode;
-    isModal: boolean;
-    setModal?: (state: boolean) => void;
-    setFields?: ActionCreatorWithPayload<(IInputValue)>;
-    dinamicClassName?: string;
-}
+import { IModal } from './ModalsModels';
 const Modal: FC<IModal> = memo(function ({ title, content, isModal, setModal, setFields, dinamicClassName }) {
     const dispatch = useAppDispatch();
     const visible = isModal
         ? [style.modal, style.active].join(' ')
         : style.modal;
-
     const isAvatarModal = 'Загрузка нового аватара';
     return (
         <div
@@ -32,7 +22,8 @@ const Modal: FC<IModal> = memo(function ({ title, content, isModal, setModal, se
             onKeyDown={e => keyClose(e, setModal, dispatch, setFields)}
             onMouseDown={() => removeModal(setModal, dispatch, setFields)}
         >
-            <div onMouseDown={e => (e.stopPropagation())} className={[style.modalContent,dinamicClassName].join(' ')}>
+
+            <div onMouseDown={e => (e.stopPropagation())} className={[style.modalContent, dinamicClassName].join(' ')}>
                 <div className={style.modalMarg}>
                     <div className={style.modalNav}>
                         <h5 className={style.modalTitle}>{title}</h5>

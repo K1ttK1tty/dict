@@ -7,10 +7,8 @@ import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { setInputValue } from '../../../../store/reducers/modalRenameCard';
 import { setIsModalAddCardActive } from '../../../../store/reducers/modalAddCard';
 // types
-interface IModalAddCards {
-    modalAdd?: React.MutableRefObject<HTMLInputElement | null>;
-}
-const ModalAddCards: FC<IModalAddCards> = memo(function ({ modalAdd }) {
+import { IFormAddCard } from '../ModalsModels';
+const ModalAddCards: FC<IFormAddCard> = memo(function ({ modalAdd }) {
     const dispatch = useAppDispatch();
     const { isModalAddCardActive } = useAppSelector(state => state.modalAddCard);
     const [isModal, setIsModal] = useState<boolean>(false);
@@ -19,10 +17,10 @@ const ModalAddCards: FC<IModalAddCards> = memo(function ({ modalAdd }) {
         return () => {
             dispatch(setInputValue({ id: 0, word: '', translate: '', theme: '', note: '' }));
         };
-    }, [isModalAddCardActive]);
+    }, [isModalAddCardActive, dispatch]);
     useEffect(() => {
         if (!isModal) dispatch(setIsModalAddCardActive(false));
-    }, [isModal]);
+    }, [isModal, dispatch]);
     return (
         <Modal
             title={'Создание карточки'}

@@ -8,38 +8,25 @@ import CardsInfo from '../CardsInfo/CardsInfo';
 import { modalAddCard } from '../../../functions/modalAddCard';
 // styles
 import styles from './CardsControl.module.css';
+import btnStyle from '../Modal/ModalAddCards/FormAddCard.module.css';
 // icon
 import PinIcon from './Icons/PinIcon';
 // redux
 import { useAppDispatch } from '../../../hooks/redux';
 // types
-interface ICardsControl {
-    btnStyle: CSSModuleClasses;
-    modalAdd: React.MutableRefObject<HTMLInputElement | null>;
-    isAttached: boolean;
-    setIsAttached: React.Dispatch<React.SetStateAction<boolean>>;
-    doubleRowCards: boolean;
-    setDoubleRowCards: (state: boolean) => void;
-    isOpenModal: boolean;
-    setIsModal: (state: boolean) => void;
-    wordsOrder: boolean;
-    setWordsOrder: (state: boolean) => void;
-}
+import { ICardsControl, TMouseMove } from './CardsControlModel';
 const CardsControl: FC<ICardsControl> = memo(function
-    (
-        {
-            btnStyle,
-            modalAdd,
-            isAttached,
-            setIsAttached,
-            doubleRowCards,
-            setDoubleRowCards,
-            isOpenModal,
-            setIsModal,
-            wordsOrder,
-            setWordsOrder
-        }
-    ) {
+    ({
+        modalAdd,
+        isAttached,
+        setIsAttached,
+        isTwoColumns,
+        setIsTwoColumns,
+        isOpenModal,
+        setIsModal,
+        wordsOrder,
+        setWordsOrder
+    }) {
     const dispatch = useAppDispatch();
     const windowBlock = useRef<HTMLDivElement | null>(null);
     const [isCanMove, setIsCanMove] = useState<boolean>(false);
@@ -53,7 +40,7 @@ const CardsControl: FC<ICardsControl> = memo(function
         document.onmousemove = null;
         document.body.className = '';
     };
-    const mouseMove = (element: MouseEvent, shiftY: number, shiftX: number) => {
+    const mouseMove: TMouseMove = (element, shiftY, shiftX) => {
         if (windowBlock.current) {
             const windowElement = windowBlock.current;
             windowElement.style.top = element.pageY - shiftY + 'px';
@@ -79,6 +66,7 @@ const CardsControl: FC<ICardsControl> = memo(function
             left: coordinatesObj.left + window.scrollX
         };
     };
+    
     if (isAttached) {
         return (
             <div style={attachedMenuStyles} className={[styles.cardsOptions, 'CardsControl'].join(' ')}>
@@ -115,10 +103,10 @@ const CardsControl: FC<ICardsControl> = memo(function
             </div>
             <CardsInfo
                 isMovedBlock={true}
-                doubleRowCards={doubleRowCards}
-                setDoubleRowCards={setDoubleRowCards}
-                wordsOrder={wordsOrder}
-                setWordsOrder={setWordsOrder}
+                isTwoColumns={isTwoColumns}
+                setIsTwoColumns={setIsTwoColumns}
+                order={wordsOrder}
+                setOrder={setWordsOrder}
             />
             <div className={styles.cardsOptionsMoved}>
                 <BtnAddCard

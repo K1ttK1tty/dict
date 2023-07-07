@@ -9,11 +9,7 @@ import styles from './UserMenu.module.css';
 // redux
 import { useAppDispatch } from '../../../hooks/redux';
 import { Logout } from '../../../store/reducers/authorization/Authorization/ActionCreator';
-interface IUserMenuProps {
-    isActivated: boolean;
-    setModal: (state: boolean) => void;
-    isDropDownMenuOpen: boolean;
-}
+import { IUserMenuProps } from './UserMenuModel';
 const UserMenu: FC<IUserMenuProps> = memo(function ({ isActivated, setModal, isDropDownMenuOpen }) {
     const dispatch = useAppDispatch();
     return (

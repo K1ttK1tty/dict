@@ -1,7 +1,5 @@
 import { FC, memo } from 'react';
-interface ISettingsIcon {
-    dinamicClassName?: string;
-}
+import { ISettingsIcon } from '../CardsControlModel';
 const SettingsIcon: FC<ISettingsIcon> = memo(function ({ dinamicClassName }) {
 
     return (

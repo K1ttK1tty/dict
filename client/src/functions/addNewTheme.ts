@@ -4,14 +4,9 @@ import { setSelectOptions } from '../store/reducers/authorization/Authorization/
 // functions
 import { isNotEmpty } from './isNotEmpty';
 // types
-import { AppDispatch } from '../store/store';
-type FunctType = (
-    selectOptions: string[],
-    newTheme: string,
-    email: string,
-    dispatch: AppDispatch,
-) => void;
-export const addNewTheme: FunctType = (selectOptions, newTheme, email, dispatch) => {
+import { TAddNewTheme } from './functoinModels';
+
+export const addNewTheme: TAddNewTheme = (selectOptions, newTheme, email, dispatch) => {
     if (!isNotEmpty(newTheme)) {
         return;
     }

@@ -4,16 +4,10 @@ import InputAddCard from '../InputAddCard/InputAddCard';
 // styles
 import styles from '../CardRand/CardRand.module.css';
 import '../../../styles/Games.css';
-
 //redux
 import { useAppSelector } from '../../../hooks/redux';
 // types
-import { ICard } from '../../../store/reducers/authorization/Authorization/AuthTypes';
-interface ICardRand {
-    card: ICard;
-    index: number;
-    testByWord: boolean;
-}
+import { ICardRand } from './CardRandModel';
 const CardRand: FC<ICardRand> = memo(function ({ card, index, testByWord }) {
     const { validateArr } = useAppSelector(state => state.GamesSlice);
     let validateWord = 'hidden';

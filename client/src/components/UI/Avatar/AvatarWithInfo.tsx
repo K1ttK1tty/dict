@@ -7,10 +7,8 @@ import { cutLongLine } from '../../../functions/cutLongLine';
 import styles from '../UserMenu/UserMenu.module.css';
 // redux
 import { useAppSelector } from '../../../hooks/redux';
-interface IAvatarWithInfoProps {
-    isMenuOpen?: boolean;
-    setFunction: (state: boolean) => void;
-}
+// model
+import { IAvatarWithInfoProps } from './AvatarModels';
 const AvatarWithInfo: FC<IAvatarWithInfoProps> = memo(function ({ isMenuOpen, setFunction }) {
     const { user } = useAppSelector(state => state.AuthSlice);
     const showName = isMenuOpen === false

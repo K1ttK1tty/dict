@@ -1,10 +1,6 @@
 import { FC, memo } from 'react';
 // types
-interface IDisplayFile {
-    styles: CSSModuleClasses;
-    files: FileList | [];
-    setFiles: (state: FileList | []) => void;
-}
+import { IDisplayFile } from '../ModalsModels';
 const DisplayFile: FC<IDisplayFile> = memo(function ({ files, setFiles, styles }) {
     return (
         <div className={styles.changeFileWrapper}>

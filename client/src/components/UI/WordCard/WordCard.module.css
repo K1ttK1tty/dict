@@ -63,6 +63,8 @@
     cursor: var(--pointer);
     transition: 0.2s;
     padding: 3px;
+    border: none;
+    background-color: transparent;
     transform: translate(8px);
 }
 .remove {
@@ -74,6 +76,8 @@
     cursor: var(--pointer);
     transition: 0.2s;
     padding: 3px;
+    border: none;
+    background-color: transparent;
     transform: translate(-8px);
 }
 .card:hover .edit {
@@ -101,6 +105,8 @@
     width: 18px;
     height: 100%;
     border-radius: 0px 12px 12px 0px;
+    border: none;
+    cursor: pointer;
 }
 .green {
     background-color: rgb(136, 214, 47);
@@ -111,7 +117,7 @@
 .orange {
     background-color: orange;
 }
-.cardInfo{
+.cardInfo {
     position: absolute;
     top: 0px;
     right: 0px;

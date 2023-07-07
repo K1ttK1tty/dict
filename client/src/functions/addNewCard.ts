@@ -8,16 +8,8 @@ import { setInputValue } from '../store/reducers/modalRenameCard';
 import { UpdateCards } from '../store/reducers/authorization/Authorization/ActionCreator';
 // types
 import { ICard } from '../store/reducers/authorization/Authorization/AuthTypes';
-import { AppDispatch } from '../store/store';
-type FunctType = (
-    e: React.MouseEvent<HTMLButtonElement>,
-    inputValue: ICard,
-    Cards: ICard[],
-    selectOptions: string[],
-    email: string,
-    dispatch: AppDispatch,
-) => void;
-export const addNewCard: FunctType = (e, inputValue, Cards, selectOptions, email, dispatch) => {
+import { TAddNewCard } from './functoinModels';
+export const addNewCard: TAddNewCard= (e, inputValue, Cards, selectOptions, email, dispatch) => {
     e.preventDefault();
     if (isNotEmpty(inputValue.word) && isNotEmpty(inputValue.translate)) {
         const cards: ICard[] = [...Cards, { ...inputValue, id: Cards.length + 1 }];

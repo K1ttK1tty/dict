@@ -16,11 +16,7 @@ import {
     setChooseTheme
 } from '../../../store/reducers/authorization/Authorization/AuthSlice';
 // types
-interface IMySelect {
-    isCanMove?: boolean;
-    isOpenModal: boolean;
-    setIsModal: (state: boolean) => void;
-}
+import { IMySelect } from './MySelectModel';
 const MySelect: FC<IMySelect> = memo(function ({ isCanMove, isOpenModal, setIsModal }) {
     const dispatch = useAppDispatch();
     const { optionName, optionState } = useAppSelector(state => state.AuthSlice);
@@ -59,7 +55,7 @@ const MySelect: FC<IMySelect> = memo(function ({ isCanMove, isOpenModal, setIsMo
     }, []);
     useEffect(() => {
         if (isOpenModal) dispatch(setOptionState({ ...optionState, open: false }));
-    }, [isOpenModal]);
+    }, [isOpenModal, dispatch, optionState]);
     return (
         <div
             className={styles.select}

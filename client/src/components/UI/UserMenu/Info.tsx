@@ -8,9 +8,7 @@ import styles from './UserMenu.module.css';
 // redux
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { activateMail } from '../../../store/reducers/authorization/Authorization/ActionCreator';
-interface IInfo {
-    isUserMenuOpen: boolean;
-}
+import { IInfo } from './UserMenuModel';
 const Info: FC<IInfo> = memo(function ({ isUserMenuOpen }) {
     const dispatch = useAppDispatch();
     const { id, email } = useAppSelector(state => state.AuthSlice.user);

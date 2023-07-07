@@ -3,29 +3,31 @@ import { useMemo } from 'react';
 import { isNotEmpty } from '../functions/isNotEmpty';
 // types
 import { ICard } from '../store/reducers/authorization/Authorization/AuthTypes';
-
-export const useSordetCard = (Cards: ICard[], toggleWordsOrder: boolean) => {
+import { TUseCards, TUseSearchByWord, TUseSelectedThemes, TUseSortedCards } from '../models/models';
+export const useSordetCard: TUseSortedCards = (Cards, toggleWordsOrder) => {
     const sordetCard = useMemo(() => {
         if (!toggleWordsOrder) return Cards;
         return Cards.sort((a, b) => a.word.localeCompare(b.word));
     }, [Cards, toggleWordsOrder]);
     return sordetCard;
 };
-export const useSelectedThemes = (Cards: ICard[], chooseTheme: string, toggleWordsOrder: boolean) => {
+export const useSelectedThemes: TUseSelectedThemes = (Cards, chooseTheme, toggleWordsOrder) => {
     const sordetCard = useSordetCard(Cards, toggleWordsOrder);
     const selectedThemes = useMemo(() => {
         if (!chooseTheme) return sordetCard;
         return sordetCard.filter((card: ICard) => card.theme == chooseTheme);
-    }, [chooseTheme, Cards]);
+    }, [chooseTheme, sordetCard]);
 
     return selectedThemes;
 };
-export const useCards = (Cards: ICard[],
-    searchWord: string,
-    chooseTheme: string,
-    toggleWordsOrder: boolean,
-    isSearchByWord: boolean,
-    isLetterCaseInclude: boolean
+
+export const useCards: TUseCards = (
+    Cards,
+    searchWord,
+    chooseTheme,
+    toggleWordsOrder,
+    isSearchByWord,
+    isLetterCaseInclude
 ) => {
     const iterableCards = Cards.length ? [...Cards] : [];
     const selectedThemes = useSelectedThemes(iterableCards, chooseTheme, toggleWordsOrder);
@@ -49,7 +51,7 @@ export const useCards = (Cards: ICard[],
     }, [selectedThemes, searchWord, isSearchByWord, isLetterCaseInclude]);
     return selectedAndSearchedWord;
 };
-export const useSearchByWord = (array: string[], word: string) => {
+export const useSearchByWord: TUseSearchByWord = (array, word) => {
     const result = useMemo(() => {
         if (isNotEmpty(word)) {
             const newArray = [...array].filter(element => element.toLowerCase().includes(word.toLowerCase()));

@@ -1,14 +1,8 @@
-import { FC, useRef, useEffect, ReactNode } from 'react';
+import { FC, useRef, useEffect } from 'react';
 // styles
 import styles from './DropDownMenu.module.css';
 import { keyClose } from '../../../functions/keyClose';
-interface IDropDownMenu {
-    isMenuOpen: boolean;
-    setIsMenuOpen: (state: boolean) => void;
-    content: ReactNode;
-    dinamicClassName?: string;
-    isAvatarMenuOpen?: boolean;
-}
+import { IDropDownMenu } from './DropDownMenuMode';
 const DropDownMenu: FC<IDropDownMenu> = function (
     {
         content,

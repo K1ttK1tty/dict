@@ -9,10 +9,7 @@ import SearchItem from './SearchItem';
 import styles from '../UserMenu/UserMenu.module.css';
 //redux
 import { useAppSelector } from '../../../hooks/redux';
-interface IMenuVoc {
-    setMenuOpen: (state: boolean) => void;
-    menuOpen: boolean;
-}
+import { IMenuVoc } from './MenuVocModel';
 const MenuVoc: FC<IMenuVoc> = memo(function ({ menuOpen, setMenuOpen }) {
     const { user } = useAppSelector(state => state.AuthSlice);
     const [modal, setModal] = useState<boolean>(false);

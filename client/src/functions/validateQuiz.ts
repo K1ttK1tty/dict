@@ -1,15 +1,8 @@
 // redux
 import { setValidateArr } from '../store/reducers/GamesSlice';
 // types
-import { AppDispatch } from '../store/store';
-import { ICard } from '../store/reducers/authorization/Authorization/AuthTypes';
-type FunctType = (
-    e: React.MouseEvent<HTMLButtonElement>,
-    array: ICard[],
-    testByWord: boolean,
-    dispatch: AppDispatch,
-) => void;
-export const validateQuiz: FunctType = (e, array, testByWord, dispatch) => {
+import { TValidateQuiz, TShared } from './functoinModels';
+export const validateQuiz: TValidateQuiz = (e, array, testByWord, dispatch) => {
     const state: string[] = [];
     e.preventDefault();
     const inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll('.inptReq');
@@ -27,7 +20,7 @@ export const validateQuiz: FunctType = (e, array, testByWord, dispatch) => {
         dispatch(setValidateArr(state));
     }
 };
-const shared = (state: string[], wordInCard: string, inputs: NodeListOf<HTMLInputElement>, index: number) => {
+const shared: TShared = (state, wordInCard, inputs, index) => {
     const input = inputs[index];
     const inputValue = input.value.toLowerCase().split(' ').join('');
     if (wordInCard === inputValue) {

@@ -1,11 +1,6 @@
 import { FC, memo } from 'react';
 import style from './Checkbox.module.css';
-interface ICheckbox {
-    id: string;
-    defaultChecked: boolean;
-    dinamicClassName?: string;
-    callback: React.ChangeEventHandler<HTMLInputElement>;
-}
+import { ICheckbox } from './CheckboxModel';
 const Checkbox: FC<ICheckbox> = memo(function ({ id, defaultChecked, dinamicClassName, callback }) {
     return (
         <>

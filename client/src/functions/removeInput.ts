@@ -4,17 +4,8 @@ import { setOptionState } from '../store/reducers/authorization/Authorization/Au
 // styles
 import cl from '../components/UI/BtnAddCard/BtnAddCard.module.css';
 // types
-import { AppDispatch } from '../store/store';
-import { IInput } from '../store/reducers/upMenu';
-import { IOptionState } from '../store/reducers/authorization/Authorization/AuthTypes';
-type FunctType = (
-    elem: React.MouseEvent<HTMLDivElement>,
-    input: IInput,
-    chooseTheme: string,
-    optionState: IOptionState,
-    dispatch: AppDispatch,
-) => void;
-export const removeInput: FunctType = (elem, input, chooseTheme, optionState, dispatch) => {
+import { TRemoveInput } from './functoinModels';
+export const removeInput: TRemoveInput = (elem, input, chooseTheme, optionState, dispatch) => {
     let a = false;
     const divElement = elem.target as HTMLDivElement;
     const parentElement = divElement.parentNode as HTMLElement;

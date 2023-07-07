@@ -1,8 +1,5 @@
 import { FC, memo } from 'react';
-interface IPicIcon {
-    styles: string;
-    setIsAttached: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { IPicIcon } from '../CardsControlModel';
 const PinIcon: FC<IPicIcon> = memo(function ({ styles, setIsAttached }) {
     return (
         <svg onClick={() => setIsAttached(prev => !prev)} className={styles}

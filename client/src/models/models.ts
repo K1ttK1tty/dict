@@ -1,4 +1,5 @@
-export interface IColorObject{
+import { ICard } from '../store/reducers/authorization/Authorization/AuthTypes';
+export interface IColorObject {
     light: {
         elements: HTMLElement[];
         colors: string[];
@@ -13,8 +14,22 @@ export interface IVocabulary {
     setDoubleRowCards: (state: boolean) => void;
     wordsOrder: boolean;
     setWordsOrder: (state: boolean) => void;
+    isColorsOnCards: boolean;
+    setIsColorsInCards: (state: boolean) => void;
 }
 export interface ISetOptions {
     replaceOption: (element: React.MouseEvent<HTMLDivElement>) => void;
     setIsModal: (state: boolean) => void;
 }
+export type TUseLocaleStorage = (name: string, state: boolean) => [boolean, (state: boolean) => void];
+export type TUseSortedCards = (Cards: ICard[], toggleWordsOrder: boolean) => ICard[];
+export type TUseSelectedThemes = (Cards: ICard[], chooseTheme: string, toggleWordsOrder: boolean) => ICard[];
+export type TUseCards = (
+    Cards: ICard[],
+    searchWord: string,
+    chooseTheme: string,
+    toggleWordsOrder: boolean,
+    isSearchByWord: boolean,
+    isLetterCaseInclude: boolean
+) => ICard[];
+export type TUseSearchByWord = (array: string[], word: string) => string[];

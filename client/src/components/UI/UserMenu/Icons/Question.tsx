@@ -1,8 +1,5 @@
 import { FC, memo } from 'react';
-interface IQuestion {
-    style: string;
-    setIsOpen: (state: (prevState: boolean) => boolean) => void;
-}
+import { IQuestion } from '../UserMenuModel';
 const Question: FC<IQuestion> = memo(function ({ style, setIsOpen }) {
     return (
         <svg

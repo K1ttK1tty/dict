@@ -3,14 +3,9 @@ import Card from './Card';
 // style
 import '../../../styles/Vocabulary.css';
 // types
-import { ICard } from '../../../store/reducers/authorization/Authorization/AuthTypes';
-interface ISetCards {
-    Cards: ICard[];
-    modalChangeCard: React.MutableRefObject<HTMLInputElement | null>;
-    doubleRowCards: boolean;
-}
-const SetCards: FC<ISetCards> = memo(function ({ Cards, modalChangeCard, doubleRowCards }) {
-    const cardsPosition = doubleRowCards ? 'CardsPosition' : '';
+import { ISetCards } from './WordCardModel';
+const SetCards: FC<ISetCards> = memo(function ({ Cards, modalChangeCard, isTwoColumns, isColorsOnCards }) {
+    const cardsPosition = isTwoColumns ? 'CardsPosition' : '';
     return (
         <div className={cardsPosition}>
             {Cards.map((card, index) =>
@@ -19,7 +14,8 @@ const SetCards: FC<ISetCards> = memo(function ({ Cards, modalChangeCard, doubleR
                     card={card}
                     key={Math.random() + card.word}
                     index={index}
-                    doubleRowCards={doubleRowCards}
+                    isTwoColumns={isTwoColumns}
+                    isColorsOnCards={isColorsOnCards}
                 />
             )}
         </div>

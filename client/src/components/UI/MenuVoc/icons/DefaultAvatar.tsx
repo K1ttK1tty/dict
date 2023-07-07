@@ -1,7 +1,5 @@
 import { FC } from 'react';
-interface IDefaultAvatar {
-    style: string;
-}
+import { IDefaultAvatar } from '../MenuVocModel';
 const DefaultAvatar: FC<IDefaultAvatar> = function ({ style }) {
     return (
         <svg className={style} width="30px" height="30px" viewBox="0 0 24 24" fill="none" >

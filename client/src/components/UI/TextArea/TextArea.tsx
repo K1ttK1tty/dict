@@ -1,12 +1,7 @@
 import { FC } from 'react';
 // style
 import style from './TextArea.module.css';
-interface ITextArea {
-    dinamicClassName?: string;
-    placeholder?: string;
-    inputValue?: string | number;
-    setValue?: (a: string) => void;
-}
+import { ITextArea } from './TextAreaModel';
 const TextArea: FC<ITextArea> = function ({ placeholder, inputValue, setValue }) {
     const typeSmth = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         if (setValue) {

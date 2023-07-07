@@ -1,6 +1,7 @@
 import { FC, useRef, useState, useEffect, useMemo, memo } from 'react';
 // hooks
 import { useCards } from '../hooks/useCards';
+import { useLocaleStorage } from '../hooks/useLocaleStorage';
 //components
 import SetCard from '../components/UI/WordCard/SetCard';
 import ModalEditCard from '../components/UI/Modal/ModalEditCard/ModalEditCard';
@@ -10,12 +11,13 @@ import CardsControl from '../components/UI/CardsControl/CardsControl';
 import CardsInfo from '../components/UI/CardsInfo/CardsInfo';
 import ScrollToTop from '../components/UI/ScrollToTop/ScrollToTop';
 import ModalEditThemes from '../components/UI/Modal/ModalEditThemes/ModalEditThemes';
+import Checkbox from '../components/UI/Checkbox/Checkbox';
 //functions 
 import { removeInput } from '../functions/removeInput';
 //styles
 import '../styles/theme.css';
 import '../styles/Vocabulary.css';
-import btnStyle from '../components/UI/Modal/ModalAddCards/FormAddCard.module.css';
+
 //color-picker
 import ColorPicker from '../components/UI/ColorPicker/ColorPicker';
 //redux
@@ -29,7 +31,7 @@ import {
 } from '../store/reducers/ColorPicker';
 // types
 import { IColorObject, IVocabulary } from '../models/models';
-const Vocabulary: FC<IVocabulary> = memo(function ({ doubleRowCards, setDoubleRowCards, wordsOrder, setWordsOrder }) {
+const Vocabulary: FC<IVocabulary> = memo(function ({ isColorsOnCards, setIsColorsInCards }) {
     const [isAttached, setIsAttached] = useState<boolean>(true);
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
     // authorization
@@ -50,15 +52,19 @@ const Vocabulary: FC<IVocabulary> = memo(function ({ doubleRowCards, setDoubleRo
     const colorRemoveMode = useAppSelector(state => state.ColorPicker.colorRemoveMode);
     const getCurrentColorMode = useAppSelector(state => state.ColorPicker.getCurrentColorMode);
     const currentColor = useAppSelector(state => state.ColorPicker.currentColor);
+
     const colorsBeforePaint = useAppSelector(state => state.ColorPicker.colorsBeforePaint);
+    const [order, setOrder] = useLocaleStorage('order', true);
+    const [isTwoColumns, setIsTwoColumns] = useLocaleStorage('oneOrTwoCardsColumns', false);
     const selectedAndSearchedWord = useCards(
         cards,
         searchWord,
         chooseTheme,
-        wordsOrder,
+        order,
         isSearchByWord,
         isLetterCaseInclude,
     );
+
     const [color, setColor] = useState<string>('#0dccce');
     const [allElementsArray, setAllElementsArray] = useState<HTMLElement[]>([]);
     const body = document.body;
@@ -240,7 +246,6 @@ const Vocabulary: FC<IVocabulary> = memo(function ({ doubleRowCards, setDoubleRo
 
     return (
         <div
-            // onScroll={() => console.log(document.body.scrollTop)}
             onMouseDown={e => removeInput(e, input, chooseTheme, optionState, dispatch)}
             className={'searchWrapper pageContent'}
         >
@@ -254,27 +259,38 @@ const Vocabulary: FC<IVocabulary> = memo(function ({ doubleRowCards, setDoubleRo
             <div className={isAttached ? 'CardsField' : 'CardsField paddingTop124'}>
                 <div className="wrap">
                     <CardsControl
-                        btnStyle={btnStyle}
                         modalAdd={modalAdd}
                         isAttached={isAttached}
                         setIsAttached={setIsAttached}
-                        doubleRowCards={doubleRowCards}
-                        setDoubleRowCards={setDoubleRowCards}
+                        isTwoColumns={isTwoColumns}
+                        setIsTwoColumns={setIsTwoColumns}
                         isOpenModal={isOpenModal}
                         setIsModal={setIsOpenModal}
-                        wordsOrder={wordsOrder}
-                        setWordsOrder={setWordsOrder}
+                        wordsOrder={order}
+                        setWordsOrder={setOrder}
                     />
                     {
                         isAttached &&
                         <CardsInfo
-                            doubleRowCards={doubleRowCards}
-                            setDoubleRowCards={setDoubleRowCards}
-                            wordsOrder={wordsOrder}
-                            setWordsOrder={setWordsOrder}
-                        />}
+                            order={order}
+                            setOrder={setOrder}
+                            isTwoColumns={isTwoColumns}
+                            setIsTwoColumns={setIsTwoColumns}
+                        />
+                    }
 
                     {
+                        <div >
+                            Цвета на карточках:
+                            <Checkbox
+                                id={'removeColorsOnCards'}
+                                defaultChecked={isColorsOnCards}
+                                dinamicClassName={''}
+                                callback={() => setIsColorsInCards(!isColorsOnCards)}
+                            />
+                        </div>
+
+
                         /* <ColorPicker color={color} setColor={setColor} />
                         <div
                             className="noCLick"
@@ -302,7 +318,7 @@ const Vocabulary: FC<IVocabulary> = memo(function ({ doubleRowCards, setDoubleRo
                         >
                         Выборочно отменить {colorRemoveMode ? 'on' : 'off'}
                         </div>
-    
+     
                         <div
                             className="noCLick"
                             onClick={getCurrentColor}
@@ -316,7 +332,7 @@ const Vocabulary: FC<IVocabulary> = memo(function ({ doubleRowCards, setDoubleRo
                         >
                          {currentColor ? 'Крашу в ' + currentColor : 'Копирую'}
                          </div>
-    
+     
                         <div
                             className="noCLick"
                             onClick={removeAllColors}
@@ -333,7 +349,8 @@ const Vocabulary: FC<IVocabulary> = memo(function ({ doubleRowCards, setDoubleRo
                             ? < SetCard
                                 Cards={selectedAndSearchedWord}
                                 modalChangeCard={modalChangeCard}
-                                doubleRowCards={doubleRowCards}
+                                isTwoColumns={isTwoColumns}
+                                isColorsOnCards={isColorsOnCards}
                             />
                             : <RemoveTheme />
                     }
