@@ -6,7 +6,7 @@ export const modalAddCard: TModalAddCard = (modalAdd, dispatch) => {
     setTimeout(() => {
         if (modalAdd.current) {
 
-            // modalAdd.current.focus();
+            modalAdd.current.focus();
             // console.log(modalAdd.current.getBoundingClientRect())
             // window.scrollTo()
 

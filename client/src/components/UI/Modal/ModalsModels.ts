@@ -33,8 +33,12 @@ export interface IModalAddAvatar {
     isModal: boolean;
     setModal: (state: boolean) => void;
 }
-export interface IFormAddCard {
+export interface ModalAddCards {
     modalAdd?: React.MutableRefObject<HTMLInputElement | null>;
+}
+export interface IFormAddCard extends ModalAddCards {
+    showRelatedCard: boolean;
+    setShowRelatedCard: (state: boolean) => void;
 }
 export interface IFormEditCard {
     modalChangeCard: React.MutableRefObject<HTMLInputElement | null>;

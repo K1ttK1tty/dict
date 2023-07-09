@@ -1,5 +1,5 @@
 // libs
-import { FC, useState, useMemo, lazy, Suspense, memo } from 'react';
+import { FC, useMemo, lazy, Suspense, memo } from 'react';
 import { Routes, Route } from 'react-router-dom';
 // hook
 import { useLocaleStorage } from '../hooks/useLocaleStorage.ts';
@@ -8,9 +8,6 @@ import Settings from '../pages/Settings.tsx';
 const AppRouter: FC = memo(function () {
     const Games = useMemo(() => lazy(() => import('../pages/Games.tsx')), []);
     const Vocabulary = useMemo(() => lazy(() => import('../pages/Vocabulary.tsx')), []);
-
-    const [doubleRowCards, setDoubleRowCards] = useState<boolean>(false);
-    const [wordsOrder, setWordsOrder] = useState<boolean>(true);
     const [isColorsInCards, setIsColorsInCards] = useLocaleStorage('isColorsOnCards', true);
 
     return (
@@ -20,10 +17,6 @@ const AppRouter: FC = memo(function () {
                 element={
                     <Suspense>
                         <Vocabulary
-                            doubleRowCards={doubleRowCards}
-                            setDoubleRowCards={setDoubleRowCards}
-                            wordsOrder={wordsOrder}
-                            setWordsOrder={setWordsOrder}
                             isColorsOnCards={isColorsInCards}
                             setIsColorsInCards={setIsColorsInCards}
                         />
@@ -43,10 +36,6 @@ const AppRouter: FC = memo(function () {
                 element={
                     <Suspense>
                         <Vocabulary
-                            doubleRowCards={doubleRowCards}
-                            setDoubleRowCards={setDoubleRowCards}
-                            wordsOrder={wordsOrder}
-                            setWordsOrder={setWordsOrder}
                             isColorsOnCards={isColorsInCards}
                             setIsColorsInCards={setIsColorsInCards}
                         />

@@ -6,6 +6,7 @@ import BtnAddCard from '../BtnAddCard/BtnAddCard';
 import CardsInfo from '../CardsInfo/CardsInfo';
 // functions
 import { modalAddCard } from '../../../functions/modalAddCard';
+import { mouseStay, move } from './CardsControlFunctions';
 // styles
 import styles from './CardsControl.module.css';
 import btnStyle from '../Modal/ModalAddCards/FormAddCard.module.css';
@@ -14,7 +15,7 @@ import PinIcon from './Icons/PinIcon';
 // redux
 import { useAppDispatch } from '../../../hooks/redux';
 // types
-import { ICardsControl, TMouseMove } from './CardsControlModel';
+import { ICardsControl } from './CardsControlModel';
 const CardsControl: FC<ICardsControl> = memo(function
     ({
         modalAdd,
@@ -36,37 +37,8 @@ const CardsControl: FC<ICardsControl> = memo(function
     const attachedMenuStyles = isMobile
         ? {}
         : { top: '80px', left: '0px' };
-    const mouseStay = () => {
-        document.onmousemove = null;
-        document.body.className = '';
-    };
-    const mouseMove: TMouseMove = (element, shiftY, shiftX) => {
-        if (windowBlock.current) {
-            const windowElement = windowBlock.current;
-            windowElement.style.top = element.pageY - shiftY + 'px';
-            windowElement.style.left = element.pageX - shiftX + 'px';
-        }
-    };
-    const move = (element: React.MouseEvent) => {
-        if (!isCanMove || !windowBlock.current) {
-            return;
-        }
-        const coordinates = getCoordinates(windowBlock.current);
-        const shiftY: number = element.pageY - coordinates.top;
-        const shiftX: number = element.pageX - coordinates.left;
-        document.onmousemove = (elem) => {
-            mouseMove(elem, shiftY, shiftX);
-        };
-        document.body.className = styles.noselect;
-    };
-    const getCoordinates = (element: HTMLDivElement) => {
-        const coordinatesObj = element.getBoundingClientRect();
-        return {
-            top: coordinatesObj.top + window.scrollY,
-            left: coordinatesObj.left + window.scrollX
-        };
-    };
-    
+
+
     if (isAttached) {
         return (
             <div style={attachedMenuStyles} className={[styles.cardsOptions, 'CardsControl'].join(' ')}>
@@ -90,7 +62,7 @@ const CardsControl: FC<ICardsControl> = memo(function
     return (
         <div
             ref={windowBlock}
-            onMouseDown={element => move(element)}
+            onMouseDown={element => move(element, windowBlock, isCanMove)}
             onMouseUp={mouseStay}
             className={grabCursor}
         >

@@ -10,10 +10,6 @@ export interface IColorObject {
     };
 }
 export interface IVocabulary {
-    doubleRowCards: boolean;
-    setDoubleRowCards: (state: boolean) => void;
-    wordsOrder: boolean;
-    setWordsOrder: (state: boolean) => void;
     isColorsOnCards: boolean;
     setIsColorsInCards: (state: boolean) => void;
 }

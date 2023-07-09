@@ -8,16 +8,18 @@ const SetCards: FC<ISetCards> = memo(function ({ Cards, modalChangeCard, isTwoCo
     const cardsPosition = isTwoColumns ? 'CardsPosition' : '';
     return (
         <div className={cardsPosition}>
-            {Cards.map((card, index) =>
-                < Card
-                    modalChangeCard={modalChangeCard}
-                    card={card}
-                    key={Math.random() + card.word}
-                    index={index}
-                    isTwoColumns={isTwoColumns}
-                    isColorsOnCards={isColorsOnCards}
-                />
-            )}
+            {
+                Cards.map((card, index) =>
+                    < Card
+                        modalChangeCard={modalChangeCard}
+                        card={card}
+                        key={Math.random() + card.word}
+                        index={index}
+                        isTwoColumns={isTwoColumns}
+                        isColorsOnCards={isColorsOnCards}
+                    />
+                )
+            }
         </div>
     );
 });

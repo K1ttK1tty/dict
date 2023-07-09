@@ -6,6 +6,41 @@
     border-radius: 0px;
     margin-bottom: 28px;
     outline: none;
+    transition: 0.2s;
+}
+.mb36{
+    margin-bottom: 36px;
+}
+.isOverlap {
+    font-size: 17px;
+    position: absolute;
+    bottom: -100%;
+    left: 0px;
+    color: red;
+    transition: 0.15s;
+    margin-bottom: 10px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    text-align: left;
+}
+.isOverlap:focus{
+    text-decoration: underline;
+}
+.isOverlap:hover {
+    color: rgb(199, 0, 0);
+}
+@media (max-width:490px){
+    .mb36{
+        margin-bottom: 40px;
+    }
+    .isOverlap {
+        font-size: 16px;
+        bottom: -112%;
+    }
+}
+.relative{
+    position: relative;
 }
 .btnFormAddCard {
     width: 100%;

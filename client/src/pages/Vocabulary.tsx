@@ -34,26 +34,27 @@ import { IColorObject, IVocabulary } from '../models/models';
 const Vocabulary: FC<IVocabulary> = memo(function ({ isColorsOnCards, setIsColorsInCards }) {
     const [isAttached, setIsAttached] = useState<boolean>(true);
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
-    // authorization
-    const { cards } = useAppSelector(state => state.AuthSlice);
-    //redux  
-    const { searchWord,
+    const [color, setColor] = useState<string>('#0dccce');
+    const [allElementsArray, setAllElementsArray] = useState<HTMLElement[]>([]);
+
+    const modalAdd = useRef<HTMLInputElement | null>(null);
+    const modalChangeCard = useRef<HTMLInputElement | null>(null);
+
+    const dispatch = useAppDispatch();
+    const { chooseTheme, optionState, cards } = useAppSelector(state => state.AuthSlice);
+    const {
+        searchWord,
         input,
         isSearchByWord,
         isLetterCaseInclude
     } = useAppSelector(state => state.upMenu);
-    const { chooseTheme, optionState } = useAppSelector(state => state.AuthSlice);
-    const dispatch = useAppDispatch();
-    const modalAdd = useRef<HTMLInputElement | null>(null);
-    const modalChangeCard = useRef<HTMLInputElement | null>(null);
-    //color-pixelwindow
-    const pageTheme = localStorage.getItem('theme');
     const colorModeOn = useAppSelector(state => state.ColorPicker.colorModeOn);
     const colorRemoveMode = useAppSelector(state => state.ColorPicker.colorRemoveMode);
     const getCurrentColorMode = useAppSelector(state => state.ColorPicker.getCurrentColorMode);
     const currentColor = useAppSelector(state => state.ColorPicker.currentColor);
-
     const colorsBeforePaint = useAppSelector(state => state.ColorPicker.colorsBeforePaint);
+
+    const pageTheme = localStorage.getItem('theme');
     const [order, setOrder] = useLocaleStorage('order', true);
     const [isTwoColumns, setIsTwoColumns] = useLocaleStorage('oneOrTwoCardsColumns', false);
     const selectedAndSearchedWord = useCards(
@@ -64,9 +65,6 @@ const Vocabulary: FC<IVocabulary> = memo(function ({ isColorsOnCards, setIsColor
         isSearchByWord,
         isLetterCaseInclude,
     );
-
-    const [color, setColor] = useState<string>('#0dccce');
-    const [allElementsArray, setAllElementsArray] = useState<HTMLElement[]>([]);
     const body = document.body;
     let arrOfCurrentElements: HTMLElement[] = useMemo(() => {
         return [];

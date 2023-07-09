@@ -55,7 +55,7 @@ const MySelect: FC<IMySelect> = memo(function ({ isCanMove, isOpenModal, setIsMo
     }, []);
     useEffect(() => {
         if (isOpenModal) dispatch(setOptionState({ ...optionState, open: false }));
-    }, [isOpenModal, dispatch, optionState]);
+    }, [isOpenModal]);
     return (
         <div
             className={styles.select}
