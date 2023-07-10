@@ -12,7 +12,7 @@ const RemoveTheme: FC = function () {
     const dispatch = useAppDispatch();
     const {
         selectOptions,
-        chooseTheme,
+        selectedTheme,
         optionState,
         user,
         cards
@@ -30,7 +30,9 @@ const RemoveTheme: FC = function () {
                     />
                     <BtnAddCard
                         noClick={'noClick'}
-                        onClick={() => removeSelectTheme(selectOptions, optionState, chooseTheme, user.email, dispatch)}
+                        onClick={
+                            () => removeSelectTheme(selectOptions, optionState, selectedTheme, user.email, dispatch)
+                        }
                         children="Удалить эту тему"
                     />
                 </div>

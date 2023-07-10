@@ -20,6 +20,7 @@ const ModalAddCards: FC<ModalAddCards> = memo(function ({ modalAdd }) {
         };
     }, [isModalAddCardActive, dispatch]);
     useEffect(() => {
+        setShowRelatedCard(false);
         if (!isModal) dispatch(setIsModalAddCardActive(false));
     }, [isModal, dispatch]);
 

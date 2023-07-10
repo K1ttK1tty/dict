@@ -2,8 +2,7 @@
 import { UpdateThemes } from '../store/reducers/authorization/Authorization/ActionCreator';
 import {
     setSelectOptions,
-    setChooseTheme,
-    setOptionName,
+    setSelectedTheme,
     setOptionState
 } from '../store/reducers/authorization/Authorization/AuthSlice';
 // types
@@ -18,7 +17,6 @@ export const deleteAllEmptyThemes: TDeleteAllEmptyThemes = (cards, allThemes, op
     }
     dispatch(setSelectOptions(themes));
     dispatch(UpdateThemes({ email, themes }));
-    dispatch(setChooseTheme(''));
-    dispatch(setOptionName('Тема'));
+    dispatch(setSelectedTheme(''));
     dispatch(setOptionState({ ...optionState, removeMark: false }));
 };

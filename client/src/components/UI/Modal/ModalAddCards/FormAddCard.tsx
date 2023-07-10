@@ -21,13 +21,13 @@ const FormAddCard: FC<IFormAddCard> = memo(function ({ modalAdd, showRelatedCard
     const [timeId, setTimeId] = useState<ReturnType<typeof setTimeout>>();
 
     const dispatch = useAppDispatch();
-    const { cards, user, selectOptions, optionName } = useAppSelector(state => state.AuthSlice);
+    const { cards, user, selectOptions, selectedTheme } = useAppSelector(state => state.AuthSlice);
     const { isModalAddCardActive } = useAppSelector(state => state.modalAddCard);
     const { inputValue } = useAppSelector(state => state.modalRenameCard);
 
     useEffect(() => {
-        if (optionName !== 'Тема' && isModalAddCardActive) {
-            setDefaultTheme(optionName);
+        if (isNotEmpty(selectedTheme) && isModalAddCardActive) {
+            setDefaultTheme(selectedTheme);
         } else {
             setDefaultTheme('');
             setIsOverlap(false);
@@ -37,7 +37,7 @@ const FormAddCard: FC<IFormAddCard> = memo(function ({ modalAdd, showRelatedCard
             setIsOverlap(false);
             setCardWithOverlap(null);
         };
-    }, [optionName, isModalAddCardActive]);
+    }, [selectedTheme, isModalAddCardActive]);
 
     const addCard = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation();

@@ -8,13 +8,13 @@ export const validateQuiz: TValidateQuiz = (e, array, testByWord, dispatch) => {
     const inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll('.inptReq');
     if (testByWord) {
         for (let index = 0; index < inputs.length; index++) {
-            const wordInCard = array[index].word.toLowerCase().split(' ').join('');
+            const wordInCard = array[index].translate.toLowerCase().split(' ').join('');
             shared(state, wordInCard, inputs, index);
         }
         dispatch(setValidateArr(state));
     } else {
         for (let index = 0; index < inputs.length; index++) {
-            const wordInCard = array[index].translate.toLowerCase().split(' ').join('');
+            const wordInCard = array[index].word.toLowerCase().split(' ').join('');
             shared(state, wordInCard, inputs, index);
         }
         dispatch(setValidateArr(state));

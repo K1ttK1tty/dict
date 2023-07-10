@@ -21,10 +21,9 @@ export interface IInitialState {
     updateError: string;
     cards: ICard[] | [];
     changeCard: ICard;
-    optionName: string;
     optionState: IOptionState;
     selectOptions: string[];
-    chooseTheme: string;
+    selectedTheme: string;
     serverMessage: string;
 }
 // state
@@ -52,17 +51,14 @@ export const AuthSlice = createSlice({
             state.changeCard = action.payload;
         },
         // select
-        setOptionName(state, action: PayloadAction<string>) {
-            state.optionName = action.payload;
-        },
         setOptionState(state, action: PayloadAction<IOptionState>) {
             state.optionState = action.payload;
         },
         setSelectOptions(state, action: PayloadAction<string[]>) {
             state.selectOptions = action.payload;
         },
-        setChooseTheme(state, action: PayloadAction<string>) {
-            state.chooseTheme = action.payload;
+        setSelectedTheme(state, action: PayloadAction<string>) {
+            state.selectedTheme = action.payload;
         },
         // avatar
         setAvatar(state, action: PayloadAction<string>) {
@@ -202,10 +198,9 @@ export const {
     setCards,
     setID,
     setChangeCard,
-    setOptionName,
     setOptionState,
     setSelectOptions,
-    setChooseTheme,
+    setSelectedTheme,
     setAvatar,
     setServerMessage,
 } = AuthSlice.actions;

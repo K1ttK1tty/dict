@@ -6,36 +6,25 @@ import SetOptions from '../../SetOptions';
 import IconSelect from './icons/IconSelect';
 // functions
 import { cutLongLine } from '../../../functions/cutLongLine';
+import { isNotEmpty } from '../../../functions/isNotEmpty';
 // styles
 import styles from './MySelect.module.css';
 // redux
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import {
-    setOptionName,
     setOptionState,
-    setChooseTheme
+    setSelectedTheme
 } from '../../../store/reducers/authorization/Authorization/AuthSlice';
 // types
 import { IMySelect } from './MySelectModel';
 const MySelect: FC<IMySelect> = memo(function ({ isCanMove, isOpenModal, setIsModal }) {
     const dispatch = useAppDispatch();
-    const { optionName, optionState } = useAppSelector(state => state.AuthSlice);
+    const { optionState, selectedTheme } = useAppSelector(state => state.AuthSlice);
     const selectElement = useRef<HTMLDivElement | null>(null);
     const isCanMoveFunction = isCanMove
         ? undefined :
         () => dispatch(setOptionState({ ...optionState, open: !optionState.open }));
 
-    function replaceOption(element: React.MouseEvent<HTMLDivElement>) {
-        const divElement = element.target as HTMLDivElement;
-        dispatch(setOptionName(divElement.innerText));
-        dispatch(setChooseTheme(divElement.innerText));
-        dispatch(setOptionState({ open: false, removeMark: true }));
-    }
-    function removeTheme() {
-        dispatch(setOptionName('Тема'));
-        dispatch(setChooseTheme(''));
-        dispatch(setOptionState({ open: false, removeMark: false }));
-    }
     if (optionState.open) {
         setTimeout(() => {
             if (selectElement.current) {
@@ -43,8 +32,17 @@ const MySelect: FC<IMySelect> = memo(function ({ isCanMove, isOpenModal, setIsMo
             }
         }, 200);
     }
+    function replaceOption(element: React.MouseEvent<HTMLDivElement>) {
+        const divElement = element.target as HTMLDivElement;
+        dispatch(setSelectedTheme(divElement.innerText));
+        dispatch(setOptionState({ open: false, removeMark: true }));
+    }
+    function removeTheme() {
+        dispatch(setSelectedTheme(''));
+        dispatch(setOptionState({ open: false, removeMark: false }));
+    }
     useEffect(() => {
-        if (optionName !== 'Тема') {
+        if (isNotEmpty(selectedTheme)) {
             dispatch(setOptionState({ ...optionState, removeMark: true }));
         } else {
             dispatch(setOptionState({ ...optionState, removeMark: false }));
@@ -71,7 +69,7 @@ const MySelect: FC<IMySelect> = memo(function ({ isCanMove, isOpenModal, setIsMo
                     onMouseDown={isCanMoveFunction}
                     className={[styles.selectValue, 'ifNotThisThenClose'].join(' ')}
                 >
-                    {cutLongLine(optionName, 11)}
+                    {selectedTheme ? cutLongLine(selectedTheme, 11) : 'Тема'}
                 </div>
                 <div className={styles.selectIcon}><IconSelect /></div>
             </div>

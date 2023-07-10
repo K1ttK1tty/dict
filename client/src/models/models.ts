@@ -19,11 +19,11 @@ export interface ISetOptions {
 }
 export type TUseLocaleStorage = (name: string, state: boolean) => [boolean, (state: boolean) => void];
 export type TUseSortedCards = (Cards: ICard[], toggleWordsOrder: boolean) => ICard[];
-export type TUseSelectedThemes = (Cards: ICard[], chooseTheme: string, toggleWordsOrder: boolean) => ICard[];
+export type TUseSelectedThemes = (Cards: ICard[], selectedTheme: string, toggleWordsOrder: boolean) => ICard[];
 export type TUseCards = (
     Cards: ICard[],
     searchWord: string,
-    chooseTheme: string,
+    selectedTheme: string,
     toggleWordsOrder: boolean,
     isSearchByWord: boolean,
     isLetterCaseInclude: boolean

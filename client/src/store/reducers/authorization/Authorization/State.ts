@@ -23,10 +23,9 @@ export const initialState: IInitialState = {
         color: 'red'
     },
     // select
-    optionName: 'Тема',
     optionState: { open: false, removeMark: false },
     selectOptions: [],
-    chooseTheme: '',
+    selectedTheme: '',
     // servers response
     serverMessage: '',
 };

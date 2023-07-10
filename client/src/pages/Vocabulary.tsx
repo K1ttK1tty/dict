@@ -41,7 +41,7 @@ const Vocabulary: FC<IVocabulary> = memo(function ({ isColorsOnCards, setIsColor
     const modalChangeCard = useRef<HTMLInputElement | null>(null);
 
     const dispatch = useAppDispatch();
-    const { chooseTheme, optionState, cards } = useAppSelector(state => state.AuthSlice);
+    const { selectedTheme, optionState, cards } = useAppSelector(state => state.AuthSlice);
     const {
         searchWord,
         input,
@@ -60,7 +60,7 @@ const Vocabulary: FC<IVocabulary> = memo(function ({ isColorsOnCards, setIsColor
     const selectedAndSearchedWord = useCards(
         cards,
         searchWord,
-        chooseTheme,
+        selectedTheme,
         order,
         isSearchByWord,
         isLetterCaseInclude,
@@ -244,7 +244,7 @@ const Vocabulary: FC<IVocabulary> = memo(function ({ isColorsOnCards, setIsColor
 
     return (
         <div
-            onMouseDown={e => removeInput(e, input, chooseTheme, optionState, dispatch)}
+            onMouseDown={e => removeInput(e, input, selectedTheme, optionState, dispatch)}
             className={'searchWrapper pageContent'}
         >
             <ScrollToTop />

@@ -65,7 +65,7 @@ export type TRemoveCard = (
 export type TRemoveInput = (
     elem: React.MouseEvent<HTMLDivElement>,
     input: IInput,
-    chooseTheme: string,
+    selectedTheme: string,
     optionState: IOptionState,
     dispatch: AppDispatch,
 ) => void;
@@ -78,7 +78,7 @@ export type TCutLongLine = (line: string, symbolCount: number) => string;
 export type TRemoveSelectTheme = (
     selectOptions: string[],
     optionState: IOptionState,
-    chooseTheme: string,
+    selectedTheme: string,
     email: string,
     dispatch: AppDispatch,
 ) => void;

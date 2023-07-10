@@ -11,18 +11,23 @@ import { ICardRand } from './CardRandModel';
 const CardRand: FC<ICardRand> = memo(function ({ card, index, testByWord }) {
     const { validateArr } = useAppSelector(state => state.GamesSlice);
     let validateWord = 'hidden';
-    if (validateArr[index]) validateWord = validateArr[index] + 'Color';
+    let isDisabled = false;
+    if (validateArr[index]) {
+        validateWord = validateArr[index] + 'Color';
+        isDisabled = true;
+    }
 
-    if (testByWord) {
+    if (!testByWord) {
         return (
             <div className={styles.wrapper}>
                 <div className="wordBlock">
-                    <div className="word">Слово: </div>
+                    <div className="word">Перевод: </div>
                     <div className={styles.translateRand}>{card.translate}</div>
                 </div>
                 <div className="translateBlock">
                     <InputAddCard
                         dinamicclassname={[styles.input, validateArr[index], 'inptReq '].join(' ')}
+                        disabled={isDisabled}
                     />
                     <div className={['wordShared', validateWord].join(' ')}>{card.word}</div>
                 </div>
@@ -32,12 +37,13 @@ const CardRand: FC<ICardRand> = memo(function ({ card, index, testByWord }) {
     return (
         <div className={styles.wrapper}>
             <div className="wordBlock">
-                <div className="word">Перевод: </div>
+                <div className="word">Слово: </div>
                 <div className={styles.translateRand}>{card.word}</div>
             </div>
             <div className="translateBlock">
                 <InputAddCard
                     dinamicclassname={[styles.input, validateArr[index], 'inptReq '].join(' ')}
+                    disabled={isDisabled}
                 />
                 <div className={['wordShared', validateWord].join(' ')}>{card.translate}</div>
             </div>

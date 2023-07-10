@@ -11,12 +11,12 @@ export const useSordetCard: TUseSortedCards = (Cards, toggleWordsOrder) => {
     }, [Cards, toggleWordsOrder]);
     return sordetCard;
 };
-export const useSelectedThemes: TUseSelectedThemes = (Cards, chooseTheme, toggleWordsOrder) => {
+export const useSelectedThemes: TUseSelectedThemes = (Cards, selectedTheme, toggleWordsOrder) => {
     const sordetCard = useSordetCard(Cards, toggleWordsOrder);
     const selectedThemes = useMemo(() => {
-        if (!chooseTheme) return sordetCard;
-        return sordetCard.filter((card: ICard) => card.theme == chooseTheme);
-    }, [chooseTheme, sordetCard]);
+        if (!selectedTheme) return sordetCard;
+        return sordetCard.filter((card: ICard) => card.theme == selectedTheme);
+    }, [selectedTheme, sordetCard]);
 
     return selectedThemes;
 };
@@ -24,13 +24,13 @@ export const useSelectedThemes: TUseSelectedThemes = (Cards, chooseTheme, toggle
 export const useCards: TUseCards = (
     Cards,
     searchWord,
-    chooseTheme,
+    selectedTheme,
     toggleWordsOrder,
     isSearchByWord,
     isLetterCaseInclude
 ) => {
     const iterableCards = Cards.length ? [...Cards] : [];
-    const selectedThemes = useSelectedThemes(iterableCards, chooseTheme, toggleWordsOrder);
+    const selectedThemes = useSelectedThemes(iterableCards, selectedTheme, toggleWordsOrder);
     const selectedAndSearchedWord = useMemo(() => {
         if (isSearchByWord) {
             if (isLetterCaseInclude) {
