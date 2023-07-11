@@ -2,37 +2,38 @@ import { FC, useState, useEffect, useRef, memo } from 'react';
 // components
 import DropDownMenu from '../DropDownMenu/DropDownMenu';
 import SearchParamsMenu from './SearchParamsMenu';
+// functions
+import { debounce } from '../../../functions/debounce';
 // styles
 import style from './InputSearch.module.css';
 //redux
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setSearchWord, setInput } from '../../../store/reducers/upMenu';
 const InputSearch: FC = memo(function () {
+    const [isDropDownMenuOpen, setIsDropDownMenuOpen] = useState<boolean>(false);
+    const [timeoutId, setTimeoutId] = useState<ReturnType<typeof setTimeout>>(0);
+    const inputElement = useRef<HTMLInputElement | null>(null);
     const dispatch = useAppDispatch();
     const { input } = useAppSelector(state => state.upMenu);
-    const inputElement = useRef<HTMLInputElement | null>(null);
-    const [isDropDownMenuOpen, setIsDropDownMenuOpen] = useState<boolean>(false);
     let isHidden = style.blockHidden;
-    if (input.isOpen) {
-        isHidden = '';
-        setTimeout(() => {
-            if (inputElement.current) {
-                inputElement.current.focus();
-            }
-        }, 300);
-    } else if (inputElement.current) {
-        if (inputElement.current) {
-            inputElement.current.value = '';
-        }
-        setTimeout(() => {
-            dispatch(setSearchWord(''));
-        }, 300);
-    }
+    if (input.isOpen) isHidden = '';
     useEffect(() => {
-        if (!input.isOpen) {
-            setIsDropDownMenuOpen(false);
+        if (input.isOpen) {
+            setTimeout(() => {
+                if (inputElement.current) {
+                    inputElement.current.focus();
+                }
+            }, 200);
         }
-    }, [input.isOpen]);
+
+        if (!input.isOpen) {
+            if (inputElement.current) {
+                inputElement.current.value = '';
+            }
+            setIsDropDownMenuOpen(false);
+            dispatch(setSearchWord(''));
+        }
+    }, [input.isOpen, dispatch]);
 
     const inputClass = [style.searchBlock, isHidden].join(' ');
     const handleKey = (key: React.KeyboardEvent) => {
@@ -44,13 +45,8 @@ const InputSearch: FC = memo(function () {
             dispatch(setInput({ isOpen: false, after: input.after }));
         }
     };
-
-    let typingTimeOut: ReturnType<typeof setTimeout>;
     const searching = (value: string) => {
-        clearTimeout(typingTimeOut);
-        typingTimeOut = setTimeout(() => {
-            dispatch(setSearchWord(value));
-        }, 400);
+        debounce(timeoutId, setTimeoutId, () => dispatch(setSearchWord(value)), 400);
     };
     return (
         <div className={inputClass} onMouseDown={e => e.stopPropagation()}>

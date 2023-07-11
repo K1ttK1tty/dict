@@ -15,12 +15,15 @@ const DropDownMenu: FC<IDropDownMenu> = function (
     let isOpenMenu = [styles.content, styles.hidden].join(' ');
     if (isMenuOpen && !isAvatarMenuOpen) {
         isOpenMenu = styles.content;
+    }
+    useEffect(() => {
         setTimeout(() => {
             if (menuElement.current) {
                 menuElement.current.focus();
             }
         }, 150);
-    }
+
+    }, [isMenuOpen]);
     useEffect(() => {
         document.body.onmousedown = () => {
             setIsMenuOpen(false);

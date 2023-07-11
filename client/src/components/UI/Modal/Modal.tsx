@@ -7,7 +7,6 @@ import style from './ModalEditCard/Modal.module.css';
 // redux
 import { useAppDispatch } from '../../../hooks/redux';
 // types
-import { } from '../../../hooks/redux';
 import { IModal } from './ModalsModels';
 const Modal: FC<IModal> = memo(function ({ title, content, isModal, setModal, setFields, dinamicClassName }) {
     const dispatch = useAppDispatch();

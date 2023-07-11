@@ -1,27 +1,28 @@
-import { FC, useEffect, useRef, memo } from 'react';
-// styles
+import { FC, useState, useEffect, useRef, memo } from 'react';
+import { debounce } from '../../../functions/debounce';
 import style from './ScrollToTop.module.css';
 const ScrollToTop: FC = memo(function () {
+    const [timeoutId, setTimeoutId] = useState<ReturnType<typeof setTimeout>>(0);
     const arrow = useRef<HTMLButtonElement | null>(null);
     let showArrow = false;
-    let scrollTimeOut: ReturnType<typeof setTimeout>;
-
+    
     const addActiveClassName = () => {
-        clearTimeout(scrollTimeOut);
-        scrollTimeOut = setTimeout(() => {
-            showArrow = document.body.scrollTop > window.innerHeight * 0.6;
-            const styles = showArrow
-                ? [style.arrowWrapper, style.arrowActive].join(' ')
-                : style.arrowWrapper;
-            if (arrow.current) {
-                arrow.current.className = styles;
-            }
-        }, 200);
+        showArrow = document.body.scrollTop > window.innerHeight * 0.6;
+        const styles = showArrow
+        ? [style.arrowWrapper, style.arrowActive].join(' ')
+        : style.arrowWrapper;
+        if (arrow.current) {
+            arrow.current.className = styles;
+        }
     };
+    const callback = () => {
+        debounce(timeoutId, setTimeoutId, addActiveClassName, 400);
+    };
+    
     useEffect(() => {
-        document.body.addEventListener('scroll', addActiveClassName);
+        document.body.addEventListener('scroll', callback);
         return () => {
-            document.body.removeEventListener('scroll', addActiveClassName);
+            document.body.removeEventListener('scroll', callback);
         };
     });
     return (

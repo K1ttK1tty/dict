@@ -4,14 +4,14 @@ import { isNotEmpty } from '../functions/isNotEmpty';
 // types
 import { ICard } from '../store/reducers/authorization/Authorization/AuthTypes';
 import { TUseCards, TUseSearchByWord, TUseSelectedThemes, TUseSortedCards } from '../models/models';
-export const useSordetCard: TUseSortedCards = (Cards, toggleWordsOrder) => {
+const useSordetCard: TUseSortedCards = (Cards, toggleWordsOrder) => {
     const sordetCard = useMemo(() => {
         if (!toggleWordsOrder) return Cards;
         return Cards.sort((a, b) => a.word.localeCompare(b.word));
     }, [Cards, toggleWordsOrder]);
     return sordetCard;
 };
-export const useSelectedThemes: TUseSelectedThemes = (Cards, selectedTheme, toggleWordsOrder) => {
+const useSelectedThemes: TUseSelectedThemes = (Cards, selectedTheme, toggleWordsOrder) => {
     const sordetCard = useSordetCard(Cards, toggleWordsOrder);
     const selectedThemes = useMemo(() => {
         if (!selectedTheme) return sordetCard;
@@ -20,7 +20,6 @@ export const useSelectedThemes: TUseSelectedThemes = (Cards, selectedTheme, togg
 
     return selectedThemes;
 };
-
 export const useCards: TUseCards = (
     Cards,
     searchWord,

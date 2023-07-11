@@ -8,7 +8,7 @@ import IconEdit from './icons/IconEdit';
 import { removeCard } from '../../../functions/removeCard';
 import { editWord } from '../../../functions/editWord';
 // consts
-import { colours, isNew } from './CardConsts';
+import { colours, isNewLabel } from './CardConsts';
 // styles
 import styles from './WordCard.module.css';
 //redux
@@ -90,7 +90,7 @@ const Card: FC<ICardProps> = function ({ card, index, modalChangeCard, isTwoColu
                 }
 
                 {
-                    isNew(card.time) &&
+                    isNewLabel(card.time) &&
                     <div className={styles.new}>
                         <div className={styles.font}>n</div>
                         <div className={styles.font}>e</div>

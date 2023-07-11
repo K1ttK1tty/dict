@@ -29,3 +29,6 @@ export type TUseCards = (
     isLetterCaseInclude: boolean
 ) => ICard[];
 export type TUseSearchByWord = (array: string[], word: string) => string[];
+export interface IGames {
+    isColorsInCards: boolean;
+}

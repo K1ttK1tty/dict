@@ -109,8 +109,8 @@
     font-size: 16px;
 }
 .DropDownMenuClassName {
-    height: 100px;
-    padding: 10px;
+    height: 100px !important;
+    padding: 10px !important;
     border: 1px solid rgb(136, 214, 47);
 }
 .mb14 {

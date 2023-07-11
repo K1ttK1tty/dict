@@ -1,5 +1,6 @@
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { IInputValue } from '../../../store/reducers/authorization/Authorization/AuthTypes';
+import { AppDispatch } from '../../../store/store';
 export interface IModal {
     title: string;
     content: React.ReactNode;
@@ -49,4 +50,11 @@ export interface IModalEditThemes {
 }
 export interface IModalEditThemesContent {
     setIsModal: (state: boolean) => void;
+    isOpenModal:boolean;
 }
+export type TDebounce<T> = (
+    variable: ReturnType<typeof setTimeout>,
+    setId: (state: ReturnType<typeof setTimeout>) => void,
+    callback: T,
+    time: number,
+) => void;

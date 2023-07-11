@@ -13,7 +13,7 @@ const ModalEditThemes: FC<IModalEditThemes> = memo(function ({ isOpenModal, setI
             isModal={isOpenModal}
             setModal={setIsModal}
             dinamicClassName={style.modalEditThemes}
-            content={<ModalEditThemesContent setIsModal={setIsModal} />}
+            content={<ModalEditThemesContent setIsModal={setIsModal} isOpenModal={isOpenModal} />}
         />
     );
 });

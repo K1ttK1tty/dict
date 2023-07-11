@@ -6,6 +6,7 @@ import TextArea from '../../TextArea/TextArea';
 // functions
 import { addNewCard } from '../../../../functions/addNewCard';
 import { isNotEmpty } from '../../../../functions/isNotEmpty';
+import { debounce } from '../../../../functions/debounce';
 // consts
 import styles from './FormAddCard.module.css';
 //redux
@@ -18,8 +19,7 @@ const FormAddCard: FC<IFormAddCard> = memo(function ({ modalAdd, showRelatedCard
     const [defaultTheme, setDefaultTheme] = useState<string>('');
     const [isOverlap, setIsOverlap] = useState<boolean>(false);
     const [cardWithOverlap, setCardWithOverlap] = useState<ICard | null>(null);
-    const [timeId, setTimeId] = useState<ReturnType<typeof setTimeout>>();
-
+    const [timeId, setTimeId] = useState<ReturnType<typeof setTimeout>>(0);
     const dispatch = useAppDispatch();
     const { cards, user, selectOptions, selectedTheme } = useAppSelector(state => state.AuthSlice);
     const { isModalAddCardActive } = useAppSelector(state => state.modalAddCard);
@@ -50,10 +50,9 @@ const FormAddCard: FC<IFormAddCard> = memo(function ({ modalAdd, showRelatedCard
         );
         setDefaultTheme('');
     };
-
-    const findOverlap = (e: string) => {
-        clearTimeout(timeId);
-        setTimeId(setTimeout(() => {
+    
+    const callback = (e: string) => {
+        return () => {
             const newCards: ICard[] = JSON.parse(JSON.stringify(cards));
             for (let index = 0; index < newCards.length; index++) {
                 const card = newCards[index];
@@ -65,8 +64,9 @@ const FormAddCard: FC<IFormAddCard> = memo(function ({ modalAdd, showRelatedCard
             }
             setIsOverlap(false);
             setCardWithOverlap(null);
-        }, 400));
+        };
     };
+
     const firstInputClassName = isOverlap
         ? [styles.mb36, styles.inputFormAddCard].join(' ')
         : styles.inputFormAddCard;
@@ -91,7 +91,7 @@ const FormAddCard: FC<IFormAddCard> = memo(function ({ modalAdd, showRelatedCard
                             setValue={
                                 e => {
                                     dispatch(setInputValue({ ...inputValue, word: e }));
-                                    findOverlap(e);
+                                    debounce(timeId, setTimeId, callback(e), 400);  
                                 }
                             }
                         />

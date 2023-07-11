@@ -1,11 +1,57 @@
 .title {
     font-size: 20px;
+    height: 20px;
     text-align: center;
     color: var(--header);
     position: relative;
     top: -50px;
     transition: var(--transition-theme);
 }
+.colorSelection {
+    position: relative;
+    top: -50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 110px;
+    font-size: 17px;
+    margin: 0px auto;
+}
+.colorBlock {
+    cursor: pointer;
+    height: 23px;
+    width: 30px;
+    border-radius: 8px;
+    border: 1px solid black;
+}
+.multiColorBlock {
+    position: relative;
+    background-color: rgb(255, 187, 0);
+    border-radius: 8px;
+}
+.multiColorBlock::after {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    content: "";
+    background-color: red;
+    border-radius: 8px 0px 0px 8px;
+    height: 100%;
+    width: 33%;
+}
+.multiColorBlock::before {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    content: "";
+    background-color: rgb(136, 214, 47);
+    border-radius: 0px 8px 8px 0px;
+    height: 100%;
+    width: 33%;
+}
+/* .height20 {
+    height: 20px;
+} */
 .gameBody {
     width: 60%;
     margin: 0px auto;
@@ -17,7 +63,6 @@
     height: 100%;
     min-height: 100%;
     padding-bottom: 15px;
-    transition: var(--transition-theme);
     overflow: auto;
 }
 .wordShared {
@@ -62,7 +107,7 @@
     width: 100%;
 }
 .formCards {
-    margin: 0px auto 50px;
+    margin: 0px auto 0px;
     color: whitesmoke;
 }
 .noWords {
@@ -72,9 +117,23 @@
     font-size: 25px;
     transition: var(--transition-theme);
 }
+.checkButtons {
+    margin: 0px auto;
+    display: flex;
+    justify-content: space-between;
+    max-width: 320px;
+}
 .btnGamesCheck {
     margin: 0px auto;
     display: block;
+}
+@media (max-width: 767px) {
+    .checkButtons {
+        flex-direction: column;
+    }
+    .btnGamesCheck {
+        margin-bottom: 19px;
+    }
 }
 
 /* words validate */
@@ -92,7 +151,6 @@
 }
 .gameWrap {
     height: 100%;
-    transition: var(--transition02s);
 }
 .trueWord {
     box-shadow: var(--word-shadow-true);

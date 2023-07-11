@@ -10,37 +10,31 @@ const AppRouter: FC = memo(function () {
     const Vocabulary = useMemo(() => lazy(() => import('../pages/Vocabulary.tsx')), []);
     const [isColorsInCards, setIsColorsInCards] = useLocaleStorage('isColorsOnCards', true);
 
+    const VocabularyInSuspense =
+        <Suspense>
+            <Vocabulary
+                isColorsOnCards={isColorsInCards}
+                setIsColorsInCards={setIsColorsInCards}
+            />
+        </Suspense>;
+
     return (
         <Routes>
             <Route
                 path="/posts"
-                element={
-                    <Suspense>
-                        <Vocabulary
-                            isColorsOnCards={isColorsInCards}
-                            setIsColorsInCards={setIsColorsInCards}
-                        />
-                    </Suspense>
-                }
+                element={VocabularyInSuspense}
             />
             <Route
                 path="/games"
                 element={
                     <Suspense>
-                        <Games />
+                        <Games isColorsInCards={isColorsInCards} />
                     </Suspense>
                 } />
             <Route path="/settings" element={<Settings />} />
             <Route
                 path="*"
-                element={
-                    <Suspense>
-                        <Vocabulary
-                            isColorsOnCards={isColorsInCards}
-                            setIsColorsInCards={setIsColorsInCards}
-                        />
-                    </Suspense>
-                } />
+                element={VocabularyInSuspense} />
         </Routes>
     );
 });

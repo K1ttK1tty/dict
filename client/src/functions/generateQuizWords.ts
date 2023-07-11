@@ -1,15 +1,29 @@
+// functions
+import { getRandomInt } from './getRandomInt';
 // redux
-import { setValidateArr, setChanger, setCardsNumber, setInputReq } from '../store/reducers/GamesSlice';
+import { setValidateArr, setInputReq } from '../store/reducers/GamesSlice';
 // types
 import { TDenerateQuizWords } from './functoinModels';
-export const generateQuizWords: TDenerateQuizWords = (e, inputReq, dispatch) => {
+import { ICard } from '../store/reducers/authorization/Authorization/AuthTypes';
+export const generateQuizWords: TDenerateQuizWords = (e, inputReq, setTestArray, currentColor, cards, dispatch) => {
     e.preventDefault();
     dispatch(setValidateArr([]));
-    dispatch(setCardsNumber(inputReq));
-    dispatch(setChanger());
     dispatch(setInputReq(0));
     const inputsWithAnswer: NodeListOf<HTMLInputElement> = document.querySelectorAll('.inptReq');
     for (let index = 0; index < inputsWithAnswer.length; index++) {
         inputsWithAnswer[index].value = '';
     }
+
+    const arr: ICard[] = [];
+    if (currentColor) {
+        cards.map(card => {
+            if (arr.length > 5) return;
+            if (card.color === currentColor) arr.push(card);
+        });
+    } else {
+        for (let index = 0; index < inputReq; index++) {
+            arr.push(cards[getRandomInt(cards.length)]);
+        }
+    }
+    setTestArray(arr);
 };
