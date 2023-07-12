@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, memo } from 'react';
+import { FC, useState, memo } from 'react';
 // components
 import InputAddCard from '../../InputAddCard/InputAddCard';
 import BtnAddCard from '../../BtnAddCard/BtnAddCard';
@@ -15,34 +15,37 @@ import { setInputValue } from '../../../../store/reducers/modalRenameCard';
 // types
 import { IFormAddCard } from '../ModalsModels';
 import { ICard } from '../../../../store/reducers/authorization/Authorization/AuthTypes';
-const FormAddCard: FC<IFormAddCard> = memo(function ({ modalAdd, showRelatedCard, setShowRelatedCard }) {
-    const [defaultTheme, setDefaultTheme] = useState<string>('');
+const FormAddCard: FC<IFormAddCard> = memo(function (
+    {
+        modalAdd,
+        showRelatedCard,
+        setShowRelatedCard,
+        setIsAddCardModal,
+        isAddCardModal
+    }) {
+    const dispatch = useAppDispatch();
+    const { cards, user, selectOptions, selectedTheme } = useAppSelector(state => state.AuthSlice);
+    const { inputValue } = useAppSelector(state => state.modalRenameCard);
     const [isOverlap, setIsOverlap] = useState<boolean>(false);
     const [cardWithOverlap, setCardWithOverlap] = useState<ICard | null>(null);
     const [timeId, setTimeId] = useState<ReturnType<typeof setTimeout>>(0);
-    const dispatch = useAppDispatch();
-    const { cards, user, selectOptions, selectedTheme } = useAppSelector(state => state.AuthSlice);
-    const { isModalAddCardActive } = useAppSelector(state => state.modalAddCard);
-    const { inputValue } = useAppSelector(state => state.modalRenameCard);
+    const [defaultTheme, setDefaultTheme] = useState<string>(selectedTheme);
+    const [prevIsModal, setPrevIsModal] = useState<boolean>(isAddCardModal);
 
-    useEffect(() => {
-        if (isNotEmpty(selectedTheme) && isModalAddCardActive) {
-            setDefaultTheme(selectedTheme);
-        } else {
-            setDefaultTheme('');
-            setIsOverlap(false);
-        }
-        return () => {
-            setDefaultTheme('');
-            setIsOverlap(false);
-            setCardWithOverlap(null);
-        };
-    }, [selectedTheme, isModalAddCardActive]);
+
+    if (prevIsModal !== isAddCardModal) {
+        // setShowRelatedCard(false);
+        setPrevIsModal(isAddCardModal);
+        setIsOverlap(false);
+        // setCardWithOverlap(null);
+        setDefaultTheme(selectedTheme);
+    }
 
     const addCard = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation();
         addNewCard(e,
             { ...inputValue, theme: defaultTheme, time: Date.now(), color: 'red' },
+            setIsAddCardModal,
             cards,
             selectOptions,
             user.email,
@@ -50,7 +53,7 @@ const FormAddCard: FC<IFormAddCard> = memo(function ({ modalAdd, showRelatedCard
         );
         setDefaultTheme('');
     };
-    
+
     const callback = (e: string) => {
         return () => {
             const newCards: ICard[] = JSON.parse(JSON.stringify(cards));
@@ -91,7 +94,7 @@ const FormAddCard: FC<IFormAddCard> = memo(function ({ modalAdd, showRelatedCard
                             setValue={
                                 e => {
                                     dispatch(setInputValue({ ...inputValue, word: e }));
-                                    debounce(timeId, setTimeId, callback(e), 400);  
+                                    debounce(timeId, setTimeId, callback(e), 400);
                                 }
                             }
                         />

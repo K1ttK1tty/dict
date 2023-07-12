@@ -18,13 +18,21 @@ import { UpdateCards } from '../../../store/reducers/authorization/Authorization
 // types
 import { ICard } from '../../../store/reducers/authorization/Authorization/AuthTypes';
 import { ICardProps, TSetNewColor } from './WordCardModel';
-const Card: FC<ICardProps> = function ({ card, index, modalChangeCard, isTwoColumns, isColorsOnCards }) {
+const Card: FC<ICardProps> = function (
+    {
+        card,
+        index,
+        modalChangeCard,
+        isTwoColumns,
+        isColorsOnCards,
+        setIsEditCardModal
+    }) {
     const dispatch = useAppDispatch();
     const { cards, user } = useAppSelector(state => state.AuthSlice);
     const cardColorMark = [styles.colorMark, colours.get(card.color)].join(' ');
 
     const openModalInMobile = isMobile
-        ? () => editWord(card, index, modalChangeCard, dispatch)
+        ? () => editWord(card, index, setIsEditCardModal, modalChangeCard, dispatch)
         : undefined;
     const cardClassName = isTwoColumns
         ? styles.card :
@@ -60,7 +68,7 @@ const Card: FC<ICardProps> = function ({ card, index, modalChangeCard, isTwoColu
             <h4 className={styles.word}>{card.word}</h4>
             <p className={styles.translate}>{card.translate}</p>
             <button
-                onClick={() => editWord(card, index, modalChangeCard, dispatch)}
+                onClick={() => editWord(card, index, setIsEditCardModal, modalChangeCard, dispatch)}
                 className={
                     isMobile
                         ? styles.removeIcon
@@ -85,8 +93,7 @@ const Card: FC<ICardProps> = function ({ card, index, modalChangeCard, isTwoColu
                     <button
                         className={cardColorMark}
                         onMouseDown={nextColour}
-                    >
-                    </button>
+                    />
                 }
 
                 {

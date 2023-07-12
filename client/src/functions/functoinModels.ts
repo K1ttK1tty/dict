@@ -5,6 +5,7 @@ import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 export type TAddNewCard = (
     e: React.MouseEvent<HTMLButtonElement>,
     inputValue: ICard,
+    setIsAddCardModal: (state: boolean) => void,
     Cards: ICard[],
     selectOptions: string[],
     email: string,
@@ -31,6 +32,7 @@ export type TDeleteAllEmptyThemes = (
 export type TEditWord = (
     card: ICard,
     index: number,
+    setIsEditCardModal:(state:boolean)=>void,
     modalChangeCard: React.MutableRefObject<HTMLInputElement | null>,
     dispatch: AppDispatch,
 ) => void;
@@ -38,8 +40,8 @@ export type TDenerateQuizWords = (
     e: React.MouseEvent<HTMLButtonElement>,
     inputReq: number,
     setTestArray: (state: ICard[] | []) => void,
-    currentColor:string,
-    cards:ICard[],
+    currentColor: string,
+    cards: ICard[],
     dispatch: AppDispatch,
 ) => void;
 export type TInputSearchHandler = (
@@ -55,7 +57,7 @@ export type TKeyClose = (
 ) => void;
 export type TModalAddCard = (
     modalAdd: React.MutableRefObject<HTMLInputElement | null>,
-    dispatch: AppDispatch
+    setIsAddCardModal: (state: boolean) => void,
 ) => void;
 export type TOverrideTheme = (themesArray: string[], oldTheme: string, newTheme: string) => string[];
 export type ToverrideThemesInCards = (cards: ICard[], oldTheme: string, newTheme: string) => ICard[];

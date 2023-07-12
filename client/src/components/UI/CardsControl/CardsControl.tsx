@@ -26,7 +26,8 @@ const CardsControl: FC<ICardsControl> = memo(function
         isOpenModal,
         setIsModal,
         wordsOrder,
-        setWordsOrder
+        setWordsOrder,
+        setIsAddCardModal
     }) {
     const dispatch = useAppDispatch();
     const windowBlock = useRef<HTMLDivElement | null>(null);
@@ -44,11 +45,11 @@ const CardsControl: FC<ICardsControl> = memo(function
             <div style={attachedMenuStyles} className={[styles.cardsOptions, 'CardsControl'].join(' ')}>
                 {!isMobile && <PinIcon setIsAttached={setIsAttached} styles={styles.pinIcon} />}
                 <button
-                    onClick={() => modalAddCard(modalAdd, dispatch)}
+                    onClick={() => modalAddCard(modalAdd, setIsAddCardModal)}
                     className={styles.plus}
                 >+</button>
                 <BtnAddCard
-                    onClick={() => modalAddCard(modalAdd, dispatch)}
+                    onClick={() => modalAddCard(modalAdd, setIsAddCardModal)}
                     dinamicclassname={btnStyle.btnCreateCard}
                     children="Создать карточку"
                 />
@@ -82,7 +83,7 @@ const CardsControl: FC<ICardsControl> = memo(function
             />
             <div className={styles.cardsOptionsMoved}>
                 <BtnAddCard
-                    onClick={isCanMove ? undefined : () => modalAddCard(modalAdd, dispatch)}
+                    onClick={isCanMove ? undefined : () => modalAddCard(modalAdd, setIsAddCardModal)}
                     dinamicclassname={[btnStyle.btnCreateCard, btnStyle.btnMoved].join(' ')}
                     children="Создать карточку"
                 />

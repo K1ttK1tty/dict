@@ -1,8 +1,6 @@
-// redux
-import { setIsModalAddCardActive } from '../store/reducers/modalAddCard';
 import { TModalAddCard } from './functoinModels';
-export const modalAddCard: TModalAddCard = (modalAdd, dispatch) => {
-    dispatch(setIsModalAddCardActive(true));
+export const modalAddCard: TModalAddCard = (modalAdd, setIsAddCardModal) => {
+    setIsAddCardModal(true);
     setTimeout(() => {
         if (modalAdd.current) {
 

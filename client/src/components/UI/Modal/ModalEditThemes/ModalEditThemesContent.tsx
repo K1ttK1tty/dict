@@ -1,4 +1,4 @@
-import { FC, useState, useRef, useEffect, memo } from 'react';
+import { FC, useState, useRef, memo } from 'react';
 // components
 import InputAddCard from '../../InputAddCard/InputAddCard';
 import BtnAddCard from '../../BtnAddCard/BtnAddCard';
@@ -24,11 +24,17 @@ import {
     setServerMessage
 } from '../../../../store/reducers/authorization/Authorization/AuthSlice';
 import { IModalEditThemesContent } from '../ModalsModels';
-const ModalEditThemesContent: FC<IModalEditThemesContent> = memo(function ({ setIsModal, isOpenModal }) {
+const ModalEditThemesContent: FC<IModalEditThemesContent> = memo(function (
+    {
+        setIsEditThemesModal,
+        isEditThemesModal
+    }
+) {
     const [word, setWord] = useState<string>('');
     const [timeoutId, setTimeoutId] = useState<ReturnType<typeof setTimeout>>(0);
     const [newTheme, setNewTheme] = useState<string>('');
     const [selectedElement, setSelectedElement] = useState<HTMLDivElement | null>(null);
+    const [prevModalState, setPrevModalState] = useState<boolean>(isEditThemesModal);
     const inputSearchThemes = useRef<HTMLInputElement | null>(null);
     const { user, selectOptions, cards } = useAppSelector(state => state.AuthSlice);
     const dispatch = useAppDispatch();
@@ -36,7 +42,7 @@ const ModalEditThemesContent: FC<IModalEditThemesContent> = memo(function ({ set
     const closeButtonStyle = word
         ? style.closeButton
         : style.closeButtonHide;
-
+    const themeClassName = [listStyles.optionsOption, style.theme].join(' ');
     const changeThemeAndWords = (e: React.MouseEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!selectedElement || !isNotEmpty(newTheme)) {
@@ -52,7 +58,7 @@ const ModalEditThemesContent: FC<IModalEditThemesContent> = memo(function ({ set
         dispatch(UpdateCards({ email: user.email, cards: newCardsArray }));
         dispatch(UpdateThemes({ email: user.email, themes: newThemesArray }));
 
-        setIsModal(false);
+        setIsEditThemesModal(false);
         selectedElement.classList.remove(style.selectedTheme);
         setSelectedElement(null);
         setWord('');
@@ -61,20 +67,19 @@ const ModalEditThemesContent: FC<IModalEditThemesContent> = memo(function ({ set
     const search = (e: string) => {
         debounce(timeoutId, setTimeoutId, () => setWord(e), 400);
     };
-        useEffect(() => {
-        if (!isOpenModal) {
-            setWord('');
-            if (inputSearchThemes.current) {
-                inputSearchThemes.current.value = '';
-            }
+    if (prevModalState !== isEditThemesModal) {
+
+        setPrevModalState(isEditThemesModal);
+        setWord('');
+        setNewTheme('');
+        setSelectedElement(null);
+        if (inputSearchThemes.current) {
+            inputSearchThemes.current.value = '';
         }
-        return () => {
-            setWord('');
-            if (inputSearchThemes.current) {
-                inputSearchThemes.current.value = '';
-            }
-        };
-    }, [isOpenModal]);
+        const element = document.getElementsByClassName(style.selectedTheme)[0];
+        if (element) element.classList.remove(style.selectedTheme);
+    }
+
     return (
         <div className={style.main}>
             <form onSubmit={changeThemeAndWords} >
@@ -98,7 +103,7 @@ const ModalEditThemesContent: FC<IModalEditThemesContent> = memo(function ({ set
                             {
                                 themes.map((option, id) =>
                                     <div
-                                        className={[listStyles.optionsOption, style.theme].join(' ')}
+                                        className={themeClassName}
                                         key={option + id + 'key'}
                                         onMouseDown={e => selectTheme(e, selectedElement, setSelectedElement, style)}
                                     >

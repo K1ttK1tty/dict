@@ -5,6 +5,7 @@ export interface ICardProps {
     modalChangeCard: React.MutableRefObject<HTMLInputElement | null>;
     isTwoColumns: boolean;
     isColorsOnCards: boolean;
+    setIsEditCardModal: (state: boolean) => void;
 }
 export type TSetNewColor = (cards: ICard[], id: number, color: 'green' | 'red' | 'orange') => ICard[];
 export interface ISetCards {
@@ -12,4 +13,5 @@ export interface ISetCards {
     modalChangeCard: React.MutableRefObject<HTMLInputElement | null>;
     isTwoColumns: boolean;
     isColorsOnCards: boolean;
+    setIsEditCardModal: (state: boolean) => void;
 }

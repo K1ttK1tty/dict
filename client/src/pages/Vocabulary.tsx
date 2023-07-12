@@ -33,9 +33,11 @@ import {
 import { IColorObject, IVocabulary } from '../models/models';
 const Vocabulary: FC<IVocabulary> = memo(function ({ isColorsOnCards, setIsColorsInCards }) {
     const [isAttached, setIsAttached] = useState<boolean>(true);
-    const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+    const [isEditThemesModal, setIsEditThemesModal] = useState<boolean>(false);
     const [color, setColor] = useState<string>('#0dccce');
     const [allElementsArray, setAllElementsArray] = useState<HTMLElement[]>([]);
+    const [isAddCardModal, setIsAddCardModal] = useState<boolean>(false);
+    const [isEditCardModal, setIsEditCardModal] = useState<boolean>(false);
 
     const modalAdd = useRef<HTMLInputElement | null>(null);
     const modalChangeCard = useRef<HTMLInputElement | null>(null);
@@ -248,11 +250,19 @@ const Vocabulary: FC<IVocabulary> = memo(function ({ isColorsOnCards, setIsColor
             className={'searchWrapper pageContent'}
         >
             <ScrollToTop />
-            <ModalEditCard modalChangeCard={modalChangeCard} />
-            <ModalAddCards modalAdd={modalAdd} />
+            <ModalEditCard
+                modalChangeCard={modalChangeCard}
+                isEditCardModal={isEditCardModal}
+                setIsEditCardModal={setIsEditCardModal}
+            />
+            <ModalAddCards
+                modalAdd={modalAdd}
+                isAddCardModal={isAddCardModal}
+                setIsAddCardModal={setIsAddCardModal}
+            />
             <ModalEditThemes
-                isOpenModal={isOpenModal}
-                setIsModal={setIsOpenModal}
+                isEditThemesModal={isEditThemesModal}
+                setIsEditThemesModal={setIsEditThemesModal}
             />
             <div className={isAttached ? 'CardsField' : 'CardsField paddingTop124'}>
                 <div className="wrap">
@@ -262,10 +272,11 @@ const Vocabulary: FC<IVocabulary> = memo(function ({ isColorsOnCards, setIsColor
                         setIsAttached={setIsAttached}
                         isTwoColumns={isTwoColumns}
                         setIsTwoColumns={setIsTwoColumns}
-                        isOpenModal={isOpenModal}
-                        setIsModal={setIsOpenModal}
+                        isOpenModal={isEditThemesModal}
+                        setIsModal={setIsEditThemesModal}
                         wordsOrder={order}
                         setWordsOrder={setOrder}
+                        setIsAddCardModal={setIsAddCardModal}
                     />
                     {
                         isAttached &&
@@ -349,6 +360,7 @@ const Vocabulary: FC<IVocabulary> = memo(function ({ isColorsOnCards, setIsColor
                                 modalChangeCard={modalChangeCard}
                                 isTwoColumns={isTwoColumns}
                                 isColorsOnCards={isColorsOnCards}
+                                setIsEditCardModal={setIsEditCardModal}
                             />
                             : <RemoveTheme />
                     }

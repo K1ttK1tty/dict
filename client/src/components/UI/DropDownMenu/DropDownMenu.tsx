@@ -1,4 +1,4 @@
-import { FC, useRef, useEffect } from 'react';
+import { FC, useState, useRef } from 'react';
 // styles
 import styles from './DropDownMenu.module.css';
 import { keyClose } from '../../../functions/keyClose';
@@ -9,26 +9,25 @@ const DropDownMenu: FC<IDropDownMenu> = function (
         isMenuOpen,
         setIsMenuOpen,
         dinamicClassName,
-        isAvatarMenuOpen
+        isAvatarModal
     }) {
     const menuElement = useRef<HTMLDivElement | null>(null);
     let isOpenMenu = [styles.content, styles.hidden].join(' ');
-    if (isMenuOpen && !isAvatarMenuOpen) {
+    if (isMenuOpen && !isAvatarModal) {
         isOpenMenu = styles.content;
     }
-    useEffect(() => {
+    const [prev, setPrev] = useState<boolean>(isMenuOpen);
+    if (isMenuOpen !== prev) {
+        setPrev(isMenuOpen);
         setTimeout(() => {
             if (menuElement.current) {
                 menuElement.current.focus();
             }
         }, 150);
-
-    }, [isMenuOpen]);
-    useEffect(() => {
         document.body.onmousedown = () => {
             setIsMenuOpen(false);
         };
-    }, [isMenuOpen, setIsMenuOpen]);
+    }
 
     return (
         <div

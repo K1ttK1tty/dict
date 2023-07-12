@@ -14,6 +14,7 @@ import './styles/App.css';
 import { useAppSelector, useAppDispatch } from './hooks/redux';
 // authorization
 import { CheckAuth, GetData, GetAvatar } from './store/reducers/authorization/Authorization/ActionCreator';
+let onlyInFirstRender = true;
 const App: FC = () => {
     const MenuDesk = useMemo(() => lazy(() => import('./components/UI/MenuDesk/MenuDesk')), []);
     const MenuVoc = useMemo(() => lazy(() => import('./components/UI/MenuVoc/MenuVoc')), []);
@@ -22,10 +23,12 @@ const App: FC = () => {
     const { isAuth } = useAppSelector(state => state.AuthSlice);
     const email = useAppSelector(state => state.AuthSlice?.user?.email);
 
-    useEffect(() => {
+    if (onlyInFirstRender) {
+        onlyInFirstRender = false;
         if (localStorage.getItem('token')) dispatch(CheckAuth());
         setTheme();
-    }, [dispatch]);
+    }
+
     useEffect(() => {
         if (isAuth) {
             dispatch(GetData(email));
@@ -42,7 +45,7 @@ const App: FC = () => {
                 <Suspense>
                     <MenuVoc menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
                 </Suspense>
-                    <AppRouter />
+                <AppRouter />
             </>
         );
     }

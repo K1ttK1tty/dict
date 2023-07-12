@@ -4,5 +4,5 @@ export interface IDropDownMenu {
     setIsMenuOpen: (state: boolean) => void;
     content: ReactNode;
     dinamicClassName?: string;
-    isAvatarMenuOpen?: boolean;
+    isAvatarModal?: boolean;
 }

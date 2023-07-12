@@ -1,4 +1,6 @@
-import { useState, useEffect, useCallback, memo, FC } from 'react';
+import { useState, useCallback, memo, FC } from 'react';
+// functions 
+import { isNotEmpty } from '../../../functions/isNotEmpty';
 // styles
 import styles from './Alert.module.css';
 // redux
@@ -7,35 +9,32 @@ import { setServerMessage } from '../../../store/reducers/authorization/Authoriz
 const Alert: FC = memo(function () {
     const dispatch = useAppDispatch();
     const { serverMessage } = useAppSelector(state => state.AuthSlice);
-    const [isOpen, setIsOpen] = useState<boolean>(false);
-
-    const messageStyle = isOpen
+    const close = useCallback(() => {
+        setTimeout(() => {
+            dispatch(setServerMessage(''));
+        }, 2600);
+    }, [dispatch]);
+    const instantClose = () => {
+        dispatch(setServerMessage(''));
+    };
+    const [message, setMessage] = useState<string>('');
+    if (message !== serverMessage && isNotEmpty(serverMessage)) {
+        setMessage(serverMessage);
+    }
+    if (isNotEmpty(serverMessage)) {
+        close();
+    }
+    const messageStyle = serverMessage
         ? [styles.message, styles.show].join(' ')
         : styles.message;
-    const wrapperStyles = isOpen
+    const wrapperStyles = serverMessage
         ? styles.wrapper
         : [styles.wrapper, styles.hide].join(' ');
 
-    const close = useCallback(() => {
-        setIsOpen(false);
-        setTimeout(() => {
-            dispatch(setServerMessage(''));
-        }, 350);
-    }, [dispatch]);
-
-    useEffect(() => {
-        if (serverMessage) {
-            setIsOpen(true);
-            setTimeout(() => {
-                close();
-            }, 3400);
-        }
-    }, [serverMessage, close]);
-
     return (
         <div className={wrapperStyles}>
-            <div onClick={close} className={messageStyle}>
-                <p className={styles.text}>{serverMessage}</p>
+            <div onClick={instantClose} className={messageStyle}>
+                <p className={styles.text}>{message}</p>
             </div>
         </div>
     );

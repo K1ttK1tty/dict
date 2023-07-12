@@ -17,11 +17,11 @@ import SoundIcon from '../icons/SoundIcon';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { UpdateCards } from '../../../../store/reducers/authorization/Authorization/ActionCreator';
 import { setCards } from '../../../../store/reducers/authorization/Authorization/AuthSlice';
-import { setModal, setEditCard } from '../../../../store/reducers/modalRenameCard';
+import { setEditCard } from '../../../../store/reducers/modalRenameCard';
 // types
 import { ICard } from '../../../../store/reducers/authorization/Authorization/AuthTypes';
 import { IFormEditCard } from '../ModalsModels';
-const FormEditCard: FC<IFormEditCard> = function ({ modalChangeCard }) {
+const FormEditCard: FC<IFormEditCard> = function ({ modalChangeCard, setIsEditCardModal }) {
     const dispatch = useAppDispatch();
     const { editCard } = useAppSelector(state => state.modalRenameCard);
     const { changeCard, cards, selectOptions } = useAppSelector(state => state.AuthSlice);
@@ -33,12 +33,12 @@ const FormEditCard: FC<IFormEditCard> = function ({ modalChangeCard }) {
         addNewTheme(selectOptions, editCard.theme, email, dispatch);
         dispatch(UpdateCards({ email, cards: newCards }));
         dispatch(setCards(newCards));
-        dispatch(setModal(false));
+        setIsEditCardModal(false);
     };
     const remove = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         removeCard(editCard.id, cards, email, dispatch);
-        dispatch(setModal(false));
+        setIsEditCardModal(false);
     };
     return (
         <form>

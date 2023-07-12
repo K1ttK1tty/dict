@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, memo } from 'react';
+import { FC, useState, memo } from 'react';
 // components
 import UserTopMenu from '../UserMenu/UserTopMenu';
 import UserMenu from '../UserMenu/UserMenu';
@@ -12,23 +12,18 @@ import { useAppSelector } from '../../../hooks/redux';
 import { IMenuVoc } from './MenuVocModel';
 const MenuVoc: FC<IMenuVoc> = memo(function ({ menuOpen, setMenuOpen }) {
     const { user } = useAppSelector(state => state.AuthSlice);
-    const [modal, setModal] = useState<boolean>(false);
-    const [enableSearch, setEnableSearch] = useState<boolean>(true);
+    const [isAvatarModal, setIsAvatarModel] = useState<boolean>(false);
     const [isDropDownMenuOpen, setIsDropDownMenuOpen] = useState<boolean>(false);
-    useEffect(() => {
-        const path = window.location.pathname;
-        if (path === '/posts' || path === '/') {
-            setEnableSearch(true);
-        } else setEnableSearch(false);
-        return () => {
-            setIsDropDownMenuOpen(false);
-        };
-    }, [window.location.pathname]);
+    const path = window.location.pathname;
+    let enableSearch = false;
+    if (path === '/posts' || path === '/') {
+        enableSearch = true;
+    }
     return (
         <div className="menu">
             <ModalAddAvatar
-                isModal={modal}
-                setModal={setModal}
+                isAvatarModal={isAvatarModal}
+                setModal={setIsAvatarModel}
             />
             <div className="menu__container" >
                 <div
@@ -43,10 +38,10 @@ const MenuVoc: FC<IMenuVoc> = memo(function ({ menuOpen, setMenuOpen }) {
                     <DropDownMenu
                         isMenuOpen={isDropDownMenuOpen}
                         setIsMenuOpen={setIsDropDownMenuOpen}
-                        isAvatarMenuOpen={modal}
+                        isAvatarModal={isAvatarModal}
                         content={
                             <UserMenu
-                                setModal={setModal}
+                                setModal={setIsAvatarModel}
                                 isActivated={user?.isActivated}
                                 isDropDownMenuOpen={isDropDownMenuOpen}
                             />

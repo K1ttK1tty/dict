@@ -1,42 +1,34 @@
-import { FC, useState, useEffect, memo } from 'react';
+import { FC, useState, memo } from 'react';
 // components
 import FormAddCard from './FormAddCard';
 import Modal from '../Modal';
 //redux
-import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { setInputValue } from '../../../../store/reducers/modalRenameCard';
-import { setIsModalAddCardActive } from '../../../../store/reducers/modalAddCard';
 // types
 import { ModalAddCards } from '../ModalsModels';
-const ModalAddCards: FC<ModalAddCards> = memo(function ({ modalAdd }) {
-    const dispatch = useAppDispatch();
-    const { isModalAddCardActive } = useAppSelector(state => state.modalAddCard);
+const ModalAddCards: FC<ModalAddCards> = memo(function ({ modalAdd, isAddCardModal, setIsAddCardModal }) {
     const [showRelatedCard, setShowRelatedCard] = useState<boolean>(false);
-    const [isModal, setIsModal] = useState<boolean>(false);
-    useEffect(() => {
-        if (isModalAddCardActive) setIsModal(true);
-        return () => {
-            dispatch(setInputValue({ id: 0, word: '', translate: '', theme: '', note: '' }));
-        };
-    }, [isModalAddCardActive, dispatch]);
-    useEffect(() => {
+    const [prev, setPrev] = useState<boolean>(isAddCardModal);
+    if (isAddCardModal !== prev) {
+        setPrev(isAddCardModal);
         setShowRelatedCard(false);
-        if (!isModal) dispatch(setIsModalAddCardActive(false));
-    }, [isModal, dispatch]);
-
+    }
     const title = showRelatedCard ? 'Эта карточка уже существует' : 'Создание карточки';
     return (
         <Modal
             title={title}
-            isModal={isModalAddCardActive}
-            setModal={setIsModal}
+            isModal={isAddCardModal}
+            setModal={setIsAddCardModal}
             setFields={setInputValue}
             content={
                 <FormAddCard
                     showRelatedCard={showRelatedCard}
                     setShowRelatedCard={setShowRelatedCard}
+                    setIsAddCardModal={setIsAddCardModal}
+                    isAddCardModal={isAddCardModal}
                     modalAdd={modalAdd}
-                />}
+                />
+            }
         />
     );
 });

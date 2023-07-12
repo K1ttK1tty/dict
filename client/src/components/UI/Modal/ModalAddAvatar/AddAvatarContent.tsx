@@ -1,4 +1,4 @@
-import { FC, useRef, useEffect, memo } from 'react';
+import { FC, useState, useRef, memo } from 'react';
 // components
 import BtnAddCard from '../../BtnAddCard/BtnAddCard';
 import ChangeFileController from './ChangeFileController';
@@ -27,12 +27,9 @@ const AddAvatarContent: FC<IAddAvatarContent> = memo(function (
         dispatch(RemoveAvatar({ email }));
         setModal(false);
     };
-    useEffect(() => {
-        const currentElement = element.current;
-        setTimeout(() => {
-            if (currentElement && isModal) currentElement.focus();
-        }, 150);
-    }, [isModal]);
+    setTimeout(() => {
+        if (element.current && isModal) element.current.focus();
+    }, 150);
 
     return (
         <div className={styles.contentWrapper} tabIndex={1} ref={element}>

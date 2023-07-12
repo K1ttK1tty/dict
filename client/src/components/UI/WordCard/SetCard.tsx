@@ -4,7 +4,13 @@ import Card from './Card';
 import '../../../styles/Vocabulary.css';
 // types
 import { ISetCards } from './WordCardModel';
-const SetCards: FC<ISetCards> = memo(function ({ Cards, modalChangeCard, isTwoColumns, isColorsOnCards }) {
+const SetCards: FC<ISetCards> = memo(function (
+    { Cards,
+        modalChangeCard,
+        isTwoColumns,
+        isColorsOnCards,
+        setIsEditCardModal
+    }) {
     const cardsPosition = isTwoColumns ? 'CardsPosition' : '';
     return (
         <div className={cardsPosition}>
@@ -17,6 +23,7 @@ const SetCards: FC<ISetCards> = memo(function ({ Cards, modalChangeCard, isTwoCo
                         index={index}
                         isTwoColumns={isTwoColumns}
                         isColorsOnCards={isColorsOnCards}
+                        setIsEditCardModal={setIsEditCardModal}
                     />
                 )
             }

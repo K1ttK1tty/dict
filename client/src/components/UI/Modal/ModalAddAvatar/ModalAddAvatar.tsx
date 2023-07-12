@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, memo } from 'react';
+import { FC, useState, memo } from 'react';
 // components
 import Modal from '../Modal';
 import AddAvatarContent from './AddAvatarContent';
@@ -8,11 +8,11 @@ import { UploadAvatar, GetAvatar } from '../../../../store/reducers/authorizatio
 import { setServerMessage } from '../../../../store/reducers/authorization/Authorization/AuthSlice';
 // types
 import { IModalAddAvatar } from '../ModalsModels';
-const ModalAddAvatar: FC<IModalAddAvatar> = memo(function ({ isModal, setModal }) {
+const ModalAddAvatar: FC<IModalAddAvatar> = memo(function ({ isAvatarModal, setModal }) {
     const dispatch = useAppDispatch();
     const email = useAppSelector(state => state.AuthSlice?.user?.email);
     const [files, setFiles] = useState<FileList | []>([]);
-
+    const [prev, setPrev] = useState<boolean>(isAvatarModal);
     const upload = () => {
         if (!files[0]) {
             window.alert('Добавьте файл');
@@ -35,15 +35,14 @@ const ModalAddAvatar: FC<IModalAddAvatar> = memo(function ({ isModal, setModal }
             }
         }
     };
-    useEffect(() => {
-        if (!isModal) setFiles([]);
-
-        return () => setFiles([]);
-    }, [isModal]);
+    if (isAvatarModal !== prev) {
+        setPrev(isAvatarModal);
+        if (!isAvatarModal) setFiles([]);
+    }
     return (
         <Modal
             title={'Загрузка нового аватара'}
-            isModal={isModal}
+            isModal={isAvatarModal}
             setModal={setModal}
             content={
                 <AddAvatarContent
@@ -53,7 +52,7 @@ const ModalAddAvatar: FC<IModalAddAvatar> = memo(function ({ isModal, setModal }
                     setFiles={setFiles}
                     email={email}
                     setModal={setModal}
-                    isModal={isModal}
+                    isModal={isAvatarModal}
                 />
             }
         />

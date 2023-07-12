@@ -31,26 +31,37 @@ export interface IDisplayFile {
     setFiles: (state: FileList | []) => void;
 }
 export interface IModalAddAvatar {
-    isModal: boolean;
+    isAvatarModal: boolean;
     setModal: (state: boolean) => void;
 }
 export interface ModalAddCards {
     modalAdd?: React.MutableRefObject<HTMLInputElement | null>;
+    isAddCardModal: boolean;
+    setIsAddCardModal: (state: boolean) => void;
 }
 export interface IFormAddCard extends ModalAddCards {
+    modalAdd?: React.MutableRefObject<HTMLInputElement | null>;
     showRelatedCard: boolean;
     setShowRelatedCard: (state: boolean) => void;
+    setIsAddCardModal: (state: boolean) => void;
+    isAddCardModal: boolean;
+}
+export interface IModalEditCard {
+    isEditCardModal: boolean;
+    setIsEditCardModal: (state: boolean) => void;
+    modalChangeCard: React.MutableRefObject<HTMLInputElement | null>;
 }
 export interface IFormEditCard {
+    setIsEditCardModal: (state: boolean) => void;
     modalChangeCard: React.MutableRefObject<HTMLInputElement | null>;
 }
 export interface IModalEditThemes {
-    isOpenModal: boolean;
-    setIsModal: (state: boolean) => void;
+    isEditThemesModal: boolean;
+    setIsEditThemesModal: (state: boolean) => void;
 }
 export interface IModalEditThemesContent {
-    setIsModal: (state: boolean) => void;
-    isOpenModal:boolean;
+    setIsEditThemesModal: (state: boolean) => void;
+    isEditThemesModal: boolean;
 }
 export type TDebounce<T> = (
     variable: ReturnType<typeof setTimeout>,

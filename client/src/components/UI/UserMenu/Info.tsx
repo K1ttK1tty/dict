@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, memo } from 'react';
+import { FC, useState, memo } from 'react';
 // components
 import BtnAddCard from '../BtnAddCard/BtnAddCard';
 // icons
@@ -12,10 +12,12 @@ import { IInfo } from './UserMenuModel';
 const Info: FC<IInfo> = memo(function ({ isUserMenuOpen }) {
     const dispatch = useAppDispatch();
     const { id, email } = useAppSelector(state => state.AuthSlice.user);
-    useEffect(() => {
-        if (!isUserMenuOpen) setIsOpen(false);
-    }, [isUserMenuOpen]);
-    const [isOpen, setIsOpen] = useState<boolean>(false);
+
+    const [isOpen, setIsOpen] = useState<boolean>(isUserMenuOpen);
+    if (isUserMenuOpen !== isOpen) {
+        setIsOpen(isUserMenuOpen);
+    }
+
     const submenuStyles = (isOpen && isUserMenuOpen)
         ? [styles.show, styles.submenu].join(' ')
         : styles.submenu;

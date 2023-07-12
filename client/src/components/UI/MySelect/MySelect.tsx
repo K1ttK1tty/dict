@@ -47,7 +47,7 @@ const MySelect: FC<IMySelect> = memo(function ({ isCanMove, isOpenModal, setIsMo
         } else {
             dispatch(setOptionState({ ...optionState, removeMark: false }));
         }
-        return () => {
+        return () => { 
             dispatch(setOptionState({ ...optionState, open: false }));
         };
     }, []);

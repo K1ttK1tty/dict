@@ -5,15 +5,19 @@ import Modal from '../Modal';
 // styles
 import style from './ModalEditThemes.module.css';
 import { IModalEditThemes } from '../ModalsModels';
-const ModalEditThemes: FC<IModalEditThemes> = memo(function ({ isOpenModal, setIsModal }) {
+const ModalEditThemes: FC<IModalEditThemes> = memo(function ({ isEditThemesModal, setIsEditThemesModal }) {
 
     return (
         <Modal
             title={'Изменить тему'}
-            isModal={isOpenModal}
-            setModal={setIsModal}
+            isModal={isEditThemesModal}
+            setModal={setIsEditThemesModal}
             dinamicClassName={style.modalEditThemes}
-            content={<ModalEditThemesContent setIsModal={setIsModal} isOpenModal={isOpenModal} />}
+            content={
+                <ModalEditThemesContent
+                    setIsEditThemesModal={setIsEditThemesModal}
+                    isEditThemesModal={isEditThemesModal}
+                />}
         />
     );
 });

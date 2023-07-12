@@ -8,6 +8,7 @@ export interface ICardsControl {
     setIsModal: (state: boolean) => void;
     wordsOrder: boolean;
     setWordsOrder: (state: boolean) => void;
+    setIsAddCardModal: (state: boolean) => void;
 }
 export type TMouseMove = (
     element: MouseEvent,
