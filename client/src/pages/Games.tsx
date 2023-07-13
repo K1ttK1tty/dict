@@ -1,5 +1,5 @@
 // libs
-import { FC, useState, useEffect, memo } from 'react';
+import { FC, useState, memo } from 'react';
 // components
 import InputAddCard from '../components/UI/InputAddCard/InputAddCard';
 import BtnAddCard from '../components/UI/BtnAddCard/BtnAddCard';
@@ -20,7 +20,7 @@ import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { setInputReq } from '../store/reducers/GamesSlice';
 // types
 import { ICard } from '../store/reducers/authorization/Authorization/AuthTypes';
-import { IGames } from '../models/models';
+import { IGames, TPrevState } from '../models/models';
 const Games: FC<IGames> = memo(function ({ isColorsInCards }) {
     const [testByWord, setTestByWord] = useState<boolean>(true);
     const [currentColor, setCurrentColor] = useState<string>('');
@@ -31,19 +31,16 @@ const Games: FC<IGames> = memo(function ({ isColorsInCards }) {
     const dispatch = useAppDispatch();
     const { cards } = useAppSelector(state => state.AuthSlice);
     const { inputReq } = useAppSelector(state => state.GamesSlice);
-    const setInputWordsCount = (value: string | number) => {
-        dispatch(setInputReq(Number(value)));
-    };
 
-    useEffect(() => {
-        dispatch(setInputReq(0));
+    const [prevState, setPrevState] = useState<TPrevState>({ testByWord, currentColor });
+    if (prevState.testByWord !== testByWord || prevState.currentColor !== currentColor) {
+        setPrevState({ testByWord, currentColor });
         setTestArray([]);
-        return () => {
-            dispatch(setInputReq(0));
-            setTestArray([]);
-        };
-    }, [testByWord, currentColor, dispatch]);
+    }
 
+    // const setInputWordsCount = (value: string | number) => {
+    //     dispatch(setInputReq(Number(value)));
+    // };
     const switchColor = () => {
         if (currentColor === 'red') {
             setCurrentColor('orange');
@@ -59,21 +56,19 @@ const Games: FC<IGames> = memo(function ({ isColorsInCards }) {
     const testByColorClassName = currentColor
         ? [colours.get(currentColor), 'colorBlock'].join(' ')
         : 'multiColorBlock colorBlock';
-    const inputValue = currentColor
-        ? ''
-        : (inputReq ? inputReq : '');
+    const inputValue = inputReq ? inputReq : '';
     return (
         <div className="gameWrap pageContent">
             <div className="gameCardsField">
                 <div className="title">Самопроверка</div>
                 <div className="title">
-                        по <span className={searchByWordClassName}>слову</span>/
-                        <span className={searchByTranslateClassName}>переводу</span>:
-                        <Checkbox
-                            id={'wordOrTranslateSelfTest'}
-                            defaultChecked={testByWord}
-                            callback={() => setTestByWord(!testByWord)}
-                        />
+                    по <span className={searchByWordClassName}>слову</span>/
+                    <span className={searchByTranslateClassName}>переводу</span>:
+                    <Checkbox
+                        id={'wordOrTranslateSelfTest'}
+                        defaultChecked={testByWord}
+                        callback={() => setTestByWord(!testByWord)}
+                    />
                 </div>
                 {
                     isColorsInCards &&
@@ -93,21 +88,22 @@ const Games: FC<IGames> = memo(function ({ isColorsInCards }) {
                                         <InputAddCard
                                             dinamicclassname={inputStyle.inputFormAddCard + ' inputEnterWordsCount'}
                                             inputValue={inputValue}
-                                            setValue={setInputWordsCount}
+                                            setValue={e => dispatch(setInputReq(Number(e)))}
                                             type="number"
-                                            disabled={currentColor ? true : false}
                                         />
                                     </div>
                                     <BtnAddCard
                                         onClick={
-                                            e => generateQuizWords(
-                                                e,
-                                                inputReq,
-                                                setTestArray,
-                                                currentColor,
-                                                cards,
-                                                dispatch
-                                            )
+                                            e => {
+                                                e.preventDefault();
+                                                generateQuizWords(
+                                                    inputReq,
+                                                    setTestArray,
+                                                    currentColor,
+                                                    cards,
+                                                    dispatch
+                                                );
+                                            }
                                         }
                                         children={'Сгенерировать'}
                                     />
@@ -119,22 +115,24 @@ const Games: FC<IGames> = memo(function ({ isColorsInCards }) {
                                         <div className="checkButtons">
                                             <BtnAddCard
                                                 dinamicclassname={'btnGamesCheck'}
-                                                onClick={
-                                                    e => generateQuizWords(
-                                                        e,
-                                                        testArray.length,
-                                                        setTestArray,
-                                                        currentColor,
-                                                        cards,
-                                                        dispatch
-                                                    )
-                                                }
-                                                children={'Еще попытка'}
+                                                onClick={e => validateQuiz(e, testArray, testByWord, dispatch)}
+                                                children={'Проверить'}
                                             />
                                             <BtnAddCard
                                                 dinamicclassname={'btnGamesCheck'}
-                                                onClick={e => validateQuiz(e, testArray, testByWord, dispatch)}
-                                                children={'Проверить'}
+                                                onClick={
+                                                    e => {
+                                                        e.preventDefault();
+                                                        generateQuizWords(
+                                                            testArray.length,
+                                                            setTestArray,
+                                                            currentColor,
+                                                            cards,
+                                                            dispatch
+                                                        );
+                                                    }
+                                                }
+                                                children={'Еще попытка'}
                                             />
                                         </div>
                                     </form>

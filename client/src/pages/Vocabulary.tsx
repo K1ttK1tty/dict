@@ -9,7 +9,6 @@ import ModalAddCards from '../components/UI/Modal/ModalAddCards/ModalAddCards';
 import RemoveTheme from '../components/RemoveTheme';
 import CardsControl from '../components/UI/CardsControl/CardsControl';
 import CardsInfo from '../components/UI/CardsInfo/CardsInfo';
-import ScrollToTop from '../components/UI/ScrollToTop/ScrollToTop';
 import ModalEditThemes from '../components/UI/Modal/ModalEditThemes/ModalEditThemes';
 import Checkbox from '../components/UI/Checkbox/Checkbox';
 //functions 
@@ -17,7 +16,6 @@ import { removeInput } from '../functions/removeInput';
 //styles
 import '../styles/theme.css';
 import '../styles/Vocabulary.css';
-
 //color-picker
 import ColorPicker from '../components/UI/ColorPicker/ColorPicker';
 //redux
@@ -249,7 +247,6 @@ const Vocabulary: FC<IVocabulary> = memo(function ({ isColorsOnCards, setIsColor
             onMouseDown={e => removeInput(e, input, selectedTheme, optionState, dispatch)}
             className={'searchWrapper pageContent'}
         >
-            <ScrollToTop />
             <ModalEditCard
                 modalChangeCard={modalChangeCard}
                 isEditCardModal={isEditCardModal}

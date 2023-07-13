@@ -32,3 +32,4 @@ export type TUseSearchByWord = (array: string[], word: string) => string[];
 export interface IGames {
     isColorsInCards: boolean;
 }
+    export type TPrevState = { testByWord: boolean, currentColor: string };

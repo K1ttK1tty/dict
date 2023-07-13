@@ -6,6 +6,7 @@ import AppRouter from './components/AppRouter';
 import Authorization from './components/UI/Authorization/Authorization';
 import ChangePassword from './components/UI/Authorization/ResetPassword/ChangePassword';
 import SetNewPassword from './components/UI/Authorization/SetNewPassword/SetNewPassword';
+import ScrollToTop from './components/UI/ScrollToTop/ScrollToTop';
 // functions
 import { setTheme } from './functions/setTheme';
 // styles
@@ -28,7 +29,6 @@ const App: FC = () => {
         if (localStorage.getItem('token')) dispatch(CheckAuth());
         setTheme();
     }
-
     useEffect(() => {
         if (isAuth) {
             dispatch(GetData(email));
@@ -39,6 +39,7 @@ const App: FC = () => {
     if (isAuth) {
         return (
             <>
+                <ScrollToTop />
                 <Suspense>
                     <MenuDesk menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
                 </Suspense>

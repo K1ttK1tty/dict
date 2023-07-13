@@ -37,7 +37,6 @@ export type TEditWord = (
     dispatch: AppDispatch,
 ) => void;
 export type TDenerateQuizWords = (
-    e: React.MouseEvent<HTMLButtonElement>,
     inputReq: number,
     setTestArray: (state: ICard[] | []) => void,
     currentColor: string,
