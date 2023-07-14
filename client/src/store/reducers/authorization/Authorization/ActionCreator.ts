@@ -20,7 +20,7 @@ import {
     IUpdateCards,
     IUpdateThemes,
     IUploadAvatar
-} from './AuthTypes';
+} from '../../../storeModels';
 export const Registration = createAsyncThunk(
     'Registration',
     async (userData: IRegistrationProps, thunkAPI) => {

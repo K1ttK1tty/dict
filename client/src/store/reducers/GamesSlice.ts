@@ -1,9 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-interface IInitialState {
-    inputReq: number,
-    validateArr: string[],
-}
-const initialState: IInitialState = {
+import { IGamesSliceInitialState } from '../storeModels';
+const initialState: IGamesSliceInitialState = {
     inputReq: 0,
     validateArr: [],
 };

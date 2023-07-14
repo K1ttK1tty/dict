@@ -5,12 +5,12 @@ import styles from './UI/MySelect/MySelect.module.css';
 import { useAppSelector } from '../hooks/redux';
 // types
 import { ISetOptions } from '../models/models';
-const SetOptions: FC<ISetOptions> = memo(function ({ replaceOption, setIsModal }) {
+const SetOptions: FC<ISetOptions> = memo(function ({ replaceOption, openEditThemeModal }) {
     const { selectOptions } = useAppSelector(state => state.AuthSlice);
     return (
         <div id="options" className={styles.options}>
             <div onMouseDown={e => e.stopPropagation()}>
-                <div onMouseDown={() => setIsModal(true)} className={styles.optionsOption}>
+                <div onMouseDown={openEditThemeModal} className={styles.optionsOption}>
                     Редактирование Тем
                 </div>
             </div>

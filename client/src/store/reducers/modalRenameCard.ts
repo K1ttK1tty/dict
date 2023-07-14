@@ -1,12 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IInputValue } from './authorization/Authorization/AuthTypes';
-interface IInitialState {
-    indexCard: number;
-    isModalActive: boolean;
-    inputValue: IInputValue;
-    editCard: IInputValue;
-}
-const initialState: IInitialState = {
+import { IInputValue } from '../storeModels';
+import { IModalRenameCardInitialState } from '../storeModels';
+const initialState: IModalRenameCardInitialState = {
     indexCard: 0,
     isModalActive: false,
     inputValue: {

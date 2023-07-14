@@ -1,5 +1,4 @@
-// types
-import { ICard } from '../store/reducers/authorization/Authorization/AuthTypes';
+import { ICard } from '../store/storeModels';
 import { TChangeCardFields } from './functoinModels';
 export const changeCardFields: TChangeCardFields = (cards, oldCard, newCard) => {
     const newState: ICard[] = JSON.parse(JSON.stringify(cards));

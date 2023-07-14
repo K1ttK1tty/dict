@@ -1,5 +1,4 @@
 import { FC } from 'react';
-// style
 import style from './TextArea.module.css';
 import { ITextArea } from './TextAreaModel';
 const TextArea: FC<ITextArea> = function ({ placeholder, inputValue, setValue }) {

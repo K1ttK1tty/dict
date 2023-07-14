@@ -1,5 +1,6 @@
+import { IOptionState } from '../../../store/storeModels';
 export interface IMySelect {
-    isCanMove?: boolean;
-    isOpenModal: boolean;
     setIsModal: (state: boolean) => void;
+    isSelectOpen:IOptionState;
+    setIsSelectOpen:(state: React.SetStateAction<IOptionState>) => void;
 }

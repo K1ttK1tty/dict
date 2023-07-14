@@ -1,5 +1,5 @@
-import { IInitialState } from './AuthSlice';
-export const initialState: IInitialState = {
+import { IAuthSliceInitialState } from '../../../storeModels';
+export const initialState: IAuthSliceInitialState = {
     // authorization
     user: {
         id: 0,
@@ -22,10 +22,7 @@ export const initialState: IInitialState = {
         time: 0,
         color: 'red'
     },
-    // select
-    optionState: { open: false, removeMark: false },
     selectOptions: [],
     selectedTheme: '',
-    // servers response
     serverMessage: '',
 };

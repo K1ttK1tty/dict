@@ -68,13 +68,19 @@ const ModalEditThemesContent: FC<IModalEditThemesContent> = memo(function (
         debounce(timeoutId, setTimeoutId, () => setWord(e), 400);
     };
     if (prevModalState !== isEditThemesModal) {
-
         setPrevModalState(isEditThemesModal);
         setWord('');
         setNewTheme('');
         setSelectedElement(null);
         if (inputSearchThemes.current) {
             inputSearchThemes.current.value = '';
+        }
+        if (isEditThemesModal) {
+            setTimeout(() => {
+                if (inputSearchThemes.current) {
+                    inputSearchThemes.current.focus();
+                }
+            }, 200);
         }
         const element = document.getElementsByClassName(style.selectedTheme)[0];
         if (element) element.classList.remove(style.selectedTheme);

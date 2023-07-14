@@ -11,10 +11,8 @@ import { ICardRand } from './CardRandModel';
 const CardRand: FC<ICardRand> = memo(function ({ card, index, testByWord }) {
     const { validateArr } = useAppSelector(state => state.GamesSlice);
     let validateWord = 'hidden';
-    let isDisabled = false;
     if (validateArr[index]) {
         validateWord = validateArr[index] + 'Color';
-        isDisabled = true;
     }
 
     if (!testByWord) {
@@ -27,7 +25,6 @@ const CardRand: FC<ICardRand> = memo(function ({ card, index, testByWord }) {
                 <div className="translateBlock">
                     <InputAddCard
                         dinamicclassname={[styles.input, validateArr[index], 'inptReq '].join(' ')}
-                        disabled={isDisabled}
                     />
                     <div className={['wordShared', validateWord].join(' ')}>{card.word}</div>
                 </div>
@@ -43,7 +40,6 @@ const CardRand: FC<ICardRand> = memo(function ({ card, index, testByWord }) {
             <div className="translateBlock">
                 <InputAddCard
                     dinamicclassname={[styles.input, validateArr[index], 'inptReq '].join(' ')}
-                    disabled={isDisabled}
                 />
                 <div className={['wordShared', validateWord].join(' ')}>{card.translate}</div>
             </div>

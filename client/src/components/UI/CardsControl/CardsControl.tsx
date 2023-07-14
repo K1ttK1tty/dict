@@ -12,8 +12,6 @@ import styles from './CardsControl.module.css';
 import btnStyle from '../Modal/ModalAddCards/FormAddCard.module.css';
 // icon
 import PinIcon from './Icons/PinIcon';
-// redux
-import { useAppDispatch } from '../../../hooks/redux';
 // types
 import { ICardsControl } from './CardsControlModel';
 const CardsControl: FC<ICardsControl> = memo(function
@@ -23,13 +21,13 @@ const CardsControl: FC<ICardsControl> = memo(function
         setIsAttached,
         isTwoColumns,
         setIsTwoColumns,
-        isOpenModal,
         setIsModal,
         wordsOrder,
         setWordsOrder,
-        setIsAddCardModal
+        setIsAddCardModal,
+        isSelectOpen,
+        setIsSelectOpen
     }) {
-    const dispatch = useAppDispatch();
     const windowBlock = useRef<HTMLDivElement | null>(null);
     const [isCanMove, setIsCanMove] = useState<boolean>(false);
     const grabCursor: string = isCanMove
@@ -38,8 +36,6 @@ const CardsControl: FC<ICardsControl> = memo(function
     const attachedMenuStyles = isMobile
         ? {}
         : { top: '80px', left: '0px' };
-
-
     if (isAttached) {
         return (
             <div style={attachedMenuStyles} className={[styles.cardsOptions, 'CardsControl'].join(' ')}>
@@ -54,8 +50,9 @@ const CardsControl: FC<ICardsControl> = memo(function
                     children="Создать карточку"
                 />
                 <MySelect
-                    isOpenModal={isOpenModal}
                     setIsModal={setIsModal}
+                    isSelectOpen={isSelectOpen}
+                    setIsSelectOpen={setIsSelectOpen}
                 />
             </div>
         );
@@ -88,9 +85,10 @@ const CardsControl: FC<ICardsControl> = memo(function
                     children="Создать карточку"
                 />
                 <MySelect
-                    isOpenModal={isOpenModal}
                     setIsModal={setIsModal}
-                    isCanMove={isCanMove} />
+                    isSelectOpen={isSelectOpen}
+                    setIsSelectOpen={setIsSelectOpen}
+                />
             </div>
             <BtnAddCard
                 onMouseDown={(e: React.MouseEvent<HTMLButtonElement>) => e.preventDefault()}

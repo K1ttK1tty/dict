@@ -12,20 +12,7 @@ import {
 } from './ActionCreator';
 import { SendResetPassword, refreshPassword } from '../ChangePassword/Actions';
 // interfaces
-import { ICard, IOptionState, IUser } from './AuthTypes';
-export interface IInitialState {
-    user: IUser;
-    avatar: string;
-    isAuth: boolean;
-    isLoading: boolean;
-    updateError: string;
-    cards: ICard[] | [];
-    changeCard: ICard;
-    optionState: IOptionState;
-    selectOptions: string[];
-    selectedTheme: string;
-    serverMessage: string;
-}
+import { ICard } from '../../../storeModels';
 // state
 import { initialState } from './State';
 export const AuthSlice = createSlice({
@@ -49,10 +36,6 @@ export const AuthSlice = createSlice({
         },
         setChangeCard(state, action: PayloadAction<ICard>) {
             state.changeCard = action.payload;
-        },
-        // select
-        setOptionState(state, action: PayloadAction<IOptionState>) {
-            state.optionState = action.payload;
         },
         setSelectOptions(state, action: PayloadAction<string[]>) {
             state.selectOptions = action.payload;
@@ -198,7 +181,6 @@ export const {
     setCards,
     setID,
     setChangeCard,
-    setOptionState,
     setSelectOptions,
     setSelectedTheme,
     setAvatar,

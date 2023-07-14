@@ -1,15 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-export interface IInput {
-    isOpen: boolean;
-    after: string;
-}
-interface IInitialState {
-    input: IInput;
-    searchWord: string;
-    isSearchByWord: boolean;
-    isLetterCaseInclude: boolean;
-}
-const initialState: IInitialState = {
+import { IInput, IUpMenuInitialState } from '../storeModels';
+const initialState: IUpMenuInitialState = {
     input: { isOpen: false, after: '' },
     searchWord: '',
     isSearchByWord: true,
@@ -31,7 +22,6 @@ const upMenu = createSlice({
         setIsLetterCaseInclude(state) {
             state.isLetterCaseInclude = !state.isLetterCaseInclude;
         }
-
     }
 });
 export default upMenu.reducer;

@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 // functions
 import { isNotEmpty } from '../functions/isNotEmpty';
 // types
-import { ICard } from '../store/reducers/authorization/Authorization/AuthTypes';
+import { ICard } from '../store/storeModels';
 import { TUseCards, TUseSearchByWord, TUseSelectedThemes, TUseSortedCards } from '../models/models';
 const useSordetCard: TUseSortedCards = (Cards, toggleWordsOrder) => {
     const sordetCard = useMemo(() => {

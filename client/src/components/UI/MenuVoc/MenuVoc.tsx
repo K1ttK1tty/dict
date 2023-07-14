@@ -10,7 +10,7 @@ import styles from '../UserMenu/UserMenu.module.css';
 //redux
 import { useAppSelector } from '../../../hooks/redux';
 import { IMenuVoc } from './MenuVocModel';
-const MenuVoc: FC<IMenuVoc> = memo(function ({ menuOpen, setMenuOpen }) {
+const MenuVoc: FC<IMenuVoc> = memo(function ({ setMenuOpen }) {
     const { user } = useAppSelector(state => state.AuthSlice);
     const [isAvatarModal, setIsAvatarModel] = useState<boolean>(false);
     const [isDropDownMenuOpen, setIsDropDownMenuOpen] = useState<boolean>(false);
@@ -28,7 +28,7 @@ const MenuVoc: FC<IMenuVoc> = memo(function ({ menuOpen, setMenuOpen }) {
             <div className="menu__container" >
                 <div
                     className={styles.openMenuButton}
-                    onClick={() => setMenuOpen(!menuOpen)}
+                    onClick={() => setMenuOpen(prev => !prev)}
                 >
                     <div className={styles.openMenuIcon}></div>
                 </div>

@@ -1,5 +1,4 @@
 import { FC } from 'react';
-// redux
 import { useAppSelector } from '../../../../hooks/redux';
 
 const SoundIcon: FC = function () {

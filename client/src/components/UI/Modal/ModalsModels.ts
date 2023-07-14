@@ -1,6 +1,5 @@
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
-import { IInputValue } from '../../../store/reducers/authorization/Authorization/AuthTypes';
-import { AppDispatch } from '../../../store/store';
+import { IInputValue } from '../../../store/storeModels';
 export interface IModal {
     title: string;
     content: React.ReactNode;

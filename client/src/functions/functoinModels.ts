@@ -1,6 +1,6 @@
 import { AppDispatch } from '../store/store';
-import { IInputValue, IOptionState, ICard } from '../store/reducers/authorization/Authorization/AuthTypes';
-import { IInput } from '../store/reducers/upMenu';
+import { IInputValue, IOptionState, ICard } from '../store/storeModels';
+import { IInput } from '../store/storeModels';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 export type TAddNewCard = (
     e: React.MouseEvent<HTMLButtonElement>,
@@ -25,14 +25,15 @@ export type TChangeCardFields = (
 export type TDeleteAllEmptyThemes = (
     cards: ICard[],
     allThemes: string[],
-    optionState: IOptionState,
+    setIsSelectOpen: (state: React.SetStateAction<IOptionState>) => void,
+    isSelectOpen: IOptionState,
     email: string,
     dispatch: AppDispatch,
 ) => void;
 export type TEditWord = (
     card: ICard,
     index: number,
-    setIsEditCardModal:(state:boolean)=>void,
+    setIsEditCardModal: (state: boolean) => void,
     modalChangeCard: React.MutableRefObject<HTMLInputElement | null>,
     dispatch: AppDispatch,
 ) => void;
@@ -69,8 +70,6 @@ export type TRemoveCard = (
 export type TRemoveInput = (
     elem: React.MouseEvent<HTMLDivElement>,
     input: IInput,
-    selectedTheme: string,
-    optionState: IOptionState,
     dispatch: AppDispatch,
 ) => void;
 export type TRemoveModal = (
@@ -81,7 +80,8 @@ export type TRemoveModal = (
 export type TCutLongLine = (line: string, symbolCount: number) => string;
 export type TRemoveSelectTheme = (
     selectOptions: string[],
-    optionState: IOptionState,
+    setIsSelectOpen: (state: React.SetStateAction<IOptionState>) => void,
+    isSelectOpen: IOptionState,
     selectedTheme: string,
     email: string,
     dispatch: AppDispatch,

@@ -39,14 +39,14 @@ const App: FC = () => {
     if (isAuth) {
         return (
             <>
-                <ScrollToTop />
+                <Suspense>
+                    <MenuVoc setMenuOpen={setMenuOpen} />
+                </Suspense>
                 <Suspense>
                     <MenuDesk menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
                 </Suspense>
-                <Suspense>
-                    <MenuVoc menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-                </Suspense>
                 <AppRouter />
+                <ScrollToTop />
             </>
         );
     }

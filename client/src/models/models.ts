@@ -1,4 +1,5 @@
-import { ICard } from '../store/reducers/authorization/Authorization/AuthTypes';
+import { ICard } from '../store/storeModels';
+import { IOptionState } from '../store/storeModels';
 export interface IColorObject {
     light: {
         elements: HTMLElement[];
@@ -15,7 +16,7 @@ export interface IVocabulary {
 }
 export interface ISetOptions {
     replaceOption: (element: React.MouseEvent<HTMLDivElement>) => void;
-    setIsModal: (state: boolean) => void;
+    openEditThemeModal: () => void;
 }
 export type TUseLocaleStorage = (name: string, state: boolean) => [boolean, (state: boolean) => void];
 export type TUseSortedCards = (Cards: ICard[], toggleWordsOrder: boolean) => ICard[];
@@ -32,4 +33,9 @@ export type TUseSearchByWord = (array: string[], word: string) => string[];
 export interface IGames {
     isColorsInCards: boolean;
 }
-    export type TPrevState = { testByWord: boolean, currentColor: string };
+export type TPrevState = { testByWord: boolean, currentColor: string };
+
+export interface IRemoveTheme {
+    isSelectOpen: IOptionState;
+    setIsSelectOpen: (state: React.SetStateAction<IOptionState>) => void;
+}

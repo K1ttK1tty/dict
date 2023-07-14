@@ -1,4 +1,4 @@
-import { ICard } from '../../../store/reducers/authorization/Authorization/AuthTypes';
+import { ICard } from '../../../store/storeModels';
 export interface ICardsRandom {
     cardsGame: ICard[];
     testByWord: boolean;

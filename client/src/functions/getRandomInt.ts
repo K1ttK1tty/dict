@@ -1,4 +1,4 @@
-import { ICard } from '../store/reducers/authorization/Authorization/AuthTypes';
+import { ICard } from '../store/storeModels';
 const getRandomInt = (max: number) => {
     return Math.floor(Math.random() * max);
 };

@@ -1,5 +1,4 @@
 import { FC, memo } from 'react';
-// types
 import { IDisplayFile } from '../ModalsModels';
 const DisplayFile: FC<IDisplayFile> = memo(function ({ files, setFiles, styles }) {
     return (

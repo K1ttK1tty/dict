@@ -23,11 +23,9 @@ const ChangePassword: FC = function () {
         mode: 'onSubmit'
     });
     const onSubmit: SubmitHandler<IChangePassword> = data => {
-
         const email = data.email;
         dispatch(SendResetPassword({ email }));
     };
-
     return (
         <div className={stylesAuth.back}>
 

@@ -1,4 +1,4 @@
-import { ICard } from '../../../store/reducers/authorization/Authorization/AuthTypes';
+import { ICard } from '../../../store/storeModels';
 export interface ICardProps {
     card: ICard;
     index: number;
@@ -14,4 +14,5 @@ export interface ISetCards {
     isTwoColumns: boolean;
     isColorsOnCards: boolean;
     setIsEditCardModal: (state: boolean) => void;
+    stale: boolean;
 }

@@ -1,4 +1,4 @@
-import { FC, useState, useRef, memo } from 'react';
+import { FC, useRef, memo } from 'react';
 // components
 import BtnAddCard from '../../BtnAddCard/BtnAddCard';
 import ChangeFileController from './ChangeFileController';

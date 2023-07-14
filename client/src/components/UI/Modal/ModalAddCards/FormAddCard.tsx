@@ -14,7 +14,7 @@ import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { setInputValue } from '../../../../store/reducers/modalRenameCard';
 // types
 import { IFormAddCard } from '../ModalsModels';
-import { ICard } from '../../../../store/reducers/authorization/Authorization/AuthTypes';
+import { ICard } from '../../../../store/storeModels';
 const FormAddCard: FC<IFormAddCard> = memo(function (
     {
         modalAdd,
@@ -32,15 +32,11 @@ const FormAddCard: FC<IFormAddCard> = memo(function (
     const [defaultTheme, setDefaultTheme] = useState<string>(selectedTheme);
     const [prevIsModal, setPrevIsModal] = useState<boolean>(isAddCardModal);
 
-
     if (prevIsModal !== isAddCardModal) {
-        // setShowRelatedCard(false);
         setPrevIsModal(isAddCardModal);
         setIsOverlap(false);
-        // setCardWithOverlap(null);
         setDefaultTheme(selectedTheme);
     }
-
     const addCard = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation();
         addNewCard(e,
@@ -53,7 +49,6 @@ const FormAddCard: FC<IFormAddCard> = memo(function (
         );
         setDefaultTheme('');
     };
-
     const callback = (e: string) => {
         return () => {
             const newCards: ICard[] = JSON.parse(JSON.stringify(cards));
@@ -69,7 +64,6 @@ const FormAddCard: FC<IFormAddCard> = memo(function (
             setCardWithOverlap(null);
         };
     };
-
     const firstInputClassName = isOverlap
         ? [styles.mb36, styles.inputFormAddCard].join(' ')
         : styles.inputFormAddCard;

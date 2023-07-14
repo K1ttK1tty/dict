@@ -24,7 +24,7 @@ const FormLogin: FC<IFormProps> = function ({ showPassword, setShowPassword, isL
     const dispatch = useAppDispatch();
     const formStyle = isLogin ? styles.form : [styles.form, styles.formHide].join(' ');
     const onSubmit: SubmitHandler<IFormLoginHookArgs> = data => {
-        //////////////////// DELETE THIS!!
+        //////////////// DELETE THIS!!
         if (data.email === 'admin@mail.ru' && data.password === 'admin') {
             dispatch(setIsAuth());
             return;

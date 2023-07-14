@@ -16,7 +16,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setCards } from '../../../store/reducers/authorization/Authorization/AuthSlice';
 import { UpdateCards } from '../../../store/reducers/authorization/Authorization/ActionCreator';
 // types
-import { ICard } from '../../../store/reducers/authorization/Authorization/AuthTypes';
+import { ICard } from '../../../store/storeModels';
 import { ICardProps, TSetNewColor } from './WordCardModel';
 const Card: FC<ICardProps> = function (
     {

@@ -6,7 +6,7 @@ import { setCards, setServerMessage } from '../store/reducers/authorization/Auth
 import { setInputValue } from '../store/reducers/modalRenameCard';
 import { UpdateCards } from '../store/reducers/authorization/Authorization/ActionCreator';
 // types
-import { ICard } from '../store/reducers/authorization/Authorization/AuthTypes';
+import { ICard } from '../store/storeModels';
 import { TAddNewCard } from './functoinModels';
 export const addNewCard: TAddNewCard = (e, inputValue, setIsAddCardModal, Cards, selectOptions, email, dispatch) => {
     e.preventDefault();

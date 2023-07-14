@@ -5,7 +5,7 @@ const ScrollToTop: FC = memo(function () {
     const [timeoutId, setTimeoutId] = useState<ReturnType<typeof setTimeout>>(0);
     const arrow = useRef<HTMLButtonElement | null>(null);
     let showArrow = false;
-    
+
     const addActiveClassName = () => {
         showArrow = document.body.scrollTop > window.innerHeight * 0.6;
         const styles = showArrow
@@ -18,7 +18,6 @@ const ScrollToTop: FC = memo(function () {
     const callback = () => {
         debounce(timeoutId, setTimeoutId, addActiveClassName, 400);
     };
-    
     useEffect(() => {
         document.body.addEventListener('scroll', callback);
         return () => {

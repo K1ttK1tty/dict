@@ -1,5 +1,4 @@
 import { FC, memo } from 'react';
-// styles
 import '../../styles/Vocabulary.css';
 const Search: FC = memo(function () {
     return (

@@ -19,7 +19,7 @@ import CheckboxChoice from '../components/UI//InputSearch/InputSearch.module.css
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { setInputReq } from '../store/reducers/GamesSlice';
 // types
-import { ICard } from '../store/reducers/authorization/Authorization/AuthTypes';
+import { ICard } from '../store/storeModels';
 import { IGames, TPrevState } from '../models/models';
 const Games: FC<IGames> = memo(function ({ isColorsInCards }) {
     const [testByWord, setTestByWord] = useState<boolean>(true);
@@ -37,10 +37,6 @@ const Games: FC<IGames> = memo(function ({ isColorsInCards }) {
         setPrevState({ testByWord, currentColor });
         setTestArray([]);
     }
-
-    // const setInputWordsCount = (value: string | number) => {
-    //     dispatch(setInputReq(Number(value)));
-    // };
     const switchColor = () => {
         if (currentColor === 'red') {
             setCurrentColor('orange');

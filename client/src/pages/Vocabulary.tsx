@@ -1,4 +1,4 @@
-import { FC, useRef, useState, useEffect, useMemo, memo } from 'react';
+import { FC, useRef, useState, useEffect, useMemo, memo, useDeferredValue } from 'react';
 // hooks
 import { useCards } from '../hooks/useCards';
 import { useLocaleStorage } from '../hooks/useLocaleStorage';
@@ -29,7 +29,9 @@ import {
 } from '../store/reducers/ColorPicker';
 // types
 import { IColorObject, IVocabulary } from '../models/models';
+import { IOptionState } from '../store/storeModels';
 const Vocabulary: FC<IVocabulary> = memo(function ({ isColorsOnCards, setIsColorsInCards }) {
+    const [isSelectOpen, setIsSelectOpen] = useState<IOptionState>({ open: false, removeMark: false });
     const [isAttached, setIsAttached] = useState<boolean>(true);
     const [isEditThemesModal, setIsEditThemesModal] = useState<boolean>(false);
     const [color, setColor] = useState<string>('#0dccce');
@@ -41,7 +43,7 @@ const Vocabulary: FC<IVocabulary> = memo(function ({ isColorsOnCards, setIsColor
     const modalChangeCard = useRef<HTMLInputElement | null>(null);
 
     const dispatch = useAppDispatch();
-    const { selectedTheme, optionState, cards } = useAppSelector(state => state.AuthSlice);
+    const { selectedTheme, cards } = useAppSelector(state => state.AuthSlice);
     const {
         searchWord,
         input,
@@ -65,6 +67,9 @@ const Vocabulary: FC<IVocabulary> = memo(function ({ isColorsOnCards, setIsColor
         isSearchByWord,
         isLetterCaseInclude,
     );
+    const calculatedArray = useDeferredValue(selectedAndSearchedWord);
+    const stale = calculatedArray !== selectedAndSearchedWord;
+
     const body = document.body;
     let arrOfCurrentElements: HTMLElement[] = useMemo(() => {
         return [];
@@ -244,7 +249,7 @@ const Vocabulary: FC<IVocabulary> = memo(function ({ isColorsOnCards, setIsColor
 
     return (
         <div
-            onMouseDown={e => removeInput(e, input, selectedTheme, optionState, dispatch)}
+            onMouseDown={e => removeInput(e, input, dispatch)}
             className={'searchWrapper pageContent'}
         >
             <ModalEditCard
@@ -258,8 +263,8 @@ const Vocabulary: FC<IVocabulary> = memo(function ({ isColorsOnCards, setIsColor
                 setIsAddCardModal={setIsAddCardModal}
             />
             <ModalEditThemes
-                isEditThemesModal={isEditThemesModal}
                 setIsEditThemesModal={setIsEditThemesModal}
+                isEditThemesModal={isEditThemesModal}
             />
             <div className={isAttached ? 'CardsField' : 'CardsField paddingTop124'}>
                 <div className="wrap">
@@ -269,11 +274,12 @@ const Vocabulary: FC<IVocabulary> = memo(function ({ isColorsOnCards, setIsColor
                         setIsAttached={setIsAttached}
                         isTwoColumns={isTwoColumns}
                         setIsTwoColumns={setIsTwoColumns}
-                        isOpenModal={isEditThemesModal}
                         setIsModal={setIsEditThemesModal}
                         wordsOrder={order}
                         setWordsOrder={setOrder}
                         setIsAddCardModal={setIsAddCardModal}
+                        isSelectOpen={isSelectOpen}
+                        setIsSelectOpen={setIsSelectOpen}
                     />
                     {
                         isAttached &&
@@ -353,13 +359,14 @@ const Vocabulary: FC<IVocabulary> = memo(function ({ isColorsOnCards, setIsColor
                     {
                         selectedAndSearchedWord.length
                             ? < SetCard
-                                Cards={selectedAndSearchedWord}
+                                stale={stale}
+                                Cards={calculatedArray}
                                 modalChangeCard={modalChangeCard}
                                 isTwoColumns={isTwoColumns}
                                 isColorsOnCards={isColorsOnCards}
                                 setIsEditCardModal={setIsEditCardModal}
                             />
-                            : <RemoveTheme />
+                            : <RemoveTheme setIsSelectOpen={setIsSelectOpen} isSelectOpen={isSelectOpen} />
                     }
                 </div>
             </div>

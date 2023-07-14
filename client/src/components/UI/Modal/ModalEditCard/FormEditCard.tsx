@@ -19,7 +19,7 @@ import { UpdateCards } from '../../../../store/reducers/authorization/Authorizat
 import { setCards } from '../../../../store/reducers/authorization/Authorization/AuthSlice';
 import { setEditCard } from '../../../../store/reducers/modalRenameCard';
 // types
-import { ICard } from '../../../../store/reducers/authorization/Authorization/AuthTypes';
+import { ICard } from '../../../../store/storeModels';
 import { IFormEditCard } from '../ModalsModels';
 const FormEditCard: FC<IFormEditCard> = function ({ modalChangeCard, setIsEditCardModal }) {
     const dispatch = useAppDispatch();

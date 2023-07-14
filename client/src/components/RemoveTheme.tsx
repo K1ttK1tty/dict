@@ -8,12 +8,12 @@ import { deleteAllEmptyThemes } from '../functions/deleteAllEmptyThemes';
 import '../styles/Vocabulary.css';
 //redux
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
-const RemoveTheme: FC = function () {
+import { IRemoveTheme } from '../models/models';
+const RemoveTheme: FC<IRemoveTheme> = function ({ setIsSelectOpen,isSelectOpen }) {
     const dispatch = useAppDispatch();
     const {
         selectOptions,
         selectedTheme,
-        optionState,
         user,
         cards
     } = useAppSelector(state => state.AuthSlice);
@@ -21,17 +21,27 @@ const RemoveTheme: FC = function () {
         <div>
             <h4 className="noCards">Пустота...</h4>
             {
-                optionState.removeMark &&
+                isSelectOpen.removeMark &&
                 <div className="deleteThemeWrapper">
                     <BtnAddCard
                         noClick={'noClick removeSelectedTheme'}
-                        onClick={() => deleteAllEmptyThemes(cards, selectOptions, optionState, user.email, dispatch)}
+                        onClick={
+                            () => deleteAllEmptyThemes(
+                                cards,
+                                selectOptions,
+                                setIsSelectOpen,
+                                isSelectOpen,
+                                user.email,
+                                dispatch
+                            )
+                        }
                         children="Удалить все пустые темы"
                     />
                     <BtnAddCard
                         noClick={'noClick'}
                         onClick={
-                            () => removeSelectTheme(selectOptions, optionState, selectedTheme, user.email, dispatch)
+                            () => removeSelectTheme(
+                                selectOptions, setIsSelectOpen, isSelectOpen, selectedTheme, user.email, dispatch)
                         }
                         children="Удалить эту тему"
                     />

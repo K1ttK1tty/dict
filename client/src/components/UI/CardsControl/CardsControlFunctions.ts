@@ -1,10 +1,10 @@
 import { TMouseMove, TMove } from './CardsControlModel';
 import styles from './CardsControl.module.css';
-export const mouseStay = () => { // get out
+export const mouseStay = () => { 
     document.onmousemove = null;
     document.body.className = '';
 };
-export const mouseMove: TMouseMove = (element, shiftY, shiftX, windowBlock) => { // get out
+export const mouseMove: TMouseMove = (element, shiftY, shiftX, windowBlock) => { 
     if (windowBlock?.current) {
         const windowElement = windowBlock?.current;
         windowElement.style.top = element.pageY - shiftY + 'px';
@@ -12,7 +12,7 @@ export const mouseMove: TMouseMove = (element, shiftY, shiftX, windowBlock) => {
     }
 };
 
-export const move: TMove = (element, windowBlock, isCanMove) => { // get out
+export const move: TMove = (element, windowBlock, isCanMove) => { 
     if (windowBlock) {
         if (!isCanMove || !windowBlock.current) {
             return;
@@ -26,7 +26,7 @@ export const move: TMove = (element, windowBlock, isCanMove) => { // get out
         document.body.className = styles.noselect;
     }
 };
-export const getCoordinates = (element: HTMLDivElement) => { // get out
+export const getCoordinates = (element: HTMLDivElement) => { 
     const coordinatesObj = element.getBoundingClientRect();
     return {
         top: coordinatesObj.top + window.scrollY,

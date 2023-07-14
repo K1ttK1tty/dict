@@ -1,5 +1,7 @@
 .paintBrush {
-    cursor: url("../styles//Icons//brush1.png") 0 30, pointer;
+    cursor:
+        url("../styles//Icons//brush1.png") 0 30,
+        pointer;
 }
 .CardsPosition {
     max-width: 900px;
@@ -226,4 +228,8 @@
     min-width: 46px;
     position: relative;
     display: flex;
+}
+.notRenderedYet{
+    opacity: 0.5;
+    transition: 0.15s;
 }

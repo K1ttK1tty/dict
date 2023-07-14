@@ -1,6 +1,5 @@
 export interface IMenuVoc {
-    setMenuOpen: (state: boolean) => void;
-    menuOpen: boolean;
+    setMenuOpen: (state: React.SetStateAction<boolean>) => void;
 }
 export interface IDefaultAvatar {
     style: string;

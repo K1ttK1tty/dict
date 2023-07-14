@@ -79,4 +79,39 @@ export interface IRegistration {
             name: string;
         }
     };
+}export interface IInput {
+    isOpen: boolean;
+    after: string;
+}
+export interface IUpMenuInitialState {
+    input: IInput;
+    searchWord: string;
+    isSearchByWord: boolean;
+    isLetterCaseInclude: boolean;
+}
+export interface IModalRenameCardInitialState {
+    indexCard: number;
+    isModalActive: boolean;
+    inputValue: IInputValue;
+    editCard: IInputValue;
+}
+export interface IGamesSliceInitialState {
+    inputReq: number,
+    validateArr: string[],
+}
+export interface IRefreshPassword {
+    password: string;
+    id: string | null;
+}
+export interface IAuthSliceInitialState {
+    user: IUser;
+    avatar: string;
+    isAuth: boolean;
+    isLoading: boolean;
+    updateError: string;
+    cards: ICard[] | [];
+    changeCard: ICard;
+    selectOptions: string[];
+    selectedTheme: string;
+    serverMessage: string;
 }

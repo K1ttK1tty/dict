@@ -1,6 +1,6 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { IDefaultAvatar } from '../MenuVocModel';
-const DefaultAvatar: FC<IDefaultAvatar> = function ({ style }) {
+const DefaultAvatar: FC<IDefaultAvatar> = memo(function ({ style }) {
     return (
         <svg className={style} width="30px" height="30px" viewBox="0 0 24 24" fill="none" >
             <path id="Vector" d="M20 21C20 18.2386 16.4183 16 12 16C7.58172 16 4 18.2386 4 21M12 
@@ -10,5 +10,5 @@ const DefaultAvatar: FC<IDefaultAvatar> = function ({ style }) {
             />
         </svg>
     );
-};
+});
 export default DefaultAvatar;
