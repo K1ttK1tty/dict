@@ -13,6 +13,10 @@ export interface IColorObject {
 export interface IVocabulary {
     isColorsOnCards: boolean;
     setIsColorsInCards: (state: boolean) => void;
+    isSelectOpen: IOptionState,
+    setIsSelectOpen: (state: React.SetStateAction<IOptionState>) => void;
+    isAttached: TAttachedControls,
+    setIsAttached: React.Dispatch<React.SetStateAction<TAttachedControls>>;
 }
 export interface ISetOptions {
     replaceOption: (element: React.MouseEvent<HTMLDivElement>) => void;
@@ -39,3 +43,4 @@ export interface IRemoveTheme {
     isSelectOpen: IOptionState;
     setIsSelectOpen: (state: React.SetStateAction<IOptionState>) => void;
 }
+export type TAttachedControls = { attach: boolean, top: string, left: string }

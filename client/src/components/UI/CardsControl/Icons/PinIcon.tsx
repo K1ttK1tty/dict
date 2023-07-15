@@ -1,8 +1,8 @@
 import { FC, memo } from 'react';
 import { IPicIcon } from '../CardsControlModel';
-const PinIcon: FC<IPicIcon> = memo(function ({ styles, setIsAttached }) {
+const PinIcon: FC<IPicIcon> = memo(function ({ styles, isAttached, setIsAttached }) {
     return (
-        <svg onClick={() => setIsAttached(prev => !prev)} className={styles}
+        <svg onClick={() => setIsAttached({ ...isAttached, attach: !isAttached.attach })} className={styles}
             height="18px" width="18px" viewBox="0 0 512 512" >
             <polygon
                 points="85.564,392.665 23.785,454.449 0,508.121

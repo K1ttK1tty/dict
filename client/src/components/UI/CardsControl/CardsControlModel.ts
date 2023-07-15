@@ -1,8 +1,9 @@
 import { IOptionState } from '../../../store/storeModels';
+import { TAttachedControls } from '../../../models/models';
 export interface ICardsControl {
     modalAdd: React.MutableRefObject<HTMLInputElement | null>;
-    isAttached: boolean;
-    setIsAttached: React.Dispatch<React.SetStateAction<boolean>>;
+    isAttached: TAttachedControls;
+    setIsAttached: React.Dispatch<React.SetStateAction<TAttachedControls>>;
     isTwoColumns: boolean;
     setIsTwoColumns: (state: boolean) => void;
     setIsModal: (state: boolean) => void;
@@ -16,11 +17,14 @@ export type TMouseMove = (
     element: MouseEvent,
     shiftY: number,
     shiftX: number,
-    windowBlock: React.RefObject<HTMLDivElement> | null
+    windowBlock: React.RefObject<HTMLDivElement> | null,
+    isAttached: TAttachedControls,
+    setIsAttached: React.Dispatch<React.SetStateAction<TAttachedControls>>,
 ) => void;
 export interface IPicIcon {
     styles: string;
-    setIsAttached: React.Dispatch<React.SetStateAction<boolean>>;
+    isAttached: TAttachedControls;
+    setIsAttached: React.Dispatch<React.SetStateAction<TAttachedControls>>;
 }
 export interface ISettingsIcon {
     dinamicClassName?: string;
@@ -28,5 +32,7 @@ export interface ISettingsIcon {
 export type TMove = (
     element: React.MouseEvent,
     windowBlock: React.RefObject<HTMLDivElement> | null,
-    isCanMove: boolean
+    isCanMove: boolean,
+    isAttached: TAttachedControls,
+    setIsAttached: React.Dispatch<React.SetStateAction<TAttachedControls>>,
 ) => void;

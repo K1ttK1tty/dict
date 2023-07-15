@@ -21,7 +21,7 @@ const MySelect: FC<IMySelect> = memo(function ({ setIsModal, isSelectOpen, setIs
     const { selectedTheme } = useAppSelector(state => state.AuthSlice);
     const selectWrapper = useRef<HTMLDivElement | null>(null);
     const [prev, setPrev] = useState<IOptionState>(isSelectOpen);
-    if (prev.open !== isSelectOpen.open ) {
+    if (prev.open !== isSelectOpen.open || prev.removeMark !== isSelectOpen.removeMark) {
         setPrev(isSelectOpen);
         if (isSelectOpen.open) {
             setTimeout(() => {
@@ -29,9 +29,6 @@ const MySelect: FC<IMySelect> = memo(function ({ setIsModal, isSelectOpen, setIs
                     selectWrapper.current.focus();
                 }
             }, 200);
-            document.body.onmousedown = () => {
-                setIsSelectOpen({ ...isSelectOpen, open: false });
-            };
         }
     }
     const openEditThemeModal = () => {

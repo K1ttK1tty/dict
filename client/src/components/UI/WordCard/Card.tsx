@@ -77,7 +77,7 @@ const Card: FC<ICardProps> = function (
             >
                 <IconEdit />
             </button>
-            <div
+            <button
                 onClick={() => removeCard(card.id, cards, user.email, dispatch)}
                 className={isMobile
                     ? styles.removeIcon
@@ -85,7 +85,7 @@ const Card: FC<ICardProps> = function (
                 }
             >
                 <IconRemove />
-            </div>
+            </button>
             <div className={styles.cardInfo} onClick={e => e.stopPropagation()}>
 
                 {

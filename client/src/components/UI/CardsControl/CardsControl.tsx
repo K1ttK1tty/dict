@@ -36,10 +36,10 @@ const CardsControl: FC<ICardsControl> = memo(function
     const attachedMenuStyles = isMobile
         ? {}
         : { top: '80px', left: '0px' };
-    if (isAttached) {
+    if (isAttached.attach) {
         return (
             <div style={attachedMenuStyles} className={[styles.cardsOptions, 'CardsControl'].join(' ')}>
-                {!isMobile && <PinIcon setIsAttached={setIsAttached} styles={styles.pinIcon} />}
+                {!isMobile && <PinIcon isAttached={isAttached} setIsAttached={setIsAttached} styles={styles.pinIcon} />}
                 <button
                     onClick={() => modalAddCard(modalAdd, setIsAddCardModal)}
                     className={styles.plus}
@@ -60,12 +60,14 @@ const CardsControl: FC<ICardsControl> = memo(function
     return (
         <div
             ref={windowBlock}
-            onMouseDown={element => move(element, windowBlock, isCanMove)}
+            onMouseDown={element => move(element, windowBlock, isCanMove, isAttached, setIsAttached)}
             onMouseUp={mouseStay}
             className={grabCursor}
+            style={{ left: isAttached.left, top: isAttached.top }}
         >
             <div className={styles.title}>
                 <PinIcon
+                    isAttached={isAttached}
                     setIsAttached={setIsAttached}
                     styles={[styles.pinIcon, styles.pinIconMarginRight].join(' ')}
                 />

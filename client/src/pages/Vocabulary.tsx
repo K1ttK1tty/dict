@@ -29,10 +29,15 @@ import {
 } from '../store/reducers/ColorPicker';
 // types
 import { IColorObject, IVocabulary } from '../models/models';
-import { IOptionState } from '../store/storeModels';
-const Vocabulary: FC<IVocabulary> = memo(function ({ isColorsOnCards, setIsColorsInCards }) {
-    const [isSelectOpen, setIsSelectOpen] = useState<IOptionState>({ open: false, removeMark: false });
-    const [isAttached, setIsAttached] = useState<boolean>(true);
+const Vocabulary: FC<IVocabulary> = memo(function (
+    {
+        isColorsOnCards,
+        setIsColorsInCards,
+        isSelectOpen,
+        setIsSelectOpen,
+        isAttached,
+        setIsAttached
+    }) {
     const [isEditThemesModal, setIsEditThemesModal] = useState<boolean>(false);
     const [color, setColor] = useState<string>('#0dccce');
     const [allElementsArray, setAllElementsArray] = useState<HTMLElement[]>([]);
@@ -69,7 +74,6 @@ const Vocabulary: FC<IVocabulary> = memo(function ({ isColorsOnCards, setIsColor
     );
     const calculatedArray = useDeferredValue(selectedAndSearchedWord);
     const stale = calculatedArray !== selectedAndSearchedWord;
-
     const body = document.body;
     let arrOfCurrentElements: HTMLElement[] = useMemo(() => {
         return [];
@@ -249,7 +253,10 @@ const Vocabulary: FC<IVocabulary> = memo(function ({ isColorsOnCards, setIsColor
 
     return (
         <div
-            onMouseDown={e => removeInput(e, input, dispatch)}
+            onMouseDown={e => {
+                removeInput(e, input, dispatch);
+                setIsSelectOpen({ ...isSelectOpen, open: false });
+            }}
             className={'searchWrapper pageContent'}
         >
             <ModalEditCard
@@ -357,7 +364,7 @@ const Vocabulary: FC<IVocabulary> = memo(function ({ isColorsOnCards, setIsColor
                         </div> */
                     }
                     {
-                        selectedAndSearchedWord.length
+                        calculatedArray.length
                             ? < SetCard
                                 stale={stale}
                                 Cards={calculatedArray}
