@@ -12,8 +12,8 @@
     right: 200px;
     color: rgb(219, 219, 219);
     background-color: #dddddd;
-    width: 250px;
-    height: 248px;
+    width: 220px;
+    height: 205px;
     border-radius: 12px;
     border: 1px solid rgb(136, 214, 47);
     box-shadow: 0px 0px 18px 2px rgba(0, 0, 0, 0.7);
@@ -66,6 +66,7 @@ h2 {
     border-top-right-radius: 0px;
     border-top-left-radius: 0px;
     transition: 0s;
+    z-index: -1;
 }
 .buttonChangePosition:hover {
     background: rgb(124, 196, 43) !important;

@@ -4,25 +4,23 @@
     margin-left: 40px;
     color: black !important;
 }
-.wordsCount,
-.inputOrder {
+.wordsCount {
     color: var(--empty-header);
     text-align: right;
     top: 0px;
     right: 0px;
     font-size: 17px;
-    margin-bottom: 4px;
+    margin-bottom: 10px;
 }
 .wordsCount {
     padding-right: 6px;
 }
-@media (max-width:768px){
+@media (max-width: 768px) {
     .mb18 {
         margin-bottom: 18px;
     }
 }
 @media (max-width: 768px) {
-    .inputOrder,
     .wordsCount {
         text-align: left;
         margin-left: 18px;

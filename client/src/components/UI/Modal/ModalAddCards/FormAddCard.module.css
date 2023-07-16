@@ -63,6 +63,7 @@
 }
 .btnMoved {
     margin-bottom: 10px;
+    
 }
 .btnCreateCard:after {
     scale: 0 !important;

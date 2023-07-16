@@ -23,7 +23,6 @@ const App: FC = () => {
     const dispatch = useAppDispatch();
     const { isAuth } = useAppSelector(state => state.AuthSlice);
     const email = useAppSelector(state => state.AuthSlice?.user?.email);
-
     if (onlyInFirstRender) {
         onlyInFirstRender = false;
         if (localStorage.getItem('token')) dispatch(CheckAuth());

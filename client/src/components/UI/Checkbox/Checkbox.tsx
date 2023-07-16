@@ -1,10 +1,16 @@
 import { FC, useId, memo } from 'react';
 import style from './Checkbox.module.css';
 import { ICheckbox } from './CheckboxModel';
-const Checkbox: FC<ICheckbox> = memo(function ({ id, defaultChecked, dinamicClassName, callback }) {
+const Checkbox: FC<ICheckbox> = memo(function (
+    { id,
+        defaultChecked,
+        dinamicClassName,
+        dinamicClassNameWrapper,
+        callback
+    }) {
     const differentId = `${useId()}-${id}`;
     return (
-        <div className={style.relative}>
+        <div className={style.relative + ` ${dinamicClassNameWrapper}`}>
             <input
                 id={differentId}
                 className={style.input}

@@ -1,7 +1,6 @@
 import { FC, useRef, useState, useEffect, useMemo, memo, useDeferredValue } from 'react';
 // hooks
 import { useCards } from '../hooks/useCards';
-import { useLocaleStorage } from '../hooks/useLocaleStorage';
 //components
 import SetCard from '../components/UI/WordCard/SetCard';
 import ModalEditCard from '../components/UI/Modal/ModalEditCard/ModalEditCard';
@@ -10,7 +9,6 @@ import RemoveTheme from '../components/RemoveTheme';
 import CardsControl from '../components/UI/CardsControl/CardsControl';
 import CardsInfo from '../components/UI/CardsInfo/CardsInfo';
 import ModalEditThemes from '../components/UI/Modal/ModalEditThemes/ModalEditThemes';
-import Checkbox from '../components/UI/Checkbox/Checkbox';
 //functions 
 import { removeInput } from '../functions/removeInput';
 //styles
@@ -31,12 +29,16 @@ import {
 import { IColorObject, IVocabulary } from '../models/models';
 const Vocabulary: FC<IVocabulary> = memo(function (
     {
-        isColorsOnCards,
-        setIsColorsInCards,
+        isTwoColumns,
+        isColorsInCards,
         isSelectOpen,
         setIsSelectOpen,
         isAttached,
-        setIsAttached
+        setIsAttached,
+        showNewLabel,
+        order,
+        selectedColorOrNewLabel,
+        setSelectedColorOrNewLabel,
     }) {
     const [isEditThemesModal, setIsEditThemesModal] = useState<boolean>(false);
     const [color, setColor] = useState<string>('#0dccce');
@@ -61,9 +63,7 @@ const Vocabulary: FC<IVocabulary> = memo(function (
     const currentColor = useAppSelector(state => state.ColorPicker.currentColor);
     const colorsBeforePaint = useAppSelector(state => state.ColorPicker.colorsBeforePaint);
 
-    const pageTheme = localStorage.getItem('theme');
-    const [order, setOrder] = useLocaleStorage('order', true);
-    const [isTwoColumns, setIsTwoColumns] = useLocaleStorage('oneOrTwoCardsColumns', false);
+    // const pageTheme = localStorage.getItem('theme');
     const selectedAndSearchedWord = useCards(
         cards,
         searchWord,
@@ -71,6 +71,7 @@ const Vocabulary: FC<IVocabulary> = memo(function (
         order,
         isSearchByWord,
         isLetterCaseInclude,
+        selectedColorOrNewLabel
     );
     const calculatedArray = useDeferredValue(selectedAndSearchedWord);
     const stale = calculatedArray !== selectedAndSearchedWord;
@@ -198,58 +199,58 @@ const Vocabulary: FC<IVocabulary> = memo(function (
     }, []);
 
     // проверить как ведут себя массивы элементов при точечном удалении цвета
-    useEffect(() => {
+    // useEffect(() => {
 
-        if (pageTheme === 'light') {
+    //     if (pageTheme === 'light') {
 
-            colorObject.light.elements = [...allElementsArray];
-            colorObject.light.colors = [];
+    //         colorObject.light.elements = [...allElementsArray];
+    //         colorObject.light.colors = [];
 
-            for (let index = 0; index < allElementsArray.length; index++) {
-                const element = allElementsArray[index];
-                colorObject.light.colors = [...colorObject.light.colors, element.style.background];
-            }
+    //         for (let index = 0; index < allElementsArray.length; index++) {
+    //             const element = allElementsArray[index];
+    //             colorObject.light.colors = [...colorObject.light.colors, element.style.background];
+    //         }
 
-        } else {
-            colorObject.dark.elements = [...allElementsArray];
-            colorObject.dark.colors = [];
+    //     } else {
+    //         colorObject.dark.elements = [...allElementsArray];
+    //         colorObject.dark.colors = [];
 
-            for (let index = 0; index < allElementsArray.length; index++) {
-                const element = allElementsArray[index];
-                colorObject.dark.colors = [...colorObject.dark.colors, element.style.background];
-            }
-        }
-    }, [
-        allElementsArray,
-        pageTheme,
-        colorObject.dark,
-        colorObject.light
-    ]);
+    //         for (let index = 0; index < allElementsArray.length; index++) {
+    //             const element = allElementsArray[index];
+    //             colorObject.dark.colors = [...colorObject.dark.colors, element.style.background];
+    //         }
+    //     }
+    // }, [
+    //     allElementsArray,
+    //     pageTheme,
+    //     colorObject.dark,
+    //     colorObject.light
+    // ]);
     // console.log(pageTheme)
     // console.log(colorObject)
     // console.log(allElementsArray)
 
-    useEffect(() => {
-        if (pageTheme === 'light') {
-            for (let index = 0; index < colorObject.light.elements.length; index++) {
-                const element = colorObject.light.elements[index];
+    // useEffect(() => {
+    //     if (pageTheme === 'light') {
+    //         for (let index = 0; index < colorObject.light.elements.length; index++) {
+    //             const element = colorObject.light.elements[index];
 
-                element.style.background = colorObject.light.colors[index];
-            }
-        } else {
-            for (let index = 0; index < colorObject.dark.elements.length; index++) {
-                const element = colorObject.dark.elements[index];
+    //             element.style.background = colorObject.light.colors[index];
+    //         }
+    //     } else {
+    //         for (let index = 0; index < colorObject.dark.elements.length; index++) {
+    //             const element = colorObject.dark.elements[index];
 
-                element.style.background = colorObject.dark.colors[index];
-            }
-        }
-    }, [
-        pageTheme,
-        colorObject.dark.colors,
-        colorObject.dark.elements,
-        colorObject.light.colors,
-        colorObject.light.elements
-    ]);
+    //             element.style.background = colorObject.dark.colors[index];
+    //         }
+    //     }
+    // }, [
+    //     pageTheme,
+    //     colorObject.dark.colors,
+    //     colorObject.dark.elements,
+    //     colorObject.light.colors,
+    //     colorObject.light.elements
+    // ]);
 
     return (
         <div
@@ -279,36 +280,20 @@ const Vocabulary: FC<IVocabulary> = memo(function (
                         modalAdd={modalAdd}
                         isAttached={isAttached}
                         setIsAttached={setIsAttached}
-                        isTwoColumns={isTwoColumns}
-                        setIsTwoColumns={setIsTwoColumns}
                         setIsModal={setIsEditThemesModal}
-                        wordsOrder={order}
-                        setWordsOrder={setOrder}
                         setIsAddCardModal={setIsAddCardModal}
                         isSelectOpen={isSelectOpen}
                         setIsSelectOpen={setIsSelectOpen}
+                        setSelectedColorOrNewLabel={setSelectedColorOrNewLabel}
+                        selectedColorOrNewLabel={selectedColorOrNewLabel}
+                        isColorsInCards={isColorsInCards}
                     />
                     {
-                        isAttached &&
-                        <CardsInfo
-                            order={order}
-                            setOrder={setOrder}
-                            isTwoColumns={isTwoColumns}
-                            setIsTwoColumns={setIsTwoColumns}
-                        />
+                        isAttached.attach &&
+                        <CardsInfo />
                     }
 
                     {
-                        <div >
-                            Цвета на карточках:
-                            <Checkbox
-                                id={'removeColorsOnCards'}
-                                defaultChecked={isColorsOnCards}
-                                dinamicClassName={''}
-                                callback={() => setIsColorsInCards(!isColorsOnCards)}
-                            />
-                        </div>
-
 
                         /* <ColorPicker color={color} setColor={setColor} />
                         <div
@@ -367,13 +352,18 @@ const Vocabulary: FC<IVocabulary> = memo(function (
                         calculatedArray.length
                             ? < SetCard
                                 stale={stale}
+                                showNewLabel={showNewLabel}
                                 Cards={calculatedArray}
                                 modalChangeCard={modalChangeCard}
                                 isTwoColumns={isTwoColumns}
-                                isColorsOnCards={isColorsOnCards}
+                                isColorsInCards={isColorsInCards}
                                 setIsEditCardModal={setIsEditCardModal}
                             />
-                            : <RemoveTheme setIsSelectOpen={setIsSelectOpen} isSelectOpen={isSelectOpen} />
+                            : <RemoveTheme
+                                setIsSelectOpen={setIsSelectOpen}
+                                isSelectOpen={isSelectOpen}
+                                selectedColorOrNewLabel={selectedColorOrNewLabel}
+                            />
                     }
                 </div>
             </div>

@@ -1,4 +1,5 @@
 import { FC, useState, memo } from 'react';
+import { useLocation } from 'react-router-dom';
 // components
 import UserTopMenu from '../UserMenu/UserTopMenu';
 import UserMenu from '../UserMenu/UserMenu';
@@ -14,7 +15,7 @@ const MenuVoc: FC<IMenuVoc> = memo(function ({ setMenuOpen }) {
     const { user } = useAppSelector(state => state.AuthSlice);
     const [isAvatarModal, setIsAvatarModel] = useState<boolean>(false);
     const [isDropDownMenuOpen, setIsDropDownMenuOpen] = useState<boolean>(false);
-    const path = window.location.pathname;
+    const path = useLocation().pathname;
     let enableSearch = false;
     if (path === '/posts' || path === '/') {
         enableSearch = true;

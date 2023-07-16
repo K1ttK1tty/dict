@@ -53,16 +53,17 @@
     background-color: rgba(128, 128, 128, 0.22);
 }
 .options {
-    position: absolute;
-    left: 0px;
-    top: 40px;
+    /* position: absolute; */
+    /* left: 0px; */
+    position: relative;
+    top: 6px;
     width: 170px;
     max-height: 450px;
     background: white;
     z-index: 0;
     border-radius: 14px;
     border: 1px solid rgba(0, 0, 0, 0.4);
-    z-index: 2;
+    /* z-index: 20; */
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -104,4 +105,75 @@
         top: 7px;
         right: -42px;
     }
+}
+.relative {
+    position: relative;
+}
+.dropDown {
+    width: 57%;
+    top: 90px;
+    left: 100%;
+    max-height: 130px;
+    z-index: 50;
+    transition: 0.25s;
+    cursor: default;
+    padding: 8px;
+}
+@media (max-width:768px){
+    .dropDown {
+        width: 70% !important;
+        top: 120px !important;
+        left: 40%;
+        max-height: 140px;
+        z-index: 50;
+        transition: 0.25s;
+        cursor: default;
+        padding: 8px;
+    }
+
+}
+.open {
+    top: 83px;
+}
+.colorBlock {
+    width: 80px;
+    height: 32px;
+    border: none;
+    border-radius: 6px;
+    margin: 0px auto 10px;
+    cursor: pointer;
+}
+.colorBlock:last-child {
+    margin-bottom: 0px;
+}
+.green {
+    background-color: rgb(136, 214, 47);
+    transition: 0.2s;
+}
+.green:hover {
+    background-color: rgb(124, 196, 43);
+}
+.red {
+    background-color: rgba(255, 0, 0, 0.8);
+    transition: 0.2s;
+}
+.red:hover {
+    background-color: rgba(224, 0, 0, 0.8);
+}
+.orange {
+    background-color: orange;
+    transition: 0.2s;
+}
+.orange:hover {
+    background-color: rgb(235, 152, 0);
+}
+.new {
+    background-color: #24292f;
+    font-size: 16px;
+    letter-spacing: 2px;
+    color: rgb(235, 235, 235);
+    transition: 0.2s;
+}
+.new:hover {
+    background-color: #24292fd2;
 }

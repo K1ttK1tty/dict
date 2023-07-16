@@ -113,9 +113,7 @@
     min-height: 100%;
     height: auto;
     padding-bottom: 15px;
-    /* transition: var(--transition-theme); */
 }
-
 @keyframes appear {
     from {
         transform: translateY(10px);
@@ -168,7 +166,7 @@
 }
 
 /*  */
-#checkbox {
+/* #checkbox {
     display: none;
 }
 
@@ -197,7 +195,7 @@
 
 #checkbox:checked + .checkboxLabel::after {
     transform: translateX(18px);
-}
+} */
 
 /* for light-dark theme */
 .iconSearchForMenu {
@@ -229,7 +227,20 @@
     position: relative;
     display: flex;
 }
-.notRenderedYet{
+.notRenderedYet {
     opacity: 0.5;
     transition: 0.15s;
+}
+/* Settings */
+
+.option {
+    max-width: 1000px;
+    width: 48%;
+    margin: 0px auto;
+    margin-bottom: 4px;
+    color: var(--header);
+}
+.optionContent{
+    display: inline-block;
+    min-width: 200px;
 }

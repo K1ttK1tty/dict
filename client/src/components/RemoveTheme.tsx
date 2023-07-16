@@ -9,7 +9,7 @@ import '../styles/Vocabulary.css';
 //redux
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { IRemoveTheme } from '../models/models';
-const RemoveTheme: FC<IRemoveTheme> = function ({ setIsSelectOpen,isSelectOpen }) {
+const RemoveTheme: FC<IRemoveTheme> = function ({ setIsSelectOpen, isSelectOpen, selectedColorOrNewLabel }) {
     const dispatch = useAppDispatch();
     const {
         selectOptions,
@@ -19,9 +19,11 @@ const RemoveTheme: FC<IRemoveTheme> = function ({ setIsSelectOpen,isSelectOpen }
     } = useAppSelector(state => state.AuthSlice);
     return (
         <div>
+
             <h4 className="noCards">Пустота...</h4>
+
             {
-                isSelectOpen.removeMark &&
+                (isSelectOpen.removeMark && !selectedColorOrNewLabel) &&
                 <div className="deleteThemeWrapper">
                     <BtnAddCard
                         noClick={'noClick removeSelectedTheme'}

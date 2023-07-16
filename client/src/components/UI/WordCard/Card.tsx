@@ -18,19 +18,22 @@ import { UpdateCards } from '../../../store/reducers/authorization/Authorization
 // types
 import { ICard } from '../../../store/storeModels';
 import { ICardProps, TSetNewColor } from './WordCardModel';
+import { TColorsOnCard } from '../../../models/models';
 const Card: FC<ICardProps> = function (
     {
         card,
+        showNewLabel,
         index,
         modalChangeCard,
         isTwoColumns,
-        isColorsOnCards,
+        isColorsInCards,
         setIsEditCardModal
     }) {
     const dispatch = useAppDispatch();
     const { cards, user } = useAppSelector(state => state.AuthSlice);
     const cardColorMark = [styles.colorMark, colours.get(card.color)].join(' ');
 
+    const showLabel = showNewLabel && isNewLabel(card.time);
     const openModalInMobile = isMobile
         ? () => editWord(card, index, setIsEditCardModal, modalChangeCard, dispatch)
         : undefined;
@@ -40,7 +43,7 @@ const Card: FC<ICardProps> = function (
 
     const nextColour = (e: React.MouseEvent<HTMLButtonElement>) => {
         const element = e.target as HTMLButtonElement;
-        let color: 'green' | 'red' | 'orange';
+        let color: TColorsOnCard;
         if (element.classList.contains(styles.red)) {
             color = 'orange';
         } else if (element.classList.contains(styles.orange)) {
@@ -64,7 +67,10 @@ const Card: FC<ICardProps> = function (
     };
 
     return (
-        <div onClick={openModalInMobile} className={cardClassName}>
+        <div onClick={openModalInMobile}
+            onMouseDown={e => e.stopPropagation()}
+            className={cardClassName}
+        >
             <h4 className={styles.word}>{card.word}</h4>
             <p className={styles.translate}>{card.translate}</p>
             <button
@@ -89,7 +95,7 @@ const Card: FC<ICardProps> = function (
             <div className={styles.cardInfo} onClick={e => e.stopPropagation()}>
 
                 {
-                    isColorsOnCards &&
+                    isColorsInCards &&
                     <button
                         className={cardColorMark}
                         onMouseDown={nextColour}
@@ -97,7 +103,7 @@ const Card: FC<ICardProps> = function (
                 }
 
                 {
-                    isNewLabel(card.time) &&
+                    showLabel &&
                     <div className={styles.new}>
                         <div className={styles.font}>n</div>
                         <div className={styles.font}>e</div>

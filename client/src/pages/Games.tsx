@@ -31,7 +31,6 @@ const Games: FC<IGames> = memo(function ({ isColorsInCards }) {
     const dispatch = useAppDispatch();
     const { cards } = useAppSelector(state => state.AuthSlice);
     const { inputReq } = useAppSelector(state => state.GamesSlice);
-
     const [prevState, setPrevState] = useState<TPrevState>({ testByWord, currentColor });
     if (prevState.testByWord !== testByWord || prevState.currentColor !== currentColor) {
         setPrevState({ testByWord, currentColor });
@@ -57,23 +56,27 @@ const Games: FC<IGames> = memo(function ({ isColorsInCards }) {
         <div className="gameWrap pageContent">
             <div className="gameCardsField">
                 <div className="title">Самопроверка</div>
-                <div className="title">
-                    по <span className={searchByWordClassName}>слову</span>/
-                    <span className={searchByTranslateClassName}>переводу</span>:
-                    <Checkbox
-                        id={'wordOrTranslateSelfTest'}
-                        defaultChecked={testByWord}
-                        callback={() => setTestByWord(!testByWord)}
-                    />
-                </div>
                 {
-                    isColorsInCards &&
-                    <div className="colorSelection" >
-                        <div>По цвету:</div>
-                        <button onClick={switchColor} className={testByColorClassName} />
-                    </div>
+                    cards.length &&
+                    <>
+                        <div className="title">
+                            по <span className={searchByWordClassName}>слову</span>/
+                            <span className={searchByTranslateClassName}>переводу</span>:
+                            <Checkbox
+                                id={'wordOrTranslateSelfTest'}
+                                defaultChecked={testByWord}
+                                callback={() => setTestByWord(!testByWord)}
+                            />
+                        </div>
+                        {
+                            isColorsInCards &&
+                            <div className="colorSelection" >
+                                <div>По цвету:</div>
+                                <button onClick={switchColor} className={testByColorClassName} />
+                            </div>
+                        }
+                    </>
                 }
-
                 <div className="gameBody">
                     {
                         cards.length ?

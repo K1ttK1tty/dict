@@ -16,7 +16,15 @@ import {
 // types
 import { IMySelect } from './MySelectModel';
 import { IOptionState } from '../../../store/storeModels';
-const MySelect: FC<IMySelect> = memo(function ({ setIsModal, isSelectOpen, setIsSelectOpen }) {
+const MySelect: FC<IMySelect> = memo(function (
+    {
+        setIsModal,
+        isSelectOpen,
+        setIsSelectOpen,
+        setSelectedColorOrNewLabel,
+        selectedColorOrNewLabel,
+        isColorsInCards
+    }) {
     const dispatch = useAppDispatch();
     const { selectedTheme } = useAppSelector(state => state.AuthSlice);
     const selectWrapper = useRef<HTMLDivElement | null>(null);
@@ -39,11 +47,20 @@ const MySelect: FC<IMySelect> = memo(function ({ setIsModal, isSelectOpen, setIs
         const divElement = element.target as HTMLDivElement;
         dispatch(setSelectedTheme(divElement.innerText));
         setIsSelectOpen({ open: false, removeMark: true });
+        if (selectedColorOrNewLabel) {
+            setSelectedColorOrNewLabel(null);
+        }
     };
     const removeTheme = () => {
         dispatch(setSelectedTheme(''));
         setIsSelectOpen({ open: false, removeMark: false });
+        setSelectedColorOrNewLabel(null);
     };
+    const label = selectedColorOrNewLabel
+        ? selectedColorOrNewLabel
+        : selectedTheme
+            ? cutLongLine(selectedTheme, 11)
+            : 'Тема';
     return (
         <div
             className={styles.select}
@@ -59,7 +76,7 @@ const MySelect: FC<IMySelect> = memo(function ({ setIsModal, isSelectOpen, setIs
                 <div
                     className={[styles.selectValue, 'ifNotThisThenClose'].join(' ')}
                 >
-                    {selectedTheme ? cutLongLine(selectedTheme, 11) : 'Тема'}
+                    {label}
                 </div>
                 <div className={styles.selectIcon}><IconSelect /></div>
             </div>
@@ -77,6 +94,10 @@ const MySelect: FC<IMySelect> = memo(function ({ setIsModal, isSelectOpen, setIs
                 <SetOptions
                     replaceOption={replaceOption}
                     openEditThemeModal={openEditThemeModal}
+                    setSelectedColorOrNewLabel={setSelectedColorOrNewLabel}
+                    isSelectOpen={isSelectOpen}
+                    setIsSelectOpen={setIsSelectOpen}
+                    isColorsInCards={isColorsInCards}
                 />
 
             </CSSTransition>

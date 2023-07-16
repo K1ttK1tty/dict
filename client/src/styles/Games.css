@@ -16,6 +16,7 @@
     max-width: 110px;
     font-size: 17px;
     margin: 0px auto;
+    color: var(--header);
 }
 .colorBlock {
     cursor: pointer;
@@ -88,6 +89,9 @@
 }
 .mb12 {
     margin-bottom: 12px;
+}
+.mr6 {
+    margin-right: 6px;
 }
 .inputEnterWordsCount {
     color: var(--input-borderBottom) !important;

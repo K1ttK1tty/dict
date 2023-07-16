@@ -14,11 +14,11 @@ const Info: FC<IInfo> = memo(function ({ isUserMenuOpen }) {
     const { id, email } = useAppSelector(state => state.AuthSlice.user);
 
     const [isOpen, setIsOpen] = useState<boolean>(isUserMenuOpen);
-    if (isUserMenuOpen !== isOpen) {
-        setIsOpen(isUserMenuOpen);
+    if (isUserMenuOpen !== isOpen && !isUserMenuOpen) {
+        setIsOpen(false);
     }
 
-    const submenuStyles = (isOpen && isUserMenuOpen)
+    const submenuStyles = (isOpen)
         ? [styles.show, styles.submenu].join(' ')
         : styles.submenu;
 

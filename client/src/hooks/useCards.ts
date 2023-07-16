@@ -1,22 +1,30 @@
 import { useMemo } from 'react';
 // functions
 import { isNotEmpty } from '../functions/isNotEmpty';
+import { isNewLabel } from '../components/UI/WordCard/CardConsts';
 // types
 import { ICard } from '../store/storeModels';
 import { TUseCards, TUseSearchByWord, TUseSelectedThemes, TUseSortedCards } from '../models/models';
+
 const useSordetCard: TUseSortedCards = (Cards, toggleWordsOrder) => {
     const sordetCard = useMemo(() => {
         if (!toggleWordsOrder) return Cards;
-        return Cards.sort((a, b) => a.word.localeCompare(b.word));
+        return [...Cards].sort((a, b) => a.word.localeCompare(b.word));
     }, [Cards, toggleWordsOrder]);
     return sordetCard;
 };
-const useSelectedThemes: TUseSelectedThemes = (Cards, selectedTheme, toggleWordsOrder) => {
+const useSelectedThemes: TUseSelectedThemes = (Cards, selectedTheme, toggleWordsOrder, selectedColor) => {
     const sordetCard = useSordetCard(Cards, toggleWordsOrder);
     const selectedThemes = useMemo(() => {
-        if (!selectedTheme) return sordetCard;
+        if (!selectedTheme && !selectedColor) return sordetCard;
+        if (selectedColor === 'new') {
+            return sordetCard.filter((card: ICard) => isNewLabel(card.time));
+        }
+        if (selectedColor) {
+            return sordetCard.filter((card: ICard) => card.color === selectedColor);
+        }
         return sordetCard.filter((card: ICard) => card.theme == selectedTheme);
-    }, [selectedTheme, sordetCard]);
+    }, [selectedTheme, sordetCard, selectedColor]);
 
     return selectedThemes;
 };
@@ -26,10 +34,11 @@ export const useCards: TUseCards = (
     selectedTheme,
     toggleWordsOrder,
     isSearchByWord,
-    isLetterCaseInclude
+    isLetterCaseInclude,
+    selectedColor
 ) => {
     const iterableCards = Cards.length ? [...Cards] : [];
-    const selectedThemes = useSelectedThemes(iterableCards, selectedTheme, toggleWordsOrder);
+    const selectedThemes = useSelectedThemes(iterableCards, selectedTheme, toggleWordsOrder, selectedColor);
     const selectedAndSearchedWord = useMemo(() => {
         if (isSearchByWord) {
             if (isLetterCaseInclude) {
@@ -57,6 +66,7 @@ export const useSearchByWord: TUseSearchByWord = (array, word) => {
             return newArray;
         }
         return array;
-    }, [word, array.length, array]);
+    }, [word, array]);
+    // }, [word, array.length, array]);
     return result;
 };

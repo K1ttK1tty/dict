@@ -1,19 +1,20 @@
 // libs
 import { FC, memo } from 'react';
 import { Link } from 'react-router-dom';
+import { isMobile } from 'react-device-detect';
 // icons
 import Icon1 from './icons/Icon1';
 import Icon2 from './icons/Icon2';
-// import Icon3 from './icons/Icon3';
+import Icon3 from './icons/Icon3';
 // import Icon4 from './icons/Icon4';
 // styles
 import cl from './MenuDesk.module.css';
 import { IMenuDesk } from './MenuDeskModel';
 const MenuDesk: FC<IMenuDesk> = memo(function ({ menuOpen, setMenuOpen }) {
-
+    const isMobileOrDesc = isMobile ? cl.back : [cl.back, cl.canHover].join(' ');
     const isMenuOpen: string = menuOpen
-        ? [cl.back, cl.canHover, cl.menuOpen].join(' ')
-        : [cl.back, cl.canHover].join(' ');
+        ? [isMobileOrDesc, cl.menuOpen].join(' ')
+        : [isMobileOrDesc].join(' ');
 
     const openMenu = (element: React.MouseEvent<HTMLElement>) => {
         element.stopPropagation();
@@ -31,7 +32,7 @@ const MenuDesk: FC<IMenuDesk> = memo(function ({ menuOpen, setMenuOpen }) {
         setMenuOpen(false);
     };
     return (
-        <nav onClick={openMenu} >
+        <nav onClick={isMobile ? openMenu : undefined} >
             <div className={isMenuOpen}>
                 <div className={cl.content}>
                     <ul className={cl.ulMmenu}>
@@ -55,13 +56,13 @@ const MenuDesk: FC<IMenuDesk> = memo(function ({ menuOpen, setMenuOpen }) {
                             </span>
                         </li>
 
-                        {/* <li className={cl.ulMenu__item}>
+                        <li className={cl.ulMenu__item}>
                             <span className={cl.spanIcons}>
-                                <Link to="/settings" >
-                                <Icon3 className={cl.colorIcon} />
-                                <span className={cl.swipe}>Настройки</span></Link>
+                                <Link className={cl.navigationLink} to="/settings" >
+                                    <Icon3 className={cl.colorIcon} />
+                                    <span className={cl.swipe}>Настройки</span></Link>
                             </span>
-                        </li> */}
+                        </li>
                     </ul>
 
                     {/* <a className={cl.callBack}>

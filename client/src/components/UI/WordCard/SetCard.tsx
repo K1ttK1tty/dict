@@ -7,10 +7,11 @@ import { ISetCards } from './WordCardModel';
 const SetCards: FC<ISetCards> = memo(function (
     {
         Cards,
+        showNewLabel,
         stale,
         modalChangeCard,
         isTwoColumns,
-        isColorsOnCards,
+        isColorsInCards,
         setIsEditCardModal
     }) {
     const notRendered = stale ? 'notRenderedYet' : '';
@@ -27,8 +28,9 @@ const SetCards: FC<ISetCards> = memo(function (
                             key={Math.random() + card.word}
                             index={index}
                             isTwoColumns={isTwoColumns}
-                            isColorsOnCards={isColorsOnCards}
+                            isColorsInCards={isColorsInCards}
                             setIsEditCardModal={setIsEditCardModal}
+                            showNewLabel={showNewLabel}
                         />
                     )
                 }
