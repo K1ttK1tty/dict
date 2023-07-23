@@ -10,7 +10,6 @@ import '../styles/theme.css';
 const Statistics: FC = function () {
 
     const data = {
-
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
         datasets: [{
             label: '# of Votes',

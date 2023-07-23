@@ -7,76 +7,44 @@ const pool = require('../db.js').pool
 const fileError = require('../exeptions/fileError.js')
 
 class fileService {
-
     async createUsersDataDir() {
         if (!fs.existsSync(process.env.USER_DATA_PATH)) {
             fs.mkdirSync(path.resolve(process.env.SERVER_DIR_PATH, 'usersData'))
         }
     }
-
     async createFile(email) {
         fs.mkdir(path.resolve(process.env.SERVER_DIR_PATH, 'usersData', `${email}_content`), (err) => { // асинхронная функция
-            if (err) {
-                throw new Error('Ошибка при создании файла')
-            }
+            if (err) throw new Error('Ошибка при создании файла');
         })
-        fs.writeFile(path.resolve(process.env.USER_DATA_PATH, `${email}_content`, `themes_${email}.txt`), '[]', (err) => {
-            if (err) {
-                throw new Error('Ошибка при создании файла')
-            }
-        })
-        fs.writeFile(path.resolve(process.env.USER_DATA_PATH, `${email}_content`, `cards_${email}.txt`), '[]', (err) => {
-            if (err) {
-                throw new Error('Ошибка при создании файла')
-            }
+        fs.writeFile(path.resolve(process.env.USER_DATA_PATH, `${email}_content`, `data_${email}.txt`), '{"default":{"selectOptions":[],"cards":[]}}', (err) => {
+            if (err) throw new Error('Ошибка при создании файла');
         })
     }
 
-    async getDataFromFile(email) {
+    async uploadData(email, data) { // new
+        const userData = JSON.stringify(data);
+        try {
+            if (!fs.existsSync(process.env.USER_DATA_PATH, `${email}_content`, `data_${email}.txt`)) {
+                throw fileError.ReadError()
+            }
+            fs.writeFile(path.resolve(process.env.USER_DATA_PATH, `${email}_content`, `data_${email}.txt`), userData, (err) => {
+                if (err) throw fileError.ReadError()
+            })
+
+            return 'Upload success'
+        } catch (error) {
+            return error
+        }
+    }
+    async getData(email) { // new
         if (!fs.existsSync(path.resolve(process.env.USER_DATA_PATH, `${email}_content`))) {
             throw fileError.getDataError()
         }
-        let cards = fs.readFileSync(path.resolve(process.env.USER_DATA_PATH, `${email}_content`, `cards_${email}.txt`), { encoding: 'utf-8' }, (err, data) => { 
-            if (err) {
-                throw fileError.getDataError()
-            }
+        let data = fs.readFileSync(path.resolve(process.env.USER_DATA_PATH, `${email}_content`, `data_${email}.txt`), { encoding: 'utf-8' }, (err, data) => {
+            if (err) throw fileError.getDataError()
         })
-        let themes = fs.readFileSync(path.resolve(process.env.USER_DATA_PATH, `${email}_content`, `themes_${email}.txt`), { encoding: 'utf-8' }, (err, data) => { 
-            if (err) {
-                throw fileError.getDataError()
-            }
-        })
-        const userCards = JSON.parse(cards)
-        const userThemes = JSON.parse(themes)
-        return { userCards, userThemes }
+        return JSON.parse(data)
     }
-
-
-    async updateCards(email, data) {
-        const userData = JSON.stringify(data)
-        if (!fs.existsSync(process.env.USER_DATA_PATH, `${email}_content`, `cards_${email}.txt`)) {
-            throw fileError.ReadError()
-        }
-        fs.writeFile(path.resolve(process.env.USER_DATA_PATH, `${email}_content`, `cards_${email}.txt`), userData, (err) => {
-            if (err) {
-                throw fileError.ReadError()
-            }
-        })
-    }
-
-
-    async updateTheme(email, data) {
-        const userData = JSON.stringify(data)
-        if (!fs.existsSync(process.env.USER_DATA_PATH, `${email}_content`, `themes_${email}.txt`)) {
-            throw fileError.ReadError()
-        }
-        fs.writeFile(path.resolve(process.env.USER_DATA_PATH, `${email}_content`, `themes_${email}.txt`), userData, (err) => {
-            if (err) {
-                throw fileError.ReadError()
-            }
-        })
-    }
-
     async uploadAvatar(email, avatar) {
         const extension = avatar.name.split('.').pop()
         const filePath = path.resolve(process.env.USER_DATA_PATH, `${email}_content`, `avatar.${extension}`)

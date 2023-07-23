@@ -126,7 +126,7 @@ export const AuthSlice = createSlice({
         builder.addCase(Logout.fulfilled, (state, action) => {
             localStorage.removeItem('token');
             state.isAuth = false;
-            state.user = { id: 0, name: '', email: '', isActivated: false };
+            state.user = { id: 0, name: '', email: '', isActivated: false, registrationDate: '' };
             state.serverMessage = action.payload.message;
             state.currentDictionary = 'default';
         });

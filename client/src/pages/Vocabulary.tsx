@@ -253,6 +253,7 @@ const Vocabulary: FC<IVocabulary> = memo(function (
     //     colorObject.light.colors,
     //     colorObject.light.elements
     // ]);
+
     return (
         <div
             onMouseDown={e => {

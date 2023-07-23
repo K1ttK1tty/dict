@@ -7,7 +7,7 @@ const router = require('./router/router.js')
 const errorMiddleware = require('./middlewares/errorMiddleware.js')
 const fileService = require('./service/fileService.js')
 const PORT = process.env.PORT || 5001;
-const app = express()
+const app = express();
 
 app.use(fileupload({}))
 app.use(express.json())
@@ -23,9 +23,8 @@ const start = () => {
     try {
         app.listen(PORT, () => console.log('server start at port ' + PORT))
         fileService.createUsersDataDir();
-
     } catch (err) {
-        console.log(err)
+        console.log(err)    
     }
 }
-start()
+start();

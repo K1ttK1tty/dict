@@ -11,6 +11,7 @@ const ApiError = require('../exeptions/apiError.js')
 // functions
 const generateAndSaveToken = require('../Functions/generateAndSaveToken.js').generateAndSaveToken
 const sendActivationMail = require('../Functions/sendActivationMail.js').sendActivationMail
+const getTodayDate = require('../Functions/getTodayDate.js').getTodayDate
 
 class userService {
     async registration(userName, email, password) {
@@ -20,19 +21,18 @@ class userService {
             throw ApiError.BadRequest(`Пользователь с почтовым адресом ${email} уже существует.`)
         }
         const hashPassword = await bcrypt.hash(password, 3);
-        await pool.query(`insert into user (name,email,password) values(?,?,?);`, [userName, email, hashPassword]);
+        await pool.query(`insert into user (name,registrationDate,email,password) values(?,?,?,?);`, [userName, getTodayDate(), email, hashPassword]);
 
         const activationLink = await sendActivationMail(email)
-        const [newPerson] = await pool.query(`select id,name,email from user where email=?;`, [email]) 
+        const [newPerson] = await pool.query(`select id,name,registrationDate,email from user where email=?;`, [email])
         await pool.query(`insert into activation (activationLink,user_id) values(?,?);`, [activationLink, newPerson[0].id])
 
-        const tokens = tokenService.generateTokens(newPerson[0]) 
-        await tokenService.saveToken(newPerson[0].id, tokens.refreshToken) 
+        const tokens = tokenService.generateTokens(newPerson[0])
+        await tokenService.saveToken(newPerson[0].id, tokens.refreshToken)
         const dto = { ...newPerson[0], activationLink }
 
         return { ...tokens, user: dto }
     }
-
     async sendActivate(id, email) {
         const activationLink = await sendActivationMail(email)
         await pool.query(`update activation set activationLink=? where user_id=?;`, [activationLink, id])
@@ -48,11 +48,11 @@ class userService {
 
     async login(email, password) {
         const [user] = await pool.query(`select * from user where email=?;`, [email])
-        if (!user[0]) { 
+        if (!user[0]) {
             throw ApiError.BadRequest('Пользователь с таким email не был найден')
         }
         const isPasswordsEqual = await bcrypt.compare(password, user[0].password) // возвращает true/false - сравнение паролей
-        if (!isPasswordsEqual) { 
+        if (!isPasswordsEqual) {
             throw ApiError.BadRequest('Неверный пароль')
         }
         return generateAndSaveToken(user);

@@ -1,18 +1,15 @@
 const ApiError = require('../exeptions/apiError.js')
 const tokenService = require('../service/tokenService.js')
 module.exports = function (req, res, next) {
-
     try {
         const authorizationHeader = req.headers.authorization; // получение токена в заголовке 
         if (!authorizationHeader) {
             return next(ApiError.UnauthorizedError())
         }
-
         const accessToken = authorizationHeader.split(' ')[1]; // разбиение строки "Bearer 'token'", получаем из header в запросе
         if (!accessToken) {
             return next(ApiError.UnauthorizedError())
         }
-
         const userData = tokenService.validateAccessToken(accessToken);
         if (!userData) {
             return next(ApiError.UnauthorizedError())
@@ -24,5 +21,4 @@ module.exports = function (req, res, next) {
     } catch (err) {
         return next(ApiError.UnauthorizedError())
     }
-    
 }

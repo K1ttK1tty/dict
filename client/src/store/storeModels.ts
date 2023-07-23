@@ -20,6 +20,7 @@ export interface IUser {
     name: string;
     email: string;
     isActivated: boolean;
+    registrationDate: string;
 }
 export interface IOptionState {
     open: boolean;
@@ -70,6 +71,7 @@ export interface IRegistration {
             email: string;
             id: number;
             name: string;
+            registrationDate: string;
         }
     };
 }export interface IInput {
@@ -102,7 +104,7 @@ export interface IAuthSliceInitialState {
     isLoading: boolean;
     updateError: string;
     cards: ICard[] | [];
-    currentDictionary:string;
+    currentDictionary: string;
     changeCard: ICard;
     selectOptions: string[];
     selectedTheme: string;

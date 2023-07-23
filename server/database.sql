@@ -2,6 +2,7 @@
 create table user(
     id int auto_increment primary key,
     name VARCHAR(255) NOT NULL,
+    registrationDate VARCHAR(255) NOt NULL,
     email VARCHAR(255) NOT NULL,
     password  VARCHAR(255) NOT NULL
 );

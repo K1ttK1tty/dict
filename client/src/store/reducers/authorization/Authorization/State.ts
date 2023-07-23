@@ -5,7 +5,8 @@ export const initialState: IAuthSliceInitialState = {
         id: 0,
         name: '',
         email: '',
-        isActivated: false
+        isActivated: false,
+        registrationDate: ''
     },
     data: {
         'default': {

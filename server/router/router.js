@@ -17,16 +17,15 @@ router.post('/login', userController.login);
 router.post('/logout', userController.logout);
 router.get('/refresh', userController.refresh);
 // activate email
-router.post('/sendActivationMail',userController.activationMail)
+router.post('/sendActivationMail', userController.activationMail)
 router.get('/activate/:link', userController.activate);
 // reset password
 router.post('/resetPassword', userController.resetPassword)
-router.get('/setNewPassword/:link',userController.toChangePassword)
+router.get('/setNewPassword/:link', userController.toChangePassword)
 router.post('/refreshPassword', userController.setNewPassword)
 // work with files
-router.post('/getData', authMiddleware, fileController.getContent);
-router.post('/updateCards', authMiddleware, fileController.updateCards);
-router.post('/updateTheme', authMiddleware, fileController.updateThemes);
+router.post('/uploadData', authMiddleware, fileController.uploadData);
+router.post('/getUserData', authMiddleware, fileController.getData);
 // avatar
 router.post('/uploadAvatar', authMiddleware, fileController.uploadAvatar)
 router.post('/getAvatar', authMiddleware, fileController.getAvatar)

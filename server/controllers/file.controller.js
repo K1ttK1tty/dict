@@ -1,34 +1,23 @@
 const fileService = require('../service/fileService.js')
 class fileController {
-
-    async updateCards(req, res, next) {
-        try {
-            const { email, cards } = req.body
-            await fileService.updateCards(email, cards)
-        } catch (err) {
-            next(err)
-        }
-    }
-
-    async updateThemes(req, res, next) {
-        try {
-            const { email, themes } = req.body
-            await fileService.updateTheme(email, themes)
-        } catch (err) {
-            next(err)
-        }
-    }
-
-    async getContent(req, res, next) {
+    async getData(req, res, next) {
         try {
             const { email } = req.body
-            const response = await fileService.getDataFromFile(email)
+            const response = await fileService.getData(email)
             res.json(response)
         } catch (err) {
             next(err)
         }
     }
-
+    async uploadData(req, res, next) {
+        try {
+            const { email, data } = req.body
+            const response = await fileService.uploadData(email, data)
+            res.json(response)
+        } catch (err) {
+            next(err)
+        }
+    }
     async uploadAvatar(req, res, next) {
         try {
             const email = req.query.email
@@ -38,7 +27,6 @@ class fileController {
             next(err)
         }
     }
-
     async getAvatar(req, res, next) {
         try {
             const email = req.body.data
@@ -46,8 +34,7 @@ class fileController {
             if (response) return res.download(response)
         } catch (err) {
         }
-    } 
-
+    }
     async removeAvatar(req, res, next) {
         try {
             const email = req.body.email
@@ -57,5 +44,4 @@ class fileController {
         }
     }
 }
-
 module.exports = new fileController();

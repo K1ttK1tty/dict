@@ -18,6 +18,7 @@ import {
     IUploadAvatar,
     IDataStructure
 } from '../../../storeModels';
+
 export const Registration = createAsyncThunk(
     'Registration',
     async (userData: IRegistrationProps, thunkAPI) => {
