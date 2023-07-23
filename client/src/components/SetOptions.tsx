@@ -27,7 +27,7 @@ const SetOptions: FC<ISetOptions> = memo(function (
     const dropDownMenuClassName = openDropDown
         ? [styles.dropDown, styles.open].join(' ')
         : styles.dropDown;
-    return (
+    return ( 
         <div id="options">
             <DropDownMenu
                 isMenuOpen={openDropDown}

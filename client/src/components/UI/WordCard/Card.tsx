@@ -7,6 +7,7 @@ import IconEdit from './icons/IconEdit';
 // functions
 import { removeCard } from '../../../functions/removeCard';
 import { editWord } from '../../../functions/editWord';
+import { updatedCards } from '../../../functions/UpdateCards';
 // consts
 import { colours, isNewLabel } from './CardConsts';
 // styles
@@ -14,7 +15,6 @@ import styles from './WordCard.module.css';
 //redux
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setCards } from '../../../store/reducers/authorization/Authorization/AuthSlice';
-import { UpdateCards } from '../../../store/reducers/authorization/Authorization/ActionCreator';
 // types
 import { ICard } from '../../../store/storeModels';
 import { ICardProps, TSetNewColor } from './WordCardModel';
@@ -30,7 +30,13 @@ const Card: FC<ICardProps> = function (
         setIsEditCardModal
     }) {
     const dispatch = useAppDispatch();
-    const { cards, user } = useAppSelector(state => state.AuthSlice);
+    const {
+        cards,
+        user,
+        data,
+        currentDictionary,
+        selectOptions
+    } = useAppSelector(state => state.AuthSlice);
     const cardColorMark = [styles.colorMark, colours.get(card.color)].join(' ');
 
     const showLabel = showNewLabel && isNewLabel(card.time);
@@ -42,6 +48,7 @@ const Card: FC<ICardProps> = function (
         [styles.card, styles.cardOneColumn].join(' ');
 
     const nextColour = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
         const element = e.target as HTMLButtonElement;
         let color: TColorsOnCard;
         if (element.classList.contains(styles.red)) {
@@ -53,9 +60,8 @@ const Card: FC<ICardProps> = function (
         }
         const newCards = setNewColor(cards, card.id, color);
         dispatch(setCards(newCards));
-        dispatch(UpdateCards({ email: user.email, cards: newCards }));
+        updatedCards(currentDictionary, user.email, data, newCards, selectOptions, dispatch);
     };
-
     const setNewColor: TSetNewColor = (cards, id, color) => {
         const newCards: ICard[] = JSON.parse(JSON.stringify(cards));
         newCards.map(card => {
@@ -65,7 +71,6 @@ const Card: FC<ICardProps> = function (
         });
         return newCards;
     };
-
     return (
         <div onClick={openModalInMobile}
             onMouseDown={e => e.stopPropagation()}
@@ -84,7 +89,7 @@ const Card: FC<ICardProps> = function (
                 <IconEdit />
             </button>
             <button
-                onClick={() => removeCard(card.id, cards, user.email, dispatch)}
+                onClick={() => removeCard(card.id, cards, user.email, data, currentDictionary, selectOptions, dispatch)}
                 className={isMobile
                     ? styles.removeIcon
                     : styles.remove

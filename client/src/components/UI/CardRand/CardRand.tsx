@@ -25,6 +25,7 @@ const CardRand: FC<ICardRand> = memo(function ({ card, index, testByWord }) {
                 <div className="translateBlock">
                     <InputAddCard
                         dinamicclassname={[styles.input, validateArr[index], 'inptReq '].join(' ')}
+                        disabled={validateArr.length > 0 ? true : false}
                     />
                     <div className={['wordShared', validateWord].join(' ')}>{card.word}</div>
                 </div>
@@ -40,6 +41,7 @@ const CardRand: FC<ICardRand> = memo(function ({ card, index, testByWord }) {
             <div className="translateBlock">
                 <InputAddCard
                     dinamicclassname={[styles.input, validateArr[index], 'inptReq '].join(' ')}
+                    disabled={validateArr.length > 0 ? true : false}
                 />
                 <div className={['wordShared', validateWord].join(' ')}>{card.translate}</div>
             </div>

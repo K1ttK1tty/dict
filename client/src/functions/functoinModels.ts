@@ -1,6 +1,6 @@
 import { AppDispatch } from '../store/store';
 import { IInputValue, IOptionState, ICard } from '../store/storeModels';
-import { IInput } from '../store/storeModels';
+import { IInput, IDataStructure } from '../store/storeModels';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 export type TAddNewCard = (
     e: React.MouseEvent<HTMLButtonElement>,
@@ -9,14 +9,15 @@ export type TAddNewCard = (
     Cards: ICard[],
     selectOptions: string[],
     email: string,
+    data: IDataStructure,
+    dictionaryName: string,
     dispatch: AppDispatch,
 ) => void;
 export type TAddNewTheme = (
     selectOptions: string[],
     newTheme: string,
-    email: string,
     dispatch: AppDispatch,
-) => void;
+) => string[];
 export type TChangeCardFields = (
     cards: ICard[],
     oldCard: ICard,
@@ -28,6 +29,8 @@ export type TDeleteAllEmptyThemes = (
     setIsSelectOpen: (state: React.SetStateAction<IOptionState>) => void,
     isSelectOpen: IOptionState,
     email: string,
+    data: IDataStructure,
+    dictionaryName: string,
     dispatch: AppDispatch,
 ) => void;
 export type TEditWord = (
@@ -65,6 +68,9 @@ export type TRemoveCard = (
     cardClickID: number,
     Cards: ICard[],
     email: string,
+    data: IDataStructure,
+    dictionaryName: string,
+    selectOptions:string[],
     dispatch: AppDispatch,
 ) => void;
 export type TRemoveInput = (
@@ -84,6 +90,8 @@ export type TRemoveSelectTheme = (
     isSelectOpen: IOptionState,
     selectedTheme: string,
     email: string,
+    data: IDataStructure,
+    dictionaryName: string,
     dispatch: AppDispatch,
 ) => void;
 export type TValidateQuiz = (
@@ -98,3 +106,30 @@ export type TShared = (
     inputs: NodeListOf<HTMLInputElement>,
     index: number
 ) => void;
+export type TUpdateThemes = (
+    dictionaryName: string,
+    email: string,
+    data: IDataStructure,
+    newThemes: string[],
+    dispatch: AppDispatch
+) => void
+export type TUpdatedCards = (
+    dictionaryName: string,
+    email: string,
+    data: IDataStructure,
+    newCards: ICard[],
+    newThemes: string[],
+    dispatch: AppDispatch
+) => void
+export type TDeleteDictionary = (
+    dictionaryName: string,
+    email: string,
+    data: IDataStructure,
+    dispatch: AppDispatch
+) => void;
+export type TAddNewDictionary = (
+    dictionaryName: string,
+    email: string,
+    data: IDataStructure,
+    dispatch: AppDispatch
+) => void

@@ -3,9 +3,9 @@ import $api from '../../../../api';
 // redux
 import { createAsyncThunk } from '@reduxjs/toolkit';
 // types
-import { IFetchError, IMessage, ILogin, IEmail } from '../../../storeModels';
+import { IFetchError, IMessage, IEmail } from '../../../storeModels';
 import { AxiosError } from 'axios';
-import { IRefreshPassword } from '../../../storeModels';
+import { IRefreshPassword, ILogin } from '../../../storeModels';
 export const SendResetPassword = createAsyncThunk(
     'SendResetPassword',
     async (userData: IEmail, thunkAPI) => {

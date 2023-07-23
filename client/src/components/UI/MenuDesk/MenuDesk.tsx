@@ -6,6 +6,7 @@ import { isMobile } from 'react-device-detect';
 import Icon1 from './icons/Icon1';
 import Icon2 from './icons/Icon2';
 import Icon3 from './icons/Icon3';
+import IconChart from './icons/IconChart';
 // import Icon4 from './icons/Icon4';
 // styles
 import cl from './MenuDesk.module.css';
@@ -61,6 +62,14 @@ const MenuDesk: FC<IMenuDesk> = memo(function ({ menuOpen, setMenuOpen }) {
                                 <Link className={cl.navigationLink} to="/settings" >
                                     <Icon3 className={cl.colorIcon} />
                                     <span className={cl.swipe}>Настройки</span></Link>
+                            </span>
+                        </li>
+
+                        <li className={cl.ulMenu__item}>
+                            <span className={cl.spanIcons}>
+                                <Link className={cl.navigationLink} to="/statistics" >
+                                    <IconChart dinamicClassName={cl.colorIcon} />
+                                    <span className={cl.swipe}>Статистика</span></Link>
                             </span>
                         </li>
                     </ul>

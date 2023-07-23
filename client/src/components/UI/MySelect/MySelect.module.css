@@ -53,8 +53,6 @@
     background-color: rgba(128, 128, 128, 0.22);
 }
 .options {
-    /* position: absolute; */
-    /* left: 0px; */
     position: relative;
     top: 6px;
     width: 170px;
@@ -63,7 +61,6 @@
     z-index: 0;
     border-radius: 14px;
     border: 1px solid rgba(0, 0, 0, 0.4);
-    /* z-index: 20; */
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -73,7 +70,6 @@
         height: 45px;
     }
     .options {
-        top: 45px;
         width: 140px;
     }
     .title {

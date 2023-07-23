@@ -15,13 +15,14 @@ const RemoveTheme: FC<IRemoveTheme> = function ({ setIsSelectOpen, isSelectOpen,
         selectOptions,
         selectedTheme,
         user,
-        cards
+        cards,
+        data,
+        currentDictionary
     } = useAppSelector(state => state.AuthSlice);
     return (
-        <div>
+        <>
 
             <h4 className="noCards">Пустота...</h4>
-
             {
                 (isSelectOpen.removeMark && !selectedColorOrNewLabel) &&
                 <div className="deleteThemeWrapper">
@@ -34,6 +35,8 @@ const RemoveTheme: FC<IRemoveTheme> = function ({ setIsSelectOpen, isSelectOpen,
                                 setIsSelectOpen,
                                 isSelectOpen,
                                 user.email,
+                                data,
+                                currentDictionary,
                                 dispatch
                             )
                         }
@@ -43,13 +46,21 @@ const RemoveTheme: FC<IRemoveTheme> = function ({ setIsSelectOpen, isSelectOpen,
                         noClick={'noClick'}
                         onClick={
                             () => removeSelectTheme(
-                                selectOptions, setIsSelectOpen, isSelectOpen, selectedTheme, user.email, dispatch)
+                                selectOptions,
+                                setIsSelectOpen,
+                                isSelectOpen,
+                                selectedTheme,
+                                user.email,
+                                data,
+                                currentDictionary,
+                                dispatch
+                            )
                         }
                         children="Удалить эту тему"
                     />
                 </div>
             }
-        </div>
+        </>
     );
 };
 export default RemoveTheme;

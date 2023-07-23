@@ -9,13 +9,13 @@ import TextArea from '../../TextArea/TextArea';
 import { changeCardFields } from '../../../../functions/changeCardFields';
 import { addNewTheme } from '../../../../functions/addNewTheme';
 import { removeCard } from '../../../../functions/removeCard';
+import { updatedCards } from '../../../../functions/UpdateCards';
 // styles
 import style from './Modal.module.css';
 // icon
 import SoundIcon from '../icons/SoundIcon';
 // redux
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
-import { UpdateCards } from '../../../../store/reducers/authorization/Authorization/ActionCreator';
 import { setCards } from '../../../../store/reducers/authorization/Authorization/AuthSlice';
 import { setEditCard } from '../../../../store/reducers/modalRenameCard';
 // types
@@ -24,20 +24,26 @@ import { IFormEditCard } from '../ModalsModels';
 const FormEditCard: FC<IFormEditCard> = function ({ modalChangeCard, setIsEditCardModal }) {
     const dispatch = useAppDispatch();
     const { editCard } = useAppSelector(state => state.modalRenameCard);
-    const { changeCard, cards, selectOptions } = useAppSelector(state => state.AuthSlice);
+    const {
+        changeCard,
+        cards,
+        selectOptions,
+        data,
+        currentDictionary
+    } = useAppSelector(state => state.AuthSlice);
     const email = useAppSelector(state => state.AuthSlice?.user?.email);
 
     const ChangeCard = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         const newCards: ICard[] = changeCardFields(cards, changeCard, editCard);
-        addNewTheme(selectOptions, editCard.theme, email, dispatch);
-        dispatch(UpdateCards({ email, cards: newCards }));
+        const newThemes = addNewTheme(selectOptions, editCard.theme, dispatch);
+        updatedCards(currentDictionary, email, data, newCards, newThemes, dispatch);
         dispatch(setCards(newCards));
         setIsEditCardModal(false);
     };
     const remove = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        removeCard(editCard.id, cards, email, dispatch);
+        removeCard(editCard.id, cards, email, data, currentDictionary, selectOptions, dispatch)
         setIsEditCardModal(false);
     };
     return (

@@ -10,16 +10,13 @@ import { AxiosError } from 'axios';
 import {
     IRegistrationProps,
     IRegistration,
-    ILogin,
     IFetchError,
     IActivateMailProps,
     IMessage,
     ILoginProps,
     ICheckAuth,
-    IUserContent,
-    IUpdateCards,
-    IUpdateThemes,
-    IUploadAvatar
+    IUploadAvatar,
+    IDataStructure
 } from '../../../storeModels';
 export const Registration = createAsyncThunk(
     'Registration',
@@ -58,7 +55,7 @@ export const Login = createAsyncThunk(
     async (userData: ILoginProps, thunkAPI) => {
         try {
             const { email, password } = userData;
-            const response = await $api.post<ILogin>('/login', { email, password });
+            const response = await $api.post<ICheckAuth>('/login', { email, password });
             console.log(response);
             return response.data;
         } catch (error) {
@@ -100,47 +97,39 @@ export const CheckAuth = createAsyncThunk(
         }
     }
 );
-export const GetData = createAsyncThunk(
-    'GetData',
-    async (email: string, thunkAPI) => {
+export const UploadData = createAsyncThunk(
+    'UploadData',
+    async (userData: { email: string, data: IDataStructure }, thunkAPI) => {
+        const { email, data } = userData;
         try {
-            const response = await $api.post<IUserContent>('/getData', { email });
+            const response = await $api.post<IDataStructure>('/uploadData', { email, data });
             console.log(response);
             return response.data;
+
         } catch (error) {
             const err = error as AxiosError<IFetchError>;
             console.log(err);
             console.log(err?.response?.data?.message);
             return thunkAPI.rejectWithValue(err?.response?.data?.message);
         }
+
     }
 );
-export const UpdateCards = createAsyncThunk(
-    'UpdateCards',
-    async (data: IUpdateCards, thunkAPI) => {
+export const GetUserData = createAsyncThunk(
+    'GetUserData',
+    async (email: string, thunkAPI) => {
         try {
-            const { email, cards } = data;
-            const response = await $api.post('/updateCards', { email, cards });
+            const response = await $api.post<IDataStructure>('/getUserData', { email });
+            console.log(response);
+            return response.data;
+
         } catch (error) {
             const err = error as AxiosError<IFetchError>;
             console.log(err);
             console.log(err?.response?.data?.message);
-            return thunkAPI.rejectWithValue('Произошла ошибка при запросе на сервер :(');
+            return thunkAPI.rejectWithValue(err?.response?.data?.message);
         }
-    }
-);
-export const UpdateThemes = createAsyncThunk(
-    'UpdateThemes',
-    async (data: IUpdateThemes, thunkAPI) => {
-        try {
-            const { email, themes } = data;
-            const response = await $api.post('/updateTheme', { email, themes });
-        } catch (error) {
-            const err = error as AxiosError<IFetchError>;
-            console.log(err);
-            console.log(err?.response?.data?.message);
-            return thunkAPI.rejectWithValue('Произошла ошибка при запросе на сервер :(');
-        }
+
     }
 );
 export const UploadAvatar = createAsyncThunk(

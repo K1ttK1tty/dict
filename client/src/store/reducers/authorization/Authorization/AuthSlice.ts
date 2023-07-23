@@ -6,13 +6,13 @@ import {
     Registration,
     Logout,
     CheckAuth,
-    GetData,
     GetAvatar,
-    activateMail
+    activateMail,
+    GetUserData
 } from './ActionCreator';
 import { SendResetPassword, refreshPassword } from '../ChangePassword/Actions';
 // interfaces
-import { ICard } from '../../../storeModels';
+import { ICard, IDataStructure } from '../../../storeModels';
 // state
 import { initialState } from './State';
 export const AuthSlice = createSlice({
@@ -24,7 +24,16 @@ export const AuthSlice = createSlice({
             state.isAuth = true;
         },
         ////////////// DELETE THIS !
-
+        changeDictionary(state, action: PayloadAction<string>) {
+            state.cards = state.data[action.payload].cards;
+            state.selectOptions = state.data[action.payload].selectOptions;
+        },
+        setCurrentDictionary(state, action: PayloadAction<string>) {
+            state.currentDictionary = action.payload;
+        },
+        setData(state, action: PayloadAction<IDataStructure>) {
+            state.data = action.payload;
+        },
         // cards
         setCards(state, action: PayloadAction<ICard[]>) {
             state.cards = action.payload;
@@ -93,8 +102,6 @@ export const AuthSlice = createSlice({
         builder.addCase(Login.fulfilled, (state, action) => {
             localStorage.setItem('token', action.payload.accessToken);
             console.log(action.payload);
-            state.cards = action.payload.userContent.userCards;
-            state.selectOptions = action.payload.userContent.userThemes;
             state.isAuth = true;
             const userInfo = { ...action.payload.user, isActivated: !!action.payload.user.isActivated };
             state.user = userInfo;
@@ -121,6 +128,7 @@ export const AuthSlice = createSlice({
             state.isAuth = false;
             state.user = { id: 0, name: '', email: '', isActivated: false };
             state.serverMessage = action.payload.message;
+            state.currentDictionary = 'default';
         });
 
         // refresh token
@@ -133,10 +141,12 @@ export const AuthSlice = createSlice({
             state.serverMessage = action.payload.message;
         });
 
-        // get cards 
-        builder.addCase(GetData.fulfilled, (state, action) => {
-            state.cards = action.payload.userCards;
-            state.selectOptions = action.payload.userThemes;
+        // upload user data
+        builder.addCase(GetUserData.fulfilled, (state, action) => {
+            console.log(action.payload);
+            state.data = action.payload;
+            state.cards = action.payload.default.cards;
+            state.selectOptions = action.payload.default.selectOptions;
         });
 
         builder.addCase(GetAvatar.fulfilled, (state, action) => {
@@ -185,4 +195,7 @@ export const {
     setSelectedTheme,
     setAvatar,
     setServerMessage,
+    setCurrentDictionary,
+    setData,
+    changeDictionary
 } = AuthSlice.actions;

@@ -1,5 +1,5 @@
 // libs
-import { FC, useState, useMemo, lazy, Suspense, memo } from 'react';
+import { FC, useState, lazy, Suspense, memo } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 // hook
 import { useLocaleStorage } from '../hooks/useLocaleStorage.ts';
@@ -7,15 +7,17 @@ import { useLocaleStorage } from '../hooks/useLocaleStorage.ts';
 import { IOptionState } from '../store/storeModels.ts';
 import { TAttachedControls } from '../models/models.ts';
 import { TSelectColorOrNew } from './UI/MySelect/MySelectModel.ts';
-const AppRouter: FC = memo(function () {
-    const Games = useMemo(() => lazy(() => import('../pages/Games.tsx')), []);
-    const Vocabulary = useMemo(() => lazy(() => import('../pages/Vocabulary.tsx')), []);
-    const Settings = useMemo(() => lazy(() => import('../pages/Settings.tsx')), []);
+const Games = lazy(() => import('../pages/Games.tsx'));
+const Vocabulary = lazy(() => import('../pages/Vocabulary.tsx'));
+const Settings = lazy(() => import('../pages/Settings.tsx'));
+const Statistics = lazy(() => import('../pages/Statistics.tsx'));
 
+const AppRouter: FC = memo(function () {
     const [isColorsInCards, setIsColorsInCards] = useLocaleStorage('isColorsOnCards', true);
     const [isTwoColumns, setIsTwoColumns] = useLocaleStorage('oneOrTwoCardsColumns', false);
     const [showNewLabel, setShowNewLabel] = useLocaleStorage('showNewLabel', true);
     const [order, setOrder] = useLocaleStorage('order', true);
+
     const [isSelectOpen, setIsSelectOpen] = useState<IOptionState>({ open: false, removeMark: false });
     const [isAttached, setIsAttached] = useState<TAttachedControls>({ attach: true, top: '100px', left: '120px' });
     const [selectedColorOrNewLabel, setSelectedColorOrNewLabel] = useState<TSelectColorOrNew | null>(null);
@@ -65,6 +67,14 @@ const AppRouter: FC = memo(function () {
                     />
                 </Suspense>
             } />
+            <Route
+                path="/statistics"
+                element={
+                    <Suspense>
+                        <Statistics />
+                    </Suspense>
+                }
+            />
             <Route
                 path="*"
                 element={VocabularyInSuspense} />

@@ -24,7 +24,14 @@ const FormAddCard: FC<IFormAddCard> = memo(function (
         isAddCardModal
     }) {
     const dispatch = useAppDispatch();
-    const { cards, user, selectOptions, selectedTheme } = useAppSelector(state => state.AuthSlice);
+    const {
+        cards,
+        user,
+        selectOptions,
+        selectedTheme,
+        data,
+        currentDictionary
+    } = useAppSelector(state => state.AuthSlice);
     const { inputValue } = useAppSelector(state => state.modalRenameCard);
     const [isOverlap, setIsOverlap] = useState<boolean>(false);
     const [cardWithOverlap, setCardWithOverlap] = useState<ICard | null>(null);
@@ -45,6 +52,8 @@ const FormAddCard: FC<IFormAddCard> = memo(function (
             cards,
             selectOptions,
             user.email,
+            data,
+            currentDictionary,
             dispatch
         );
         setDefaultTheme('');

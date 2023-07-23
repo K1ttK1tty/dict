@@ -1,12 +1,19 @@
 // redux
 import { setCards, setID } from '../store/reducers/authorization/Authorization/AuthSlice';
-import { UpdateCards } from '../store/reducers/authorization/Authorization/ActionCreator';
+import { updatedCards } from './UpdateCards';
 // types
 import { TRemoveCard } from './functoinModels';
-export const removeCard: TRemoveCard = (cardClickID, Cards, email, dispatch) => {
+export const removeCard: TRemoveCard = (
+    cardClickID,
+    Cards,
+    email,
+    data,
+    currentDictionary,
+    selectOptions,
+    dispatch
+) => {
     const cards = [...Cards.filter(card => cardClickID !== card.id)];
-    console.log(cards)
-    dispatch(UpdateCards({ email, cards }));
+    updatedCards(currentDictionary, email, data, cards, selectOptions, dispatch);
     dispatch(setCards(cards));
     dispatch(setID());
 };

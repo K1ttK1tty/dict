@@ -1,5 +1,5 @@
 // redux
-import { UpdateThemes } from '../store/reducers/authorization/Authorization/ActionCreator';
+import { updateThemes } from './updateThemes';
 import {
     setSelectOptions,
     setSelectedTheme
@@ -13,6 +13,8 @@ export const deleteAllEmptyThemes: TDeleteAllEmptyThemes =
         setIsSelectOpen,
         isSelectOpen,
         email,
+        data,
+        currentDictionary,
         dispatch
     ) => {
         const themes: string[] = [];
@@ -23,7 +25,7 @@ export const deleteAllEmptyThemes: TDeleteAllEmptyThemes =
             }
         }
         dispatch(setSelectOptions(themes));
-        dispatch(UpdateThemes({ email, themes }));
+        updateThemes(currentDictionary, email, data, themes, dispatch);
         dispatch(setSelectedTheme(''));
         setIsSelectOpen({ ...isSelectOpen, removeMark: false });
     };

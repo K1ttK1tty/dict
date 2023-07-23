@@ -80,7 +80,7 @@ const Games: FC<IGames> = memo(function ({ isColorsInCards }) {
                 <div className="gameBody">
                     {
                         cards.length ?
-                            <div>
+                            <>
                                 <form className="formTitle">
                                     <div className={'mr6 mb12'}>
                                         Введите количество слов:
@@ -136,7 +136,7 @@ const Games: FC<IGames> = memo(function ({ isColorsInCards }) {
                                         </div>
                                     </form>
                                 }
-                            </div>
+                            </>
                             : <h3 className="noWords">Добавьте слова!</h3>
                     }
                 </div>

@@ -38,7 +38,6 @@
     }
     .modalContent {
         padding: 25px 21px;
-        /* min-width: 250px; */
     }
 }
 .modalInputs {
@@ -69,6 +68,11 @@
     font-size: 20px;
     font-weight: 500;
     max-width: 85%;
+    transition: 0.2s;
+
+}
+.ml30{
+    margin-left: 30px;
 }
 .modalClose {
     position: relative;
@@ -105,7 +109,6 @@
     min-width: 104px;
     display: flex;
     align-items: center;
-    /* min-width: 89px; */
 }
 @media (max-width: 768px) {
     .inputP {
@@ -162,4 +165,9 @@
     scale: 1.2;
     border: none;
     border-top: 1px solid rgba(128, 128, 128, 0.35);
+}
+.backArrow{
+    scale: 0.6;
+    left: -24px;
+    top: -11px;
 }

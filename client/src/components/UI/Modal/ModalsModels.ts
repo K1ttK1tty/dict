@@ -7,6 +7,8 @@ export interface IModal {
     setModal?: (state: boolean) => void;
     setFields?: ActionCreatorWithPayload<(IInputValue)>;
     dinamicClassName?: string;
+    back?: boolean;
+    backFunc?:()=>void;
 }
 export interface IAddAvatarContent {
     changeFile: (file: HTMLInputElement) => void;
@@ -68,3 +70,18 @@ export type TDebounce<T> = (
     callback: T,
     time: number,
 ) => void;
+export interface IModalDictionary {
+    isModal: boolean;
+    setIsModal: (state: boolean) => void;
+}
+export interface IDictionaryContent {
+    removeContent: boolean;
+    createContent: boolean;
+    changeContent: boolean;
+}
+export interface IModalDictionaryMain {
+    isModal: boolean;
+    setIsModal: (state: boolean) => void;
+    setDictionaryContent: (state: IDictionaryContent) => void;
+    dictionaryContent: IDictionaryContent;
+}

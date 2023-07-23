@@ -50,13 +50,6 @@ export interface ICheckAuth extends IMessage {
 export interface IFetchError extends IMessage {
     errors: [] | { value: string, msg: string, param: string, location: string }
 }
-export interface IUpdateCards extends IEmail {
-    email: string;
-    cards: ICard[];
-}
-export interface IUpdateThemes extends IEmail {
-    themes: string[];
-}
 export interface IUploadAvatar extends IEmail {
     avatar: File;
 }
@@ -91,7 +84,6 @@ export interface IUpMenuInitialState {
 }
 export interface IModalRenameCardInitialState {
     indexCard: number;
-    isModalActive: boolean;
     inputValue: IInputValue;
     editCard: IInputValue;
 }
@@ -110,8 +102,18 @@ export interface IAuthSliceInitialState {
     isLoading: boolean;
     updateError: string;
     cards: ICard[] | [];
+    currentDictionary:string;
     changeCard: ICard;
     selectOptions: string[];
     selectedTheme: string;
     serverMessage: string;
+    data: IDataStructure;
+}
+interface IObjFields {
+    selectOptions: string[],
+    cards: ICard[]
+}
+export interface IDataStructure {
+    default: IObjFields;
+    [key: string]: IObjFields
 }

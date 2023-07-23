@@ -12,7 +12,6 @@ export default function InputAddCard<T>(props: IInputProps<T>) {
         }
     };
     const onChangeThemeAddCard = (e: React.ChangeEvent<HTMLInputElement>) => {
-
         if (props.setDefaultTheme) {
             props.setDefaultTheme(e.target.value);
         }
@@ -25,6 +24,7 @@ export default function InputAddCard<T>(props: IInputProps<T>) {
                 className={[cl.www, props.dinamicclassname].join(' ')}
                 value={props.defaultTheme}
                 onChange={onChangeThemeAddCard}
+                disabled={props.disabled}
             />
         );
     }
@@ -36,6 +36,7 @@ export default function InputAddCard<T>(props: IInputProps<T>) {
             className={[cl.www, props.dinamicclassname].join(' ')}
             value={props.inputValue}
             onChange={setInputValue}
+            disabled={props.disabled}
             {...props.register}
         />
     );

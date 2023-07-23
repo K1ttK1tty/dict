@@ -1,4 +1,3 @@
-
 import { TSelectThemeModalEditThemes, TClearInput } from './modelsModalEditThemes';
 export const selectTheme: TSelectThemeModalEditThemes = (e, selectedElement, setSelectedElement, style) => {
     const divElement = e.target as HTMLDivElement;

@@ -7,6 +7,13 @@ export const initialState: IAuthSliceInitialState = {
         email: '',
         isActivated: false
     },
+    data: {
+        'default': {
+            selectOptions: [],
+            cards: []
+        }
+    },
+    currentDictionary: 'default',
     avatar: '',
     isAuth: false,
     isLoading: false,

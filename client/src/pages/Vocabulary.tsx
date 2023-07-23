@@ -3,12 +3,13 @@ import { FC, useRef, useState, useEffect, useMemo, memo, useDeferredValue } from
 import { useCards } from '../hooks/useCards';
 //components
 import SetCard from '../components/UI/WordCard/SetCard';
-import ModalEditCard from '../components/UI/Modal/ModalEditCard/ModalEditCard';
-import ModalAddCards from '../components/UI/Modal/ModalAddCards/ModalAddCards';
 import RemoveTheme from '../components/RemoveTheme';
 import CardsControl from '../components/UI/CardsControl/CardsControl';
 import CardsInfo from '../components/UI/CardsInfo/CardsInfo';
+import ModalEditCard from '../components/UI/Modal/ModalEditCard/ModalEditCard';
+import ModalAddCards from '../components/UI/Modal/ModalAddCards/ModalAddCards';
 import ModalEditThemes from '../components/UI/Modal/ModalEditThemes/ModalEditThemes';
+import ModalDictionary from '../components/UI/Modal/ModalDictionary/ModalDictionary';
 //functions 
 import { removeInput } from '../functions/removeInput';
 //styles
@@ -45,6 +46,7 @@ const Vocabulary: FC<IVocabulary> = memo(function (
     const [allElementsArray, setAllElementsArray] = useState<HTMLElement[]>([]);
     const [isAddCardModal, setIsAddCardModal] = useState<boolean>(false);
     const [isEditCardModal, setIsEditCardModal] = useState<boolean>(false);
+    const [isDictionaryModal, setIsDictionaryModal] = useState<boolean>(false);
 
     const modalAdd = useRef<HTMLInputElement | null>(null);
     const modalChangeCard = useRef<HTMLInputElement | null>(null);
@@ -251,7 +253,6 @@ const Vocabulary: FC<IVocabulary> = memo(function (
     //     colorObject.light.colors,
     //     colorObject.light.elements
     // ]);
-
     return (
         <div
             onMouseDown={e => {
@@ -274,6 +275,10 @@ const Vocabulary: FC<IVocabulary> = memo(function (
                 setIsEditThemesModal={setIsEditThemesModal}
                 isEditThemesModal={isEditThemesModal}
             />
+            <ModalDictionary
+                isModal={isDictionaryModal}
+                setIsModal={setIsDictionaryModal}
+            />
             <div className={isAttached ? 'CardsField' : 'CardsField paddingTop124'}>
                 <div className="wrap">
                     <CardsControl
@@ -290,64 +295,9 @@ const Vocabulary: FC<IVocabulary> = memo(function (
                     />
                     {
                         isAttached.attach &&
-                        <CardsInfo />
+                        <CardsInfo setIsDictionaryModal={setIsDictionaryModal} />
                     }
 
-                    {
-
-                        /* <ColorPicker color={color} setColor={setColor} />
-                        <div
-                            className="noCLick"
-                            onClick={devMode}
-                            style={
-                                {
-                                    background: colorModeOn ? 'red' : 'teal', color: 'white', width: '100px',
-                                    cursor: 'pointer', marginBottom: '20px', textAlign: 'center', borderRadius: '20px',
-                                    padding: '5px'
-                                }
-                            }
-                        >
-                        Change mode {colorModeOn ? 'on' : 'off'}
-                        </div>
-                        <div
-                            className="noCLick"
-                            onClick={removeCurrent}
-                            style={
-                                {
-                                    background: colorRemoveMode ? 'green' : 'teal', color: 'white', width: '100px',
-                                    cursor: 'pointer', marginBottom: '20px', textAlign: 'center',
-                                    borderRadius: '20px', padding: '5px'
-                                }
-                            }
-                        >
-                        Выборочно отменить {colorRemoveMode ? 'on' : 'off'}
-                        </div>
-     
-                        <div
-                            className="noCLick"
-                            onClick={getCurrentColor}
-                            style={
-                                {
-                                    background: getCurrentColorMode ? 'green' : 'teal', color: 'white',
-                                    width: '100px', cursor: 'pointer', marginBottom: '20px', textAlign: 'center',
-                                    borderRadius: '20px', padding: '5px'
-                                }
-                            }
-                        >
-                         {currentColor ? 'Крашу в ' + currentColor : 'Копирую'}
-                         </div>
-     
-                        <div
-                            className="noCLick"
-                            onClick={removeAllColors}
-                            style={{
-                                background: 'pink', color: 'black', width: '100px', cursor: 'pointer',
-                                marginBottom: '20px', textAlign: 'center', borderRadius: '20px', padding: '5px'
-                            }}
-                        >
-                        Убрать все цвета
-                        </div> */
-                    }
                     {
                         calculatedArray.length
                             ? < SetCard

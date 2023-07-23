@@ -1,6 +1,6 @@
 import { FC } from 'react';
 // types 
-import { IIconMenuDesc } from './Icon1';
+import { IIconMenuDesc } from '../MenuDeskModel';
 const Icon3: FC<IIconMenuDesc> = function ({ className }) {
     return (
         <svg className={className} viewBox="0 0 478.703 478.703" >

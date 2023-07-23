@@ -22,11 +22,15 @@ export const generateQuizWords: TDenerateQuizWords = (inputReq, setTestArray, cu
     let arr: ICard[] = [];
     const arrWithColors: ICard[] = [];
     if (currentColor) {
-        cards.map((card) => {
+        cards.map(card => {
             if (card.color === currentColor) {
                 arrWithColors.push(card);
             }
         });
+        if (arrWithColors.length < 1) {
+            dispatch(setServerMessage('Карточек с таким цветом нет.'));
+            return;
+        }
         arr = getArrayWithRandomValue(arrWithColors, maxIterations);
     } else {
         arr = getArrayWithRandomValue(cards, maxIterations);
