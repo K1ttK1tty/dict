@@ -58,16 +58,16 @@ const MenuDesk: FC<IMenuDesk> = memo(function ({ menuOpen, setMenuOpen }) {
                         </li>
 
                         <li className={cl.ulMenu__item}>
-                            <span className={cl.spanIcons}>
-                                <Link className={cl.navigationLink} to="/settings" >
+                            <span onClick={e => e.stopPropagation()} className={cl.spanIcons}>
+                                <Link className={cl.navigationLink} onClick={changePage} to="/settings" >
                                     <Icon3 className={cl.colorIcon} />
                                     <span className={cl.swipe}>Настройки</span></Link>
                             </span>
                         </li>
 
                         <li className={cl.ulMenu__item}>
-                            <span className={cl.spanIcons}>
-                                <Link className={cl.navigationLink} to="/statistics" >
+                            <span onClick={e => e.stopPropagation()} className={cl.spanIcons}>
+                                <Link className={cl.navigationLink} onClick={changePage} to="/statistics" >
                                     <IconChart dinamicClassName={cl.colorIcon} />
                                     <span className={cl.swipe}>Статистика</span></Link>
                             </span>

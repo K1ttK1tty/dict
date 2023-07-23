@@ -53,6 +53,7 @@ const Vocabulary: FC<IVocabulary> = memo(function (
 
     const dispatch = useAppDispatch();
     const { selectedTheme, cards } = useAppSelector(state => state.AuthSlice);
+    console.log(new Date(cards[0].time))
     const {
         searchWord,
         input,

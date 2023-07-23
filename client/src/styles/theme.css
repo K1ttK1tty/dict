@@ -20,6 +20,9 @@
     --word-shadow-true: 0px 3px 20px -1px rgb(5, 253, 5);
     --word-shadow-false: 0px 3px 20px -2px rgba(255, 0, 0);
     --word-shadow-almost: 0px 3px 20px 0px rgb(255, 217, 0);
+
+    /* Others */
+    --custom-color:#24292f;
 }
 /* dark theme */
 :root[data-theme="light"] {
@@ -44,6 +47,9 @@
     --word-shadow-true: 0px 3px 20px -1px rgb(5, 253, 5);
     --word-shadow-false: 0px 3px 20px -2px rgba(255, 0, 0);
     --word-shadow-almost: 0px 3px 20px 0px rgb(255, 217, 0);
+
+    /* Others */
+    --custom-color:#24292f;
 }
 
 /* light theme */
@@ -69,4 +75,7 @@
     --word-shadow-true: 0px 3px 20px -2px rgba(0, 255, 0);
     --word-shadow-false: 0px 3px 20px -2px rgba(255, 0, 0);
     --word-shadow-almost: 0px 3px 20px -2px rgb(255, 217, 0);
+
+    /* Others */
+    --custom-color:rgb(136, 214, 47);
 }
