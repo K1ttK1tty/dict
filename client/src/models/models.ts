@@ -71,3 +71,12 @@ export interface IRemoveTheme {
 }
 export type TAttachedControls = { attach: boolean, top: string, left: string }
 export type TColorsOnCard = 'green' | 'red' | 'orange';
+export interface ICheckboxesStatistics {
+    years: boolean;
+    months: boolean;
+    days: boolean;
+}
+export interface IArrayWithStats {
+    keys: string[];
+    numbers: number[]
+}

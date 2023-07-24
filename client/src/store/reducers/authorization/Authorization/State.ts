@@ -34,3 +34,4 @@ export const initialState: IAuthSliceInitialState = {
     selectedTheme: '',
     serverMessage: '',
 };
+

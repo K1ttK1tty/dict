@@ -7,7 +7,8 @@ interface ISwiperComponent {
 }
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { Navigation } from 'swiper/modules';
+import { Navigation, Mousewheel, Keyboard } from 'swiper/modules';
+
 const SwiperComponent: FC<ISwiperComponent> = function (
     {
         dinamicClassName,
@@ -22,10 +23,11 @@ const SwiperComponent: FC<ISwiperComponent> = function (
             spaceBetween={30}
             direction={'horizontal'}
             navigation={true}
-            modules={[Navigation]}
+            modules={[Navigation, Mousewheel, Keyboard]}
             centeredSlides={true}
             grabCursor={true}
-            // onActiveIndexChange={}
+            mousewheel={true}
+            keyboard={true}
             onRealIndexChange={e => setActiveIndex(e.activeIndex)}
         >
             {

@@ -271,12 +271,11 @@
 }
 .swiperHorizontalLine .swiper-slide img {
 }
-.swiper-button-prev,
-.swiper-button-next {
-    color: var(--custom-color);
-    font-size: 5px;
+.swiperHorizontalLine .swiper-button-prev,
+.swiperHorizontalLine .swiper-button-next {
+    color: var(--custom-color) !important;
 }
-.swiper-button-prev::after,
-.swiper-button-next::after {
-    font-size: 22px;
+.swiperHorizontalLine .swiper-button-prev::after,
+.swiperHorizontalLine .swiper-button-next::after {
+    font-size: 22px !important;
 }

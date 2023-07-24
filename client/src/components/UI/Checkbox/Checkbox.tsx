@@ -6,6 +6,7 @@ const Checkbox: FC<ICheckbox> = memo(function (
         defaultChecked,
         dinamicClassName,
         dinamicClassNameWrapper,
+        checked,
         callback
     }) {
     const differentId = `${useId()}-${id}`;
@@ -15,6 +16,7 @@ const Checkbox: FC<ICheckbox> = memo(function (
                 id={differentId}
                 className={style.input}
                 defaultChecked={defaultChecked}
+                checked={checked}
                 onChange={callback}
                 type="checkbox"
             />

@@ -9,7 +9,7 @@ import Checkbox from '../components/UI/Checkbox/Checkbox';
 import { generateQuizWords } from '../functions/generateQuizWords';
 import { validateQuiz } from '../functions/validateQuiz';
 // consts
-import { colours } from '../components/UI/WordCard/CardConsts';
+import { colours } from '../globalConsts/globalConsts';
 // styles
 import '../styles/Games.css';
 import '../styles/theme.css';

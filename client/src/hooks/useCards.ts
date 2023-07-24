@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 // functions
 import { isNotEmpty } from '../functions/isNotEmpty';
-import { isNewLabel } from '../components/UI/WordCard/CardConsts';
+import { isNewLabel } from '../globalConsts/globalConsts';
 // types
 import { ICard } from '../store/storeModels';
 import { TUseCards, TUseSearchByWord, TUseSelectedThemes, TUseSortedCards } from '../models/models';

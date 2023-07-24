@@ -9,7 +9,7 @@ import { removeCard } from '../../../functions/removeCard';
 import { editWord } from '../../../functions/editWord';
 import { updatedCards } from '../../../functions/UpdateCards';
 // consts
-import { colours, isNewLabel } from './CardConsts';
+import { colours,isNewLabel } from '../../../globalConsts/globalConsts';
 // styles
 import styles from './WordCard.module.css';
 //redux
