@@ -71,7 +71,7 @@ const AppRouter: FC = memo(function () {
                 path="/statistics"
                 element={
                     <Suspense>
-                        <Statistics />
+                        <Statistics isColorsInCards={isColorsInCards} />
                     </Suspense>
                 }
             />

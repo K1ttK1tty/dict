@@ -29,6 +29,17 @@ const SwiperComponent: FC<ISwiperComponent> = function (
             mousewheel={true}
             keyboard={true}
             onRealIndexChange={e => setActiveIndex(e.activeIndex)}
+            breakpoints={{
+                0: {
+                    slidesPerView: 1,
+                },
+                425: {
+                    slidesPerView: 2,
+                },
+                768: {
+                    slidesPerView: 3,
+                },
+            }}
         >
             {
                 array?.map(element => <SwiperSlide key={element}>{element}</SwiperSlide>)

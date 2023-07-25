@@ -251,6 +251,7 @@
     padding: 4px 40px 3px;
     border-top: 1px solid var(--custom-color);
     border-bottom: 1px solid var(--custom-color);
+    margin-bottom: 12px;
 }
 
 .swiperHorizontalLine .swiper-wrapper {
@@ -278,4 +279,66 @@
 .swiperHorizontalLine .swiper-button-prev::after,
 .swiperHorizontalLine .swiper-button-next::after {
     font-size: 22px !important;
+}
+.poem {
+    margin: 0px auto;
+    font-size: 18px;
+    max-width: 180px;
+}
+.author {
+    position: relative;
+    right: -35px;
+    text-align: right;
+}
+.statistics {
+    margin: 0px auto;
+    width: 80%;
+    max-width: 1200px;
+}
+.diagram {
+    width: 80% !important;
+    height: 80% !important;
+    min-height: 250px;
+    min-width: 250px;
+    max-height: 600px;
+    max-width: 600px;
+    margin: 0px auto 12px;
+}
+
+.chart {
+    min-width: 275px;
+    width: 80%;
+    max-width: 1200px;
+    margin: 0px auto;
+    margin-bottom: 90px;
+}
+.tac {
+    text-align: center;
+    color: var(--header);
+}
+.count{
+    color: var(--header);
+}
+.diagrams {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 600px;
+}
+
+.diagrams > div {
+    width: 50%;
+}
+@media (max-width: 1024px) {
+    .diagrams {
+        flex-direction: column;
+    }
+    .diagram {
+        width: 60% !important;
+        height: 60% !important;
+    }
+    .diagrams > div {
+        width: 100%;
+        color: rgba(128, 128, 128, 0.753);
+    }
 }

@@ -23,6 +23,9 @@ export interface IVocabulary {
     setSelectedColorOrNewLabel: (state: React.SetStateAction<TSelectColorOrNew | null>) => void;
     selectedColorOrNewLabel: TSelectColorOrNew | null;
 }
+export interface IStatistics {
+    isColorsInCards: boolean;
+}
 export interface ISettings {
     isColorsInCards: boolean;
     setIsColorsInCards: (state: boolean) => void;
@@ -79,4 +82,5 @@ export interface ICheckboxesStatistics {
 export interface IArrayWithStats {
     keys: string[];
     numbers: number[]
+    count:number;
 }

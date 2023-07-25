@@ -165,3 +165,6 @@
     box-shadow: var(--word-shadow-almost);
     transition: var(--transition-theme);
 }
+.fz18{
+    font-size: 18px;
+}

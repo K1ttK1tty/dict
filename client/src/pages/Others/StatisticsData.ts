@@ -70,15 +70,21 @@ export const getYearsArray = (index: number, data: IDataStructure, all = false) 
             ttt.set(cardYear, 1);
         }
     });
-    const keys: string[] = [(new Date(newArray[0].time).getFullYear() - 1).toString()];
-    const numbers: number[] = [0];
+    const keys: string[] = array.length > 0
+        ? [(new Date(newArray[0].time).getFullYear() - 1).toString()]
+        : [];
+    const numbers: number[] = array.length > 0
+        ? [0]
+        : [];
+    // const numbers: number[] = [];
+    // const keys: string[] = [];
     for (const year of ttt.keys()) {
         keys.push(year.toString());
     }
     for (const value of ttt.values()) {
         numbers.push(value);
     }
-    return { keys, numbers };
+    return { keys, numbers, count: newArray.length };
 };
 export const getMonths = (index: number, data: IDataStructure, all = false) => {
     const ttt = new Map();
@@ -108,7 +114,7 @@ export const getMonths = (index: number, data: IDataStructure, all = false) => {
         if (value === monthObject.get(currentMonth)) break;
     }
 
-    return { keys, numbers };
+    return { keys, numbers, count: array.length };
 };
 export const getDays = (index: number, data: IDataStructure, all = false) => {
     const ttt = new Map();
@@ -144,7 +150,7 @@ export const getDays = (index: number, data: IDataStructure, all = false) => {
         } else numbers.push(0);
         if (index === currentDay) break;
     }
-    return { keys, numbers };
+    return { keys, numbers, count: array.length };
 };
 export const getColorsInDictionary = (index: number, data: IDataStructure, all = false) => {
     let green = 0;
