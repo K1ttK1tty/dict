@@ -1,24 +1,19 @@
 import { FC } from 'react';
 // components
 import Checkbox from '../components/UI/Checkbox/Checkbox';
+// hook
+import { useLocaleStorage } from '../hooks/useLocaleStorage';
 // styles
 import '../styles/Vocabulary.css';
 import '../styles/Games.css';
 import '../styles/theme.css';
 // types
-import { ISettings } from '../models/models';
-const Settings: FC<ISettings> = function (
-    {
-        isColorsInCards,
-        setIsColorsInCards,
-        isTwoColumns,
-        setIsTwoColumns,
-        showNewLabel,
-        setShowNewLabel,
-        order,
-        setOrder
-    }) {
-
+const Settings: FC = function () {
+    const [isColorsInCards, setIsColorsInCards] = useLocaleStorage('isColorsOnCards', true);
+    const [isTwoColumns, setIsTwoColumns] = useLocaleStorage('oneOrTwoCardsColumns', false);
+    const [showNewLabel, setShowNewLabel] = useLocaleStorage('showNewLabel', true);
+    const [hideTranslate, setHideTranslate] = useLocaleStorage('hideTranslation', false);
+    const [order, setOrder] = useLocaleStorage('order', true);
     return (
         <div className="searchWrapper pageContent">
             <div className="CardsField">
@@ -69,6 +64,17 @@ const Settings: FC<ISettings> = function (
                             callback={() => setShowNewLabel(!showNewLabel)}
                         />
                         Отметка "new"
+                    </div>
+                </div>
+                <div className="option">
+                    <div className="optionContent">
+                        <Checkbox
+                            id={'hideTranslation'}
+                            dinamicClassNameWrapper="mr6"
+                            defaultChecked={hideTranslate}
+                            callback={() => setHideTranslate(!hideTranslate)}
+                        />
+                        Скрыть перевод если выбрано "Избранное"
                     </div>
                 </div>
 

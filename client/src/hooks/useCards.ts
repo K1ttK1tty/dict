@@ -17,6 +17,9 @@ const useSelectedThemes: TUseSelectedThemes = (Cards, selectedTheme, toggleWords
     const sordetCard = useSordetCard(Cards, toggleWordsOrder);
     const selectedThemes = useMemo(() => {
         if (!selectedTheme && !selectedColor) return sordetCard;
+        if (selectedColor === 'Избранное') {
+            return sordetCard.filter((card: ICard) => card.favorite === true);
+        }
         if (selectedColor === 'new') {
             return sordetCard.filter((card: ICard) => isNewLabel(card.time));
         }

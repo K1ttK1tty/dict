@@ -1,7 +1,5 @@
 import { FC } from 'react';
-//components
 import Checkbox from '../Checkbox/Checkbox';
-//style
 import style from './InputSearch.module.css';
 // redux
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';

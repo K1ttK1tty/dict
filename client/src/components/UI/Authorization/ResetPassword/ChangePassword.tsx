@@ -18,7 +18,6 @@ import { SendResetPassword } from '../../../../store/reducers/authorization/Chan
 import { IChangePassword } from '../forms/FormsTypes';
 const ChangePassword: FC = function () {
     const dispatch = useAppDispatch();
-
     const { register, handleSubmit, formState: { errors } } = useForm<IChangePassword>({
         mode: 'onSubmit'
     });

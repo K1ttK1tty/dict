@@ -3,9 +3,7 @@ import { FC, memo } from 'react';
 import defaultAvatar from '../../../pages/Icons/defaultAvatar.svg';
 // redux
 import { useAppSelector } from '../../../hooks/redux';
-interface IAvatarProps {
-    styles: string;
-}
+import { IAvatarProps } from './AvatarModels';
 const Avatar: FC<IAvatarProps> = memo(function ({ styles }) {
     const { avatar } = useAppSelector(state => state.AuthSlice);
     const source = avatar ? avatar : defaultAvatar;

@@ -8,6 +8,8 @@ import Checkbox from '../components/UI/Checkbox/Checkbox';
 // functions
 import { generateQuizWords } from '../functions/generateQuizWords';
 import { validateQuiz } from '../functions/validateQuiz';
+// hook
+import { useLocaleStorage } from '../hooks/useLocaleStorage';
 // consts
 import { colours } from '../globalConsts/globalConsts';
 // styles
@@ -20,20 +22,24 @@ import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { setInputReq } from '../store/reducers/GamesSlice';
 // types
 import { ICard } from '../store/storeModels';
-import { IGames, TPrevState } from '../models/models';
-const Games: FC<IGames> = memo(function ({ isColorsInCards }) {
+import { TPrevState } from '../models/models';
+const Games: FC = memo(function () {
     const [testByWord, setTestByWord] = useState<boolean>(true);
+    const [testByFavorite, setTestByFavorite] = useState<boolean>(false);
     const [currentColor, setCurrentColor] = useState<string>('');
     const [testArray, setTestArray] = useState<ICard[] | []>([]);
     const searchByWordClassName = testByWord ? CheckboxChoice.underline : '';
     const searchByTranslateClassName = testByWord ? '' : CheckboxChoice.underline;
-
+    const [isColorsInCards] = useLocaleStorage('isColorsOnCards', true);
     const dispatch = useAppDispatch();
     const { cards } = useAppSelector(state => state.AuthSlice);
     const { inputReq } = useAppSelector(state => state.GamesSlice);
-    const [prevState, setPrevState] = useState<TPrevState>({ testByWord, currentColor });
-    if (prevState.testByWord !== testByWord || prevState.currentColor !== currentColor) {
-        setPrevState({ testByWord, currentColor });
+    const [prevState, setPrevState] = useState<TPrevState>({ testByWord, currentColor, testByFavorite });
+    const clearField = prevState.testByWord !== testByWord
+        || prevState.currentColor !== currentColor
+        || prevState.testByFavorite !== testByFavorite;
+    if (clearField) {
+        setPrevState({ testByWord, currentColor, testByFavorite });
         setTestArray([]);
     }
     const switchColor = () => {
@@ -41,12 +47,9 @@ const Games: FC<IGames> = memo(function ({ isColorsInCards }) {
             setCurrentColor('orange');
         } else if (currentColor === 'orange') {
             setCurrentColor('green');
-
         } else if (currentColor === 'green') {
             setCurrentColor('');
-        } else {
-            setCurrentColor('red');
-        }
+        } else setCurrentColor('red');
     };
     const testByColorClassName = currentColor
         ? [colours.get(currentColor), 'colorBlock'].join(' ')
@@ -59,13 +62,21 @@ const Games: FC<IGames> = memo(function ({ isColorsInCards }) {
                 {
                     cards.length &&
                     <>
-                        <div className="title">
+                        <div className="title mb6">
                             по <span className={searchByWordClassName}>слову</span>/
                             <span className={searchByTranslateClassName}>переводу</span>:
                             <Checkbox
                                 id={'wordOrTranslateSelfTest'}
                                 defaultChecked={testByWord}
-                                callback={() => setTestByWord(!testByWord)}
+                                callback={() => setTestByWord(prev => !prev)}
+                            />
+                        </div>
+                        <div className="title mb12">
+                            Избранное:
+                            <Checkbox
+                                id={'testByFavoriteId'}
+                                defaultChecked={testByFavorite}
+                                callback={() => setTestByFavorite(prev => !prev)}
                             />
                         </div>
                         {
@@ -99,6 +110,7 @@ const Games: FC<IGames> = memo(function ({ isColorsInCards }) {
                                                     inputReq,
                                                     setTestArray,
                                                     currentColor,
+                                                    testByFavorite,
                                                     cards,
                                                     dispatch
                                                 );
@@ -126,6 +138,7 @@ const Games: FC<IGames> = memo(function ({ isColorsInCards }) {
                                                             testArray.length,
                                                             setTestArray,
                                                             currentColor,
+                                                            testByFavorite,
                                                             cards,
                                                             dispatch
                                                         );

@@ -9,7 +9,8 @@ export const overrideThemesInCards: ToverrideThemesInCards = (cards, oldTheme, n
                 theme: newTheme,
                 note: card.note,
                 time: card.time,
-                color: card.color
+                color: card.color,
+                favorite:card.favorite
             };
         }
         return card;

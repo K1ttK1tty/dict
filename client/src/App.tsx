@@ -32,19 +32,14 @@ const App: FC = () => {
         if (isAuth) {
             dispatch(GetUserData(email));
             dispatch(GetAvatar(email));
-
         }
     }, [isAuth, email, dispatch]);
 
     if (isAuth) {
         return (
             <>
-                <Suspense>
-                    <MenuVoc setMenuOpen={setMenuOpen} />
-                </Suspense>
-                <Suspense>
-                    <MenuDesk menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-                </Suspense>
+                <Suspense><MenuVoc setMenuOpen={setMenuOpen} /></Suspense>
+                <Suspense><MenuDesk menuOpen={menuOpen} setMenuOpen={setMenuOpen} /></Suspense>
                 <AppRouter />
                 <ScrollToTop />
             </>

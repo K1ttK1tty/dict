@@ -316,7 +316,7 @@
     text-align: center;
     color: var(--header);
 }
-.count{
+.count {
     color: var(--header);
 }
 .diagrams {
@@ -340,5 +340,47 @@
     .diagrams > div {
         width: 100%;
         color: rgba(128, 128, 128, 0.753);
+    }
+}
+.favoriteIcon {
+    stroke: rgb(136, 214, 47);
+    cursor: pointer;
+}
+.disableButtonAppearance {
+    border: none;
+    background: transparent;
+}
+.fill {
+    fill: rgb(136, 214, 47);
+}
+.favoriteIcon:hover {
+    transition: 0.2s;
+    stroke: rgb(35, 112, 143);
+}
+.notFoundImageWrapper {
+    position: relative;
+    left: 70px;
+    margin: 30px auto;
+    max-width: 800px;
+}
+.notFoundImageWrapper img {
+    width: 100%;
+    height: 100%;
+    box-shadow: 15px 20px 20px 12px #0000005c;
+    border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+    .notFoundImageWrapper {
+        left: 0px;
+        width: 100%;
+        height: 100%;
+    }
+}
+@media (min-width: 1024px) {
+    .notFoundImageWrapper {
+        left: 0px;
+        width: 100%;
+        height: 100%;
     }
 }

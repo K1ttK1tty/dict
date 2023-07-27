@@ -11,12 +11,11 @@ const DropDownMenu: FC<IDropDownMenu> = function (
         dinamicClassName,
         isAvatarModal
     }) {
-    const menuElement = useRef<HTMLDivElement | null>(null);
     let isOpenMenu = [styles.content, styles.hidden].join(' ');
-    if (isMenuOpen && !isAvatarModal) {
-        isOpenMenu = styles.content;
-    }
+    if (isMenuOpen && !isAvatarModal) isOpenMenu = styles.content;
+
     const [prev, setPrev] = useState<boolean>(isMenuOpen);
+    const menuElement = useRef<HTMLDivElement | null>(null);
     if (isMenuOpen !== prev) {
         setPrev(isMenuOpen);
         setTimeout(() => {

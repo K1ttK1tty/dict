@@ -11,7 +11,7 @@ export interface ICardsControl {
     setIsSelectOpen: (state: React.SetStateAction<IOptionState>) => void;
     setSelectedColorOrNewLabel: (state: React.SetStateAction<TSelectColorOrNew | null>) => void;
     selectedColorOrNewLabel: TSelectColorOrNew | null;
-    isColorsInCards:boolean;
+    setIsDictionaryModal: (state: boolean) => void
 }
 export type TMouseMove = (
     element: MouseEvent,

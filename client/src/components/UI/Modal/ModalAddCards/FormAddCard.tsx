@@ -3,6 +3,7 @@ import { FC, useState, memo } from 'react';
 import InputAddCard from '../../InputAddCard/InputAddCard';
 import BtnAddCard from '../../BtnAddCard/BtnAddCard';
 import TextArea from '../../TextArea/TextArea';
+import Checkbox from '../../Checkbox/Checkbox';
 // functions
 import { addNewCard } from '../../../../functions/addNewCard';
 import { isNotEmpty } from '../../../../functions/isNotEmpty';
@@ -38,16 +39,18 @@ const FormAddCard: FC<IFormAddCard> = memo(function (
     const [timeId, setTimeId] = useState<ReturnType<typeof setTimeout>>(0);
     const [defaultTheme, setDefaultTheme] = useState<string>(selectedTheme);
     const [prevIsModal, setPrevIsModal] = useState<boolean>(isAddCardModal);
+    const [isFavorite, setIsFavorite] = useState<boolean>(false);
 
     if (prevIsModal !== isAddCardModal) {
         setPrevIsModal(isAddCardModal);
         setIsOverlap(false);
         setDefaultTheme(selectedTheme);
+        setIsFavorite(false);
     }
     const addCard = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation();
         addNewCard(e,
-            { ...inputValue, theme: defaultTheme, time: Date.now(), color: 'red' },
+            { ...inputValue, theme: defaultTheme, time: Date.now(), color: 'red', favorite: isFavorite },
             setIsAddCardModal,
             cards,
             selectOptions,
@@ -152,6 +155,15 @@ const FormAddCard: FC<IFormAddCard> = memo(function (
                         />
                     </>
             }
+            <div className={styles.mb18}>
+                <Checkbox
+                    defaultChecked={isFavorite}
+                    id={'setFavoriteOrNot'}
+                    dinamicClassNameWrapper={styles.mr6}
+                    callback={() => setIsFavorite(!isFavorite)}
+                />
+                Добавить в избранное
+            </div>
             <BtnAddCard
                 aria={'Создать'}
                 dinamicclassname={styles.btnFormAddCard}

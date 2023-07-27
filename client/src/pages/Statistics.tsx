@@ -33,6 +33,8 @@ import {
     getColorsInDictionary,
     getAllCards
 } from './Others/StatisticsData';
+// hook
+import { useLocaleStorage } from '../hooks/useLocaleStorage';
 // styles
 import '../styles/Vocabulary.css';
 import '../styles/Games.css';
@@ -40,10 +42,11 @@ import '../styles/theme.css';
 // redux
 import { useAppSelector } from '../hooks/redux';
 // types
-import { IStatistics, ICheckboxesStatistics, IArrayWithStats } from '../models/models';
-const Statistics: FC<IStatistics> = function ({ isColorsInCards }) {
+import { ICheckboxesStatistics, IArrayWithStats } from '../models/models';
+const Statistics: FC = function () {
     const [activeIndex, setActiveIndex] = useState<number>(0);
     const [allDictionaries, setAllDictionaries] = useState<boolean>(false);
+    const [isColorsInCards] = useLocaleStorage('isColorsOnCards', true);
     const [checkboxes, setCheckboxes] = useState<ICheckboxesStatistics>({
         years: false,
         months: false,
@@ -66,7 +69,6 @@ const Statistics: FC<IStatistics> = function ({ isColorsInCards }) {
     const optionsWithCertainDictionary = {
         type: 'line',
         labels: ['Красный', 'Оранжевый', 'Зеленый'],
-
         datasets: [{
             label: 'Карточек по цвету',
             data: getColorsInDictionary(activeIndex, data, allDictionaries),

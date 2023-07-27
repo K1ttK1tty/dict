@@ -25,7 +25,7 @@ const CardsControl: FC<ICardsControl> = memo(function
         setIsSelectOpen,
         setSelectedColorOrNewLabel,
         selectedColorOrNewLabel,
-        isColorsInCards
+        setIsDictionaryModal
     }) {
     const windowBlock = useRef<HTMLDivElement | null>(null);
     const [isCanMove, setIsCanMove] = useState<boolean>(false);
@@ -35,7 +35,6 @@ const CardsControl: FC<ICardsControl> = memo(function
     const attachedMenuStyles = isMobile
         ? {}
         : { top: '80px', left: '0px' };
-
 
     if (isAttached.attach) {
         return (
@@ -56,7 +55,6 @@ const CardsControl: FC<ICardsControl> = memo(function
                     setIsSelectOpen={setIsSelectOpen}
                     setSelectedColorOrNewLabel={setSelectedColorOrNewLabel}
                     selectedColorOrNewLabel={selectedColorOrNewLabel}
-                    isColorsInCards={isColorsInCards}
                 />
             </div>
         );
@@ -79,6 +77,7 @@ const CardsControl: FC<ICardsControl> = memo(function
             </div>
             <CardsInfo
                 isMovedBlock={true}
+                setIsDictionaryModal={setIsDictionaryModal}
             />
             <div className={styles.cardsOptionsMoved}>
                 <BtnAddCard
@@ -92,7 +91,6 @@ const CardsControl: FC<ICardsControl> = memo(function
                     setIsSelectOpen={setIsSelectOpen}
                     setSelectedColorOrNewLabel={setSelectedColorOrNewLabel}
                     selectedColorOrNewLabel={selectedColorOrNewLabel}
-                    isColorsInCards={isColorsInCards}
                 />
             </div>
             <BtnAddCard

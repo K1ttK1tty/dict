@@ -7,7 +7,6 @@ import { setEditCard } from '../../../../store/reducers/modalRenameCard';
 // types
 import { IModalEditCard } from '../ModalsModels';
 const ModalEditCard: FC<IModalEditCard> = memo(function ({ modalChangeCard, isEditCardModal, setIsEditCardModal }) {
-
     return (
         <Modal
             title={'Редактирование'}

@@ -10,7 +10,6 @@
     top: 0px;
     right: 0px;
     font-size: 17px;
-    /* margin-bottom: 10px; */
 }
 .wordsCount {
     padding-right: 6px;
@@ -28,4 +27,19 @@
 }
 .input::before {
     border: 2px solid black !important;
+}
+.button {
+    padding: 3px 8px;
+    margin-left: 4px;
+    font-size: 16px;
+    background: rgb(238, 238, 238);
+}
+.button:after {
+    scale: 0 !important;
+}
+.button:hover.button:after {
+    scale: 0 !important;
+}
+.button:hover {
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.5);
 }

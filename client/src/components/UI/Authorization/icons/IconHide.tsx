@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { IFormIcon } from '../forms/Icons/ShowIcon';
+import { IFormIcon } from '../forms/FormsTypes';
 const IconHide: FC<IFormIcon> = function ({ setShowPassword, styles }) {
     return (
         <svg

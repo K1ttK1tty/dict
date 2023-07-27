@@ -1,4 +1,6 @@
 import { FC, memo } from 'react';
+// components
+import BtnAddCard from '../BtnAddCard/BtnAddCard';
 // functions
 import { cutLongLine } from '../../../functions/cutLongLine';
 // styles
@@ -16,12 +18,14 @@ const CardsInfo: FC<ICardsInfo> = memo(function ({ isMovedBlock, setIsDictionary
         <>
             <div className={totalWordsClass}>
                 Словарь:
-                <button onMouseDown={e => {
-                    e.stopPropagation();
-                    setIsDictionaryModal(true);
-                }}>
-                    {cutLongLine(currentDictionary, 24)}
-                </button>
+                <BtnAddCard
+                    dinamicclassname={style.button}
+                    children={cutLongLine(currentDictionary, 24)}
+                    onMouseDown={e => {
+                        e.stopPropagation();
+                        setIsDictionaryModal(true);
+                    }}
+                />
             </div>
             <div className={totalWordsClass}>Слов: {cards.length}</div>
         </>

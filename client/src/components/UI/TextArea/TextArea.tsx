@@ -3,9 +3,7 @@ import style from './TextArea.module.css';
 import { ITextArea } from './TextAreaModel';
 const TextArea: FC<ITextArea> = function ({ placeholder, inputValue, setValue }) {
     const typeSmth = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        if (setValue) {
-            setValue(e.target.value);
-        }
+        if (setValue) setValue(e.target.value);
     };
     return (
         <textarea

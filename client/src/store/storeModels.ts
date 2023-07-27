@@ -7,6 +7,7 @@ export interface ICard {
     note: string;
     time: number;
     color: 'green' | 'red' | 'orange';
+    favorite: boolean;
 }
 export interface IInputValue {
     id: number;
@@ -14,6 +15,7 @@ export interface IInputValue {
     translate: string;
     theme: string;
     note: string;
+    favorite:boolean;
 }
 export interface IUser {
     id: number;

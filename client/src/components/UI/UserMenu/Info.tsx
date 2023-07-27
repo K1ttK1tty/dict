@@ -12,15 +12,9 @@ import { IInfo } from './UserMenuModel';
 const Info: FC<IInfo> = memo(function ({ isUserMenuOpen }) {
     const dispatch = useAppDispatch();
     const { id, email } = useAppSelector(state => state.AuthSlice.user);
-
     const [isOpen, setIsOpen] = useState<boolean>(isUserMenuOpen);
-    if (isUserMenuOpen !== isOpen && !isUserMenuOpen) {
-        setIsOpen(false);
-    }
-
-    const submenuStyles = (isOpen)
-        ? [styles.show, styles.submenu].join(' ')
-        : styles.submenu;
+    if (isUserMenuOpen !== isOpen && !isUserMenuOpen) setIsOpen(false);
+    const submenuStyles = (isOpen) ? [styles.show, styles.submenu].join(' ') : styles.submenu;
 
     return (
         <div className={styles.infoWrapper}>

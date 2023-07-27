@@ -16,3 +16,10 @@ export interface IChangePassword {
 export interface ISetNewPassword {
     password: string;
 }
+export interface IFormIcon {
+    styles: CSSModuleClasses;
+    setShowPassword: (a: boolean) => void;
+}
+export interface IShowIcon extends IFormIcon {
+    showPassword: boolean;
+}

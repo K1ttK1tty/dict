@@ -12,6 +12,8 @@ import ModalEditThemes from '../components/UI/Modal/ModalEditThemes/ModalEditThe
 import ModalDictionary from '../components/UI/Modal/ModalDictionary/ModalDictionary';
 //functions 
 import { removeInput } from '../functions/removeInput';
+// hook
+import { useLocaleStorage } from '../hooks/useLocaleStorage';
 //styles
 import '../styles/theme.css';
 import '../styles/Vocabulary.css';
@@ -30,19 +32,16 @@ import {
 import { IColorObject, IVocabulary } from '../models/models';
 const Vocabulary: FC<IVocabulary> = memo(function (
     {
-        isTwoColumns,
-        isColorsInCards,
         isSelectOpen,
         setIsSelectOpen,
         isAttached,
         setIsAttached,
-        showNewLabel,
-        order,
         selectedColorOrNewLabel,
         setSelectedColorOrNewLabel,
     }) {
     const [isEditThemesModal, setIsEditThemesModal] = useState<boolean>(false);
     const [color, setColor] = useState<string>('#0dccce');
+    const [order] = useLocaleStorage('order', true);
     const [allElementsArray, setAllElementsArray] = useState<HTMLElement[]>([]);
     const [isAddCardModal, setIsAddCardModal] = useState<boolean>(false);
     const [isEditCardModal, setIsEditCardModal] = useState<boolean>(false);
@@ -107,7 +106,6 @@ const Vocabulary: FC<IVocabulary> = memo(function (
             } else element.style.background = color; // paint
         }
     }
-
     function devMode() {
         if (colorModeOn) {
 
@@ -201,8 +199,8 @@ const Vocabulary: FC<IVocabulary> = memo(function (
     }, []);
 
     // проверить как ведут себя массивы элементов при точечном удалении цвета
-    // useEffect(() => {
 
+    // useEffect(() => {
     //     if (pageTheme === 'light') {
 
     //         colorObject.light.elements = [...allElementsArray];
@@ -254,7 +252,6 @@ const Vocabulary: FC<IVocabulary> = memo(function (
     //     colorObject.light.elements
     // ]);
 
-
     return (
         <div
             onMouseDown={e => {
@@ -293,23 +290,19 @@ const Vocabulary: FC<IVocabulary> = memo(function (
                         setIsSelectOpen={setIsSelectOpen}
                         setSelectedColorOrNewLabel={setSelectedColorOrNewLabel}
                         selectedColorOrNewLabel={selectedColorOrNewLabel}
-                        isColorsInCards={isColorsInCards}
+                        setIsDictionaryModal={setIsDictionaryModal}
                     />
                     {
-                        isAttached.attach &&
-                        <CardsInfo setIsDictionaryModal={setIsDictionaryModal} />
+                        isAttached.attach && <CardsInfo setIsDictionaryModal={setIsDictionaryModal} />
                     }
-
                     {
                         calculatedArray.length
                             ? < SetCard
                                 stale={stale}
-                                showNewLabel={showNewLabel}
                                 Cards={calculatedArray}
                                 modalChangeCard={modalChangeCard}
-                                isTwoColumns={isTwoColumns}
-                                isColorsInCards={isColorsInCards}
                                 setIsEditCardModal={setIsEditCardModal}
+                                selectedColorOrNewLabel={selectedColorOrNewLabel}
                             />
                             : <RemoveTheme
                                 setIsSelectOpen={setIsSelectOpen}

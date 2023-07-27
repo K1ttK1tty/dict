@@ -19,12 +19,12 @@ const RemoveTheme: FC<IRemoveTheme> = function ({ setIsSelectOpen, isSelectOpen,
         data,
         currentDictionary
     } = useAppSelector(state => state.AuthSlice);
+    const isCanDeleteTheme = isSelectOpen.removeMark && !selectedColorOrNewLabel;
     return (
         <>
-
             <h4 className="noCards">Пустота...</h4>
             {
-                (isSelectOpen.removeMark && !selectedColorOrNewLabel) &&
+                isCanDeleteTheme &&
                 <div className="deleteThemeWrapper">
                     <BtnAddCard
                         noClick={'noClick removeSelectedTheme'}

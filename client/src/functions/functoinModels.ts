@@ -44,6 +44,7 @@ export type TDenerateQuizWords = (
     inputReq: number,
     setTestArray: (state: ICard[] | []) => void,
     currentColor: string,
+    testByFavorite: boolean,
     cards: ICard[],
     dispatch: AppDispatch,
 ) => void;
@@ -70,7 +71,7 @@ export type TRemoveCard = (
     email: string,
     data: IDataStructure,
     dictionaryName: string,
-    selectOptions:string[],
+    selectOptions: string[],
     dispatch: AppDispatch,
 ) => void;
 export type TRemoveInput = (
@@ -129,6 +130,15 @@ export type TDeleteDictionary = (
 ) => void;
 export type TAddNewDictionary = (
     dictionaryName: string,
+    email: string,
+    data: IDataStructure,
+    dispatch: AppDispatch
+) => void
+export type TSwitchFavorite = (
+    cards: ICard[],
+    cardId: number,
+    currentDictionary: string,
+    selectOptions: string[],
     email: string,
     data: IDataStructure,
     dispatch: AppDispatch

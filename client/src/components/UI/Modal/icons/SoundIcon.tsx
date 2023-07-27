@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { useAppSelector } from '../../../../hooks/redux';
-
 const SoundIcon: FC = function () {
     const { editCard } = useAppSelector(state => state.modalRenameCard);
     const listen = () => {

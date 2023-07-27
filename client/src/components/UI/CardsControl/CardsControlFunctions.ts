@@ -14,7 +14,6 @@ const mouseMove: TMouseMove = (element, shiftY, shiftX, windowBlock, isAttached,
         setIsAttached({ ...isAttached, top: topPosition, left: leftPosition });
     }
 };
-// isAttached, setIsAttached
 export const move: TMove = (element, windowBlock, isCanMove, isAttached, setIsAttached) => {
     if (windowBlock) {
         if (!isCanMove || !windowBlock.current) {

@@ -21,9 +21,8 @@ const Alert: FC = memo(function () {
     if (message !== serverMessage && isNotEmpty(serverMessage)) {
         setMessage(serverMessage);
     }
-    if (isNotEmpty(serverMessage)) {
-        close();
-    }
+    if (isNotEmpty(serverMessage)) close();
+    
     const messageStyle = serverMessage
         ? [styles.message, styles.show].join(' ')
         : styles.message;

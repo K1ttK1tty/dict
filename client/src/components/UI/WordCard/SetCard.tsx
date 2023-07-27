@@ -1,5 +1,7 @@
 import { FC, memo, Suspense } from 'react';
 import Card from './Card';
+// hook
+import { useLocaleStorage } from '../../../hooks/useLocaleStorage';
 // style
 import '../../../styles/Vocabulary.css';
 // types
@@ -7,16 +9,14 @@ import { ISetCards } from './WordCardModel';
 const SetCards: FC<ISetCards> = memo(function (
     {
         Cards,
-        showNewLabel,
         stale,
         modalChangeCard,
-        isTwoColumns,
-        isColorsInCards,
-        setIsEditCardModal
+        setIsEditCardModal,
+        selectedColorOrNewLabel
     }) {
+    const [isTwoColumns] = useLocaleStorage('oneOrTwoCardsColumns', false);
     const notRendered = stale ? 'notRenderedYet' : '';
     const cardsPosition = isTwoColumns ? `CardsPosition ${notRendered}` : notRendered;
-
     return (
         <div className={cardsPosition}>
             <Suspense>
@@ -27,10 +27,8 @@ const SetCards: FC<ISetCards> = memo(function (
                             card={card}
                             key={Math.random() + card.word}
                             index={index}
-                            isTwoColumns={isTwoColumns}
-                            isColorsInCards={isColorsInCards}
                             setIsEditCardModal={setIsEditCardModal}
-                            showNewLabel={showNewLabel}
+                            selectedColorOrNewLabel={selectedColorOrNewLabel}
                         />
                     )
                 }

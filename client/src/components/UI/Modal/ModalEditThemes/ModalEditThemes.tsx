@@ -6,7 +6,6 @@ import Modal from '../Modal';
 import style from './ModalEditThemes.module.css';
 import { IModalEditThemes } from '../ModalsModels';
 const ModalEditThemes: FC<IModalEditThemes> = memo(function ({ isEditThemesModal, setIsEditThemesModal }) {
-
     return (
         <Modal
             title={'Изменить тему'}

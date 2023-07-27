@@ -54,30 +54,28 @@
     height: 23px;
     overflow: var(--overflowHidden);
 }
-.edit {
+.icon{
     opacity: var(--opacityOff);
     visibility: var(--visibilityOff);
     position: var(--positionAbsolute);
-    top: 27%;
-    right: 21%;
     cursor: var(--pointer);
     transition: 0.2s;
     padding: 3px;
     border: none;
     background-color: transparent;
+}
+.favorite {
+    top: 11%;
+    right: 30%;
+}
+.edit {
+    top: 27%;
+    right: 21%;
     transform: translate(8px);
 }
 .remove {
-    opacity: var(--opacityOff);
-    visibility: var(--visibilityOff);
-    position: var(--positionAbsolute);
     top: 27%;
     right: 11.5%;
-    cursor: var(--pointer);
-    transition: 0.2s;
-    padding: 3px;
-    border: none;
-    background-color: transparent;
     transform: translate(-8px);
 }
 .card:hover .edit {
@@ -86,6 +84,11 @@
     transform: translate(0px);
 }
 .card:hover .remove {
+    opacity: var(--opacityOn);
+    visibility: var(--visibilityOn);
+    transform: translate(0px);
+}
+.card:hover .favorite {
     opacity: var(--opacityOn);
     visibility: var(--visibilityOn);
     transform: translate(0px);

@@ -1,12 +1,16 @@
 import { FC } from 'react';
 import styles from './MySelect.module.css';
-import { ISetSelectedColor,TSelectColorOrNew } from './MySelectModel';
+import { ISetSelectedColor, TSelectColorOrNew } from './MySelectModel';
+import { setSelectedTheme } from '../../../store/reducers/authorization/Authorization/AuthSlice';
+import { useAppDispatch } from '../../../hooks/redux';
 const DropDownColors: FC<ISetSelectedColor> = function ({ setSelectedColorOrNewLabel, setIsSelectOpen }) {
+    const dispatch = useAppDispatch();
     const selectColor = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         const button = e.target as HTMLButtonElement;
         if (button.dataset.selectcolorornew) {
             setSelectedColorOrNewLabel(button.dataset.selectcolorornew as TSelectColorOrNew);
+            dispatch(setSelectedTheme(''));
             setIsSelectOpen({ open: false, removeMark: true });
         }
     };

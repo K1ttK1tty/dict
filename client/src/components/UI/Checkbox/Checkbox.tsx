@@ -2,7 +2,8 @@ import { FC, useId, memo } from 'react';
 import style from './Checkbox.module.css';
 import { ICheckbox } from './CheckboxModel';
 const Checkbox: FC<ICheckbox> = memo(function (
-    { id,
+    {
+        id,
         defaultChecked,
         dinamicClassName,
         dinamicClassNameWrapper,

@@ -29,7 +29,6 @@ const SetNewPassword: FC = function () {
         const password = data.password;
         dispatch(refreshPassword({ id: userID, password }));
     };
-
     return (
         <div className={stylesAuth.back}>
             <div className={[stylesAuth.content, stylesAuth.setPasswdContent].join(' ')}>

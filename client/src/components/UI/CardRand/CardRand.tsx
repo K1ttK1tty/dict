@@ -11,9 +11,7 @@ import { ICardRand } from './CardRandModel';
 const CardRand: FC<ICardRand> = memo(function ({ card, index, testByWord }) {
     const { validateArr } = useAppSelector(state => state.GamesSlice);
     let validateWord = 'hidden';
-    if (validateArr[index]) {
-        validateWord = validateArr[index] + 'Color';
-    }
+    if (validateArr[index]) validateWord = validateArr[index] + 'Color';
 
     if (!testByWord) {
         return (

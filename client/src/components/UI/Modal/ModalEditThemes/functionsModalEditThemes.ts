@@ -15,10 +15,7 @@ export const selectTheme: TSelectThemeModalEditThemes = (e, selectedElement, set
     divElement.classList.add(style.selectedTheme);
     setSelectedElement(divElement);
 };
-
 export const clearInput: TClearInput = (word, setWord, inputSearchThemes) => {
     if (word) setWord('');
-    if (inputSearchThemes.current) {
-        inputSearchThemes.current.value = '';
-    }
+    if (inputSearchThemes.current) inputSearchThemes.current.value = '';
 };

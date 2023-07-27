@@ -6,15 +6,7 @@ import { debounce } from '../../../functions/debounce';
 // styles
 import style from '../Modal/ModalEditThemes/ModalEditThemes.module.css';
 import listStyles from '../MySelect/MySelect.module.css';
-interface IListWithSearching {
-    inputSearchThemes: React.MutableRefObject<HTMLInputElement | null>;
-    word: string;
-    setWord: (state: string) => void;
-    array: string[];
-    setClearInput: () => void;
-    onItemClick: (e: React.MouseEvent<HTMLDivElement>) => void;
-    dinamicClassName?: string;
-}
+import { IListWithSearching } from './ListWithSearchingModels';
 const ListWithSearching: FC<IListWithSearching> = memo(function (
     {
         inputSearchThemes,

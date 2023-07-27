@@ -1,5 +1,4 @@
 import { FC } from 'react';
-// styles
 import styles from '../WordCard.module.css';
 const IconRemove: FC = function () {
     return (

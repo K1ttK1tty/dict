@@ -52,6 +52,7 @@ export const AuthSlice = createSlice({
         setSelectedTheme(state, action: PayloadAction<string>) {
             state.selectedTheme = action.payload;
         },
+        
         // avatar
         setAvatar(state, action: PayloadAction<string>) {
             state.avatar = action.payload;

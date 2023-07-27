@@ -9,8 +9,8 @@ const ScrollToTop: FC = memo(function () {
     const addActiveClassName = () => {
         showArrow = document.body.scrollTop > window.innerHeight * 0.6;
         const styles = showArrow
-        ? [style.arrowWrapper, style.arrowActive].join(' ')
-        : style.arrowWrapper;
+            ? [style.arrowWrapper, style.arrowActive].join(' ')
+            : style.arrowWrapper;
         if (arrow.current) {
             arrow.current.className = styles;
         }

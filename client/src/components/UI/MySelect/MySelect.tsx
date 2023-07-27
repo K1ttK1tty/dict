@@ -10,9 +10,7 @@ import { cutLongLine } from '../../../functions/cutLongLine';
 import styles from './MySelect.module.css';
 // redux
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import {
-    setSelectedTheme
-} from '../../../store/reducers/authorization/Authorization/AuthSlice';
+import { setSelectedTheme } from '../../../store/reducers/authorization/Authorization/AuthSlice';
 // types
 import { IMySelect } from './MySelectModel';
 import { IOptionState } from '../../../store/storeModels';
@@ -23,7 +21,6 @@ const MySelect: FC<IMySelect> = memo(function (
         setIsSelectOpen,
         setSelectedColorOrNewLabel,
         selectedColorOrNewLabel,
-        isColorsInCards
     }) {
     const dispatch = useAppDispatch();
     const { selectedTheme } = useAppSelector(state => state.AuthSlice);
@@ -97,7 +94,6 @@ const MySelect: FC<IMySelect> = memo(function (
                     setSelectedColorOrNewLabel={setSelectedColorOrNewLabel}
                     isSelectOpen={isSelectOpen}
                     setIsSelectOpen={setIsSelectOpen}
-                    isColorsInCards={isColorsInCards}
                 />
 
             </CSSTransition>

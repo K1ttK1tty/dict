@@ -28,7 +28,8 @@ export const initialState: IAuthSliceInitialState = {
         theme: '',
         note: '',
         time: 0,
-        color: 'red'
+        color: 'red',
+        favorite: false,
     },
     selectOptions: [],
     selectedTheme: '',

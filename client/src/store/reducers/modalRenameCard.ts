@@ -8,14 +8,16 @@ const initialState: IModalRenameCardInitialState = {
         word: '',
         translate: '',
         theme: '',
-        note: ''
+        note: '',
+        favorite: false
     },
     editCard: {
         id: 0,
         word: '',
         translate: '',
         theme: '',
-        note: ''
+        note: '',
+        favorite: false,
     }
 };
 const modalRenameCard = createSlice({

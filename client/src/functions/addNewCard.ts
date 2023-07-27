@@ -26,7 +26,7 @@ export const addNewCard: TAddNewCard = (
         const newThemes = addNewTheme(selectOptions, inputValue.theme, dispatch);
         updatedCards(currentDictionary, email, data, cards, newThemes, dispatch);
         setIsAddCardModal(false);
-        dispatch(setInputValue({ id: 0, word: '', translate: '', theme: '', note: '' }));
+        dispatch(setInputValue({ id: 0, word: '', translate: '', theme: '', note: '', favorite: false }));
 
     } else dispatch(setServerMessage('Поля "Слово" и "Перевод" должны быть заполнены'));
 };
