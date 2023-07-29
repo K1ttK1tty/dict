@@ -1,44 +1,30 @@
 import { FC } from 'react';
 import { isMobile } from 'react-device-detect';
-// components
-import IconRemove from './icons/IconRemove';
-import IconEdit from './icons/IconEdit';
-// functions
-import { removeCard } from '../../../functions/removeCard';
-import { editWord } from '../../../functions/editWord';
+
 import { updatedCards } from '../../../functions/UpdateCards';
 import { switchFavorite } from '../../../functions/changeFavoriteCard';
-// hook
-import { useLocaleStorage } from '../../../hooks/useLocaleStorage';
-// consts
-import { colours, isNewLabel } from '../../../globalConsts/globalConsts';
-// styles
-import styles from './WordCard.module.css';
-// icon
-import FavoriteIcon from '../../../pages/Icons/FavoriteIcon';
-//redux
+import { editWord } from '../../../functions/editWord';
+import { removeCard } from '../../../functions/removeCard';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { useLocaleStorage } from '../../../hooks/useLocaleStorage';
+
+import styles from './WordCard.module.css';
+
+import { colours, isNewLabel } from '../../../globalConsts/globalConsts';
+
 import { setCards } from '../../../store/reducers/authorization/Authorization/AuthSlice';
-// types
 import { ICard } from '../../../store/storeModels';
-import { ICardProps, TSetNewColor } from './WordCardModel';
+
 import { TColorsOnCard } from '../../../models/models';
-const Card: FC<ICardProps> = function (
-    {
-        card,
-        index,
-        modalChangeCard,
-        setIsEditCardModal,
-        selectedColorOrNewLabel
-    }) {
+import { ICardProps, TSetNewColor } from './WordCardModel';
+
+import FavoriteIcon from '../../../pages/Icons/FavoriteIcon';
+import IconEdit from './icons/IconEdit';
+import IconRemove from './icons/IconRemove';
+
+const Card: FC<ICardProps> = function ({ card, index, modalChangeCard, setIsEditCardModal, selectedColorOrNewLabel }) {
     const dispatch = useAppDispatch();
-    const {
-        cards,
-        user,
-        data,
-        currentDictionary,
-        selectOptions
-    } = useAppSelector(state => state.AuthSlice);
+    const { cards, user, data, currentDictionary, selectOptions } = useAppSelector(state => state.AuthSlice);
     const cardColorMark = [styles.colorMark, colours.get(card.color)].join(' ');
     const [isTwoColumns] = useLocaleStorage('oneOrTwoCardsColumns', false);
     const [isColorsInCards] = useLocaleStorage('isColorsOnCards', true);
@@ -48,9 +34,7 @@ const Card: FC<ICardProps> = function (
     const openModalInMobile = isMobile
         ? () => editWord(card, index, setIsEditCardModal, modalChangeCard, dispatch)
         : undefined;
-    const cardClassName = isTwoColumns
-        ? styles.card :
-        [styles.card, styles.cardOneColumn].join(' ');
+    const cardClassName = isTwoColumns ? styles.card : [styles.card, styles.cardOneColumn].join(' ');
 
     const nextColour = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -69,18 +53,16 @@ const Card: FC<ICardProps> = function (
     };
     const setNewColor: TSetNewColor = (cards, id, color) => {
         const newCards: ICard[] = JSON.parse(JSON.stringify(cards));
-        newCards.map(card => {
-            if (card.id === id) {
-                card.color = color;
+        newCards.map(oneCard => {
+            if (oneCard.id === id) {
+                oneCard.color = color;
             }
+            return oneCard;
         });
         return newCards;
     };
     return (
-        <div onClick={openModalInMobile}
-            onMouseDown={e => e.stopPropagation()}
-            className={cardClassName}
-        >
+        <div onClick={openModalInMobile} onMouseDown={e => e.stopPropagation()} className={cardClassName}>
             <h4 className={styles.word}>{card.word}</h4>
             {
                 <p className={styles.translate}>
@@ -109,21 +91,14 @@ const Card: FC<ICardProps> = function (
                 <IconRemove />
             </button>
             <div className={styles.cardInfo} onClick={e => e.stopPropagation()}>
-                {
-                    isColorsInCards &&
-                    <button
-                        className={cardColorMark}
-                        onMouseDown={nextColour}
-                    />
-                }
-                {
-                    showLabel &&
+                {isColorsInCards && <button className={cardColorMark} onMouseDown={nextColour} />}
+                {showLabel && (
                     <div className={styles.new}>
                         <div className={styles.font}>n</div>
                         <div className={styles.font}>e</div>
                         <div className={styles.font}>w</div>
                     </div>
-                }
+                )}
             </div>
         </div>
     );

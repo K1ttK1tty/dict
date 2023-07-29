@@ -1,28 +1,27 @@
-// libs
-import { FC, useState, memo } from 'react';
-// components
-import InputAddCard from '../components/UI/InputAddCard/InputAddCard';
+import { FC, memo, useState } from 'react';
+
+import CheckboxChoice from '../components/UI//InputSearch/InputSearch.module.css';
 import BtnAddCard from '../components/UI/BtnAddCard/BtnAddCard';
 import CardsRandom from '../components/UI/CardsRandom/CardsRandom';
 import Checkbox from '../components/UI/Checkbox/Checkbox';
-// functions
+import InputAddCard from '../components/UI/InputAddCard/InputAddCard';
+import inputStyle from '../components/UI/Modal/ModalAddCards/FormAddCard.module.css';
+
 import { generateQuizWords } from '../functions/generateQuizWords';
 import { validateQuiz } from '../functions/validateQuiz';
-// hook
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { useLocaleStorage } from '../hooks/useLocaleStorage';
-// consts
+
 import { colours } from '../globalConsts/globalConsts';
-// styles
+
 import '../styles/Games.css';
 import '../styles/theme.css';
-import inputStyle from '../components/UI/Modal/ModalAddCards/FormAddCard.module.css';
-import CheckboxChoice from '../components/UI//InputSearch/InputSearch.module.css';
-// redux
-import { useAppDispatch, useAppSelector } from '../hooks/redux';
+
 import { setInputReq } from '../store/reducers/GamesSlice';
-// types
 import { ICard } from '../store/storeModels';
+
 import { TPrevState } from '../models/models';
+
 const Games: FC = memo(function () {
     const [testByWord, setTestByWord] = useState<boolean>(true);
     const [testByFavorite, setTestByFavorite] = useState<boolean>(false);
@@ -35,9 +34,10 @@ const Games: FC = memo(function () {
     const { cards } = useAppSelector(state => state.AuthSlice);
     const { inputReq } = useAppSelector(state => state.GamesSlice);
     const [prevState, setPrevState] = useState<TPrevState>({ testByWord, currentColor, testByFavorite });
-    const clearField = prevState.testByWord !== testByWord
-        || prevState.currentColor !== currentColor
-        || prevState.testByFavorite !== testByFavorite;
+    const clearField =
+        prevState.testByWord !== testByWord ||
+        prevState.currentColor !== currentColor ||
+        prevState.testByFavorite !== testByFavorite;
     if (clearField) {
         setPrevState({ testByWord, currentColor, testByFavorite });
         setTestArray([]);
@@ -59,8 +59,7 @@ const Games: FC = memo(function () {
         <div className="gameWrap pageContent">
             <div className="gameCardsField">
                 <div className="title">Самопроверка</div>
-                {
-                    cards.length &&
+                {cards.length && (
                     <>
                         <div className="title mb6">
                             по <span className={searchByWordClassName}>слову</span>/
@@ -79,79 +78,73 @@ const Games: FC = memo(function () {
                                 callback={() => setTestByFavorite(prev => !prev)}
                             />
                         </div>
-                        {
-                            isColorsInCards &&
-                            <div className="colorSelection" >
+                        {isColorsInCards && (
+                            <div className="colorSelection">
                                 <div>По цвету:</div>
                                 <button onClick={switchColor} className={testByColorClassName} />
                             </div>
-                        }
+                        )}
                     </>
-                }
+                )}
                 <div className="gameBody">
-                    {
-                        cards.length ?
-                            <>
-                                <form className="formTitle">
-                                    <div className={'mr6 mb12'}>
-                                        Введите количество слов:
-                                        <InputAddCard
-                                            dinamicclassname={inputStyle.inputFormAddCard + ' inputEnterWordsCount'}
-                                            inputValue={inputValue}
-                                            setValue={e => dispatch(setInputReq(Number(e)))}
-                                            type="number"
+                    {cards.length ? (
+                        <>
+                            <form className="formTitle">
+                                <div className={'mr6 mb12'}>
+                                    Введите количество слов:
+                                    <InputAddCard
+                                        dinamicclassname={inputStyle.inputFormAddCard + ' inputEnterWordsCount'}
+                                        inputValue={inputValue}
+                                        setValue={e => dispatch(setInputReq(Number(e)))}
+                                        type="number"
+                                    />
+                                </div>
+                                <BtnAddCard
+                                    onClick={e => {
+                                        e.preventDefault();
+                                        generateQuizWords(
+                                            inputReq,
+                                            setTestArray,
+                                            currentColor,
+                                            testByFavorite,
+                                            cards,
+                                            dispatch,
+                                        );
+                                    }}
+                                    children={'Сгенерировать'}
+                                />
+                            </form>
+                            {testArray.length > 0 && (
+                                <form className="formCards">
+                                    <CardsRandom cardsGame={testArray} testByWord={testByWord} />
+                                    <div className="checkButtons">
+                                        <BtnAddCard
+                                            dinamicclassname={'btnGamesCheck'}
+                                            onClick={e => validateQuiz(e, testArray, testByWord, dispatch)}
+                                            children={'Проверить'}
                                         />
-                                    </div>
-                                    <BtnAddCard
-                                        onClick={
-                                            e => {
+                                        <BtnAddCard
+                                            dinamicclassname={'btnGamesCheck'}
+                                            onClick={e => {
                                                 e.preventDefault();
                                                 generateQuizWords(
-                                                    inputReq,
+                                                    testArray.length,
                                                     setTestArray,
                                                     currentColor,
                                                     testByFavorite,
                                                     cards,
-                                                    dispatch
+                                                    dispatch,
                                                 );
-                                            }
-                                        }
-                                        children={'Сгенерировать'}
-                                    />
+                                            }}
+                                            children={'Еще попытка'}
+                                        />
+                                    </div>
                                 </form>
-                                {
-                                    testArray.length > 0 &&
-                                    <form className="formCards">
-                                        <CardsRandom cardsGame={testArray} testByWord={testByWord} />
-                                        <div className="checkButtons">
-                                            <BtnAddCard
-                                                dinamicclassname={'btnGamesCheck'}
-                                                onClick={e => validateQuiz(e, testArray, testByWord, dispatch)}
-                                                children={'Проверить'}
-                                            />
-                                            <BtnAddCard
-                                                dinamicclassname={'btnGamesCheck'}
-                                                onClick={
-                                                    e => {
-                                                        e.preventDefault();
-                                                        generateQuizWords(
-                                                            testArray.length,
-                                                            setTestArray,
-                                                            currentColor,
-                                                            testByFavorite,
-                                                            cards,
-                                                            dispatch
-                                                        );
-                                                    }
-                                                }
-                                                children={'Еще попытка'}
-                                            />
-                                        </div>
-                                    </form>
-                                }
-                            </>
-                            : <h3 className="noWords">Добавьте слова!</h3>
-                    }
+                            )}
+                        </>
+                    ) : (
+                        <h3 className="noWords">Добавьте слова!</h3>
+                    )}
                 </div>
             </div>
         </div>

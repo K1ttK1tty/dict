@@ -1,20 +1,19 @@
-// libs
-import { FC, useState, useEffect, lazy, Suspense } from 'react';
-import { Routes, Route } from 'react-router-dom';
-// components
+import { FC, Suspense, lazy, useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
+
 import AppRouter from './components/AppRouter';
 import Authorization from './components/UI/Authorization/Authorization';
 import ChangePassword from './components/UI/Authorization/ResetPassword/ChangePassword';
 import SetNewPassword from './components/UI/Authorization/SetNewPassword/SetNewPassword';
 import ScrollToTop from './components/UI/ScrollToTop/ScrollToTop';
-// functions
+
 import { setTheme } from './functions/setTheme';
-// styles
+import { useAppDispatch, useAppSelector } from './hooks/redux';
+
 import './styles/App.css';
-// redux
-import { useAppSelector, useAppDispatch } from './hooks/redux';
-// authorization
+
 import { CheckAuth, GetAvatar, GetUserData } from './store/reducers/authorization/Authorization/ActionCreator';
+
 let onlyInFirstRender = true;
 const MenuDesk = lazy(() => import('./components/UI/MenuDesk/MenuDesk'));
 const MenuVoc = lazy(() => import('./components/UI/MenuVoc/MenuVoc'));
@@ -34,12 +33,15 @@ const App: FC = () => {
             dispatch(GetAvatar(email));
         }
     }, [isAuth, email, dispatch]);
-
     if (isAuth) {
         return (
             <>
-                <Suspense><MenuVoc setMenuOpen={setMenuOpen} /></Suspense>
-                <Suspense><MenuDesk menuOpen={menuOpen} setMenuOpen={setMenuOpen} /></Suspense>
+                <Suspense>
+                    <MenuVoc setMenuOpen={setMenuOpen} />
+                </Suspense>
+                <Suspense>
+                    <MenuDesk menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+                </Suspense>
                 <AppRouter />
                 <ScrollToTop />
             </>

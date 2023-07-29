@@ -1,6 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IInputValue } from '../storeModels';
-import { IModalRenameCardInitialState } from '../storeModels';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+
+import { IInputValue, IModalRenameCardInitialState } from '../storeModels';
+
 const initialState: IModalRenameCardInitialState = {
     indexCard: 0,
     inputValue: {
@@ -9,7 +10,7 @@ const initialState: IModalRenameCardInitialState = {
         translate: '',
         theme: '',
         note: '',
-        favorite: false
+        favorite: false,
     },
     editCard: {
         id: 0,
@@ -18,7 +19,7 @@ const initialState: IModalRenameCardInitialState = {
         theme: '',
         note: '',
         favorite: false,
-    }
+    },
 };
 const modalRenameCard = createSlice({
     name: 'modalRenameCard',
@@ -33,7 +34,7 @@ const modalRenameCard = createSlice({
         setEditCard(state, action: PayloadAction<IInputValue>) {
             state.editCard = action.payload;
         },
-    }
+    },
 });
 export default modalRenameCard.reducer;
 export const { setIndexCard, setInputValue, setEditCard } = modalRenameCard.actions;

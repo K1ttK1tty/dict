@@ -1,23 +1,26 @@
-// libs
-import { FC, useState, lazy, Suspense, memo } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
-// types
-import { IOptionState } from '../store/storeModels.ts';
-import { TAttachedControls } from '../models/models.ts';
+import { FC, Suspense, lazy, memo, useState } from 'react';
+import { Route, Routes, useLocation } from 'react-router-dom';
+
 import { TSelectColorOrNew } from './UI/MySelect/MySelectModel.ts';
-// pages
+
+import { IOptionState } from '../store/storeModels.ts';
+
+import { TAttachedControls } from '../models/models.ts';
+
 import NotFoundPage from '../pages/NotFoundPage.tsx';
-const Games = lazy(() => import('../pages/Games.tsx'));
-const Vocabulary = lazy(() => import('../pages/Vocabulary.tsx'));
-const Settings = lazy(() => import('../pages/Settings.tsx'));
-const Statistics = lazy(() => import('../pages/Statistics.tsx'));
+
+export const Games = lazy(() => import('../pages/Games.tsx'));
+export const Vocabulary = lazy(() => import('../pages/Vocabulary.tsx'));
+export const Settings = lazy(() => import('../pages/Settings.tsx'));
+export const Statistics = lazy(() => import('../pages/Statistics.tsx'));
+
 const AppRouter: FC = memo(function () {
     const [isSelectOpen, setIsSelectOpen] = useState<IOptionState>({ open: false, removeMark: false });
     const [isAttached, setIsAttached] = useState<TAttachedControls>({ attach: true, top: '100px', left: '120px' });
     const [selectedColorOrNewLabel, setSelectedColorOrNewLabel] = useState<TSelectColorOrNew | null>(null);
     if (useLocation().pathname === '/games' && isSelectOpen.open) setIsSelectOpen({ ...isSelectOpen, open: false });
 
-    const VocabularyInSuspense =
+    const VocabularyInSuspense = (
         <Suspense>
             <Vocabulary
                 isSelectOpen={isSelectOpen}
@@ -27,11 +30,11 @@ const AppRouter: FC = memo(function () {
                 selectedColorOrNewLabel={selectedColorOrNewLabel}
                 setSelectedColorOrNewLabel={setSelectedColorOrNewLabel}
             />
-        </Suspense>;
-
+        </Suspense>
+    );
 
     return (
-        <Routes>
+        <Routes >
             <Route path="/posts" element={VocabularyInSuspense} />
             <Route path="/" element={VocabularyInSuspense} />
             <Route
@@ -40,12 +43,16 @@ const AppRouter: FC = memo(function () {
                     <Suspense>
                         <Games />
                     </Suspense>
-                } />
-            <Route path="/settings" element={
-                <Suspense>
-                    <Settings />
-                </Suspense>
-            } />
+                }
+            />
+            <Route
+                path="/settings"
+                element={
+                    <Suspense>
+                        <Settings />
+                    </Suspense>
+                }
+            />
             <Route
                 path="/statistics"
                 element={

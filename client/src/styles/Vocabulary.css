@@ -384,3 +384,6 @@
         height: 100%;
     }
 }
+*::selection{
+    background: rgb(136, 214, 47);
+}

@@ -1,17 +1,16 @@
-import { FC, useState, memo } from 'react';
-// components
+import { FC, memo, useState } from 'react';
+
+import { IDictionaryContent, IModalDictionary } from '../ModalsModels';
+
 import Modal from '../Modal';
 import ModalDictionaryMain from './ModalDictionaryMain';
-// models
-import { IModalDictionary, IDictionaryContent } from '../ModalsModels';
+
 const ModalDictionary: FC<IModalDictionary> = memo(function ({ isModal, setIsModal }) {
-    const [dictionaryContent, setDictionaryContent] = useState<IDictionaryContent>(
-        {
-            removeContent: false,
-            createContent: false,
-            changeContent: false
-        }
-    );
+    const [dictionaryContent, setDictionaryContent] = useState<IDictionaryContent>({
+        removeContent: false,
+        createContent: false,
+        changeContent: false,
+    });
     let title: string;
     if (dictionaryContent.changeContent) title = 'Смена словаря';
     else if (dictionaryContent.createContent) title = 'Создание';
@@ -20,28 +19,24 @@ const ModalDictionary: FC<IModalDictionary> = memo(function ({ isModal, setIsMod
     const [prev, setPrev] = useState<boolean>(false);
     if (prev !== isModal) {
         setPrev(isModal);
-        setDictionaryContent(
-            {
-                removeContent: false,
-                createContent: false,
-                changeContent: false
-            }
-        );
+        setDictionaryContent({
+            removeContent: false,
+            createContent: false,
+            changeContent: false,
+        });
     }
     return (
         <Modal
             title={title}
             isModal={isModal}
             setModal={setIsModal}
-            back={title !== 'Словарь' ? true : false}
-            backFunc={
-                () => setDictionaryContent(
-                    {
-                        removeContent: false,
-                        createContent: false,
-                        changeContent: false
-                    }
-                )
+            back={title !== 'Словарь'}
+            backFunc={() =>
+                setDictionaryContent({
+                    removeContent: false,
+                    createContent: false,
+                    changeContent: false,
+                })
             }
             content={
                 <ModalDictionaryMain
@@ -53,6 +48,5 @@ const ModalDictionary: FC<IModalDictionary> = memo(function ({ isModal, setIsMod
             }
         />
     );
-
 });
 export default ModalDictionary;

@@ -1,36 +1,33 @@
-import { FC, useState, useRef, memo } from 'react';
-// components
+import { FC, memo, useRef, useState } from 'react';
+
+import { addNewDictionary } from '../../../../functions/addNewDictionary';
+import { cutLongLine } from '../../../../functions/cutLongLine';
+import { deleteDictionary } from '../../../../functions/deleteDictionary';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
+import { useSearchByWord } from '../../../../hooks/useCards';
+import { clearInput, selectTheme } from '../ModalEditThemes/functionsModalEditThemes';
+
+import style from '../ModalEditThemes/ModalEditThemes.module.css';
+import styles from './ModalDictionary.module.css';
+
+import {
+    changeDictionary,
+    setCurrentDictionary,
+    setServerMessage,
+} from '../../../../store/reducers/authorization/Authorization/AuthSlice';
+
+import { IModalDictionaryMain } from '../ModalsModels';
+
 import BtnAddCard from '../../BtnAddCard/BtnAddCard';
 import InputAddCard from '../../InputAddCard/InputAddCard';
 import ListWithSearching from '../../listWithSearching/ListWithSearching';
-// functions
-import { clearInput } from '../ModalEditThemes/functionsModalEditThemes';
-import { selectTheme } from '../ModalEditThemes/functionsModalEditThemes';
-// functions 
-import { useSearchByWord } from '../../../../hooks/useCards';
-import { addNewDictionary } from '../../../../functions/addNewDictionary';
-import { deleteDictionary } from '../../../../functions/deleteDictionary';
-import { cutLongLine } from '../../../../functions/cutLongLine';
-// styles
-import styles from './ModalDictionary.module.css';
-import style from '../ModalEditThemes/ModalEditThemes.module.css';
-// redux
-import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
-import {
-    setServerMessage,
-    setCurrentDictionary,
-    changeDictionary
-} from '../../../../store/reducers/authorization/Authorization/AuthSlice';
-// models
-import { IModalDictionaryMain } from '../ModalsModels';
-const ModalDictionaryMain: FC<IModalDictionaryMain> = memo(function (
-    {
-        isModal,
-        setIsModal,
-        setDictionaryContent,
-        dictionaryContent
-    }
-) {
+
+const ModalDictionaryMain: FC<IModalDictionaryMain> = memo(function ({
+    isModal,
+    setIsModal,
+    setDictionaryContent,
+    dictionaryContent,
+}) {
     const dispatch = useAppDispatch();
     const { currentDictionary, data, user } = useAppSelector(state => state.AuthSlice);
 
@@ -72,72 +69,68 @@ const ModalDictionaryMain: FC<IModalDictionaryMain> = memo(function (
 
     if (dictionaryContent.createContent) {
         return (
-            <form onSubmit={e => {
-                e.preventDefault();
-                addNewDictionary(wordCreate, user.email, data, dispatch);
-                dispatch(setCurrentDictionary(wordCreate));
-                dispatch(changeDictionary(wordCreate));
-                setIsModal(false);
-            }}>
+            <form
+                onSubmit={e => {
+                    e.preventDefault();
+                    addNewDictionary(wordCreate, user.email, data, dispatch);
+                    dispatch(setCurrentDictionary(wordCreate));
+                    dispatch(changeDictionary(wordCreate));
+                    setIsModal(false);
+                }}
+            >
                 <InputAddCard
                     defaultTheme={wordCreate}
                     setDefaultTheme={setWordCreate}
                     dinamicclassname={[style.input, style.inputCreateDictionary].join(' ')}
                     placeholder="Имя словаря..."
                 />
-                <BtnAddCard
-                    children="Создать"
-                    type="submit"
-                    dinamicclassname={styles.button}
-                />
+                <BtnAddCard children="Создать" type="submit" dinamicclassname={styles.button} />
             </form>
         );
     }
     if (dictionaryContent.changeContent) {
         return (
-            <form onSubmit={e => {
-                e.preventDefault();
-                if (!selectedElement) {
-                    dispatch(setServerMessage('Нужно выбрать словарь!'));
-                    return;
-                }
-                dispatch(setCurrentDictionary(selectedElement.innerText));
-                dispatch(changeDictionary(selectedElement.innerText));
-                setIsModal(false);
-            }}>
+            <form
+                onSubmit={e => {
+                    e.preventDefault();
+                    if (!selectedElement) {
+                        dispatch(setServerMessage('Нужно выбрать словарь!'));
+                        return;
+                    }
+                    dispatch(setCurrentDictionary(selectedElement.innerText));
+                    dispatch(changeDictionary(selectedElement.innerText));
+                    setIsModal(false);
+                }}
+            >
                 <ListWithSearching
                     word={wordChange}
                     setWord={setWordChange}
                     inputSearchThemes={inputChangeDictionary}
                     setClearInput={() => clearInput(wordChange, setWordChange, inputChangeDictionary)}
                     onItemClick={e => onOptionClick(e)}
-                    array={
-                        arrayWithoutCurrentDictionary.filter(element => element !== currentDictionary)
-                    }
+                    array={arrayWithoutCurrentDictionary.filter(element => element !== currentDictionary)}
                     dinamicClassName={styles.listStyle}
                 />
-                <BtnAddCard
-                    children="Сменить"
-                    type="submit"
-                    dinamicclassname={styles.button}
-                />
+                <BtnAddCard children="Сменить" type="submit" dinamicclassname={styles.button} />
             </form>
         );
     }
     if (dictionaryContent.removeContent) {
         return (
-            <form onSubmit={e => {
-                if (!selectedElement) {
-                    dispatch(setServerMessage('Нужно выбрать словарь!'));
-                    return;
-                }
-                if (selectedElement.innerText === currentDictionary) {
-                    dispatch(setCurrentDictionary('default'));
-                    dispatch(changeDictionary('default'));
-                }
-                deleteDictionary(selectedElement.innerText, user.email, data, dispatch);
-                e.preventDefault();
-            }}>
+            <form
+                onSubmit={e => {
+                    if (!selectedElement) {
+                        dispatch(setServerMessage('Нужно выбрать словарь!'));
+                        return;
+                    }
+                    if (selectedElement.innerText === currentDictionary) {
+                        dispatch(setCurrentDictionary('default'));
+                        dispatch(changeDictionary('default'));
+                    }
+                    deleteDictionary(selectedElement.innerText, user.email, data, dispatch);
+                    e.preventDefault();
+                }}
+            >
                 <ListWithSearching
                     word={wordRemove}
                     setWord={setWordRemove}
@@ -155,16 +148,13 @@ const ModalDictionaryMain: FC<IModalDictionaryMain> = memo(function (
             </form>
         );
     }
-    const titleClassname = currentDictionary === 'default'
-        ? styles.title
-        : [styles.title, styles.mb30].join(' ');
+    const titleClassname = currentDictionary === 'default' ? styles.title : [styles.title, styles.mb30].join(' ');
     return (
         <>
             <h2 className={titleClassname}>Текущий словарь: {cutLongLine(currentDictionary, 16)}</h2>
-            {
-                currentDictionary === 'default' &&
+            {currentDictionary === 'default' && (
                 <p className={styles.defaultDictionary}>Это стандартный словарь, его нельзя удалить</p>
-            }
+            )}
             <BtnAddCard
                 children="Сменить"
                 dinamicclassname={styles.button}
@@ -173,7 +163,7 @@ const ModalDictionaryMain: FC<IModalDictionaryMain> = memo(function (
                     setDictionaryContent({
                         removeContent: false,
                         createContent: false,
-                        changeContent: true
+                        changeContent: true,
                     });
                 }}
             />
@@ -185,7 +175,7 @@ const ModalDictionaryMain: FC<IModalDictionaryMain> = memo(function (
                     setDictionaryContent({
                         removeContent: false,
                         createContent: true,
-                        changeContent: false
+                        changeContent: false,
                     });
                 }}
             />
@@ -197,12 +187,11 @@ const ModalDictionaryMain: FC<IModalDictionaryMain> = memo(function (
                     setDictionaryContent({
                         removeContent: true,
                         createContent: false,
-                        changeContent: false
+                        changeContent: false,
                     });
                 }}
             />
         </>
     );
-
 });
 export default ModalDictionaryMain;

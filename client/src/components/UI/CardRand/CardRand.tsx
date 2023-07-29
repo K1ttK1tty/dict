@@ -1,18 +1,17 @@
 import { FC, memo } from 'react';
-// components
-import InputAddCard from '../InputAddCard/InputAddCard';
-// styles
-import styles from '../CardRand/CardRand.module.css';
-import '../../../styles/Games.css';
-//redux
+
 import { useAppSelector } from '../../../hooks/redux';
-// types
+
+import '../../../styles/Games.css';
+import styles from '../CardRand/CardRand.module.css';
+
+import InputAddCard from '../InputAddCard/InputAddCard';
 import { ICardRand } from './CardRandModel';
+
 const CardRand: FC<ICardRand> = memo(function ({ card, index, testByWord }) {
     const { validateArr } = useAppSelector(state => state.GamesSlice);
     let validateWord = 'hidden';
     if (validateArr[index]) validateWord = validateArr[index] + 'Color';
-
     if (!testByWord) {
         return (
             <div className={styles.wrapper}>
@@ -23,7 +22,7 @@ const CardRand: FC<ICardRand> = memo(function ({ card, index, testByWord }) {
                 <div className="translateBlock">
                     <InputAddCard
                         dinamicclassname={[styles.input, validateArr[index], 'inptReq '].join(' ')}
-                        disabled={validateArr.length > 0 ? true : false}
+                        disabled={validateArr.length > 0}
                     />
                     <div className={['wordShared', validateWord].join(' ')}>{card.word}</div>
                 </div>
@@ -39,7 +38,7 @@ const CardRand: FC<ICardRand> = memo(function ({ card, index, testByWord }) {
             <div className="translateBlock">
                 <InputAddCard
                     dinamicclassname={[styles.input, validateArr[index], 'inptReq '].join(' ')}
-                    disabled={validateArr.length > 0 ? true : false}
+                    disabled={validateArr.length > 0}
                 />
                 <div className={['wordShared', validateWord].join(' ')}>{card.translate}</div>
             </div>

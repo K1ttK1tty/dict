@@ -1,10 +1,10 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
-// reducers
-import upMenu from './reducers/upMenu';
-import modalRenameCard from './reducers/modalRenameCard';
-import GamesSlice from './reducers/GamesSlice';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+
 import ColorPicker from './reducers/ColorPicker';
+import GamesSlice from './reducers/GamesSlice';
 import AuthSlice from './reducers/authorization/Authorization/AuthSlice';
+import modalRenameCard from './reducers/modalRenameCard';
+import upMenu from './reducers/upMenu';
 
 const rootReducer = combineReducers({
     upMenu,
@@ -16,9 +16,9 @@ const rootReducer = combineReducers({
 export const setupStore = (initialState = {}) => {
     return configureStore({
         reducer: rootReducer,
-        preloadedState: initialState
+        preloadedState: initialState,
     });
 };
-export type RootState = ReturnType<typeof rootReducer>
-export type AppStore = ReturnType<typeof setupStore>
-export type AppDispatch = AppStore['dispatch']
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppStore = ReturnType<typeof setupStore>;
+export type AppDispatch = AppStore['dispatch'];

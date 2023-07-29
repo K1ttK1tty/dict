@@ -1,11 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-interface IColorPicker {
-    colorModeOn: boolean,
-    colorRemoveMode: boolean,
-    getCurrentColorMode: boolean,
-    currentColor: string,
-    colorsBeforePaint: string[],
-}
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+
+import { IColorPicker } from '../storeModels';
+
 const initialState: IColorPicker = {
     colorModeOn: false,
     colorRemoveMode: false,
@@ -32,13 +28,8 @@ const ColorPicker = createSlice({
         setColorsBeforePaint(state, action: PayloadAction<string[]>) {
             state.colorsBeforePaint = action.payload;
         },
-    }
+    },
 });
 export default ColorPicker.reducer;
-export const {
-    setColorModeOn,
-    setColorRemoveMode,
-    setGetCurrentColorMode,
-    setCurrentColor,
-    setColorsBeforePaint
-} = ColorPicker.actions;
+export const { setColorModeOn, setColorRemoveMode, setGetCurrentColorMode, setCurrentColor, setColorsBeforePaint } =
+    ColorPicker.actions;

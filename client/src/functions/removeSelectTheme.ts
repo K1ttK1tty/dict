@@ -1,11 +1,8 @@
-// redux
-import {
-    setSelectOptions,
-    setSelectedTheme,
-} from '../store/reducers/authorization/Authorization/AuthSlice';
-import { updateThemes } from './updateThemes';
-// types
+import { setSelectOptions, setSelectedTheme } from '../store/reducers/authorization/Authorization/AuthSlice';
+
 import { TRemoveSelectTheme } from './functoinModels';
+import { updateThemes } from './updateThemes';
+
 export const removeSelectTheme: TRemoveSelectTheme = (
     selectOptions,
     setIsSelectOpen,
@@ -14,7 +11,7 @@ export const removeSelectTheme: TRemoveSelectTheme = (
     email,
     data,
     currentDictionary,
-    dispatch
+    dispatch,
 ) => {
     const themes = selectOptions.filter(theme => theme !== selectedTheme);
     dispatch(setSelectOptions(themes));

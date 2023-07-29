@@ -1,6 +1,8 @@
 import { ICard } from '../../../store/storeModels';
+
 import { TColorsOnCard } from '../../../models/models';
 import { TSelectColorOrNew } from '../MySelect/MySelectModel';
+
 export interface ICardProps {
     card: ICard;
     index: number;

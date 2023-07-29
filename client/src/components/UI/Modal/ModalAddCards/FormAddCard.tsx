@@ -1,38 +1,33 @@
-import { FC, useState, memo } from 'react';
-// components
-import InputAddCard from '../../InputAddCard/InputAddCard';
-import BtnAddCard from '../../BtnAddCard/BtnAddCard';
-import TextArea from '../../TextArea/TextArea';
-import Checkbox from '../../Checkbox/Checkbox';
-// functions
+import { FC, memo, useState } from 'react';
+
 import { addNewCard } from '../../../../functions/addNewCard';
-import { isNotEmpty } from '../../../../functions/isNotEmpty';
 import { debounce } from '../../../../functions/debounce';
-// consts
-import styles from './FormAddCard.module.css';
-//redux
+import { isNotEmpty } from '../../../../functions/isNotEmpty';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
+
+import styles from './FormAddCard.module.css';
+
 import { setInputValue } from '../../../../store/reducers/modalRenameCard';
-// types
-import { IFormAddCard } from '../ModalsModels';
 import { ICard } from '../../../../store/storeModels';
-const FormAddCard: FC<IFormAddCard> = memo(function (
-    {
-        modalAdd,
-        showRelatedCard,
-        setShowRelatedCard,
-        setIsAddCardModal,
-        isAddCardModal
-    }) {
+
+import { IFormAddCard } from '../ModalsModels';
+
+import BtnAddCard from '../../BtnAddCard/BtnAddCard';
+import Checkbox from '../../Checkbox/Checkbox';
+import InputAddCard from '../../InputAddCard/InputAddCard';
+import TextArea from '../../TextArea/TextArea';
+
+const FormAddCard: FC<IFormAddCard> = memo(function ({
+    modalAdd,
+    showRelatedCard,
+    setShowRelatedCard,
+    setIsAddCardModal,
+    isAddCardModal,
+}) {
     const dispatch = useAppDispatch();
-    const {
-        cards,
-        user,
-        selectOptions,
-        selectedTheme,
-        data,
-        currentDictionary
-    } = useAppSelector(state => state.AuthSlice);
+    const { cards, user, selectOptions, selectedTheme, data, currentDictionary } = useAppSelector(
+        state => state.AuthSlice,
+    );
     const { inputValue } = useAppSelector(state => state.modalRenameCard);
     const [isOverlap, setIsOverlap] = useState<boolean>(false);
     const [cardWithOverlap, setCardWithOverlap] = useState<ICard | null>(null);
@@ -49,7 +44,8 @@ const FormAddCard: FC<IFormAddCard> = memo(function (
     }
     const addCard = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation();
-        addNewCard(e,
+        addNewCard(
+            e,
             { ...inputValue, theme: defaultTheme, time: Date.now(), color: 'red', favorite: isFavorite },
             setIsAddCardModal,
             cards,
@@ -57,7 +53,7 @@ const FormAddCard: FC<IFormAddCard> = memo(function (
             user.email,
             data,
             currentDictionary,
-            dispatch
+            dispatch,
         );
         setDefaultTheme('');
     };
@@ -76,37 +72,27 @@ const FormAddCard: FC<IFormAddCard> = memo(function (
             setCardWithOverlap(null);
         };
     };
-    const firstInputClassName = isOverlap
-        ? [styles.mb36, styles.inputFormAddCard].join(' ')
-        : styles.inputFormAddCard;
-    const overlapNote = showRelatedCard
-        ? 'Вернуться (жми)'
-        : 'Посмотреть совпадение (жми)';
+    const firstInputClassName = isOverlap ? [styles.mb36, styles.inputFormAddCard].join(' ') : styles.inputFormAddCard;
+    const overlapNote = showRelatedCard ? 'Вернуться (жми)' : 'Посмотреть совпадение (жми)';
 
     return (
-        <form >
+        <form>
             <div className={styles.relative}>
-                {
-                    showRelatedCard
-                        ? <InputAddCard
-                            inputValue={cardWithOverlap?.word}
-                            dinamicclassname={firstInputClassName}
-                        />
-                        : <InputAddCard
-                            modalAdd={modalAdd}
-                            dinamicclassname={firstInputClassName}
-                            placeholder={'Слово'}
-                            inputValue={inputValue.word}
-                            setValue={
-                                e => {
-                                    dispatch(setInputValue({ ...inputValue, word: e }));
-                                    debounce(timeId, setTimeId, callback(e), 400);
-                                }
-                            }
-                        />
-                }
-                {
-                    isOverlap &&
+                {showRelatedCard ? (
+                    <InputAddCard inputValue={cardWithOverlap?.word} dinamicclassname={firstInputClassName} />
+                ) : (
+                    <InputAddCard
+                        modalAdd={modalAdd}
+                        dinamicclassname={firstInputClassName}
+                        placeholder={'Слово'}
+                        inputValue={inputValue.word}
+                        setValue={e => {
+                            dispatch(setInputValue({ ...inputValue, word: e }));
+                            debounce(timeId, setTimeId, callback(e), 400);
+                        }}
+                    />
+                )}
+                {isOverlap && (
                     <button
                         onClick={e => {
                             e.preventDefault();
@@ -116,45 +102,36 @@ const FormAddCard: FC<IFormAddCard> = memo(function (
                     >
                         {overlapNote}
                     </button>
-                }
+                )}
             </div>
 
-            {
-                showRelatedCard ?
-                    <>
-                        <InputAddCard
-                            inputValue={cardWithOverlap?.translate}
-                            dinamicclassname={styles.inputFormAddCard}
-                        />
-                        <InputAddCard
-                            inputValue={cardWithOverlap?.theme}
-                            dinamicclassname={styles.inputFormAddCard}
-                        />
-                        <TextArea
-                            inputValue={cardWithOverlap?.note}
-                        />
-                    </>
-                    :
-                    <>
-                        <InputAddCard
-                            dinamicclassname={styles.inputFormAddCard}
-                            placeholder={'Перевод'}
-                            inputValue={inputValue.translate}
-                            setValue={e => dispatch(setInputValue({ ...inputValue, translate: e }))}
-                        />
-                        <InputAddCard
-                            dinamicclassname={styles.inputFormAddCard}
-                            placeholder={'Тема'}
-                            defaultTheme={defaultTheme}
-                            setDefaultTheme={setDefaultTheme}
-                        />
-                        <TextArea
-                            placeholder="Комментарий..."
-                            inputValue={inputValue.note}
-                            setValue={e => dispatch(setInputValue({ ...inputValue, note: e }))}
-                        />
-                    </>
-            }
+            {showRelatedCard ? (
+                <>
+                    <InputAddCard inputValue={cardWithOverlap?.translate} dinamicclassname={styles.inputFormAddCard} />
+                    <InputAddCard inputValue={cardWithOverlap?.theme} dinamicclassname={styles.inputFormAddCard} />
+                    <TextArea inputValue={cardWithOverlap?.note} />
+                </>
+            ) : (
+                <>
+                    <InputAddCard
+                        dinamicclassname={styles.inputFormAddCard}
+                        placeholder={'Перевод'}
+                        inputValue={inputValue.translate}
+                        setValue={e => dispatch(setInputValue({ ...inputValue, translate: e }))}
+                    />
+                    <InputAddCard
+                        dinamicclassname={styles.inputFormAddCard}
+                        placeholder={'Тема'}
+                        defaultTheme={defaultTheme}
+                        setDefaultTheme={setDefaultTheme}
+                    />
+                    <TextArea
+                        placeholder="Комментарий..."
+                        inputValue={inputValue.note}
+                        setValue={e => dispatch(setInputValue({ ...inputValue, note: e }))}
+                    />
+                </>
+            )}
             <div className={styles.mb18}>
                 <Checkbox
                     defaultChecked={isFavorite}

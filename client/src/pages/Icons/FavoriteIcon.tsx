@@ -1,9 +1,9 @@
 import { FC } from 'react';
+
 import '../../styles/Vocabulary.css';
-interface IFavoriteCard {
-    isFavorite: boolean;
-    dinamicClassName?: string;
-}
+
+import { IFavoriteCard } from '../../models/models';
+
 const FavoriteIcon: FC<IFavoriteCard> = function ({ isFavorite, dinamicClassName }) {
     const className = isFavorite ? 'favoriteIcon fill' : 'favoriteIcon';
     return (

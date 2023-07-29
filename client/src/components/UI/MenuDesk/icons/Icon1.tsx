@@ -1,5 +1,7 @@
 import { FC, memo } from 'react';
+
 import { IIconMenuDesc } from '../MenuDeskModel';
+
 const Icon1: FC<IIconMenuDesc> = memo(function ({ className }) {
     return (
         <svg className={className} viewBox="0 0 457.822 457.822">

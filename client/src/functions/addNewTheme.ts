@@ -1,14 +1,9 @@
 import { setSelectOptions } from '../store/reducers/authorization/Authorization/AuthSlice';
-// functions
-import { isNotEmpty } from './isNotEmpty';
-// types
-import { TAddNewTheme } from './functoinModels';
 
-export const addNewTheme: TAddNewTheme = (
-    selectOptions,
-    newTheme,
-    dispatch
-) => {
+import { TAddNewTheme } from './functoinModels';
+import { isNotEmpty } from './isNotEmpty';
+
+export const addNewTheme: TAddNewTheme = (selectOptions, newTheme, dispatch) => {
     if (!isNotEmpty(newTheme)) return [...selectOptions];
 
     const opt = [...selectOptions];

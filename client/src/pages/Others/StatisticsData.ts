@@ -1,4 +1,5 @@
-import { IDataStructure, ICard } from '../../store/storeModels';
+import { ICard, IDataStructure } from '../../store/storeModels';
+
 const monthObject = new Map([
     [0, 'Январь'],
     [1, 'Февраль'],
@@ -42,9 +43,7 @@ export const getAllCards = (data: IDataStructure) => {
 };
 export const getYearsArray = (index: number, data: IDataStructure, all = false) => {
     const ttt = new Map();
-    const array = all
-        ? getAllCards(data)
-        : data[Object.keys(data)[index]].cards;
+    const array = all ? getAllCards(data) : data[Object.keys(data)[index]].cards;
     const newArray = array.length > 0 ? [...array] : [];
 
     if (all) {
@@ -60,22 +59,17 @@ export const getYearsArray = (index: number, data: IDataStructure, all = false) 
         }
     }
 
-    newArray.map(card => {
+    newArray.forEach(card => {
         const cardDate = new Date(card.time);
         const cardYear = cardDate.getFullYear();
         if (ttt.get(cardYear) >= 0) {
             ttt.set(cardYear, ttt.get(cardYear) + 1);
-        }
-        else {
+        } else {
             ttt.set(cardYear, 1);
         }
     });
-    const keys: string[] = array.length > 0
-        ? [(new Date(newArray[0].time).getFullYear() - 1).toString()]
-        : [];
-    const numbers: number[] = array.length > 0
-        ? [0]
-        : [];
+    const keys: string[] = array.length > 0 ? [(new Date(newArray[0].time).getFullYear() - 1).toString()] : [];
+    const numbers: number[] = array.length > 0 ? [0] : [];
     // const numbers: number[] = [];
     // const keys: string[] = [];
     for (const year of ttt.keys()) {
@@ -92,10 +86,8 @@ export const getMonths = (index: number, data: IDataStructure, all = false) => {
     const currentYear = currentDate.getFullYear();
     const currentMonth = currentDate.getMonth();
 
-    const array = all
-        ? getAllCards(data)
-        : data[Object.keys(data)[index]].cards;
-    array.map(card => {
+    const array = all ? getAllCards(data) : data[Object.keys(data)[index]].cards;
+    array.forEach(card => {
         const cardDate = new Date(card.time);
         const cardMonth = monthObject.get(cardDate.getMonth());
         const cardYear = cardDate.getFullYear();
@@ -107,7 +99,6 @@ export const getMonths = (index: number, data: IDataStructure, all = false) => {
     const keys: string[] = [];
     const numbers: number[] = [];
     for (const value of months.keys()) {
-
         keys.push(value);
         if (ttt.get(value)) numbers.push(ttt.get(value));
         else numbers.push(0);
@@ -123,10 +114,8 @@ export const getDays = (index: number, data: IDataStructure, all = false) => {
     const currentMonth = currentDate.getMonth();
     const currentDay = currentDate.getDate();
 
-    const array = all
-        ? getAllCards(data)
-        : data[Object.keys(data)[index]].cards;
-    array.map(card => {
+    const array = all ? getAllCards(data) : data[Object.keys(data)[index]].cards;
+    array.forEach(card => {
         const cardDate = new Date(card.time);
         const cardMonth = monthObject.get(cardDate.getMonth());
         const cardYear = cardDate.getFullYear();
@@ -156,10 +145,8 @@ export const getColorsInDictionary = (index: number, data: IDataStructure, all =
     let green = 0;
     let orange = 0;
     let red = 0;
-    const array = all
-        ? getAllCards(data)
-        : data[Object.keys(data)[index]].cards;
-    array.map(card => {
+    const array = all ? getAllCards(data) : data[Object.keys(data)[index]].cards;
+    array.forEach(card => {
         if (card.color === 'green') green += 1;
         if (card.color === 'orange') orange += 1;
         if (card.color === 'red') red += 1;

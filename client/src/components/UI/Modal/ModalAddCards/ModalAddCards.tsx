@@ -1,10 +1,7 @@
 import { FC, useState, memo } from 'react';
-// components
 import FormAddCard from './FormAddCard';
 import Modal from '../Modal';
-//redux
 import { setInputValue } from '../../../../store/reducers/modalRenameCard';
-// types
 import { ModalAddCards } from '../ModalsModels';
 const ModalAddCards: FC<ModalAddCards> = memo(function ({ modalAdd, isAddCardModal, setIsAddCardModal }) {
     const [showRelatedCard, setShowRelatedCard] = useState<boolean>(false);

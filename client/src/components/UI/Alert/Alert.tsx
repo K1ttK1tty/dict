@@ -1,11 +1,12 @@
-import { useState, useCallback, memo, FC } from 'react';
-// functions 
+import { FC, memo, useCallback, useState } from 'react';
+
 import { isNotEmpty } from '../../../functions/isNotEmpty';
-// styles
-import styles from './Alert.module.css';
-// redux
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+
+import styles from './Alert.module.css';
+
 import { setServerMessage } from '../../../store/reducers/authorization/Authorization/AuthSlice';
+
 const Alert: FC = memo(function () {
     const dispatch = useAppDispatch();
     const { serverMessage } = useAppSelector(state => state.AuthSlice);
@@ -22,13 +23,9 @@ const Alert: FC = memo(function () {
         setMessage(serverMessage);
     }
     if (isNotEmpty(serverMessage)) close();
-    
-    const messageStyle = serverMessage
-        ? [styles.message, styles.show].join(' ')
-        : styles.message;
-    const wrapperStyles = serverMessage
-        ? styles.wrapper
-        : [styles.wrapper, styles.hide].join(' ');
+
+    const messageStyle = serverMessage ? [styles.message, styles.show].join(' ') : styles.message;
+    const wrapperStyles = serverMessage ? styles.wrapper : [styles.wrapper, styles.hide].join(' ');
 
     return (
         <div className={wrapperStyles}>

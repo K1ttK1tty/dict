@@ -1,9 +1,10 @@
 import { FC } from 'react';
-// types 
+
 import { IIconMenuDesc } from '../MenuDeskModel';
+
 const Icon3: FC<IIconMenuDesc> = function ({ className }) {
     return (
-        <svg className={className} viewBox="0 0 478.703 478.703" >
+        <svg className={className} viewBox="0 0 478.703 478.703">
             <path
                 d="M454.2,189.101l-33.6-5.7c-3.5-11.3-8-22.2-13.5-32.6l19.8-27.7c8.4-11.8,
             7.1-27.9-3.2-38.1l-29.8-29.8c-5.6-5.6-13-8.7-20.9-8.7c-6.2,0-12.1,1.9-17.1,

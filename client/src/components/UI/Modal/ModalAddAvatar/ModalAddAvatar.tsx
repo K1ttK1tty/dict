@@ -1,13 +1,15 @@
-import { FC, useState, memo } from 'react';
-// components
+import { FC, memo, useState } from 'react';
+
+import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
+
+import { GetAvatar, UploadAvatar } from '../../../../store/reducers/authorization/Authorization/ActionCreator';
+import { setServerMessage } from '../../../../store/reducers/authorization/Authorization/AuthSlice';
+
+import { IModalAddAvatar } from '../ModalsModels';
+
 import Modal from '../Modal';
 import AddAvatarContent from './AddAvatarContent';
-// redux
-import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
-import { UploadAvatar, GetAvatar } from '../../../../store/reducers/authorization/Authorization/ActionCreator';
-import { setServerMessage } from '../../../../store/reducers/authorization/Authorization/AuthSlice';
-// types
-import { IModalAddAvatar } from '../ModalsModels';
+
 const ModalAddAvatar: FC<IModalAddAvatar> = memo(function ({ isAvatarModal, setModal }) {
     const dispatch = useAppDispatch();
     const email = useAppSelector(state => state.AuthSlice?.user?.email);

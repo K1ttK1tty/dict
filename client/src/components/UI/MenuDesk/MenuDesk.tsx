@@ -1,21 +1,20 @@
-// libs
 import { FC, memo } from 'react';
-import { Link } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
-// icons
+import { Link } from 'react-router-dom';
+
+import cl from './MenuDesk.module.css';
+
+import { IMenuDesk } from './MenuDeskModel';
+
 import Icon1 from './icons/Icon1';
 import Icon2 from './icons/Icon2';
 import Icon3 from './icons/Icon3';
-import IconChart from './icons/IconChart';
 // import Icon4 from './icons/Icon4';
-// styles
-import cl from './MenuDesk.module.css';
-import { IMenuDesk } from './MenuDeskModel';
+import IconChart from './icons/IconChart';
+
 const MenuDesk: FC<IMenuDesk> = memo(function ({ menuOpen, setMenuOpen }) {
     const isMobileOrDesc = isMobile ? cl.back : [cl.back, cl.canHover].join(' ');
-    const isMenuOpen: string = menuOpen
-        ? [isMobileOrDesc, cl.menuOpen].join(' ')
-        : [isMobileOrDesc].join(' ');
+    const isMenuOpen: string = menuOpen ? [isMobileOrDesc, cl.menuOpen].join(' ') : [isMobileOrDesc].join(' ');
 
     const openMenu = (element: React.MouseEvent<HTMLElement>) => {
         element.stopPropagation();
@@ -33,13 +32,12 @@ const MenuDesk: FC<IMenuDesk> = memo(function ({ menuOpen, setMenuOpen }) {
         setMenuOpen(false);
     };
     return (
-        <nav onClick={isMobile ? openMenu : undefined} >
+        <nav onClick={isMobile ? openMenu : undefined}>
             <div className={isMenuOpen}>
                 <div className={cl.content}>
                     <ul className={cl.ulMmenu}>
                         <li className={cl.ulMenu__item}>
                             <span onClick={e => e.stopPropagation()} className={cl.spanIcons}>
-
                                 <Link className={cl.navigationLink} onClick={changePage} to="/posts">
                                     <Icon2 className={cl.colorIcon} />
                                     <div className={cl.swipe}>Словарь</div>
@@ -49,7 +47,6 @@ const MenuDesk: FC<IMenuDesk> = memo(function ({ menuOpen, setMenuOpen }) {
 
                         <li className={cl.ulMenu__item}>
                             <span onClick={e => e.stopPropagation()} className={cl.spanIcons}>
-
                                 <Link className={cl.navigationLink} onClick={changePage} to="/games">
                                     <Icon1 className={cl.colorIcon} />
                                     <div className={cl.swipe}>Мини игры</div>
@@ -59,17 +56,19 @@ const MenuDesk: FC<IMenuDesk> = memo(function ({ menuOpen, setMenuOpen }) {
 
                         <li className={cl.ulMenu__item}>
                             <span onClick={e => e.stopPropagation()} className={cl.spanIcons}>
-                                <Link className={cl.navigationLink} onClick={changePage} to="/settings" >
+                                <Link className={cl.navigationLink} onClick={changePage} to="/settings">
                                     <Icon3 className={cl.colorIcon} />
-                                    <span className={cl.swipe}>Настройки</span></Link>
+                                    <span className={cl.swipe}>Настройки</span>
+                                </Link>
                             </span>
                         </li>
 
                         <li className={cl.ulMenu__item}>
                             <span onClick={e => e.stopPropagation()} className={cl.spanIcons}>
-                                <Link className={cl.navigationLink} onClick={changePage} to="/statistics" >
+                                <Link className={cl.navigationLink} onClick={changePage} to="/statistics">
                                     <IconChart dinamicClassName={cl.colorIcon} />
-                                    <span className={cl.swipe}>Статистика</span></Link>
+                                    <span className={cl.swipe}>Статистика</span>
+                                </Link>
                             </span>
                         </li>
                     </ul>
@@ -82,7 +81,7 @@ const MenuDesk: FC<IMenuDesk> = memo(function ({ menuOpen, setMenuOpen }) {
                     </a> */}
                 </div>
             </div>
-        </nav >
+        </nav>
     );
 });
 export default MenuDesk;

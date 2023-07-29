@@ -1,16 +1,18 @@
-import { FC, useState, useRef } from 'react';
-// styles
-import styles from './DropDownMenu.module.css';
+import { FC, useRef, useState } from 'react';
+
 import { keyClose } from '../../../functions/keyClose';
+
+import styles from './DropDownMenu.module.css';
+
 import { IDropDownMenu } from './DropDownMenuMode';
-const DropDownMenu: FC<IDropDownMenu> = function (
-    {
-        content,
-        isMenuOpen,
-        setIsMenuOpen,
-        dinamicClassName,
-        isAvatarModal
-    }) {
+
+const DropDownMenu: FC<IDropDownMenu> = function ({
+    content,
+    isMenuOpen,
+    setIsMenuOpen,
+    dinamicClassName,
+    isAvatarModal,
+}) {
     let isOpenMenu = [styles.content, styles.hidden].join(' ');
     if (isMenuOpen && !isAvatarModal) isOpenMenu = styles.content;
 
@@ -36,7 +38,7 @@ const DropDownMenu: FC<IDropDownMenu> = function (
             ref={menuElement}
         >
             {content}
-        </div >
+        </div>
     );
 };
 export default DropDownMenu;

@@ -1,13 +1,12 @@
-// functions
-import { addNewTheme } from './addNewTheme';
-import { isNotEmpty } from './isNotEmpty';
-import { updatedCards } from './UpdateCards';
-// redux
 import { setCards, setServerMessage } from '../store/reducers/authorization/Authorization/AuthSlice';
 import { setInputValue } from '../store/reducers/modalRenameCard';
-// types
 import { ICard } from '../store/storeModels';
+
+import { updatedCards } from './UpdateCards';
+import { addNewTheme } from './addNewTheme';
 import { TAddNewCard } from './functoinModels';
+import { isNotEmpty } from './isNotEmpty';
+
 export const addNewCard: TAddNewCard = (
     e,
     inputValue,
@@ -17,7 +16,7 @@ export const addNewCard: TAddNewCard = (
     email,
     data,
     currentDictionary,
-    dispatch
+    dispatch,
 ) => {
     e.preventDefault();
     if (isNotEmpty(inputValue.word) && isNotEmpty(inputValue.translate)) {
@@ -27,6 +26,5 @@ export const addNewCard: TAddNewCard = (
         updatedCards(currentDictionary, email, data, cards, newThemes, dispatch);
         setIsAddCardModal(false);
         dispatch(setInputValue({ id: 0, word: '', translate: '', theme: '', note: '', favorite: false }));
-
     } else dispatch(setServerMessage('Поля "Слово" и "Перевод" должны быть заполнены'));
 };

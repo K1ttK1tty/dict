@@ -1,5 +1,7 @@
 import { setInput, setSearchWord } from '../store/reducers/upMenu';
+
 import { TInputSearchHandler } from './functoinModels';
+
 export const inputSearchHandler: TInputSearchHandler = (e, input, dispatch) => {
     const element = e.target as HTMLDivElement;
     if (element.id === '1') {

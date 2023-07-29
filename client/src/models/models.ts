@@ -1,6 +1,7 @@
-import { ICard } from '../store/storeModels';
-import { IOptionState } from '../store/storeModels';
 import { TSelectColorOrNew } from '../components/UI/MySelect/MySelectModel';
+
+import { ICard, IOptionState } from '../store/storeModels';
+
 export interface IColorObject {
     light: {
         elements: HTMLElement[];
@@ -12,9 +13,9 @@ export interface IColorObject {
     };
 }
 export interface IVocabulary {
-    isSelectOpen: IOptionState,
+    isSelectOpen: IOptionState;
     setIsSelectOpen: (state: React.SetStateAction<IOptionState>) => void;
-    isAttached: TAttachedControls,
+    isAttached: TAttachedControls;
     setIsAttached: React.Dispatch<React.SetStateAction<TAttachedControls>>;
     setSelectedColorOrNewLabel: (state: React.SetStateAction<TSelectColorOrNew | null>) => void;
     selectedColorOrNewLabel: TSelectColorOrNew | null;
@@ -33,7 +34,7 @@ export type TUseSelectedThemes = (
     Cards: ICard[],
     selectedTheme: string,
     toggleWordsOrder: boolean,
-    selectedColor: TSelectColorOrNew | null
+    selectedColor: TSelectColorOrNew | null,
 ) => ICard[];
 export type TUseCards = (
     Cards: ICard[],
@@ -42,17 +43,17 @@ export type TUseCards = (
     toggleWordsOrder: boolean,
     isSearchByWord: boolean,
     isLetterCaseInclude: boolean,
-    selectedColor: TSelectColorOrNew | null
+    selectedColor: TSelectColorOrNew | null,
 ) => ICard[];
 export type TUseSearchByWord = (array: string[], word: string) => string[];
-export type TPrevState = { testByWord: boolean, currentColor: string, testByFavorite: boolean };
+export type TPrevState = { testByWord: boolean; currentColor: string; testByFavorite: boolean };
 
 export interface IRemoveTheme {
     isSelectOpen: IOptionState;
     setIsSelectOpen: (state: React.SetStateAction<IOptionState>) => void;
     selectedColorOrNewLabel: TSelectColorOrNew | null;
 }
-export type TAttachedControls = { attach: boolean, top: string, left: string }
+export type TAttachedControls = { attach: boolean; top: string; left: string };
 export type TColorsOnCard = 'green' | 'red' | 'orange';
 export interface ICheckboxesStatistics {
     years: boolean;
@@ -61,6 +62,10 @@ export interface ICheckboxesStatistics {
 }
 export interface IArrayWithStats {
     keys: string[];
-    numbers: number[]
+    numbers: number[];
     count: number;
+}
+export interface IFavoriteCard {
+    isFavorite: boolean;
+    dinamicClassName?: string;
 }

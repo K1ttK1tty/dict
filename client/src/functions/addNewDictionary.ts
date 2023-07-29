@@ -1,15 +1,16 @@
-import { TAddNewDictionary } from './functoinModels';
 import { UploadData } from '../store/reducers/authorization/Authorization/ActionCreator';
 import { setData } from '../store/reducers/authorization/Authorization/AuthSlice';
-export const addNewDictionary: TAddNewDictionary = ( dictionaryName, email, data, dispatch) => {
+
+import { TAddNewDictionary } from './functoinModels';
+
+export const addNewDictionary: TAddNewDictionary = (dictionaryName, email, data, dispatch) => {
     const newArray = {
         ...data,
         [dictionaryName]: {
             selectOptions: [],
-            cards: []
-        }
+            cards: [],
+        },
     };
     dispatch(setData(newArray));
     dispatch(UploadData({ email: email, data: newArray }));
 };
-

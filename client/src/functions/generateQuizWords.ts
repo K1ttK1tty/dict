@@ -1,18 +1,18 @@
-// functions
-import { getArrayWithRandomValue } from './getRandomInt';
-// redux
-import { setValidateArr, setInputReq } from '../store/reducers/GamesSlice';
+import { setInputReq, setValidateArr } from '../store/reducers/GamesSlice';
 import { setServerMessage } from '../store/reducers/authorization/Authorization/AuthSlice';
-// types
-import { TDenerateQuizWords } from './functoinModels';
 import { ICard } from '../store/storeModels';
+
+import { TDenerateQuizWords } from './functoinModels';
+
+import { getArrayWithRandomValue } from './getRandomInt';
+
 export const generateQuizWords: TDenerateQuizWords = (
     inputReq,
     setTestArray,
     currentColor,
     testByFavorite,
     cards,
-    dispatch
+    dispatch,
 ) => {
     if (inputReq > 50) {
         dispatch(setServerMessage('Давай округлим до 50))))'));
@@ -29,7 +29,7 @@ export const generateQuizWords: TDenerateQuizWords = (
     let arr: ICard[] = [];
     const arrWithColors: ICard[] = [];
     if (currentColor) {
-        cards.map(card => {
+        cards.forEach(card => {
             if (card.color === currentColor) {
                 arrWithColors.push(card);
             }
@@ -39,9 +39,8 @@ export const generateQuizWords: TDenerateQuizWords = (
             return;
         }
         arr = getArrayWithRandomValue(arrWithColors, maxIterations);
-
     } else if (testByFavorite) {
-        cards.map(card => {
+        cards.forEach(card => {
             if (card.favorite === true) {
                 arrWithColors.push(card);
             }

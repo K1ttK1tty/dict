@@ -1,27 +1,26 @@
-// libs
-import { FC, useState, useRef, memo } from 'react';
+import { FC, memo, useRef, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
-// components
+
+import { cutLongLine } from '../../../functions/cutLongLine';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+
+import styles from './MySelect.module.css';
+
+import { setSelectedTheme } from '../../../store/reducers/authorization/Authorization/AuthSlice';
+import { IOptionState } from '../../../store/storeModels';
+
+import { IMySelect } from './MySelectModel';
+
 import SetOptions from '../../SetOptions';
 import IconSelect from './icons/IconSelect';
-// functions
-import { cutLongLine } from '../../../functions/cutLongLine';
-// styles
-import styles from './MySelect.module.css';
-// redux
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { setSelectedTheme } from '../../../store/reducers/authorization/Authorization/AuthSlice';
-// types
-import { IMySelect } from './MySelectModel';
-import { IOptionState } from '../../../store/storeModels';
-const MySelect: FC<IMySelect> = memo(function (
-    {
-        setIsModal,
-        isSelectOpen,
-        setIsSelectOpen,
-        setSelectedColorOrNewLabel,
-        selectedColorOrNewLabel,
-    }) {
+
+const MySelect: FC<IMySelect> = memo(function ({
+    setIsModal,
+    isSelectOpen,
+    setIsSelectOpen,
+    setSelectedColorOrNewLabel,
+    selectedColorOrNewLabel,
+}) {
     const dispatch = useAppDispatch();
     const { selectedTheme } = useAppSelector(state => state.AuthSlice);
     const selectWrapper = useRef<HTMLDivElement | null>(null);
@@ -56,8 +55,8 @@ const MySelect: FC<IMySelect> = memo(function (
     const label = selectedColorOrNewLabel
         ? selectedColorOrNewLabel
         : selectedTheme
-            ? cutLongLine(selectedTheme, 11)
-            : 'Тема';
+        ? cutLongLine(selectedTheme, 11)
+        : 'Тема';
     return (
         <div
             className={styles.select}
@@ -70,24 +69,17 @@ const MySelect: FC<IMySelect> = memo(function (
                 onMouseDown={() => setIsSelectOpen({ ...isSelectOpen, open: !isSelectOpen.open })}
                 className={[styles.title, 'ifNotThisThenClose'].join(' ')}
             >
-                <div
-                    className={[styles.selectValue, 'ifNotThisThenClose'].join(' ')}
-                >
-                    {label}
+                <div className={[styles.selectValue, 'ifNotThisThenClose'].join(' ')}>{label}</div>
+                <div className={styles.selectIcon}>
+                    <IconSelect />
                 </div>
-                <div className={styles.selectIcon}><IconSelect /></div>
             </div>
-            {
-                isSelectOpen.removeMark &&
-                <button onClick={removeTheme} className={styles.removeTheme}>&times;</button>
-            }
-            <CSSTransition
-                in={isSelectOpen.open}
-                timeout={180}
-                classNames="stateOption"
-                mountOnEnter
-                unmountOnExit
-            >
+            {isSelectOpen.removeMark && (
+                <button onClick={removeTheme} className={styles.removeTheme}>
+                    &times;
+                </button>
+            )}
+            <CSSTransition in={isSelectOpen.open} timeout={180} classNames="stateOption" mountOnEnter unmountOnExit>
                 <SetOptions
                     replaceOption={replaceOption}
                     openEditThemeModal={openEditThemeModal}
@@ -95,7 +87,6 @@ const MySelect: FC<IMySelect> = memo(function (
                     isSelectOpen={isSelectOpen}
                     setIsSelectOpen={setIsSelectOpen}
                 />
-
             </CSSTransition>
         </div>
     );

@@ -45,7 +45,7 @@
     padding: 3px;
     line-height: 1;
     color: rgba(206, 15, 15, 0.9);
-    background:white;
+    background: white;
     cursor: pointer;
     border: none;
 }
@@ -56,7 +56,6 @@
     color: white;
     display: block;
     margin: 0px auto;
-
 }
 .btnRemoveAvatar:focus {
     box-shadow: none;

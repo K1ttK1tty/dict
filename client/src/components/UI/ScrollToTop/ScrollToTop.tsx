@@ -1,6 +1,9 @@
-import { FC, useState, useEffect, useRef, memo } from 'react';
+import { FC, memo, useEffect, useRef, useState } from 'react';
+
 import { debounce } from '../../../functions/debounce';
+
 import style from './ScrollToTop.module.css';
+
 const ScrollToTop: FC = memo(function () {
     const [timeoutId, setTimeoutId] = useState<ReturnType<typeof setTimeout>>(0);
     const arrow = useRef<HTMLButtonElement | null>(null);
@@ -8,9 +11,7 @@ const ScrollToTop: FC = memo(function () {
 
     const addActiveClassName = () => {
         showArrow = document.body.scrollTop > window.innerHeight * 0.6;
-        const styles = showArrow
-            ? [style.arrowWrapper, style.arrowActive].join(' ')
-            : style.arrowWrapper;
+        const styles = showArrow ? [style.arrowWrapper, style.arrowActive].join(' ') : style.arrowWrapper;
         if (arrow.current) {
             arrow.current.className = styles;
         }

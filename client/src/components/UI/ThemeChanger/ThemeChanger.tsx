@@ -1,15 +1,15 @@
 import { FC, memo } from 'react';
-// functions
+
 import { changeTheme } from '../../../functions/changeTheme';
-// styles
+
 import styles from './ThemeChanger.module.css';
+
 const ThemeChanger: FC = memo(function () {
     const theme = localStorage.getItem('theme');
-    const isLightTheme = theme === 'light' ? false : true;
     return (
         <div className={styles.themeChanger}>
             <input
-                defaultChecked={isLightTheme}
+                defaultChecked={theme === 'light'}
                 onClick={elem => changeTheme(elem)}
                 id={styles.checkbox}
                 type="checkbox"

@@ -1,4 +1,5 @@
 import styles from '../components/UI/WordCard/WordCard.module.css';
+
 export const colours = new Map();
 colours.set('green', styles.green);
 colours.set('red', styles.red);

@@ -1,4 +1,5 @@
 import { IAuthSliceInitialState } from '../../../storeModels';
+
 export const initialState: IAuthSliceInitialState = {
     // authorization
     user: {
@@ -6,13 +7,13 @@ export const initialState: IAuthSliceInitialState = {
         name: '',
         email: '',
         isActivated: false,
-        registrationDate: ''
+        registrationDate: '',
     },
     data: {
-        'default': {
+        default: {
             selectOptions: [],
-            cards: []
-        }
+            cards: [],
+        },
     },
     currentDictionary: 'default',
     avatar: '',
@@ -35,4 +36,3 @@ export const initialState: IAuthSliceInitialState = {
     selectedTheme: '',
     serverMessage: '',
 };
-

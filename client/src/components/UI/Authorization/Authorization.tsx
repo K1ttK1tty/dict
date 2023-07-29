@@ -1,12 +1,12 @@
-// libs
 import { FC, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
-// components
+import { Route, Routes } from 'react-router-dom';
+
+import styles from './Authorization.module.css';
+
+import ChangePassword from './ResetPassword/ChangePassword';
 import FormLogin from './forms/FormLogin';
 import FormRegistration from './forms/FormRegistration';
-import ChangePassword from './ResetPassword/ChangePassword';
-// styles
-import styles from './Authorization.module.css';
+
 const Authorization: FC = function () {
     const [isLogin, setIsLogin] = useState<boolean>(true);
     const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -17,22 +17,18 @@ const Authorization: FC = function () {
         ? styles.buttonSwitcher
         : [styles.buttonSwitcher, styles.buttonSwitcherActive].join(' ');
     return (
-        <div className={styles.back}>
+        <div data-testid="authorization" className={styles.back}>
             <div className={styles.content}>
                 <div className={styles.changeActions}>
-                    <button onClick={() => setIsLogin(true)} className={buttonLogin}>Вход</button>
-                    <button onClick={() => setIsLogin(false)} className={buttonRegistration}>Регистрация</button>
+                    <button onClick={() => setIsLogin(true)} className={buttonLogin}>
+                        Вход
+                    </button>
+                    <button onClick={() => setIsLogin(false)} className={buttonRegistration}>
+                        Регистрация
+                    </button>
                 </div>
-                <FormLogin
-                    showPassword={showPassword}
-                    setShowPassword={setShowPassword}
-                    isLogin={isLogin}
-                />
-                <FormRegistration
-                    showPassword={showPassword}
-                    setShowPassword={setShowPassword}
-                    isLogin={isLogin}
-                />
+                <FormLogin showPassword={showPassword} setShowPassword={setShowPassword} isLogin={isLogin} />
+                <FormRegistration showPassword={showPassword} setShowPassword={setShowPassword} isLogin={isLogin} />
                 <Routes>
                     <Route path="/forgotPassword" element={<ChangePassword />} />
                 </Routes>

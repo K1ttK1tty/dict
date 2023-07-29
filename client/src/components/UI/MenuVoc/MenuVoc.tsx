@@ -1,16 +1,18 @@
-import { FC, useState, memo } from 'react';
+import { FC, memo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-// components
-import UserTopMenu from '../UserMenu/UserTopMenu';
-import UserMenu from '../UserMenu/UserMenu';
-import ModalAddAvatar from '../Modal/ModalAddAvatar/ModalAddAvatar';
-import DropDownMenu from '../DropDownMenu/DropDownMenu';
-import SearchItem from './SearchItem';
-// styles
-import styles from '../UserMenu/UserMenu.module.css';
-//redux
+
 import { useAppSelector } from '../../../hooks/redux';
+
+import styles from '../UserMenu/UserMenu.module.css';
+
 import { IMenuVoc } from './MenuVocModel';
+
+import DropDownMenu from '../DropDownMenu/DropDownMenu';
+import ModalAddAvatar from '../Modal/ModalAddAvatar/ModalAddAvatar';
+import UserMenu from '../UserMenu/UserMenu';
+import UserTopMenu from '../UserMenu/UserTopMenu';
+import SearchItem from './SearchItem';
+
 const MenuVoc: FC<IMenuVoc> = memo(function ({ setMenuOpen }) {
     const { user } = useAppSelector(state => state.AuthSlice);
     const [isAvatarModal, setIsAvatarModel] = useState<boolean>(false);
@@ -22,15 +24,9 @@ const MenuVoc: FC<IMenuVoc> = memo(function ({ setMenuOpen }) {
     }
     return (
         <div className="menu">
-            <ModalAddAvatar
-                isAvatarModal={isAvatarModal}
-                setModal={setIsAvatarModel}
-            />
-            <div className="menu__container" >
-                <div
-                    className={styles.openMenuButton}
-                    onClick={() => setMenuOpen(prev => !prev)}
-                >
+            <ModalAddAvatar isAvatarModal={isAvatarModal} setModal={setIsAvatarModel} />
+            <div className="menu__container">
+                <div className={styles.openMenuButton} onClick={() => setMenuOpen(prev => !prev)}>
                     <div className={styles.openMenuIcon}></div>
                 </div>
                 <div className="menu__logo">Logo</div>

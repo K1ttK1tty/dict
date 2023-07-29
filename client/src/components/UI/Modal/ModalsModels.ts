@@ -1,14 +1,16 @@
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
+
 import { IInputValue } from '../../../store/storeModels';
+
 export interface IModal {
     title: string;
     content: React.ReactNode;
     isModal: boolean;
     setModal?: (state: boolean) => void;
-    setFields?: ActionCreatorWithPayload<(IInputValue)>;
+    setFields?: ActionCreatorWithPayload<IInputValue>;
     dinamicClassName?: string;
     back?: boolean;
-    backFunc?:()=>void;
+    backFunc?: () => void;
 }
 export interface IAddAvatarContent {
     changeFile: (file: HTMLInputElement) => void;

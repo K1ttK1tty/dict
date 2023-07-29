@@ -1,13 +1,12 @@
-// styles
 import cl from './inputAddCard.module.css';
-// types
+
 import { IInputProps } from './InputAddCardModel';
+
 export default function InputAddCard<T>(props: IInputProps<T>) {
     const element = props.modalAdd ? props.modalAdd : props.modalChangeCard;
     const setInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
         const input = e.target as HTMLInputElement;
         if (props.setValue) {
-
             props.setValue(input.value);
         }
     };

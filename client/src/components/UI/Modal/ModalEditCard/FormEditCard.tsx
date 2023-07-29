@@ -1,36 +1,29 @@
-// libs
 import { FC } from 'react';
 import { isMobile } from 'react-device-detect';
-// components
-import InputAddCard from '../../InputAddCard/InputAddCard';
-import BtnAddCard from '../../BtnAddCard/BtnAddCard';
-import TextArea from '../../TextArea/TextArea';
-// functions
-import { changeCardFields } from '../../../../functions/changeCardFields';
-import { addNewTheme } from '../../../../functions/addNewTheme';
-import { removeCard } from '../../../../functions/removeCard';
+
 import { updatedCards } from '../../../../functions/UpdateCards';
-// styles
-import style from './Modal.module.css';
-// icon
-import SoundIcon from '../icons/SoundIcon';
-// redux
+import { addNewTheme } from '../../../../functions/addNewTheme';
+import { changeCardFields } from '../../../../functions/changeCardFields';
+import { removeCard } from '../../../../functions/removeCard';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
+
+import style from './Modal.module.css';
+
 import { setCards } from '../../../../store/reducers/authorization/Authorization/AuthSlice';
 import { setEditCard } from '../../../../store/reducers/modalRenameCard';
-// types
 import { ICard } from '../../../../store/storeModels';
+
 import { IFormEditCard } from '../ModalsModels';
+
+import BtnAddCard from '../../BtnAddCard/BtnAddCard';
+import InputAddCard from '../../InputAddCard/InputAddCard';
+import TextArea from '../../TextArea/TextArea';
+import SoundIcon from '../icons/SoundIcon';
+
 const FormEditCard: FC<IFormEditCard> = function ({ modalChangeCard, setIsEditCardModal }) {
     const dispatch = useAppDispatch();
     const { editCard } = useAppSelector(state => state.modalRenameCard);
-    const {
-        changeCard,
-        cards,
-        selectOptions,
-        data,
-        currentDictionary
-    } = useAppSelector(state => state.AuthSlice);
+    const { changeCard, cards, selectOptions, data, currentDictionary } = useAppSelector(state => state.AuthSlice);
     const email = useAppSelector(state => state.AuthSlice?.user?.email);
 
     const ChangeCard = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -43,7 +36,7 @@ const FormEditCard: FC<IFormEditCard> = function ({ modalChangeCard, setIsEditCa
     };
     const remove = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        removeCard(editCard.id, cards, email, data, currentDictionary, selectOptions, dispatch)
+        removeCard(editCard.id, cards, email, data, currentDictionary, selectOptions, dispatch);
         setIsEditCardModal(false);
     };
     return (
@@ -82,14 +75,14 @@ const FormEditCard: FC<IFormEditCard> = function ({ modalChangeCard, setIsEditCa
                 setValue={e => dispatch(setEditCard({ ...editCard, note: e }))}
             />
             <div className={style.buttonsBlock}>
-                {
-                    isMobile && <BtnAddCard
+                {isMobile && (
+                    <BtnAddCard
                         aria={'Удалить'}
                         onClick={remove}
                         dinamicclassname={[style.btnFormEditCard, style.removeButtonOnMobile].join(' ')}
                         children="Удалить"
                     />
-                }
+                )}
                 <BtnAddCard
                     aria={'Изменить'}
                     onClick={ChangeCard}
@@ -97,7 +90,7 @@ const FormEditCard: FC<IFormEditCard> = function ({ modalChangeCard, setIsEditCa
                     children="Изменить"
                 />
             </div>
-        </form >
+        </form>
     );
 };
 export default FormEditCard;

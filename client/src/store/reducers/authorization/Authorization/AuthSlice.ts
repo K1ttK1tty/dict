@@ -1,20 +1,11 @@
-// redux lib
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-// Actions
-import {
-    Login,
-    Registration,
-    Logout,
-    CheckAuth,
-    GetAvatar,
-    activateMail,
-    GetUserData
-} from './ActionCreator';
-import { SendResetPassword, refreshPassword } from '../ChangePassword/Actions';
-// interfaces
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+
 import { ICard, IDataStructure } from '../../../storeModels';
-// state
+
+import { SendResetPassword, refreshPassword } from '../ChangePassword/Actions';
+import { CheckAuth, GetAvatar, GetUserData, Login, Logout, Registration, activateMail } from './ActionCreator';
 import { initialState } from './State';
+
 export const AuthSlice = createSlice({
     name: 'AuthSlice',
     initialState,
@@ -52,7 +43,7 @@ export const AuthSlice = createSlice({
         setSelectedTheme(state, action: PayloadAction<string>) {
             state.selectedTheme = action.payload;
         },
-        
+
         // avatar
         setAvatar(state, action: PayloadAction<string>) {
             state.avatar = action.payload;
@@ -72,7 +63,7 @@ export const AuthSlice = createSlice({
             state.isLoading = false;
             state.serverMessage = action.payload.message;
         });
-        builder.addCase(Registration.pending, (state) => {
+        builder.addCase(Registration.pending, state => {
             state.isLoading = true;
         });
         builder.addCase(Registration.rejected, (state, action) => {
@@ -90,7 +81,6 @@ export const AuthSlice = createSlice({
             state.serverMessage = action.payload.message;
         });
         builder.addCase(activateMail.rejected, (state, action) => {
-
             if (!action.payload) {
                 state.serverMessage = 'Произошла ошибка при запросе на сервер :(';
                 return;
@@ -109,7 +99,7 @@ export const AuthSlice = createSlice({
             state.isLoading = false;
             state.serverMessage = action.payload.message;
         });
-        builder.addCase(Login.pending, (state) => {
+        builder.addCase(Login.pending, state => {
             state.isLoading = true;
         });
         builder.addCase(Login.rejected, (state, action) => {
@@ -184,7 +174,7 @@ export const AuthSlice = createSlice({
             const Errorresponse = action.payload as string;
             state.serverMessage = Errorresponse;
         });
-    }
+    },
 });
 export default AuthSlice.reducer;
 export const {
@@ -198,5 +188,5 @@ export const {
     setServerMessage,
     setCurrentDictionary,
     setData,
-    changeDictionary
+    changeDictionary,
 } = AuthSlice.actions;

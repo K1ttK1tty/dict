@@ -1,9 +1,10 @@
-import { TDeleteDictionary } from './functoinModels';
-import { IDataStructure } from '../store/storeModels';
 import { UploadData } from '../store/reducers/authorization/Authorization/ActionCreator';
-import { setServerMessage } from '../store/reducers/authorization/Authorization/AuthSlice';
-import { setData } from '../store/reducers/authorization/Authorization/AuthSlice';
-export const deleteDictionary: TDeleteDictionary = ( dictionaryName, email, data, dispatch) => {
+import { setData, setServerMessage } from '../store/reducers/authorization/Authorization/AuthSlice';
+import { IDataStructure } from '../store/storeModels';
+
+import { TDeleteDictionary } from './functoinModels';
+
+export const deleteDictionary: TDeleteDictionary = (dictionaryName, email, data, dispatch) => {
     if (dictionaryName === 'default') {
         dispatch(setServerMessage('Стандартный словарь нельзя удалить!'));
         return;

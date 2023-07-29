@@ -1,11 +1,12 @@
 import { FC, memo } from 'react';
-// components
-import FormEditCard from './FormEditCard';
-import Modal from '../Modal';
-// redux
+
 import { setEditCard } from '../../../../store/reducers/modalRenameCard';
-// types
+
 import { IModalEditCard } from '../ModalsModels';
+
+import Modal from '../Modal';
+import FormEditCard from './FormEditCard';
+
 const ModalEditCard: FC<IModalEditCard> = memo(function ({ modalChangeCard, isEditCardModal, setIsEditCardModal }) {
     return (
         <Modal
@@ -13,11 +14,7 @@ const ModalEditCard: FC<IModalEditCard> = memo(function ({ modalChangeCard, isEd
             isModal={isEditCardModal}
             setModal={setIsEditCardModal}
             setFields={setEditCard}
-            content={
-                <FormEditCard
-                    modalChangeCard={modalChangeCard}
-                    setIsEditCardModal={setIsEditCardModal}
-                />}
+            content={<FormEditCard modalChangeCard={modalChangeCard} setIsEditCardModal={setIsEditCardModal} />}
         />
     );
 });

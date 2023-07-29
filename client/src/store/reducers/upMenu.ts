@@ -1,10 +1,12 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+
 import { IInput, IUpMenuInitialState } from '../storeModels';
+
 const initialState: IUpMenuInitialState = {
     input: { isOpen: false, after: '' },
     searchWord: '',
     isSearchByWord: true,
-    isLetterCaseInclude: false
+    isLetterCaseInclude: false,
 };
 const upMenu = createSlice({
     name: 'upMenu',
@@ -21,12 +23,8 @@ const upMenu = createSlice({
         },
         setIsLetterCaseInclude(state) {
             state.isLetterCaseInclude = !state.isLetterCaseInclude;
-        }
-    }
+        },
+    },
 });
 export default upMenu.reducer;
-export const { setSearchWord,
-    setInput,
-    setSearchByWord,
-    setIsLetterCaseInclude
-} = upMenu.actions;
+export const { setSearchWord, setInput, setSearchByWord, setIsLetterCaseInclude } = upMenu.actions;

@@ -1,5 +1,7 @@
 import { FC } from 'react';
+
 import { IFormIcon } from '../forms/FormsTypes';
+
 const IconHide: FC<IFormIcon> = function ({ setShowPassword, styles }) {
     return (
         <svg
@@ -10,7 +12,8 @@ const IconHide: FC<IFormIcon> = function ({ setShowPassword, styles }) {
             height="27px"
             viewBox="0 0 24 24"
         >
-            <path d="M2.293,21.707a1,1,0,0,0,1.414,0l3.2-3.2A9.581,9.581
+            <path
+                d="M2.293,21.707a1,1,0,0,0,1.414,0l3.2-3.2A9.581,9.581
             ,0,0,0,12,20c4.325,0,8.227-3,9.938-7.654a.993.993,
             0,0,0,0-.692A12.6,12.6,0,0,0,18.7,6.719l3.012-3.012a1,1,0,
             1,0-1.414-1.414l-3.2,3.2A9.581,9.581,0,0,0,12,4C7.675,4,3.773,

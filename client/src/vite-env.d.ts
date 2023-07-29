@@ -1,5 +1,6 @@
 /// <reference types="vite/client" />
-declare module '*.tsx'
-declare module '*.ts'
-declare module 'react-transition-group'
-declare module 'react-speech-kit'
+/// <reference types="vitest" />
+declare module '*.tsx';
+declare module '*.ts';
+declare module 'react-transition-group';
+declare module 'react-speech-kit';

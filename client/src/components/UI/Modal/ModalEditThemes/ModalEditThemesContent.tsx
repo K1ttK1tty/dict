@@ -1,46 +1,38 @@
-import { FC, useState, useRef, memo } from 'react';
-// components
-import InputAddCard from '../../InputAddCard/InputAddCard';
-import BtnAddCard from '../../BtnAddCard/BtnAddCard';
-import ListWithSearching from '../../listWithSearching/ListWithSearching';
-// hooks
-import { useSearchByWord } from '../../../../hooks/useCards';
-// functions
-import { overrideTheme } from '../../../../functions/overrideTheme';
-import { isNotEmpty } from '../../../../functions/isNotEmpty';
-import { overrideThemesInCards } from '../../../../functions/overrideThemesInCards';
-import { selectTheme } from './functionsModalEditThemes';
-import { clearInput } from './functionsModalEditThemes';
+import { FC, memo, useRef, useState } from 'react';
+
 import { updatedCards } from '../../../../functions/UpdateCards';
-// styles
-import style from './ModalEditThemes.module.css';
-import btnStyles from '../../Modal/ModalEditCard/Modal.module.css';
-// redux
+import { isNotEmpty } from '../../../../functions/isNotEmpty';
+import { overrideTheme } from '../../../../functions/overrideTheme';
+import { overrideThemesInCards } from '../../../../functions/overrideThemesInCards';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
+import { useSearchByWord } from '../../../../hooks/useCards';
+import { clearInput, selectTheme } from './functionsModalEditThemes';
+
+import btnStyles from '../../Modal/ModalEditCard/Modal.module.css';
+import style from './ModalEditThemes.module.css';
+
 import {
-    setSelectOptions,
     setCards,
-    setServerMessage
+    setSelectOptions,
+    setServerMessage,
 } from '../../../../store/reducers/authorization/Authorization/AuthSlice';
+
 import { IModalEditThemesContent } from '../ModalsModels';
-const ModalEditThemesContent: FC<IModalEditThemesContent> = memo(function (
-    {
-        setIsEditThemesModal,
-        isEditThemesModal
-    }
-) {
+
+import BtnAddCard from '../../BtnAddCard/BtnAddCard';
+import InputAddCard from '../../InputAddCard/InputAddCard';
+import ListWithSearching from '../../listWithSearching/ListWithSearching';
+
+const ModalEditThemesContent: FC<IModalEditThemesContent> = memo(function ({
+    setIsEditThemesModal,
+    isEditThemesModal,
+}) {
     const [word, setWord] = useState<string>('');
     const [newTheme, setNewTheme] = useState<string>('');
     const [selectedElement, setSelectedElement] = useState<HTMLDivElement | null>(null);
     const [prevModalState, setPrevModalState] = useState<boolean>(isEditThemesModal);
     const inputSearchThemes = useRef<HTMLInputElement | null>(null);
-    const {
-        user,
-        selectOptions,
-        cards,
-        data,
-        currentDictionary
-    } = useAppSelector(state => state.AuthSlice);
+    const { user, selectOptions, cards, data, currentDictionary } = useAppSelector(state => state.AuthSlice);
     const dispatch = useAppDispatch();
     const themes = useSearchByWord(selectOptions, word);
     const changeThemeAndWords = (e: React.MouseEvent<HTMLFormElement>) => {
@@ -85,7 +77,7 @@ const ModalEditThemesContent: FC<IModalEditThemesContent> = memo(function (
     };
     return (
         <div className={style.main}>
-            <form onSubmit={changeThemeAndWords} >
+            <form onSubmit={changeThemeAndWords}>
                 <div className={style.wrapper}>
                     <ListWithSearching
                         inputSearchThemes={inputSearchThemes}

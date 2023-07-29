@@ -1,8 +1,10 @@
 import { FC } from 'react';
+
 import styles from '../WordCard.module.css';
+
 const IconEdit: FC = function () {
     return (
-        <svg x="0px" y="0px" className={styles.cardIconsize} viewBox="0 0 55.25 55.25" >
+        <svg x="0px" y="0px" className={styles.cardIconsize} viewBox="0 0 55.25 55.25">
             <path
                 className="cardsIconColor"
                 d="M52.618,2.631c-3.51-3.508-9.219-3.508-12.729,0L3.827,38.693C3.81,38.71,3.8,38.731,

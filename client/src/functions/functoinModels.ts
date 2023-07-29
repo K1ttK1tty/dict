@@ -1,7 +1,8 @@
-import { AppDispatch } from '../store/store';
-import { IInputValue, IOptionState, ICard } from '../store/storeModels';
-import { IInput, IDataStructure } from '../store/storeModels';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
+
+import { AppDispatch } from '../store/store';
+import { ICard, IDataStructure, IInput, IInputValue, IOptionState } from '../store/storeModels';
+
 export type TAddNewCard = (
     e: React.MouseEvent<HTMLButtonElement>,
     inputValue: ICard,
@@ -13,16 +14,8 @@ export type TAddNewCard = (
     dictionaryName: string,
     dispatch: AppDispatch,
 ) => void;
-export type TAddNewTheme = (
-    selectOptions: string[],
-    newTheme: string,
-    dispatch: AppDispatch,
-) => string[];
-export type TChangeCardFields = (
-    cards: ICard[],
-    oldCard: ICard,
-    newCard: IInputValue,
-) => ICard[];
+export type TAddNewTheme = (selectOptions: string[], newTheme: string, dispatch: AppDispatch) => string[];
+export type TChangeCardFields = (cards: ICard[], oldCard: ICard, newCard: IInputValue) => ICard[];
 export type TDeleteAllEmptyThemes = (
     cards: ICard[],
     allThemes: string[],
@@ -48,16 +41,12 @@ export type TDenerateQuizWords = (
     cards: ICard[],
     dispatch: AppDispatch,
 ) => void;
-export type TInputSearchHandler = (
-    e: React.MouseEvent<HTMLDivElement>,
-    input: IInput,
-    dispatch: AppDispatch
-) => void;
+export type TInputSearchHandler = (e: React.MouseEvent<HTMLDivElement>, input: IInput, dispatch: AppDispatch) => void;
 export type TKeyClose = (
     e: React.KeyboardEvent<HTMLDivElement>,
     closeModal: ((state: boolean) => void) | undefined,
     dispatch?: AppDispatch | undefined,
-    setFields?: ActionCreatorWithPayload<(IInputValue)>
+    setFields?: ActionCreatorWithPayload<IInputValue>,
 ) => void;
 export type TModalAddCard = (
     modalAdd: React.MutableRefObject<HTMLInputElement | null>,
@@ -74,15 +63,11 @@ export type TRemoveCard = (
     selectOptions: string[],
     dispatch: AppDispatch,
 ) => void;
-export type TRemoveInput = (
-    elem: React.MouseEvent<HTMLDivElement>,
-    input: IInput,
-    dispatch: AppDispatch,
-) => void;
+export type TRemoveInput = (elem: React.MouseEvent<HTMLDivElement>, input: IInput, dispatch: AppDispatch) => void;
 export type TRemoveModal = (
     setModal: ((state: boolean) => void) | undefined,
     dispatch: AppDispatch | undefined,
-    setFields?: ActionCreatorWithPayload<(IInputValue)>
+    setFields?: ActionCreatorWithPayload<IInputValue>,
 ) => void;
 export type TCutLongLine = (line: string, symbolCount: number) => string;
 export type TRemoveSelectTheme = (
@@ -105,35 +90,35 @@ export type TShared = (
     state: string[],
     wordInCard: string,
     inputs: NodeListOf<HTMLInputElement>,
-    index: number
+    index: number,
 ) => void;
 export type TUpdateThemes = (
     dictionaryName: string,
     email: string,
     data: IDataStructure,
     newThemes: string[],
-    dispatch: AppDispatch
-) => void
+    dispatch: AppDispatch,
+) => void;
 export type TUpdatedCards = (
     dictionaryName: string,
     email: string,
     data: IDataStructure,
     newCards: ICard[],
     newThemes: string[],
-    dispatch: AppDispatch
-) => void
+    dispatch: AppDispatch,
+) => void;
 export type TDeleteDictionary = (
     dictionaryName: string,
     email: string,
     data: IDataStructure,
-    dispatch: AppDispatch
+    dispatch: AppDispatch,
 ) => void;
 export type TAddNewDictionary = (
     dictionaryName: string,
     email: string,
     data: IDataStructure,
-    dispatch: AppDispatch
-) => void
+    dispatch: AppDispatch,
+) => void;
 export type TSwitchFavorite = (
     cards: ICard[],
     cardId: number,
@@ -141,5 +126,5 @@ export type TSwitchFavorite = (
     selectOptions: string[],
     email: string,
     data: IDataStructure,
-    dispatch: AppDispatch
-) => void
+    dispatch: AppDispatch,
+) => void;

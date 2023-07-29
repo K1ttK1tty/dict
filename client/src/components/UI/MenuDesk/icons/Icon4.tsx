@@ -1,5 +1,7 @@
 import { FC } from 'react';
+
 import { IIcon4 } from '../MenuDeskModel';
+
 const Icon4: FC<IIcon4> = function ({ fill, icon4Class }) {
     return (
         <svg className={icon4Class} viewBox="0 0 24 24" fill="none">

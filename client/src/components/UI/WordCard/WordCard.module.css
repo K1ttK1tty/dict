@@ -54,7 +54,7 @@
     height: 23px;
     overflow: var(--overflowHidden);
 }
-.icon{
+.icon {
     opacity: var(--opacityOff);
     visibility: var(--visibilityOff);
     position: var(--positionAbsolute);

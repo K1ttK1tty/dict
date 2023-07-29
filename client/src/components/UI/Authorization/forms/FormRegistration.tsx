@@ -1,25 +1,27 @@
 import { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-// components
-import InputAddCard from '../../InputAddCard/InputAddCard';
-import BtnAddCard from '../../BtnAddCard/BtnAddCard';
-import ShowIcon from './Icons/ShowIcon';
-// consts
-import { regularExpression } from './regularExpression';
-// styles
-import styles from '../Authorization.module.css';
-import inputStyle from '../../Modal/ModalAddCards/FormAddCard.module.css';
-// redux
+
 import { useAppDispatch } from '../../../../hooks/redux';
+
+import inputStyle from '../../Modal/ModalAddCards/FormAddCard.module.css';
+import styles from '../Authorization.module.css';
+
 import { Registration } from '../../../../store/reducers/authorization/Authorization/ActionCreator';
-// types 
+
+import BtnAddCard from '../../BtnAddCard/BtnAddCard';
+import InputAddCard from '../../InputAddCard/InputAddCard';
 import { IFormProps, IFormRegistrationHookArgs } from './FormsTypes';
+import ShowIcon from './Icons/ShowIcon';
+import { regularExpression } from './regularExpression';
+
 const FormRegistration: FC<IFormProps> = function ({ showPassword, setShowPassword, isLogin }) {
     const formStyle = isLogin ? [styles.form, styles.formHide].join(' ') : styles.form;
     const dispatch = useAppDispatch();
-    const { register, handleSubmit, formState: { errors } } = useForm<IFormRegistrationHookArgs>({
-        mode: 'onSubmit'
-    });
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<IFormRegistrationHookArgs>({ mode: 'onSubmit' });
     const onSubmit: SubmitHandler<IFormRegistrationHookArgs> = data => {
         const email = data.email;
         const userName = data.name;
@@ -29,7 +31,7 @@ const FormRegistration: FC<IFormProps> = function ({ showPassword, setShowPasswo
     console.log(errors);
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className={formStyle} >
+        <form onSubmit={handleSubmit(onSubmit)} className={formStyle}>
             <h1 className={styles.title}>Регистрация</h1>
 
             <label className={styles.label}>
@@ -39,13 +41,10 @@ const FormRegistration: FC<IFormProps> = function ({ showPassword, setShowPasswo
                     register={{
                         ...register('name', {
                             required: 'Поле обязательно для заполнения',
-                        })
+                        }),
                     }}
                 />
-                {
-                    errors?.name?.message &&
-                    <div className={styles.errorMessage}>{errors?.name?.message}</div>
-                }
+                {errors?.name?.message && <div className={styles.errorMessage}>{errors?.name?.message}</div>}
             </label>
             <label className={styles.label}>
                 <span className={styles.asterisk}>*</span>Email
@@ -57,15 +56,12 @@ const FormRegistration: FC<IFormProps> = function ({ showPassword, setShowPasswo
                             required: 'Поле обязательно для заполнения',
                             pattern: {
                                 value: regularExpression,
-                                message: 'Введите правильный почтовый адрес'
-                            }
-                        })
+                                message: 'Введите правильный почтовый адрес',
+                            },
+                        }),
                     }}
                 />
-                {
-                    errors?.email?.message &&
-                    <div className={styles.errorMessage}>{errors?.email?.message}</div>
-                }
+                {errors?.email?.message && <div className={styles.errorMessage}>{errors?.email?.message}</div>}
             </label>
             <label className={[styles.passwordLabel, styles.label].join(' ')}>
                 <span className={styles.asterisk}>*</span>Password
@@ -75,25 +71,14 @@ const FormRegistration: FC<IFormProps> = function ({ showPassword, setShowPasswo
                     register={{
                         ...register('password', {
                             required: 'Поле обязательно для заполнения',
-                            minLength: { value: 4, message: 'Длина пароля не менее 4 символов' }
-                        })
+                            minLength: { value: 4, message: 'Длина пароля не менее 4 символов' },
+                        }),
                     }}
                 />
-                <ShowIcon
-                    showPassword={showPassword}
-                    styles={styles}
-                    setShowPassword={setShowPassword}
-                />
-                {
-                    errors?.password?.message &&
-                    <div className={styles.errorMessage}>{errors?.password?.message}</div>
-                }
+                <ShowIcon showPassword={showPassword} styles={styles} setShowPassword={setShowPassword} />
+                {errors?.password?.message && <div className={styles.errorMessage}>{errors?.password?.message}</div>}
             </label>
-            <BtnAddCard
-                aria={'Зарегистрироваться'}
-                dinamicclassname={styles.button}
-                children="Зарегистрироваться"
-            />
+            <BtnAddCard aria={'Зарегистрироваться'} dinamicclassname={styles.button} children="Зарегистрироваться" />
         </form>
     );
 };

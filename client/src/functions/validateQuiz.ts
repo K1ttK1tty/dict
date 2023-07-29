@@ -1,7 +1,7 @@
-// redux
 import { setValidateArr } from '../store/reducers/GamesSlice';
-// types
-import { TValidateQuiz, TShared } from './functoinModels';
+
+import { TShared, TValidateQuiz } from './functoinModels';
+
 export const validateQuiz: TValidateQuiz = (e, array, testByWord, dispatch) => {
     const state: string[] = [];
     e.preventDefault();
@@ -27,6 +27,5 @@ const shared: TShared = (state, wordInCard, inputs, index) => {
         state.push('trueWord');
     } else if (wordInCard.includes(inputValue) && inputValue !== 'to' && inputValue !== '') {
         state.push('almost');
-
     } else state.push('falseWord');
 };

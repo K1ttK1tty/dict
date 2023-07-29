@@ -1,26 +1,27 @@
-// libs
 import { FC } from 'react';
-import { Link } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
-// components
-import InputAddCard from '../../InputAddCard/InputAddCard';
-import BtnAddCard from '../../BtnAddCard/BtnAddCard';
-import ShowIcon from './Icons/ShowIcon';
-// consts
-import { regularExpression } from './regularExpression';
-// styles
-import styles from '../Authorization.module.css';
+import { Link } from 'react-router-dom';
+
+import { useAppDispatch } from '../../../../hooks/redux';
+
 import inputStyle from '../../Modal/ModalAddCards/FormAddCard.module.css';
-// redux
+import styles from '../Authorization.module.css';
+
 import { Login } from '../../../../store/reducers/authorization/Authorization/ActionCreator';
 import { setIsAuth } from '../../../../store/reducers/authorization/Authorization/AuthSlice';
-import { useAppDispatch } from '../../../../hooks/redux';
-// types
-import { IFormProps, IFormLoginHookArgs } from './FormsTypes';
+
+import BtnAddCard from '../../BtnAddCard/BtnAddCard';
+import InputAddCard from '../../InputAddCard/InputAddCard';
+import { IFormLoginHookArgs, IFormProps } from './FormsTypes';
+import ShowIcon from './Icons/ShowIcon';
+import { regularExpression } from './regularExpression';
+
 const FormLogin: FC<IFormProps> = function ({ showPassword, setShowPassword, isLogin }) {
-    const { register, handleSubmit, formState: { errors } } = useForm<IFormLoginHookArgs>({
-        mode: 'onSubmit'
-    });
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<IFormLoginHookArgs>({ mode: 'onSubmit' });
     const dispatch = useAppDispatch();
     const formStyle = isLogin ? styles.form : [styles.form, styles.formHide].join(' ');
     const onSubmit: SubmitHandler<IFormLoginHookArgs> = data => {
@@ -29,13 +30,13 @@ const FormLogin: FC<IFormProps> = function ({ showPassword, setShowPassword, isL
             dispatch(setIsAuth());
             return;
         }
-        //////////////////////  
+        //////////////////////
         const email = data.email;
         const password = data.password;
         dispatch(Login({ email, password }));
     };
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className={formStyle} >
+        <form onSubmit={handleSubmit(onSubmit)} className={formStyle}>
             <h1 className={styles.title}>Вход</h1>
             <label className={styles.label}>
                 <span className={styles.asterisk}>*</span>
@@ -48,16 +49,12 @@ const FormLogin: FC<IFormProps> = function ({ showPassword, setShowPassword, isL
                             required: 'Поле обязательно для заполнения',
                             pattern: {
                                 value: regularExpression,
-                                message: 'Введите правильный почтовый адрес'
-                            }
-                        })
+                                message: 'Введите правильный почтовый адрес',
+                            },
+                        }),
                     }}
                 />
-                {
-                    errors?.email?.message &&
-                    <div className={styles.errorMessage}>{errors?.email?.message}</div>
-                }
-
+                {errors?.email?.message && <div className={styles.errorMessage}>{errors?.email?.message}</div>}
             </label>
             <label className={[styles.passwordLabel, styles.label].join(' ')}>
                 <span className={styles.asterisk}>*</span>Password
@@ -67,29 +64,17 @@ const FormLogin: FC<IFormProps> = function ({ showPassword, setShowPassword, isL
                     register={{
                         ...register('password', {
                             required: 'Поле обязательно для заполнения',
-                            minLength: { value: 4, message: 'Длина пароля не менее 4 символов' }
-                        })
+                            minLength: { value: 4, message: 'Длина пароля не менее 4 символов' },
+                        }),
                     }}
                 />
-                <ShowIcon
-                    showPassword={showPassword}
-                    setShowPassword={setShowPassword}
-                    styles={styles}
-                />
-                {
-                    errors?.password?.message &&
-                    <div className={styles.errorMessage}>{errors?.password?.message}</div>
-                }
+                <ShowIcon showPassword={showPassword} setShowPassword={setShowPassword} styles={styles} />
+                {errors?.password?.message && <div className={styles.errorMessage}>{errors?.password?.message}</div>}
             </label>
-            <BtnAddCard
-                aria={'Вход'}
-                dinamicclassname={styles.button}
-                children="Вход"
-            />
+            <BtnAddCard aria={'Вход'} dinamicclassname={styles.button} children="Вход" />
             <Link className={styles.link} to="/forgotPassword">
                 <p className={styles.forgotPasswd}>Забыли пароль?</p>
             </Link>
-
         </form>
     );
 };

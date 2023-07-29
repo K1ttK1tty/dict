@@ -15,7 +15,7 @@ export interface IInputValue {
     translate: string;
     theme: string;
     note: string;
-    favorite:boolean;
+    favorite: boolean;
 }
 export interface IUser {
     id: number;
@@ -51,7 +51,7 @@ export interface ICheckAuth extends IMessage {
     user: IUser;
 }
 export interface IFetchError extends IMessage {
-    errors: [] | { value: string, msg: string, param: string, location: string }
+    errors: [] | { value: string; msg: string; param: string; location: string };
 }
 export interface IUploadAvatar extends IEmail {
     avatar: File;
@@ -74,9 +74,10 @@ export interface IRegistration {
             id: number;
             name: string;
             registrationDate: string;
-        }
+        };
     };
-}export interface IInput {
+}
+export interface IInput {
     isOpen: boolean;
     after: string;
 }
@@ -92,8 +93,8 @@ export interface IModalRenameCardInitialState {
     editCard: IInputValue;
 }
 export interface IGamesSliceInitialState {
-    inputReq: number,
-    validateArr: string[],
+    inputReq: number;
+    validateArr: string[];
 }
 export interface IRefreshPassword {
     password: string;
@@ -114,10 +115,17 @@ export interface IAuthSliceInitialState {
     data: IDataStructure;
 }
 interface IObjFields {
-    selectOptions: string[],
-    cards: ICard[]
+    selectOptions: string[];
+    cards: ICard[];
 }
 export interface IDataStructure {
     default: IObjFields;
-    [key: string]: IObjFields
+    [key: string]: IObjFields;
+}
+export interface IColorPicker {
+    colorModeOn: boolean,
+    colorRemoveMode: boolean,
+    getCurrentColorMode: boolean,
+    currentColor: string,
+    colorsBeforePaint: string[],
 }

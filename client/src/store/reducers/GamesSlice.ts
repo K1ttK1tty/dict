@@ -1,5 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+
 import { IGamesSliceInitialState } from '../storeModels';
+
 const initialState: IGamesSliceInitialState = {
     inputReq: 0,
     validateArr: [],
@@ -13,8 +15,8 @@ const GamesSlice = createSlice({
         },
         setValidateArr(state, action: PayloadAction<string[]>) {
             state.validateArr = action.payload;
-        }
-    }
+        },
+    },
 });
 export default GamesSlice.reducer;
 export const { setInputReq, setValidateArr } = GamesSlice.actions;

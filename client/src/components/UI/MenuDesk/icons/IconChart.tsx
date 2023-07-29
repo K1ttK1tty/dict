@@ -1,8 +1,10 @@
 import { FC, memo } from 'react';
+
 import { IIconChart } from '../MenuDeskModel';
+
 const IconChart: FC<IIconChart> = memo(function ({ dinamicClassName }) {
     return (
-        <svg className={dinamicClassName} viewBox="0 0 24 24" stroke="rgba(255, 255, 255, 0.65)" >
+        <svg className={dinamicClassName} viewBox="0 0 24 24" stroke="rgba(255, 255, 255, 0.65)">
             <path
                 d="M17.2929 2.29289C17 2.58579 17 3.05719 17 4V17C17 17.9428 17 18.4142 17.2929 18.7071C17.5858 19
                  18.0572 19 19 19C19.9428 19 20.4142 19 20.7071 18.7071C21 18.4142 21 17.9428 21 17V4C21 3.05719

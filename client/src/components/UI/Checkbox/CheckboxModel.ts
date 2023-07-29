@@ -1,8 +1,8 @@
 export interface ICheckbox {
     id: string;
     defaultChecked?: boolean;
-    checked?:boolean;
+    checked?: boolean;
     dinamicClassName?: string;
-    dinamicClassNameWrapper?:string;
+    dinamicClassNameWrapper?: string;
     callback: React.ChangeEventHandler<HTMLInputElement>;
 }

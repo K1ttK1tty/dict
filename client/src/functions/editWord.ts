@@ -1,8 +1,8 @@
-// redux
 import { setChangeCard } from '../store/reducers/authorization/Authorization/AuthSlice';
 import { setEditCard, setIndexCard } from '../store/reducers/modalRenameCard';
-// types
+
 import { TEditWord } from './functoinModels';
+
 export const editWord: TEditWord = (card, index, setIsEditCardModal, modalChangeCard, dispatch) => {
     dispatch(setIndexCard(index));
     dispatch(setChangeCard(card));

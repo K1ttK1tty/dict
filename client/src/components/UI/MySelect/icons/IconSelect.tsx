@@ -1,7 +1,8 @@
 import { FC, memo } from 'react';
+
 const IconSelect: FC = memo(function () {
     return (
-        <svg className="selSVG" width="27px" height="27px" viewBox="0 0 24 24" fill="none" >
+        <svg className="selSVG" width="27px" height="27px" viewBox="0 0 24 24" fill="none">
             <path
                 className="selSVG"
                 d="M2.75 5H21.25C21.6642 5 22 5.33579 22 5.75C22 6.1297 21.7178 6.44349

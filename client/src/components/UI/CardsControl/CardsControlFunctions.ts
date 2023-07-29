@@ -1,5 +1,7 @@
-import { TMouseMove, TMove } from './CardsControlModel';
 import styles from './CardsControl.module.css';
+
+import { TMouseMove, TMove } from './CardsControlModel';
+
 export const mouseStay = () => {
     document.onmousemove = null;
     document.body.className = '';
@@ -22,7 +24,7 @@ export const move: TMove = (element, windowBlock, isCanMove, isAttached, setIsAt
         const coordinates = getCoordinates(windowBlock.current);
         const shiftY: number = element.pageY - coordinates.top;
         const shiftX: number = element.pageX - coordinates.left;
-        document.onmousemove = (elem) => {
+        document.onmousemove = elem => {
             mouseMove(elem, shiftY, shiftX, windowBlock, isAttached, setIsAttached);
         };
         document.body.className = styles.noselect;
@@ -32,6 +34,6 @@ export const getCoordinates = (element: HTMLDivElement) => {
     const coordinatesObj = element.getBoundingClientRect();
     return {
         top: coordinatesObj.top + window.scrollY,
-        left: coordinatesObj.left + window.scrollX
+        left: coordinatesObj.left + window.scrollX,
     };
 };

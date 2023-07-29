@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+
 import { TUseLocaleStorage } from '../models/models';
+
 export const useLocaleStorage: TUseLocaleStorage = (name, state) => {
     const storageValue = localStorage.getItem(name);
     let initialState;

@@ -1,13 +1,13 @@
 import { FC } from 'react';
-// components
+
 import Checkbox from '../components/UI/Checkbox/Checkbox';
-// hook
+
 import { useLocaleStorage } from '../hooks/useLocaleStorage';
-// styles
-import '../styles/Vocabulary.css';
+
 import '../styles/Games.css';
+import '../styles/Vocabulary.css';
 import '../styles/theme.css';
-// types
+
 const Settings: FC = function () {
     const [isColorsInCards, setIsColorsInCards] = useLocaleStorage('isColorsOnCards', true);
     const [isTwoColumns, setIsTwoColumns] = useLocaleStorage('oneOrTwoCardsColumns', false);
@@ -77,7 +77,6 @@ const Settings: FC = function () {
                         Скрыть перевод если выбрано "Избранное"
                     </div>
                 </div>
-
             </div>
         </div>
     );

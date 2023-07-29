@@ -1,10 +1,12 @@
 import { FC, memo } from 'react';
-// components
-import ModalEditThemesContent from './ModalEditThemesContent';
-import Modal from '../Modal';
-// styles
+
 import style from './ModalEditThemes.module.css';
+
 import { IModalEditThemes } from '../ModalsModels';
+
+import Modal from '../Modal';
+import ModalEditThemesContent from './ModalEditThemesContent';
+
 const ModalEditThemes: FC<IModalEditThemes> = memo(function ({ isEditThemesModal, setIsEditThemesModal }) {
     return (
         <Modal
@@ -16,7 +18,8 @@ const ModalEditThemes: FC<IModalEditThemes> = memo(function ({ isEditThemesModal
                 <ModalEditThemesContent
                     setIsEditThemesModal={setIsEditThemesModal}
                     isEditThemesModal={isEditThemesModal}
-                />}
+                />
+            }
         />
     );
 });

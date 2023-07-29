@@ -1,12 +1,11 @@
 import { FC, memo } from 'react';
-// components
-import InputSearch from '../InputSearch/InputSearch';
-// icon
-import Search from '../../../pages/Icons/Search';
-// functions
+
 import { inputSearchHandler } from '../../../functions/inputSearchHandler';
-// redux
-import { useAppSelector, useAppDispatch } from '../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+
+import Search from '../../../pages/Icons/Search';
+import InputSearch from '../InputSearch/InputSearch';
+
 const SearchItem: FC = memo(function () {
     const dispatch = useAppDispatch();
     const { input } = useAppSelector(state => state.upMenu);

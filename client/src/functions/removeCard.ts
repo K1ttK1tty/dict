@@ -1,8 +1,8 @@
-// redux
 import { setCards, setID } from '../store/reducers/authorization/Authorization/AuthSlice';
+
 import { updatedCards } from './UpdateCards';
-// types
 import { TRemoveCard } from './functoinModels';
+
 export const removeCard: TRemoveCard = (
     cardClickID,
     Cards,
@@ -10,7 +10,7 @@ export const removeCard: TRemoveCard = (
     data,
     currentDictionary,
     selectOptions,
-    dispatch
+    dispatch,
 ) => {
     const cards = [...Cards.filter(card => cardClickID !== card.id)];
     updatedCards(currentDictionary, email, data, cards, selectOptions, dispatch);

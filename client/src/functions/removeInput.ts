@@ -1,7 +1,7 @@
-// redux
-import { setSearchWord, setInput } from '../store/reducers/upMenu';
-// types
+import { setInput, setSearchWord } from '../store/reducers/upMenu';
+
 import { TRemoveInput } from './functoinModels';
+
 export const removeInput: TRemoveInput = (elem, input, dispatch) => {
     const divElement = elem.target as HTMLDivElement;
     const classElement = divElement.className;

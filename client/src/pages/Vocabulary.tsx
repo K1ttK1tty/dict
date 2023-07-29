@@ -1,44 +1,41 @@
-import { FC, useRef, useState, useEffect, useMemo, memo, useDeferredValue } from 'react';
-// hooks
-import { useCards } from '../hooks/useCards';
-//components
-import SetCard from '../components/UI/WordCard/SetCard';
+import { FC, memo, useDeferredValue, useEffect, useMemo, useRef, useState } from 'react';
+
 import RemoveTheme from '../components/RemoveTheme';
 import CardsControl from '../components/UI/CardsControl/CardsControl';
 import CardsInfo from '../components/UI/CardsInfo/CardsInfo';
-import ModalEditCard from '../components/UI/Modal/ModalEditCard/ModalEditCard';
-import ModalAddCards from '../components/UI/Modal/ModalAddCards/ModalAddCards';
-import ModalEditThemes from '../components/UI/Modal/ModalEditThemes/ModalEditThemes';
-import ModalDictionary from '../components/UI/Modal/ModalDictionary/ModalDictionary';
-//functions 
-import { removeInput } from '../functions/removeInput';
-// hook
-import { useLocaleStorage } from '../hooks/useLocaleStorage';
-//styles
-import '../styles/theme.css';
-import '../styles/Vocabulary.css';
-//color-picker
 import ColorPicker from '../components/UI/ColorPicker/ColorPicker';
-//redux
+import ModalAddCards from '../components/UI/Modal/ModalAddCards/ModalAddCards';
+import ModalDictionary from '../components/UI/Modal/ModalDictionary/ModalDictionary';
+import ModalEditCard from '../components/UI/Modal/ModalEditCard/ModalEditCard';
+import ModalEditThemes from '../components/UI/Modal/ModalEditThemes/ModalEditThemes';
+import SetCard from '../components/UI/WordCard/SetCard';
+
+import { removeInput } from '../functions/removeInput';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import { useCards } from '../hooks/useCards';
+import { useLocaleStorage } from '../hooks/useLocaleStorage';
+
+import '../styles/Vocabulary.css';
+import '../styles/theme.css';
+
 import {
     setColorModeOn,
     setColorRemoveMode,
-    setGetCurrentColorMode,
+    setColorsBeforePaint,
     setCurrentColor,
-    setColorsBeforePaint
+    setGetCurrentColorMode,
 } from '../store/reducers/ColorPicker';
-// types
+
 import { IColorObject, IVocabulary } from '../models/models';
-const Vocabulary: FC<IVocabulary> = memo(function (
-    {
-        isSelectOpen,
-        setIsSelectOpen,
-        isAttached,
-        setIsAttached,
-        selectedColorOrNewLabel,
-        setSelectedColorOrNewLabel,
-    }) {
+
+const Vocabulary: FC<IVocabulary> = memo(function ({
+    isSelectOpen,
+    setIsSelectOpen,
+    isAttached,
+    setIsAttached,
+    selectedColorOrNewLabel,
+    setSelectedColorOrNewLabel,
+}) {
     const [isEditThemesModal, setIsEditThemesModal] = useState<boolean>(false);
     const [color, setColor] = useState<string>('#0dccce');
     const [order] = useLocaleStorage('order', true);
@@ -52,12 +49,7 @@ const Vocabulary: FC<IVocabulary> = memo(function (
 
     const dispatch = useAppDispatch();
     const { selectedTheme, cards } = useAppSelector(state => state.AuthSlice);
-    const {
-        searchWord,
-        input,
-        isSearchByWord,
-        isLetterCaseInclude
-    } = useAppSelector(state => state.upMenu);
+    const { searchWord, input, isSearchByWord, isLetterCaseInclude } = useAppSelector(state => state.upMenu);
     const colorModeOn = useAppSelector(state => state.ColorPicker.colorModeOn);
     const colorRemoveMode = useAppSelector(state => state.ColorPicker.colorRemoveMode);
     const getCurrentColorMode = useAppSelector(state => state.ColorPicker.getCurrentColorMode);
@@ -72,7 +64,7 @@ const Vocabulary: FC<IVocabulary> = memo(function (
         order,
         isSearchByWord,
         isLetterCaseInclude,
-        selectedColorOrNewLabel
+        selectedColorOrNewLabel,
     );
     const calculatedArray = useDeferredValue(selectedAndSearchedWord);
     const stale = calculatedArray !== selectedAndSearchedWord;
@@ -81,14 +73,13 @@ const Vocabulary: FC<IVocabulary> = memo(function (
         return [];
     }, []);
 
-    function click(e: MouseEvent) {
+    const click = (e: MouseEvent) => {
         const element = e.target as HTMLElement;
         if (
             element.className !== 'noCLick' &&
             element.className !== 'react-colorful__interactive' &&
             element.className !== 'react-colorful__pointer react-colorful__saturation-pointer'
         ) {
-
             if (!arrOfCurrentElements.includes(element)) {
                 arrOfCurrentElements.push(element);
                 dispatch(setColorsBeforePaint([...colorsBeforePaint, element.style.background]));
@@ -96,28 +87,29 @@ const Vocabulary: FC<IVocabulary> = memo(function (
 
             if (colorRemoveMode) element.style.background = '';
             else if (getCurrentColorMode) {
-
                 if (currentColor) element.style.background = currentColor;
                 else {
                     dispatch(setCurrentColor(element.style.background));
                     setColor(element.style.background);
                 }
-
             } else element.style.background = color; // paint
         }
-    }
-    function devMode() {
+    };
+    const devMode = () => {
         if (colorModeOn) {
-
             let isExit = true;
             if (arrOfCurrentElements.length) {
                 isExit = window.confirm('Выход из режима редактирования. Сохранить изменения?');
             }
 
-            if (!isExit) { // if not save
-                arrOfCurrentElements.map((elem, index) => { // return to previous colors
+            if (!isExit) {
+                // if not save
+                arrOfCurrentElements.forEach((elem, index) => {
+                    // return to previous colors
                     elem.style.background = colorsBeforePaint[index];
                 });
+                // arrOfCurrentElements.fore((elem, index) => {
+                // });
             }
 
             dispatch(setGetCurrentColorMode(false)); // remove all mods
@@ -136,14 +128,17 @@ const Vocabulary: FC<IVocabulary> = memo(function (
         }
         dispatch(setCurrentColor(''));
         dispatch(setColorModeOn(!colorModeOn));
-    }
-    function removeAllColors() {
+    };
+    const removeAllColors = () => {
         if (colorModeOn) {
             const resultArray = allElementsArray.concat(arrOfCurrentElements);
 
-            resultArray.map(elem => {
+            resultArray.forEach(elem => {
                 elem.style.background = '';
             });
+            // resultArray.map(elem => {
+            //     elem.style.background = '';
+            // });
 
             arrOfCurrentElements = [];
             setAllElementsArray([]);
@@ -152,21 +147,21 @@ const Vocabulary: FC<IVocabulary> = memo(function (
             colorObject.light.colors = [];
             colorObject.dark.colors = [];
         }
-    }
-    function removeCurrent() {
+    };
+    const removeCurrent = () => {
         if (colorModeOn) {
             dispatch(setGetCurrentColorMode(false));
             dispatch(setColorRemoveMode(!colorRemoveMode));
         }
         dispatch(setCurrentColor(''));
-    }
-    function getCurrentColor() {
+    };
+    const getCurrentColor = () => {
         if (colorModeOn) {
             dispatch(setColorRemoveMode(false));
             dispatch(setGetCurrentColorMode(!getCurrentColorMode));
         }
         dispatch(setCurrentColor(''));
-    }
+    };
 
     useEffect(() => {
         if (colorModeOn) body.addEventListener('click', click);
@@ -179,7 +174,6 @@ const Vocabulary: FC<IVocabulary> = memo(function (
             body.removeEventListener('click', click);
             document.body.className = '';
         };
-
     }, [
         colorModeOn,
         color,
@@ -187,14 +181,13 @@ const Vocabulary: FC<IVocabulary> = memo(function (
         getCurrentColorMode,
         arrOfCurrentElements.length,
         currentColor,
-        colorsBeforePaint
-    ]
-    );
+        colorsBeforePaint,
+    ]);
 
     const colorObject: IColorObject = useMemo(() => {
         return {
             light: { elements: [], colors: [] },
-            dark: { elements: [], colors: [] }
+            dark: { elements: [], colors: [] },
         };
     }, []);
 
@@ -254,30 +247,22 @@ const Vocabulary: FC<IVocabulary> = memo(function (
 
     return (
         <div
+            data-testid="vocabulary"
             onMouseDown={e => {
                 removeInput(e, input, dispatch);
                 setIsSelectOpen({ ...isSelectOpen, open: false });
             }}
             className={'searchWrapper pageContent'}
         >
+            <div>lazyLoad</div>
             <ModalEditCard
                 modalChangeCard={modalChangeCard}
                 isEditCardModal={isEditCardModal}
                 setIsEditCardModal={setIsEditCardModal}
             />
-            <ModalAddCards
-                modalAdd={modalAdd}
-                isAddCardModal={isAddCardModal}
-                setIsAddCardModal={setIsAddCardModal}
-            />
-            <ModalEditThemes
-                setIsEditThemesModal={setIsEditThemesModal}
-                isEditThemesModal={isEditThemesModal}
-            />
-            <ModalDictionary
-                isModal={isDictionaryModal}
-                setIsModal={setIsDictionaryModal}
-            />
+            <ModalAddCards modalAdd={modalAdd} isAddCardModal={isAddCardModal} setIsAddCardModal={setIsAddCardModal} />
+            <ModalEditThemes setIsEditThemesModal={setIsEditThemesModal} isEditThemesModal={isEditThemesModal} />
+            <ModalDictionary isModal={isDictionaryModal} setIsModal={setIsDictionaryModal} />
             <div className={isAttached ? 'CardsField' : 'CardsField paddingTop124'}>
                 <div className="wrap">
                     <CardsControl
@@ -292,27 +277,25 @@ const Vocabulary: FC<IVocabulary> = memo(function (
                         selectedColorOrNewLabel={selectedColorOrNewLabel}
                         setIsDictionaryModal={setIsDictionaryModal}
                     />
-                    {
-                        isAttached.attach && <CardsInfo setIsDictionaryModal={setIsDictionaryModal} />
-                    }
-                    {
-                        calculatedArray.length
-                            ? < SetCard
-                                stale={stale}
-                                Cards={calculatedArray}
-                                modalChangeCard={modalChangeCard}
-                                setIsEditCardModal={setIsEditCardModal}
-                                selectedColorOrNewLabel={selectedColorOrNewLabel}
-                            />
-                            : <RemoveTheme
-                                setIsSelectOpen={setIsSelectOpen}
-                                isSelectOpen={isSelectOpen}
-                                selectedColorOrNewLabel={selectedColorOrNewLabel}
-                            />
-                    }
+                    {isAttached.attach && <CardsInfo setIsDictionaryModal={setIsDictionaryModal} />}
+                    {calculatedArray.length ? (
+                        <SetCard
+                            stale={stale}
+                            Cards={calculatedArray}
+                            modalChangeCard={modalChangeCard}
+                            setIsEditCardModal={setIsEditCardModal}
+                            selectedColorOrNewLabel={selectedColorOrNewLabel}
+                        />
+                    ) : (
+                        <RemoveTheme
+                            setIsSelectOpen={setIsSelectOpen}
+                            isSelectOpen={isSelectOpen}
+                            selectedColorOrNewLabel={selectedColorOrNewLabel}
+                        />
+                    )}
                 </div>
             </div>
-        </div >
+        </div>
     );
 });
 export default Vocabulary;

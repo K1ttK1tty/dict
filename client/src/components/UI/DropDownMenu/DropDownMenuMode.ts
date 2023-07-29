@@ -1,4 +1,5 @@
-import {ReactNode} from 'react';
+import { ReactNode } from 'react';
+
 export interface IDropDownMenu {
     isMenuOpen: boolean;
     setIsMenuOpen: (state: boolean) => void;

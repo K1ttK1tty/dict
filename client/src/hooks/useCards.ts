@@ -1,9 +1,11 @@
 import { useMemo } from 'react';
-// functions
+
 import { isNotEmpty } from '../functions/isNotEmpty';
+
 import { isNewLabel } from '../globalConsts/globalConsts';
-// types
+
 import { ICard } from '../store/storeModels';
+
 import { TUseCards, TUseSearchByWord, TUseSelectedThemes, TUseSortedCards } from '../models/models';
 
 const useSordetCard: TUseSortedCards = (Cards, toggleWordsOrder) => {
@@ -38,27 +40,24 @@ export const useCards: TUseCards = (
     toggleWordsOrder,
     isSearchByWord,
     isLetterCaseInclude,
-    selectedColor
+    selectedColor,
 ) => {
     const iterableCards = Cards.length ? [...Cards] : [];
     const selectedThemes = useSelectedThemes(iterableCards, selectedTheme, toggleWordsOrder, selectedColor);
     const selectedAndSearchedWord = useMemo(() => {
         if (isSearchByWord) {
             if (isLetterCaseInclude) {
-                return selectedThemes.filter((card: ICard) =>
-                    card.word.includes(searchWord));
+                return selectedThemes.filter((card: ICard) => card.word.includes(searchWord));
             }
-            return selectedThemes.filter((card: ICard) =>
-                card.word.toLowerCase().includes(searchWord.toLowerCase()));
+            return selectedThemes.filter((card: ICard) => card.word.toLowerCase().includes(searchWord.toLowerCase()));
         } else {
             if (isLetterCaseInclude) {
-                return selectedThemes.filter((card: ICard) =>
-                    card.translate.includes(searchWord));
+                return selectedThemes.filter((card: ICard) => card.translate.includes(searchWord));
             }
             return selectedThemes.filter((card: ICard) =>
-                card.translate.toLowerCase().includes(searchWord.toLowerCase()));
+                card.translate.toLowerCase().includes(searchWord.toLowerCase()),
+            );
         }
-
     }, [selectedThemes, searchWord, isSearchByWord, isLetterCaseInclude]);
     return selectedAndSearchedWord;
 };

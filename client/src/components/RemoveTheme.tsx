@@ -1,35 +1,30 @@
 import { FC } from 'react';
-// components
+
 import BtnAddCard from './UI/BtnAddCard/BtnAddCard';
-// functions
-import { removeSelectTheme } from '../functions/removeSelectTheme';
+
 import { deleteAllEmptyThemes } from '../functions/deleteAllEmptyThemes';
-// styles
-import '../styles/Vocabulary.css';
-//redux
+import { removeSelectTheme } from '../functions/removeSelectTheme';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
+
+import '../styles/Vocabulary.css';
+
 import { IRemoveTheme } from '../models/models';
+
 const RemoveTheme: FC<IRemoveTheme> = function ({ setIsSelectOpen, isSelectOpen, selectedColorOrNewLabel }) {
     const dispatch = useAppDispatch();
-    const {
-        selectOptions,
-        selectedTheme,
-        user,
-        cards,
-        data,
-        currentDictionary
-    } = useAppSelector(state => state.AuthSlice);
+    const { selectOptions, selectedTheme, user, cards, data, currentDictionary } = useAppSelector(
+        state => state.AuthSlice,
+    );
     const isCanDeleteTheme = isSelectOpen.removeMark && !selectedColorOrNewLabel;
     return (
         <>
             <h4 className="noCards">Пустота...</h4>
-            {
-                isCanDeleteTheme &&
+            {isCanDeleteTheme && (
                 <div className="deleteThemeWrapper">
                     <BtnAddCard
                         noClick={'noClick removeSelectedTheme'}
-                        onClick={
-                            () => deleteAllEmptyThemes(
+                        onClick={() =>
+                            deleteAllEmptyThemes(
                                 cards,
                                 selectOptions,
                                 setIsSelectOpen,
@@ -37,15 +32,15 @@ const RemoveTheme: FC<IRemoveTheme> = function ({ setIsSelectOpen, isSelectOpen,
                                 user.email,
                                 data,
                                 currentDictionary,
-                                dispatch
+                                dispatch,
                             )
                         }
                         children="Удалить все пустые темы"
                     />
                     <BtnAddCard
                         noClick={'noClick'}
-                        onClick={
-                            () => removeSelectTheme(
+                        onClick={() =>
+                            removeSelectTheme(
                                 selectOptions,
                                 setIsSelectOpen,
                                 isSelectOpen,
@@ -53,13 +48,13 @@ const RemoveTheme: FC<IRemoveTheme> = function ({ setIsSelectOpen, isSelectOpen,
                                 user.email,
                                 data,
                                 currentDictionary,
-                                dispatch
+                                dispatch,
                             )
                         }
                         children="Удалить эту тему"
                     />
                 </div>
-            }
+            )}
         </>
     );
 };

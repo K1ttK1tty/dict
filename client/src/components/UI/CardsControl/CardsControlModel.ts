@@ -1,6 +1,8 @@
 import { IOptionState } from '../../../store/storeModels';
+
 import { TAttachedControls } from '../../../models/models';
 import { TSelectColorOrNew } from '../MySelect/MySelectModel';
+
 export interface ICardsControl {
     modalAdd: React.MutableRefObject<HTMLInputElement | null>;
     isAttached: TAttachedControls;
@@ -11,7 +13,7 @@ export interface ICardsControl {
     setIsSelectOpen: (state: React.SetStateAction<IOptionState>) => void;
     setSelectedColorOrNewLabel: (state: React.SetStateAction<TSelectColorOrNew | null>) => void;
     selectedColorOrNewLabel: TSelectColorOrNew | null;
-    setIsDictionaryModal: (state: boolean) => void
+    setIsDictionaryModal: (state: boolean) => void;
 }
 export type TMouseMove = (
     element: MouseEvent,
