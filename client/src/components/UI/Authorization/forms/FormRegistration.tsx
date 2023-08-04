@@ -31,12 +31,13 @@ const FormRegistration: FC<IFormProps> = function ({ showPassword, setShowPasswo
     console.log(errors);
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className={formStyle}>
+        <form data-testid="registrationForm" onSubmit={handleSubmit(onSubmit)} className={formStyle}>
             <h1 className={styles.title}>Регистрация</h1>
 
             <label className={styles.label}>
                 <span className={styles.asterisk}>*</span>Name
                 <InputAddCard
+                    testId="registrationName"
                     dinamicclassname={[inputStyle.inputFormAddCard, styles.input].join(' ')}
                     register={{
                         ...register('name', {
@@ -44,11 +45,16 @@ const FormRegistration: FC<IFormProps> = function ({ showPassword, setShowPasswo
                         }),
                     }}
                 />
-                {errors?.name?.message && <div className={styles.errorMessage}>{errors?.name?.message}</div>}
+                {errors?.name?.message && (
+                    <div data-testid="formError" className={styles.errorMessage}>
+                        {errors?.name?.message}
+                    </div>
+                )}
             </label>
             <label className={styles.label}>
                 <span className={styles.asterisk}>*</span>Email
                 <InputAddCard
+                    testId="registrationEmail"
                     dinamicclassname={[inputStyle.inputFormAddCard, styles.input].join(' ')}
                     type="email"
                     register={{
@@ -61,11 +67,16 @@ const FormRegistration: FC<IFormProps> = function ({ showPassword, setShowPasswo
                         }),
                     }}
                 />
-                {errors?.email?.message && <div className={styles.errorMessage}>{errors?.email?.message}</div>}
+                {errors?.email?.message && (
+                    <div data-testid="formError" className={styles.errorMessage}>
+                        {errors?.email?.message}
+                    </div>
+                )}
             </label>
             <label className={[styles.passwordLabel, styles.label].join(' ')}>
                 <span className={styles.asterisk}>*</span>Password
                 <InputAddCard
+                    testId="registrationPassword"
                     type={showPassword ? 'text' : 'password'}
                     dinamicclassname={[inputStyle.inputFormAddCard, styles.input, styles.inputPasswd].join(' ')}
                     register={{
@@ -76,9 +87,18 @@ const FormRegistration: FC<IFormProps> = function ({ showPassword, setShowPasswo
                     }}
                 />
                 <ShowIcon showPassword={showPassword} styles={styles} setShowPassword={setShowPassword} />
-                {errors?.password?.message && <div className={styles.errorMessage}>{errors?.password?.message}</div>}
+                {errors?.password?.message && (
+                    <div data-testid="formError" className={styles.errorMessage}>
+                        {errors?.password?.message}
+                    </div>
+                )}
             </label>
-            <BtnAddCard aria={'Зарегистрироваться'} dinamicclassname={styles.button} children="Зарегистрироваться" />
+            <BtnAddCard
+                data-testid="registrationBtn"
+                aria={'Зарегистрироваться'}
+                dinamicclassname={styles.button}
+                children="Зарегистрироваться"
+            />
         </form>
     );
 };

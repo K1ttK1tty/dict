@@ -9,18 +9,18 @@ module.exports = class ApiError extends Error {
     }
 
     static UnauthorizedError() {
-        return new ApiError(401, 'Пользователь не авторизован')
-    }  
+        return new ApiError(401, 'Пользователь не авторизован');
+    }
 
     static BadRequest(message, errors = []) {
         return new ApiError(400, message, errors);
     }
 
-    static EmailNotFound(){
-        return new ApiError(400, 'Такого почтового адреса не существует')
+    static EmailNotFound() {
+        return new ApiError(400, 'Такого почтового адреса не существует');
     }
 
-    static UserNotFound(){
-        return new ApiError(400, 'Не удалось найти пользователя')
+    static UserNotFound() {
+        return new ApiError(400, 'Не удалось найти пользователя');
     }
-}
+};

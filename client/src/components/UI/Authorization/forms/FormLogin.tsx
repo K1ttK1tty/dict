@@ -30,18 +30,19 @@ const FormLogin: FC<IFormProps> = function ({ showPassword, setShowPassword, isL
             dispatch(setIsAuth());
             return;
         }
-        //////////////////////
+        ////////////////////// DELETE THIS!!
         const email = data.email;
         const password = data.password;
         dispatch(Login({ email, password }));
     };
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className={formStyle}>
+        <form data-testid="loginForm" onSubmit={handleSubmit(onSubmit)} className={formStyle}>
             <h1 className={styles.title}>Вход</h1>
             <label className={styles.label}>
                 <span className={styles.asterisk}>*</span>
                 Email
                 <InputAddCard
+                    testId="loginEmailInput"
                     type="email"
                     dinamicclassname={[inputStyle.inputFormAddCard, styles.input].join(' ')}
                     register={{
@@ -54,11 +55,16 @@ const FormLogin: FC<IFormProps> = function ({ showPassword, setShowPassword, isL
                         }),
                     }}
                 />
-                {errors?.email?.message && <div className={styles.errorMessage}>{errors?.email?.message}</div>}
+                {errors?.email?.message && (
+                    <div data-testid="formError" className={styles.errorMessage}>
+                        {errors?.email?.message}
+                    </div>
+                )}
             </label>
             <label className={[styles.passwordLabel, styles.label].join(' ')}>
                 <span className={styles.asterisk}>*</span>Password
                 <InputAddCard
+                    testId="loginPasswordInput"
                     type={showPassword ? 'text' : 'password'}
                     dinamicclassname={[inputStyle.inputFormAddCard, styles.input, styles.inputPasswd].join(' ')}
                     register={{
@@ -69,9 +75,13 @@ const FormLogin: FC<IFormProps> = function ({ showPassword, setShowPassword, isL
                     }}
                 />
                 <ShowIcon showPassword={showPassword} setShowPassword={setShowPassword} styles={styles} />
-                {errors?.password?.message && <div className={styles.errorMessage}>{errors?.password?.message}</div>}
+                {errors?.password?.message && (
+                    <div data-testid="formError" className={styles.errorMessage}>
+                        {errors?.password?.message}
+                    </div>
+                )}
             </label>
-            <BtnAddCard aria={'Вход'} dinamicclassname={styles.button} children="Вход" />
+            <BtnAddCard data-testid="loginBtn" aria={'Вход'} dinamicclassname={styles.button} children="Вход" />
             <Link className={styles.link} to="/forgotPassword">
                 <p className={styles.forgotPasswd}>Забыли пароль?</p>
             </Link>

@@ -1,7 +1,7 @@
-const ApiError = require('../exeptions/apiError.js')
-const fileError = require('../exeptions/fileError.js')
+const ApiError = require('../exeptions/apiError.js');
+const fileError = require('../exeptions/fileError.js');
 module.exports = function (err, req, res, next) {
-    // первым параметром ошибка 
+    // первым параметром ошибка
     if (err instanceof ApiError) {
         return next(res.status(err.status).json({ message: err.message, errors: err.errors }));
     }
@@ -9,5 +9,5 @@ module.exports = function (err, req, res, next) {
         return next(res.status(500).json({ message: err.message, errors: err.errors }));
     }
     next();
-    return res.status(500).json({ message: 'Непредвиденная ошибка' })
-}
+    return res.status(500).json({ message: 'Непредвиденная ошибка' });
+};

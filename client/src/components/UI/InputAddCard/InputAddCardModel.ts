@@ -10,5 +10,6 @@ export interface IInputProps<T> {
     defaultTheme?: string;
     setDefaultTheme?: (state: string) => void;
     disabled?: boolean;
+    testId?:string;
     register?: T;
 }

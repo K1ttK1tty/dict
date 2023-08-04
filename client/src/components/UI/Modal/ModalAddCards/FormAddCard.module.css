@@ -56,7 +56,7 @@
 .btnCreateCard {
     width: 170px;
     height: 35px;
-    padding: 7px;
+    padding: 7px !important;
     margin: 0px auto;
     display: block;
     transition: 0s;

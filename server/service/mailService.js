@@ -1,4 +1,4 @@
-const nodemailer = require('nodemailer')
+const nodemailer = require('nodemailer');
 class mailService {
     constructor() {
         this.transporter = nodemailer.createTransport({
@@ -7,9 +7,9 @@ class mailService {
             secure: true,
             auth: {
                 user: process.env.SMTP_USER,
-                pass: process.env.SMTP_PASSWORD
-            }
-        })
+                pass: process.env.SMTP_PASSWORD,
+            },
+        });
     }
 
     async sendActivationMail(to, link) {
@@ -27,8 +27,8 @@ class mailService {
                  </p>
                  <p>Если вы получили эт​о сообщение по ошибке, то просто проигнорируйте его.</p>
             </div>
-            `
-        })
+            `,
+        });
     }
 
     async sendResetPassword(to, link) {
@@ -46,8 +46,8 @@ class mailService {
                 </p>
                 <p>Если вы получили эт​о сообщение по ошибке, то просто проигнорируйте его.</p>
             </div>
-            `
-        })
+            `,
+        });
     }
 }
-module.exports = new mailService()
+module.exports = new mailService();

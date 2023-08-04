@@ -1,48 +1,47 @@
-const jwt = require('jsonwebtoken')
-const pool = require('../db').pool
-
+const jwt = require('jsonwebtoken');
+const pool = require('../db').pool;
 class tokenService {
-    generateTokens(payload) { 
-        const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_SERCRET, { expiresIn: '30m' }) 
-        const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_SECRET, { expiresIn: '30d' })
+    generateTokens(payload) {
+        const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_SERCRET, { expiresIn: '30m' });
+        const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_SECRET, { expiresIn: '30d' });
         return {
             accessToken,
-            refreshToken
-        }
+            refreshToken,
+        };
     }
 
     validateAccessToken(token) {
         try {
-            const userData = jwt.verify(token, process.env.JWT_ACCESS_SERCRET)
-            return userData
+            const userData = jwt.verify(token, process.env.JWT_ACCESS_SERCRET);
+            return userData;
         } catch (err) {
             return null;
         }
     }
     validateRefreshToken(token) {
         try {
-            const userData = jwt.verify(token, process.env.JWT_REFRESH_SECRET)
+            const userData = jwt.verify(token, process.env.JWT_REFRESH_SECRET);
             return userData;
         } catch (err) {
-            return null
+            return null;
         }
     }
 
     async saveToken(userId, refreshToken) {
-        const [refToken] = await pool.query(`select refreshToken from token where user_id=?;`, [userId])
-        if (refToken[0]) { 
-            await pool.query(`update token set refreshToken=? where user_id=?;`, [refreshToken, userId])
-            return refreshToken
+        const [refToken] = await pool.query(`select refreshToken from token where user_id=?;`, [userId]);
+        if (refToken[0]) {
+            await pool.query(`update token set refreshToken=? where user_id=?;`, [refreshToken, userId]);
+            return refreshToken;
         }
-        await pool.query(`insert into token (refreshToken,user_id) values(?,?);`, [refreshToken, userId])
-        return refreshToken
+        await pool.query(`insert into token (refreshToken,user_id) values(?,?);`, [refreshToken, userId]);
+        return refreshToken;
     }
     async removeToken(refreshToken) {
-        await pool.query(`delete from token where refreshToken=?;`, [refreshToken])
+        await pool.query(`delete from token where refreshToken=?;`, [refreshToken]);
     }
     async findToken(refreshToken) {
-        const [token] = await pool.query(`select refreshToken from token where refreshToken=?;`, [refreshToken])
+        const [token] = await pool.query(`select refreshToken from token where refreshToken=?;`, [refreshToken]);
         return token[0].refreshToken;
     }
 }
-module.exports = new tokenService()
+module.exports = new tokenService();

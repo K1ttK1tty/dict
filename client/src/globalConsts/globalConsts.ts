@@ -4,7 +4,7 @@ export const colours = new Map();
 colours.set('green', styles.green);
 colours.set('red', styles.red);
 colours.set('orange', styles.orange);
-const weekSec = 1000 * 60 * 60 * 24; // now is 24 hours
+const oneDay = 1000 * 60 * 60 * 24; // 24 hours
 export const isNewLabel = (time: number) => {
-    return Date.now() - time <= weekSec;
+    return Date.now() - time <= oneDay;
 };

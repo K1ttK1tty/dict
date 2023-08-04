@@ -3,6 +3,7 @@ import { FC, memo, useRef, useState } from 'react';
 import { addNewDictionary } from '../../../../functions/addNewDictionary';
 import { cutLongLine } from '../../../../functions/cutLongLine';
 import { deleteDictionary } from '../../../../functions/deleteDictionary';
+import { isNotEmpty } from '../../../../functions/isNotEmpty';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { useSearchByWord } from '../../../../hooks/useCards';
 import { clearInput, selectTheme } from '../ModalEditThemes/functionsModalEditThemes';
@@ -47,6 +48,14 @@ const ModalDictionaryMain: FC<IModalDictionaryMain> = memo(function ({
     const onOptionClick = (e: React.MouseEvent<HTMLDivElement>) => {
         selectTheme(e, selectedElement, setSelectedElement, style);
     };
+    const isDictionaryName = (e: React.FormEvent<HTMLFormElement>, name: string) => {
+        e.preventDefault();
+        if (!isNotEmpty(name)) {
+            dispatch(setServerMessage('Название не должно быть пустым.'));
+            return false;
+        }
+        return true;
+    };
     const [prev, setPrev] = useState<boolean>(isModal);
     if (prev !== isModal) {
         setPrev(isModal);
@@ -71,7 +80,7 @@ const ModalDictionaryMain: FC<IModalDictionaryMain> = memo(function ({
         return (
             <form
                 onSubmit={e => {
-                    e.preventDefault();
+                    if (!isDictionaryName(e, wordCreate)) return;
                     addNewDictionary(wordCreate, user.email, data, dispatch);
                     dispatch(setCurrentDictionary(wordCreate));
                     dispatch(changeDictionary(wordCreate));
@@ -119,6 +128,7 @@ const ModalDictionaryMain: FC<IModalDictionaryMain> = memo(function ({
         return (
             <form
                 onSubmit={e => {
+                    e.preventDefault();
                     if (!selectedElement) {
                         dispatch(setServerMessage('Нужно выбрать словарь!'));
                         return;
@@ -128,7 +138,6 @@ const ModalDictionaryMain: FC<IModalDictionaryMain> = memo(function ({
                         dispatch(changeDictionary('default'));
                     }
                     deleteDictionary(selectedElement.innerText, user.email, data, dispatch);
-                    e.preventDefault();
                 }}
             >
                 <ListWithSearching

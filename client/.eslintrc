@@ -20,16 +20,16 @@
         "react-refresh/only-export-components": "warn",
         "no-console": "warn",
         "prefer-const": "error",
-        "max-len": ["error", { "code": 120 }], // длина строки
+        "max-len": ["error", { "code": 120 }], 
         "camelcase": "warn",
-        "array-callback-return": "error", // точка с запятой после строки
+        "array-callback-return": "error", 
         "no-duplicate-imports": "error",
         "func-style": ["error", "expression", { "allowArrowFunctions": true }],
         "no-multi-assign": "error",
         "no-return-assign": "error",
         "no-return-await": "error",
         // "no-shadow": "warn",
-        "no-underscore-dangle": "error",
+        // "no-underscore-dangle": "error",
         "no-unneeded-ternary": "warn",
         "no-useless-concat": "warn",
         "sort-imports": [

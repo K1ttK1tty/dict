@@ -20,10 +20,14 @@ const Authorization: FC = function () {
         <div data-testid="authorization" className={styles.back}>
             <div className={styles.content}>
                 <div className={styles.changeActions}>
-                    <button onClick={() => setIsLogin(true)} className={buttonLogin}>
+                    <button data-testid="switchFormToLogin" onClick={() => setIsLogin(true)} className={buttonLogin}>
                         Вход
                     </button>
-                    <button onClick={() => setIsLogin(false)} className={buttonRegistration}>
+                    <button
+                        data-testid="switchFormToRegistration"
+                        onClick={() => setIsLogin(false)}
+                        className={buttonRegistration}
+                    >
                         Регистрация
                     </button>
                 </div>

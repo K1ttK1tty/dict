@@ -32,6 +32,7 @@ export const AuthSlice = createSlice({
         setID(state) {
             state.cards.map((card, index) => {
                 card.id = index + 1;
+                return card;
             });
         },
         setChangeCard(state, action: PayloadAction<ICard>) {

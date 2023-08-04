@@ -24,6 +24,7 @@ export default function InputAddCard<T>(props: IInputProps<T>) {
                 value={props.defaultTheme}
                 onChange={onChangeThemeAddCard}
                 disabled={props.disabled}
+                data-testid={props.testId}
             />
         );
     }
@@ -36,6 +37,7 @@ export default function InputAddCard<T>(props: IInputProps<T>) {
             value={props.inputValue}
             onChange={setInputValue}
             disabled={props.disabled}
+            data-testid={props.testId}
             {...props.register}
         />
     );
