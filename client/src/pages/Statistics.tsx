@@ -72,16 +72,10 @@ const Statistics: FC = function () {
     const lineOptions = {
         responsive: true,
         scales: {
-            x: {
-                grid: {
-                    color: 'rgba(128, 128, 128, 0.7)',
-                },
-            },
+            x: { grid: { color: 'rgba(128, 128, 128, 0.7)' } },
             y: {
                 beginAtZero: true,
-                grid: {
-                    color: 'rgba(128, 128, 128, 0.7)',
-                },
+                grid: { color: 'rgba(128, 128, 128, 0.7)' },
             },
         },
     };
@@ -102,10 +96,9 @@ const Statistics: FC = function () {
         ],
     };
     return (
-        <div className="searchWrapper pageContent">
+        <div data-testid="statisticsPage" className="searchWrapper pageContent">
             <div className="CardsField">
                 <h1 className="title">Статистика</h1>
-
                 {getAllCards(data).length > 0 ? (
                     <>
                         <div className="statistics">

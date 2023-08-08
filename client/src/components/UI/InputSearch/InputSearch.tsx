@@ -1,6 +1,7 @@
 import { FC, memo, useEffect, useRef, useState } from 'react';
 
 import { debounce } from '../../../functions/debounce';
+import { isNotEmpty } from '../../../functions/isNotEmpty';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 
 import style from './InputSearch.module.css';
@@ -12,7 +13,7 @@ import SearchParamsMenu from './SearchParamsMenu';
 
 const InputSearch: FC = memo(function () {
     const [isDropDownMenuOpen, setIsDropDownMenuOpen] = useState<boolean>(false);
-    const [timeoutId, setTimeoutId] = useState<ReturnType<typeof setTimeout>>(0);
+    const [timeoutId, setTimeoutId] = useState<ReturnType<typeof setTimeout> | number>(0);
     const inputElement = useRef<HTMLInputElement | null>(null);
     const dispatch = useAppDispatch();
     const { input } = useAppSelector(state => state.upMenu);
@@ -35,7 +36,6 @@ const InputSearch: FC = memo(function () {
         }
     }, [input.isOpen, dispatch]);
 
-    const inputClass = [style.searchBlock, isHidden].join(' ');
     const handleKey = (key: React.KeyboardEvent) => {
         if (key.key === 'Escape') {
             if (inputElement.current) {
@@ -46,18 +46,27 @@ const InputSearch: FC = memo(function () {
         }
     };
     const searching = (value: string) => {
-        debounce(timeoutId, setTimeoutId, () => dispatch(setSearchWord(value)), 400);
+        debounce(timeoutId, setTimeoutId, () => dispatch(setSearchWord(value.trim())), 400);
     };
     return (
-        <div className={inputClass} onMouseDown={e => e.stopPropagation()}>
+        <div
+            data-testid="inputSearch"
+            className={[style.searchBlock, isHidden].join(' ')}
+            onMouseDown={e => e.stopPropagation()}
+        >
             <input
+                data-testid="inputSearchElement"
                 placeholder={' Искать'}
                 ref={inputElement}
                 onKeyDown={handleKey}
                 onChange={e => searching(e.target.value)}
                 className={style.inputSearch}
             />
-            <div className={style.dotsWrapper} onMouseDown={() => setIsDropDownMenuOpen(!isDropDownMenuOpen)}>
+            <div
+                data-testid="inputSearchDots"
+                className={style.dotsWrapper}
+                onMouseDown={() => setIsDropDownMenuOpen(!isDropDownMenuOpen)}
+            >
                 <div className={style.dots} onMouseDown={() => setIsDropDownMenuOpen(!isDropDownMenuOpen)}></div>
             </div>
             <DropDownMenu

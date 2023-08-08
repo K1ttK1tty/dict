@@ -43,6 +43,7 @@ const ModalAddAvatar: FC<IModalAddAvatar> = memo(function ({ isAvatarModal, setM
     }
     return (
         <Modal
+            testid="modalAvatar"
             title={'Загрузка нового аватара'}
             isModal={isAvatarModal}
             setModal={setModal}

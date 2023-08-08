@@ -32,6 +32,7 @@ const DropDownMenu: FC<IDropDownMenu> = function ({
 
     return (
         <div
+            data-testid="DropDownMenu"
             onKeyDown={e => keyClose(e, setIsMenuOpen)}
             className={[isOpenMenu, dinamicClassName].join(' ')}
             tabIndex={1}

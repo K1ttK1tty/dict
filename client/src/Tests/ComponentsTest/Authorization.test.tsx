@@ -107,7 +107,7 @@ describe('Authorization', () => {
                             id: 1,
                             word: 'word',
                             translate: 'translate',
-                            theme: 'theme',
+                            theme: '1theme',
                             note: 'note',
                             time: 123,
                             color: 'red',

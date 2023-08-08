@@ -15,7 +15,7 @@ const Settings: FC = function () {
     const [hideTranslate, setHideTranslate] = useLocaleStorage('hideTranslation', false);
     const [order, setOrder] = useLocaleStorage('order', true);
     return (
-        <div className="searchWrapper pageContent">
+        <div data-testid="settingsPage" className="searchWrapper pageContent">
             <div className="CardsField">
                 <h2 className="title ">Настройки</h2>
                 <div className="option">

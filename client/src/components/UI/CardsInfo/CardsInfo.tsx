@@ -12,12 +12,13 @@ import BtnAddCard from '../BtnAddCard/BtnAddCard';
 const CardsInfo: FC<ICardsInfo> = memo(function ({ isMovedBlock, setIsDictionaryModal }) {
     const { cards, currentDictionary } = useAppSelector(state => state.AuthSlice);
     const totalWordsClass: string = isMovedBlock ? [style.wordsCount, style.textCenter].join(' ') : style.wordsCount;
+    const buttonStyles = isMovedBlock ? [style.button, style.colorAndShadowBlack].join(' ') : style.button;
     return (
         <>
             <div className={totalWordsClass}>
                 Словарь:
                 <BtnAddCard
-                    dinamicclassname={style.button}
+                    dinamicclassname={buttonStyles}
                     children={cutLongLine(currentDictionary, 24)}
                     onMouseDown={e => {
                         e.stopPropagation();

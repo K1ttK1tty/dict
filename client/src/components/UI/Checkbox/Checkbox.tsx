@@ -22,6 +22,7 @@ const Checkbox: FC<ICheckbox> = memo(function ({
                 checked={checked}
                 onChange={callback}
                 type="checkbox"
+                role="checkbox"
             />
             <label htmlFor={differentId} className={[style.label, dinamicClassName].join(' ')}></label>
         </div>

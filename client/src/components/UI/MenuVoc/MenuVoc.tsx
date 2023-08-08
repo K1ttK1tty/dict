@@ -19,11 +19,9 @@ const MenuVoc: FC<IMenuVoc> = memo(function ({ setMenuOpen }) {
     const [isDropDownMenuOpen, setIsDropDownMenuOpen] = useState<boolean>(false);
     const path = useLocation().pathname;
     let enableSearch = false;
-    if (path === '/posts' || path === '/') {
-        enableSearch = true;
-    }
+    if (path === '/posts' || path === '/') enableSearch = true;
     return (
-        <div className="menu">
+        <div data-testid="MenuVoc" className="menu">
             <ModalAddAvatar isAvatarModal={isAvatarModal} setModal={setIsAvatarModel} />
             <div className="menu__container">
                 <div className={styles.openMenuButton} onClick={() => setMenuOpen(prev => !prev)}>

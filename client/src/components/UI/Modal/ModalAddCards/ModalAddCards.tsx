@@ -13,6 +13,7 @@ const ModalAddCards: FC<ModalAddCards> = memo(function ({ modalAdd, isAddCardMod
     const title = showRelatedCard ? 'Эта карточка уже существует' : 'Создание карточки';
     return (
         <Modal
+            testid="modalAddCards"
             title={title}
             isModal={isAddCardModal}
             setModal={setIsAddCardModal}

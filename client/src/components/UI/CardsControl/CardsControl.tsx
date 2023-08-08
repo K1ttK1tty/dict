@@ -33,12 +33,21 @@ const CardsControl: FC<ICardsControl> = memo(function ({
 
     if (isAttached.attach) {
         return (
-            <div style={attachedMenuStyles} className={[styles.cardsOptions, 'CardsControl'].join(' ')}>
+            <div
+                data-testid="attachedCardsControl"
+                style={attachedMenuStyles}
+                className={[styles.cardsOptions, 'CardsControl'].join(' ')}
+            >
                 {!isMobile && <PinIcon isAttached={isAttached} setIsAttached={setIsAttached} styles={styles.pinIcon} />}
-                <button onClick={() => modalAddCard(modalAdd, setIsAddCardModal)} className={styles.plus}>
+                <button
+                    data-testid="addCardButton"
+                    onClick={() => modalAddCard(modalAdd, setIsAddCardModal)}
+                    className={styles.plus}
+                >
                     +
                 </button>
                 <BtnAddCard
+                    data-testid="addCardButton"
                     onClick={() => modalAddCard(modalAdd, setIsAddCardModal)}
                     dinamicclassname={btnStyle.btnCreateCard}
                     children="Создать карточку"
@@ -55,6 +64,7 @@ const CardsControl: FC<ICardsControl> = memo(function ({
     }
     return (
         <div
+            data-testid="notAttachedCardsControl"
             ref={windowBlock}
             onMouseDown={element => move(element, windowBlock, isCanMove, isAttached, setIsAttached)}
             onMouseUp={mouseStay}

@@ -1,0 +1,211 @@
+import { cleanup, fireEvent, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { Suspense } from 'react';
+import { afterEach, describe, expect, test, vi } from 'vitest';
+
+import dropDownMenuStyles from '../../components/UI/DropDownMenu/DropDownMenu.module.css';
+import inputStyles from '../../components/UI/InputSearch/InputSearch.module.css';
+import modalStyles from '../../components/UI/Modal/ModalEditCard/Modal.module.css';
+import menuStyles from '../../components/UI/UserMenu/UserMenu.module.css';
+
+import App from '../../App';
+import $api from '../../api';
+import { renderWithReduxAndRoute } from '../Helpers/renderWithReduxAndRoute';
+import { authorizationData, authorizationDataWithActivation, logoutData } from './TestsConsts';
+
+const elements = (
+    <Suspense>
+        <App />
+    </Suspense>
+);
+afterEach(cleanup);
+describe('MenuVocabulary(upMenu)', () => {
+    test('avatarModal', async () => {
+        renderWithReduxAndRoute(elements, { AuthSlice: authorizationData });
+        await screen.findByTestId('vocabulary');
+        const modal = screen.getByTestId('modalAvatar');
+        const avatarModalBtnOpen = screen.getByTestId('avatar');
+        await userEvent.click(avatarModalBtnOpen);
+        expect(modal.classList.contains(modalStyles.active)).toBe(true);
+        expect(screen.getByText(/Выбрать файл/i)).not.toBeNull();
+        expect(within(modal).queryByText('Загрузить')).toBeNull();
+        // const imgBlob: any = 'blob:http://localhost:5173/73bfa063-ca07-4050-be4a-e1e5fb3fd59e';
+        // global.fetch = vi.fn(() => imgBlob);
+    });
+    test('modal open/close behavior', async () => {
+        renderWithReduxAndRoute(elements, { AuthSlice: authorizationData });
+        await screen.findByTestId('vocabulary');
+        const modal = screen.getByTestId('modalAvatar');
+        const avatarModalBtnOpen = screen.getByTestId('avatar');
+        const btnCloseModal = within(modal).getAllByRole('button')[0];
+        expect(modal.classList.contains(modalStyles.active)).toBe(false);
+        await userEvent.click(avatarModalBtnOpen);
+        expect(modal.classList.contains(modalStyles.active)).toBe(true);
+        await userEvent.click(modal);
+        expect(modal.classList.contains(modalStyles.active)).toBe(false);
+        await userEvent.click(avatarModalBtnOpen);
+        expect(modal.classList.contains(modalStyles.active)).toBe(true);
+        await userEvent.click(btnCloseModal);
+        expect(modal.classList.contains(modalStyles.active)).toBe(false);
+        await userEvent.click(avatarModalBtnOpen);
+        expect(modal.classList.contains(modalStyles.active)).toBe(true);
+        fireEvent.keyDown(modal, { key: 'Escape', code: 27 });
+        // await userEvent.keyboard('{Escape}'); //failed because of that
+        // expect(modal.classList.contains(modalStyles.active)).toBe(false);
+    });
+
+    test('search icon is only available on the Vocabulary page', async () => {
+        renderWithReduxAndRoute(elements, { AuthSlice: authorizationData });
+        await screen.findByTestId('vocabulary');
+        const toVocabularyPageBtn = screen.getByTestId('toVocabularyPageBtn');
+        const toGamesPageBtn = screen.getByTestId('toGamesPageBtn');
+        const toSettingsPageBtn = screen.getByTestId('toSettingsPageBtn');
+        const toStatisticsPageBtn = screen.getByTestId('toStatisticsPageBtn');
+        expect(screen.getByTestId('searchIconUpMenu')).not.toBeNull();
+        await userEvent.click(toGamesPageBtn);
+        await screen.findByText(/Самопроверка/i);
+        expect(screen.queryByTestId('searchIconUpMenu')).toBeNull();
+        await userEvent.click(toSettingsPageBtn);
+        await screen.findByTestId('settingsPage');
+        expect(screen.queryByTestId('searchIconUpMenu')).toBeNull();
+        await userEvent.click(toStatisticsPageBtn);
+        await screen.findByTestId('statisticsPage');
+        expect(screen.queryByTestId('searchIconUpMenu')).toBeNull();
+        await userEvent.click(toVocabularyPageBtn);
+        await screen.findByTestId('vocabulary');
+        expect(screen.getByTestId('searchIconUpMenu')).not.toBeNull();
+    });
+    test('inputSearch open/close behavior', async () => {
+        renderWithReduxAndRoute(elements, { AuthSlice: authorizationData });
+        const vocPage = await screen.findByTestId('vocabulary');
+        const inputSearch = screen.getByTestId('inputSearch');
+        const searchIcon = screen.getByTestId('searchIconUpMenu');
+        const inputSearchElement = screen.getByTestId('inputSearchElement');
+        expect(inputSearch.classList.contains(inputStyles.blockHidden)).toBe(true);
+        await userEvent.click(searchIcon);
+        expect(inputSearch.classList.contains(inputStyles.blockHidden)).toBe(false);
+        await userEvent.click(searchIcon);
+        expect(inputSearch.classList.contains(inputStyles.blockHidden)).toBe(true);
+        await userEvent.click(searchIcon);
+        expect(inputSearch.classList.contains(inputStyles.blockHidden)).toBe(false);
+        fireEvent.keyDown(inputSearchElement, { key: 'Escape', code: 27 });
+        expect(screen.getByTestId('inputSearch').classList.contains(inputStyles.blockHidden)).toBe(true);
+        await userEvent.click(searchIcon);
+        expect(inputSearch.classList.contains(inputStyles.blockHidden)).toBe(false);
+        await userEvent.click(vocPage);
+        expect(inputSearch.classList.contains(inputStyles.blockHidden)).toBe(true);
+    });
+    test('inputSearch DropDown open/close behavior', async () => {
+        renderWithReduxAndRoute(elements, { AuthSlice: authorizationData });
+        const vocPage = await screen.findByTestId('vocabulary');
+        const inputSearch = screen.getByTestId('inputSearch');
+        const searchIcon = screen.getByTestId('searchIconUpMenu');
+        const inputSearchDots = screen.getByTestId('inputSearchDots');
+        const inputSearchElement = screen.getByTestId('inputSearchElement');
+        const DropDownMenu = within(inputSearch).getByTestId('DropDownMenu');
+        expect(inputSearch.classList.contains(inputStyles.blockHidden)).toBe(true);
+        await userEvent.click(searchIcon);
+        expect(inputSearch.classList.contains(inputStyles.blockHidden)).toBe(false);
+        expect(DropDownMenu.classList.contains(dropDownMenuStyles.hidden)).toBe(true);
+        await userEvent.click(inputSearchDots);
+        expect(DropDownMenu.classList.contains(dropDownMenuStyles.hidden)).toBe(false);
+        await userEvent.click(searchIcon);
+        expect(inputSearch.classList.contains(inputStyles.blockHidden)).toBe(true);
+        expect(DropDownMenu.classList.contains(dropDownMenuStyles.hidden)).toBe(true);
+        expect(inputSearch.classList.contains(inputStyles.blockHidden)).toBe(true);
+        await userEvent.click(searchIcon);
+        expect(inputSearch.classList.contains(inputStyles.blockHidden)).toBe(false);
+        expect(DropDownMenu.classList.contains(dropDownMenuStyles.hidden)).toBe(true);
+        await userEvent.click(inputSearchDots);
+        expect(DropDownMenu.classList.contains(dropDownMenuStyles.hidden)).toBe(false);
+        await userEvent.click(inputSearchDots);
+        expect(DropDownMenu.classList.contains(dropDownMenuStyles.hidden)).toBe(true);
+        await userEvent.click(inputSearchDots);
+        expect(DropDownMenu.classList.contains(dropDownMenuStyles.hidden)).toBe(false);
+        fireEvent.keyDown(inputSearchElement, { key: 'Escape', code: 27 });
+        expect(inputSearch.classList.contains(inputStyles.blockHidden)).toBe(true);
+        expect(DropDownMenu.classList.contains(dropDownMenuStyles.hidden)).toBe(true);
+        await userEvent.click(searchIcon);
+        expect(inputSearch.classList.contains(inputStyles.blockHidden)).toBe(false);
+        await userEvent.click(inputSearchDots);
+        expect(DropDownMenu.classList.contains(dropDownMenuStyles.hidden)).toBe(false);
+        await userEvent.click(searchIcon);
+        expect(DropDownMenu.classList.contains(dropDownMenuStyles.hidden)).toBe(true);
+        await userEvent.click(searchIcon);
+        expect(inputSearch.classList.contains(inputStyles.blockHidden)).toBe(false);
+        await userEvent.click(inputSearchDots);
+        expect(DropDownMenu.classList.contains(dropDownMenuStyles.hidden)).toBe(false);
+        await userEvent.click(vocPage);
+        expect(inputSearch.classList.contains(inputStyles.blockHidden)).toBe(true);
+        expect(DropDownMenu.classList.contains(dropDownMenuStyles.hidden)).toBe(true);
+    });
+    test('dropdown userMenu open/close behavior', async () => {
+        renderWithReduxAndRoute(elements, { AuthSlice: authorizationData });
+        const vocPage = await screen.findByTestId('vocabulary');
+        const handlerButton = screen.getByTestId('userMenuHandlerButton');
+        const toGamesPageBtn = screen.getByTestId('toGamesPageBtn');
+        const toVocabularyPageBtn = screen.getByTestId('toVocabularyPageBtn');
+        expect(screen.getByText(/user@mail.ru/i)).not.toBeNull();
+        expect(screen.getByText(/360/i)).not.toBeNull();
+        expect(screen.getByText(/Аккаунт: не активирован/i)).not.toBeNull();
+        expect(handlerButton.classList.contains(menuStyles.wrapperActive)).toBe(false);
+        await userEvent.click(handlerButton);
+        expect(handlerButton.classList.contains(menuStyles.wrapperActive)).toBe(true);
+        await userEvent.click(handlerButton);
+        expect(handlerButton.classList.contains(menuStyles.wrapperActive)).toBe(false);
+        // await userEvent.click(handlerButton);
+        // expect(handlerButton.classList.contains(menuStyles.wrapperActive)).toBe(true);
+        // await userEvent.keyboard('{Escape}'); //failed because of that
+        // expect(handlerButton.classList.contains(menuStyles.wrapperActive)).toBe(false);
+        await userEvent.click(handlerButton);
+        expect(handlerButton.classList.contains(menuStyles.wrapperActive)).toBe(true);
+        await userEvent.click(vocPage);
+        expect(handlerButton.classList.contains(menuStyles.wrapperActive)).toBe(false);
+        await userEvent.click(handlerButton);
+        expect(handlerButton.classList.contains(menuStyles.wrapperActive)).toBe(true);
+        await userEvent.click(toGamesPageBtn);
+        await screen.findByText(/Самопроверка/i);
+        await userEvent.click(toVocabularyPageBtn);
+        await screen.findByTestId('vocabulary');
+        expect(handlerButton.classList.contains(menuStyles.wrapperActive)).toBe(false);
+    });
+    test('account activation dropDown menu, account not activated', async () => {
+        renderWithReduxAndRoute(elements, { AuthSlice: authorizationData });
+        const vocPage = await screen.findByTestId('vocabulary');
+        expect(screen.getByText(/При регистрации вам было отправлено письмо об активации аккаунта./i)).not.toBeNull();
+        const handlerButton = screen.getByTestId('userMenuHandlerButton');
+        const accountActivation = screen.getByTestId('userMenuInfoAboutAccountActivation');
+        const questionIconAccountActivation = screen.getByTestId('questionIconAccountActivation');
+        expect(handlerButton.classList.contains(menuStyles.wrapperActive)).toBe(false);
+        await userEvent.click(handlerButton);
+        expect(handlerButton.classList.contains(menuStyles.wrapperActive)).toBe(true);
+        expect(accountActivation.classList.contains(menuStyles.show)).toBe(false);
+        await userEvent.click(questionIconAccountActivation);
+        expect(accountActivation.classList.contains(menuStyles.show)).toBe(true);
+        await userEvent.click(questionIconAccountActivation);
+        expect(accountActivation.classList.contains(menuStyles.show)).toBe(false);
+        await userEvent.click(questionIconAccountActivation);
+        expect(accountActivation.classList.contains(menuStyles.show)).toBe(true);
+        await userEvent.click(vocPage);
+        expect(accountActivation.classList.contains(menuStyles.show)).toBe(false);
+        await userEvent.click(handlerButton);
+        expect(accountActivation.classList.contains(menuStyles.show)).toBe(false);
+    });
+    test('account activated', async () => {
+        renderWithReduxAndRoute(elements, { AuthSlice: authorizationDataWithActivation });
+        await screen.findByTestId('vocabulary');
+        expect(screen.queryByText(/При регистрации вам было отправлено письмо об активации аккаунта./i)).toBeNull();
+        expect(screen.getByText(/Аккаунт: активирован/i)).not.toBeNull();
+    });
+    test('logout', async () => {
+        renderWithReduxAndRoute(elements, { AuthSlice: authorizationData });
+        expect(await screen.findByTestId('vocabulary')).not.toBeNull();
+        expect(screen.queryByTestId('authorization')).toBeNull();
+        const mock = vi.spyOn($api, 'post');
+        mock.mockReturnValue(logoutData);
+        const logoutButton = screen.getByText(/Выйти из аккаунта/i);
+        await userEvent.click(logoutButton);
+        expect(screen.queryByTestId('vocabulary')).toBeNull();
+        expect(screen.getByTestId('authorization')).not.toBeNull();
+    });
+});

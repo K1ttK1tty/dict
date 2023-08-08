@@ -6,6 +6,7 @@ const PinIcon: FC<IPicIcon> = memo(function ({ styles, isAttached, setIsAttached
     return (
         <svg
             onClick={() => setIsAttached({ ...isAttached, attach: !isAttached.attach })}
+            data-testid="pinIcon"
             className={styles}
             height="18px"
             width="18px"

@@ -44,7 +44,7 @@
 }
 .btnFormAddCard {
     width: 100%;
-    background: rgb(136, 214, 47);
+    background: rgb(136, 214, 47) !important;
     border: none;
 }
 .btnFormAddCard:hover.btnFormAddCard:after {

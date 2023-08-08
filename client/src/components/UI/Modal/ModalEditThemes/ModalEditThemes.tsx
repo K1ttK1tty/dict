@@ -10,6 +10,7 @@ import ModalEditThemesContent from './ModalEditThemesContent';
 const ModalEditThemes: FC<IModalEditThemes> = memo(function ({ isEditThemesModal, setIsEditThemesModal }) {
     return (
         <Modal
+            testid="modalEditThemes"
             title={'Изменить тему'}
             isModal={isEditThemesModal}
             setModal={setIsEditThemesModal}

@@ -4,7 +4,13 @@ import { IQuestion } from '../UserMenuModel';
 
 const Question: FC<IQuestion> = memo(function ({ style, setIsOpen }) {
     return (
-        <svg onClick={() => setIsOpen(prev => !prev)} className={style} fill="#000000" viewBox="0 0 512 512">
+        <svg
+            data-testid="questionIconAccountActivation"
+            onClick={() => setIsOpen(prev => !prev)}
+            className={style}
+            fill="#000000"
+            viewBox="0 0 512 512"
+        >
             <path
                 d="M256,0C114.62,0,0,114.62,0,256s114.62,256,256,256s256-114.62,256-256S397.38
             ,0,256,0z M256,486.4C128.956,486.4,25.6,383.044,25.6,256S128.956

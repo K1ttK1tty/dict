@@ -28,7 +28,6 @@ export interface ISetOptions {
     isSelectOpen: IOptionState;
     setIsSelectOpen: (state: React.SetStateAction<IOptionState>) => void;
 }
-export type TUseLocaleStorage = (name: string, state: boolean) => [boolean, (state: boolean) => void];
 export type TUseSortedCards = (Cards: ICard[], toggleWordsOrder: boolean) => ICard[];
 export type TUseSelectedThemes = (
     Cards: ICard[],

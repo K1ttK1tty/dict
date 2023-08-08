@@ -9,7 +9,7 @@ const ThemeChanger: FC = memo(function () {
     return (
         <div className={styles.themeChanger}>
             <input
-                defaultChecked={theme === 'light'}
+                defaultChecked={theme !== 'light'}
                 onClick={elem => changeTheme(elem)}
                 id={styles.checkbox}
                 type="checkbox"
@@ -19,3 +19,4 @@ const ThemeChanger: FC = memo(function () {
     );
 });
 export default ThemeChanger;
+

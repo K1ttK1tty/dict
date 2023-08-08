@@ -254,7 +254,6 @@ const Vocabulary: FC<IVocabulary> = memo(function ({
             }}
             className={'searchWrapper pageContent'}
         >
-            <div>lazyLoad</div>
             <ModalEditCard
                 modalChangeCard={modalChangeCard}
                 isEditCardModal={isEditCardModal}

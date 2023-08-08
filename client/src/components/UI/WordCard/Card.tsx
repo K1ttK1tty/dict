@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, Fragment, createElement } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { updatedCards } from '../../../functions/UpdateCards';
@@ -25,6 +25,7 @@ import IconRemove from './icons/IconRemove';
 const Card: FC<ICardProps> = function ({ card, index, modalChangeCard, setIsEditCardModal, selectedColorOrNewLabel }) {
     const dispatch = useAppDispatch();
     const { cards, user, data, currentDictionary, selectOptions } = useAppSelector(state => state.AuthSlice);
+    const { searchWord, isSearchByWord } = useAppSelector(state => state.upMenu);
     const cardColorMark = [styles.colorMark, colours.get(card.color)].join(' ');
     const [isTwoColumns] = useLocaleStorage('oneOrTwoCardsColumns', false);
     const [isColorsInCards] = useLocaleStorage('isColorsOnCards', true);
@@ -40,13 +41,9 @@ const Card: FC<ICardProps> = function ({ card, index, modalChangeCard, setIsEdit
         e.preventDefault();
         const element = e.target as HTMLButtonElement;
         let color: TColorsOnCard;
-        if (element.classList.contains(styles.red)) {
-            color = 'orange';
-        } else if (element.classList.contains(styles.orange)) {
-            color = 'green';
-        } else {
-            color = 'red';
-        }
+        if (element.classList.contains(styles.red)) color = 'orange';
+        else if (element.classList.contains(styles.orange)) color = 'green';
+        else color = 'red';
         const newCards = setNewColor(cards, card.id, color);
         dispatch(setCards(newCards));
         updatedCards(currentDictionary, user.email, data, newCards, selectOptions, dispatch);
@@ -61,14 +58,46 @@ const Card: FC<ICardProps> = function ({ card, index, modalChangeCard, setIsEdit
         });
         return newCards;
     };
+    const coloringLetters = (word: string) => {
+        const arrayOfReactElements: React.ReactElement[] = [];
+        const regExpression = new RegExp(searchWord, 'i');
+        const array = word.split(regExpression);
+        let beginningOfArray = regExpression.exec(word)?.index;
+        array.forEach((element, index) => {
+            arrayOfReactElements.push(createElement('span', { className: '' }, element));
+            if (index === array.length - 1) return arrayOfReactElements;
+            const stringWithSpace = regExpression.exec(word.slice(beginningOfArray))?.[0].split(' ');
+            stringWithSpace?.forEach((elem, index) => {
+                arrayOfReactElements.push(createElement('span', { className: styles.coloringLetters }, elem));
+                if (index !== stringWithSpace.length - 1) {
+                    arrayOfReactElements.push(createElement('span', { className: '' }, ' '));
+                }
+            });
+            beginningOfArray = index + searchWord.length;
+        });
+        return arrayOfReactElements;
+    };
+    const translate =
+        (!isSearchByWord && searchWord.length)
+            ? coloringLetters(card.translate).map(elem => (
+                  <Fragment key={card.translate + index + Math.random()}>{elem}</Fragment>
+              ))
+            : card.translate;
     return (
-        <div onClick={openModalInMobile} onMouseDown={e => e.stopPropagation()} className={cardClassName}>
-            <h4 className={styles.word}>{card.word}</h4>
-            {
-                <p className={styles.translate}>
-                    {!(hideTranslate && selectedColorOrNewLabel !== null) && card.translate}
-                </p>
-            }
+        <div
+            data-testid="cards"
+            onClick={openModalInMobile}
+            onMouseDown={e => e.stopPropagation()}
+            className={cardClassName}
+        >
+            <h4 className={styles.word}>
+                {searchWord.length
+                    ? coloringLetters(card.word).map((elem, index) => (
+                          <Fragment key={card.word + index + Math.random()}>{elem}</Fragment>
+                      ))
+                    : card.word}
+            </h4>
+            {<p className={styles.translate}>{!(hideTranslate && selectedColorOrNewLabel !== null) && translate}</p>}
             <button
                 className={isMobile ? styles.removeIcon : [styles.favorite, styles.icon].join(' ')}
                 onClick={e => {

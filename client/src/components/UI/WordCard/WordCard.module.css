@@ -22,6 +22,9 @@
     cursor: var(--pointer);
     transition: var(--transition-theme);
 }
+.coloringLetters {
+    background-color: rgb(136, 214, 47) !important;
+}
 .cardOneColumn {
     width: 70%;
     margin: 0px auto 16px;
@@ -43,7 +46,7 @@
     top: -4px;
     max-height: 26px;
     overflow: var(--overflowHidden);
-}
+}   
 .translate {
     font-size: 16px;
     line-height: 1.2;

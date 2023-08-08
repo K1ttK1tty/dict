@@ -5,7 +5,7 @@ import { debounce } from '../../../functions/debounce';
 import style from './ScrollToTop.module.css';
 
 const ScrollToTop: FC = memo(function () {
-    const [timeoutId, setTimeoutId] = useState<ReturnType<typeof setTimeout>>(0);
+    const [timeoutId, setTimeoutId] = useState<ReturnType<typeof setTimeout> | number>(0);
     const arrow = useRef<HTMLButtonElement | null>(null);
     let showArrow = false;
 

@@ -66,6 +66,7 @@ const MySelect: FC<IMySelect> = memo(function ({
             tabIndex={0}
         >
             <div
+                data-testid="select"
                 onMouseDown={() => setIsSelectOpen({ ...isSelectOpen, open: !isSelectOpen.open })}
                 className={[styles.title, 'ifNotThisThenClose'].join(' ')}
             >

@@ -102,7 +102,7 @@ const ModalEditThemesContent: FC<IModalEditThemesContent> = memo(function ({
                     </div>
                 </div>
                 <BtnAddCard
-                    aria={'Изменить тему'}
+                    aria={'Изменить эту тему'}
                     dinamicclassname={[btnStyles.btnFormEditCard, style.button].join(' ')}
                     children="Изменить"
                     type="submit"

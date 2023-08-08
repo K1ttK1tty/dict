@@ -10,6 +10,7 @@ export interface IModal {
     setFields?: ActionCreatorWithPayload<IInputValue>;
     dinamicClassName?: string;
     back?: boolean;
+    testid:string;
     backFunc?: () => void;
 }
 export interface IAddAvatarContent {
@@ -67,7 +68,7 @@ export interface IModalEditThemesContent {
     isEditThemesModal: boolean;
 }
 export type TDebounce<T> = (
-    variable: ReturnType<typeof setTimeout>,
+    variable: ReturnType<typeof setTimeout> | number,
     setId: (state: ReturnType<typeof setTimeout>) => void,
     callback: T,
     time: number,

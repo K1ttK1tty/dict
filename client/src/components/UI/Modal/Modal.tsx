@@ -24,6 +24,7 @@ const Modal: FC<IModal> = memo(function ({
     dinamicClassName,
     back,
     backFunc,
+    testid,
 }) {
     const { editCard } = useAppSelector(state => state.modalRenameCard);
     const { cards, currentDictionary, selectOptions, user, data } = useAppSelector(state => state.AuthSlice);
@@ -39,6 +40,7 @@ const Modal: FC<IModal> = memo(function ({
     };
     return (
         <div
+            data-testid={testid}
             tabIndex={1}
             className={visible}
             onKeyDown={e => keyClose(e, setModal, dispatch, setFields)}

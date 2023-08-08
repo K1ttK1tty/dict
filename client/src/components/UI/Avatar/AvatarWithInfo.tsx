@@ -1,12 +1,13 @@
 import { FC, memo } from 'react';
 
-import styles from '../UserMenu/UserMenu.module.css';
-
 import { cutLongLine } from '../../../functions/cutLongLine';
 import { useAppSelector } from '../../../hooks/redux';
 
-import Avatar from './Avatar';
+import styles from '../UserMenu/UserMenu.module.css';
+
 import { IAvatarWithInfoProps } from './AvatarModels';
+
+import Avatar from './Avatar';
 
 const AvatarWithInfo: FC<IAvatarWithInfoProps> = memo(function ({ isMenuOpen, setFunction }) {
     const { user } = useAppSelector(state => state.AuthSlice);
@@ -15,7 +16,7 @@ const AvatarWithInfo: FC<IAvatarWithInfoProps> = memo(function ({ isMenuOpen, se
     const menuDescAvatar = isMenuOpen === false ? [styles.userMain, styles.menuDesc].join(' ') : styles.userMain;
     return (
         <div onClick={e => e.stopPropagation()} className={menuDescAvatar}>
-            <div onClick={() => setFunction(true)} className={styles.avatarWrapper}>
+            <div data-testid="avatar" onClick={() => setFunction(true)} className={styles.avatarWrapper}>
                 <Avatar styles={styles.avatar} />
             </div>
             <div>

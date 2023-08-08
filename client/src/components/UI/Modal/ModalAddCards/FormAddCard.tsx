@@ -31,7 +31,7 @@ const FormAddCard: FC<IFormAddCard> = memo(function ({
     const { inputValue } = useAppSelector(state => state.modalRenameCard);
     const [isOverlap, setIsOverlap] = useState<boolean>(false);
     const [cardWithOverlap, setCardWithOverlap] = useState<ICard | null>(null);
-    const [timeId, setTimeId] = useState<ReturnType<typeof setTimeout>>(0);
+    const [timeId, setTimeId] = useState<ReturnType<typeof setTimeout> | number>(0);
     const [defaultTheme, setDefaultTheme] = useState<string>(selectedTheme);
     const [prevIsModal, setPrevIsModal] = useState<boolean>(isAddCardModal);
     const [isFavorite, setIsFavorite] = useState<boolean>(false);
@@ -74,7 +74,6 @@ const FormAddCard: FC<IFormAddCard> = memo(function ({
     };
     const firstInputClassName = isOverlap ? [styles.mb36, styles.inputFormAddCard].join(' ') : styles.inputFormAddCard;
     const overlapNote = showRelatedCard ? 'Вернуться (жми)' : 'Посмотреть совпадение (жми)';
-
     return (
         <form>
             <div className={styles.relative}>

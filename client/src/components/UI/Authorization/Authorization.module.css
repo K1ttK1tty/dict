@@ -79,18 +79,18 @@ input:-webkit-autofill {
     font-size: 18px;
     padding: 10px;
     border: none;
-    background: rgb(136, 214, 47);
+    background: rgb(136, 214, 47) !important;
     transition: 0.15s;
     margin-bottom: 18px;
 }
 .button:hover {
-    background: rgb(124, 196, 43);
+    background: rgb(124, 196, 43) !important;
 }
 .button:after {
-    scale: 0;
+    scale: 0 !important;
 }
 .button:hover.button:after {
-    scale: 0;
+    scale: 0 !important;
 }
 .buttonSwitcher {
     font-size: 16px;

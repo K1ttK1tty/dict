@@ -18,7 +18,7 @@ const ListWithSearching: FC<IListWithSearching> = memo(function ({
     onItemClick,
     dinamicClassName,
 }) {
-    const [timeoutId, setTimeoutId] = useState<ReturnType<typeof setTimeout>>(0);
+    const [timeoutId, setTimeoutId] = useState<ReturnType<typeof setTimeout> | number>(0);
     const search = (e: string) => {
         debounce(timeoutId, setTimeoutId, () => setWord(e), 400);
     };

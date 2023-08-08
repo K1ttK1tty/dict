@@ -10,6 +10,7 @@ import FormEditCard from './FormEditCard';
 const ModalEditCard: FC<IModalEditCard> = memo(function ({ modalChangeCard, isEditCardModal, setIsEditCardModal }) {
     return (
         <Modal
+            testid="ModalEditCard"
             title={'Редактирование'}
             isModal={isEditCardModal}
             setModal={setIsEditCardModal}

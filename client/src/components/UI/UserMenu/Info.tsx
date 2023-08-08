@@ -21,7 +21,7 @@ const Info: FC<IInfo> = memo(function ({ isUserMenuOpen }) {
     return (
         <div className={styles.infoWrapper}>
             <Question setIsOpen={setIsOpen} style={styles.icon} />
-            <div className={submenuStyles}>
+            <div data-testid="userMenuInfoAboutAccountActivation" className={submenuStyles}>
                 <p>При регистрации вам было отправлено письмо об активации аккаунта.</p>
                 <BtnAddCard
                     children={'Отправить повторно'}

@@ -1,18 +1,16 @@
 import { useEffect, useState } from 'react';
 
-import { TUseLocaleStorage } from '../models/models';
-
-export const useLocaleStorage: TUseLocaleStorage = (name, state) => {
+export const useLocaleStorage = <T>(name: string, state: T) => {
     const storageValue = localStorage.getItem(name);
-    let initialState;
+    let initialState:T;
     if (storageValue) {
         initialState = JSON.parse(storageValue);
     } else initialState = state;
 
-    const [value, setValue] = useState(initialState);
+    const [value, setValue] = useState<T>(initialState);
 
     useEffect(() => {
         localStorage.setItem(name, JSON.stringify(value));
     }, [value, name]);
-    return [value, setValue];
+    return [value, setValue] as const;
 };
