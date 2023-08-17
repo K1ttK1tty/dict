@@ -10,11 +10,12 @@ import '../styles/Vocabulary.css';
 
 import { IRemoveTheme } from '../models/models';
 
+import { getSelectedTheme } from '../Tests/StoreTests/Selectors';
+
 const RemoveTheme: FC<IRemoveTheme> = function ({ setIsSelectOpen, isSelectOpen, selectedColorOrNewLabel }) {
     const dispatch = useAppDispatch();
-    const { selectOptions, selectedTheme, user, cards, data, currentDictionary } = useAppSelector(
-        state => state.AuthSlice,
-    );
+    const { selectOptions, user, cards, data, currentDictionary } = useAppSelector(state => state.AuthSlice);
+    const selectedTheme = useAppSelector(getSelectedTheme);
     const isCanDeleteTheme = isSelectOpen.removeMark && !selectedColorOrNewLabel;
     return (
         <>

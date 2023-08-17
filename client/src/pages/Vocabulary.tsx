@@ -28,6 +28,8 @@ import {
 
 import { IColorObject, IVocabulary } from '../models/models';
 
+import { getSelectedTheme } from '../Tests/StoreTests/Selectors';
+
 const Vocabulary: FC<IVocabulary> = memo(function ({
     isSelectOpen,
     setIsSelectOpen,
@@ -48,7 +50,8 @@ const Vocabulary: FC<IVocabulary> = memo(function ({
     const modalChangeCard = useRef<HTMLInputElement | null>(null);
 
     const dispatch = useAppDispatch();
-    const { selectedTheme, cards } = useAppSelector(state => state.AuthSlice);
+    const { cards } = useAppSelector(state => state.AuthSlice);
+    const selectedTheme = useAppSelector(getSelectedTheme);
     const { searchWord, input, isSearchByWord, isLetterCaseInclude } = useAppSelector(state => state.upMenu);
     const colorModeOn = useAppSelector(state => state.ColorPicker.colorModeOn);
     const colorRemoveMode = useAppSelector(state => state.ColorPicker.colorRemoveMode);

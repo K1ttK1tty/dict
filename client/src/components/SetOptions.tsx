@@ -11,6 +11,8 @@ import { setSelectedTheme } from '../store/reducers/authorization/Authorization/
 
 import { ISetOptions } from '../models/models';
 
+import { getSelectOptions } from '../Tests/StoreTests/Selectors';
+
 const SetOptions: FC<ISetOptions> = memo(function ({
     replaceOption,
     openEditThemeModal,
@@ -18,7 +20,7 @@ const SetOptions: FC<ISetOptions> = memo(function ({
     isSelectOpen,
     setIsSelectOpen,
 }) {
-    const { selectOptions } = useAppSelector(state => state.AuthSlice);
+    const selectOptions = useAppSelector(getSelectOptions);
     const [openDropDown, setOpenDropDown] = useState<boolean>(false);
     const [isColorsInCards] = useLocaleStorage('isColorsOnCards', true);
     const dispatch = useAppDispatch();
@@ -27,7 +29,7 @@ const SetOptions: FC<ISetOptions> = memo(function ({
     }
     const dropDownMenuClassName = openDropDown ? [styles.dropDown, styles.open].join(' ') : styles.dropDown;
     return (
-        <div id="options">
+        <div data-testid="selectOptions" id="options">
             <DropDownMenu
                 isMenuOpen={openDropDown}
                 setIsMenuOpen={setOpenDropDown}

@@ -22,21 +22,25 @@ const DropDownColors: FC<ISetSelectedColor> = function ({ setSelectedColorOrNewL
     return (
         <>
             <button
+                data-testid="redColorInSelect"
                 onMouseDown={selectColor}
                 className={[styles.colorBlock, styles.red].join(' ')}
                 data-selectcolorornew="red"
             />
             <button
+                data-testid="orangeColorInSelect"
                 onMouseDown={selectColor}
                 className={[styles.colorBlock, styles.orange].join(' ')}
                 data-selectcolorornew="orange"
             />
             <button
+                data-testid="greenColorInSelect"
                 onMouseDown={selectColor}
                 className={[styles.colorBlock, styles.green].join(' ')}
                 data-selectcolorornew="green"
             />
             <button
+                data-testid="newMarkInSelect"
                 onMouseDown={selectColor}
                 className={[styles.colorBlock, styles.new].join(' ')}
                 data-selectcolorornew="new"

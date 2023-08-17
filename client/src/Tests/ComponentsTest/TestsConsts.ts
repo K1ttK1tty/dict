@@ -1,8 +1,10 @@
-export const authorizationData = {
+import { IAuthSliceInitialState } from '../../store/storeModels';
+
+export const authorizationData: IAuthSliceInitialState = {
     user: {
         id: 1,
         email: 'user@mail.ru',
-        isActivated: 0,
+        isActivated: false,
         name: '360',
         registrationDate: '23-7-2023',
     },
@@ -97,7 +99,7 @@ export const authorizationDataWithActivation = {
     user: {
         id: 1,
         email: 'user@mail.ru',
-        isActivated: 1,
+        isActivated: true,
         name: '360',
         registrationDate: '23-7-2023',
     },

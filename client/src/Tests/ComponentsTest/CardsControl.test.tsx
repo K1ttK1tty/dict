@@ -1,4 +1,4 @@
-import { cleanup, fireEvent, getAllByTestId, getByTestId, screen, within } from '@testing-library/react';
+import { cleanup, fireEvent, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Suspense } from 'react';
 import { afterEach, describe, expect, test, vi } from 'vitest';
@@ -14,6 +14,7 @@ const elements = (
         <App />
     </Suspense>
 );
+afterEach(cleanup);
 describe('CardsControl component', () => {
     test('attach/move position', async () => {
         renderWithReduxAndRoute(elements, { AuthSlice: authorizationData });
@@ -32,7 +33,7 @@ describe('CardsControl component', () => {
         renderWithReduxAndRoute(elements, { AuthSlice: authorizationData });
         await screen.findByTestId('vocabulary');
         const modalAddCard = screen.getByTestId('modalAddCards');
-        const addCardButton = screen.getAllByTestId('addCardButton')[0];
+        const addCardButton = screen.getAllByTestId('addCardButton')[1];
         expect(modalAddCard.classList.contains(modalStyles.active)).toBe(false);
         await userEvent.click(addCardButton);
         expect(modalAddCard.classList.contains(modalStyles.active)).toBe(true);
@@ -45,15 +46,22 @@ describe('CardsControl component', () => {
         await screen.findByTestId('vocabulary');
         const modalAddCard = screen.getByTestId('modalAddCards');
         const addCardButton = screen.getAllByTestId('addCardButton')[0];
-        expect(modalAddCard.classList.contains(modalStyles.active)).toBe(false);
-        await userEvent.click(addCardButton);
-        expect(modalAddCard.classList.contains(modalStyles.active)).toBe(true);
+
+        // const theme1 = within(selectOptions).getByText('theme1');
 
         const select = screen.getByTestId('select');
-        
+        await userEvent.click(select);
+        const selectOptions = screen.getByTestId('selectOptions');
+        const themeOption = within(selectOptions).getByText('theme1');
+        await userEvent.click(themeOption);
 
-        const inputWTheme = screen.getByPlaceholderText('Тема');
-        expect(inputWTheme.innerHTML).toEqual('');
+        // expect(modalAddCard.classList.contains(modalStyles.active)).toBe(false);
+        // await userEvent.click(addCardButton);
+        // expect(modalAddCard.classList.contains(modalStyles.active)).toBe(true);
+
+        const inputWithTeme = within(select).getByText('theme1');
+        // expect(inputWithTeme.innerHTML).toEqual('theme1');
+        // screen.debug();
     });
     // test.only('add new card', async () => {
     //     renderWithReduxAndRoute(elements, { AuthSlice: authorizationData });

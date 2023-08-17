@@ -12,6 +12,7 @@ import { ICard } from '../../../../store/storeModels';
 
 import { IFormAddCard } from '../ModalsModels';
 
+import { getSelectedTheme } from '../../../../Tests/StoreTests/Selectors';
 import BtnAddCard from '../../BtnAddCard/BtnAddCard';
 import Checkbox from '../../Checkbox/Checkbox';
 import InputAddCard from '../../InputAddCard/InputAddCard';
@@ -25,9 +26,8 @@ const FormAddCard: FC<IFormAddCard> = memo(function ({
     isAddCardModal,
 }) {
     const dispatch = useAppDispatch();
-    const { cards, user, selectOptions, selectedTheme, data, currentDictionary } = useAppSelector(
-        state => state.AuthSlice,
-    );
+    const { cards, user, selectOptions, data, currentDictionary } = useAppSelector(state => state.AuthSlice);
+    const selectedTheme = useAppSelector(getSelectedTheme);
     const { inputValue } = useAppSelector(state => state.modalRenameCard);
     const [isOverlap, setIsOverlap] = useState<boolean>(false);
     const [cardWithOverlap, setCardWithOverlap] = useState<ICard | null>(null);

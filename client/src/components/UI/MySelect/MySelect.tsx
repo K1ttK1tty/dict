@@ -11,6 +11,7 @@ import { IOptionState } from '../../../store/storeModels';
 
 import { IMySelect } from './MySelectModel';
 
+import { getSelectedTheme } from '../../../Tests/StoreTests/Selectors';
 import SetOptions from '../../SetOptions';
 import IconSelect from './icons/IconSelect';
 
@@ -22,7 +23,7 @@ const MySelect: FC<IMySelect> = memo(function ({
     selectedColorOrNewLabel,
 }) {
     const dispatch = useAppDispatch();
-    const { selectedTheme } = useAppSelector(state => state.AuthSlice);
+    const selectedTheme = useAppSelector(getSelectedTheme);
     const selectWrapper = useRef<HTMLDivElement | null>(null);
     const [prev, setPrev] = useState<IOptionState>(isSelectOpen);
     if (prev.open !== isSelectOpen.open || prev.removeMark !== isSelectOpen.removeMark) {
@@ -41,7 +42,7 @@ const MySelect: FC<IMySelect> = memo(function ({
     };
     const replaceOption = (element: React.MouseEvent<HTMLDivElement>) => {
         const divElement = element.target as HTMLDivElement;
-        dispatch(setSelectedTheme(divElement.innerText));
+        dispatch(setSelectedTheme(divElement.innerHTML));
         setIsSelectOpen({ open: false, removeMark: true });
         if (selectedColorOrNewLabel) {
             setSelectedColorOrNewLabel(null);
@@ -76,7 +77,7 @@ const MySelect: FC<IMySelect> = memo(function ({
                 </div>
             </div>
             {isSelectOpen.removeMark && (
-                <button onClick={removeTheme} className={styles.removeTheme}>
+                <button data-testid="selectRemoveThemeBtn" onClick={removeTheme} className={styles.removeTheme}>
                     &times;
                 </button>
             )}

@@ -60,13 +60,13 @@ const Card: FC<ICardProps> = function ({ card, index, modalChangeCard, setIsEdit
     };
     const coloringLetters = (word: string) => {
         const arrayOfReactElements: React.ReactElement[] = [];
-        const regExpression = new RegExp(searchWord, 'i');
-        const array = word.split(regExpression);
-        let beginningOfArray = regExpression.exec(word)?.index;
-        array.forEach((element, index) => {
+        const regularExspression = new RegExp(searchWord, 'i');
+        const arraySplitByExpression = word.split(regularExspression);
+        let beginningOfArray = regularExspression.exec(word)?.index;
+        arraySplitByExpression.forEach((element, index) => {
             arrayOfReactElements.push(createElement('span', { className: '' }, element));
-            if (index === array.length - 1) return arrayOfReactElements;
-            const stringWithSpace = regExpression.exec(word.slice(beginningOfArray))?.[0].split(' ');
+            if (index === arraySplitByExpression.length - 1) return arrayOfReactElements;
+            const stringWithSpace = regularExspression.exec(word.slice(beginningOfArray))?.[0].split(' ');
             stringWithSpace?.forEach((elem, index) => {
                 arrayOfReactElements.push(createElement('span', { className: styles.coloringLetters }, elem));
                 if (index !== stringWithSpace.length - 1) {
@@ -78,7 +78,7 @@ const Card: FC<ICardProps> = function ({ card, index, modalChangeCard, setIsEdit
         return arrayOfReactElements;
     };
     const translate =
-        (!isSearchByWord && searchWord.length)
+        !isSearchByWord && searchWord.length
             ? coloringLetters(card.translate).map(elem => (
                   <Fragment key={card.translate + index + Math.random()}>{elem}</Fragment>
               ))
@@ -114,7 +114,7 @@ const Card: FC<ICardProps> = function ({ card, index, modalChangeCard, setIsEdit
                 <IconEdit />
             </button>
             <button
-                onClick={() => removeCard(card.id, cards, user.email, data, currentDictionary, selectOptions, dispatch)}
+                // onClick={() => removeCard(card.id, cards, user.email, data, currentDictionary, selectOptions, dispatch)}
                 className={isMobile ? styles.removeIcon : [styles.remove, styles.icon].join(' ')}
             >
                 <IconRemove />

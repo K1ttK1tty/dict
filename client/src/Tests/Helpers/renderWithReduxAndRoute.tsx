@@ -11,6 +11,6 @@ export const renderWithReduxAndRoute: IRenderWithReduxAndRoute<any> = (component
     return render(
         <Provider store={store}>
             <MemoryRouter>{component}</MemoryRouter>
-        </Provider>,
+        </Provider>
     );
 };

@@ -63,6 +63,7 @@ const Modal: FC<IModal> = memo(function ({
                             )}
                         </h5>
                         <button
+                            data-testid="modalCloseButton"
                             onClick={() => removeModal(setModal, dispatch, setFields)}
                             className={style.modalClose}
                             aria-label="закрыть"
