@@ -133,7 +133,7 @@ export const getDays = (index: number, data: IDataStructure, all = false) => {
     const keys: string[] = [];
     const numbers: number[] = [];
     for (let index = 1; index < 32; index++) {
-        keys.push(index.toString());
+        keys.push(index.toString() + ' день');
         if (ttt.get(index)) {
             numbers.push(ttt.get(index));
         } else numbers.push(0);

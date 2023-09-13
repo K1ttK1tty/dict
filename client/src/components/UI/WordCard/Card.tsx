@@ -36,7 +36,6 @@ const Card: FC<ICardProps> = function ({ card, index, modalChangeCard, setIsEdit
         ? () => editWord(card, index, setIsEditCardModal, modalChangeCard, dispatch)
         : undefined;
     const cardClassName = isTwoColumns ? styles.card : [styles.card, styles.cardOneColumn].join(' ');
-
     const nextColour = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         const element = e.target as HTMLButtonElement;
@@ -97,7 +96,11 @@ const Card: FC<ICardProps> = function ({ card, index, modalChangeCard, setIsEdit
                       ))
                     : card.word}
             </h4>
-            {<p className={styles.translate}>{!(hideTranslate && selectedColorOrNewLabel !== null) && translate}</p>}
+            {
+                <p className={styles.translate}>
+                    {!(hideTranslate && selectedColorOrNewLabel === 'Избранное') && translate}
+                </p>
+            }
             <button
                 className={isMobile ? styles.removeIcon : [styles.favorite, styles.icon].join(' ')}
                 onClick={e => {
@@ -114,15 +117,17 @@ const Card: FC<ICardProps> = function ({ card, index, modalChangeCard, setIsEdit
                 <IconEdit />
             </button>
             <button
-                // onClick={() => removeCard(card.id, cards, user.email, data, currentDictionary, selectOptions, dispatch)}
+                onClick={() => removeCard(card.id, cards, user.email, data, currentDictionary, selectOptions, dispatch)}
                 className={isMobile ? styles.removeIcon : [styles.remove, styles.icon].join(' ')}
             >
                 <IconRemove />
             </button>
             <div className={styles.cardInfo} onClick={e => e.stopPropagation()}>
-                {isColorsInCards && <button className={cardColorMark} onMouseDown={nextColour} />}
+                {isColorsInCards && (
+                    <button data-testid="colorOnCard" className={cardColorMark} onMouseDown={nextColour} />
+                )}
                 {showLabel && (
-                    <div className={styles.new}>
+                    <div data-testid="newMarkOnCard" className={styles.new}>
                         <div className={styles.font}>n</div>
                         <div className={styles.font}>e</div>
                         <div className={styles.font}>w</div>

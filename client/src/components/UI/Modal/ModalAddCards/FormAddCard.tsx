@@ -35,7 +35,6 @@ const FormAddCard: FC<IFormAddCard> = memo(function ({
     const [defaultTheme, setDefaultTheme] = useState<string>(selectedTheme);
     const [prevIsModal, setPrevIsModal] = useState<boolean>(isAddCardModal);
     const [isFavorite, setIsFavorite] = useState<boolean>(false);
-
     if (prevIsModal !== isAddCardModal) {
         setPrevIsModal(isAddCardModal);
         setIsOverlap(false);
@@ -56,6 +55,7 @@ const FormAddCard: FC<IFormAddCard> = memo(function ({
             dispatch,
         );
         setDefaultTheme('');
+        setIsFavorite(false);
     };
     const callback = (e: string) => {
         return () => {
@@ -133,7 +133,7 @@ const FormAddCard: FC<IFormAddCard> = memo(function ({
             )}
             <div className={styles.mb18}>
                 <Checkbox
-                    defaultChecked={isFavorite}
+                    checked={isFavorite}
                     id={'setFavoriteOrNot'}
                     dinamicClassNameWrapper={styles.mr6}
                     callback={() => setIsFavorite(!isFavorite)}

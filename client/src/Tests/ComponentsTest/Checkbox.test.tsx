@@ -1,7 +1,7 @@
-import { screen, within } from '@testing-library/react';
+import { cleanup, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Suspense } from 'react';
-import { describe, expect, test } from 'vitest';
+import { afterEach,describe, expect, test } from 'vitest';
 
 import SearchParamsMenu from '../../components/UI/InputSearch/SearchParamsMenu';
 
@@ -12,6 +12,7 @@ const elements = (
         <SearchParamsMenu />
     </Suspense>
 );
+afterEach(cleanup);
 describe('Checkbox component', () => {
     test('checked on/off', async () => {
         renderWithReduxAndRoute(elements);

@@ -279,7 +279,12 @@ const Vocabulary: FC<IVocabulary> = memo(function ({
                         selectedColorOrNewLabel={selectedColorOrNewLabel}
                         setIsDictionaryModal={setIsDictionaryModal}
                     />
-                    {isAttached.attach && <CardsInfo setIsDictionaryModal={setIsDictionaryModal} />}
+                    {isAttached.attach && (
+                        <CardsInfo
+                            selectedColorOrNewLabel={selectedColorOrNewLabel}
+                            setIsDictionaryModal={setIsDictionaryModal}
+                        />
+                    )}
                     {calculatedArray.length ? (
                         <SetCard
                             stale={stale}

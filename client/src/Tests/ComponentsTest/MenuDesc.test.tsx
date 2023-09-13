@@ -1,19 +1,18 @@
-import { screen } from '@testing-library/react';
+import { cleanup, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Suspense } from 'react';
-import { describe, expect, test } from 'vitest';
+import { afterEach,describe, expect, test } from 'vitest';
 
 import App from '../../App';
 import { renderWithReduxAndRoute } from '../Helpers/renderWithReduxAndRoute';
 import { authorizationData } from './TestsConsts';
-
-// global.window.URL.createObjectURL = vi.fn(() => 'detail');
 
 const elements = (
     <Suspense>
         <App />
     </Suspense>
 );
+afterEach(cleanup);
 describe('Routing', () => {
     test('routing between pages', async () => {
         renderWithReduxAndRoute(elements, { AuthSlice: authorizationData });

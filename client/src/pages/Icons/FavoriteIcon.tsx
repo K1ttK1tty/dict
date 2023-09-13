@@ -8,6 +8,7 @@ const FavoriteIcon: FC<IFavoriteCard> = function ({ isFavorite, dinamicClassName
     const className = isFavorite ? 'favoriteIcon fill' : 'favoriteIcon';
     return (
         <svg
+            data-testid="favoriteIcon"
             width="29px"
             height="29px"
             viewBox="0 0 64 64"

@@ -1,5 +1,4 @@
-import { describe, expect, expectTypeOf, test } from 'vitest';
-
+import { afterEach,describe, expect, expectTypeOf, test } from 'vitest';
 import AuthSlice, {
     changeDictionary,
     setAvatar,
@@ -29,6 +28,7 @@ import {
     getUserAuthSlice,
     getUserData,
 } from './Selectors';
+import { cleanup } from '@testing-library/react';
 
 const mockUser: IUser = {
     id: 3,
@@ -177,7 +177,7 @@ const fakeCards: ICard[] = [
         favorite: true,
     },
 ];
-
+afterEach(cleanup);
 describe('Selector testing', () => {
     test('user from AuthSlice', () => {
         expect(getUserAuthSlice({ AuthSlice: { user: mockUser } })).toEqual(mockUser);
@@ -395,6 +395,7 @@ describe('Reducer tests', () => {
             AuthSlice({ ...authorizationData, data: dataAfterAssignment }, changeDictionary('anotherDictionary')),
         ).toEqual({
             ...authorizationData,
+            data: dataAfterAssignment,
             cards: dataAfterAssignment['anotherDictionary'].cards,
             selectOptions: dataAfterAssignment['anotherDictionary'].selectOptions,
         });

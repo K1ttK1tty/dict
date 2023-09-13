@@ -1,4 +1,4 @@
-import { cleanup, screen, within } from '@testing-library/react';
+import { cleanup, getByTestId, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Suspense } from 'react';
 import { afterEach, describe, expect, test } from 'vitest';
@@ -125,7 +125,7 @@ describe('Select component', () => {
     });
     test('color selection, switching between themes,colors', async () => {
         renderWithReduxAndRoute(elements, { AuthSlice: authorizationData });
-        await screen.findByTestId('vocabulary');
+        const background = await screen.findByTestId('vocabulary');
 
         const select = screen.getByTestId('select');
         expect(screen.queryByTestId('selectOptions')).toBeNull();
@@ -239,15 +239,18 @@ describe('Select component', () => {
     });
     test('favorive selection, switching between theme,colors and favorite', async () => {
         renderWithReduxAndRoute(elements, { AuthSlice: authorizationData });
-        await screen.findByTestId('vocabulary');
+        const background = await screen.findByTestId('vocabulary');
 
         let select = screen.getByTestId('select');
         expect(screen.queryByTestId('selectOptions')).toBeNull();
+        let cards = screen.getAllByTestId('cards');
         await userEvent.click(select);
         expect(screen.getByTestId('selectOptions')).not.toBeNull();
         expect(screen.queryByTestId('selectRemoveThemeBtn')).toBeNull();
+        expect(cards.length).toBe(6);
         await userEvent.click(within(screen.getByTestId('selectOptions')).getByText('Избранное'));
-
+        cards = screen.getAllByTestId('cards');
+        expect(cards.length).toBe(3);
         expect(screen.queryByTestId('selectOptions')?.className).toEqual('stateOption-exit stateOption-exit-active');
         expect(screen.getByTestId('selectRemoveThemeBtn')).not.toBeNull();
         expect(within(select).queryByText('Тема')).toBeNull();
@@ -264,6 +267,9 @@ describe('Select component', () => {
         expect(within(select).queryByText('Тема')).toBeNull();
         expect(within(select).queryByText('Избранное')).toBeNull();
         expect(within(select).getByText('new')).not.toBeNull();
+
+        cards = screen.getAllByTestId('cards');
+        expect(cards.length).toBe(1);
 
         // theme selection
         await userEvent.click(select);
@@ -303,7 +309,7 @@ describe('Select component', () => {
     });
     test('open/ close modal edit theme', async () => {
         renderWithReduxAndRoute(elements, { AuthSlice: authorizationData });
-        await screen.findByTestId('vocabulary');
+        const background = await screen.findByTestId('vocabulary');
         const select = screen.getByTestId('select');
 
         await userEvent.click(select);
@@ -322,7 +328,7 @@ describe('Select component', () => {
     });
     test('open modal edit theme with choosen theme/color/favorite', async () => {
         renderWithReduxAndRoute(elements, { AuthSlice: authorizationData });
-        await screen.findByTestId('vocabulary');
+        const background = await screen.findByTestId('vocabulary');
 
         const select = screen.getByTestId('select');
         expect(screen.queryByTestId('selectOptions')).toBeNull();

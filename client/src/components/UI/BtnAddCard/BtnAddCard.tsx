@@ -1,5 +1,6 @@
 import { FC } from 'react';
 
+import noSelectStyles from '../CardsControl/CardsControl.module.css';
 import moduleStyles from './BtnAddCard.module.css';
 
 import { IBtnProps } from './BtnAddCardModel';
@@ -11,7 +12,7 @@ const BtnAddCard: FC<IBtnProps> = function ({ children, style, noClick, aria, di
             style={style}
             type={type}
             {...props}
-            className={[moduleStyles.btnAddCard, dinamicclassname, noClick].join(' ')}
+            className={[moduleStyles.btnAddCard, noSelectStyles.noselect, dinamicclassname, noClick].join(' ')}
         >
             {children}
         </button>

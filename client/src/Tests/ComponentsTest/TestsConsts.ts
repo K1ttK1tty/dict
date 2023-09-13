@@ -26,7 +26,7 @@ export const authorizationData: IAuthSliceInitialState = {
             translate: 'translate',
             theme: 'theme1',
             note: 'note',
-            time: 123,
+            time: Date.now(),
             color: 'red',
             favorite: true,
         },
@@ -62,7 +62,7 @@ export const authorizationData: IAuthSliceInitialState = {
         },
         {
             id: 5,
-            word: 'word3',
+            word: 'word5',
             translate: 'translate',
             theme: 'theme3',
             note: 'note',
@@ -72,7 +72,7 @@ export const authorizationData: IAuthSliceInitialState = {
         },
         {
             id: 6,
-            word: 'Word4',
+            word: 'Word6',
             translate: 'Translate',
             theme: 'theme3',
             note: 'note',
@@ -190,4 +190,71 @@ export const authorizationDataWithActivation = {
     selectedTheme: '',
     serverMessage: '',
 };
+const cardsWithoutRedColorAndTheme1 = [
+    {
+        id: 1,
+        word: 'word1',
+        translate: 'translate',
+        theme: 'theme2',
+        note: 'note',
+        time: 123,
+        color: 'orange',
+        favorite: true,
+    },
+    {
+        id: 2,
+        word: 'Word2',
+        translate: 'Translate',
+        theme: 'theme2',
+        note: 'note',
+        time: 124,
+        color: 'orange',
+        favorite: true,
+    },
+    {
+        id: 3,
+        word: 'word3',
+        translate: 'translate',
+        theme: 'theme2',
+        note: 'note',
+        time: 123,
+        color: 'orange',
+        favorite: false,
+    },
+    {
+        id: 4,
+        word: 'Word4',
+        translate: 'Translate',
+        theme: 'theme2',
+        note: 'note',
+        time: 124,
+        color: 'orange',
+        favorite: false,
+    },
+    {
+        id: 5,
+        word: 'word3',
+        translate: 'translate',
+        theme: 'theme2',
+        note: 'note',
+        time: 123,
+        color: 'green',
+        favorite: true,
+    },
+    {
+        id: 6,
+        word: 'Word4',
+        translate: 'Translate',
+        theme: 'theme2',
+        note: 'note',
+        time: 124,
+        color: 'green',
+        favorite: false,
+    },
+];
+export const dataWhereCardsWithoutRedColorAndTheme1 = {
+    ...authorizationDataWithActivation,
+    cards: cardsWithoutRedColorAndTheme1,
+};
+
 export const logoutData: any = { data: { message: 'Вы вышли из аккаунта' } };

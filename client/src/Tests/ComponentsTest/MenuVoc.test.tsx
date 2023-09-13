@@ -53,7 +53,6 @@ describe('MenuVocabulary(upMenu)', () => {
         // await userEvent.keyboard('{Escape}'); //failed because of that
         // expect(modal.classList.contains(modalStyles.active)).toBe(false);
     });
-
     test('search icon is only available on the Vocabulary page', async () => {
         renderWithReduxAndRoute(elements, { AuthSlice: authorizationData });
         await screen.findByTestId('vocabulary');

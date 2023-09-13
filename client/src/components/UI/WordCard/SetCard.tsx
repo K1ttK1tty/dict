@@ -16,7 +16,8 @@ const SetCards: FC<ISetCards> = memo(function ({
     selectedColorOrNewLabel,
 }) {
     const [isTwoColumns] = useLocaleStorage('oneOrTwoCardsColumns', false);
-    const notRendered = stale ? 'notRenderedYet' : '';
+    const notRendered = stale ? '' : '';
+    // const notRendered = stale ? 'notRenderedYet' : '';
     const cardsPosition = isTwoColumns ? `CardsPosition ${notRendered}` : notRendered;
     return (
         <div className={cardsPosition}>

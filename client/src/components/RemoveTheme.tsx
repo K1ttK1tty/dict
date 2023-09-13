@@ -15,8 +15,10 @@ import { getSelectedTheme } from '../Tests/StoreTests/Selectors';
 const RemoveTheme: FC<IRemoveTheme> = function ({ setIsSelectOpen, isSelectOpen, selectedColorOrNewLabel }) {
     const dispatch = useAppDispatch();
     const { selectOptions, user, cards, data, currentDictionary } = useAppSelector(state => state.AuthSlice);
+    const { searchWord } = useAppSelector(state => state.upMenu);
     const selectedTheme = useAppSelector(getSelectedTheme);
-    const isCanDeleteTheme = isSelectOpen.removeMark && !selectedColorOrNewLabel;
+    const isCanDeleteTheme = isSelectOpen.removeMark && !selectedColorOrNewLabel && !searchWord;
+    
     return (
         <>
             <h4 className="noCards">Пустота...</h4>
@@ -60,3 +62,4 @@ const RemoveTheme: FC<IRemoveTheme> = function ({ setIsSelectOpen, isSelectOpen,
     );
 };
 export default RemoveTheme;
+

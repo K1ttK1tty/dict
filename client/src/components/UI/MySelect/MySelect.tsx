@@ -4,6 +4,7 @@ import { CSSTransition } from 'react-transition-group';
 import { cutLongLine } from '../../../functions/cutLongLine';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 
+import noSelectStyles from '../CardsControl/CardsControl.module.css';
 import styles from './MySelect.module.css';
 
 import { setSelectedTheme } from '../../../store/reducers/authorization/Authorization/AuthSlice';
@@ -30,9 +31,7 @@ const MySelect: FC<IMySelect> = memo(function ({
         setPrev(isSelectOpen);
         if (isSelectOpen.open) {
             setTimeout(() => {
-                if (selectWrapper.current) {
-                    selectWrapper.current.focus();
-                }
+                if (selectWrapper.current) selectWrapper.current.focus();
             }, 200);
         }
     }
@@ -44,9 +43,7 @@ const MySelect: FC<IMySelect> = memo(function ({
         const divElement = element.target as HTMLDivElement;
         dispatch(setSelectedTheme(divElement.innerHTML));
         setIsSelectOpen({ open: false, removeMark: true });
-        if (selectedColorOrNewLabel) {
-            setSelectedColorOrNewLabel(null);
-        }
+        if (selectedColorOrNewLabel) setSelectedColorOrNewLabel(null);
     };
     const removeTheme = () => {
         dispatch(setSelectedTheme(''));
@@ -60,7 +57,7 @@ const MySelect: FC<IMySelect> = memo(function ({
         : 'Тема';
     return (
         <div
-            className={styles.select}
+            className={[styles.select, noSelectStyles.noselect].join(' ')}
             ref={selectWrapper}
             onKeyDown={() => setIsSelectOpen({ ...isSelectOpen, open: false })}
             onMouseDown={e => e.stopPropagation()}

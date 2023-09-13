@@ -79,7 +79,11 @@ const CardsControl: FC<ICardsControl> = memo(function ({
                 />
                 <h2>Управление</h2>
             </div>
-            <CardsInfo isMovedBlock={true} setIsDictionaryModal={setIsDictionaryModal} />
+            <CardsInfo
+                selectedColorOrNewLabel={selectedColorOrNewLabel}
+                isMovedBlock={true}
+                setIsDictionaryModal={setIsDictionaryModal}
+            />
             <div className={styles.cardsOptionsMoved}>
                 <BtnAddCard
                     onClick={isCanMove ? undefined : () => modalAddCard(modalAdd, setIsAddCardModal)}
