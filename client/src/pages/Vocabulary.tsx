@@ -13,7 +13,6 @@ import SetCard from '../components/UI/WordCard/SetCard';
 import { removeInput } from '../functions/removeInput';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { useCards } from '../hooks/useCards';
-import { useLocaleStorage } from '../hooks/useLocaleStorage';
 
 import '../styles/Vocabulary.css';
 import '../styles/theme.css';
@@ -40,7 +39,6 @@ const Vocabulary: FC<IVocabulary> = memo(function ({
 }) {
     const [isEditThemesModal, setIsEditThemesModal] = useState<boolean>(false);
     const [color, setColor] = useState<string>('#0dccce');
-    const [order] = useLocaleStorage('order', true);
     const [allElementsArray, setAllElementsArray] = useState<HTMLElement[]>([]);
     const [isAddCardModal, setIsAddCardModal] = useState<boolean>(false);
     const [isEditCardModal, setIsEditCardModal] = useState<boolean>(false);
@@ -58,13 +56,11 @@ const Vocabulary: FC<IVocabulary> = memo(function ({
     const getCurrentColorMode = useAppSelector(state => state.ColorPicker.getCurrentColorMode);
     const currentColor = useAppSelector(state => state.ColorPicker.currentColor);
     const colorsBeforePaint = useAppSelector(state => state.ColorPicker.colorsBeforePaint);
-
     // const pageTheme = localStorage.getItem('theme');
     const selectedAndSearchedWord = useCards(
         cards,
         searchWord,
         selectedTheme,
-        order,
         isSearchByWord,
         isLetterCaseInclude,
         selectedColorOrNewLabel,

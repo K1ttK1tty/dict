@@ -28,18 +28,16 @@ export interface ISetOptions {
     isSelectOpen: IOptionState;
     setIsSelectOpen: (state: React.SetStateAction<IOptionState>) => void;
 }
-export type TUseSortedCards = (Cards: ICard[], toggleWordsOrder: boolean) => ICard[];
+export type TUseSortedCards = (Cards: ICard[]) => ICard[];
 export type TUseSelectedThemes = (
     Cards: ICard[],
     selectedTheme: string,
-    toggleWordsOrder: boolean,
     selectedColor: TSelectColorOrNew | null,
 ) => ICard[];
 export type TUseCards = (
     Cards: ICard[],
     searchWord: string,
     selectedTheme: string,
-    toggleWordsOrder: boolean,
     isSearchByWord: boolean,
     isLetterCaseInclude: boolean,
     selectedColor: TSelectColorOrNew | null,

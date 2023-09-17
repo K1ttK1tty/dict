@@ -51,7 +51,11 @@ const Modal: FC<IModal> = memo(function ({
                     <div className={style.modalNav}>
                         <h5 className={titleClassName}>
                             {back && (
-                                <div onMouseDown={backFunc} className={[arrowStyles.icon, style.backArrow].join(' ')}>
+                                <div
+                                    data-testid="backArrowDictModal"
+                                    onMouseDown={backFunc}
+                                    className={[arrowStyles.icon, style.backArrow].join(' ')}
+                                >
                                     <div className={arrowStyles.arrow}></div>
                                 </div>
                             )}

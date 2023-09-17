@@ -1,7 +1,7 @@
 import { cleanup, fireEvent, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Suspense } from 'react';
-import { afterEach, describe, expect, test, vi } from 'vitest';
+import { afterEach, describe, expect, test } from 'vitest';
 
 import modalStyles from '../../components/UI/Modal/ModalEditCard/Modal.module.css';
 import cardStyles from '../../components/UI/WordCard/WordCard.module.css';
@@ -295,5 +295,103 @@ describe('CardsControl component', () => {
         await userEvent.click(favorite);
         expect(screen.queryByText('Удалить все пустые темы')).toBeNull();
         expect(screen.queryByText('Удалить эту тему')).toBeNull();
+    });
+    test('create and change dictionaies', async () => {
+        renderWithReduxAndRoute(elements, { AuthSlice: dataWhereCardsWithoutRedColorAndTheme1 });
+        const background = await screen.findByTestId('vocabulary');
+
+        let dictionaryButton = screen.getByText('default');
+
+        const dictModal = screen.getByTestId('modalDictionary');
+        expect(dictModal.classList.contains(modalStyles.active)).toBe(false);
+        await userEvent.click(dictionaryButton);
+        expect(dictModal.classList.contains(modalStyles.active)).toBe(true);
+
+        expect(within(dictModal).getByText('Текущий словарь: default'));
+        expect(within(dictModal).getByText('Это стандартный словарь, его нельзя удалить'));
+
+        let changeButton = within(dictModal).getByText('Сменить');
+        await userEvent.click(changeButton);
+        expect(screen.getByText('Смена словаря'));
+        expect(screen.getByText('Тут ничего нет...'));
+        await userEvent.click(screen.getByTestId('backArrowDictModal'));
+        expect(within(dictModal).getByText('Текущий словарь: default'));
+        expect(within(dictModal).getByText('Это стандартный словарь, его нельзя удалить'));
+
+        let createButton = within(dictModal).getByText('Создать');
+        await userEvent.click(createButton);
+        expect(screen.getByText('Создание словаря'));
+        await userEvent.click(screen.getByTestId('backArrowDictModal'));
+        expect(within(dictModal).getByText('Текущий словарь: default'));
+        expect(within(dictModal).getByText('Это стандартный словарь, его нельзя удалить'));
+
+        let deleteButton = within(dictModal).getByText('Удалить');
+        await userEvent.click(deleteButton);
+        expect(screen.getByText('Удаление словаря'));
+        expect(screen.getByText('Тут ничего нет...'));
+        await userEvent.click(screen.getByTestId('backArrowDictModal'));
+        expect(within(dictModal).getByText('Текущий словарь: default'));
+        expect(within(dictModal).getByText('Это стандартный словарь, его нельзя удалить'));
+
+        createButton = within(dictModal).getByText('Создать');
+        await userEvent.click(createButton);
+        expect(screen.getByText('Создание словаря'));
+
+        const createDictInput = screen.getByTestId('createDictInput');
+        fireEvent.change(createDictInput, { target: { value: 'notDefault' } });
+        createButton = within(dictModal).getByText('Создать');
+        await userEvent.click(createButton);
+        expect(dictModal.classList.contains(modalStyles.active)).toBe(false);
+        let notDefault = screen.getByText('notDefault');
+        await userEvent.click(notDefault);
+        expect(dictModal.classList.contains(modalStyles.active)).toBe(true);
+        expect(within(dictModal).getByText('Текущий словарь: notDefault'));
+        expect(within(dictModal).queryByText('Это стандартный словарь, его нельзя удалить')).toBeNull();
+
+        // check and switch to default dictionary in list
+        changeButton = within(dictModal).getByText('Сменить');
+        await userEvent.click(changeButton);
+
+        expect(within(dictModal).getByText('default'));
+        expect(within(dictModal).queryByText('notDefault')).toBeNull();
+        await userEvent.click(within(dictModal).getByText('default'));
+        changeButton = within(dictModal).getByText('Сменить');
+        await userEvent.click(changeButton);
+        expect(dictModal.classList.contains(modalStyles.active)).toBe(false);
+        dictionaryButton = screen.getByText('default');
+        await userEvent.click(dictionaryButton);
+        expect(dictModal.classList.contains(modalStyles.active)).toBe(true);
+        expect(within(dictModal).getByText('Текущий словарь: default'));
+        expect(within(dictModal).getByText('Это стандартный словарь, его нельзя удалить'));
+
+        // switch to notDefault
+        changeButton = within(dictModal).getByText('Сменить');
+        await userEvent.click(changeButton);
+        await userEvent.click(within(dictModal).getByText('notDefault'));
+        changeButton = within(dictModal).getByText('Сменить');
+        await userEvent.click(changeButton);
+        expect(dictModal.classList.contains(modalStyles.active)).toBe(false);
+
+        notDefault = screen.getByText('notDefault');
+        await userEvent.click(notDefault);
+        expect(dictModal.classList.contains(modalStyles.active)).toBe(true);
+        expect(within(dictModal).getByText('Текущий словарь: notDefault'));
+        expect(within(dictModal).queryByText('Это стандартный словарь, его нельзя удалить')).toBeNull();
+
+        // removing at the end
+        deleteButton = within(dictModal).getByText('Удалить');
+        await userEvent.click(deleteButton);
+        expect(screen.getByText('Удаление словаря'));
+        expect(screen.queryByText('default')).toBeNull();
+        expect(within(dictModal).getByText('notDefault'));
+
+        deleteButton = within(dictModal).getByText('Удалить');
+        await userEvent.click(deleteButton);
+        expect(dictModal.classList.contains(modalStyles.active)).toBe(true);
+
+        expect(screen.getByText('Тут ничего нет...'));
+        expect(screen.getByText('Удаление словаря'));
+        expect(screen.queryByText('default')).toBeNull();
+        // expect(within(dictModal).queryByText('notDefault')).toBeNull(); //+-
     });
 });

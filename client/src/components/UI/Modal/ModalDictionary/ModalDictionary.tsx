@@ -13,8 +13,8 @@ const ModalDictionary: FC<IModalDictionary> = memo(function ({ isModal, setIsMod
     });
     let title = 'Словарь';
     if (dictionaryContent.changeContent) title = 'Смена словаря';
-    else if (dictionaryContent.createContent) title = 'Создание';
-    else if (dictionaryContent.removeContent) title = 'Удаление';
+    else if (dictionaryContent.createContent) title = 'Создание словаря';
+    else if (dictionaryContent.removeContent) title = 'Удаление словаря';
 
     const [prev, setPrev] = useState<boolean>(false);
     if (prev !== isModal) {

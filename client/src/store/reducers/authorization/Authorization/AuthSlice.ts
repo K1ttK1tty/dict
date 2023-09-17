@@ -10,14 +10,16 @@ export const AuthSlice = createSlice({
     name: 'AuthSlice',
     initialState,
     reducers: {
-        /////////////// DELETE THIS !
+        /////////////// DELETE THIS !  🠗🠗🠗
         setIsAuth(state) {
             state.isAuth = true;
         },
-        ////////////// DELETE THIS !
+        ////////////// DELETE THIS !   🠕🠕🠕
         changeDictionary(state, action: PayloadAction<string>) {
-            state.cards = state.data[action.payload].cards;
-            state.selectOptions = state.data[action.payload].selectOptions;
+            state.cards = state.data[action.payload]?.cards ? state.data[action.payload].cards : [];
+            state.selectOptions = state.data[action.payload]?.selectOptions
+                ? state.data[action.payload].selectOptions
+                : [];
         },
         setCurrentDictionary(state, action: PayloadAction<string>) {
             state.currentDictionary = action.payload;

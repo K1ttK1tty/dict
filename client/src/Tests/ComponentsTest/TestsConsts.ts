@@ -23,7 +23,7 @@ export const authorizationData: IAuthSliceInitialState = {
         {
             id: 1,
             word: 'word1',
-            translate: 'translate',
+            translate: 'Translate',
             theme: 'theme1',
             note: 'note',
             time: Date.now(),
@@ -43,7 +43,7 @@ export const authorizationData: IAuthSliceInitialState = {
         {
             id: 3,
             word: 'word3',
-            translate: 'translate',
+            translate: 'Translate',
             theme: 'theme2',
             note: 'note',
             time: 123,
@@ -63,7 +63,7 @@ export const authorizationData: IAuthSliceInitialState = {
         {
             id: 5,
             word: 'word5',
-            translate: 'translate',
+            translate: 'Translate',
             theme: 'theme3',
             note: 'note',
             time: 123,

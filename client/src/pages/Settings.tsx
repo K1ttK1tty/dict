@@ -9,11 +9,11 @@ import '../styles/Vocabulary.css';
 import '../styles/theme.css';
 
 const Settings: FC = function () {
-    const [isColorsInCards, setIsColorsInCards] = useLocaleStorage('isColorsOnCards', true);
+    const [order, setOrder] = useLocaleStorage('order', true);
     const [isTwoColumns, setIsTwoColumns] = useLocaleStorage('oneOrTwoCardsColumns', false);
+    const [isColorsInCards, setIsColorsInCards] = useLocaleStorage('isColorsOnCards', true);
     const [showNewLabel, setShowNewLabel] = useLocaleStorage('showNewLabel', true);
     const [hideTranslate, setHideTranslate] = useLocaleStorage('hideTranslation', false);
-    const [order, setOrder] = useLocaleStorage('order', true);
     return (
         <div data-testid="settingsPage" className="searchWrapper pageContent">
             <div className="CardsField">

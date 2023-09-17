@@ -8,15 +8,19 @@ import { ICard } from '../store/storeModels';
 
 import { TUseCards, TUseSearchByWord, TUseSelectedThemes, TUseSortedCards } from '../models/models';
 
-const useSordetCard: TUseSortedCards = (Cards, toggleWordsOrder) => {
+import { useLocaleStorage } from './useLocaleStorage';
+
+const useSordetCard: TUseSortedCards = (Cards) => {
+    const [order] = useLocaleStorage('order', true);
     const sordetCard = useMemo(() => {
-        if (!toggleWordsOrder) return Cards;
-        return [...Cards].sort((a, b) => a.word.localeCompare(b.word));
-    }, [Cards, toggleWordsOrder]);
+        const cards = [...Cards].reverse();
+        if (!order) return cards;
+        return cards.sort((a, b) => a.word.localeCompare(b.word));
+    }, [Cards, order]);
     return sordetCard;
 };
-const useSelectedThemes: TUseSelectedThemes = (Cards, selectedTheme, toggleWordsOrder, selectedColor) => {
-    const sordetCard = useSordetCard(Cards, toggleWordsOrder);
+const useSelectedThemes: TUseSelectedThemes = (Cards, selectedTheme, selectedColor) => {
+    const sordetCard = useSordetCard(Cards);
     const selectedThemes = useMemo(() => {
         if (!selectedTheme && !selectedColor) return sordetCard;
         if (selectedColor === 'Избранное') {
@@ -37,13 +41,12 @@ export const useCards: TUseCards = (
     Cards,
     searchWord,
     selectedTheme,
-    toggleWordsOrder,
     isSearchByWord,
     isLetterCaseInclude,
     selectedColor,
 ) => {
     const iterableCards = Cards.length ? [...Cards] : [];
-    const selectedThemes = useSelectedThemes(iterableCards, selectedTheme, toggleWordsOrder, selectedColor);
+    const selectedThemes = useSelectedThemes(iterableCards, selectedTheme, selectedColor);
     const selectedAndSearchedWord = useMemo(() => {
         if (isSearchByWord) {
             if (isLetterCaseInclude) {

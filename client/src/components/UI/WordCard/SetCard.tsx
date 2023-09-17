@@ -20,7 +20,7 @@ const SetCards: FC<ISetCards> = memo(function ({
     // const notRendered = stale ? 'notRenderedYet' : '';
     const cardsPosition = isTwoColumns ? `CardsPosition ${notRendered}` : notRendered;
     return (
-        <div className={cardsPosition}>
+        <div data-testid="setCardComponent" className={cardsPosition}>
             <Suspense>
                 {Cards.map((card, index) => (
                     <Card

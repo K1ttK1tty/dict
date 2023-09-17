@@ -1,4 +1,4 @@
-import { cleanup, getByTestId, screen, within } from '@testing-library/react';
+import { cleanup, fireEvent, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Suspense } from 'react';
 import { afterEach, describe, expect, test } from 'vitest';
@@ -427,5 +427,51 @@ describe('Select component', () => {
         expect(screen.getByTestId('selectRemoveThemeBtn')).not.toBeNull();
         expect(within(select).getByText('theme1')).not.toBeNull();
         expect(within(select).queryByText('Тема')).toBeNull();
+    });
+    test('theme changing modal.', async () => {
+        renderWithReduxAndRoute(elements, { AuthSlice: authorizationData });
+        const background = await screen.findByTestId('vocabulary');
+        let cards = screen.getAllByTestId('cards');
+        expect(cards.length).toBe(6);
+
+        const select = screen.getByTestId('select');
+        await userEvent.click(select);
+        let selectOptions = screen.getByTestId('selectOptions');
+        const theme2Option = within(selectOptions).getByText('theme2');
+        await userEvent.click(theme2Option);
+        cards = screen.getAllByTestId('cards');
+        expect(cards.length).toBe(3);
+        expect(within(cards[0]).getByText('Word2'));
+        expect(within(cards[1]).getByText('word3'));
+        expect(within(cards[2]).getByText('Word4'));
+
+        await userEvent.click(select);
+        expect(screen.getByTestId('modalEditThemes').classList.contains(modalStyles.active)).toBe(false);
+        await userEvent.click(within(selectOptions).getByText('Редактирование Тем'));
+        expect(screen.getByTestId('modalEditThemes').classList.contains(modalStyles.active)).toBe(true);
+
+        const modal = screen.getByTestId('modalEditThemes');
+        await userEvent.click(within(modal).getByText('theme2'));
+        const inputForNewTheme = screen.getByTestId('inputForNewTheme');
+
+        fireEvent.change(inputForNewTheme, { target: { value: 'newThemeInsteadOfTheme2' } });
+        await userEvent.click(within(modal).getByText('Изменить'));
+        expect(screen.getByTestId('modalEditThemes').classList.contains(modalStyles.active)).toBe(false);
+
+        await userEvent.click(screen.getByTestId('selectRemoveThemeBtn'));
+
+        cards = screen.getAllByTestId('cards');
+        expect(cards.length).toBe(6);
+
+        await userEvent.click(select);
+        selectOptions = screen.getByTestId('selectOptions');
+        const newTheme = within(selectOptions).getByText('newThemeInsteadOfTheme2');
+        await userEvent.click(newTheme);
+
+        cards = screen.getAllByTestId('cards');
+        expect(cards.length).toBe(3);
+        expect(within(cards[0]).getByText('Word2'));
+        expect(within(cards[1]).getByText('word3'));
+        expect(within(cards[2]).getByText('Word4'));
     });
 });

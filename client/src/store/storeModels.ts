@@ -115,17 +115,17 @@ export interface IAuthSliceInitialState {
     data: IDataStructure;
 }
 interface IObjFields {
-    selectOptions: string[];
-    cards: ICard[];
+    selectOptions: string[] | [];
+    cards: ICard[] | [];
 }
 export interface IDataStructure {
     default: IObjFields;
     [key: string]: IObjFields;
 }
 export interface IColorPicker {
-    colorModeOn: boolean,
-    colorRemoveMode: boolean,
-    getCurrentColorMode: boolean,
-    currentColor: string,
-    colorsBeforePaint: string[],
+    colorModeOn: boolean;
+    colorRemoveMode: boolean;
+    getCurrentColorMode: boolean;
+    currentColor: string;
+    colorsBeforePaint: string[];
 }

@@ -41,8 +41,8 @@ const ModalEditThemesContent: FC<IModalEditThemesContent> = memo(function ({
             dispatch(setServerMessage('Нужно выбрать старую/новую тему!'));
             return;
         }
-        const newThemesArray = overrideTheme(selectOptions, selectedElement!.innerText, newTheme);
-        const newCardsArray = overrideThemesInCards(cards, selectedElement!.innerText, newTheme);
+        const newThemesArray = overrideTheme(selectOptions, selectedElement!.innerHTML, newTheme);
+        const newCardsArray = overrideThemesInCards(cards, selectedElement!.innerHTML, newTheme);
 
         dispatch(setSelectOptions(newThemesArray));
         dispatch(setCards(newCardsArray));
@@ -93,6 +93,7 @@ const ModalEditThemesContent: FC<IModalEditThemesContent> = memo(function ({
                     </div>
                     <div className={style.newThemeBlock}>
                         <InputAddCard
+                            testId="inputForNewTheme"
                             dinamicclassname={[style.input, style.mb12Center].join(' ')}
                             placeholder="Новая тема..."
                             defaultTheme={newTheme}

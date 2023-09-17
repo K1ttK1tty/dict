@@ -43,7 +43,6 @@ const ModalDictionaryMain: FC<IModalDictionaryMain> = memo(function ({
     const inputChangeDictionary = useRef<HTMLInputElement | null>(null);
     const [wordChange, setWordChange] = useState<string>('');
     const arrayWithoutCurrentDictionary: string[] = JSON.parse(JSON.stringify(Object.keys(data)));
-
     const [selectedElement, setSelectedElement] = useState<HTMLDivElement | null>(null);
     const onOptionClick = (e: React.MouseEvent<HTMLDivElement>) => {
         selectTheme(e, selectedElement, setSelectedElement, style);
@@ -85,9 +84,11 @@ const ModalDictionaryMain: FC<IModalDictionaryMain> = memo(function ({
                     dispatch(setCurrentDictionary(wordCreate));
                     dispatch(changeDictionary(wordCreate));
                     setIsModal(false);
+                    setSelectedElement(null);
                 }}
             >
                 <InputAddCard
+                    testId="createDictInput"
                     defaultTheme={wordCreate}
                     setDefaultTheme={setWordCreate}
                     dinamicclassname={[style.input, style.inputCreateDictionary].join(' ')}
@@ -106,9 +107,10 @@ const ModalDictionaryMain: FC<IModalDictionaryMain> = memo(function ({
                         dispatch(setServerMessage('Нужно выбрать словарь!'));
                         return;
                     }
-                    dispatch(setCurrentDictionary(selectedElement.innerText));
-                    dispatch(changeDictionary(selectedElement.innerText));
+                    dispatch(setCurrentDictionary(selectedElement.innerHTML));
+                    dispatch(changeDictionary(selectedElement.innerHTML));
                     setIsModal(false);
+                    setSelectedElement(null);
                 }}
             >
                 <ListWithSearching
@@ -133,11 +135,12 @@ const ModalDictionaryMain: FC<IModalDictionaryMain> = memo(function ({
                         dispatch(setServerMessage('Нужно выбрать словарь!'));
                         return;
                     }
-                    if (selectedElement.innerText === currentDictionary) {
+                    if (selectedElement.innerHTML === currentDictionary) {
                         dispatch(setCurrentDictionary('default'));
                         dispatch(changeDictionary('default'));
                     }
-                    deleteDictionary(selectedElement.innerText, user.email, data, dispatch);
+                    deleteDictionary(selectedElement.innerHTML, user.email, data, dispatch);
+                    setSelectedElement(null);
                 }}
             >
                 <ListWithSearching

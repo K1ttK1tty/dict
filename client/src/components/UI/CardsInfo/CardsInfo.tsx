@@ -25,11 +25,12 @@ const CardsInfo: FC<ICardsInfo> = memo(function ({ isMovedBlock, setIsDictionary
         numberOfCards = [...cards].filter(card => card.theme === selectedTheme).length;
     } else if (selectedColorOrNewLabel !== null) {
         themeOrColor = true;
-        if (selectedColorOrNewLabel === 'new') {
-            numberOfCards = [...cards].filter(card => isNewLabel(card.time)).length;
+        if (selectedColorOrNewLabel === 'new') numberOfCards = [...cards].filter(card => isNewLabel(card.time)).length;
+        else if (selectedColorOrNewLabel === 'Избранное') {
+            numberOfCards = [...cards].filter(card => card.favorite).length;
         } else numberOfCards = [...cards].filter(card => card.color === selectedColorOrNewLabel).length;
     }
-    const wordsInThemeOfColor = themeOrColor ? totalWordsClass : [totalWordsClass,style.hide].join(' ');
+    const wordsInTheme = `(${numberOfCards})`;
     return (
         <>
             <div className={totalWordsClass}>
@@ -43,8 +44,9 @@ const CardsInfo: FC<ICardsInfo> = memo(function ({ isMovedBlock, setIsDictionary
                     }}
                 />
             </div>
-            <div className={totalWordsClass}>Всего слов: {cards.length}</div>
-            <div className={wordsInThemeOfColor}>Слов в теме/по отметке: {numberOfCards}</div>
+            <div className={totalWordsClass}>
+                Всего слов: {cards.length}{themeOrColor && wordsInTheme}
+            </div>
         </>
     );
 });
