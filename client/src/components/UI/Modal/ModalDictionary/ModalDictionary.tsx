@@ -45,6 +45,7 @@ const ModalDictionary: FC<IModalDictionary> = memo(function ({ isModal, setIsMod
                     setIsModal={setIsModal}
                     setDictionaryContent={setDictionaryContent}
                     dictionaryContent={dictionaryContent}
+                    title={title}
                 />
             }
         />

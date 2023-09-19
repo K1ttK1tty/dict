@@ -102,7 +102,7 @@ const Statistics: FC = function () {
                 {getAllCards(data).length > 0 ? (
                     <>
                         <div className="statistics">
-                            <h2 className="title mb12 fz18">Дате регистрации: {user.registrationDate}</h2>
+                            <h2 className="title mb12 fz18">Дата регистрации: {user.registrationDate}</h2>
                             <h3 className="title">Карточки в словарях</h3>
                             <div className="diagrams">
                                 <div>

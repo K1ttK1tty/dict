@@ -9,10 +9,12 @@ import ScrollToTop from './components/UI/ScrollToTop/ScrollToTop';
 
 import { setTheme } from './functions/setTheme';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
+import { useLocaleStorage } from './hooks/useLocaleStorage';
 
 import './styles/App.css';
 
 import { CheckAuth, GetAvatar, GetUserData } from './store/reducers/authorization/Authorization/ActionCreator';
+import { changeDictionary, setCurrentDictionary } from './store/reducers/authorization/Authorization/AuthSlice';
 
 let onlyInFirstRender = true;
 const MenuDesk = lazy(() => import('./components/UI/MenuDesk/MenuDesk'));
@@ -22,6 +24,8 @@ const App: FC = () => {
     const dispatch = useAppDispatch();
     const { isAuth } = useAppSelector(state => state.AuthSlice);
     const email = useAppSelector(state => state.AuthSlice?.user?.email);
+    const [currentDictionaryInStorage] = useLocaleStorage('currentDictionary', 'default');
+
     if (onlyInFirstRender) {
         onlyInFirstRender = false;
         if (localStorage.getItem('token')) dispatch(CheckAuth());
@@ -29,6 +33,8 @@ const App: FC = () => {
     }
     useEffect(() => {
         if (isAuth) {
+            dispatch(setCurrentDictionary(currentDictionaryInStorage));
+            dispatch(changeDictionary(currentDictionaryInStorage));
             dispatch(GetUserData(email));
             dispatch(GetAvatar(email));
         }

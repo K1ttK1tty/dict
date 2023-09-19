@@ -29,7 +29,8 @@ const months = new Map([
     ['Декабрь', 0],
 ]);
 export const numberOfCards = (dictionaryName: string, data: IDataStructure) => {
-    return data[dictionaryName].cards.length;
+    if (data[dictionaryName]) return data[dictionaryName].cards.length;
+    else return 0;
 };
 export const getAllCards = (data: IDataStructure) => {
     const keys = Object.keys(data);
@@ -45,12 +46,11 @@ export const getYearsArray = (index: number, data: IDataStructure, all = false) 
     const ttt = new Map();
     const array = all ? getAllCards(data) : data[Object.keys(data)[index]].cards;
     const newArray = array.length > 0 ? [...array] : [];
-
     if (all) {
+        // sorting by time
         for (let k = 0; k < newArray.length - 1; k++) {
             for (let index = 0; index < newArray.length - 1; index++) {
                 const element = newArray[index];
-
                 if (newArray[index + 1].time < element.time) {
                     newArray[index] = newArray[index + 1];
                     newArray[index + 1] = element;
@@ -58,24 +58,26 @@ export const getYearsArray = (index: number, data: IDataStructure, all = false) 
             }
         }
     }
-
     newArray.forEach(card => {
         const cardDate = new Date(card.time);
         const cardYear = cardDate.getFullYear();
         if (ttt.get(cardYear) >= 0) {
             ttt.set(cardYear, ttt.get(cardYear) + 1);
-        } else {
-            ttt.set(cardYear, 1);
-        }
+        } else ttt.set(cardYear, 1);
     });
     const keys: string[] = array.length > 0 ? [(new Date(newArray[0].time).getFullYear() - 1).toString()] : [];
     const numbers: number[] = array.length > 0 ? [0] : [];
-    // const numbers: number[] = [];
-    // const keys: string[] = [];
-    for (const year of ttt.keys()) {
-        keys.push(year.toString());
-    }
-    for (const value of ttt.values()) {
+
+    // key=>year,value=>value
+    for (const [key, value] of ttt) {
+        const previos = Number(keys[keys.length - 1]);
+        if (key - previos > 1) {
+            for (let index = previos; index < key - 1; index++) {
+                keys.push((index + 1).toString());
+                numbers.push(0);
+            }
+        }
+        keys.push(key.toString());
         numbers.push(value);
     }
     return { keys, numbers, count: newArray.length };
@@ -95,7 +97,6 @@ export const getMonths = (index: number, data: IDataStructure, all = false) => {
             ttt.set(cardMonth, ttt.get(monthObject.get(cardDate.getMonth())) + 1);
         } else if (cardYear === currentYear && !ttt.get(cardMonth)) ttt.set(cardMonth, 1);
     });
-
     const keys: string[] = [];
     const numbers: number[] = [];
     for (const value of months.keys()) {
@@ -104,7 +105,6 @@ export const getMonths = (index: number, data: IDataStructure, all = false) => {
         else numbers.push(0);
         if (value === monthObject.get(currentMonth)) break;
     }
-
     return { keys, numbers, count: array.length };
 };
 export const getDays = (index: number, data: IDataStructure, all = false) => {

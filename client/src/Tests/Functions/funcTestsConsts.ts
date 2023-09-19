@@ -100,3 +100,4 @@ export const mokedReturnedCards: ICard[] = [
 // themes
 export const mockThemes = ['theme1', 'theme2'];
 export const newThemes = ['abobo', 'theme2'];
+

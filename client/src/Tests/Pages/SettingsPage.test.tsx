@@ -5,7 +5,7 @@ import { afterEach, describe, expect, test } from 'vitest';
 
 import App from '../../App';
 import { renderWithReduxAndRoute } from '../Helpers/renderWithReduxAndRoute';
-import { authorizationData } from './TestsConsts';
+import { authorizationData } from '../ComponentsTest/TestsConsts';
 
 const elements = (
     <Suspense>

@@ -87,4 +87,5 @@ export interface IModalDictionaryMain {
     setIsModal: (state: boolean) => void;
     setDictionaryContent: (state: IDictionaryContent) => void;
     dictionaryContent: IDictionaryContent;
+    title:string;
 }

@@ -110,4 +110,5 @@ describe('Functions', () => {
             expect(overrideTheme(mockThemes, 'tetetetetete', 'changeTheme')).toEqual(mockThemes);
         });
     });
+    
 });

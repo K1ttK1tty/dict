@@ -6,6 +6,7 @@ import { deleteDictionary } from '../../../../functions/deleteDictionary';
 import { isNotEmpty } from '../../../../functions/isNotEmpty';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { useSearchByWord } from '../../../../hooks/useCards';
+import { useLocaleStorage } from '../../../../hooks/useLocaleStorage';
 import { clearInput, selectTheme } from '../ModalEditThemes/functionsModalEditThemes';
 
 import style from '../ModalEditThemes/ModalEditThemes.module.css';
@@ -28,10 +29,14 @@ const ModalDictionaryMain: FC<IModalDictionaryMain> = memo(function ({
     setIsModal,
     setDictionaryContent,
     dictionaryContent,
+    title,
 }) {
     const dispatch = useAppDispatch();
     const { currentDictionary, data, user } = useAppSelector(state => state.AuthSlice);
-
+    const [currentDictionaryInStorage, setCurrentDictionaryInStorage] = useLocaleStorage(
+        'currentDictionary',
+        'default',
+    );
     const [wordCreate, setWordCreate] = useState<string>('');
 
     const inputRemoveDictionary = useRef<HTMLInputElement | null>(null);
@@ -51,6 +56,10 @@ const ModalDictionaryMain: FC<IModalDictionaryMain> = memo(function ({
         e.preventDefault();
         if (!isNotEmpty(name)) {
             dispatch(setServerMessage('Название не должно быть пустым.'));
+            return false;
+        }
+        if (data[name]) {
+            dispatch(setServerMessage('Название совпадает с уже существующим словарем.'));
             return false;
         }
         return true;
@@ -74,6 +83,13 @@ const ModalDictionaryMain: FC<IModalDictionaryMain> = memo(function ({
         const element = document.getElementsByClassName(style.selectedTheme)[0];
         if (element) element.classList.remove(style.selectedTheme);
     }
+    const [prevTitle, setPrevTitle] = useState<string>(title);
+    if (prevTitle !== title) {
+        setPrevTitle(title);
+        setWordChange('');
+        setWordCreate('');
+        setWordRemove('');
+    }
 
     if (dictionaryContent.createContent) {
         return (
@@ -83,6 +99,7 @@ const ModalDictionaryMain: FC<IModalDictionaryMain> = memo(function ({
                     addNewDictionary(wordCreate, user.email, data, dispatch);
                     dispatch(setCurrentDictionary(wordCreate));
                     dispatch(changeDictionary(wordCreate));
+                    setCurrentDictionaryInStorage(wordCreate);
                     setIsModal(false);
                     setSelectedElement(null);
                 }}
@@ -109,6 +126,7 @@ const ModalDictionaryMain: FC<IModalDictionaryMain> = memo(function ({
                     }
                     dispatch(setCurrentDictionary(selectedElement.innerHTML));
                     dispatch(changeDictionary(selectedElement.innerHTML));
+                    setCurrentDictionaryInStorage(selectedElement.innerHTML);
                     setIsModal(false);
                     setSelectedElement(null);
                 }}
