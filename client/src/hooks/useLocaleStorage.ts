@@ -8,7 +8,6 @@ export const useLocaleStorage = <T>(name: string, state: T) => {
     } else initialState = state;
 
     const [value, setValue] = useState<T>(initialState);
-
     useEffect(() => {
         localStorage.setItem(name, JSON.stringify(value));
     }, [value, name]);

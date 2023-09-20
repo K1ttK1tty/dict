@@ -4,8 +4,8 @@ import { Suspense } from 'react';
 import { afterEach, describe, expect, test } from 'vitest';
 
 import App from '../../App';
-import { renderWithReduxAndRoute } from '../Helpers/renderWithReduxAndRoute';
 import { authorizationData } from '../ComponentsTest/TestsConsts';
+import { renderWithReduxAndRoute } from '../Helpers/renderWithReduxAndRoute';
 
 const elements = (
     <Suspense>
@@ -124,7 +124,7 @@ describe('Settings page', () => {
         for (const card of cards) {
             expect(within(card).getByText('Translate')).not.toBeNull();
         }
-        
+
         const toSettingsPageBtn = screen.getByTestId('toSettingsPageBtn');
         await userEvent.click(toSettingsPageBtn);
         await screen.findByTestId('settingsPage');

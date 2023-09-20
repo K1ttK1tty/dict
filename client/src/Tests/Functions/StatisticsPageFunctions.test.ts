@@ -113,8 +113,9 @@ describe('Statistics page functions', () => {
             data.default.cards[1].time = 1681337125684;
             data.default.cards[2].time = 1691337125684;
             expect(getMonths(0, data)).toEqual({
+                // need to be updated every day
                 keys: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь'],
-                numbers: [1, 0, 0, 1, 0, 0, 0, 2, 0],
+                numbers: [1, 0, 0, 1, 0, 0, 0, 2, 0], // need to be updated every day
                 count: 6,
             });
         });
@@ -124,8 +125,9 @@ describe('Statistics page functions', () => {
             data.default.cards[1].time = 1681337125684;
             data.default.cards[2].time = 1691337125684;
             expect(getMonths(0, data, true)).toEqual({
+                // need to be updated every day
                 keys: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь'],
-                numbers: [1, 0, 0, 1, 0, 0, 0, 3, 0],
+                numbers: [1, 0, 0, 1, 0, 0, 0, 3, 0], // need to be updated every day
                 count: 12,
             });
         });
@@ -134,8 +136,9 @@ describe('Statistics page functions', () => {
             expect(getMonths(0, data, true)).toEqual({
                 // keys:[from january to current month] same .lenght
                 // numbers:[all 0, because there is a months in keys] same .lenght
+                // need to be updated every day
                 keys: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь'],
-                numbers: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                numbers: [0, 0, 0, 0, 0, 0, 0, 0, 0], // need to be updated every day
                 count: 0,
             });
         });
@@ -154,6 +157,7 @@ describe('Statistics page functions', () => {
             // keys:[from 0 to current day] same .lenght
             // numbers:[all 0, because there is a days in keys] same .lenght
             expect(getDays(0, data)).toEqual({
+                // need to be updated every day
                 keys: [
                     '1 день',
                     '2 день',
@@ -174,8 +178,9 @@ describe('Statistics page functions', () => {
                     '17 день',
                     '18 день',
                     '19 день',
+                    '20 день',
                 ],
-                numbers: [0, 0, 2, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0],
+                numbers: [0, 0, 2, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0], // need to be updated every day
                 count: 6,
             });
         });
@@ -197,6 +202,7 @@ describe('Statistics page functions', () => {
             data.second.cards[4].time = 1694924989406; // 17
 
             expect(getDays(0, data, true)).toEqual({
+                // need to be updated every day
                 keys: [
                     '1 день',
                     '2 день',
@@ -217,8 +223,9 @@ describe('Statistics page functions', () => {
                     '17 день',
                     '18 день',
                     '19 день',
+                    '20 день',
                 ],
-                numbers: [0, 0, 4, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 4, 0, 0],
+                numbers: [0, 0, 4, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0], // need to be updated every day
                 count: 12,
             });
         });
@@ -228,6 +235,7 @@ describe('Statistics page functions', () => {
             // keys:[from 0 to current day] same .lenght
             // numbers:[all 0, because there is a days in keys] same .lenght
             expect(getDays(0, data, true)).toEqual({
+                // need to be updated every day
                 keys: [
                     '1 день',
                     '2 день',
@@ -248,8 +256,9 @@ describe('Statistics page functions', () => {
                     '17 день',
                     '18 день',
                     '19 день',
+                    '20 день',
                 ],
-                numbers: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                numbers: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // need to be updated every day
                 count: 0,
             });
         });

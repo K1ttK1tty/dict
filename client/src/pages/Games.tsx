@@ -12,10 +12,10 @@ import { validateQuiz } from '../functions/validateQuiz';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { useLocaleStorage } from '../hooks/useLocaleStorage';
 
-import { colours } from '../globalConsts/globalConsts';
-
 import '../styles/Games.css';
 import '../styles/theme.css';
+
+import { colours } from '../globalConsts/globalConsts';
 
 import { setInputReq } from '../store/reducers/GamesSlice';
 import { ICard } from '../store/storeModels';
@@ -97,6 +97,7 @@ const Games: FC = memo(function () {
                                         inputValue={inputValue}
                                         setValue={e => dispatch(setInputReq(Number(e)))}
                                         type="number"
+                                        testId="inputEnterWordsCount"
                                     />
                                 </div>
                                 <BtnAddCard

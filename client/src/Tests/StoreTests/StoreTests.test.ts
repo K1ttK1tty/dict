@@ -1,4 +1,6 @@
-import { afterEach,describe, expect, expectTypeOf, test } from 'vitest';
+import { cleanup } from '@testing-library/react';
+import { afterEach, describe, expect, expectTypeOf, test } from 'vitest';
+
 import AuthSlice, {
     changeDictionary,
     setAvatar,
@@ -28,7 +30,6 @@ import {
     getUserAuthSlice,
     getUserData,
 } from './Selectors';
-import { cleanup } from '@testing-library/react';
 
 const mockUser: IUser = {
     id: 3,
@@ -265,7 +266,7 @@ describe('Selector testing', () => {
 });
 
 describe('Reducer tests', () => {
-    test('setServerMessage reducer', () => {
+    test(' reducer', () => {
         expect(AuthSlice({ ...authorizationData }, setServerMessage(''))).toEqual({
             ...authorizationData,
             serverMessage: '',

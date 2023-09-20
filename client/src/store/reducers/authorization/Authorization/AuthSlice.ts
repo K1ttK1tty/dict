@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice, current } from '@reduxjs/toolkit';
 
 import { ICard, IDataStructure } from '../../../storeModels';
 
@@ -16,10 +16,20 @@ export const AuthSlice = createSlice({
         },
         ////////////// DELETE THIS !   🠕🠕🠕
         changeDictionary(state, action: PayloadAction<string>) {
-            state.cards = state.data[action.payload]?.cards ? state.data[action.payload].cards : [];
-            state.selectOptions = state.data[action.payload]?.selectOptions
-                ? state.data[action.payload].selectOptions
-                : [];
+            // state.cards = state.data[action.payload]?.cards ? state.data[action.payload].cards : [];
+            // state.selectOptions = state.data[action.payload]?.selectOptions
+            //     ? state.data[action.payload].selectOptions
+            //     : [];
+            console.log(current(state));
+
+            if (state.data[action.payload]) {
+                state.cards = state.data[action.payload].cards;
+                state.selectOptions = state.data[action.payload].selectOptions;
+            } else {
+                state.cards = [];
+                state.selectOptions = [];
+            }
+            // console.log(current(state))
         },
         setCurrentDictionary(state, action: PayloadAction<string>) {
             state.currentDictionary = action.payload;
@@ -137,10 +147,23 @@ export const AuthSlice = createSlice({
 
         // upload user data
         builder.addCase(GetUserData.fulfilled, (state, action) => {
+            const dictionaryInStorage = localStorage.getItem('currentDictionary');
+            if (dictionaryInStorage) {
+                const dictionaryWithoutQuotes = JSON.parse(dictionaryInStorage);
+                if (action.payload[dictionaryWithoutQuotes]) {
+                    state.currentDictionary = dictionaryWithoutQuotes;
+                    state.cards = action.payload[dictionaryWithoutQuotes].cards;
+                    state.selectOptions = action.payload[dictionaryWithoutQuotes].selectOptions;
+                } else {
+                    state.cards = [];
+                    state.selectOptions = [];
+                }
+            } else {
+                state.cards = action.payload.default.cards;
+                state.selectOptions = action.payload.default.selectOptions;
+            }
             console.log(action.payload);
             state.data = action.payload;
-            state.cards = action.payload.default.cards;
-            state.selectOptions = action.payload.default.selectOptions;
         });
 
         builder.addCase(GetAvatar.fulfilled, (state, action) => {
