@@ -4,11 +4,12 @@ import { Suspense } from 'react';
 import { afterEach, describe, expect, test } from 'vitest';
 
 import Alert from '../../components/UI/Alert/Alert';
-import modalStyles from '../../components/UI/Modal/ModalEditCard/Modal.module.css';
-import cardStyles from '../../components/UI/WordCard/WordCard.module.css';
+
+import { IAuthSliceInitialState } from '../../store/storeModels';
 
 import App from '../../App';
 import { renderWithReduxAndRoute } from '../Helpers/renderWithReduxAndRoute';
+import { cardsWithGreenColor, cardsWithoutFavorite } from './Cards66';
 import { dataWithCardsForStatisticsPage } from './TestsConsts';
 
 const elements = (
@@ -202,6 +203,48 @@ describe('Alert component', () => {
             const generateButton = screen.getByText('Сгенерировать');
             await userEvent.click(generateButton);
             expect(screen.getByText('Давай округлим до 50))))'));
+        });
+        test('generate favorite without favorite cards', async () => {
+            const data: IAuthSliceInitialState = { ...dataWithCardsForStatisticsPage, cards: cardsWithoutFavorite };
+            renderWithReduxAndRoute(elements, { AuthSlice: data });
+            const background = await screen.findByTestId('vocabulary');
+            const toGamesPageBtn = screen.getByTestId('toGamesPageBtn');
+            await userEvent.click(toGamesPageBtn);
+            await screen.findByText(/Самопроверка/i);
+            const generateButton = screen.getByText('Сгенерировать');
+            const input = screen.getAllByRole('checkbox');
+            await userEvent.click(input[2]); // favorite
+            await userEvent.click(generateButton);
+            expect(screen.getByText('В избранном нет карточек.'));
+        });
+        describe('generate cards with color if there is no color', () => {
+            test('there is only green color', async () => {
+                const data: IAuthSliceInitialState = { ...dataWithCardsForStatisticsPage, cards: cardsWithGreenColor };
+                renderWithReduxAndRoute(elements, { AuthSlice: data });
+                const background = await screen.findByTestId('vocabulary');
+                const toGamesPageBtn = screen.getByTestId('toGamesPageBtn');
+                await userEvent.click(toGamesPageBtn);
+                await screen.findByText(/Самопроверка/i);
+                const generateButton = screen.getByText('Сгенерировать');
+                const changeColorButton = screen.getByTestId('changeColor');
+                await userEvent.click(changeColorButton);
+                await userEvent.click(generateButton);
+                expect(screen.getByText('Карточек с таким цветом нет.'));
+            });
+            test('there is only green color', async () => {
+                const data: IAuthSliceInitialState = { ...dataWithCardsForStatisticsPage, cards: cardsWithGreenColor };
+                renderWithReduxAndRoute(elements, { AuthSlice: data });
+                const background = await screen.findByTestId('vocabulary');
+                const toGamesPageBtn = screen.getByTestId('toGamesPageBtn');
+                await userEvent.click(toGamesPageBtn);
+                await screen.findByText(/Самопроверка/i);
+                const generateButton = screen.getByText('Сгенерировать');
+                const changeColorButton = screen.getByTestId('changeColor');
+                await userEvent.click(changeColorButton);
+                await userEvent.click(changeColorButton);
+                await userEvent.click(generateButton);
+                expect(screen.getByText('Карточек с таким цветом нет.'));
+            });
         });
     });
 });

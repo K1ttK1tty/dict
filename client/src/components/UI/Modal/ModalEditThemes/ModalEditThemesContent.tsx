@@ -14,11 +14,13 @@ import style from './ModalEditThemes.module.css';
 import {
     setCards,
     setSelectOptions,
+    setSelectedTheme,
     setServerMessage,
 } from '../../../../store/reducers/authorization/Authorization/AuthSlice';
 
 import { IModalEditThemesContent } from '../ModalsModels';
 
+import { getSelectedTheme } from '../../../../Tests/StoreTests/Selectors';
 import BtnAddCard from '../../BtnAddCard/BtnAddCard';
 import InputAddCard from '../../InputAddCard/InputAddCard';
 import ListWithSearching from '../../listWithSearching/ListWithSearching';
@@ -35,6 +37,7 @@ const ModalEditThemesContent: FC<IModalEditThemesContent> = memo(function ({
     const { user, selectOptions, cards, data, currentDictionary } = useAppSelector(state => state.AuthSlice);
     const dispatch = useAppDispatch();
     const themes = useSearchByWord(selectOptions, word);
+    const selectedTheme = useAppSelector(getSelectedTheme);
     const changeThemeAndWords = (e: React.MouseEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!selectedElement || !isNotEmpty(newTheme)) {
@@ -51,6 +54,12 @@ const ModalEditThemesContent: FC<IModalEditThemesContent> = memo(function ({
         setIsEditThemesModal(false);
         selectedElement.classList.remove(style.selectedTheme);
         setSelectedElement(null);
+        if (selectedTheme === selectedElement.innerHTML) {
+            setWord('');
+            setNewTheme('');
+            dispatch(setSelectedTheme(newTheme));
+            return;
+        }
         setWord('');
         setNewTheme('');
     };

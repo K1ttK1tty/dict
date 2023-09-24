@@ -24,7 +24,6 @@
 .btnAddCard:hover.btnAddCard:after {
     scale: 1;
 }
-
 .btnAddCard:focus {
     box-shadow: 0px 0px 18px 1px rgb(136, 214, 47);
 }

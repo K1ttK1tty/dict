@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { ICard, IDataStructure } from '../../store/storeModels';
+import { IDataStructure } from '../../store/storeModels';
 
 import {
     getAllCards,
@@ -179,8 +179,12 @@ describe('Statistics page functions', () => {
                     '18 день',
                     '19 день',
                     '20 день',
-                ],
-                numbers: [0, 0, 2, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0], // need to be updated every day
+                    '21 день',
+                    '22 день',
+                    '23 день',
+                    '24 день',
+                ],// keys and numbers need to be updated every day
+                numbers: [0, 0, 2, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0], 
                 count: 6,
             });
         });
@@ -224,8 +228,12 @@ describe('Statistics page functions', () => {
                     '18 день',
                     '19 день',
                     '20 день',
-                ],
-                numbers: [0, 0, 4, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0], // need to be updated every day
+                    '21 день',
+                    '22 день',
+                    '23 день',
+                    '24 день',
+                ],// keys and numbers need to be updated every day
+                numbers: [0, 0, 4, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0], 
                 count: 12,
             });
         });
@@ -257,8 +265,12 @@ describe('Statistics page functions', () => {
                     '18 день',
                     '19 день',
                     '20 день',
-                ],
-                numbers: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // need to be updated every day
+                    '21 день',
+                    '22 день',
+                    '23 день',
+                    '24 день',
+                ],// keys and numbers need to be updated every day
+                numbers: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
                 count: 0,
             });
         });

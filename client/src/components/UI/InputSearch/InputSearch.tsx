@@ -1,7 +1,6 @@
 import { FC, memo, useEffect, useRef, useState } from 'react';
 
 import { debounce } from '../../../functions/debounce';
-import { isNotEmpty } from '../../../functions/isNotEmpty';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 
 import style from './InputSearch.module.css';

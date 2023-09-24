@@ -28,18 +28,8 @@ export const generateQuizWords: TDenerateQuizWords = (
     const maxIterations = inputReq ? inputReq : 5;
     let arr: ICard[] = [];
     const arrWithColors: ICard[] = [];
-    if (currentColor) {
-        cards.forEach(card => {
-            if (card.color === currentColor) {
-                arrWithColors.push(card);
-            }
-        });
-        if (arrWithColors.length < 1) {
-            dispatch(setServerMessage('Карточек с таким цветом нет.'));
-            return;
-        }
-        arr = getArrayWithRandomValue(arrWithColors, maxIterations);
-    } else if (testByFavorite) {
+
+    if (testByFavorite) {
         cards.forEach(card => {
             if (card.favorite === true) {
                 arrWithColors.push(card);
@@ -47,6 +37,17 @@ export const generateQuizWords: TDenerateQuizWords = (
         });
         if (arrWithColors.length < 1) {
             dispatch(setServerMessage('В избранном нет карточек.'));
+            return;
+        }
+        arr = getArrayWithRandomValue(arrWithColors, maxIterations);
+    } else if (currentColor) {
+        cards.forEach(card => {
+            if (card.color === currentColor) {
+                arrWithColors.push(card);
+            }
+        });
+        if (arrWithColors.length < 1) {
+            dispatch(setServerMessage('Карточек с таким цветом нет.'));
             return;
         }
         arr = getArrayWithRandomValue(arrWithColors, maxIterations);

@@ -6,8 +6,11 @@ import { afterEach, describe, expect, test } from 'vitest';
 import modalStyles from '../../components/UI/Modal/ModalEditCard/Modal.module.css';
 import cardStyles from '../../components/UI/WordCard/WordCard.module.css';
 
+import { IAuthSliceInitialState } from '../../store/storeModels';
+
 import App from '../../App';
 import { renderWithReduxAndRoute } from '../Helpers/renderWithReduxAndRoute';
+import { cards66 } from './Cards66';
 import { authorizationData, dataWhereCardsWithoutRedColorAndTheme1 } from './TestsConsts';
 
 const elements = (

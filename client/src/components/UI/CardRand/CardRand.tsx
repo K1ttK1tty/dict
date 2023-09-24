@@ -14,7 +14,7 @@ const CardRand: FC<ICardRand> = memo(function ({ card, index, testByWord }) {
     if (validateArr[index]) validateWord = validateArr[index] + 'Color';
     if (!testByWord) {
         return (
-            <div className={styles.wrapper}>
+            <div data-testid="cardRand" className={styles.wrapper}>
                 <div className="wordBlock">
                     <div className="word">Перевод: </div>
                     <div className={styles.translateRand}>{card.translate}</div>
@@ -30,7 +30,7 @@ const CardRand: FC<ICardRand> = memo(function ({ card, index, testByWord }) {
         );
     }
     return (
-        <div className={styles.wrapper}>
+        <div data-testid="cardRand" className={styles.wrapper}>
             <div className="wordBlock">
                 <div className="word">Слово: </div>
                 <div className={styles.translateRand}>{card.word}</div>

@@ -159,6 +159,7 @@ const ModalDictionaryMain: FC<IModalDictionaryMain> = memo(function ({
                     }
                     deleteDictionary(selectedElement.innerHTML, user.email, data, dispatch);
                     setSelectedElement(null);
+                    setCurrentDictionaryInStorage('default');
                 }}
             >
                 <ListWithSearching

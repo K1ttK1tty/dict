@@ -81,7 +81,11 @@ const Games: FC = memo(function () {
                         {isColorsInCards && (
                             <div className="colorSelection">
                                 <div>По цвету:</div>
-                                <button onClick={switchColor} className={testByColorClassName} />
+                                <button
+                                    data-testid="changeColor"
+                                    onClick={switchColor}
+                                    className={testByColorClassName}
+                                />
                             </div>
                         )}
                     </>

@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice, current } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { ICard, IDataStructure } from '../../../storeModels';
 
@@ -16,12 +16,6 @@ export const AuthSlice = createSlice({
         },
         ////////////// DELETE THIS !   🠕🠕🠕
         changeDictionary(state, action: PayloadAction<string>) {
-            // state.cards = state.data[action.payload]?.cards ? state.data[action.payload].cards : [];
-            // state.selectOptions = state.data[action.payload]?.selectOptions
-            //     ? state.data[action.payload].selectOptions
-            //     : [];
-            console.log(current(state));
-
             if (state.data[action.payload]) {
                 state.cards = state.data[action.payload].cards;
                 state.selectOptions = state.data[action.payload].selectOptions;
@@ -29,7 +23,6 @@ export const AuthSlice = createSlice({
                 state.cards = [];
                 state.selectOptions = [];
             }
-            // console.log(current(state))
         },
         setCurrentDictionary(state, action: PayloadAction<string>) {
             state.currentDictionary = action.payload;
@@ -66,7 +59,6 @@ export const AuthSlice = createSlice({
             state.serverMessage = action.payload;
         },
     },
-
     extraReducers(builder) {
         //registration
         builder.addCase(Registration.fulfilled, (state, action) => {
@@ -101,7 +93,6 @@ export const AuthSlice = createSlice({
             const Errorresponse = action.payload as string;
             state.serverMessage = Errorresponse;
         });
-
         //login
         builder.addCase(Login.fulfilled, (state, action) => {
             localStorage.setItem('token', action.payload.accessToken);
@@ -125,7 +116,6 @@ export const AuthSlice = createSlice({
             const Errorresponse = action.payload as string;
             state.serverMessage = Errorresponse;
         });
-
         //logout
         builder.addCase(Logout.fulfilled, (state, action) => {
             localStorage.removeItem('token');
@@ -134,7 +124,6 @@ export const AuthSlice = createSlice({
             state.serverMessage = action.payload.message;
             state.currentDictionary = 'default';
         });
-
         // refresh token
         builder.addCase(CheckAuth.fulfilled, (state, action) => {
             console.log(action.payload);
@@ -144,7 +133,6 @@ export const AuthSlice = createSlice({
             state.user = userInfo;
             state.serverMessage = action.payload.message;
         });
-
         // upload user data
         builder.addCase(GetUserData.fulfilled, (state, action) => {
             const dictionaryInStorage = localStorage.getItem('currentDictionary');
@@ -165,12 +153,10 @@ export const AuthSlice = createSlice({
             console.log(action.payload);
             state.data = action.payload;
         });
-
         builder.addCase(GetAvatar.fulfilled, (state, action) => {
             console.log(action.payload);
             state.avatar = action.payload;
         });
-
         // change password
         builder.addCase(SendResetPassword.fulfilled, (state, action) => {
             state.serverMessage = action.payload.message;

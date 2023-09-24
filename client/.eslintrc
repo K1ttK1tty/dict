@@ -28,8 +28,6 @@
         "no-multi-assign": "error",
         "no-return-assign": "error",
         "no-return-await": "error",
-        // "no-shadow": "warn",
-        // "no-underscore-dangle": "error",
         "no-unneeded-ternary": "warn",
         "no-useless-concat": "warn",
         "sort-imports": [
@@ -42,18 +40,15 @@
                 "allowSeparatedGroups": true
             }
         ],
-        // "sort-vars":"warn",
         "yoda": "warn",
         // formatting layout
 
         "dot-location": ["warn", "object"],
-        // "implicit-arrow-linebreak": ["warn", "beside"],
         "jsx-quotes": ["warn", "prefer-double"],
         "key-spacing": ["warn", { "afterColon": true }],
         "keyword-spacing": ["warn", { "before": true }],
         "no-multi-spaces": "warn",
         "no-whitespace-before-property": "warn",
-        // "nonblock-statement-body-position": ["error", "beside"],
         "object-curly-newline": ["warn", { "multiline": true }],
         "padded-blocks": ["warn", "never"],
         "quotes": ["warn", "single"],

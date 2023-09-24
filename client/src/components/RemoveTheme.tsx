@@ -18,7 +18,6 @@ const RemoveTheme: FC<IRemoveTheme> = function ({ setIsSelectOpen, isSelectOpen,
     const { searchWord } = useAppSelector(state => state.upMenu);
     const selectedTheme = useAppSelector(getSelectedTheme);
     const isCanDeleteTheme = isSelectOpen.removeMark && !selectedColorOrNewLabel && !searchWord;
-    
     return (
         <>
             <h4 className="noCards">Пустота...</h4>
