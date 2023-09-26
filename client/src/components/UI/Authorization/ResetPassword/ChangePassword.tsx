@@ -35,7 +35,7 @@ const ChangePassword: FC = function () {
                     </div>
                 </Link>
                 <form onSubmit={handleSubmit(onSubmit)} className={[stylesAuth.form, styles.form].join(' ')}>
-                    <h1 className={[stylesAuth.title, styles.title].join(' ')}>Смена пароля</h1>
+                    <h1 className={[styles.title].join(' ')}>Смена пароля</h1>
                     <p className={styles.info}>На почту придет письмо с инструкцией по смене пароля*</p>
 
                     <label className={stylesAuth.passwordLabel}>

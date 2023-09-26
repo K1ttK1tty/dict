@@ -347,7 +347,6 @@
     background: transparent;
 }
 .fill {
-    left: 6px;
     fill: rgb(136, 214, 47);
 }
 .favoriteIcon:hover {

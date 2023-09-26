@@ -7,6 +7,7 @@ import { changeCardFields } from '../../../../functions/changeCardFields';
 import { removeCard } from '../../../../functions/removeCard';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 
+import btnStyles from '../ModalAddCards/FormAddCard.module.css';
 import style from './Modal.module.css';
 
 import { setCards } from '../../../../store/reducers/authorization/Authorization/AuthSlice';
@@ -86,7 +87,8 @@ const FormEditCard: FC<IFormEditCard> = function ({ modalChangeCard, setIsEditCa
                 <BtnAddCard
                     aria={'Изменить'}
                     onClick={ChangeCard}
-                    dinamicclassname={style.btnFormEditCard}
+                    dinamicclassname={btnStyles.btnFormAddCard}
+                    // dinamicclassname={style.btnFormEditCard}
                     children="Изменить"
                 />
             </div>

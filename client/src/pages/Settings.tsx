@@ -4,6 +4,7 @@ import Checkbox from '../components/UI/Checkbox/Checkbox';
 
 import { useLocaleStorage } from '../hooks/useLocaleStorage';
 
+import '../styles/App.css';
 import '../styles/Games.css';
 import '../styles/Vocabulary.css';
 import '../styles/theme.css';

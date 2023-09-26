@@ -147,20 +147,20 @@
 .arrow::before {
     content: "";
     position: absolute;
-    width: 55%;
+    width: 50%;
     height: 5px;
-    right: -6px;
+    right: -5px;
     background-color: black;
     border-radius: 8px;
 }
 .arrow::after {
-    top: -7px;
-    transform: rotate(45deg);
+    top: -5px;
+    transform: rotate(30deg);
 }
 .arrow::before {
-    top: 7px;
+    top: 5px;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-    transform: rotate(-45deg);
+    transform: rotate(-30deg);
 }
 .button {
     display: block;
@@ -168,6 +168,8 @@
     width: 50%;
     position: relative;
     bottom: -15px;
+    background: rgb(136, 214, 47);
+
 }
 @media (max-width: 768px) {
     .button {

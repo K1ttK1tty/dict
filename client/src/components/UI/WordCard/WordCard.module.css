@@ -46,7 +46,7 @@
     top: -4px;
     max-height: 26px;
     overflow: var(--overflowHidden);
-}   
+}
 .translate {
     font-size: 16px;
     line-height: 1.2;
@@ -142,4 +142,19 @@
 }
 .font {
     font-family: inherit;
+}
+.cardForStorybook .edit {
+    opacity: var(--opacityOn);
+    visibility: var(--visibilityOn);
+    transform: translate(0px);
+}
+.cardForStorybook .remove {
+    opacity: var(--opacityOn);
+    visibility: var(--visibilityOn);
+    transform: translate(0px);
+}
+.cardForStorybook .favorite {
+    opacity: var(--opacityOn);
+    visibility: var(--visibilityOn);
+    transform: translate(0px);
 }

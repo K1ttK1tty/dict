@@ -59,7 +59,7 @@ const Games: FC = memo(function () {
         <div className="gameWrap pageContent">
             <div className="gameCardsField">
                 <div className="title">Самопроверка</div>
-                {cards.length && (
+                {!!cards.length && (
                     <>
                         <div className="title mb6">
                             по <span className={searchByWordClassName}>слову</span>/

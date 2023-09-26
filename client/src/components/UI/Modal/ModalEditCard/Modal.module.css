@@ -124,7 +124,7 @@
     font-size: 18px;
     padding: 12px;
     border: none;
-    background: rgb(136, 214, 47);
+    background: rgb(136, 214, 47) ;
 }
 .btnFormEditCard:hover.btnFormEditCard:after {
     scale: 0 !important;

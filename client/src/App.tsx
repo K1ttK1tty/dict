@@ -28,7 +28,6 @@ const App: FC = () => {
         if (localStorage.getItem('token')) dispatch(CheckAuth());
         setTheme();
     }
-
     useEffect(() => {
         if (isAuth) {
             dispatch(GetUserData(email));
